@@ -11,14 +11,14 @@ export class Slider {
 				prevNextButtons: false
 			} );
 		}
-		this.slider.on( 'select', this.onSelect.bind( this ) );
+		this.slider.on( 'change', this.onChange.bind( this ) );
 		this.viewedSlides = 1;
 	}
 
 	/**
 	 * Handler for "select" event which is triggered when a new slide is shown
 	 */
-	onSelect() {
+	onChange() {
 		this.viewedSlides++;
 	}
 
