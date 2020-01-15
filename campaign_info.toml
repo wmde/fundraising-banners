@@ -5,30 +5,6 @@
 # TODO: When thank you campaign is over, restore channel + language setup for regular banners from Git history
 
 # Thank You Campaign
-[thank_you]
-campaign_tracking = "ty01-ba-200101"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[thank_you.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WMDE_ty01_200101_ctrl"
-tracking = "org-ty-200101-ctrl"
-
-[thank_you.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_ty01_200101_var"
-tracking = "org-ty-200101-var"
-
-[thank_you.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_dskt_ctrl"
-tracking = "WMDE_2019_2020_thx_dskt_ctrl"
-
-[thank_you.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_dskt_var"
-tracking = "WMDE_2019_2020_thx_dskt_var"
 
 # Thank you campaign mobile wp.org
 [thank_you_mobile]
@@ -41,68 +17,3 @@ filename = "./thank_you/banner_ctrl.js"
 pagename = "B19WMDE_mob_ty01_200101_ctrl"
 tracking = "org-mob-ty-200101-ctrl"
 
-[thank_you_mobile.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_mob_ty01_200101_var"
-tracking = "org-mob-ty-200101-var"
-
-[thank_you_mobile.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_mob_ctrl"
-tracking = "WMDE_2019_2020_thx_mob_ctrl"
-
-[thank_you_mobile.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_mob_var"
-tracking = "WMDE_2019_2020_thx_mob_var"
-
-[thank_you_ipad]
-campaign_tracking = "ty01-ipad-ba-200101"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[thank_you_ipad.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WMDE_ipad_ty01_200101_ctrl"
-tracking = "org-ipad-ty-200101-ctrl"
-
-[thank_you_ipad.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_ipad_ty01_200101_var"
-tracking = "org-ipad-ty-200101-var"
-
-[thank_you_ipad.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_ipad_ctrl"
-tracking = "WMDE_2019_2020_thx_ipad_ctrl"
-
-[thank_you_ipad.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_ipad_var"
-tracking = "WMDE_2019_2020_thx_ipad_var"
-
-# Thank you campaign wp.de
-[thank_you_wpde]
-campaign_tracking = "ty01-wpde-ba-200101"
-preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
-wrapper_template = "wikipedia_de"
-
-[thank_you_wpde.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WPDE_ty01_200101_ctrl"
-tracking = "org-wpde-ty-200101-ctrl"
-
-[thank_you_wpde.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WPDE_ty01_200101_var"
-tracking = "org-wpde-ty-200101-var"
-
-[thank_you_wpde.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "B19WPDE_ty01_200101_authors_ctrl"
-tracking = "WPDE_2019_2020_thx_dskt_ctrl"
-
-[thank_you_wpde.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "B19WPDE_ty01_200101_authors_var"
-tracking = "WPDE_2019_2020_thx_dskt_var"
