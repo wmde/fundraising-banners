@@ -36,4 +36,8 @@ export default class Vector extends Skin {
 	moveBannerContainerToTopOfDom() {
 		$( 'body' ).prepend( $( '#centralNotice' ) );
 	}
+
+	getName() {
+		return mw.config.get('skin')
+	}
 }

@@ -17,3 +17,8 @@ filename = "./thank_you/banner_ctrl.js"
 pagename = "B19WMDE_mob_ty01_200101_ctrl"
 tracking = "org-mob-ty-200101-ctrl"
 
+[thank_you_mobile.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B19WMDE_mob_ty01_200101_var"
+tracking = "org-mob-ty-200101-var"
+

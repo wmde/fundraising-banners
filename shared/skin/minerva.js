@@ -31,6 +31,10 @@ export default class Minerva extends Skin {
 	}
 
 	moveBannerContainerToTopOfDom() {
-		$( 'body' ).prepend( $( '#centralNotice' ) );
+		$( '#centralNotice' ).detach().prependTo( 'body' );
+	}
+
+	getName() {
+		return mw.config.get('skin')
 	}
 }

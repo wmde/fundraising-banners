@@ -3,23 +3,24 @@ import style from './styles/styles_ctrl.pcss';
 
 import { donorFormatter, millionFormatter } from './src/formatters';
 import { createCampaignParameters } from '../shared/campaign_parameters';
-import { showBanner } from './src/show_banner';
 import { getTrackingData } from './src/tracking_data';
 import { getTrackingIds } from './src/tracking_ids';
 import { getSkin } from '../shared/skin';
 
 import Banner from './banners/Banner';
 import MembershipMoreInfo from './components/MembershipMoreInfo';
+import { createElement, render } from 'preact';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 
 const CampaignParameters = createCampaignParameters();
 const trackingIds = getTrackingIds( bannerContainer );
+const skinFunctions = getSkin();
 
-showBanner(
-	Banner,
-	bannerContainer,
-	{
+skinFunctions.moveBannerContainerToTopOfDom();
+
+render(
+	createElement( Banner, {
 		...trackingIds,
 		numberOfDonors: donorFormatter( CampaignParameters.donationProjection.donorsBase ),
 		numberOfMembers: donorFormatter( CampaignParameters.numberOfMembers ),
@@ -27,6 +28,12 @@ showBanner(
 		trackingData: getTrackingData( trackingIds.bannerName ),
 		expandText: 'Dankestext lesen',
 		moreInfo: MembershipMoreInfo,
-		skinFunctions: getSkin()
-	}
+		skinFunctions,
+		onClose: () => {
+			skinFunctions.removeSpace();
+		}
+	} ),
+	bannerContainer
 );
+
+skinFunctions.addSpaceInstantly( bannerContainer.getElementsByClassName( 'wmde-banner' ).item( 0 ).offsetHeight );
