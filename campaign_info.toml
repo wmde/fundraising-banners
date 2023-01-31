@@ -1,0 +1,30 @@
+# NOTE: The "pagename" value must start with an uppercase "B" and should be followed by the year (YY) and WMDE.
+# Example: "B18WMDE_"
+# See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
+
+# A Campaign with global settings
+[desktop]
+campaign_tracking = "00-ba-230202"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop.banners.ctrl]
+filename = "./banners/desktop/banner_ctrl.ts"
+pagename = "B23WMDE_00_230202_ctrl"
+tracking = "org-00-230202-ctrl"
+
+
+[wikipediade]
+name = "C23_WPDE_00"
+campaign_tracking = "wpde-00-230202"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
+
+[wikipediade.banners.ctrl]
+filename = "./banners/wpde_desktop/banner_ctrl.ts"
+pagename = "B23WPDE_00_ctrl"
+tracking = "wpde-00-230202-ctrl"
+

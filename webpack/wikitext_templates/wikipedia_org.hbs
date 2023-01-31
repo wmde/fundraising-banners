@@ -1,0 +1,14 @@
+<!-- WMDE compiled banner, see https://github.com/wmde/fundraising-banners -->
+{{#with campaignConfig }}
+    <div id="WMDE-Banner-Container"
+         data-trackingparams="piwik_campaign={{campaign_tracking}}&amp;piwik_kwd={{tracking}}"
+         data-campaign-tracking="{{campaign_tracking}}"
+         data-tracking="{{tracking}}"
+         data-built-on="{{../build_date}}"
+    ></div>
+{{/with}}
+{{{ bannerValues }}}
+<nowiki>
+	<script>mw.loader.using(['vue'], function(){ {{{ banner }}} })</script>
+</nowiki>
+

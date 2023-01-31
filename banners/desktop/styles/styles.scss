@@ -1,0 +1,10 @@
+@import 'variables.scss';
+
+.wmde-banner {
+  background: white;
+
+  &-greeting:hover {
+    opacity: 0.5;
+  }
+}
+

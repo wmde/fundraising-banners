@@ -1,0 +1,12 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "dashboard/**/*", "dashboard/**/*.vue", "webpack/**/*"],
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+	"baseUrl": ".",
+	"paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

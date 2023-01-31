@@ -1,0 +1,10 @@
+<template>
+	<p>
+		<a :href="campaign.previewLinkDev.replace('{banner}', banner.fileName)">{{banner.pageName}}</a>
+	</p>
+</template>
+<script setup lang="ts">
+import type { Banner, Campaign } from '../webpack/campaign_config_types';
+
+defineProps<{banner: Banner, campaign: Campaign}>();
+</script>
