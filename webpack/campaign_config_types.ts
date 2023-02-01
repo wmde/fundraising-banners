@@ -7,8 +7,8 @@ export interface Banner {
 export interface Campaign {
 	name: string,
 	tracking: string,
-	previewLinkDev: string,
-	previewLinkProd: string,
+	previewUrlDev: string,
+	previewUrlProd: string,
 	wrapperTemplate: string,
 	banners: Record<string, Banner>
 }

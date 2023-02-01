@@ -1,6 +1,6 @@
 <template>
 	<p>
-		<a :href="campaign.previewLinkDev.replace('{banner}', banner.fileName)">{{banner.pageName}}</a>
+		<a :href="campaign.previewUrlDev.replace('{banner}', banner.fileName)">{{banner.pageName}}</a>
 	</p>
 </template>
 <script setup lang="ts">

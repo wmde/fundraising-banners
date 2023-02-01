@@ -1,5 +1,5 @@
 import './styles/styles.scss';
-import { createVueApp } from '../../shared/create_vue_app.ts';
+import { createVueApp } from '../../src/create_vue_app';
 
 import Banner from './components/Banner.vue';
 

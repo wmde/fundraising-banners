@@ -1,18 +1,19 @@
 import { createApp } from 'vue';
-import DevDashboard from './DevDashboard.vue';
+import DevDashboard from './components/DevDashboard.vue';
 
-import type { CampaignConfig } from './campaign_config_types';
+import type { CampaignConfig } from '../webpack/campaign_config_types';
 
+// global variables injected by webpack DefinePlugin, see webpack.config.js
+// CAMPAIGNS might not really conform to CampaignConfig- if the campaign_info.toml file contains bogus data, you will get errors further down
+// eslint-disable-next-line no-var
 declare var CAMPAIGNS: CampaignConfig;
+// eslint-disable-next-line no-var
 declare var GIT_BRANCH: string;
 
 createApp(
 	DevDashboard,
-	// global variables injected by webpack DefinePlugin, see webpack.config.js
 	{
-		// eslint-disable-next-line no-undef
 		campaigns: CAMPAIGNS,
-		// eslint-disable-next-line no-undef
-		gitBranch: GIT_BRANCH 
+		gitBranch: GIT_BRANCH
 	}
-).mount("#dashboard");
+).mount( '#dashboard' );

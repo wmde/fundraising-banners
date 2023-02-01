@@ -6,6 +6,7 @@ const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 const { exec } = require( 'child_process' );
 const webpackBuildApiRoute = require( './webpack/build_api' );
+const { campaignInfoToCampaignConfig } = require( './webpack/convert_info_to_type' );
 
 const getBranch = () => new Promise( ( resolve ) => {
 	return exec( 'git rev-parse --abbrev-ref HEAD', ( err, stdout ) => {
@@ -35,7 +36,7 @@ module.exports = () => Promise.all( [
 		plugins: [
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.DefinePlugin( {
-				CAMPAIGNS: JSON.stringify( campaignConfig ),
+				CAMPAIGNS: JSON.stringify( campaignInfoToCampaignConfig( campaignConfig ) ),
 				GIT_BRANCH: JSON.stringify( currentBranch )
 			} )
 		],
