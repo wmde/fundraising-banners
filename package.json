@@ -9,6 +9,7 @@
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
     "start": "nodemon",
+	"dev": "npm run start",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint:js": "eslint --ext .js,.vue,.ts,.cjs --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:css": "stylelint '**/*.pcss'",
