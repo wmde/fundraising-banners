@@ -19,16 +19,18 @@ module.exports = {
 		mw: false
 	},
 	'rules': {
-		'dot-notation': [ 'error', { allowKeywords: true } ],
-		'one-var': [ 'off' ],
+		// We want to use const and let wherever we like. TypeScript will inform us about use-before-declation situations
 		'vars-on-top': [ 'off' ],
+
+		// use as few quotes as possible
 		'quote-props': [ 'error', 'consistent-as-needed', { keywords: true } ],
+
+		// We have big monitors
 		'max-len': [ 'error', {
 			code: 180
 		} ],
-		'max-statements-per-line': [ 'error', { max: 2 } ],
-		'prefer-regex-literals': [ 'off' ],
-		// jsdoc should use type infromation, doc comments should just inform about the purpose of a function/method
+
+		// jsdoc should use TypeScript type information, most doc comments may just inform about the purpose of a function/method
 		'jsdoc/require-param': [ 'off' ],
 		'jsdoc/require-returns': [ 'off' ]
 
