@@ -1,20 +1,21 @@
 {
-  "name": "banners-webpack",
+  "name": "fundraising-banners",
   "version": "1.0.0",
-  "description": "Building WMDE fundraising banners with webpack",
+  "description": "WMDE fundraising banners",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "mocha --require @babel/register",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
     "start": "nodemon",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
-    "lint:js": "eslint --ext .js --ext .vue --ext .ts --cache --cache-location .eslintcache --ignore-path .gitignore .",
+    "lint:js": "eslint --ext .js,.vue,.ts,.cjs --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:css": "stylelint '**/*.pcss'",
     "update-content": "npm update fundraising-frontend-content"
   },
   "keywords": [],
-  "author": "gabriel.birke@wikimedia.de",
+  "author": "fundaising-tech@wikimedia.de",
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {

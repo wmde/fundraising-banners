@@ -11,8 +11,9 @@
 </template>
 
 <script setup lang="ts">
+import type { CampaignConfig } from '../../webpack/campaign_config_types';
+
 import BannerActions from './BannerActions.vue';
-import type { CampaignConfig } from './campaign_config_types';
 
 defineProps<{campaigns: CampaignConfig, gitBranch: string}>();
 

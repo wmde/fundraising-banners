@@ -1,6 +1,7 @@
 /**
  * This webpack plugin wraps the banner source code in a "Vue loader" that delays the execution fo the banner code
  * (that doesn't contain the Vue runtime) until a global Vue object has been loaded.
+ *
  * @file
  */
 

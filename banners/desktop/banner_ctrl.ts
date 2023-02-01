@@ -1,7 +1,7 @@
 import './styles/styles.scss';
-import { createVueApp } from '../../src/create_vue_app';
+import { createVueApp } from '@src/create_vue_app';
 
-import Banner from './components/Banner.vue';
+import MainBanner from './components/MainBanner.vue';
 
-const app = createVueApp( Banner, { greeting: 'Hello' } );
+const app = createVueApp( MainBanner, { greeting: 'Hello' } );
 app.mount( '#WMDE-Banner-Container' );

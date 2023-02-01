@@ -8,7 +8,7 @@
 import { ref } from 'vue';
 
 interface Props {
-	greeting: ?string
+	greeting?: string
 }
 
 withDefaults( defineProps<Props>(), {

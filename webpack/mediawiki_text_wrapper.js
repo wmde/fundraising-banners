@@ -55,7 +55,7 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 					const templateContext = {
 						banner: compiledSource.replace( /\/\*! For license information please see.*?\*\/\s*/, '' ),
 						campaignConfig: self.campaignConfig[ pagename ] || {},
-						build_date: buildDate,
+						buildDate,
 						...self.context
 					};
 					const wrappedFile = template( templateContext );
