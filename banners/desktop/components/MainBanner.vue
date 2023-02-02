@@ -1,11 +1,13 @@
 <template>
 	<div class="wmde-banner">
-		WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}}</span>
+		<ButtonClose />
+		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}}</span></div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 
 interface Props {
 	greeting?: string
@@ -20,6 +22,7 @@ const planet = ref<string>( 'World' );
 
 <style>
 .wmde-banner {
+	position: relative;
 	font-size: 200%;
 	color: green;
 	padding: 15px;
