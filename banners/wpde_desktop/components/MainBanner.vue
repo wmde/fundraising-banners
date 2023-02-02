@@ -1,0 +1,31 @@
+<template>
+	<div class="wmde-banner">
+		<ButtonClose />
+		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}}</span></div>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+
+interface Props {
+	greeting?: string
+}
+
+withDefaults( defineProps<Props>(), {
+	greeting: 'Ahoy'
+} );
+
+const planet = ref<string>( 'World' );
+</script>
+
+<style>
+.wmde-banner {
+	position: relative;
+	font-size: 200%;
+	color: green;
+	padding: 15px;
+	border: solid 2px darkgreen;
+}
+</style>

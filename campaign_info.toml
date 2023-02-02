@@ -15,18 +15,17 @@ pagename = "B23WMDE_00_230202_ctrl"
 tracking = "org-00-230202-ctrl"
 
 
-# commented out until desktop banner works
+# desktop banners on wikipedia.de
+[wikipediade]
+name = "C23_WPDE_00"
+campaign_tracking = "wpde-00-230202"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 
-# [wikipediade]
-# name = "C23_WPDE_00"
-# campaign_tracking = "wpde-00-230202"
-# preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
-# wrapper_template = "wikipedia_de"
-# wrap_in_wikitext = false
-# preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
-
-# [wikipediade.banners.ctrl]
-# filename = "./banners/wpde_desktop/banner_ctrl.ts"
-# pagename = "B23WPDE_00_ctrl"
-# tracking = "wpde-00-230202-ctrl"
+[wikipediade.banners.ctrl]
+filename = "./banners/wpde_desktop/banner_ctrl.ts"
+pagename = "B23WPDE_00_ctrl"
+tracking = "wpde-00-230202-ctrl"
 
