@@ -67,20 +67,42 @@ style changes, different behavior)
 
 ## Directory structure
 
+- `archive/`: Archived banners
 - `banners/`: Contains subdirectories for each campaign (sometimes also called
 	a *channel*). Subfolder names *should* match the campaign names
 	(top-level configuration sections in `campaign_info.toml`), but are
 	not required to match.
   - `desktop/`: contains the entry points and the banner components for
-	  the desktop campaign.
+	the desktop campaign.
 - `dashboard/`: Dashboard UI that displays the overview of the
-	banners in development mode.
+  banners in development mode.
 - `dist/`: compiled banner code
-- `src/`: All TypeScript code and components that the banners share
+- `src/`: All TypeScript code and components shared between banners
+- `test/`: Unit and component tests
+  - `unit`: Unit tests for small library functions.
+  - `components`: Unit tests for components
 - `themes/`: Theme files
 - `webpack/`: Files related how we build the banners with webpack: Webpack
 	plugins and loaders, a class that can process information from
 	`campaign_info.toml` into smaller chunks.
+
+## Conventions when writing unit tests
+
+1. All test files must end in `.spec.ts`
+2. Component tests must match the directory structure in `src/components/`.
+   test file name must match component file name (PascalCase) with
+   `.spec.ts` instead of `.vue` suffix.
+3. Unit tests should replicate the directory structure and names
+   (snake_case) in the `src/` directory.
+4. Component tests should test:
+   - Props have an effect. If a prop has a limited value range, e.g.
+     boolean or a set of strings, test all possible values.
+   - Computed properties
+   - Event handlers
+   - Passing props to children
+   - Slots
+5. Use `shallowMount` instead of `mount` in *every* test where you don't
+   need to check the values of child components.
 
 ## How the preview feature works
 * The webpack dev server loads the file `dashboard/index.html`, which requests a small Vue application inside the `dashboard` directory. The application renders an overview of campaigns and banners, generated from `campaign_info.toml`.

@@ -1,13 +1,20 @@
 import path from 'path';
+import { defineConfig } from 'vitest/config';
+import Vue from '@vitejs/plugin-vue';
 
-export default {
+export default defineConfig( {
+	plugins: [ Vue() ],
+
 	test: {
 		globals: false,
-		environment: 'node'
+		environmentMatchGlobs: [
+			[ 'test/unit/**', 'node' ],
+			[ 'test/components/**', 'jsdom' ]
+		]
 	},
 	resolve: {
 		alias: {
 			'@src': path.resolve( __dirname, './src' )
 		}
 	}
-};
+} );
