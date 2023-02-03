@@ -1,0 +1,20 @@
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "wmde/funtech-core"
+    ignore:
+        # Ignore eslint 8 for now, since we're getting ESM/commonjs errors
+        # Remove and re-investigate after Jan 2022
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+
+    # Temporarily disable automated update PRs for this repository
+    open-pull-requests-limit: 0
+
