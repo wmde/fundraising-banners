@@ -78,13 +78,43 @@ style changes, different behavior)
   banners in development mode.
 - `dist/`: compiled banner code
 - `src/`: All TypeScript code and components shared between banners
+  - `components/`: Vue single-file components. Each component can be in a
+	  subdirectory.
 - `test/`: Unit and component tests
   - `unit`: Unit tests for small library functions.
   - `components`: Unit tests for components
-- `themes/`: Theme files
+- `themes/`: Theme style files
+  - `theme1/`: Theme folder for one theme, containing files for components.
+     The directory structure inside the theme folder should replicate the 
+	 directory structure in `src/components/`
 - `webpack/`: Files related how we build the banners with webpack: Webpack
 	plugins and loaders, a class that can process information from
 	`campaign_info.toml` into smaller chunks.
+
+## Banner themes
+
+Each component in `src/components` defines their "layout" style
+(positioning, flex, padding reset, etc) inside its `<style>` section.
+
+You must put all other styling (colors, fonts, borders, etc.)in a theme
+file of the same name as the component.  
+Example: The theme files for the themes `foo` and `bar` for the component
+`src/components/Icons/CloseIcon.vue` are
+`themes/foo/Icons/CloseIcon.scss` and `themes/bar/Icons/CloseIcon.scss`
+
+Each banner has a `styles.scss` file that imports all the component
+styles. You must import this style file in the `<style>` section of the
+top-most component, e.g. `banners/desktop/components/MainBanner.vue`:
+
+```
+<style>
+@use "../styles/styles.scss";
+</style
+```
+
+At the moment, you have to know which components a banner uses and add and
+remove the right `@use` statements for the component theme files to
+`styles.scss`. In the future we might use Webpack to validate the imports.
 
 ## Conventions when writing unit tests
 
@@ -105,10 +135,10 @@ style changes, different behavior)
    need to check the values of child components.
 
 ## How the preview feature works
-* The webpack dev server loads the file `dashboard/index.html`, which requests a small Vue application inside the `dashboard` directory. The application renders an overview of campaigns and banners, generated from `campaign_info.toml`.
+* The Webpack dev server loads the file `dashboard/index.html`, which requests a small Vue application inside the `dashboard` directory. The application renders an overview of campaigns and banners, generated from `campaign_info.toml`.
 * `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that
   path from a configured URL in the background and serve it transparently from the local host. The configuration tells the web server to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org. 
-* There are two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
+* There are two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same host name as the Webpack server (e.g. `localhost` or `10.0.2.2`).
   * [B22_WMDE_local_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B22_WMDE_local_prototype) on CentralNotice
   * [dev-mode-wpde](https://github.com/wmde/wikipedia.de-banners/blob/master/dev-mode-wpde.js) on the [`wmde/wikipedia.de-banners` repository](https://github.com/wmde/wikipedia.de-banners) on GitHub.
 

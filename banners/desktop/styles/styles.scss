@@ -1,12 +1,14 @@
 // This is the file where we import the theme-specifc component styles
 
-@import "variables";
+@use "variables";
 
 // TODO import theme files for this banner (including only the used components)
 
-// This is just an example, please remove
 .wmde-banner {
   background: #ffffff;
+  font-size: 200%;
+  padding: 15px;
+  border: solid 2px #006400;
 
   &-greeting:hover {
     opacity: 0.5;

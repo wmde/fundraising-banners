@@ -21,11 +21,12 @@ const planet = ref<string>( 'World' );
 </script>
 
 <style>
+/* Import theme */
+@use '../styles/styles';
+
+/* All layout styles defined in this component will be overridden by the imported theme file */
 .wmde-banner {
 	position: relative;
-	font-size: 200%;
 	color: green;
-	padding: 15px;
-	border: solid 2px darkgreen;
 }
 </style>
