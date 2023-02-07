@@ -35,7 +35,6 @@ module.exports = () => Promise.all( [
 			inject_tracking: './webpack/inject_tracking.js'
 		},
 		plugins: [
-			new webpack.HotModuleReplacementPlugin(),
 			new webpack.DefinePlugin( {
 				CAMPAIGNS: JSON.stringify( campaignInfoToCampaignConfig( campaignConfig ) ),
 				GIT_BRANCH: JSON.stringify( currentBranch )
