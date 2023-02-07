@@ -25,6 +25,9 @@ module.exports = {
 		// use as few quotes as possible
 		'quote-props': [ 'error', 'consistent-as-needed', { keywords: true } ],
 
+		// Allow template literals
+		'quotes': [ 'error', 'single', { allowTemplateLiterals: true } ],
+
 		// We have big monitors
 		'max-len': [ 'error', {
 			code: 180

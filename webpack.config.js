@@ -32,7 +32,7 @@ module.exports = () => Promise.all( [
 		entry: {
 			dashboard: './dashboard/dashboard.ts',
 			// eslint-disable-next-line camelcase
-			inject_tracking: './webpack/inject_tracking.js'
+			inject_tracking: './dashboard/inject_tracking.ts'
 		},
 		plugins: [
 			new webpack.DefinePlugin( {
