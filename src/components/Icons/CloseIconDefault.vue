@@ -5,5 +5,5 @@
 	</svg>
 </template>
 <script setup lang="ts">
-withDefaults( defineProps<{fill: string}>(), { fill: '#A9A9A9' } );
+withDefaults( defineProps<{fill?: string}>(), { fill: '#A9A9A9' } );
 </script>
