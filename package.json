@@ -61,7 +61,7 @@
     "vitest": "^0.28.3",
     "vue-loader": "^17.0.1",
     "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.0",
     "webpack-merge": "^5.8.0",
     "webpack-sources": "^3.2.3"
