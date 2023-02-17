@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import DevDashboard from './components/DevDashboard.vue';
+import './styles.scss';
 
 import type { CampaignConfig } from '../webpack/campaign_config_types';
 
