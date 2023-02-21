@@ -35,7 +35,14 @@ module.exports = {
 
 		// jsdoc should use TypeScript type information, most doc comments may just inform about the purpose of a function/method
 		'jsdoc/require-param': [ 'off' ],
-		'jsdoc/require-returns': [ 'off' ]
+		'jsdoc/require-returns': [ 'off' ],
 
+		// This forces script and style lang in Vue single file components
+		'vue/block-lang': [ 'error', {
+			script: { lang: 'ts' },
+			style: { lang: 'scss' }
+		} ],
+
+		'@typescript-eslint/type-annotation-spacing': 'error'
 	}
 };
