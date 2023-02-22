@@ -1,19 +1,19 @@
 <template>
 	<svg width="100%" height="100%" viewBox="0 0 28 28" version="1.1"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-681,-72)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Copy" transform="matrix(0.965517,0,0,0.965517,65,-503.034)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill:rgb(255,55,0);"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 255, 55, 0, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
 					<g clipPath="url(#_clip1)">
 						<g transform="matrix(1.03571,0,0,1.03571,-67.3214,11.4286)">
-							<rect x="690" y="81" width="9" height="13" style="fill:white;"/>
+							<rect x="690" y="81" width="9" height="13" style="fill: #ffffff;"/>
 						</g>
 						<g transform="matrix(0.932143,0,0,1.03571,4.45357,12.4643)">
-							<path d="M703,80.7L699.105,77L693,77L693,90L703,90L703,80.7Z" style="fill:white;"/>
+							<path d="M703,80.7L699.105,77L693,77L693,90L703,90L703,80.7Z" style="fill: #ffffff;"/>
 						</g>
 						<g id="Copy1" transform="matrix(0.420796,0,0,0.423728,279.676,-1211.36)">
 							<path
@@ -38,7 +38,7 @@
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconCopy'
 };

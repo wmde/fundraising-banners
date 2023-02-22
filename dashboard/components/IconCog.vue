@@ -1,10 +1,10 @@
 <template>
 	<svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-799,-68)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Cog" transform="matrix(1.10345,0,0,1.10345,95,-518.897)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill:rgb(255,208,8);"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 255, 208, 8, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
@@ -15,7 +15,7 @@
 								94L811.347,90.327L806.34,89L807.694,84L806.34,79L811.347,77.673L815,74ZM815,82.5C814.172,
 								82.5 813.5,83.172 813.5,84C813.5,84.828 814.172,85.5 815,85.5C815.828,85.5 816.5,
 								84.828 816.5,84C816.5,83.172 815.828,82.5 815,82.5Z"
-								style="fill:rgb(136,136,136);"></path>
+								style="fill: rgba( 136, 136, 136, 1 );"></path>
 						</g>
 						<g id="Cog1" transform="matrix(0.498437,0,0,0.498437,-29.3624,-1155.56)">
 							<path
@@ -89,7 +89,7 @@
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconCog'
 };

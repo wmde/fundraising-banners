@@ -58,28 +58,22 @@ interface CompileInfo {
 	};
 }
 
-const props = defineProps<{ banner: Banner, campaign: Campaign, isWPDE:boolean, compileInfo: CompileInfo }>();
+const props = defineProps<{
+	banner: Banner,
+	campaign: Campaign,
+	isWPDE: boolean,
+	compileInfo: CompileInfo
+}>();
+
 const bannerPageName = ref( props.banner.pageName );
 
 const CENTRAL_NOTICE_EDIT_URL = 'https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/{{banner}}';
 const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml';
 
-let editLink:string = props.isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerPageName.value );
-const isCompiled:boolean = !!props.compileInfo;
-// let bannerCopyLink:boolean = null;
+let editLink: string = props.isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerPageName.value );
+const isCompiled: boolean = !!props.compileInfo;
 
-if ( !props.isWPDE ) {
-	let onCopyBannerToClipBoard = ( e: Event ) => e.preventDefault();
-
-	let bannerCopyTooltip = 'Banner not compiled';
-	if ( props.compileInfo ) {
-		const compiledSizeInKb = Math.round( Number( props.compileInfo.size ) / 1024 );
-		onCopyBannerToClipBoard = bannerCopyHandler;
-		bannerCopyTooltip = `Copy ${ compiledSizeInKb } KB Banner Code, compiled ${ relevantTime( props.compileInfo.date.toString() ) }`;
-	}
-}
-
-function onCompileBanner( e:Event ) {
+function onCompileBanner( e: Event ) {
 	e.preventDefault();
 	fetch( `/compile-banner/${ bannerPageName.value }` ).then( async response => {
 		const result = await response.json();
@@ -91,10 +85,10 @@ function onCompileBanner( e:Event ) {
 	} );
 }
 
-function bannerCopyHandler( e:Event ) {
+function bannerCopyHandler( e: Event ) {
 	e.preventDefault();
 	const bannerFileName = `/compiled-banners/${ bannerPageName.value }.js.wikitext`;
-	// TODO start spinnisWPDEer state for copy
+	// TODO start spinner state for copy
 	fetch( bannerFileName ).then( async response => {
 		// TODO unset spinner state for copy/ show confirmation
 		if ( !response.ok ) {
@@ -108,6 +102,16 @@ function bannerCopyHandler( e:Event ) {
 		const bannerCode = await response.text();
 		await navigator.clipboard.writeText( bannerCode );
 	} );
+}
+let onCopyBannerToClipBoard = ( e: Event ) => e.preventDefault();
+let bannerCopyTooltip = 'Banner not compiled';
+
+if ( !props.isWPDE ) {
+	if ( props.compileInfo ) {
+		const compiledSizeInKb = Math.round( Number( props.compileInfo.size ) / 1024 );
+		onCopyBannerToClipBoard = bannerCopyHandler;
+		bannerCopyTooltip = `Copy ${ compiledSizeInKb } KB Banner Code, compiled ${ relevantTime( props.compileInfo.date.toString() ) }`;
+	}
 }
 
 </script>

@@ -1,19 +1,19 @@
 <template>
 	<svg viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-719,-72)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Edit" transform="matrix(0.965517,0,0,0.965517,103,-503.034)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill:rgb(118,185,72);"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 118, 185, 72, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
 					<g clipPath="url(#_clip1)">
 						<g transform="matrix(0.732361,-0.732361,0.732361,0.732361,56.0551,576.911)">
-							<rect x="732" y="81" width="8" height="3" style="fill:rgb(0,157,255);"/>
+							<rect x="732" y="81" width="8" height="3" style="fill: rgba( 0, 157, 255, 1 );"/>
 						</g>
 						<g transform="matrix(0.732361,-0.732361,0.852624,0.852624,42.1763,563.262)">
-							<rect x="729" y="86" width="3" height="2" style="fill:rgb(255,208,8);"/>
+							<rect x="729" y="86" width="3" height="2" style="fill: rgba( 255, 208, 8, 1 );"/>
 						</g>
 						<g id="Edit1" transform="matrix(0.417091,0,0,0.417153,643.388,-1030.88)">
 							<path
@@ -39,7 +39,7 @@
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconEdit'
 };

@@ -1,6 +1,6 @@
 <template>
 	<svg width="18px" height="19px" viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-705,-9)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Refresh" transform="matrix(0.5,0,0,0.5,-18,-1541.36)">
@@ -17,14 +17,14 @@
 					2151.53 1458.47,2154 1464,2154C1473.09,2154 1480.73,2147.22 1481.86,2138.28C1482,2137.18 1481.22,
 					2136.18 1480.12,2136.04C1479.03,2135.9 1478.03,2136.68 1477.89,2137.78C1477.01,2144.73 1471.07,2150 1464,
 					2150C1459.26,2150 1454.92,2147.67 1452.35,2144Z"
-					style="fill:white;"/>
+					style="fill: #ffffff;"/>
 				</g>
 			</g>
 		</g>
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconRefresh'
 };

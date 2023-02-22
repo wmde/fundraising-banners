@@ -1,10 +1,10 @@
 <template>
 	<svg viewBox="0 0 32 32" version="1.1"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-841,-68)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Command" transform="matrix(1.10345,0,0,1.10345,137,-518.897)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill:rgb(52,52,52);"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 52, 52, 52, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
@@ -13,7 +13,7 @@
 							<g transform="matrix(18,0,0,18,877.406,83.5014)">
 							</g>
 							<text x="855.806px" y="83.501px"
-							style="font-family:'JetBrainsMono-Bold', 'JetBrains Mono', monospace;font-weight:700;font-size:18px;fill:white;">&gt;_
+							style="font-family: 'JetBrainsMono-Bold', 'JetBrains Mono', monospace;font-weight: bold;font-size: 18px;fill: #ffffff;">&gt;_
 							</text>
 						</g>
 					</g>
@@ -28,7 +28,7 @@
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconCommand'
 };

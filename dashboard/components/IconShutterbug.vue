@@ -1,10 +1,10 @@
 <template>
 	<svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-757,-68)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Shutterbug" transform="matrix(1.10345,0,0,1.10345,53,-518.897)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill:rgb(0,157,255);"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 0, 157, 255, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
@@ -17,10 +17,10 @@
 								2819.78C139.8,2821.99 138.007,2823.78 135.798,2823.78L104.202,2823.78C101.992,
 								2823.78 100.2,2821.99 100.2,2819.78L100.2,2800.22C100.2,2798.01 101.993,2796.22
 								104.202,2796.22L118.8,2796.22Z"
-								style="fill:rgb(220,214,186);"/>
+								style="fill: rgba( 220, 214, 186, 1 );"/>
 						</g>
 						<g transform="matrix(0.90625,0,0,0.90625,-48.9375,24.375)">
-							<circle cx="776.5" cy="85.5" r="2.5" style="fill:rgb(172,200,219);"/>
+							<circle cx="776.5" cy="85.5" r="2.5" style="fill: rgba( 172, 200, 219, 1 );"/>
 						</g>
 						<g id="Shutterbug2" transform="matrix(0.411932,0,0,0.408835,603.068,-1047.1)">
 							<path
@@ -52,7 +52,7 @@
 	</svg>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'IconShutterbug'
 };

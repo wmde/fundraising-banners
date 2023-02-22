@@ -100,7 +100,7 @@ onMounted( () => {
 		} );
 } );
 
-const onDoScreenshots = ( campaignName:string, e:Event ) => {
+const onDoScreenshots = ( campaignName: string, e: Event ) => {
 	e.preventDefault();
 	navigator.clipboard.writeText( `ssh -t funweb3-deploy "queue_screenshots ${ campaignName }"` )
 		.then( () => {
@@ -112,7 +112,7 @@ if ( props.gitBranch.match( gitFailurePrefix ) ) {
 	branchName.value = props.gitBranch.replace( gitFailurePrefix, '' );
 }
 
-const refresh = ( e:Event ) => {
+const refresh = ( e: Event ) => {
 	e.preventDefault();
 	window.location.reload();
 };
