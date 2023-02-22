@@ -20,13 +20,13 @@ withDefaults( defineProps<Props>(), {
 const planet = ref<string>( 'World' );
 </script>
 
-<style>
+<style lang="scss">
 /* Import theme */
 @use '../styles/styles';
 
 /* All layout styles defined in this component will be overridden by the imported theme file */
 .wmde-banner {
 	position: relative;
-	color: green;
+	color: #008000ff;
 }
 </style>
