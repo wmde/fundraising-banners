@@ -8,7 +8,7 @@ export default defineConfig( {
 	test: {
 		globals: false,
 		environmentMatchGlobs: [
-			[ 'test/unit/**', 'node' ],
+			[ 'test/unit/**', 'jsdom' ],
 			[ 'test/components/**', 'jsdom' ]
 		]
 	},

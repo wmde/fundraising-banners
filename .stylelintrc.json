@@ -31,6 +31,14 @@
 					"at-root"
 				]
 			}
+		],
+		"annotation-no-unknown": [
+			true,
+			{
+				"ignoreAnnotation": [
+					"default"
+				]
+			}
 		]
 	}
 }

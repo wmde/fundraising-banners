@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import CampaignDays, { endOfDay, startOfDay } from '@src/campaign_days';
+import CampaignDays, { endOfDay, startOfDay } from '@src/utils/CampaignDays';
 
 describe( 'startOfDay', function () {
 	it( 'returns the first second of the day', function () {

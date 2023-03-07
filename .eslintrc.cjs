@@ -43,6 +43,10 @@ module.exports = {
 			style: { lang: 'scss' }
 		} ],
 
-		'@typescript-eslint/type-annotation-spacing': 'error'
+		'@typescript-eslint/type-annotation-spacing': 'error',
+
+		// Workaround for Typescript enums, see https://github.com/typescript-eslint/typescript-eslint/issues/2483
+		'no-shadow': 'off',
+		'@typescript-eslint/no-shadow': [ 'error' ]
 	}
 };

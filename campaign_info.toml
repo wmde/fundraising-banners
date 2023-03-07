@@ -14,6 +14,17 @@ filename = "./banners/desktop/banner_ctrl.ts"
 pagename = "B23WMDE_00_230202_ctrl"
 tracking = "org-00-230202-ctrl"
 
+[mobile]
+campaign_tracking = "00-ba-230202"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[mobile.banners.ctrl]
+filename = "./banners/mobile/banner_ctrl.ts"
+pagename = "B23WMDE_00_Mobile_230202_ctrl"
+tracking = "org-00-230202-ctrl"
+
 
 # desktop banners on wikipedia.de
 [wikipediade]

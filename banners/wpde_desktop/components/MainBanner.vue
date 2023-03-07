@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner">
+	<div class="wmde-banner-main">
 		<ButtonClose />
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}}</span></div>
 	</div>
@@ -25,7 +25,7 @@ const planet = ref<string>( 'World' );
 @use '../styles/styles';
 
 /* All layout styles defined in this component will be overridden by the imported theme file */
-.wmde-banner {
+.wmde-banner-main {
 	position: relative;
 	color: #008000ff;
 }
