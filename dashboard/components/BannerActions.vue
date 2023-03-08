@@ -20,7 +20,8 @@
 			href="#"
 			title="Build Banner"
 			@click="onCompileBanner">
-				<IconBuild fill="#141414" />
+				<IconBuild fill="#141414"/>
+				<LoadingSpinner :small="true" :loading="isCompiling"/>
 			</a>
 			<a class="banner-actions-icon"
 			:class="{ 'uncompiled': !isCompiled }"
@@ -29,6 +30,7 @@
 			:data-tooltip="bannerCopyTooltip"
 			@click="onCopyBannerToClipBoard">
 				<IconCopy fill="#141414" />
+				<LoadingSpinner :small="true" :loading="isCopying"/>
 			</a>
 			<a class="banner-actions-icon"
 			target="_blank"
@@ -48,7 +50,8 @@ import IconEdit from './IconEdit.vue';
 import IconCopy from './IconCopy.vue';
 import IconBuild from './IconBuild.vue';
 import { relevantTime } from '../relevant_time';
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
+import LoadingSpinner from './LoadingSpinner.vue';
 
 interface CompileInfo {
 	[key: string]: {
@@ -73,11 +76,15 @@ const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/mast
 let editLink: string = props.isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerPageName.value );
 const isCompiled: boolean = !!props.compileInfo;
 
+let isCompiling: Ref<boolean> = ref( false );
+let isCopying: Ref<boolean> = ref( false );
+
 function onCompileBanner( e: Event ) {
 	e.preventDefault();
+	isCompiling.value = true;
 	fetch( `/compile-banner/${ bannerPageName.value }` ).then( async response => {
 		const result = await response.json();
-		// TODO unset spinner state for compile
+		isCompiling.value = false;
 		if ( result.err ) {
 			alert( result.err );
 		}
@@ -88,9 +95,9 @@ function onCompileBanner( e: Event ) {
 function bannerCopyHandler( e: Event ) {
 	e.preventDefault();
 	const bannerFileName = `/compiled-banners/${ bannerPageName.value }.js.wikitext`;
-	// TODO start spinner state for copy
+	isCopying.value = true;
 	fetch( bannerFileName ).then( async response => {
-		// TODO unset spinner state for copy/ show confirmation
+		isCopying.value = false;
 		if ( !response.ok ) {
 			if ( response.status === 404 ) {
 				alert( `${ bannerPageName.value }.js.wikitext not found, maybe you need to compile first?` );
