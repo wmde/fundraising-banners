@@ -24,7 +24,7 @@
 				<LoadingSpinner :small="true" :loading="isCompiling"/>
 			</a>
 			<a class="banner-actions-icon"
-			:class="{ 'uncompiled': !isCompiled }"
+			:class="{ 'uncompiled': !isCompiled, 'copied': isCopied }"
 			href="#"
 			title="Copy Banner Code"
 			:data-tooltip="bannerCopyTooltip"

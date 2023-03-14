@@ -152,6 +152,9 @@ a {
 			opacity: 0.5;
 			cursor: default;
 		}
+		&.copied {
+			background-color: #11eb04;
+		}
 	}
 }
 
