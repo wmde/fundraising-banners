@@ -7,14 +7,10 @@ export class BannerStateMachine implements StateMachine<BannerState> {
 
 	constructor( stateRef: Ref<BannerState> ) {
 		this.currentState = stateRef;
+		this.currentState.value.enter( null ).then( ()=>{} );
 	}
 
-	async StartWithState( state: BannerState ): Promise<any> {
-		this.currentState.value = state;
-		return await this.currentState.value.enter( null );
-	}
-
-	async ChangeState( state: BannerState ): Promise<any> {
+	async changeState( state: BannerState ): Promise<any> {
 
 		if ( this.currentState.value === null ) {
 			throw new Error( 'State machine must be started with an initial state' );
