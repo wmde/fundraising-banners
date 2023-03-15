@@ -6,7 +6,7 @@
 		'wmde-banner--visible' : bannerState.stateName === BannerStates.Visible,
 		'wmde-banner--closed' : bannerState.stateName === BannerStates.Closed
 	}">
-		<component :is="banner" v-bind="bannerProps" :bannerState="bannerState.stateName"/>
+		<component :is="banner" v-bind="bannerProps" :bannerState="bannerState.stateName" @banner-closed="onCloseHandler"/>
 	</div>
 </template>
 
@@ -51,7 +51,13 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState() ) );
+
+// TODO figure out the best state here
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( props.page ) ) );
+
+async function onCloseHandler() {
+	await stateMachine.changeState( new ClosedState( props.page ) );
+}
 
 </script>
 

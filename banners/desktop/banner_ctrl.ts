@@ -14,7 +14,7 @@ const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
-		transitionDuration: 500
+		transitionDuration: 1000
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: MainBanner,

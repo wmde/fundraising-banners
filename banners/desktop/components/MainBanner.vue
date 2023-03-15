@@ -1,6 +1,6 @@
 <template>
 	<div class="wmde-banner-main">
-		<ButtonClose />
+		<ButtonClose @click.prevent="onClose"/>
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}} {{ bannerState }}</span></div>
 	</div>
 </template>
@@ -18,6 +18,12 @@ interface Props {
 withDefaults( defineProps<Props>(), {
 	greeting: 'Ahoy'
 } );
+
+const emit = defineEmits( [ 'banner-closed' ] );
+
+function onClose() {
+	emit( 'banner-closed', 'close-completely' );
+}
 
 const planet = ref<string>( 'World' );
 </script>
