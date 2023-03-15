@@ -12,6 +12,7 @@ export class ClosedState extends BannerState {
 	}
 
 	enter(): Promise<any> {
+		// TODO: log events
 		this.page.unsetAnimated();
 		this.page.setSpace( 0 );
 		return Promise.resolve();

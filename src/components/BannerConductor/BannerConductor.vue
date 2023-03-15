@@ -1,10 +1,10 @@
 <template>
 	<div ref="bannerRef" class="wmde-banner" :class="{
-		'wmde-banner--initial' : bannerState.stateName === BannerStates.Initial,
-		'wmde-banner--pending' : bannerState.stateName === BannerStates.Pending,
-		'wmde-banner--showing' : bannerState.stateName === BannerStates.Showing,
-		'wmde-banner--visible' : bannerState.stateName === BannerStates.Visible,
-		'wmde-banner--closed' : bannerState.stateName === BannerStates.Closed
+		'wmde-banner-initial' : bannerState.stateName === BannerStates.Initial,
+		'wmde-banner-pending' : bannerState.stateName === BannerStates.Pending,
+		'wmde-banner-showing' : bannerState.stateName === BannerStates.Showing,
+		'wmde-banner-visible' : bannerState.stateName === BannerStates.Visible,
+		'wmde-banner-closed' : bannerState.stateName === BannerStates.Closed
 	}">
 		<component :is="banner" v-bind="bannerProps" :bannerState="bannerState.stateName" @banner-closed="onCloseHandler"/>
 	</div>
@@ -55,7 +55,8 @@ props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( ba
 // TODO figure out the best state here
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( props.page ) ) );
 
-async function onCloseHandler() {
+async function onCloseHandler( sourceOfCloseEvent: string ) {
+	console.log( 'sourceOfCloseEvent:', sourceOfCloseEvent );
 	await stateMachine.changeState( new ClosedState( props.page ) );
 }
 
@@ -68,5 +69,8 @@ async function onCloseHandler() {
 		width: 100%;
 		background: #ffffff;
 		z-index: 1000;
+	}
+	.wmde-banner-closed {
+		display: none;
 	}
 </style>
