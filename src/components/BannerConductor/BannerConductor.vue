@@ -59,7 +59,6 @@ onMounted( async () => {
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 
-// TODO figure out the best state here
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page as PageOrg ) ) );
 
 async function onCloseHandler( source: CloseSources ) {
