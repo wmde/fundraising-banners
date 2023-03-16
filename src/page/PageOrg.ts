@@ -1,9 +1,10 @@
 import { Page } from '@src/page/Page';
-import { SizeIssue } from '@src/tracking/SizeIssue';
 import { Skin } from '@src/page/skin/Skin';
 import { MediaWiki } from '@src/page/MediaWiki';
 import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
+import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -13,12 +14,14 @@ export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-dur
 
 class PageOrg implements Page, Tracker {
 
-	mediaWiki: MediaWiki;
-	skin: Skin;
+	private mediaWiki: MediaWiki;
+	private skin: Skin;
+	private sizeIssueChecker: SizeIssueChecker;
 
-	constructor( mediaWiki: MediaWiki, skin: Skin ) {
+	constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
 		this.mediaWiki = mediaWiki;
 		this.skin = skin;
+		this.sizeIssueChecker = sizeIssueChecker;
 	}
 
 	getBannerContainer(): string {
@@ -28,28 +31,29 @@ class PageOrg implements Page, Tracker {
 		return '#' + bannerContainerId;
 	}
 
-	shouldShowBanner(): boolean {
+	getReasonToNotShowBanner(): BannerNotShownReasons {
+		if ( this.sizeIssueChecker.hasSizeIssues() ) {
+			return BannerNotShownReasons.SizeIssue;
+		}
+
 		if ( !this.mediaWiki.isShowingContentPage() ) {
-			return false;
+			return BannerNotShownReasons.UserInteraction;
 		}
 
 		if ( this.mediaWiki.isContentHiddenByLightbox() ) {
-			return false;
+			return BannerNotShownReasons.UserInteraction;
 		}
 
 		if ( !this.mediaWiki.isInArticleNamespace() ) {
-			return false;
+			return BannerNotShownReasons.DisallowedNamespace;
 		}
 
-		return true;
+		return null;
 	}
 
 	trackEvent( trackingData: EventData ): void {
 		this.mediaWiki.track( 'event.WMDEBannerEvents', trackingData );
-	}
-
-	trackSizeIssue( trackingData: SizeIssue ): void {
-		this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
+		// this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 
 	onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
@@ -79,6 +83,9 @@ class PageOrg implements Page, Tracker {
 	showBanner(): Page {
 		document.body.classList.add( showBannerClass );
 		return this;
+	}
+
+	notifyThatBannerWasNotShown(): void {
 	}
 }
 

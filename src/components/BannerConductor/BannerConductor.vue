@@ -25,6 +25,7 @@ import { ShowingState } from '@src/components/BannerConductor/StateMachine/state
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
+import { SizeIssueState } from '@src/components/BannerConductor/StateMachine/states/SizeIssueState';
 
 interface Props {
 	page: Page,
@@ -41,12 +42,17 @@ const stateMachine = new BannerStateMachine( bannerState );
 
 onMounted( async () => {
 	await stateMachine.changeState( new PendingState( props.page, bannerRef.value.offsetHeight, props.bannerConfig.delay ) );
+	const bannerNotShownReason = props.page.getReasonToNotShowBanner();
 
-	if ( props.page.shouldShowBanner() ) {
+	if ( bannerNotShownReason ) {
+
+		await stateMachine.changeState( new NotShownState( bannerNotShownReason ) );
+
+	} else {
+
 		await stateMachine.changeState( new ShowingState( props.page, props.bannerConfig.transitionDuration ) );
 		await stateMachine.changeState( new VisibleState( props.page ) );
-	} else {
-		await stateMachine.changeState( new NotShownState() );
+
 	}
 } );
 

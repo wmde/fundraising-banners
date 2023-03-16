@@ -83,11 +83,8 @@ describe( 'PageOrg', function () {
 		const trackMock = vitest.fn();
 		mediaWiki.track = trackMock;
 		const trackingData = {
-			bannerAction: '🦡🦡🦡🦡🦡🦡🦡🦡🦡🦡🦡🍄',
-			bannerName: 'cool banner',
-			eventRate: 1,
-			slidesShown: 42,
-			finalSlide: 2
+			eventName: 'cool banner',
+			trackingRate: 1
 		};
 
 		( new PageOrg( mediaWiki, new SkinStub() ) ).trackEvent( trackingData );

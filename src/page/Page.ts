@@ -1,10 +1,7 @@
-import { SizeIssue } from '@src/tracking/SizeIssue';
-import { Skin } from '@src/page/skin/Skin';
+import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 
 export interface Page {
-	skin: Skin;
-	shouldShowBanner: () => boolean;
-	trackSizeIssue: ( trackingData: SizeIssue ) => void;
+	getReasonToNotShowBanner: () => BannerNotShownReasons;
 	getBannerContainer: () => string;
 	onPageEventThatShouldHideBanner: ( hideBannerListener: () => void ) => void;
 	setSpace: ( space: number ) => Page;
@@ -12,4 +9,5 @@ export interface Page {
 	setAnimated: () => Page;
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
+	notifyThatBannerWasNotShown: () => void;
 }

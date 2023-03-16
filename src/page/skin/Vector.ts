@@ -27,6 +27,10 @@ class Vector implements Skin {
 			this.editButtons[ i ].removeEventListener( 'click', this.referencedHideBannerCallback );
 		}
 	}
+
+	minimumVisiblePageBeneathBanner(): number {
+		return 160;
+	}
 }
 
 export default Vector;

@@ -23,6 +23,10 @@ class Minerva implements Skin {
 		this.searchField.removeEventListener( 'focus', this.referencedHideBannerCallback );
 		this.searchButton.removeEventListener( 'click', this.referencedHideBannerCallback );
 	}
+
+	minimumVisiblePageBeneathBanner(): number {
+		return 0;
+	}
 }
 
 export default Minerva;

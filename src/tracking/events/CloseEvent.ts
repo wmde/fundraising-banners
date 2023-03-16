@@ -1,6 +1,6 @@
 import { EventData } from '@src/tracking/EventData';
 
-class CloseEvent implements EventData {
+export class CloseEvent implements EventData {
 	eventName: string;
 	trackingRate: number;
 
