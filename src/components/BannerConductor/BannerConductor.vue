@@ -25,7 +25,7 @@ import { ShowingState } from '@src/components/BannerConductor/StateMachine/state
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
-import { SizeIssueState } from '@src/components/BannerConductor/StateMachine/states/SizeIssueState';
+import PageOrg from '@src/page/PageOrg';
 
 interface Props {
 	page: Page,
@@ -46,7 +46,7 @@ onMounted( async () => {
 
 	if ( bannerNotShownReason ) {
 
-		await stateMachine.changeState( new NotShownState( bannerNotShownReason ) );
+		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page as PageOrg ) );
 
 	} else {
 
