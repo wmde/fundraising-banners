@@ -47,4 +47,15 @@ export class WindowMediaWiki implements MediaWiki {
 		window.mw.track( name, trackingData );
 	}
 
+	preventBannerDisplayForPeriod(): void {
+		// TODO check if mw.centralNotice.internal.hide.setHideWithCloseButtonCookies should be called instead when using softclose e.g.
+		window.mw.centralNotice.hideBanner();
+	}
+
+	preventBannerDisplayUntilEndOfCampaign(): void {
+		const endOfYear = new Date( new Date().getFullYear(), 11, 31, 23, 59, 59 );
+		const secondsToEndOfYear = Math.abs( ( endOfYear.getTime() - Date.now() ) / 1000 );
+		window.mw.centralNotice.customHideBanner( 'donate', secondsToEndOfYear );
+	}
+
 }

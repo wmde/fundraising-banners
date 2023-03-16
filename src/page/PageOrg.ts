@@ -5,7 +5,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
-import {CloseSources} from "@src/tracking/CloseSources";
+import { CloseSources } from '@src/tracking/CloseSources';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -86,17 +86,25 @@ class PageOrg implements Page, Tracker {
 		return this;
 	}
 
-	notifyThatBannerWasNotShown(): void {
+	onBannerWasNotShown(): void {
 	}
 
-	notifyBannerWasClosed( source: CloseSources ): void {
+	setCloseCookieIfNecessary( source: CloseSources ): void {
 		switch ( source ) {
 			case CloseSources.AlreadyDonated:
-				// TODO: call media wiki to prevent banner until the end of campaign
+				this.mediaWiki.preventBannerDisplayUntilEndOfCampaign();
 				break;
-			case CloseSources.SoftClose:
-				// TODO: call media wiki to prevent banner for a duration
+			case CloseSources.SoftCloseBannerRejected:
+				this.mediaWiki.preventBannerDisplayForPeriod();
 				break;
+			case CloseSources.MainBanner:
+				this.mediaWiki.preventBannerDisplayForPeriod();
+				break;
+			case CloseSources.MiniBanner:
+				this.mediaWiki.preventBannerDisplayForPeriod();
+				break;
+
+				// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
 	}
 }

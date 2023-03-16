@@ -7,4 +7,6 @@ export interface MediaWiki {
 	isContentHiddenByLightbox: () => boolean,
 	isInArticleNamespace: () => boolean,
 	track: ( name: string, trackingData: BannerEvent|SizeIssue ) => void,
+	preventBannerDisplayForPeriod: () => void,
+	preventBannerDisplayUntilEndOfCampaign: () => void
 }

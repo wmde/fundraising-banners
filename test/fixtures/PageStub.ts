@@ -10,7 +10,7 @@ export class PageStub implements Page {
 		return null;
 	}
 
-	notifyThatBannerWasNotShown(): void {
+	onBannerWasNotShown(): void {
 	}
 
 	onPageEventThatShouldHideBanner(): void {

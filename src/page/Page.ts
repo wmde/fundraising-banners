@@ -1,5 +1,5 @@
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import {CloseSources} from "@src/tracking/CloseSources";
+import { CloseSources } from '@src/tracking/CloseSources';
 
 export interface Page {
 	getReasonToNotShowBanner: () => BannerNotShownReasons|null;
@@ -10,6 +10,6 @@ export interface Page {
 	setAnimated: () => Page;
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
-	notifyThatBannerWasNotShown: () => void;
-	notifyBannerWasClosed: ( source: CloseSources ) => void;
+	onBannerWasNotShown: () => void;
+	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
 }

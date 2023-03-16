@@ -20,9 +20,10 @@ export class ClosedState extends BannerState {
 
 	enter(): Promise<any> {
 		this.tracker.trackEvent( new CloseEvent( this.source ) );
-		this.page.unsetAnimated()
-			.setSpace( 0 );
-		// TODO notify page that banner has closed
+		this.page
+			.unsetAnimated()
+			.setSpace( 0 )
+			.setCloseCookieIfNecessary( this.source );
 		return Promise.resolve();
 	}
 
