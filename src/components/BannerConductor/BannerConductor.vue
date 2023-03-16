@@ -26,6 +26,7 @@ import { VisibleState } from '@src/components/BannerConductor/StateMachine/state
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import PageOrg from '@src/page/PageOrg';
+import { CloseSources } from '@src/tracking/CloseSources';
 
 interface Props {
 	page: Page,
@@ -59,11 +60,10 @@ onMounted( async () => {
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 
 // TODO figure out the best state here
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( props.page ) ) );
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page as PageOrg ) ) );
 
-async function onCloseHandler( source: string ) {
-	console.log( 'sourceOfCloseEvent:', source );
-	await stateMachine.changeState( new ClosedState( props.page ) );
+async function onCloseHandler( source: CloseSources ) {
+	await stateMachine.changeState( new ClosedState( source, props.page, props.page as PageOrg ) );
 }
 
 </script>

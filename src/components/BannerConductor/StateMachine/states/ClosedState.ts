@@ -1,20 +1,28 @@
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
+import { CloseSources } from '@src/tracking/CloseSources';
+import { Tracker } from '@src/tracking/Tracker';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 export class ClosedState extends BannerState {
 	stateName: BannerStates = BannerStates.Closed;
-	page: Page;
+	private page: Page;
+	private source: CloseSources;
+	private tracker: Tracker;
 
-	constructor( page: Page ) {
+	constructor( source: CloseSources, page: Page, tracker: Tracker ) {
 		super();
 		this.page = page;
+		this.source = source;
+		this.tracker = tracker;
 	}
 
 	enter(): Promise<any> {
-		// TODO: log events
-		this.page.unsetAnimated();
-		this.page.setSpace( 0 );
+		this.tracker.trackEvent( new CloseEvent( this.source ) );
+		this.page.unsetAnimated()
+			.setSpace( 0 );
+		// TODO notify page that banner has closed
 		return Promise.resolve();
 	}
 

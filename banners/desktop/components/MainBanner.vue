@@ -9,6 +9,7 @@
 import { ref } from 'vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import { CloseSources } from '@src/tracking/CloseSources';
 
 interface Props {
 	greeting?: string,
@@ -22,7 +23,7 @@ withDefaults( defineProps<Props>(), {
 const emit = defineEmits( [ 'banner-closed' ] );
 
 function onClose() {
-	emit( 'banner-closed', 'close-completely' );
+	emit( 'banner-closed', CloseSources.MainBanner );
 }
 
 const planet = ref<string>( 'World' );
