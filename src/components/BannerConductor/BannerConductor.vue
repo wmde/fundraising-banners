@@ -55,8 +55,8 @@ props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( ba
 // TODO figure out the best state here
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( props.page ) ) );
 
-async function onCloseHandler( sourceOfCloseEvent: string ) {
-	console.log( 'sourceOfCloseEvent:', sourceOfCloseEvent );
+async function onCloseHandler( source: string ) {
+	console.log( 'sourceOfCloseEvent:', source );
 	await stateMachine.changeState( new ClosedState( props.page ) );
 }
 

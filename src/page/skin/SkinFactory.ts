@@ -13,7 +13,7 @@ export class SkinFactory {
 	}
 
 	getSkin(): Skin {
-		switch ( this.mediaWiki.config.get( 'skin' ) ) {
+		switch ( this.mediaWiki.getConfigItem( 'skin' ) ) {
 			case 'minerva':
 				return new Minerva();
 			case 'monobook':

@@ -1,11 +1,24 @@
+import { EventData } from '@src/tracking/EventData';
+import { Page } from '@src/page/Page';
+
 export interface BannerEvent {
-	/**
-	 * Prefix for the banner name to have different events for the same banner
-	 * (can't use bannerAction for that because it's a fixed enum that we don't control)
-	 */
-	eventPrefix: string,
-	bannerAction: string,
-	eventRate: number,
-	slidesShown: number,
-	finalSlide: number
+	invoke( eventName: string ): void;
+	invoke( eventName: string, data: EventData ): void;
+}
+
+export class MWBannerEvent implements BannerEvent {
+
+	private page: Page;
+	private bannerName: string;
+
+	constructor( page: Page, bannerName: string ) {
+		this.page = page;
+		this.bannerName = bannerName;
+	}
+
+	invoke( eventName: string ): void;
+	invoke( eventName: string, data: EventData ): void;
+	invoke( eventName: string, data?: EventData ): void {
+
+	}
 }

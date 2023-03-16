@@ -5,10 +5,11 @@ import MainBanner from './components/MainBanner.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
-import MediaWiki from '@src/page/MediaWiki';
+import { WindowMediaWiki } from '@src/page/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 
-const page = new PageOrg( MediaWiki, ( new SkinFactory( MediaWiki ) ).getSkin() );
+const mediaWiki = new WindowMediaWiki();
+const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin() );
 
 const app = createVueApp( BannerConductor, {
 	page,

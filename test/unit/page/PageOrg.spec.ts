@@ -17,9 +17,8 @@ describe( 'PageOrg', function () {
 			isContentHiddenByLightbox(): boolean {
 				return false;
 			},
-			config: { get: vitest.fn() },
-			track: vitest.fn(),
-			centralNotice: {}
+			getConfigItem: vitest.fn(),
+			track: vitest.fn()
 		};
 	} );
 
