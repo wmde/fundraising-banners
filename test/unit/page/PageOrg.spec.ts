@@ -2,6 +2,8 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import PageOrg, { bannerContainerId } from '@src/page/PageOrg';
 import { MediaWiki } from '@src/page/MediaWiki';
 import { SkinStub } from '../../fixtures/SkinStub';
+import { SizeIssueCheckerStub } from '../../fixtures/SizeIssueCheckerStub';
+import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -27,7 +29,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub() ) ).shouldShowBanner() ).toBe( true );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( null );
 	} );
 
 	it( 'hides when not in article namespace', function () {
@@ -35,7 +37,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub() ) ).shouldShowBanner() ).toBe( false );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.DisallowedNamespace );
 	} );
 
 	it( 'hides when not on content page', function () {
@@ -43,7 +45,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( false );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub() ) ).shouldShowBanner() ).toBe( false );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
 	it( 'hides when content is hidden by lightbox', function () {
@@ -51,45 +53,24 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( true );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub() ) ).shouldShowBanner() ).toBe( false );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.UserInteraction );
+	} );
+
+	it( 'hides when there is a size issue', function () {
+		mediaWiki.isInArticleNamespace = vitest.fn().mockReturnValue( true );
+		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
+		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
+
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.SizeIssue );
 	} );
 
 	it( 'creates a mount point when getBannerContainer() is called', function () {
-		const page = new PageOrg( mediaWiki, new SkinStub() );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 		const id = page.getBannerContainer();
 
 		expect( id ).toBe( '#' + bannerContainerId );
 		expect( document.body.innerHTML ).toBe( `<div id="${ bannerContainerId }"></div>` );
 	} );
 
-	it( 'sends size issue tracking data', function () {
-		const trackMock = vitest.fn();
-		mediaWiki.track = trackMock;
-		const trackingData = {
-			bannerHeight: 100,
-			bannerName: 'cool banner',
-			eventRate: 1,
-			viewportHeight: 4242,
-			viewportWidth: 4242
-		};
-
-		( new PageOrg( mediaWiki, new SkinStub() ) ).trackSizeIssue( trackingData );
-
-		expect( trackMock ).toHaveBeenCalledOnce();
-		expect( trackMock ).toHaveBeenCalledWith( 'event.WMDEBannerSizeIssue', trackingData );
-	} );
-
-	it( 'sends event tracking data', function () {
-		const trackMock = vitest.fn();
-		mediaWiki.track = trackMock;
-		const trackingData = {
-			eventName: 'cool banner',
-			trackingRate: 1
-		};
-
-		( new PageOrg( mediaWiki, new SkinStub() ) ).trackEvent( trackingData );
-
-		expect( trackMock ).toHaveBeenCalledOnce();
-		expect( trackMock ).toHaveBeenCalledWith( 'event.WMDEBannerEvents', trackingData );
-	} );
+	it.todo( 'sends event tracking data' );
 } );

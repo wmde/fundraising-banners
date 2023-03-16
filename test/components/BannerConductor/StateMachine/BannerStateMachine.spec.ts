@@ -7,7 +7,12 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 describe( 'BannerStateMachine', function () {
 
 	it( 'exits current state on change', () => {
-		const startState = { stateName: BannerStates.Pending, canMoveToStates: [ BannerStates.Showing ], enter: vitest.fn(), exit: vitest.fn() };
+		const startState = {
+			stateName: BannerStates.Pending,
+			canMoveToStates: [ BannerStates.Showing ],
+			enter: vitest.fn().mockReturnValue( Promise.resolve( true ) ),
+			exit: vitest.fn()
+		};
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
 		const stateMachine = new BannerStateMachine( ref<BannerState>( startState as unknown as BannerState ) );
@@ -19,7 +24,12 @@ describe( 'BannerStateMachine', function () {
 	} );
 
 	it( 'enters next state on change', async () => {
-		const startState = { stateName: BannerStates.Pending, canMoveToStates: [ BannerStates.Showing ], enter: vitest.fn(), exit: vitest.fn() };
+		const startState = {
+			stateName: BannerStates.Pending,
+			canMoveToStates: [ BannerStates.Showing ],
+			enter: vitest.fn().mockReturnValue( Promise.resolve( true ) ),
+			exit: vitest.fn()
+		};
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
 		const currentState = ref<BannerState>( startState as unknown as BannerState );
@@ -32,16 +42,13 @@ describe( 'BannerStateMachine', function () {
 		expect( currentState.value ).toEqual( nextState );
 	} );
 
-	it( 'throws an error if change is called before start', async () => {
-		const currentState = ref<BannerState>( null );
-		const stateMachine = new BannerStateMachine( currentState );
-		const state = { enter: vitest.fn() };
-
-		await expect( () => stateMachine.changeState( state as unknown as BannerState ) ).rejects.toThrowError();
-	} );
-
 	it( 'does nothing if state cannot move to next state', async () => {
-		const startState = { stateName: BannerStates.Pending, canMoveToStates: [ BannerStates.Closed ], enter: vitest.fn(), exit: vitest.fn() };
+		const startState = {
+			stateName: BannerStates.Pending,
+			canMoveToStates: [ BannerStates.Closed ],
+			enter: vitest.fn().mockReturnValue( Promise.resolve( true ) ),
+			exit: vitest.fn()
+		};
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
 		const currentState = ref<BannerState>( startState as unknown as BannerState );

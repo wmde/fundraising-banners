@@ -6,4 +6,9 @@ export class SkinStub implements Skin {
 
 	removeEventListeners(): void {
 	}
+
+	minimumVisiblePageBeneathBanner(): number {
+		return 0;
+	}
+
 }
