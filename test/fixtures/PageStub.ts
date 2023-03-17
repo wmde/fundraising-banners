@@ -10,13 +10,15 @@ export class PageStub implements Page {
 		return null;
 	}
 
-	preventImpressionCountForHiddenBanner(): void {
+	preventImpressionCountForHiddenBanner(): Page {
+		return this;
 	}
 
 	onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): void {
+	removePageEventListeners(): Page {
+		return this;
 	}
 
 	setAnimated(): Page {
@@ -39,7 +41,8 @@ export class PageStub implements Page {
 		return this;
 	}
 
-	setCloseCookieIfNecessary(): void {
+	setCloseCookieIfNecessary(): Page {
+		return this;
 	}
 
 	trackEvent(): void {

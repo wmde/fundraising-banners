@@ -1,12 +1,14 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
 import { Page } from '@src/page/Page';
+import { PageStub } from '@test/fixtures/PageStub';
 
 describe( 'ShowingState', function () {
 	let page: Page;
 
 	beforeEach( () => {
-		page = { setSpace: vitest.fn() } as unknown as Page;
+		page = new PageStub();
+		page.setSpace = vitest.fn().mockReturnValue( page );
 		page.setAnimated = vitest.fn().mockReturnValue( page );
 		page.setTransitionDuration = vitest.fn().mockReturnValue( page );
 		page.showBanner = vitest.fn();

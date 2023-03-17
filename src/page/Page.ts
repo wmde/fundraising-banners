@@ -7,12 +7,12 @@ export interface Page extends Tracker {
 	getReasonToNotShowBanner: ( bannerDimensions: Vector2 ) => BannerNotShownReasons|null;
 	getBannerContainer: () => string;
 	onPageEventThatShouldHideBanner: ( hideBannerListener: () => void ) => void;
-	removePageEventListeners: () => void;
+	removePageEventListeners: () => Page;
 	setSpace: ( space: number ) => Page;
 	setTransitionDuration: ( duration: number ) => Page;
 	setAnimated: () => Page;
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
-	preventImpressionCountForHiddenBanner: () => void;
-	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
+	preventImpressionCountForHiddenBanner: () => Page;
+	setCloseCookieIfNecessary: ( source: CloseSources ) => Page;
 }

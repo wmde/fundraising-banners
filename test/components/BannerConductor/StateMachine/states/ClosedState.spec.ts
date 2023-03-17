@@ -1,9 +1,9 @@
 import { describe, it, vitest, expect } from 'vitest';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { PageStub } from '../../../../fixtures/PageStub';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackerStub } from '../../../../fixtures/TrackerStub';
+import { PageStub } from '@test/fixtures/PageStub';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 describe( 'ClosedState', function () {
 	it( 'tracks close event on enter', function () {
@@ -36,5 +36,15 @@ describe( 'ClosedState', function () {
 
 		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledOnce();
 		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( CloseSources.MainBanner );
+	} );
+
+	it( 'removes the event listeners', function () {
+		const page = new PageStub();
+		page.removePageEventListeners = vitest.fn( () => page );
+		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub() );
+
+		state.enter();
+
+		expect( page.removePageEventListeners ).toHaveBeenCalledOnce();
 	} );
 } );

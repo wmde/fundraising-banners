@@ -74,8 +74,9 @@ class PageOrg implements Page {
 		this.skin.addHideBannerListener( hideBannerListener );
 	}
 
-	removePageEventListeners(): void {
+	removePageEventListeners(): Page {
 		this.skin.removeEventListeners();
+		return this;
 	}
 
 	setSpace( space: number ): Page {
@@ -103,11 +104,12 @@ class PageOrg implements Page {
 		return this;
 	}
 
-	preventImpressionCountForHiddenBanner(): void {
+	preventImpressionCountForHiddenBanner(): Page {
 		this.mediaWiki.setBannerLoadedButHidden();
+		return this;
 	}
 
-	setCloseCookieIfNecessary( source: CloseSources ): void {
+	setCloseCookieIfNecessary( source: CloseSources ): Page {
 		switch ( source ) {
 			case CloseSources.AlreadyDonated:
 				this.mediaWiki.preventBannerDisplayUntilEndOfCampaign();
@@ -126,6 +128,7 @@ class PageOrg implements Page {
 
 			// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
+		return this;
 	}
 }
 

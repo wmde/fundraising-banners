@@ -23,7 +23,8 @@ export class ClosedState extends BannerState {
 		this.page
 			.unsetAnimated()
 			.setSpace( 0 )
-			.setCloseCookieIfNecessary( this.source );
+			.setCloseCookieIfNecessary( this.source )
+			.removePageEventListeners();
 		return Promise.resolve();
 	}
 

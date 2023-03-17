@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import PageOrg, { bannerContainerId } from '@src/page/PageOrg';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { SkinStub } from '../../fixtures/SkinStub';
-import { SizeIssueCheckerStub } from '../../fixtures/SizeIssueCheckerStub';
+import { SkinStub } from '@test/fixtures/SkinStub';
+import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';

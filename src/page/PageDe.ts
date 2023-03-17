@@ -1,7 +1,6 @@
 import { Page } from '@src/page/Page';
 import WPDE from '@src/page/skin/WPDE';
 import { Skin } from '@src/page/skin/Skin';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
 
 class PageDe implements Page {
@@ -24,7 +23,8 @@ class PageDe implements Page {
 	onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): void {
+	removePageEventListeners(): Page {
+		return this;
 	}
 
 	setSpace(): Page {
@@ -48,8 +48,10 @@ class PageDe implements Page {
 	}
 
 	getReasonToNotShowBanner: () => BannerNotShownReasons;
-	preventImpressionCountForHiddenBanner: () => void;
-	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
+	preventImpressionCountForHiddenBanner: () => Page;
+	setCloseCookieIfNecessary() {
+		return this;
+	}
 }
 
 export default PageDe;
