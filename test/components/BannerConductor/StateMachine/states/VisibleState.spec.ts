@@ -1,15 +1,12 @@
-import { beforeEach, describe, expect, it, vitest } from 'vitest';
+import { describe, expect, it, vitest } from 'vitest';
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
-import { Page } from '@src/page/Page';
+import { PageStub } from '@test/fixtures/PageStub';
 
 describe( 'VisibleState', function () {
-	let page: Page;
-
-	beforeEach( () => {
-		page = { setSpace: vitest.fn() } as unknown as Page;
-	} );
 
 	it( 'sets banner size on resize', () => {
+		const page = new PageStub();
+		page.setSpace = vitest.fn( () => page );
 		const visibleState = new VisibleState( page );
 
 		visibleState.onResize( 42 );

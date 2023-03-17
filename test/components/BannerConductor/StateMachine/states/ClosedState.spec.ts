@@ -30,7 +30,7 @@ describe( 'ClosedState', function () {
 
 	it( 'sets closed cookie', function () {
 		const page = new PageStub();
-		page.setCloseCookieIfNecessary = vitest.fn();
+		page.setCloseCookieIfNecessary = vitest.fn( () => page );
 		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub(), new ResizeHandlerStub() );
 
 		state.enter();
