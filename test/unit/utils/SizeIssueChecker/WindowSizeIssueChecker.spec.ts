@@ -11,48 +11,48 @@ describe( 'WindowSizeIssueChecker', function () {
 
 	it( 'returns size issue when banner is too wide', () => {
 		const bannerDimensions = new Vector2( 101, 100 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions );
+		const checker = new WindowSizeIssueChecker();
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 101 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions );
+		const checker = new WindowSizeIssueChecker();
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner with offset is too wide', () => {
 		const bannerDimensions = new Vector2( 100, 100 );
 		const spaceAdjustment = new Vector2( 1, 0 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( spaceAdjustment );
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner with offset is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 100 );
 		const spaceAdjustment = new Vector2( 0, 1 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( spaceAdjustment );
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner with skin adjustment is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 100 );
 		const spaceAdjustment = new Vector2( 0, 0 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( spaceAdjustment );
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 1 ) ) ).toBeTruthy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 1 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns no size issue when banner fits', () => {
 		const bannerDimensions = new Vector2( 90, 90 );
 		const spaceAdjustment = new Vector2( 4, 2 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( spaceAdjustment );
 
-		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeFalsy();
+		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 0 ) ) ).toBeFalsy();
 	} );
 
 	it( 'returns dimensions', () => {
@@ -61,11 +61,9 @@ describe( 'WindowSizeIssueChecker', function () {
 		Object.defineProperty( screen, 'width', { writable: true, configurable: true, value: 180 } );
 		Object.defineProperty( screen, 'height', { writable: true, configurable: true, value: 180 } );
 
-		const bannerDimensions = new Vector2( 100, 100 );
-		const checker = new WindowSizeIssueChecker( bannerDimensions );
+		const checker = new WindowSizeIssueChecker( Vector2.zero );
 
 		expect( checker.getDimensions() ).toEqual( {
-			bannerHeight: 100,
 			screen: {
 				width: 180,
 				height: 180

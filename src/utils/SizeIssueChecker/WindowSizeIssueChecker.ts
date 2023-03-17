@@ -1,6 +1,6 @@
 import { Vector2 } from '@src/utils/Vector2';
-import { SizeIssueDimensions } from '@src/utils/SizeIssueChecker/SizeIssueDimensions';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
+import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export class WindowSizeIssueChecker implements SizeIssueChecker {
 	bannerDimensions: Vector2;
@@ -11,13 +11,14 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 	 */
 	manualSpaceAdjustment: Vector2;
 
-	constructor( bannerDimensions: Vector2, manualSpaceAdjustment: Vector2 = null ) {
-		this.bannerDimensions = bannerDimensions;
-		this.manualSpaceAdjustment = manualSpaceAdjustment ?? new Vector2( 0, 0 );
+	constructor( manualSpaceAdjustment: Vector2 = null ) {
+		this.manualSpaceAdjustment = manualSpaceAdjustment ?? Vector2.zero;
 	}
 
-	public hasSizeIssues( skinSpaceAdjustment: Vector2 ): boolean {
-		const allowedBannerDimensions = this.bannerDimensions
+	public hasSizeIssues( bannerDimensions: Vector2, skinSpaceAdjustment: Vector2 ): boolean {
+		this.bannerDimensions = bannerDimensions;
+
+		const allowedBannerDimensions = bannerDimensions
 			.add( this.manualSpaceAdjustment )
 			.add( skinSpaceAdjustment );
 
@@ -25,9 +26,8 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 			window.innerHeight < allowedBannerDimensions.y;
 	}
 
-	public getDimensions(): SizeIssueDimensions {
+	public getDimensions(): WindowDimensions {
 		return {
-			bannerHeight: this.bannerDimensions.y,
 			screen: {
 				width: screen.width,
 				height: screen.height

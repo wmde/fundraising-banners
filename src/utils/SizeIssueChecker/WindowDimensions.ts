@@ -1,5 +1,4 @@
-export interface SizeIssueDimensions {
-	bannerHeight: number,
+export interface WindowDimensions {
 	screen: {
 		width: number,
 		height: number

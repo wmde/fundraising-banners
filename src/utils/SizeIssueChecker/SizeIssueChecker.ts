@@ -1,7 +1,7 @@
-import { SizeIssueDimensions } from '@src/utils/SizeIssueChecker/SizeIssueDimensions';
 import { Vector2 } from '@src/utils/Vector2';
+import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export interface SizeIssueChecker {
-	hasSizeIssues( skinSpaceAdjustment: Vector2 ): boolean;
-	getDimensions(): SizeIssueDimensions;
+	hasSizeIssues( bannerDimensions: Vector2, skinSpaceAdjustment: Vector2 ): boolean;
+	getDimensions(): WindowDimensions;
 }

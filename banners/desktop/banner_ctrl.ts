@@ -7,9 +7,10 @@ import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
+import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 
 const mediaWiki = new WindowMediaWiki();
-const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin() );
+const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 
 const app = createVueApp( BannerConductor, {
 	page,

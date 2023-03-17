@@ -5,6 +5,7 @@ import { SkinStub } from '../../fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '../../fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { Vector2 } from '@src/utils/Vector2';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -32,7 +33,8 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( null );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+			.toBe( null );
 	} );
 
 	it( 'hides when not in article namespace', function () {
@@ -40,7 +42,8 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.DisallowedNamespace );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+			.toBe( BannerNotShownReasons.DisallowedNamespace );
 	} );
 
 	it( 'hides when not on content page', function () {
@@ -48,7 +51,8 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( false );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.UserInteraction );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
 	it( 'hides when content is hidden by lightbox', function () {
@@ -56,7 +60,8 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( true );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.UserInteraction );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
 	it( 'hides when there is a size issue', function () {
@@ -64,7 +69,8 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner() ).toBe( BannerNotShownReasons.SizeIssue );
+		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner( Vector2.zero ) )
+			.toBe( BannerNotShownReasons.SizeIssue );
 	} );
 
 	it( 'creates a mount point when getBannerContainer() is called', function () {

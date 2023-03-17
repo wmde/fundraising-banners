@@ -1,5 +1,5 @@
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
-import { SizeIssueDimensions } from '@src/utils/SizeIssueChecker/SizeIssueDimensions';
+import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export class SizeIssueCheckerStub implements SizeIssueChecker {
 	private hasSizeIssue: boolean;
@@ -8,9 +8,8 @@ export class SizeIssueCheckerStub implements SizeIssueChecker {
 		this.hasSizeIssue = hasSizeIssue;
 	}
 
-	getDimensions(): SizeIssueDimensions {
+	getDimensions(): WindowDimensions {
 		return {
-			bannerHeight: 0,
 			screen: {
 				width: 0,
 				height: 0

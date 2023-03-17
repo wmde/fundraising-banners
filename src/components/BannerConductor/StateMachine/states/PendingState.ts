@@ -20,7 +20,6 @@ export class PendingState extends BannerState {
 		this.canMoveToStates.push( BannerStates.Showing );
 		this.canMoveToStates.push( BannerStates.Closed );
 		this.canMoveToStates.push( BannerStates.NotShown );
-		this.canMoveToStates.push( BannerStates.SizeIssue );
 	}
 
 	enter(): Promise<any> {

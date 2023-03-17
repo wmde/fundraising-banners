@@ -33,8 +33,8 @@ class PageOrg implements Page {
 		return '#' + bannerContainerId;
 	}
 
-	getReasonToNotShowBanner(): BannerNotShownReasons {
-		if ( this.hasSizeIssues() ) {
+	getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
+		if ( this.hasSizeIssues( bannerDimensions ) ) {
 			return BannerNotShownReasons.SizeIssue;
 		}
 
@@ -53,9 +53,9 @@ class PageOrg implements Page {
 		return null;
 	}
 
-	private hasSizeIssues(): boolean {
+	private hasSizeIssues( bannerDimensions: Vector2 ): boolean {
 		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this.skin.minimumVisiblePageBeneathBanner() );
-		return this.sizeIssueChecker.hasSizeIssues( skinSpaceAdjustment );
+		return this.sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
 	}
 
 	trackEvent( trackingData: EventData ): void {

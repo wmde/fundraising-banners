@@ -26,6 +26,7 @@ import { VisibleState } from '@src/components/BannerConductor/StateMachine/state
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { Vector2 } from '@src/utils/Vector2';
 
 interface Props {
 	page: Page,
@@ -42,7 +43,7 @@ const stateMachine = new BannerStateMachine( bannerState );
 
 onMounted( async () => {
 	await stateMachine.changeState( new PendingState( props.page, bannerRef.value.offsetHeight, props.bannerConfig.delay ) );
-	const bannerNotShownReason = props.page.getReasonToNotShowBanner();
+	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
 	if ( bannerNotShownReason ) {
 		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page ) );
