@@ -8,6 +8,7 @@ import PageOrg from '@src/page/PageOrg';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
+import TranslationPlugin from '@src/TranslationPlugin';
 
 const mediaWiki = new WindowMediaWiki();
 const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
@@ -24,5 +25,7 @@ const app = createVueApp( BannerConductor, {
 		greeting: 'Hello'
 	}
 } );
+
+app.use( TranslationPlugin, { planet: 'Jupiter' } );
 
 app.mount( page.getBannerContainer() );
