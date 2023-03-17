@@ -7,6 +7,7 @@ import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import { Vector2 } from '@src/utils/Vector2';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -34,7 +35,7 @@ class PageOrg implements Page, Tracker {
 	}
 
 	getReasonToNotShowBanner(): BannerNotShownReasons {
-		if ( this.sizeIssueChecker.hasSizeIssues() ) {
+		if ( this.hasSizeIssues() ) {
 			return BannerNotShownReasons.SizeIssue;
 		}
 
@@ -51,6 +52,11 @@ class PageOrg implements Page, Tracker {
 		}
 
 		return null;
+	}
+
+	private hasSizeIssues(): boolean {
+		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this.skin.minimumVisiblePageBeneathBanner() );
+		return this.sizeIssueChecker.hasSizeIssues( skinSpaceAdjustment );
 	}
 
 	trackEvent( trackingData: EventData ): void {
@@ -111,8 +117,10 @@ class PageOrg implements Page, Tracker {
 			case CloseSources.MiniBanner:
 				this.mediaWiki.preventBannerDisplayForPeriod();
 				break;
+			case CloseSources.FollowUpBanner:
+				break;
 
-				// TODO add more cases for banner display prevention with central notice cookies after closing
+			// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
 	}
 }

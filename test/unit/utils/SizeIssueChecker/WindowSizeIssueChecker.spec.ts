@@ -13,14 +13,14 @@ describe( 'WindowSizeIssueChecker', function () {
 		const bannerDimensions = new Vector2( 101, 100 );
 		const checker = new WindowSizeIssueChecker( bannerDimensions );
 
-		expect( checker.hasSizeIssues() ).toBeTruthy();
+		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 101 );
 		const checker = new WindowSizeIssueChecker( bannerDimensions );
 
-		expect( checker.hasSizeIssues() ).toBeTruthy();
+		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner with offset is too wide', () => {
@@ -28,7 +28,7 @@ describe( 'WindowSizeIssueChecker', function () {
 		const spaceAdjustment = new Vector2( 1, 0 );
 		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
 
-		expect( checker.hasSizeIssues() ).toBeTruthy();
+		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns size issue when banner with offset is too tall', () => {
@@ -36,7 +36,15 @@ describe( 'WindowSizeIssueChecker', function () {
 		const spaceAdjustment = new Vector2( 0, 1 );
 		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
 
-		expect( checker.hasSizeIssues() ).toBeTruthy();
+		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeTruthy();
+	} );
+
+	it( 'returns size issue when banner with skin adjustment is too tall', () => {
+		const bannerDimensions = new Vector2( 100, 100 );
+		const spaceAdjustment = new Vector2( 0, 0 );
+		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
+
+		expect( checker.hasSizeIssues( new Vector2( 0, 1 ) ) ).toBeTruthy();
 	} );
 
 	it( 'returns no size issue when banner fits', () => {
@@ -44,7 +52,7 @@ describe( 'WindowSizeIssueChecker', function () {
 		const spaceAdjustment = new Vector2( 4, 2 );
 		const checker = new WindowSizeIssueChecker( bannerDimensions, spaceAdjustment );
 
-		expect( checker.hasSizeIssues() ).toBeFalsy();
+		expect( checker.hasSizeIssues( new Vector2( 0, 0 ) ) ).toBeFalsy();
 	} );
 
 	it( 'returns dimensions', () => {
