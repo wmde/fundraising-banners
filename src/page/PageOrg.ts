@@ -34,10 +34,6 @@ class PageOrg implements Page {
 	}
 
 	getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
-		if ( this.hasSizeIssues( bannerDimensions ) ) {
-			return BannerNotShownReasons.SizeIssue;
-		}
-
 		if ( !this.mediaWiki.isShowingContentPage() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
@@ -48,6 +44,10 @@ class PageOrg implements Page {
 
 		if ( !this.mediaWiki.isInArticleNamespace() ) {
 			return BannerNotShownReasons.DisallowedNamespace;
+		}
+
+		if ( this.hasSizeIssues( bannerDimensions ) ) {
+			return BannerNotShownReasons.SizeIssue;
 		}
 
 		return null;
