@@ -24,6 +24,9 @@ class PageDe implements Page {
 	onPageEventThatShouldHideBanner(): void {
 	}
 
+	removePageEventListeners(): void {
+	}
+
 	setSpace(): Page {
 		return this;
 	}
@@ -47,7 +50,6 @@ class PageDe implements Page {
 	getReasonToNotShowBanner: () => BannerNotShownReasons;
 	preventImpressionCountForHiddenBanner: () => void;
 	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
-
 }
 
 export default PageDe;

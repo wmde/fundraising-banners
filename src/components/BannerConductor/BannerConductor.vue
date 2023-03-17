@@ -1,11 +1,5 @@
 <template>
-	<div ref="bannerRef" class="wmde-banner" :class="{
-		'wmde-banner-initial' : bannerState.stateName === BannerStates.Initial,
-		'wmde-banner-pending' : bannerState.stateName === BannerStates.Pending,
-		'wmde-banner-showing' : bannerState.stateName === BannerStates.Showing,
-		'wmde-banner-visible' : bannerState.stateName === BannerStates.Visible,
-		'wmde-banner-closed' : bannerState.stateName === BannerStates.Closed
-	}">
+	<div ref="bannerRef" class="wmde-banner" :class="bannerState.stateName">
 		<component :is="banner" v-bind="bannerProps" :bannerState="bannerState.stateName" @banner-closed="onCloseHandler"/>
 	</div>
 </template>
@@ -15,7 +9,6 @@
 import { Page } from '@src/page/Page';
 import { onMounted, ref } from 'vue';
 import { BannerConfig } from '@src/BannerConfig';
-import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { BannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
@@ -54,7 +47,6 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page ) ) );
 
 async function onCloseHandler( source: CloseSources ) {

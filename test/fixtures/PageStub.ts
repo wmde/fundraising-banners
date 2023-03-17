@@ -16,6 +16,9 @@ export class PageStub implements Page {
 	onPageEventThatShouldHideBanner(): void {
 	}
 
+	removePageEventListeners(): void {
+	}
+
 	setAnimated(): Page {
 		return this;
 	}

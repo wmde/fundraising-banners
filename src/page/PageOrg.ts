@@ -74,6 +74,10 @@ class PageOrg implements Page {
 		this.skin.addHideBannerListener( hideBannerListener );
 	}
 
+	removePageEventListeners(): void {
+		this.skin.removeEventListeners();
+	}
+
 	setSpace( space: number ): Page {
 		document.body.style.setProperty( bannerHeightCssVariable, `${space}px` );
 		return this;

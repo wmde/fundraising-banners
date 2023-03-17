@@ -2,6 +2,9 @@
 	<div class="wmde-banner-main">
 		<ButtonClose @click.prevent="onClose"/>
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}} {{ bannerState }}</span></div>
+		<div class="tmp-progress-bar">
+			<div class="tmp-progress-bar-inner"></div>
+		</div>
 	</div>
 </template>
 
@@ -38,4 +41,28 @@ const planet = ref<string>( 'World' );
 	position: relative;
 	color: #008000ff;
 }
+
+.tmp-progress-bar {
+	height: 20px;
+	width: 100%;
+	position: relative;
+	margin: 10px 0;
+	border: 2px solid #ff7863;
+	background: #ffffff;
+
+	&-inner {
+		width: 0;
+		height: 20px;
+		min-width: 30px;
+		background: #ff7863;
+		transition: width 5s ease-in-out;
+	}
+}
+
+.wmde-banner-visible {
+	.tmp-progress-bar-inner {
+		width: 100%;
+	}
+}
+
 </style>

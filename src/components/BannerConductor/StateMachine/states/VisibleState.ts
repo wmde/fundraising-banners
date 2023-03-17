@@ -22,7 +22,7 @@ export class VisibleState extends BannerState {
 	}
 
 	onResize( space: number ): void {
-		this.page.setSpace( space );
+		this.page.unsetAnimated().setSpace( space );
 	}
 
 }
