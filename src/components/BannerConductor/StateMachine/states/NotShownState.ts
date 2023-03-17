@@ -7,7 +7,7 @@ import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 
 export class NotShownState extends BannerState {
 	stateName: BannerStates = BannerStates.NotShown;
-	private bannerNotShownReason: BannerNotShownReasons;
+	private readonly bannerNotShownReason: BannerNotShownReasons;
 	private page: Page;
 	private tracker: Tracker;
 
