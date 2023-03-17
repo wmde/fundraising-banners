@@ -4,11 +4,12 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { PageStub } from '@test/fixtures/PageStub';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
+import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 
 describe( 'ClosedState', function () {
 	it( 'tracks close event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const state = new ClosedState( CloseSources.MainBanner, new PageStub(), tracker );
+		const state = new ClosedState( CloseSources.MainBanner, new PageStub(), tracker, new ResizeHandlerStub() );
 
 		state.enter();
 
@@ -19,7 +20,7 @@ describe( 'ClosedState', function () {
 		const page = new PageStub();
 		page.setSpace = vitest.fn( () => page );
 		page.unsetAnimated = vitest.fn( () => page );
-		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub() );
+		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub(), new ResizeHandlerStub() );
 
 		state.enter();
 
@@ -30,7 +31,7 @@ describe( 'ClosedState', function () {
 	it( 'sets closed cookie', function () {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vitest.fn();
-		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub() );
+		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub(), new ResizeHandlerStub() );
 
 		state.enter();
 
@@ -40,11 +41,14 @@ describe( 'ClosedState', function () {
 
 	it( 'removes the event listeners', function () {
 		const page = new PageStub();
+		const resizeHandler = new ResizeHandlerStub();
 		page.removePageEventListeners = vitest.fn( () => page );
-		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub() );
+		resizeHandler.onClose = vitest.fn();
+		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub(), resizeHandler );
 
 		state.enter();
 
 		expect( page.removePageEventListeners ).toHaveBeenCalledOnce();
+		expect( resizeHandler.onClose ).toHaveBeenCalledOnce();
 	} );
 } );

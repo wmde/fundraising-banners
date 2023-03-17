@@ -39,7 +39,7 @@ onMounted( async () => {
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
 	if ( bannerNotShownReason ) {
-		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page ) );
+		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page, props.resizeHandler ) );
 	} else {
 		await stateMachine.changeState( new ShowingState( props.page, props.bannerConfig.transitionDuration ) );
 		await stateMachine.changeState( new VisibleState( props.page ) );
@@ -47,10 +47,10 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page ) ) );
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page, props.resizeHandler ) ) );
 
 async function onCloseHandler( source: CloseSources ) {
-	await stateMachine.changeState( new ClosedState( source, props.page, props.page ) );
+	await stateMachine.changeState( new ClosedState( source, props.page, props.page, props.resizeHandler ) );
 }
 
 </script>
