@@ -19,7 +19,7 @@
 		<section class="content">
 			<div class="campaigns">
 				<div v-for="( campaign, index) in campaigns"
-				:key="campaign"
+				:key="campaign.name"
 				:class="['campaign', {'current-branch': campaign.name === branchName }]"
 				:style="{'--index': index}">
 					<div class="campaign-title">
@@ -81,12 +81,12 @@ import IconGit from './IconGit.vue';
 import IconRefresh from './IconRefresh.vue';
 import IconCog from './IconCog.vue';
 import IconCommand from './IconCommand.vue';
-import { parseCompileInfo } from '../util';
+import { CompileInfo, parseCompileInfo } from '../util';
 import { onMounted, ref } from 'vue';
 
 const props = defineProps<{ campaigns: CampaignConfig, gitBranch: string }>();
-let branchName = ref( props.gitBranch );
-const compileInfo = ref( {} );
+let branchName = ref<string>( props.gitBranch );
+const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
 
 onMounted( () => {

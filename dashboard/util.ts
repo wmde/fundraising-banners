@@ -1,4 +1,10 @@
-export function parseCompileInfo( webpackIndexText: string ): Record<string, { fileName: string, size?: string, date?: Date }> {
+export interface CompileInfo {
+	fileName: string,
+	size?: string,
+	date?: Date
+}
+
+export function parseCompileInfo( webpackIndexText: string ): Record<string, CompileInfo> {
 	const parser = new DOMParser();
 	const doc = parser.parseFromString( webpackIndexText, 'text/html' );
 	const compileInfo: Record<string, { fileName: string, size?: string, date?: Date }> = {};

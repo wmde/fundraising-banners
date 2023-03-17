@@ -44,22 +44,15 @@
 </template>
 
 <script setup lang="ts">
+import { Ref, ref } from 'vue';
 import type { Banner, Campaign } from '../../webpack/campaign_config_types';
 import IconPreview from './IconPreview.vue';
 import IconEdit from './IconEdit.vue';
 import IconCopy from './IconCopy.vue';
 import IconBuild from './IconBuild.vue';
 import { relevantTime } from '../relevant_time';
-import { Ref, ref } from 'vue';
+import { CompileInfo } from '../util';
 import LoadingSpinner from './LoadingSpinner.vue';
-
-interface CompileInfo {
-	[key: string]: {
-		fileName: string;
-		size?: string;
-		date?: Date;
-	};
-}
 
 const props = defineProps<{
 	banner: Banner,
