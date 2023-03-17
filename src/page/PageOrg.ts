@@ -1,7 +1,6 @@
 import { Page } from '@src/page/Page';
 import { Skin } from '@src/page/skin/Skin';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
@@ -15,7 +14,7 @@ export const showBannerClass = 'wmde-show-banner';
 export const bannerHeightCssVariable = '--wmde-banner-height';
 export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
 
-class PageOrg implements Page, Tracker {
+class PageOrg implements Page {
 
 	private mediaWiki: MediaWiki;
 	private skin: Skin;

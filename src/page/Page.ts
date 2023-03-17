@@ -1,7 +1,8 @@
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { Tracker } from '@src/tracking/Tracker';
 
-export interface Page {
+export interface Page extends Tracker {
 	getReasonToNotShowBanner: () => BannerNotShownReasons|null;
 	getBannerContainer: () => string;
 	onPageEventThatShouldHideBanner: ( hideBannerListener: () => void ) => void;

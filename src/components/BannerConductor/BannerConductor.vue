@@ -25,7 +25,6 @@ import { ShowingState } from '@src/components/BannerConductor/StateMachine/state
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
-import PageOrg from '@src/page/PageOrg';
 import { CloseSources } from '@src/tracking/CloseSources';
 
 interface Props {
@@ -46,23 +45,19 @@ onMounted( async () => {
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner();
 
 	if ( bannerNotShownReason ) {
-
-		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page as PageOrg ) );
-
+		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page ) );
 	} else {
-
 		await stateMachine.changeState( new ShowingState( props.page, props.bannerConfig.transitionDuration ) );
 		await stateMachine.changeState( new VisibleState( props.page ) );
-
 	}
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page as PageOrg ) ) );
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page ) ) );
 
 async function onCloseHandler( source: CloseSources ) {
-	await stateMachine.changeState( new ClosedState( source, props.page, props.page as PageOrg ) );
+	await stateMachine.changeState( new ClosedState( source, props.page, props.page ) );
 }
 
 </script>
