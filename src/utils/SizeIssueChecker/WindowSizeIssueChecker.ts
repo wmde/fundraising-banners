@@ -3,8 +3,6 @@ import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export class WindowSizeIssueChecker implements SizeIssueChecker {
-	bannerDimensions: Vector2;
-
 	/**
 	 * This is for adding or removing space from the banner dimensions to allow individual
 	 * banners to adjust the parameters of when they are shown
@@ -16,8 +14,6 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 	}
 
 	public hasSizeIssues( bannerDimensions: Vector2, skinSpaceAdjustment: Vector2 ): boolean {
-		this.bannerDimensions = bannerDimensions;
-
 		const allowedBannerDimensions = bannerDimensions
 			.add( this.manualSpaceAdjustment )
 			.add( skinSpaceAdjustment );
