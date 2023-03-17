@@ -26,4 +26,15 @@ describe( 'ClosedState', function () {
 		expect( page.setSpace ).toHaveBeenCalledWith( 0 );
 		expect( page.unsetAnimated ).toHaveBeenCalledOnce();
 	} );
+
+	it( 'sets closed cookie', function () {
+		const page = new PageStub();
+		page.setCloseCookieIfNecessary = vitest.fn();
+		const state = new ClosedState( CloseSources.MainBanner, page, new TrackerStub() );
+
+		state.enter();
+
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledOnce();
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( CloseSources.MainBanner );
+	} );
 } );

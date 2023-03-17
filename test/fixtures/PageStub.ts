@@ -1,5 +1,6 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import { CloseSources } from '@src/tracking/CloseSources';
 
 export class PageStub implements Page {
 	getBannerContainer(): string {
@@ -34,6 +35,9 @@ export class PageStub implements Page {
 
 	unsetAnimated(): Page {
 		return this;
+	}
+
+	setCloseCookieIfNecessary( source: CloseSources ): void {
 	}
 
 }
