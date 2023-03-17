@@ -1,11 +1,12 @@
 import { Page } from '@src/page/Page';
 import { Skin } from '@src/page/skin/Skin';
-import { MediaWiki } from '@src/page/MediaWiki';
+import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -53,7 +54,14 @@ class PageOrg implements Page, Tracker {
 	}
 
 	trackEvent( trackingData: EventData ): void {
-		this.mediaWiki.track( 'event.WMDEBannerEvents', trackingData );
+		const bannerEvent: BannerEvent = {
+			bannerAction: trackingData.eventName,
+			bannerName: '',
+			eventRate: trackingData.trackingRate,
+			finalSlide: 0,
+			slidesShown: 0
+		};
+		this.mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
 		// this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 

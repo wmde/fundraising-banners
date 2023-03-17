@@ -1,6 +1,6 @@
-import { BannerEvent } from '@src/tracking/BannerEvent';
-import { SizeIssue } from '@src/tracking/SizeIssue';
-import { MediaWiki } from '@src/page/MediaWiki';
+import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };

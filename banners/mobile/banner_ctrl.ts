@@ -5,7 +5,7 @@ import MainBanner from './components/MainBanner.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
-import { WindowMediaWiki } from '@src/page/WindowMediaWiki';
+import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 
 const mediaWiki = new WindowMediaWiki();

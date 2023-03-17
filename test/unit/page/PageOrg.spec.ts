@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import PageOrg, { bannerContainerId } from '@src/page/PageOrg';
-import { MediaWiki } from '@src/page/MediaWiki';
+import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '../../fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '../../fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import { CloseSources } from '@src/tracking/CloseSources';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -20,7 +21,9 @@ describe( 'PageOrg', function () {
 				return false;
 			},
 			getConfigItem: vitest.fn(),
-			track: vitest.fn()
+			track: vitest.fn(),
+			preventBannerDisplayForPeriod: vitest.fn(),
+			preventBannerDisplayUntilEndOfCampaign: vitest.fn()
 		};
 	} );
 
@@ -72,5 +75,37 @@ describe( 'PageOrg', function () {
 		expect( document.body.innerHTML ).toBe( `<div id="${ bannerContainerId }"></div>` );
 	} );
 
-	it.todo( 'sends event tracking data' );
+	it( 'stores close cookie for already donated close events', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonated );
+
+		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user closes soft close', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( CloseSources.SoftCloseBannerRejected );
+
+		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user closes main banner', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( CloseSources.MainBanner );
+
+		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user closes mini banner', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( CloseSources.MiniBanner );
+
+		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it.todo( 'sends event tracking data in trackEvent()' );
 } );
