@@ -8,13 +8,14 @@ export default defineConfig( {
 	test: {
 		globals: false,
 		environmentMatchGlobs: [
-			[ 'test/unit/**', 'node' ],
+			[ 'test/unit/**', 'jsdom' ],
 			[ 'test/components/**', 'jsdom' ]
 		]
 	},
 	resolve: {
 		alias: {
-			'@src': path.resolve( __dirname, './src' )
+			'@src': path.resolve( __dirname, './src' ),
+			'@test': path.resolve( __dirname, './test' )
 		}
 	}
 } );

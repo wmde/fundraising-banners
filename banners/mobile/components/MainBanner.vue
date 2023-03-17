@@ -1,0 +1,34 @@
+<template>
+	<div class="wmde-banner-main">
+		<ButtonClose />
+		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}} {{ bannerState }}</span></div>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+
+interface Props {
+	greeting?: string,
+	bannerState: BannerStates
+}
+
+withDefaults( defineProps<Props>(), {
+	greeting: 'Ahoy'
+} );
+
+const planet = ref<string>( 'World' );
+</script>
+
+<style lang="scss">
+/* Import theme */
+@import '../styles/styles';
+
+/* All layout styles defined in this component will be overridden by the imported theme file */
+.wmde-banner-main {
+	position: relative;
+	color: #008000ff;
+}
+</style>

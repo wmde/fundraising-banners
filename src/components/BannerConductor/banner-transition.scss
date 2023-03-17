@@ -1,0 +1,59 @@
+/* stylelint-disable selector-id-pattern */
+
+$transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
+
+#wmde-banner-app {
+	top: calc( -1 * var( --wmde-banner-height ) );
+}
+
+.wmde-animate-banner {
+
+	#wmde-banner-app,
+	// Vector
+	#mw-panel,
+	#mw-head,
+	#mw-page-base,
+	// Vector 2022
+	.mw-page-container,
+	// Minerva
+	#mw-mf-viewport,
+	#mw-mf-page-left,
+	// Monobook
+	#globalWrapper {
+		transition-timing-function: $transition-easing;
+		transition-duration: var( --wmde-banner-transition-duration );
+	}
+
+	#wmde-banner-app,
+	#mw-panel,
+	#mw-head,
+	#mw-mf-page-left,
+	#globalWrapper {
+		transition-property: top;
+	}
+
+	#mw-page-base,
+	#mw-mf-viewport,
+	.mw-page-container {
+		transition-property: padding-top;
+	}
+}
+
+.wmde-show-banner {
+	#wmde-banner-app {
+		top: 0;
+	}
+
+	#mw-panel,
+	#mw-head,
+	#mw-mf-page-left,
+	#globalWrapper {
+		top: var( --wmde-banner-height );
+	}
+
+	#mw-page-base,
+	#mw-mf-viewport,
+	.mw-page-container {
+		padding-top: var( --wmde-banner-height );
+	}
+}

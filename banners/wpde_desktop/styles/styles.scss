@@ -1,14 +1,23 @@
-// This is the file where we import the theme-specifc component styles
-
 @use 'variables';
 
 // TODO import theme files for this banner (including only the used components)
+
+.wmde-animate-skin {
+	display: none;
+}
 
 .wmde-banner {
 	background: #ffffff;
 	font-size: 200%;
 	padding: 15px;
 	border: solid 2px #006400;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	* {
+		box-sizing: border-box;
+	}
 
 	&-greeting:hover {
 		opacity: 0.5;
