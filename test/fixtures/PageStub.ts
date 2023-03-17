@@ -12,7 +12,7 @@ export class PageStub implements Page {
 		return null;
 	}
 
-	onBannerWasNotShown(): void {
+	preventImpressionCountForHiddenBanner(): void {
 	}
 
 	onPageEventThatShouldHideBanner(): void {

@@ -9,4 +9,5 @@ export interface MediaWiki {
 	track: ( name: string, trackingData: BannerEvent|SizeIssue ) => void;
 	preventBannerDisplayForPeriod: () => void;
 	preventBannerDisplayUntilEndOfCampaign: () => void;
+	setBannerLoadedButHidden: () => void;
 }

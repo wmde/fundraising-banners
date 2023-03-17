@@ -19,11 +19,11 @@ describe( 'NotShownState', function () {
 
 	it( 'marks banner as not shown on enter', function () {
 		const page = new PageStub();
-		page.onBannerWasNotShown = vitest.fn();
+		page.preventImpressionCountForHiddenBanner = vitest.fn();
 		const state = new NotShownState( BannerNotShownReasons.SizeIssue, page, new TrackerStub() );
 
 		state.enter();
 
-		expect( page.onBannerWasNotShown ).toHaveBeenCalledOnce();
+		expect( page.preventImpressionCountForHiddenBanner ).toHaveBeenCalledOnce();
 	} );
 } );

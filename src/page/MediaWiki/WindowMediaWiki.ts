@@ -58,4 +58,7 @@ export class WindowMediaWiki implements MediaWiki {
 		window.mw.centralNotice.customHideBanner( 'donate', secondsToEndOfYear );
 	}
 
+	setBannerLoadedButHidden(): void {
+		window.mw.centralNotice.setBannerLoadedButHidden();
+	}
 }

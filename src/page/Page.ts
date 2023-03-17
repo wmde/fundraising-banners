@@ -12,6 +12,6 @@ export interface Page extends Tracker {
 	setAnimated: () => Page;
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
-	onBannerWasNotShown: () => void;
+	preventImpressionCountForHiddenBanner: () => void;
 	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
 }

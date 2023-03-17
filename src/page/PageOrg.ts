@@ -99,7 +99,8 @@ class PageOrg implements Page {
 		return this;
 	}
 
-	onBannerWasNotShown(): void {
+	preventImpressionCountForHiddenBanner(): void {
+		this.mediaWiki.setBannerLoadedButHidden();
 	}
 
 	setCloseCookieIfNecessary( source: CloseSources ): void {

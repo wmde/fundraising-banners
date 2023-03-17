@@ -20,7 +20,7 @@ export class NotShownState extends BannerState {
 
 	enter(): Promise<any> {
 		this.tracker.trackEvent( new NotShownEvent( this.bannerNotShownReason ) );
-		this.page.onBannerWasNotShown();
+		this.page.preventImpressionCountForHiddenBanner();
 		return Promise.resolve( true );
 	}
 

@@ -45,7 +45,7 @@ class PageDe implements Page {
 	}
 
 	getReasonToNotShowBanner: () => BannerNotShownReasons;
-	onBannerWasNotShown: () => void;
+	preventImpressionCountForHiddenBanner: () => void;
 	setCloseCookieIfNecessary: ( source: CloseSources ) => void;
 
 }
