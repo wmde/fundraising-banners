@@ -21,7 +21,7 @@ class PageDe implements Page {
 	trackSizeIssue(): void {
 	}
 
-	onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
+	onPageEventThatShouldHideBanner(): void {
 	}
 
 	setSpace(): Page {

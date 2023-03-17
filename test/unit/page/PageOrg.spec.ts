@@ -24,7 +24,8 @@ describe( 'PageOrg', function () {
 			getConfigItem: vitest.fn(),
 			track: vitest.fn(),
 			preventBannerDisplayForPeriod: vitest.fn(),
-			preventBannerDisplayUntilEndOfCampaign: vitest.fn()
+			preventBannerDisplayUntilEndOfCampaign: vitest.fn(),
+			setBannerLoadedButHidden: vitest.fn()
 		};
 	} );
 

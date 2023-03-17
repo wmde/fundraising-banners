@@ -1,7 +1,5 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CloseSources } from '@src/tracking/CloseSources';
-import { EventData } from '@src/tracking/EventData';
 
 export class PageStub implements Page {
 	getBannerContainer(): string {
@@ -38,10 +36,10 @@ export class PageStub implements Page {
 		return this;
 	}
 
-	setCloseCookieIfNecessary( source: CloseSources ): void {
+	setCloseCookieIfNecessary(): void {
 	}
 
-	trackEvent( trackingData: EventData ): void {
+	trackEvent(): void {
 	}
 
 }

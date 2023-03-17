@@ -14,6 +14,7 @@
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint --ext .js,.vue,.ts,.cjs --cache --cache-location .eslintcache --ignore-path .gitignore .",
+    "lint:ts": "tsc --noEmit",
     "lint:css": "stylelint '**/*.{scss,vue}'",
     "ci": "npm-run-all lint test",
     "update-content": "npm update fundraising-frontend-content"
