@@ -1,5 +1,5 @@
 import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
-import { TranslationMessages } from '@src/TranslationPlugin';
+import { Translator } from '@src/Translator';
 
 const specialDayNameMessageKeys: { [ key: string ]: string } = {
 	'12/06': 'day-name-st-nicholas-day',
@@ -20,18 +20,18 @@ const dayNameMessageKeys: { [ key: number ]: string } = {
 
 export class DayName implements TextGenerator {
 	private readonly date: Date;
-	private readonly translations: TranslationMessages;
+	private readonly translator: Translator;
 
-	constructor( date: Date, translations: TranslationMessages ) {
+	constructor( date: Date, translator: Translator ) {
 		this.date = date;
-		this.translations = translations;
+		this.translator = translator;
 	}
 
-	get(): string {
-		return this.translations[ this.getDayNameMessageKey( this.date ) ];
+	public get(): string {
+		return this.translator.translate( this.getDayNameMessageKey( this.date ) );
 	}
 
-	getDayNameMessageKey( date: Date ): string {
+	private getDayNameMessageKey( date: Date ): string {
 		const specialMessageKey = this.getSpecialDayMessageKey( date );
 
 		if ( specialMessageKey in specialDayNameMessageKeys ) {
@@ -41,14 +41,14 @@ export class DayName implements TextGenerator {
 		return dayNameMessageKeys[ date.getDay() ];
 	}
 
-	getSpecialDayMessageKey( date: Date ): string {
+	private getSpecialDayMessageKey( date: Date ): string {
 		const month = this.ensureTwoDigitValue( date.getMonth() + 1 );
 		const day = this.ensureTwoDigitValue( date.getDate() );
 
 		return `${ month }/${ day }`;
 	}
 
-	ensureTwoDigitValue( value: number ): string {
+	private ensureTwoDigitValue( value: number ): string {
 		return ( '0' + value ).slice( -2 );
 	}
 }

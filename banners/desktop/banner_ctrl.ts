@@ -10,7 +10,9 @@ import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
 import Translations from '@src/messages/de';
+import { Translator } from '@src/Translator';
 
+const translator = new Translator( Translations );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 
@@ -27,6 +29,6 @@ const app = createVueApp( BannerConductor, {
 	}
 } );
 
-app.use( TranslationPlugin, Translations );
+app.use( TranslationPlugin, translator );
 
 app.mount( page.getBannerContainer() );

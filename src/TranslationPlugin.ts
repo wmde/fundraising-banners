@@ -1,12 +1,9 @@
 import { App } from 'vue';
-
-export type TranslationMessages = Record<string, string>;
+import { Translator } from '@src/Translator';
 
 export default {
-	install( app: App, options: TranslationMessages ) {
+	install( app: App, translator: Translator ) {
 		// inject a globally available $translate() method
-		app.config.globalProperties.$translate = ( key: string ): string => {
-			return options[ key ] || key;
-		};
+		app.config.globalProperties.$translate = ( key: string ): string => translator.translate( key );
 	}
 };

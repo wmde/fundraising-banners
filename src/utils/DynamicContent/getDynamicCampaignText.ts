@@ -1,0 +1,18 @@
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { DayName } from '@src/utils/DynamicContent/generators/DayName';
+import { Translator } from '@src/Translator';
+import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
+import { Formatters } from '@src/utils/DynamicContent/Formatters';
+
+// This function combines all the text generators and returns an implementation of DynamicContent and is sort've used as a factory replacement
+// Formatters format bits of text like currency, ordinals ect, generators use them to generate the actual text
+// The text generators can be copied over from the old repo one by one and tested individually.
+// Pass in required runtime things as function parameters
+// The signature might get disgustingly big so maybe think of a better pattern if that happens
+// There are todos in the CurrentDate and OrdinalEn tests
+export const getDynamicCampaignText = ( date: Date, translator: Translator, formatters: Formatters ): DynamicContent => {
+	return {
+		dayName: ( new DayName( date, translator ) ).get(),
+		currentDate: ( new CurrentDate( date, translator, formatters.ordinal ) ).get()
+	};
+};

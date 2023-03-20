@@ -1,4 +1,4 @@
-import { TranslationMessages } from '@src/TranslationPlugin';
+import { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
 	'LANGUAGE': 'de',
