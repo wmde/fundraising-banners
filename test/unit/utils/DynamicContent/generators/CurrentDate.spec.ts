@@ -1,4 +1,4 @@
-import { describe, expect, it, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';

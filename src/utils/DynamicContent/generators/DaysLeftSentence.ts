@@ -1,7 +1,10 @@
 import CampaignDays from '@src/utils/CampaignDays';
 import { Translator } from '@src/Translator';
 
-export class DaysLeft {
+/**
+ * Return a sentence that describes how many days are left in the campaign.
+ */
+export class DaysLeftSentence {
 	private readonly campaignDays: CampaignDays;
 	private readonly translator: Translator;
 
@@ -11,13 +14,15 @@ export class DaysLeft {
 	}
 
 	public get(): string {
+		const numberOfDaysUntilCampaignEnd = this.campaignDays.getNumberOfDaysUntilCampaignEnd();
 		return this.translator.translate( 'prefix-days-left' ) + ' ' +
-			this.campaignDays.getNumberOfDaysUntilCampaignEnd() + ' ' + this.getDayTranslation() + ' ' +
+			numberOfDaysUntilCampaignEnd + ' ' +
+			this.getDayTranslation( numberOfDaysUntilCampaignEnd ) + ' ' +
 			this.translator.translate( 'suffix-days-left' );
 	}
 
-	private getDayTranslation(): string {
-		return this.campaignDays.getNumberOfDaysUntilCampaignEnd() === 1 ?
+	private getDayTranslation( numberOfDaysUntilCampaignEnd: number ): string {
+		return numberOfDaysUntilCampaignEnd === 1 ?
 			this.translator.translate( 'day-singular' ) :
 			this.translator.translate( 'day-plural' );
 	}
