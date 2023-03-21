@@ -13,4 +13,14 @@ describe( 'Translator', () => {
 
 		expect( translator.translate( 'message-that-does-not-exist' ) ).toEqual( 'message-that-does-not-exist' );
 	} );
+
+	it( 'replaces template tags', () => {
+		const translator = new Translator( { 'message-with-template': '{{replaceMe}}-{{andMe}}-{{andThisNumber}}' } );
+
+		expect( translator.translate( 'message-with-template', {
+			replaceMe: 'Boo',
+			andMe: 'Urns',
+			andThisNumber: 42
+		} ) ).toEqual( 'Boo-Urns-42' );
+	} );
 } );

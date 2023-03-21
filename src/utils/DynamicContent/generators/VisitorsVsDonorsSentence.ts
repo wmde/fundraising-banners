@@ -17,8 +17,9 @@ export class VisitorsVsDonorsSentence implements TextGenerator {
 			'visitors-vs-donors-sentence-no-impressions' :
 			'visitors-vs-donors-sentence';
 
-		return this.translator.translate( messageKey )
-			.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay.toString() )
-			.replace( '{{totalNumberOfDonors}}', this.projectedNumberOfDonors.toString() );
+		return this.translator.translate( messageKey, {
+			millionImpressionsPerDay: this.millionImpressionsPerDay,
+			totalNumberOfDonors: this.projectedNumberOfDonors
+		} );
 	}
 }
