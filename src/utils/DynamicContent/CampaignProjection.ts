@@ -1,12 +1,13 @@
 import { CampaignProjectionParameters } from '@src/CampaignParameters';
 import CampaignDays from '@src/utils/CampaignDays';
 
-export class DonationProjection {
+export class CampaignProjection {
 	private readonly campaignProjectionParameters: CampaignProjectionParameters;
 	private readonly campaignDays: CampaignDays;
 
-	constructor( campaignProjectionParameters: CampaignProjectionParameters ) {
+	constructor( campaignProjectionParameters: CampaignProjectionParameters, campaignDays: CampaignDays ) {
 		this.campaignProjectionParameters = campaignProjectionParameters;
+		this.campaignDays = campaignDays;
 	}
 
 	public projectedDonors(): number {
@@ -20,7 +21,7 @@ export class DonationProjection {
 		return Math.round( this.getProjectedRemainingDonationSum() / this.campaignProjectionParameters.averageAmountPerDonation );
 	}
 
-	private getProjectedDonationSum() {
+	public getProjectedDonationSum() {
 		return this.calculateProjection(
 			this.campaignProjectionParameters.baseDonationSum,
 			this.campaignProjectionParameters.donationAmountPerMinute

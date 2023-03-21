@@ -9,7 +9,7 @@ import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftS
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
 import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/DonorsNeededSentence';
-import { DonationProjection } from '@src/utils/DynamicContent/DonationProjection';
+import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
 
 // This function combines all the text generators and returns an implementation of DynamicContent and is sort've used as a factory replacement
 // Formatters format bits of text like currency, ordinals ect, generators use them to generate the actual text
@@ -23,7 +23,12 @@ export const getDynamicCampaignText = ( date: Date, translator: Translator, form
 		endOfDay( campaignParameters.endDate )
 	);
 
-	const donationProjection = new DonationProjection( campaignParameters.campaignProjection );
+	const projectionStart = new CampaignDays(
+		startOfDay( campaignParameters.campaignProjection.baseDate ),
+		endOfDay( campaignParameters.endDate )
+	);
+
+	const donationProjection = new CampaignProjection( campaignParameters.campaignProjection, projectionStart );
 
 	return {
 		dayName: ( new DayName( date, translator ) ).get(),
