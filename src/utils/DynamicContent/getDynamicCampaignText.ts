@@ -10,13 +10,20 @@ import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/Campai
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
 import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/DonorsNeededSentence';
 import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
+import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 // This function combines all the text generators and returns an implementation of DynamicContent and is sort've used as a factory replacement
 // Formatters format bits of text like currency, ordinals ect, generators use them to generate the actual text
 // The text generators can be copied over from the old repo one by one and tested individually.
 // Pass in required runtime things as function parameters
 // The signature might get disgustingly big so maybe think of a better pattern if that happens
-export const getDynamicCampaignText = ( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters ): DynamicContent => {
+export const getDynamicCampaignText = (
+	date: Date,
+	translator: Translator,
+	formatters: Formatters,
+	campaignParameters: CampaignParameters,
+	impressionCount: ImpressionCount
+): DynamicContent => {
 
 	const campaignTimeRange = new TimeRange(
 		startOfDay( campaignParameters.startDate ),
@@ -41,6 +48,7 @@ export const getDynamicCampaignText = ( date: Date, translator: Translator, form
 			donationProjection.projectedDonors()
 		) ).get(),
 		donorsNeededSentence: ( new DonorsNeededSentence( donationProjection.remainingDonorsNeeded(), translator ) ).get(),
-		goalDonationSum: formatters.currency.millionsNumeric( donationProjection.projectedDonationSum() )
+		goalDonationSum: formatters.currency.millionsNumeric( donationProjection.projectedDonationSum() ),
+		overallImpressionCount: impressionCount.getOverallCount()
 	};
 };

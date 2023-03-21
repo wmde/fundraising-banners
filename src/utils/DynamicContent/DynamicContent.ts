@@ -6,4 +6,5 @@ export interface DynamicContent {
 	visitorsVsDonorsSentence: string;
 	donorsNeededSentence: string;
 	goalDonationSum: string;
+	overallImpressionCount: number;
 }
