@@ -40,6 +40,7 @@ export const getDynamicCampaignText = ( date: Date, translator: Translator, form
 			campaignParameters.millionImpressionsPerDay,
 			donationProjection.projectedDonors()
 		) ).get(),
-		donorsNeededSentence: ( new DonorsNeededSentence( donationProjection.remainingDonorsNeeded(), translator ) ).get()
+		donorsNeededSentence: ( new DonorsNeededSentence( donationProjection.remainingDonorsNeeded(), translator ) ).get(),
+		goalDonationSum: formatters.currency.millionsNumeric( donationProjection.projectedDonationSum() )
 	};
 };
