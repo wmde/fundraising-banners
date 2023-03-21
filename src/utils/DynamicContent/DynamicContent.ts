@@ -3,4 +3,5 @@ export interface DynamicContent {
 	currentDate: string;
 	daysLeftSentence: string;
 	campaignDaySentence: string;
+	visitorsVsDonorsSentence: string;
 }

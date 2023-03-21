@@ -13,7 +13,8 @@ export interface DonationProjection {
     donationAmountPerMinute: number,
     donorsPerMinute: number,
     // TODO investigate if this is really used for projection. Shouldn't this go into the parameters
-    averageAmountPerDonation: number
+    averageAmountPerDonation: number,
+    projectedDonors: number
 }
 
 /**
