@@ -29,23 +29,25 @@ export class CampaignDaySentence implements TextGenerator {
 			return '';
 		}
 
-		const daysUntilCampaignEnds = Math.ceil( this.campaignDays.getSecondsUntilCampaignEnds() / 86400 );
-		const daysSinceCampaignStart = Math.ceil( this.campaignDays.getSecondsSinceCampaignStart() / 86400 );
+		const daysUntilCampaignEnds = this.campaignDays.getNumberOfDaysUntilCampaignEnd();
+		const daysSinceCampaignStart = this.campaignDays.getDaysSinceCampaignStart();
 
 		if ( daysUntilCampaignEnds === 1 ) {
 			return this.translator.translate( 'campaign-day-last-day' );
 		} else if ( daysUntilCampaignEnds === 2 ) {
 			return this.translator.translate( 'campaign-day-second-last-day' );
 		} else if ( daysUntilCampaignEnds <= this.urgencyMessageDaysLeft ) {
-			return this.translator.translate( 'campaign-day-only-n-days' )
-				.replace( '{{days}}', daysUntilCampaignEnds.toString() );
+			return this.translator.translate( 'campaign-day-only-n-days', {
+				days: daysUntilCampaignEnds
+			} );
 		}
 
 		if ( daysSinceCampaignStart === 1 ) {
 			return this.translator.translate( 'campaign-day-first-day' );
 		}
 
-		return this.translator.translate( 'campaign-day-nth-day' )
-			.replace( '{{days}}', this.ordinal.get( daysSinceCampaignStart ) );
+		return this.translator.translate( 'campaign-day-nth-day', {
+			days: this.ordinal.get( daysSinceCampaignStart )
+		} );
 	}
 }
