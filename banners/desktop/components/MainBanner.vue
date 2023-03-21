@@ -2,6 +2,7 @@
 	<div class="wmde-banner-main">
 		<ButtonClose @click.prevent="onClose"/>
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{ $translate('no-interval-message')}} {{ bannerState }}</span></div>
+		<BannerText />
 		<div class="tmp-progress-bar">
 			<div class="tmp-progress-bar-inner"></div>
 		</div>
@@ -12,6 +13,7 @@
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
+import BannerText from './BannerText.vue';
 
 interface Props {
 	greeting?: string,

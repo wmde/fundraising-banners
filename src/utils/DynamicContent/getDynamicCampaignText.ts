@@ -38,7 +38,7 @@ export const getDynamicCampaignText = (
 	const donationProjection = new CampaignProjection( campaignParameters.campaignProjection, currentTimeRangeForProjection );
 
 	return {
-		dayName: ( new DayName( date, translator ) ).get(),
+		currentDayName: ( new DayName( date, translator ) ).get(),
 		currentDate: ( new CurrentDate( date, translator, formatters.ordinal ) ).get(),
 		daysLeftSentence: ( new DaysLeftSentence( campaignTimeRange, translator ) ).get(),
 		campaignDaySentence: ( new CampaignDaySentence( campaignTimeRange, translator, formatters.ordinal ) ).get(),

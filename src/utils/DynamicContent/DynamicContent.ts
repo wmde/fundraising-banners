@@ -1,5 +1,5 @@
 export interface DynamicContent {
-	dayName: string;
+	currentDayName: string;
 	currentDate: string;
 	daysLeftSentence: string;
 	campaignDaySentence: string;

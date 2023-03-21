@@ -12,10 +12,10 @@ export interface CampaignProjectionParameters {
     donorsBase: number,
     donationAmountPerMinute: number,
     donorsPerMinute: number,
-    // TODO investigate if this is really used for projection. Shouldn't this go into the parameters
-    averageAmountPerDonation: number,
-    projectedDonors: number,
-    donorsNeeded: number,
+    /**
+     * Needed to calculate missing number of donors by dividing the projected amount missing
+     */
+    averageAmountPerDonation: number
 }
 
 /**

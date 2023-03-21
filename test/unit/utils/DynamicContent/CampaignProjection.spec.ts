@@ -20,10 +20,8 @@ describe( 'CampaignProjection', function () {
 			baseDonationSum: 100_000,
 			donationAmountPerMinute: 10.3,
 			donorsBase: 105,
-			donorsNeeded: 0,
 			donorsPerMinute: 2,
-			goalDonationSum: 9_000_000,
-			projectedDonors: 0
+			goalDonationSum: 9_000_000
 		};
 	} );
 
