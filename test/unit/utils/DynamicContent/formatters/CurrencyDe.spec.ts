@@ -5,7 +5,7 @@ describe( 'CurrencyDe', () => {
 	const formatter = new CurrencyDe();
 
 	describe( '#millions', () => {
-		it( 'adds suffix and currrency', () => {
+		it( 'adds suffix and currency', () => {
 			expect( formatter.millions( 8 ) ).toBe( '8,0 Mio. €' );
 		} );
 
