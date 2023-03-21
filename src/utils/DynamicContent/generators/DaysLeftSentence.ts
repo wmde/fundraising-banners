@@ -1,4 +1,4 @@
-import CampaignDays from '@src/utils/CampaignDays';
+import TimeRange from '@src/utils/TimeRange';
 import { Translator } from '@src/Translator';
 import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
 
@@ -6,16 +6,16 @@ import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerato
  * Return a sentence that describes how many days are left in the campaign.
  */
 export class DaysLeftSentence implements TextGenerator {
-	private readonly campaignDays: CampaignDays;
+	private readonly campaignDays: TimeRange;
 	private readonly translator: Translator;
 
-	constructor( campaignDays: CampaignDays, translator: Translator ) {
+	constructor( campaignDays: TimeRange, translator: Translator ) {
 		this.campaignDays = campaignDays;
 		this.translator = translator;
 	}
 
 	public get(): string {
-		const numberOfDaysUntilCampaignEnd = this.campaignDays.getNumberOfDaysUntilCampaignEnd();
+		const numberOfDaysUntilCampaignEnd = this.campaignDays.numberOfDaysUntilEnd();
 		return this.translator.translate( 'prefix-days-left' ) + ' ' +
 			numberOfDaysUntilCampaignEnd + ' ' +
 			this.getDayTranslation( numberOfDaysUntilCampaignEnd ) + ' ' +

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import CampaignDays from '@src/utils/CampaignDays';
+import TimeRange from '@src/utils/TimeRange';
 import { CampaignProjectionParameters } from '@src/CampaignParameters';
 import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
 
@@ -22,8 +22,8 @@ const campaignProjectionParameters: CampaignProjectionParameters = {
 describe( 'CampaignProjection', function () {
 	describe( '#getProjectedDonationSum()', function () {
 		it( 'should return donation sum projection based on number of passed seconds', function () {
-			const campaignDaysOnStart = new CampaignDays( startDate, endDate, after12HoursDate );
-			const campaignDaysAfter24Hours = new CampaignDays( startDate, endDate, after24HoursDate );
+			const campaignDaysOnStart = new TimeRange( startDate, endDate, after12HoursDate );
+			const campaignDaysAfter24Hours = new TimeRange( startDate, endDate, after24HoursDate );
 			const campaignProjectionOnStart = new CampaignProjection( campaignProjectionParameters, campaignDaysOnStart );
 			const campaignProjectionAfter24Hours = new CampaignProjection( campaignProjectionParameters, campaignDaysAfter24Hours );
 			expect( campaignProjectionOnStart.getProjectedDonationSum() ).toBe( 107416 );

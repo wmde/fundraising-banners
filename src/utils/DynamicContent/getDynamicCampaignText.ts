@@ -4,7 +4,7 @@ import { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CampaignParameters } from '@src/CampaignParameters';
-import CampaignDays, { endOfDay, startOfDay } from '@src/utils/CampaignDays';
+import TimeRange, { endOfDay, startOfDay } from '@src/utils/TimeRange';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
@@ -18,23 +18,23 @@ import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection
 // The signature might get disgustingly big so maybe think of a better pattern if that happens
 export const getDynamicCampaignText = ( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters ): DynamicContent => {
 
-	const campaignDays = new CampaignDays(
+	const campaignTimeRange = new TimeRange(
 		startOfDay( campaignParameters.startDate ),
 		endOfDay( campaignParameters.endDate )
 	);
 
-	const projectionStart = new CampaignDays(
+	const currentTimeRangeForProjection = new TimeRange(
 		startOfDay( campaignParameters.campaignProjection.baseDate ),
 		endOfDay( campaignParameters.endDate )
 	);
 
-	const donationProjection = new CampaignProjection( campaignParameters.campaignProjection, projectionStart );
+	const donationProjection = new CampaignProjection( campaignParameters.campaignProjection, currentTimeRangeForProjection );
 
 	return {
 		dayName: ( new DayName( date, translator ) ).get(),
 		currentDate: ( new CurrentDate( date, translator, formatters.ordinal ) ).get(),
-		daysLeftSentence: ( new DaysLeftSentence( campaignDays, translator ) ).get(),
-		campaignDaySentence: ( new CampaignDaySentence( campaignDays, translator, formatters.ordinal ) ).get(),
+		daysLeftSentence: ( new DaysLeftSentence( campaignTimeRange, translator ) ).get(),
+		campaignDaySentence: ( new CampaignDaySentence( campaignTimeRange, translator, formatters.ordinal ) ).get(),
 		visitorsVsDonorsSentence: ( new VisitorsVsDonorsSentence(
 			translator,
 			campaignParameters.millionImpressionsPerDay,

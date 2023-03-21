@@ -1,4 +1,7 @@
-export default class CampaignDays {
+const SECONDS_PER_DAY = 86_400;
+const SECONDS_PER_MINUTE = 60;
+
+export default class TimeRange {
 	startDate: Date;
 	endDate: Date;
 	now: Date;
@@ -9,32 +12,40 @@ export default class CampaignDays {
 		this.now = now;
 	}
 
-	campaignHasStarted(): boolean {
-		return this.getSecondsSinceCampaignStart() > 0;
+	hasStarted(): boolean {
+		return this.secondsSinceStart() > 0;
 	}
 
-	campaignHasEnded(): boolean {
-		return this.getSecondsUntilCampaignEnds() < 0;
+	hasEnded(): boolean {
+		return this.secondsUntilEnd() < 0;
 	}
 
-	getSecondsSinceCampaignStart(): number {
+	secondsSinceStart(): number {
 		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
-	getDaysSinceCampaignStart(): number {
-		return Math.floor( this.getSecondsSinceCampaignStart() / ( 60 * 60 * 24 ) );
+	minutesSinceStart(): number {
+		return Math.floor( this.secondsSinceStart() / SECONDS_PER_MINUTE );
 	}
 
-	getSecondsUntilCampaignEnds(): number {
+	daysSinceStart(): number {
+		return Math.floor( this.secondsSinceStart() / SECONDS_PER_DAY );
+	}
+
+	secondsUntilEnd(): number {
 		return Math.floor( ( this.endDate.getTime() - this.now.getTime() ) / 1000 );
 	}
 
-	getSecondsBetweenStartAndEndOfCampaign(): number {
+	secondsBetweenStartAndEnd(): number {
 		return Math.floor( ( this.endDate.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
-	getNumberOfDaysUntilCampaignEnd(): number {
-		return Math.ceil( this.getSecondsUntilCampaignEnds() / 60 / 60 / 24 );
+	minutesBetweenStartAndEnd(): number {
+		return Math.floor( this.secondsBetweenStartAndEnd() / SECONDS_PER_MINUTE );
+	}
+
+	numberOfDaysUntilEnd(): number {
+		return Math.ceil( this.secondsUntilEnd() / SECONDS_PER_DAY );
 	}
 
 }

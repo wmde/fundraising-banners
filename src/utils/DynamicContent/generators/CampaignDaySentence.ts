@@ -1,10 +1,10 @@
 import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
-import CampaignDays from '@src/utils/CampaignDays';
+import TimeRange from '@src/utils/TimeRange';
 import { Translator } from '@src/Translator';
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 export class CampaignDaySentence implements TextGenerator {
-	private readonly campaignDays: CampaignDays;
+	private readonly campaignTimeRange: TimeRange;
 	private readonly translator: Translator;
 	private ordinal: Ordinal;
 	/**
@@ -13,24 +13,24 @@ export class CampaignDaySentence implements TextGenerator {
 	 */
 	private readonly urgencyMessageDaysLeft: number;
 
-	constructor( campaignDays: CampaignDays, translator: Translator, ordinal: Ordinal, urgencyMessageDaysLeft: number = 10 ) {
-		this.campaignDays = campaignDays;
+	constructor( campaignTimeRange: TimeRange, translator: Translator, ordinal: Ordinal, urgencyMessageDaysLeft: number = 10 ) {
+		this.campaignTimeRange = campaignTimeRange;
 		this.translator = translator;
 		this.ordinal = ordinal;
 		this.urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 	}
 
 	get(): string {
-		if ( !this.campaignDays.campaignHasStarted() ) {
+		if ( !this.campaignTimeRange.hasStarted() ) {
 			return this.translator.translate( 'campaign-day-before-campaign' );
 		}
 
-		if ( this.campaignDays.campaignHasEnded() ) {
+		if ( this.campaignTimeRange.hasEnded() ) {
 			return '';
 		}
 
-		const daysUntilCampaignEnds = this.campaignDays.getNumberOfDaysUntilCampaignEnd();
-		const daysSinceCampaignStart = this.campaignDays.getDaysSinceCampaignStart();
+		const daysUntilCampaignEnds = this.campaignTimeRange.numberOfDaysUntilEnd();
+		const daysSinceCampaignStart = this.campaignTimeRange.daysSinceStart();
 
 		if ( daysUntilCampaignEnds === 1 ) {
 			return this.translator.translate( 'campaign-day-last-day' );

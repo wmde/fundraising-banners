@@ -1,13 +1,13 @@
 import { CampaignProjectionParameters } from '@src/CampaignParameters';
-import CampaignDays from '@src/utils/CampaignDays';
+import TimeRange from '@src/utils/TimeRange';
 
 export class CampaignProjection {
 	private readonly campaignProjectionParameters: CampaignProjectionParameters;
-	private readonly campaignDays: CampaignDays;
+	private readonly timeRange: TimeRange;
 
-	constructor( campaignProjectionParameters: CampaignProjectionParameters, campaignDays: CampaignDays ) {
+	constructor( campaignProjectionParameters: CampaignProjectionParameters, timeRange: TimeRange ) {
 		this.campaignProjectionParameters = campaignProjectionParameters;
-		this.campaignDays = campaignDays;
+		this.timeRange = timeRange;
 	}
 
 	public projectedDonors(): number {
@@ -34,14 +34,14 @@ export class CampaignProjection {
 	}
 
 	private calculateProjection( base: number, increasePerMinute: number ): number {
-		if ( !this.campaignDays.campaignHasStarted() ) {
+		if ( !this.timeRange.hasStarted() ) {
 			return 0;
 		}
 
-		if ( this.campaignDays.campaignHasEnded() ) {
-			return base + ( this.campaignDays.getSecondsBetweenStartAndEndOfCampaign() / 60 ) * increasePerMinute;
+		if ( this.timeRange.hasEnded() ) {
+			return base + this.timeRange.minutesBetweenStartAndEnd() * increasePerMinute;
 		}
 
-		return base + ( this.campaignDays.getSecondsSinceCampaignStart() / 60 ) * increasePerMinute;
+		return base + this.timeRange.minutesSinceStart() * increasePerMinute;
 	}
 }
