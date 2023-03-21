@@ -1,6 +1,8 @@
 import { CampaignProjectionParameters } from '@src/CampaignParameters';
 import TimeRange from '@src/utils/TimeRange';
 
+const DONORS_NEEDED_ROUNDING = 100_000;
+
 /**
  * This class projects the figures from the last updated date to the current date
  * in order to get a more accurate representation of where the campaign currently stands
@@ -23,7 +25,7 @@ export class CampaignProjection {
 		);
 	}
 
-	public donorsNeeded(): number {
+	public remainingDonorsNeeded(): number {
 		return Math.round( this.projectedRemainingDonationSum() / this.campaignProjectionParameters.averageAmountPerDonation );
 	}
 
@@ -36,7 +38,7 @@ export class CampaignProjection {
 
 	private projectedRemainingDonationSum(): number {
 		const remainingAmount = this.campaignProjectionParameters.goalDonationSum - this.projectedDonationSum();
-		return Math.round( remainingAmount / 100000 ) * 100000;
+		return Math.round( remainingAmount / DONORS_NEEDED_ROUNDING ) * DONORS_NEEDED_ROUNDING;
 	}
 
 	private calculateProjection( base: number, increasePerMinute: number ): number {

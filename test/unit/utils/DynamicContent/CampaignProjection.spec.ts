@@ -15,7 +15,7 @@ describe( 'CampaignProjection', function () {
 
 	beforeEach( () => {
 		campaignProjectionParameters = {
-			averageAmountPerDonation: 0,
+			averageAmountPerDonation: 20,
 			baseDate: 'Not used by CampaignProjection directly',
 			baseDonationSum: 100_000,
 			donationAmountPerMinute: 10.3,
@@ -71,7 +71,7 @@ describe( 'CampaignProjection', function () {
 		} );
 	} );
 
-	describe( '#projectedNumberOfDonors()', function () {
+	describe( '#projectedDonors()', function () {
 		it( 'should return projected number of donors based on seconds passed', function () {
 			const campaignProjectionAfter12Hours = new CampaignProjection(
 				campaignProjectionParameters,
@@ -102,6 +102,31 @@ describe( 'CampaignProjection', function () {
 			);
 
 			expect( campaignProjection.projectedDonors() ).toBeCloseTo( 146_983 );
+		} );
+	} );
+
+	describe( '#remainingDonorsNeeded()', function () {
+		it( 'should project donors needed, based on the remaining amount, donation target and average donation per donor', function () {
+			const campaignProjection = new CampaignProjection(
+				campaignProjectionParameters,
+				new TimeRange( startDate, endDate, after24HoursDate )
+			);
+
+			expect( campaignProjection.remainingDonorsNeeded() ).toBe( 445_000 );
+		} );
+
+		it( 'should project donors needed to the nearest 100_000 donors', function () {
+			const campaignProjectionAfter12Hours = new CampaignProjection(
+				campaignProjectionParameters,
+				new TimeRange( startDate, endDate, after12HoursDate )
+			);
+			const campaignProjectionAfter24Hours = new CampaignProjection(
+				campaignProjectionParameters,
+				new TimeRange( startDate, endDate, after24HoursDate )
+			);
+
+			expect( campaignProjectionAfter12Hours.remainingDonorsNeeded() ).toBe( 445_000 );
+			expect( campaignProjectionAfter24Hours.remainingDonorsNeeded() ).toBe( 445_000 );
 		} );
 	} );
 } );
