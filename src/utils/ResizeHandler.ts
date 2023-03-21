@@ -8,7 +8,7 @@ export class WindowResizeHandler implements ResizeHandler {
 	referencedResizeCallback: () => void;
 
 	constructor() {
-		this.referencedResizeCallback = () => this.resizeCallback();
+		this.referencedResizeCallback = (): void => this.resizeCallback();
 		window.addEventListener( 'resize', this.referencedResizeCallback );
 	}
 

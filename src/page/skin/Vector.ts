@@ -9,7 +9,7 @@ class Vector implements Skin {
 	constructor() {
 		this.searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
 		this.editButtons = document.getElementsByClassName( 'mw-editsection-visualeditor' );
-		this.referencedHideBannerCallback = () => this.hideBannerCallback();
+		this.referencedHideBannerCallback = (): void => this.hideBannerCallback();
 
 		this.searchField.addEventListener( 'focus', this.referencedHideBannerCallback );
 		for ( let i = 0; i < this.editButtons.length; i++ ) {

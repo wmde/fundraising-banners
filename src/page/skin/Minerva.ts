@@ -7,7 +7,7 @@ class Minerva implements Skin {
 	referencedHideBannerCallback: () => void;
 
 	constructor() {
-		this.referencedHideBannerCallback = () => this.hideBannerCallback();
+		this.referencedHideBannerCallback = (): void => this.hideBannerCallback();
 
 		this.searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
 		this.searchButton = document.getElementById( 'searchIcon' ) as HTMLButtonElement;

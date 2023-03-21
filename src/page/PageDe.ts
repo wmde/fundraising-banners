@@ -6,7 +6,7 @@ import { BannerNotShownReasons } from './BannerNotShownReasons';
 class PageDe implements Page {
 	skin: Skin = new WPDE();
 
-	getBannerContainer() {
+	getBannerContainer(): string {
 		return '#WMDE-Banner-Container';
 	}
 
@@ -49,7 +49,7 @@ class PageDe implements Page {
 
 	getReasonToNotShowBanner: () => BannerNotShownReasons;
 	preventImpressionCountForHiddenBanner: () => Page;
-	setCloseCookieIfNecessary() {
+	setCloseCookieIfNecessary(): Page {
 		return this;
 	}
 }

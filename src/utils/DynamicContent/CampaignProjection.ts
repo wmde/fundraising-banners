@@ -27,14 +27,14 @@ export class CampaignProjection {
 		return Math.round( this.projectedRemainingDonationSum() / this.campaignProjectionParameters.averageAmountPerDonation );
 	}
 
-	public projectedDonationSum() {
+	public projectedDonationSum(): number {
 		return this.calculateProjection(
 			this.campaignProjectionParameters.baseDonationSum,
 			this.campaignProjectionParameters.donationAmountPerMinute
 		);
 	}
 
-	private projectedRemainingDonationSum() {
+	private projectedRemainingDonationSum(): number {
 		const remainingAmount = this.campaignProjectionParameters.goalDonationSum - this.projectedDonationSum();
 		return Math.round( remainingAmount / 100000 ) * 100000;
 	}

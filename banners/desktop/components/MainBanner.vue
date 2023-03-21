@@ -24,7 +24,7 @@ withDefaults( defineProps<Props>(), {
 
 const emit = defineEmits( [ 'banner-closed' ] );
 
-function onClose() {
+function onClose(): void {
 	emit( 'banner-closed', CloseSources.MainBanner );
 }
 

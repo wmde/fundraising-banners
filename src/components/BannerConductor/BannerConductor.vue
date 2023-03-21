@@ -49,7 +49,7 @@ onMounted( async () => {
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page, props.resizeHandler ) ) );
 
-async function onCloseHandler( source: CloseSources ) {
+async function onCloseHandler( source: CloseSources ): Promise<any> {
 	await stateMachine.changeState( new ClosedState( source, props.page, props.page, props.resizeHandler ) );
 }
 
