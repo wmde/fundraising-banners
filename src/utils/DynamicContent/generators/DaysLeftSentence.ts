@@ -1,10 +1,11 @@
 import CampaignDays from '@src/utils/CampaignDays';
 import { Translator } from '@src/Translator';
+import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
 
 /**
  * Return a sentence that describes how many days are left in the campaign.
  */
-export class DaysLeftSentence {
+export class DaysLeftSentence implements TextGenerator {
 	private readonly campaignDays: CampaignDays;
 	private readonly translator: Translator;
 

@@ -6,13 +6,13 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CampaignParameters } from '@src/CampaignParameters';
 import CampaignDays, { endOfDay, startOfDay } from '@src/utils/CampaignDays';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
+import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 
 // This function combines all the text generators and returns an implementation of DynamicContent and is sort've used as a factory replacement
 // Formatters format bits of text like currency, ordinals ect, generators use them to generate the actual text
 // The text generators can be copied over from the old repo one by one and tested individually.
 // Pass in required runtime things as function parameters
 // The signature might get disgustingly big so maybe think of a better pattern if that happens
-// There are todos in the CurrentDate and OrdinalEn tests
 export const getDynamicCampaignText = ( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters ): DynamicContent => {
 
 	const campaignDays = new CampaignDays(
@@ -23,6 +23,7 @@ export const getDynamicCampaignText = ( date: Date, translator: Translator, form
 	return {
 		dayName: ( new DayName( date, translator ) ).get(),
 		currentDate: ( new CurrentDate( date, translator, formatters.ordinal ) ).get(),
-		daysLeftSentence: ( new DaysLeftSentence( campaignDays, translator ) ).get()
+		daysLeftSentence: ( new DaysLeftSentence( campaignDays, translator ) ).get(),
+		campaignDaySentence: ( new CampaignDaySentence( campaignDays, translator, formatters.ordinal ) ).get()
 	};
 };
