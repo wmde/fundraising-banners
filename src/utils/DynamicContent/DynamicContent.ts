@@ -4,4 +4,5 @@ export interface DynamicContent {
 	daysLeftSentence: string;
 	campaignDaySentence: string;
 	visitorsVsDonorsSentence: string;
+	donorsNeededSentence: string;
 }

@@ -8,6 +8,7 @@ import CampaignDays, { endOfDay, startOfDay } from '@src/utils/CampaignDays';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
+import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/DonorsNeededSentence';
 
 // This function combines all the text generators and returns an implementation of DynamicContent and is sort've used as a factory replacement
 // Formatters format bits of text like currency, ordinals ect, generators use them to generate the actual text
@@ -30,6 +31,7 @@ export const getDynamicCampaignText = ( date: Date, translator: Translator, form
 			translator,
 			campaignParameters.millionImpressionsPerDay,
 			campaignParameters.donationProjection.projectedDonors
-		) ).get()
+		) ).get(),
+		donorsNeededSentence: ( new DonorsNeededSentence( campaignParameters.donationProjection.donorsNeeded, translator ) ).get()
 	};
 };
