@@ -1,7 +1,7 @@
 // TODO Discuss in the team if we should rename the properties and remove the docblocks
-export interface DonationProjection {
+export interface CampaignProjectionParameters {
     /**
-     * Donation target in million Euros
+     * Donation target in millions
      */
     goalDonationSum: number,
     /**
@@ -23,7 +23,7 @@ export interface DonationProjection {
  * the "environment" of the banner (i.e. wikipedia.org or wikipedia.de) to the dynamic text rendering.
  */
 export interface CampaignParameters {
-    donationProjection: DonationProjection,
+    campaignProjection: CampaignProjectionParameters,
     millionImpressionsPerDay: number,
     /**
      * Date in YYYY-MM-DD format
