@@ -3,14 +3,14 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 
 export class PendingState extends BannerState {
-
-	stateName: BannerStates = BannerStates.Pending;
+	// TODO: Make this private and add getter
+	public stateName: BannerStates = BannerStates.Pending;
 	private page: Page;
 	private readonly bannerHeight: number;
 	private readonly delay: number;
 	private timer: ReturnType<typeof setTimeout>;
 
-	constructor( page: Page, bannerHeight: number, delay: number ) {
+	public constructor( page: Page, bannerHeight: number, delay: number ) {
 		super();
 
 		this.page = page;
@@ -22,7 +22,7 @@ export class PendingState extends BannerState {
 		this.canMoveToStates.push( BannerStates.NotShown );
 	}
 
-	enter(): Promise<any> {
+	public enter(): Promise<any> {
 		this.page.setSpace( this.bannerHeight );
 
 		return new Promise( ( resolve ) => {
@@ -30,12 +30,12 @@ export class PendingState extends BannerState {
 		} );
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		clearTimeout( this.timer );
 		return Promise.resolve();
 	}
 
-	onResize( space: number ): void {
+	public onResize( space: number ): void {
 		this.page.setSpace( space );
 	}
 }

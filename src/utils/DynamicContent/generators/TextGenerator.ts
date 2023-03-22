@@ -1,3 +1,3 @@
 export interface TextGenerator {
-	get(): string;
+	getText(): string;
 }

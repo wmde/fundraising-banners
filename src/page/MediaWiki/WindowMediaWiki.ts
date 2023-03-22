@@ -15,15 +15,15 @@ interface MwWindow extends Window {
 declare let window: MwWindow;
 
 export class WindowMediaWiki implements MediaWiki {
-	getConfigItem( name: string ): any {
+	public getConfigItem( name: string ): any {
 		return window.mw.config.get( name );
 	}
 
-	isContentHiddenByLightbox(): boolean {
+	public isContentHiddenByLightbox(): boolean {
 		return document.getElementsByClassName( 'mw-mmv-lightbox-open' ).length > 0;
 	}
 
-	isInArticleNamespace(): boolean {
+	public isInArticleNamespace(): boolean {
 		const namespaceNumber = this.getConfigItem( 'wgNamespaceNumber' );
 		const pageName = this.getConfigItem( 'wgRelevantPageName' );
 
@@ -39,26 +39,26 @@ export class WindowMediaWiki implements MediaWiki {
 		return false;
 	}
 
-	isShowingContentPage(): boolean {
+	public isShowingContentPage(): boolean {
 		return this.getConfigItem( 'wgAction' ) === 'view';
 	}
 
-	track( name: string, trackingData: BannerEvent | SizeIssue ): void {
+	public track( name: string, trackingData: BannerEvent | SizeIssue ): void {
 		window.mw.track( name, trackingData );
 	}
 
-	preventBannerDisplayForPeriod(): void {
+	public preventBannerDisplayForPeriod(): void {
 		// TODO check if mw.centralNotice.internal.hide.setHideWithCloseButtonCookies should be called instead when using softclose e.g.
 		window.mw.centralNotice.hideBanner();
 	}
 
-	preventBannerDisplayUntilEndOfCampaign(): void {
+	public preventBannerDisplayUntilEndOfCampaign(): void {
 		const endOfYear = new Date( new Date().getFullYear(), 11, 31, 23, 59, 59 );
 		const secondsToEndOfYear = Math.abs( ( endOfYear.getTime() - Date.now() ) / 1000 );
 		window.mw.centralNotice.customHideBanner( 'donate', secondsToEndOfYear );
 	}
 
-	setBannerLoadedButHidden(): void {
+	public setBannerLoadedButHidden(): void {
 		window.mw.centralNotice.setBannerLoadedButHidden();
 	}
 }

@@ -2,50 +2,50 @@ import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 
 export class PageStub implements Page {
-	getBannerContainer(): string {
+	public getBannerContainer(): string {
 		return '';
 	}
 
-	getReasonToNotShowBanner(): BannerNotShownReasons|null {
+	public getReasonToNotShowBanner(): BannerNotShownReasons|null {
 		return null;
 	}
 
-	preventImpressionCountForHiddenBanner(): Page {
+	public preventImpressionCountForHiddenBanner(): Page {
 		return this;
 	}
 
-	onPageEventThatShouldHideBanner(): void {
+	public onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): Page {
+	public removePageEventListeners(): Page {
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		return this;
 	}
 
-	setSpace(): Page {
+	public setSpace(): Page {
 		return this;
 	}
 
-	setTransitionDuration(): Page {
+	public setTransitionDuration(): Page {
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		return this;
 	}
 
-	setCloseCookieIfNecessary(): Page {
+	public setCloseCookieIfNecessary(): Page {
 		return this;
 	}
 
-	trackEvent(): void {
+	public trackEvent(): void {
 	}
 
 }

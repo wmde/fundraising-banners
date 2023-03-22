@@ -4,10 +4,10 @@ export interface ResizeHandler {
 }
 
 export class WindowResizeHandler implements ResizeHandler {
-	resizeCallback: () => void;
-	referencedResizeCallback: () => void;
+	private resizeCallback: () => void;
+	private readonly referencedResizeCallback: () => void;
 
-	constructor() {
+	public constructor() {
 		this.referencedResizeCallback = (): void => this.resizeCallback();
 		window.addEventListener( 'resize', this.referencedResizeCallback );
 	}

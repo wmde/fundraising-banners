@@ -7,13 +7,13 @@ export class CurrentDate implements TextGenerator {
 	private readonly translator: Translator;
 	private ordinalFormatter: Ordinal;
 
-	constructor( date: Date, translator: Translator, ordinalFormatter: Ordinal ) {
+	public constructor( date: Date, translator: Translator, ordinalFormatter: Ordinal ) {
 		this.date = date;
 		this.translator = translator;
 		this.ordinalFormatter = ordinalFormatter;
 	}
 
-	get(): string {
-		return this.translator.translate( 'month-name-' + ( this.date.getMonth() + 1 ) ) + ' ' + this.ordinalFormatter.get( this.date.getDate() );
+	public getText(): string {
+		return this.translator.translate( 'month-name-' + ( this.date.getMonth() + 1 ) ) + ' ' + this.ordinalFormatter.getFormatted( this.date.getDate() );
 	}
 }

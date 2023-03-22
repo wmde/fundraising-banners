@@ -5,12 +5,12 @@ import { ReactiveProperty } from '@src/utils/ReactiveProperty';
 export class BannerStateMachine implements StateMachine<BannerState> {
 	public currentState: ReactiveProperty<BannerState>;
 
-	constructor( stateRef: ReactiveProperty<BannerState> ) {
+	public constructor( stateRef: ReactiveProperty<BannerState> ) {
 		this.currentState = stateRef;
 		this.currentState.value.enter( null ).then( ()=>{} );
 	}
 
-	async changeState( state: BannerState ): Promise<any> {
+	public async changeState( state: BannerState ): Promise<any> {
 
 		if ( this.currentState.value === null ) {
 			throw new Error( 'State machine must be started with an initial state' );

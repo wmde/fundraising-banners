@@ -2,10 +2,11 @@ import hasLocalStorage from './has_local_storage';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class LocalImpressionCount implements ImpressionCount {
-	private bannerName: string;
+	private readonly bannerName: string;
 	private overallCount: number;
 	private bannerCount: number;
-	constructor( bannerName: string ) {
+
+	public constructor( bannerName: string ) {
 		this.bannerName = bannerName;
 		this.overallCount = 0;
 		this.bannerCount = 0;
@@ -37,7 +38,7 @@ export class LocalImpressionCount implements ImpressionCount {
 		}
 	}
 
-	incrementImpressionCounts(): void {
+	public incrementImpressionCounts(): void {
 		this.overallCount++;
 		this.bannerCount++;
 
@@ -53,11 +54,11 @@ export class LocalImpressionCount implements ImpressionCount {
 		}
 	}
 
-	getOverallCount(): number {
+	public getOverallCount(): number {
 		return this.overallCount;
 	}
 
-	getBannerCount(): number {
+	public getBannerCount(): number {
 		return this.bannerCount;
 	}
 }

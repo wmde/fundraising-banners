@@ -43,19 +43,21 @@ module.exports = {
 			style: { lang: 'scss' }
 		} ],
 
-		'@typescript-eslint/type-annotation-spacing': 'error',
-		'@typescript-eslint/explicit-function-return-type': 'off',
-
 		// Workaround for Typescript enums, see https://github.com/typescript-eslint/typescript-eslint/issues/2483
 		'no-shadow': 'off',
-		'@typescript-eslint/no-shadow': [ 'error' ]
+		'@typescript-eslint/no-shadow': [ 'error' ],
+
+		'@typescript-eslint/type-annotation-spacing': 'error',
+		'@typescript-eslint/explicit-function-return-type': 'off',
+		'@typescript-eslint/explicit-member-accessibility': 'off'
 	},
 	'overrides': [
 		{
 			// enable the rule specifically for TypeScript files
 			files: [ '*.ts', '*.mts', '*.cts', '*.tsx', '*.vue' ],
 			rules: {
-				'@typescript-eslint/explicit-function-return-type': 'error'
+				'@typescript-eslint/explicit-function-return-type': 'error',
+				'@typescript-eslint/explicit-member-accessibility': 'error'
 			}
 		}
 	]

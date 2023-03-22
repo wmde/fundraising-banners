@@ -1,3 +1,3 @@
 export interface Ordinal {
-	get( figures: number ): string;
+	getFormatted( figures: number ): string;
 }

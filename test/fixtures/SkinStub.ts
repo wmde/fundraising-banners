@@ -1,13 +1,13 @@
 import { Skin } from '@src/page/skin/Skin';
 
 export class SkinStub implements Skin {
-	addHideBannerListener(): void {
+	public addHideBannerListener(): void {
 	}
 
-	removeEventListeners(): void {
+	public removeEventListeners(): void {
 	}
 
-	minimumVisiblePageBeneathBanner(): number {
+	public minimumVisiblePageBeneathBanner(): number {
 		return 0;
 	}
 

@@ -9,12 +9,12 @@ export class DaysLeftSentence implements TextGenerator {
 	private readonly campaignDays: TimeRange;
 	private readonly translator: Translator;
 
-	constructor( campaignDays: TimeRange, translator: Translator ) {
+	public constructor( campaignDays: TimeRange, translator: Translator ) {
 		this.campaignDays = campaignDays;
 		this.translator = translator;
 	}
 
-	public get(): string {
+	public getText(): string {
 		const numberOfDaysUntilCampaignEnd = this.campaignDays.numberOfDaysUntilEnd();
 		return this.translator.translate( 'prefix-days-left' ) + ' ' +
 			numberOfDaysUntilCampaignEnd + ' ' +

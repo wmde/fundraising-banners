@@ -3,25 +3,26 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 
 export class VisibleState extends BannerState {
-	stateName: BannerStates = BannerStates.Visible;
+	// TODO: Make this private and add getter
+	public stateName: BannerStates = BannerStates.Visible;
 	private page: Page;
 
-	constructor( page: Page ) {
+	public constructor( page: Page ) {
 		super();
 		this.page = page;
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
-	enter(): Promise<any> {
+	public enter(): Promise<any> {
 		// Fire shown events here
 		return Promise.resolve();
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve();
 	}
 
-	onResize( space: number ): void {
+	public onResize( space: number ): void {
 		this.page.unsetAnimated().setSpace( space );
 	}
 

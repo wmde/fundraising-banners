@@ -22,7 +22,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private campaignProjection: CampaignProjection;
 	private cache: Map<string, string>;
 
-	constructor( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters, impressionCount: ImpressionCount ) {
+	public constructor( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters, impressionCount: ImpressionCount ) {
 		this.date = date;
 		this.translator = translator;
 		this.formatters = formatters;
@@ -53,7 +53,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get campaignDaySentence(): string {
-		return this.getCachedValue( 'campaignDaySentence', () => this.newCampaignDaySentence().get() );
+		return this.getCachedValue( 'campaignDaySentence', () => this.newCampaignDaySentence().getText() );
 	}
 
 	public newCurrentDate(): CurrentDate {
@@ -61,7 +61,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get currentDate(): string {
-		return this.getCachedValue( 'currentDate', () => this.newCurrentDate().get() );
+		return this.getCachedValue( 'currentDate', () => this.newCurrentDate().getText() );
 	}
 
 	public newCurrentDayName(): DayName {
@@ -69,13 +69,13 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get currentDayName(): string {
-		return this.getCachedValue( 'currentDayName', () => this.newCurrentDayName().get() );
+		return this.getCachedValue( 'currentDayName', () => this.newCurrentDayName().getText() );
 	}
 	public newDaysLeftSentence(): DaysLeftSentence {
 		return new DaysLeftSentence( this.getCampaignTimeRange(), this.translator );
 	}
 	public get daysLeftSentence(): string {
-		return this.getCachedValue( 'daysLeftSentence', () => this.newDaysLeftSentence().get() );
+		return this.getCachedValue( 'daysLeftSentence', () => this.newDaysLeftSentence().getText() );
 	}
 
 	public getCampaignProjection(): CampaignProjection {
@@ -100,7 +100,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get donorsNeededSentence(): string {
-		return this.getCachedValue( 'donorsNeededSentence', () => this.newDonorsNeededSentence().get() );
+		return this.getCachedValue( 'donorsNeededSentence', () => this.newDonorsNeededSentence().getText() );
 	}
 
 	public get goalDonationSum(): string {
@@ -119,7 +119,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get visitorsVsDonorsSentence(): string {
-		return this.getCachedValue( 'visitorsVsDonorsSentence', () => this.newVisitorsVsDonorsSentence().get() );
+		return this.getCachedValue( 'visitorsVsDonorsSentence', () => this.newVisitorsVsDonorsSentence().getText() );
 	}
 
 }

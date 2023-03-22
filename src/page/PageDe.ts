@@ -1,55 +1,52 @@
 import { Page } from '@src/page/Page';
-import WPDE from '@src/page/skin/WPDE';
-import { Skin } from '@src/page/skin/Skin';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
 
 class PageDe implements Page {
-	skin: Skin = new WPDE();
 
-	getBannerContainer(): string {
+	public getBannerContainer(): string {
 		return '#WMDE-Banner-Container';
 	}
 
-	shouldShowBanner(): boolean {
+	public shouldShowBanner(): boolean {
 		return true;
 	}
 
-	trackEvent(): void {
+	public trackEvent(): void {
 	}
 
-	trackSizeIssue(): void {
+	public trackSizeIssue(): void {
 	}
 
-	onPageEventThatShouldHideBanner(): void {
+	public onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): Page {
+	public removePageEventListeners(): Page {
 		return this;
 	}
 
-	setSpace(): Page {
+	public setSpace(): Page {
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		return this;
 	}
 
-	setTransitionDuration(): Page {
+	public setTransitionDuration(): Page {
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		return this;
 	}
 
-	getReasonToNotShowBanner: () => BannerNotShownReasons;
-	preventImpressionCountForHiddenBanner: () => Page;
-	setCloseCookieIfNecessary(): Page {
+	public getReasonToNotShowBanner: () => BannerNotShownReasons;
+	public preventImpressionCountForHiddenBanner: () => Page;
+	public setCloseCookieIfNecessary(): Page {
 		return this;
 	}
 }

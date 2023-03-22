@@ -2,49 +2,49 @@ const SECONDS_PER_DAY = 86_400;
 const SECONDS_PER_MINUTE = 60;
 
 export default class TimeRange {
-	startDate: Date;
-	endDate: Date;
-	now: Date;
+	private startDate: Date;
+	private endDate: Date;
+	private now: Date;
 
-	constructor( startDate: Date, endDate: Date, now: Date = new Date() ) {
+	public constructor( startDate: Date, endDate: Date, now: Date = new Date() ) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.now = now;
 	}
 
-	hasStarted(): boolean {
+	public hasStarted(): boolean {
 		return this.secondsSinceStart() > 0;
 	}
 
-	hasEnded(): boolean {
+	public hasEnded(): boolean {
 		return this.secondsUntilEnd() < 0;
 	}
 
-	secondsSinceStart(): number {
+	public secondsSinceStart(): number {
 		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
-	minutesSinceStart(): number {
+	public minutesSinceStart(): number {
 		return Math.floor( this.secondsSinceStart() / SECONDS_PER_MINUTE );
 	}
 
-	daysSinceStart(): number {
+	public daysSinceStart(): number {
 		return Math.floor( this.secondsSinceStart() / SECONDS_PER_DAY );
 	}
 
-	secondsUntilEnd(): number {
+	public secondsUntilEnd(): number {
 		return Math.floor( ( this.endDate.getTime() - this.now.getTime() ) / 1000 );
 	}
 
-	secondsBetweenStartAndEnd(): number {
+	public secondsBetweenStartAndEnd(): number {
 		return Math.floor( ( this.endDate.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
-	minutesBetweenStartAndEnd(): number {
+	public minutesBetweenStartAndEnd(): number {
 		return Math.floor( this.secondsBetweenStartAndEnd() / SECONDS_PER_MINUTE );
 	}
 
-	numberOfDaysUntilEnd(): number {
+	public numberOfDaysUntilEnd(): number {
 		return Math.ceil( this.secondsUntilEnd() / SECONDS_PER_DAY );
 	}
 

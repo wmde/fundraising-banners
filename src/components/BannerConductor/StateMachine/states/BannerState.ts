@@ -5,9 +5,9 @@ export abstract class BannerState implements StateMachineState<BannerStates> {
 	public abstract stateName: BannerStates;
 	public canMoveToStates: BannerStates[] = [];
 
-	abstract enter( lastState: BannerStates ): Promise<any>;
+	public abstract enter( lastState: BannerStates ): Promise<any>;
 
-	abstract exit( nextState: BannerStates ): Promise<any>;
+	public abstract exit( nextState: BannerStates ): Promise<any>;
 
-	abstract onResize( space: number ): void;
+	public abstract onResize( space: number ): void;
 }

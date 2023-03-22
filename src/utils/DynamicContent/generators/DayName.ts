@@ -22,12 +22,12 @@ export class DayName implements TextGenerator {
 	private readonly date: Date;
 	private readonly translator: Translator;
 
-	constructor( date: Date, translator: Translator ) {
+	public constructor( date: Date, translator: Translator ) {
 		this.date = date;
 		this.translator = translator;
 	}
 
-	public get(): string {
+	public getText(): string {
 		return this.translator.translate( this.getDayNameMessageKey( this.date ) );
 	}
 

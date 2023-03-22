@@ -1,9 +1,9 @@
 import { Skin } from '@src/page/skin/Skin';
 
 class Monobook implements Skin {
-	addHideBannerListener: ( hideBannerListener: () => void ) => void;
-	removeEventListeners: () => void;
-	minimumVisiblePageBeneathBanner(): number {
+	public addHideBannerListener: ( hideBannerListener: () => void ) => void;
+	public removeEventListeners: () => void;
+	public minimumVisiblePageBeneathBanner(): number {
 		return 0;
 	}
 }

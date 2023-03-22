@@ -1,12 +1,12 @@
 import { Skin } from '@src/page/skin/Skin';
 
 class Minerva implements Skin {
-	searchField: HTMLInputElement;
-	searchButton: HTMLButtonElement;
-	hideBannerCallback: () => void;
-	referencedHideBannerCallback: () => void;
+	private searchField: HTMLInputElement;
+	private searchButton: HTMLButtonElement;
+	private hideBannerCallback: () => void;
+	private readonly referencedHideBannerCallback: () => void;
 
-	constructor() {
+	public constructor() {
 		this.referencedHideBannerCallback = (): void => this.hideBannerCallback();
 
 		this.searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
@@ -15,16 +15,16 @@ class Minerva implements Skin {
 		this.searchButton.addEventListener( 'click', this.referencedHideBannerCallback );
 	}
 
-	addHideBannerListener( hideBannerListener: () => void ): void {
+	public addHideBannerListener( hideBannerListener: () => void ): void {
 		this.hideBannerCallback = hideBannerListener;
 	}
 
-	removeEventListeners(): void {
+	public removeEventListeners(): void {
 		this.searchField.removeEventListener( 'focus', this.referencedHideBannerCallback );
 		this.searchButton.removeEventListener( 'click', this.referencedHideBannerCallback );
 	}
 
-	minimumVisiblePageBeneathBanner(): number {
+	public minimumVisiblePageBeneathBanner(): number {
 		return 0;
 	}
 }

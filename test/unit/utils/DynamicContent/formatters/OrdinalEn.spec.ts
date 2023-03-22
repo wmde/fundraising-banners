@@ -23,6 +23,6 @@ describe( 'OrdinalEn', () => {
 		[ 56781, '56781st' ],
 		[ 42424242424242, '42424242424242nd' ]
 	] )( 'returns correct ordinal given various numbers', ( date: number, expected: string ) => {
-		expect( ( new OrdinalEn() ).get( date ) ).toEqual( expected );
+		expect( ( new OrdinalEn() ).getFormatted( date ) ).toEqual( expected );
 	} );
 } );

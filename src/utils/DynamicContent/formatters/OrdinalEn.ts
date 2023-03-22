@@ -1,7 +1,7 @@
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 export class OrdinalEn implements Ordinal {
-	get( figures: number ): string {
+	public getFormatted( figures: number ): string {
 		const lastFigure = figures % 10;
 
 		// There are exceptions to the ordinal when the last 2 figures

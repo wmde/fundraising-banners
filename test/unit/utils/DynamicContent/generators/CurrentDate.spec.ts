@@ -11,7 +11,7 @@ const translator = new Translator( {
 } );
 
 const staticOrdinal: Ordinal = {
-	get: ( figure: number ) => figure + 'sth'
+	getFormatted: ( figure: number ) => figure + 'sth'
 };
 
 describe( 'CurrentDate', () => {
@@ -23,6 +23,6 @@ describe( 'CurrentDate', () => {
 	] )( 'returns the proper month name and date', ( month: number, day: number, expected: string ) => {
 		const currentDate = new CurrentDate( new Date( 2023, month - 1, day, 12, 0, 0 ), translator, staticOrdinal );
 
-		expect( currentDate.get() ).toEqual( expected );
+		expect( currentDate.getText() ).toEqual( expected );
 	} );
 } );

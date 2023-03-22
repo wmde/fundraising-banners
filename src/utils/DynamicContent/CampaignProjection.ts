@@ -13,7 +13,7 @@ export class CampaignProjection {
 	private readonly campaignProjectionParameters: CampaignProjectionParameters;
 	private readonly timeRange: TimeRange;
 
-	constructor( campaignProjectionParameters: CampaignProjectionParameters, timeRange: TimeRange ) {
+	public constructor( campaignProjectionParameters: CampaignProjectionParameters, timeRange: TimeRange ) {
 		this.campaignProjectionParameters = campaignProjectionParameters;
 		this.timeRange = timeRange;
 	}

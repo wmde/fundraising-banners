@@ -7,13 +7,14 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 
 export class ClosedState extends BannerState {
-	stateName: BannerStates = BannerStates.Closed;
+	// TODO: Make this private and add getter
+	public stateName: BannerStates = BannerStates.Closed;
 	private page: Page;
-	private source: CloseSources;
+	private readonly source: CloseSources;
 	private tracker: Tracker;
 	private resizeHandler: ResizeHandler;
 
-	constructor( source: CloseSources, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor( source: CloseSources, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
 		super();
 		this.page = page;
 		this.source = source;
@@ -21,7 +22,7 @@ export class ClosedState extends BannerState {
 		this.resizeHandler = resizeHandler;
 	}
 
-	enter(): Promise<any> {
+	public enter(): Promise<any> {
 		this.tracker.trackEvent( new CloseEvent( this.source ) );
 		this.page
 			.unsetAnimated()
@@ -32,11 +33,11 @@ export class ClosedState extends BannerState {
 		return Promise.resolve();
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve();
 	}
 
-	onResize(): void {
+	public onResize(): void {
 	}
 
 }

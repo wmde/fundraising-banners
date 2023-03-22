@@ -5,12 +5,12 @@ export class DonorsNeededSentence implements TextGenerator {
 	private readonly donorsNeeded: number;
 	private readonly translator: Translator;
 
-	constructor( donorsNeeded: number, translator: Translator ) {
+	public constructor( donorsNeeded: number, translator: Translator ) {
 		this.donorsNeeded = donorsNeeded;
 		this.translator = translator;
 	}
 
-	get(): string {
+	public getText(): string {
 		if ( this.donorsNeeded <= 0 ) {
 			return '';
 		}

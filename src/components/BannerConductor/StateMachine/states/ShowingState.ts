@@ -3,13 +3,13 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 
 export class ShowingState extends BannerState {
-
-	stateName: BannerStates = BannerStates.Showing;
+	// TODO: Make this private and add getter
+	public stateName: BannerStates = BannerStates.Showing;
 	private page: Page;
 	private readonly transitionDuration: number;
 	private timer: ReturnType<typeof setTimeout>;
 
-	constructor( page: Page, transitionDuration: number ) {
+	public constructor( page: Page, transitionDuration: number ) {
 		super();
 		this.page = page;
 		this.transitionDuration = transitionDuration;
@@ -17,7 +17,7 @@ export class ShowingState extends BannerState {
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
-	enter(): Promise<any> {
+	public enter(): Promise<any> {
 		this.page.setAnimated()
 			.setTransitionDuration( this.transitionDuration )
 			.showBanner();
@@ -27,12 +27,12 @@ export class ShowingState extends BannerState {
 		} );
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		clearTimeout( this.timer );
 		return Promise.resolve();
 	}
 
-	onResize( space: number ): void {
+	public onResize( space: number ): void {
 		this.page.unsetAnimated().setSpace( space );
 	}
 }

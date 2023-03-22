@@ -8,11 +8,11 @@ import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 export class SkinFactory {
 	private mediaWiki: MediaWiki;
 
-	constructor( mediaWiki: MediaWiki ) {
+	public constructor( mediaWiki: MediaWiki ) {
 		this.mediaWiki = mediaWiki;
 	}
 
-	getSkin(): Skin {
+	public getSkin(): Skin {
 		switch ( this.mediaWiki.getConfigItem( 'skin' ) ) {
 			case 'minerva':
 				return new Minerva();

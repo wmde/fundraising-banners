@@ -1,10 +1,10 @@
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 
 export class ResizeHandlerStub implements ResizeHandler {
-	onClose(): void {
+	public onClose(): void {
 	}
 
-	onResize(): void {
+	public onResize(): void {
 	}
 
 }

@@ -11,11 +11,11 @@ describe( 'DayName', () => {
 
 	it( 'returns the proper message key for a date defined as special day', function () {
 		const dayName = new DayName( new Date( 2023, 11, 25, 12, 0, 0 ), translator );
-		expect( dayName.get() ).toBe( 'day-name-christmas-day' );
+		expect( dayName.getText() ).toBe( 'day-name-christmas-day' );
 	} );
 
 	it( 'returns the general message key for the week of the day', function () {
 		const dayName = new DayName( new Date( 2023, 10, 14, 12, 0, 0 ), translator );
-		expect( dayName.get() ).toBe( 'day-name-tuesday' );
+		expect( dayName.getText() ).toBe( 'day-name-tuesday' );
 	} );
 } );

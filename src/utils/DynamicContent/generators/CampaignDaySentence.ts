@@ -13,14 +13,14 @@ export class CampaignDaySentence implements TextGenerator {
 	 */
 	private readonly urgencyMessageDaysLeft: number;
 
-	constructor( campaignTimeRange: TimeRange, translator: Translator, ordinal: Ordinal, urgencyMessageDaysLeft: number = 10 ) {
+	public constructor( campaignTimeRange: TimeRange, translator: Translator, ordinal: Ordinal, urgencyMessageDaysLeft: number = 10 ) {
 		this.campaignTimeRange = campaignTimeRange;
 		this.translator = translator;
 		this.ordinal = ordinal;
 		this.urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 	}
 
-	get(): string {
+	public getText(): string {
 		if ( !this.campaignTimeRange.hasStarted() ) {
 			return this.translator.translate( 'campaign-day-before-campaign' );
 		}
@@ -47,7 +47,7 @@ export class CampaignDaySentence implements TextGenerator {
 		}
 
 		return this.translator.translate( 'campaign-day-nth-day', {
-			days: this.ordinal.get( daysSinceCampaignStart )
+			days: this.ordinal.getFormatted( daysSinceCampaignStart )
 		} );
 	}
 }

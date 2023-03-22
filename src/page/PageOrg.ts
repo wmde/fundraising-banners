@@ -20,20 +20,20 @@ class PageOrg implements Page {
 	private skin: Skin;
 	private sizeIssueChecker: SizeIssueChecker;
 
-	constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
+	public constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
 		this.mediaWiki = mediaWiki;
 		this.skin = skin;
 		this.sizeIssueChecker = sizeIssueChecker;
 	}
 
-	getBannerContainer(): string {
+	public getBannerContainer(): string {
 		const mountPoint = document.createElement( 'div' );
 		mountPoint.id = bannerContainerId;
 		document.body.prepend( mountPoint );
 		return '#' + bannerContainerId;
 	}
 
-	getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
+	public getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
 		if ( !this.mediaWiki.isShowingContentPage() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
@@ -58,7 +58,7 @@ class PageOrg implements Page {
 		return this.sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
 	}
 
-	trackEvent( trackingData: EventData ): void {
+	public trackEvent( trackingData: EventData ): void {
 		const bannerEvent: BannerEvent = {
 			bannerAction: trackingData.eventName,
 			bannerName: '',
@@ -70,46 +70,46 @@ class PageOrg implements Page {
 		// this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 
-	onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
+	public onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
 		this.skin.addHideBannerListener( hideBannerListener );
 	}
 
-	removePageEventListeners(): Page {
+	public removePageEventListeners(): Page {
 		this.skin.removeEventListeners();
 		return this;
 	}
 
-	setSpace( space: number ): Page {
+	public setSpace( space: number ): Page {
 		document.body.style.setProperty( bannerHeightCssVariable, `${space}px` );
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		document.body.classList.add( bannerAnimatedClass );
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		document.body.classList.remove( bannerAnimatedClass );
 		return this;
 	}
 
-	setTransitionDuration( duration: number ): Page {
+	public setTransitionDuration( duration: number ): Page {
 		document.body.style.setProperty( bannerTransitionDurationCssVariable, `${duration}ms` );
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		document.body.classList.add( showBannerClass );
 		return this;
 	}
 
-	preventImpressionCountForHiddenBanner(): Page {
+	public preventImpressionCountForHiddenBanner(): Page {
 		this.mediaWiki.setBannerLoadedButHidden();
 		return this;
 	}
 
-	setCloseCookieIfNecessary( source: CloseSources ): Page {
+	public setCloseCookieIfNecessary( source: CloseSources ): Page {
 		switch ( source ) {
 			case CloseSources.AlreadyDonated:
 				this.mediaWiki.preventBannerDisplayUntilEndOfCampaign();
