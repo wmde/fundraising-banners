@@ -13,7 +13,7 @@ export class VisitorsVsDonorsSentence implements TextGenerator {
 	}
 
 	public getText(): string {
-		const messageKey = this.millionImpressionsPerDay === 0 ?
+		const messageKey = ( this.millionImpressionsPerDay === 0 || this.projectedNumberOfDonors === 0 ) ?
 			'visitors-vs-donors-sentence-no-impressions' :
 			'visitors-vs-donors-sentence';
 
