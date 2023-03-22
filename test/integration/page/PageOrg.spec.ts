@@ -6,6 +6,7 @@ import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
+import { JSDOM } from 'jsdom';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -115,6 +116,8 @@ describe( 'PageOrg', function () {
 	} );
 
 	it( 'returns campaign parameters', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p id="wmde-campaign-parameters" data-start-date="2084-12-12">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		const retrievedCampaignParameters = page.getCampaignParameters();
