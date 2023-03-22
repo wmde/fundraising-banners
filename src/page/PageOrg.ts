@@ -7,6 +7,7 @@ import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { Vector2 } from '@src/utils/Vector2';
+import { CampaignParameters } from '@src/CampaignParameters';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -129,6 +130,30 @@ class PageOrg implements Page {
 			// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
 		return this;
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		const element = document.getElementById( 'wmde-campaign-parameters' );
+		if ( !element ) {
+			throw new Error( 'Campaign data element not found' );
+		}
+		const data = element.dataset;
+
+		return {
+			campaignProjection: {
+				goalDonationSum: Number( data.goalDonationSum ),
+				baseDate: data.donationsDateBase,
+				baseDonationSum: Number( data.donationsCollectedBase ),
+				donorsBase: Number( data.donorsBase ),
+				donationAmountPerMinute: Number( data.donationsPerMinute ),
+				donorsPerMinute: Number( data.donorsPerMinute ),
+				averageAmountPerDonation: Number( data.averageAmountPerDonation )
+			},
+			millionImpressionsPerDay: Number( data.millionImpressionsPerDay ),
+			startDate: data.campaignStartDate,
+			endDate: data.campaignEndDate,
+			numberOfMembers: Number( data.numberOfMembers )
+		};
 	}
 }
 

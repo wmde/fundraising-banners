@@ -17,8 +17,6 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
-import { CampaignParameters } from '@src/CampaignParameters';
-import { getCampaignDataFromHtmlElement } from '@src/utils/getCampaignDataFromHtmlElement';
 
 const translator = new Translator( Translations );
 
@@ -31,8 +29,6 @@ const formatters: Formatters = { currency: new CurrencyDe(), ordinal: new Ordina
 
 // TODO get from banner environment
 const bannerName = 'testbanner';
-
-const campaignParameters: CampaignParameters = getCampaignDataFromHtmlElement( 'wmde-campaign-parameters' );
 
 const impressionCount = new LocalImpressionCount( bannerName );
 
@@ -52,7 +48,7 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
-	campaignParameters,
+	campaignParameters: page.getCampaignParameters(),
 	date: new Date(),
 	formatters,
 	impressionCount,

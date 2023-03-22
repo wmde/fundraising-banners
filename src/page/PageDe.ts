@@ -1,5 +1,6 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
+import { CampaignParameters } from '@src/CampaignParameters';
 
 class PageDe implements Page {
 
@@ -48,6 +49,11 @@ class PageDe implements Page {
 	public preventImpressionCountForHiddenBanner: () => Page;
 	public setCloseCookieIfNecessary(): Page {
 		return this;
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		// TODO implement
+		throw new Error( 'Not implemented' );
 	}
 }
 

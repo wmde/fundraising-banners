@@ -114,5 +114,13 @@ describe( 'PageOrg', function () {
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
 
+	it( 'returns campaign parameters', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		const retrievedCampaignParameters = page.getCampaignParameters();
+
+		expect( retrievedCampaignParameters.startDate ).toBe( '2084-12-12' );
+	} );
+
 	it.todo( 'sends event tracking data in trackEvent()' );
 } );

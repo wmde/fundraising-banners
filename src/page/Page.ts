@@ -1,3 +1,4 @@
+import { CampaignParameters } from '@src/CampaignParameters';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Tracker } from '@src/tracking/Tracker';
@@ -15,4 +16,5 @@ export interface Page extends Tracker {
 	showBanner: () => Page;
 	preventImpressionCountForHiddenBanner: () => Page;
 	setCloseCookieIfNecessary: ( source: CloseSources ) => Page;
+	getCampaignParameters: () => CampaignParameters;
 }
