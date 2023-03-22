@@ -48,6 +48,8 @@ const campaignParameters: CampaignParameters = {
 	numberOfMembers: 0
 };
 
+const impressionCount = new LocalImpressionCount( bannerName );
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -58,7 +60,8 @@ const app = createVueApp( BannerConductor, {
 	banner: MainBanner,
 	bannerProps: {
 		greeting: 'Hello'
-	}
+	},
+	impressionCount
 } );
 
 app.use( TranslationPlugin, translator );
@@ -66,7 +69,7 @@ app.use( DynamicTextPlugin, {
 	campaignParameters,
 	date: new Date(),
 	formatters,
-	impressionCount: new LocalImpressionCount( bannerName ),
+	impressionCount,
 	translator
 } );
 

@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<p>
+			Impressioncount: {{ overallImpressionCount }}
 			<strong>An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
@@ -21,6 +22,6 @@
 import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
-const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount }: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>
