@@ -1,11 +1,11 @@
 import { StateMachine } from '@src/utils/StateMachine/StateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { Ref } from 'vue';
+import { ReactiveProperty } from '@src/utils/ReactiveProperty';
 
 export class BannerStateMachine implements StateMachine<BannerState> {
-	public currentState: Ref<BannerState>;
+	public currentState: ReactiveProperty<BannerState>;
 
-	constructor( stateRef: Ref<BannerState> ) {
+	constructor( stateRef: ReactiveProperty<BannerState> ) {
 		this.currentState = stateRef;
 		this.currentState.value.enter( null ).then( ()=>{} );
 	}
