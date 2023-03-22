@@ -48,34 +48,28 @@ export default class DynamicCampaignText implements DynamicContent {
 		return this.cache.get( key );
 	}
 
-	private newCampaignDaySentence(): CampaignDaySentence {
-		return new CampaignDaySentence( this.getCampaignTimeRange(), this.translator, this.formatters.ordinal );
-	}
-
 	public get campaignDaySentence(): string {
-		return this.getCachedValue( 'campaignDaySentence', () => this.newCampaignDaySentence().getText() );
-	}
-
-	public newCurrentDate(): CurrentDate {
-		return new CurrentDate( this.date, this.translator, this.formatters.ordinal );
+		return this.getCachedValue( 'campaignDaySentence', () => {
+			return new CampaignDaySentence( this.getCampaignTimeRange(), this.translator, this.formatters.ordinal ).getText();
+		} );
 	}
 
 	public get currentDate(): string {
-		return this.getCachedValue( 'currentDate', () => this.newCurrentDate().getText() );
-	}
-
-	public newCurrentDayName(): DayName {
-		return new DayName( this.date, this.translator );
+		return this.getCachedValue( 'currentDate', () => {
+			return new CurrentDate( this.date, this.translator, this.formatters.ordinal ).getText();
+		} );
 	}
 
 	public get currentDayName(): string {
-		return this.getCachedValue( 'currentDayName', () => this.newCurrentDayName().getText() );
+		return this.getCachedValue( 'currentDayName', () => {
+			return new DayName( this.date, this.translator ).getText();
+		} );
 	}
-	public newDaysLeftSentence(): DaysLeftSentence {
-		return new DaysLeftSentence( this.getCampaignTimeRange(), this.translator );
-	}
+
 	public get daysLeftSentence(): string {
-		return this.getCachedValue( 'daysLeftSentence', () => this.newDaysLeftSentence().getText() );
+		return this.getCachedValue( 'daysLeftSentence', () => {
+			return new DaysLeftSentence( this.getCampaignTimeRange(), this.translator ).getText();
+		} );
 	}
 
 	public getCampaignProjection(): CampaignProjection {
@@ -92,34 +86,33 @@ export default class DynamicCampaignText implements DynamicContent {
 		return this.campaignProjection;
 	}
 
-	private newDonorsNeededSentence(): DonorsNeededSentence {
-		return new DonorsNeededSentence(
-			this.getCampaignProjection().remainingDonorsNeeded(),
-			this.translator
-		);
-	}
-
 	public get donorsNeededSentence(): string {
-		return this.getCachedValue( 'donorsNeededSentence', () => this.newDonorsNeededSentence().getText() );
+		return this.getCachedValue( 'donorsNeededSentence', () => {
+			return new DonorsNeededSentence(
+				this.getCampaignProjection().remainingDonorsNeeded(),
+				this.translator
+			).getText();
+		} );
 	}
 
 	public get goalDonationSum(): string {
-		return this.getCachedValue( 'goalDonationSum', () => this.formatters.currency.millionsNumeric( this.getCampaignProjection().projectedDonationSum() ) );
+		return this.getCachedValue( 'goalDonationSum', () => {
+			return this.formatters.currency.millionsNumeric( this.getCampaignProjection().projectedDonationSum() );
+		} );
 	}
+
 	public get overallImpressionCount(): number {
+		// TODO check if we need to add 1 because it is not reactive and the value gets initialized before incrementing
 		return this.impressionCount.getOverallCount();
 	}
 
-	private newVisitorsVsDonorsSentence(): VisitorsVsDonorsSentence {
-		return new VisitorsVsDonorsSentence(
-			this.translator,
-			this.campaignParameters.millionImpressionsPerDay,
-			this.getCampaignProjection().projectedDonors()
-		);
-	}
-
 	public get visitorsVsDonorsSentence(): string {
-		return this.getCachedValue( 'visitorsVsDonorsSentence', () => this.newVisitorsVsDonorsSentence().getText() );
+		return this.getCachedValue( 'visitorsVsDonorsSentence', () => {
+			return new VisitorsVsDonorsSentence(
+				this.translator,
+				this.campaignParameters.millionImpressionsPerDay,
+				this.getCampaignProjection().projectedDonors()
+			).getText();
+		} );
 	}
-
 }
