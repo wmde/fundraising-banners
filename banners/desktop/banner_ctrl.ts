@@ -17,7 +17,8 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
-import { CampaignParameters, CampaignProjectionParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/CampaignParameters';
+import { getCampaignDataFromHtmlElement } from '@src/utils/getCampaignDataFromHtmlElement';
 
 const translator = new Translator( Translations );
 
@@ -31,22 +32,7 @@ const formatters: Formatters = { currency: new CurrencyDe(), ordinal: new Ordina
 // TODO get from banner environment
 const bannerName = 'testbanner';
 
-// TODO get from banner environment (ideally the same on all channels with webpack alias override in dev env)
-const campaignParameters: CampaignParameters = {
-	campaignProjection: {
-		averageAmountPerDonation: 0,
-		baseDate: '2023-11-01',
-		baseDonationSum: 0,
-		donationAmountPerMinute: 5,
-		donorsBase: 0,
-		donorsPerMinute: 1,
-		goalDonationSum: 9_000_000
-	} as CampaignProjectionParameters,
-	startDate: '2023-11-01',
-	endDate: '2023-12-31',
-	millionImpressionsPerDay: 0,
-	numberOfMembers: 0
-};
+const campaignParameters: CampaignParameters = getCampaignDataFromHtmlElement( 'wmde-campaign-parameters' );
 
 const impressionCount = new LocalImpressionCount( bannerName );
 
