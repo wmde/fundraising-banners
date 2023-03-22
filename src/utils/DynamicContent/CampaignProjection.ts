@@ -18,26 +18,26 @@ export class CampaignProjection {
 		this.timeRange = timeRange;
 	}
 
-	public projectedDonors(): number {
+	public projectedDonationCount(): number {
 		return this.calculateProjection(
-			this.campaignProjectionParameters.donorsBase,
-			this.campaignProjectionParameters.donorsPerMinute
+			this.campaignProjectionParameters.donationCountBase,
+			this.campaignProjectionParameters.donationCountPerMinute
 		);
 	}
 
-	public remainingDonorsNeeded(): number {
+	public remainingNumberOfDonationsNeeded(): number {
 		return Math.round( this.projectedRemainingDonationSum() / this.campaignProjectionParameters.averageAmountPerDonation );
 	}
 
 	public projectedDonationSum(): number {
 		return this.calculateProjection(
-			this.campaignProjectionParameters.baseDonationSum,
+			this.campaignProjectionParameters.donationSumBase,
 			this.campaignProjectionParameters.donationAmountPerMinute
 		);
 	}
 
 	private projectedRemainingDonationSum(): number {
-		const remainingAmount = this.campaignProjectionParameters.goalDonationSum - this.projectedDonationSum();
+		const remainingAmount = this.campaignProjectionParameters.donationTarget - this.projectedDonationSum();
 		return Math.round( remainingAmount / DONORS_NEEDED_ROUNDING ) * DONORS_NEEDED_ROUNDING;
 	}
 

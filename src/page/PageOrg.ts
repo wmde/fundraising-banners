@@ -141,12 +141,12 @@ class PageOrg implements Page {
 
 		return {
 			campaignProjection: {
-				goalDonationSum: Number( data.goalDonationSum ),
-				baseDate: data.baseDate,
-				baseDonationSum: Number( data.baseDonationSum ),
-				donorsBase: Number( data.donorsBase ),
+				donationTarget: Number( data.donationTarget ),
+				updatedAt: data.updatedAt,
+				donationSumBase: Number( data.donationSumBase ),
+				donationCountBase: Number( data.donationCountBase ),
 				donationAmountPerMinute: Number( data.donationAmountPerMinute ),
-				donorsPerMinute: Number( data.donorsPerMinute ),
+				donationCountPerMinute: Number( data.donationCountPerMinute ),
 				averageAmountPerDonation: Number( data.averageAmountPerDonation )
 			},
 			millionImpressionsPerDay: Number( data.millionImpressionsPerDay ),

@@ -53,12 +53,12 @@ export class PageStub implements Page {
 		return {
 			campaignProjection: {
 				averageAmountPerDonation: 0,
-				baseDate: '',
-				baseDonationSum: 0,
+				updatedAt: '',
+				donationSumBase: 0,
 				donationAmountPerMinute: 0,
-				donorsBase: 0,
-				donorsPerMinute: 0,
-				goalDonationSum: 0
+				donationCountBase: 0,
+				donationCountPerMinute: 0,
+				donationTarget: 0
 			},
 			endDate: '',
 			millionImpressionsPerDay: 0,

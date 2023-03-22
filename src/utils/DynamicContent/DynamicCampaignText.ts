@@ -75,7 +75,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	public getCampaignProjection(): CampaignProjection {
 		if ( this.campaignProjection === undefined ) {
 			const projectionRange = new TimeRange(
-				startOfDay( this.campaignParameters.campaignProjection.baseDate ),
+				startOfDay( this.campaignParameters.campaignProjection.updatedAt ),
 				endOfDay( this.campaignParameters.endDate )
 			);
 			this.campaignProjection = new CampaignProjection(
@@ -89,7 +89,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	public get donorsNeededSentence(): string {
 		return this.getCachedValue( 'donorsNeededSentence', () => {
 			return new DonorsNeededSentence(
-				this.getCampaignProjection().remainingDonorsNeeded(),
+				this.getCampaignProjection().remainingNumberOfDonationsNeeded(),
 				this.translator
 			).getText();
 		} );
@@ -113,7 +113,7 @@ export default class DynamicCampaignText implements DynamicContent {
 			return new VisitorsVsDonorsSentence(
 				this.translator,
 				this.campaignParameters.millionImpressionsPerDay,
-				this.getCampaignProjection().projectedDonors()
+				this.getCampaignProjection().projectedDonationCount()
 			).getText();
 		} );
 	}

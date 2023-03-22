@@ -16,18 +16,18 @@ describe( 'CampaignProjection', function () {
 	beforeEach( () => {
 		campaignProjectionParameters = {
 			averageAmountPerDonation: 20,
-			baseDate: 'Not used by CampaignProjection directly',
-			baseDonationSum: 100_000,
+			updatedAt: 'Not used by CampaignProjection directly',
+			donationSumBase: 100_000,
 			donationAmountPerMinute: 10.3,
-			donorsBase: 105,
-			donorsPerMinute: 2,
-			goalDonationSum: 9_000_000
+			donationCountBase: 105,
+			donationCountPerMinute: 2,
+			donationTarget: 9_000_000
 		};
 	} );
 
 	describe( '#projectedDonationSum()', function () {
 		it( 'should return donation sum projection based on number of passed seconds', function () {
-			campaignProjectionParameters.baseDonationSum = 0;
+			campaignProjectionParameters.donationSumBase = 0;
 			const campaignProjection = new CampaignProjection(
 				campaignProjectionParameters,
 				new TimeRange( startDate, endDate, after12HoursDate )
@@ -80,8 +80,8 @@ describe( 'CampaignProjection', function () {
 				new TimeRange( startDate, endDate, after24HoursDate )
 			);
 
-			expect( campaignProjectionAfter12Hours.projectedDonors() ).toBe( 1545 );
-			expect( campaignProjectionAfter24Hours.projectedDonors() ).toBe( 2985 );
+			expect( campaignProjectionAfter12Hours.projectedDonationCount() ).toBe( 1545 );
+			expect( campaignProjectionAfter24Hours.projectedDonationCount() ).toBe( 2985 );
 		} );
 
 		it( 'should return zero before the campaign starts', function () {
@@ -90,7 +90,7 @@ describe( 'CampaignProjection', function () {
 				new TimeRange( startDate, endDate, beforeStartDate )
 			);
 
-			expect( campaignProjection.projectedDonors() ).toBe( 0 );
+			expect( campaignProjection.projectedDonationCount() ).toBe( 0 );
 		} );
 
 		it( 'should stop projecting donors after the campaign ends', function () {
@@ -99,7 +99,7 @@ describe( 'CampaignProjection', function () {
 				new TimeRange( startDate, endDate, afterEndDate )
 			);
 
-			expect( campaignProjection.projectedDonors() ).toBeCloseTo( 146_983 );
+			expect( campaignProjection.projectedDonationCount() ).toBeCloseTo( 146_983 );
 		} );
 	} );
 
@@ -110,7 +110,7 @@ describe( 'CampaignProjection', function () {
 				new TimeRange( startDate, endDate, after24HoursDate )
 			);
 
-			expect( campaignProjection.remainingDonorsNeeded() ).toBe( 445_000 );
+			expect( campaignProjection.remainingNumberOfDonationsNeeded() ).toBe( 445_000 );
 		} );
 
 		it( 'should project donors needed to the nearest 100_000 donors', function () {
@@ -123,8 +123,8 @@ describe( 'CampaignProjection', function () {
 				new TimeRange( startDate, endDate, after24HoursDate )
 			);
 
-			expect( campaignProjectionAfter12Hours.remainingDonorsNeeded() ).toBe( 445_000 );
-			expect( campaignProjectionAfter24Hours.remainingDonorsNeeded() ).toBe( 445_000 );
+			expect( campaignProjectionAfter12Hours.remainingNumberOfDonationsNeeded() ).toBe( 445_000 );
+			expect( campaignProjectionAfter24Hours.remainingNumberOfDonationsNeeded() ).toBe( 445_000 );
 		} );
 	} );
 } );

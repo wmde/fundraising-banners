@@ -1,17 +1,13 @@
-// TODO Discuss in the team if we should rename the properties and remove the docblocks
 export interface CampaignProjectionParameters {
+    donationTarget: number,
     /**
-     * Donation target in millions
+     * The date where the number of donors (donorsBase) and donation sum (baseDonationSum) were measured
      */
-    goalDonationSum: number,
-    /**
-     * Last date where the number of donors (donorsBase) and donation sum (baseDonationSum) was measured
-     */
-    baseDate: string,
-    baseDonationSum: number,
-    donorsBase: number,
+    updatedAt: string,
+    donationSumBase: number,
+    donationCountBase: number,
     donationAmountPerMinute: number,
-    donorsPerMinute: number,
+    donationCountPerMinute: number,
     /**
      * Needed to calculate missing number of donors by dividing the projected amount missing
      */
@@ -25,10 +21,12 @@ export interface CampaignProjectionParameters {
 export interface CampaignParameters {
     campaignProjection: CampaignProjectionParameters,
     millionImpressionsPerDay: number,
+
     /**
      * Date in YYYY-MM-DD format
      */
     startDate: string,
+
     /**
      * Date in YYYY-MM-DD format (code will automatically add the time of 23:59:59)
      */
