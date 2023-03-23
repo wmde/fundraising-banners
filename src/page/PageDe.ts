@@ -4,8 +4,10 @@ import { CampaignParameters } from '@src/CampaignParameters';
 import { TrackingParameters } from '@src/TrackingParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
-interface WpdeWindow extends Window {
+export interface WpdeWindow extends Window {
 	campaignParameters: CampaignParameters;
+	CampaignName: string,
+	BannerName: string
 }
 
 declare let window: WpdeWindow;
@@ -60,12 +62,15 @@ class PageDe implements Page {
 	}
 
 	public getCampaignParameters(): CampaignParameters {
+		if ( !window.campaignParameters ) {
+			throw new Error( 'Campaign parameters are not set globally' );
+		}
+
 		return getCampaignParameterOverride( window.campaignParameters );
 	}
 
 	public getTracking(): TrackingParameters {
-		// TODO implement
-		throw new Error( 'Not implemented' );
+		return { campaign: window.CampaignName, keyword: window.BannerName };
 	}
 }
 
