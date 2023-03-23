@@ -7,13 +7,13 @@ import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 const beforeStartDate = new Date( 2023, 10, 10 );
 const startDate = new Date( 2023, 10, 11 );
+const endDate = new Date( 2024, 0, 1 );
 const after24HoursDate = new Date( 2023, 10, 12 );
 const after48HoursDate = new Date( 2023, 10, 13 );
 const urgencyDate = new Date( 2023, 11, 22 );
 const secondLastDayDate = new Date( 2023, 11, 30 );
 const lastDayDate = new Date( 2023, 11, 31 );
-const endDate = new Date( 2023, 11, 31, 23, 59, 59 );
-const afterEndDate = new Date( 2024, 0, 1 );
+const afterEndDate = new Date( 2024, 0, 1, 0, 0, 1 );
 
 const staticOrdinal: Ordinal = {
 	getFormatted: ( figure: number ) => figure + 'sth'

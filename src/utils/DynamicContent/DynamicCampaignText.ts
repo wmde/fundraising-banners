@@ -4,7 +4,7 @@ import { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CampaignParameters } from '@src/CampaignParameters';
-import TimeRange, { endOfDay, startOfDay } from '@src/utils/TimeRange';
+import TimeRange from '@src/utils/TimeRange';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
@@ -33,9 +33,9 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	private getCampaignTimeRange(): TimeRange {
 		if ( this._campaignTimeRange === undefined ) {
-			this._campaignTimeRange = new TimeRange(
-				startOfDay( this._campaignParameters.startDate ),
-				endOfDay( this._campaignParameters.endDate )
+			this._campaignTimeRange = TimeRange.createFromStrings(
+				this._campaignParameters.startDate,
+				this._campaignParameters.endDate
 			);
 		}
 		return this._campaignTimeRange;
@@ -74,9 +74,9 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public getCampaignProjection(): CampaignProjection {
 		if ( this._campaignProjection === undefined ) {
-			const projectionRange = new TimeRange(
-				startOfDay( this._campaignParameters.campaignProjection.updatedAt ),
-				endOfDay( this._campaignParameters.endDate )
+			const projectionRange = TimeRange.createFromStrings(
+				this._campaignParameters.campaignProjection.updatedAt,
+				this._campaignParameters.endDate
 			);
 			this._campaignProjection = new CampaignProjection(
 				this._campaignParameters.campaignProjection,
