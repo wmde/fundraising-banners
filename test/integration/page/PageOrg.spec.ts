@@ -125,5 +125,31 @@ describe( 'PageOrg', function () {
 		expect( retrievedCampaignParameters.startDate ).toBe( '2084-12-12' );
 	} );
 
+	it( 'throws error if campaign parameters element not found', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p data-start-date="2084-12-12">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign data element not found' );
+	} );
+
+	it( 'returns banner tracking keyword', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		const retrievedTrackingKeyword = page.getTrackingKeyword();
+
+		expect( retrievedTrackingKeyword ).toBe( 'org-00-2023-blabla-ctrl' );
+	} );
+
+	it( 'throws error if banner keyword can not be retrieved', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		expect( () => page.getTrackingKeyword() ).toThrow( 'Banner container element not found' );
+	} );
+
 	it.todo( 'sends event tracking data in trackEvent()' );
 } );
