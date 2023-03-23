@@ -8,6 +8,7 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/CampaignParameters';
+import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
 export const bannerContainerId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -138,7 +139,7 @@ class PageOrg implements Page {
 		}
 		const data = element.dataset;
 
-		return {
+		const campaignParameters = {
 			campaignProjection: {
 				donationTarget: Number( data.donationTarget ),
 				updatedAt: data.updatedAt,
@@ -153,6 +154,8 @@ class PageOrg implements Page {
 			endDate: data.endDate,
 			numberOfMembers: Number( data.numberOfMembers )
 		};
+
+		return getCampaignParameterOverride( campaignParameters );
 	}
 }
 
