@@ -55,6 +55,11 @@ class PageDe implements Page {
 		// TODO implement
 		throw new Error( 'Not implemented' );
 	}
+
+	public getTrackingKeyword(): string {
+		// TODO implement
+		throw new Error( 'Not implemented' );
+	}
 }
 
 export default PageDe;

@@ -17,4 +17,5 @@ export interface Page extends Tracker {
 	preventImpressionCountForHiddenBanner: () => Page;
 	setCloseCookieIfNecessary: ( source: CloseSources ) => Page;
 	getCampaignParameters: () => CampaignParameters;
+	getTrackingKeyword: () => string;
 }

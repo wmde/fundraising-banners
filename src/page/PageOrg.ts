@@ -10,11 +10,13 @@ import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/CampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
-export const bannerContainerId = 'wmde-banner-app';
+export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
 export const showBannerClass = 'wmde-show-banner';
 export const bannerHeightCssVariable = '--wmde-banner-height';
 export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
+const centralNoticeBannerContainerId = 'WMDE-Banner-Container';
+const campaignParametersId = 'wmde-campaign-parameters';
 
 class PageOrg implements Page {
 	private _mediaWiki: MediaWiki;
@@ -29,9 +31,9 @@ class PageOrg implements Page {
 
 	public getBannerContainer(): string {
 		const mountPoint = document.createElement( 'div' );
-		mountPoint.id = bannerContainerId;
+		mountPoint.id = bannerAppId;
 		document.body.prepend( mountPoint );
-		return '#' + bannerContainerId;
+		return '#' + bannerAppId;
 	}
 
 	public getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
@@ -133,7 +135,7 @@ class PageOrg implements Page {
 	}
 
 	public getCampaignParameters(): CampaignParameters {
-		const element = document.getElementById( 'wmde-campaign-parameters' );
+		const element = document.getElementById( campaignParametersId );
 		if ( !element ) {
 			throw new Error( 'Campaign data element not found' );
 		}
@@ -156,6 +158,14 @@ class PageOrg implements Page {
 		};
 
 		return getCampaignParameterOverride( campaignParameters );
+	}
+
+	public getTrackingKeyword(): string {
+		const element = document.getElementById( centralNoticeBannerContainerId );
+		if ( !element ) {
+			throw new Error( 'Banner container element not found' );
+		}
+		return element.dataset.tracking;
 	}
 }
 

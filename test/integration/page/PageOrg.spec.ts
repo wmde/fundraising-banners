@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
-import PageOrg, { bannerContainerId } from '@src/page/PageOrg';
+import PageOrg, { bannerAppId } from '@src/page/PageOrg';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
@@ -79,8 +79,8 @@ describe( 'PageOrg', function () {
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 		const id = page.getBannerContainer();
 
-		expect( id ).toBe( '#' + bannerContainerId );
-		expect( document.body.innerHTML ).toBe( `<div id="${ bannerContainerId }"></div>` );
+		expect( id ).toBe( '#' + bannerAppId );
+		expect( document.body.innerHTML ).toBe( `<div id="${ bannerAppId }"></div>` );
 	} );
 
 	it( 'stores close cookie for already donated close events', () => {

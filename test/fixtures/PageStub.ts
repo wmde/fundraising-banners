@@ -67,4 +67,8 @@ export class PageStub implements Page {
 		};
 	}
 
+	public getTrackingKeyword(): string {
+		return 'tracking-keyword-ctrl';
+	}
+
 }
