@@ -2,6 +2,13 @@ import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
 import { CampaignParameters } from '@src/CampaignParameters';
 import { TrackingParameters } from '@src/TrackingParameters';
+import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
+
+interface WpdeWindow extends Window {
+	campaignParameters: CampaignParameters;
+}
+
+declare let window: WpdeWindow;
 
 class PageDe implements Page {
 
@@ -53,8 +60,7 @@ class PageDe implements Page {
 	}
 
 	public getCampaignParameters(): CampaignParameters {
-		// TODO implement
-		throw new Error( 'Not implemented' );
+		return getCampaignParameterOverride( window.campaignParameters );
 	}
 
 	public getTracking(): TrackingParameters {
