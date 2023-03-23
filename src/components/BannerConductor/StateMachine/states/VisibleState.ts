@@ -4,21 +4,21 @@ import { Page } from '@src/page/Page';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class VisibleState extends BannerState {
-	// TODO: Make this private and add getter
-	public stateName: BannerStates = BannerStates.Visible;
-	private page: Page;
-	private impressionCount: ImpressionCount;
+	public readonly stateName: BannerStates = BannerStates.Visible;
+	private _page: Page;
+	private _impressionCount: ImpressionCount;
 
 	public constructor( page: Page, impressionCount: ImpressionCount ) {
 		super();
-		this.page = page;
-		this.impressionCount = impressionCount;
+		this._page = page;
+		this._impressionCount = impressionCount;
+
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
 	public enter(): Promise<any> {
 		// TODO Fire shown events here
-		this.impressionCount.incrementImpressionCounts();
+		this._impressionCount.incrementImpressionCounts();
 		return Promise.resolve();
 	}
 
@@ -27,7 +27,7 @@ export class VisibleState extends BannerState {
 	}
 
 	public onResize( space: number ): void {
-		this.page.unsetAnimated().setSpace( space );
+		this._page.unsetAnimated().setSpace( space );
 	}
 
 }

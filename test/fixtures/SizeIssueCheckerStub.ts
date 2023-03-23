@@ -2,10 +2,10 @@ import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export class SizeIssueCheckerStub implements SizeIssueChecker {
-	private readonly hasSizeIssue: boolean;
+	private readonly _hasSizeIssues: boolean = false;
 
-	public constructor( hasSizeIssue: boolean = false ) {
-		this.hasSizeIssue = hasSizeIssue;
+	public constructor( hasSizeIssues: boolean = false ) {
+		this._hasSizeIssues = hasSizeIssues;
 	}
 
 	public getDimensions(): WindowDimensions {
@@ -26,6 +26,6 @@ export class SizeIssueCheckerStub implements SizeIssueChecker {
 	}
 
 	public hasSizeIssues(): boolean {
-		return this.hasSizeIssue;
+		return this._hasSizeIssues;
 	}
 }

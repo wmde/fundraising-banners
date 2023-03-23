@@ -3,19 +3,18 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 
 export class PendingState extends BannerState {
-	// TODO: Make this private and add getter
-	public stateName: BannerStates = BannerStates.Pending;
-	private page: Page;
-	private readonly bannerHeight: number;
-	private readonly delay: number;
-	private timer: ReturnType<typeof setTimeout>;
+	public readonly stateName: BannerStates = BannerStates.Pending;
+	private _timer: ReturnType<typeof setTimeout>;
+	private _page: Page;
+	private readonly _bannerHeight: number;
+	private readonly _delay: number;
 
 	public constructor( page: Page, bannerHeight: number, delay: number ) {
 		super();
 
-		this.page = page;
-		this.bannerHeight = bannerHeight;
-		this.delay = delay;
+		this._page = page;
+		this._bannerHeight = bannerHeight;
+		this._delay = delay;
 
 		this.canMoveToStates.push( BannerStates.Showing );
 		this.canMoveToStates.push( BannerStates.Closed );
@@ -23,19 +22,19 @@ export class PendingState extends BannerState {
 	}
 
 	public enter(): Promise<any> {
-		this.page.setSpace( this.bannerHeight );
+		this._page.setSpace( this._bannerHeight );
 
 		return new Promise( ( resolve ) => {
-			this.timer = setTimeout( () => resolve( true ), this.delay );
+			this._timer = setTimeout( () => resolve( true ), this._delay );
 		} );
 	}
 
 	public exit(): Promise<any> {
-		clearTimeout( this.timer );
+		clearTimeout( this._timer );
 		return Promise.resolve();
 	}
 
 	public onResize( space: number ): void {
-		this.page.setSpace( space );
+		this._page.setSpace( space );
 	}
 }

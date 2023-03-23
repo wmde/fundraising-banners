@@ -2,14 +2,14 @@ const SECONDS_PER_DAY = 86_400;
 const SECONDS_PER_MINUTE = 60;
 
 export default class TimeRange {
-	private startDate: Date;
-	private endDate: Date;
-	private now: Date;
+	private _startDate: Date;
+	private _endDate: Date;
+	private _now: Date = new Date();
 
 	public constructor( startDate: Date, endDate: Date, now: Date = new Date() ) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.now = now;
+		this._startDate = startDate;
+		this._endDate = endDate;
+		this._now = now;
 	}
 
 	public hasStarted(): boolean {
@@ -21,7 +21,7 @@ export default class TimeRange {
 	}
 
 	public secondsSinceStart(): number {
-		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
+		return Math.floor( ( this._now.getTime() - this._startDate.getTime() ) / 1000 );
 	}
 
 	public minutesSinceStart(): number {
@@ -33,11 +33,11 @@ export default class TimeRange {
 	}
 
 	public secondsUntilEnd(): number {
-		return Math.floor( ( this.endDate.getTime() - this.now.getTime() ) / 1000 );
+		return Math.floor( ( this._endDate.getTime() - this._now.getTime() ) / 1000 );
 	}
 
 	public secondsBetweenStartAndEnd(): number {
-		return Math.floor( ( this.endDate.getTime() - this.startDate.getTime() ) / 1000 );
+		return Math.floor( ( this._endDate.getTime() - this._startDate.getTime() ) / 1000 );
 	}
 
 	public minutesBetweenStartAndEnd(): number {
@@ -50,7 +50,7 @@ export default class TimeRange {
 
 }
 
-function getDateParts( dateStr: string ): [number, number, number] {
+function getDateParts( dateStr: string ): [ number, number, number ] {
 	const result = dateStr.match( /^(\d{4})-(\d{2})-(\d{2})$/ );
 	if ( result === null ) {
 		throw new Error( 'Wrong date string format' );

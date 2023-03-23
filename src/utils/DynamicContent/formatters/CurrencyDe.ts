@@ -3,17 +3,20 @@ import formatter from 'format-number';
 
 export class CurrencyDe implements Currency {
 
-	private readonly millionsNumericFormatter: ( amount: number ) => string;
+	private readonly _millionsFormatter: ( amount: number ) => string;
+	private readonly _millionsNumericFormatter: ( amount: number ) => string;
 
 	public constructor() {
-		this.millions = formatter( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
-		this.millionsNumericFormatter = formatter( { round: 1, decimal: ',', padRight: 1 } );
+		this._millionsFormatter = formatter( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
+		this._millionsNumericFormatter = formatter( { round: 1, decimal: ',', padRight: 1 } );
 	}
 
-	public millions: ( amount: number ) => string;
+	public millions( amount: number ): string {
+		return this._millionsFormatter( amount );
+	}
 
 	public millionsNumeric( amount: number ): string {
-		return this.millionsNumericFormatter( amount / 1_000_000 );
+		return this._millionsNumericFormatter( amount / 1_000_000 );
 	}
 
 }

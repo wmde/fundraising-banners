@@ -2,31 +2,33 @@ import hasLocalStorage from './has_local_storage';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class LocalImpressionCount implements ImpressionCount {
-	private readonly bannerName: string;
-	private overallCount: number;
-	private bannerCount: number;
+	private readonly _bannerName: string;
+	private _overallCount: number;
+	private _bannerCount: number;
 
 	public constructor( bannerName: string ) {
-		this.bannerName = bannerName;
-		this.overallCount = 0;
-		this.bannerCount = 0;
+		this._bannerName = bannerName;
+		this._overallCount = 0;
+		this._bannerCount = 0;
+
 		if ( !hasLocalStorage() ) {
 			return;
 		}
+
 		let overallCount = this.getItem( 'fundraising.overallCount', '0' );
 		// This is a fix for a local storage issue where NaN was being stored
 		// and once it was in there it would remain NaN forever and always
 		if ( isNaN( parseInt( overallCount ) ) ) {
 			overallCount = '0';
 		}
-		this.overallCount = parseInt( overallCount, 10 );
+		this._overallCount = parseInt( overallCount, 10 );
 		const bannerCount = this.getItem( 'fundraising.bannerCount', '0' ) || '';
 		if ( bannerCount.indexOf( '|' ) === -1 ) {
 			return;
 		}
 		const [ lastSeenBannerName, lastBannerCount ] = bannerCount.split( '|', 2 );
 		if ( lastSeenBannerName === bannerName ) {
-			this.bannerCount = parseInt( lastBannerCount, 10 );
+			this._bannerCount = parseInt( lastBannerCount, 10 );
 		}
 	}
 
@@ -39,26 +41,26 @@ export class LocalImpressionCount implements ImpressionCount {
 	}
 
 	public incrementImpressionCounts(): void {
-		this.overallCount++;
-		this.bannerCount++;
+		this._overallCount++;
+		this._bannerCount++;
 
 		if ( !hasLocalStorage() ) {
 			return;
 		}
 
 		try {
-			window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
-			window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
+			window.localStorage.setItem( 'fundraising.overallCount', this._overallCount.toFixed( 0 ) );
+			window.localStorage.setItem( 'fundraising.bannerCount', this._bannerName + '|' + this._bannerCount );
 		} catch ( e ) {
 			// Don't throw localStorage exceptions
 		}
 	}
 
-	public getOverallCount(): number {
-		return this.overallCount;
+	public get bannerCount(): number {
+		return this._bannerCount;
 	}
 
-	public getBannerCount(): number {
-		return this.bannerCount;
+	public get overallCount(): number {
+		return this._overallCount;
 	}
 }

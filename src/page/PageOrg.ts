@@ -16,15 +16,14 @@ export const bannerHeightCssVariable = '--wmde-banner-height';
 export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
 
 class PageOrg implements Page {
-
-	private mediaWiki: MediaWiki;
-	private skin: Skin;
-	private sizeIssueChecker: SizeIssueChecker;
+	private _mediaWiki: MediaWiki;
+	private _skin: Skin;
+	private _sizeIssueChecker: SizeIssueChecker;
 
 	public constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
-		this.mediaWiki = mediaWiki;
-		this.skin = skin;
-		this.sizeIssueChecker = sizeIssueChecker;
+		this._sizeIssueChecker = sizeIssueChecker;
+		this._skin = skin;
+		this._mediaWiki = mediaWiki;
 	}
 
 	public getBannerContainer(): string {
@@ -35,15 +34,15 @@ class PageOrg implements Page {
 	}
 
 	public getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
-		if ( !this.mediaWiki.isShowingContentPage() ) {
+		if ( !this._mediaWiki.isShowingContentPage() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
 
-		if ( this.mediaWiki.isContentHiddenByLightbox() ) {
+		if ( this._mediaWiki.isContentHiddenByLightbox() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
 
-		if ( !this.mediaWiki.isInArticleNamespace() ) {
+		if ( !this._mediaWiki.isInArticleNamespace() ) {
 			return BannerNotShownReasons.DisallowedNamespace;
 		}
 
@@ -55,8 +54,8 @@ class PageOrg implements Page {
 	}
 
 	private hasSizeIssues( bannerDimensions: Vector2 ): boolean {
-		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this.skin.minimumVisiblePageBeneathBanner() );
-		return this.sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
+		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this._skin.minimumVisiblePageBeneathBanner() );
+		return this._sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
 	}
 
 	public trackEvent( trackingData: EventData ): void {
@@ -67,16 +66,16 @@ class PageOrg implements Page {
 			finalSlide: 0,
 			slidesShown: 0
 		};
-		this.mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
-		// this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
+		this._mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
+		// this._mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 
 	public onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
-		this.skin.addHideBannerListener( hideBannerListener );
+		this._skin.addHideBannerListener( hideBannerListener );
 	}
 
 	public removePageEventListeners(): Page {
-		this.skin.removeEventListeners();
+		this._skin.removeEventListeners();
 		return this;
 	}
 
@@ -106,23 +105,23 @@ class PageOrg implements Page {
 	}
 
 	public preventImpressionCountForHiddenBanner(): Page {
-		this.mediaWiki.setBannerLoadedButHidden();
+		this._mediaWiki.setBannerLoadedButHidden();
 		return this;
 	}
 
 	public setCloseCookieIfNecessary( source: CloseSources ): Page {
 		switch ( source ) {
 			case CloseSources.AlreadyDonated:
-				this.mediaWiki.preventBannerDisplayUntilEndOfCampaign();
+				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
 				break;
 			case CloseSources.SoftCloseBannerRejected:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.MainBanner:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.MiniBanner:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.FollowUpBanner:
 				break;
