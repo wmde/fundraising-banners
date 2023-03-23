@@ -133,22 +133,23 @@ describe( 'PageOrg', function () {
 		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign data element not found' );
 	} );
 
-	it( 'returns banner tracking keyword', () => {
-		const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
+	it( 'returns banner tracking keyword and campaign', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl" data-campaign-tracking="a-campaign">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		const retrievedTrackingKeyword = page.getTrackingKeyword();
+		const retrievedTrackingKeyword = page.getTracking();
 
-		expect( retrievedTrackingKeyword ).toBe( 'org-00-2023-blabla-ctrl' );
+		expect( retrievedTrackingKeyword.keyword ).toBe( 'org-00-2023-blabla-ctrl' );
+		expect( retrievedTrackingKeyword.campaign ).toBe( 'a-campaign' );
 	} );
 
-	it( 'throws error if banner keyword can not be retrieved', () => {
+	it( 'throws error if banner tracking can not be retrieved', () => {
 		const dom = new JSDOM( `<!DOCTYPE html><p data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		expect( () => page.getTrackingKeyword() ).toThrow( 'Banner container element not found' );
+		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
 	} );
 
 	it.todo( 'sends event tracking data in trackEvent()' );

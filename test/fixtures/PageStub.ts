@@ -1,6 +1,7 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CampaignParameters } from '@src/CampaignParameters';
+import { TrackingParameters } from '@src/TrackingParameters';
 
 export class PageStub implements Page {
 	public getBannerContainer(): string {
@@ -67,8 +68,11 @@ export class PageStub implements Page {
 		};
 	}
 
-	public getTrackingKeyword(): string {
-		return 'tracking-keyword-ctrl';
+	public getTracking(): TrackingParameters {
+		return {
+			campaign: 'funny-campaign',
+			keyword: 'tracking-keyword-ctrl'
+		};
 	}
 
 }

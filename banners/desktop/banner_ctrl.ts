@@ -27,7 +27,7 @@ const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(),
 // This is language-specific and must be changed for EN banners
 const formatters: Formatters = { currency: new CurrencyDe(), ordinal: new OrdinalDe() };
 
-const impressionCount = new LocalImpressionCount( page.getTrackingKeyword() );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
 const app = createVueApp( BannerConductor, {
 	page,

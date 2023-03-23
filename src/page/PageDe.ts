@@ -1,6 +1,7 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
 import { CampaignParameters } from '@src/CampaignParameters';
+import { TrackingParameters } from '@src/TrackingParameters';
 
 class PageDe implements Page {
 
@@ -56,7 +57,7 @@ class PageDe implements Page {
 		throw new Error( 'Not implemented' );
 	}
 
-	public getTrackingKeyword(): string {
+	public getTracking(): TrackingParameters {
 		// TODO implement
 		throw new Error( 'Not implemented' );
 	}

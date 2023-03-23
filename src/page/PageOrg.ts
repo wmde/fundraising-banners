@@ -9,6 +9,7 @@ import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/CampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
+import { TrackingParameters } from '@src/TrackingParameters';
 
 export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -160,12 +161,16 @@ class PageOrg implements Page {
 		return getCampaignParameterOverride( campaignParameters );
 	}
 
-	public getTrackingKeyword(): string {
+	public getTracking(): TrackingParameters {
+
 		const element = document.getElementById( centralNoticeBannerContainerId );
 		if ( !element ) {
 			throw new Error( 'Banner container element not found' );
 		}
-		return element.dataset.tracking;
+		return {
+			campaign: element.dataset.campaignTracking,
+			keyword: element.dataset.tracking
+		};
 	}
 }
 
