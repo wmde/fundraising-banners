@@ -32,24 +32,22 @@ describe( 'PageDe', function () {
 		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign parameters are not set globally' );
 	} );
 
-	// it( 'returns banner tracking keyword and campaign', () => {
-	// 	const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl" data-campaign-tracking="a-campaign">Hello world</p>` );
-	// 	vitest.stubGlobal( 'document', dom.window.document );
-	// 	const page = new PageDe();
-	//
-	// 	const retrievedTrackingKeyword = page.getTracking();
-	//
-	// 	expect( retrievedTrackingKeyword.keyword ).toBe( 'org-00-2023-blabla-ctrl' );
-	// 	expect( retrievedTrackingKeyword.campaign ).toBe( 'a-campaign' );
-	// } );
+	it( 'returns banner tracking keyword and campaign', () => {
+		window.CampaignName = 'a-campaign';
+		window.BannerName = 'org-00-2023-blabla-ctrl';
+		const page = new PageDe();
 
-// 	it( 'throws error if banner tracking can not be retrieved', () => {
-// 		const dom = new JSDOM( `<!DOCTYPE html><p data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
-// 		vitest.stubGlobal( 'document', dom.window.document );
-// 		const page = new PageDe();
-//
-// 		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
-// 	} );
-//
-// 	it.todo( 'sends event tracking data in trackEvent()' );
+		const retrievedTrackingKeyword = page.getTracking();
+
+		expect( retrievedTrackingKeyword.keyword ).toBe( 'org-00-2023-blabla-ctrl' );
+		expect( retrievedTrackingKeyword.campaign ).toBe( 'a-campaign' );
+	} );
+
+	it( 'throws error if banner tracking can not be retrieved', () => {
+		delete window.CampaignName;
+		delete window.BannerName;
+
+		const page = new PageDe();
+		expect( () => page.getTracking() ).toThrow( 'Campaign tracking elements not found in global namespace!' );
+	} );
 } );
