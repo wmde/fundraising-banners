@@ -1,31 +1,41 @@
 import { describe, it, expect } from 'vitest';
 
-import TimeRange, { endOfDay, startOfDay } from '@src/utils/TimeRange';
-
-describe( 'startOfDay', function () {
-	it( 'returns the first second of the day', function () {
-		expect( startOfDay( '2017-11-01' ).getTime() ).toEqual( new Date( 2017, 10, 1, 0, 0, 0 ).getTime() );
-	} );
-
-	it( 'throws errors when date string is malformed', function () {
-		expect( () => startOfDay( '2017-01-4' ) ).toThrow( /wrong date string format/i );
-	} );
-} );
-
-describe( 'endOfDay', function () {
-	it( 'returns the first second of the day', function () {
-		expect( endOfDay( '2017-12-31' ).getTime() ).toEqual( new Date( 2017, 11, 31, 23, 59, 59 ).getTime() );
-	} );
-
-	it( 'throws errors when date string is malformed', function () {
-		expect( () => endOfDay( '2017-01-4' ) ).toThrow( /wrong date string format/i );
-	} );
-} );
+import TimeRange from '@src/utils/TimeRange';
 
 describe( 'TimeRange', function () {
 
 	const START_DATE = new Date( 2016, 10, 1, 0, 0, 0 );
 	const END_DATE = new Date( 2016, 11, 31, 23, 59, 59 );
+
+	describe( '#constructor', function () {
+		it( 'throws error when the end date is before the start date', function () {
+			expect( () => new TimeRange( START_DATE, START_DATE ) ).toThrow( 'start date must not be larger than end date' );
+			expect( () => new TimeRange( END_DATE, START_DATE ) ).toThrow( 'start date must not be larger than end date' );
+		} );
+	} );
+
+	describe( '#newFromStrings', function () {
+
+		it( 'returns the first second of the start day', function () {
+			const now = new Date( 2017, 10, 1, 0, 0, 0 );
+			expect( TimeRange.createFromStrings( '2017-11-01', '2017-12-04', now ).secondsSinceStart() )
+				.toEqual( 0 );
+		} );
+
+		it( 'returns the first second of the day after the end day', function () {
+			const now = new Date( 2017, 11, 31, 23, 59, 59 );
+			expect( TimeRange.createFromStrings( '2017-11-01', '2017-12-31', now ).secondsUntilEnd() )
+				.toEqual( 1 );
+		} );
+
+		it( 'throws errors when start date string is malformed', function () {
+			expect( () => TimeRange.createFromStrings( '2017-01-4', '2017-12-31' ) ).toThrow( /wrong date string format/i );
+		} );
+
+		it( 'throws errors when end date string is malformed', function () {
+			expect( () => TimeRange.createFromStrings( '2017-01-04', '2017-12-1' ) ).toThrow( /wrong date string format/i );
+		} );
+	} );
 
 	describe( '#hasStarted', function () {
 		it( 'returns false when range has not started yet', function () {
