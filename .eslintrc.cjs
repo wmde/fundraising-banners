@@ -6,7 +6,8 @@ module.exports = {
 		'@vue/eslint-config-typescript'
 	],
 	'parserOptions': {
-		ecmaVersion: 'latest'
+		ecmaVersion: 'latest',
+		parser: '@typescript-eslint/parser'
 	},
 	'root': true,
 	'env': {
@@ -49,7 +50,40 @@ module.exports = {
 
 		'@typescript-eslint/type-annotation-spacing': 'error',
 		'@typescript-eslint/explicit-function-return-type': 'off',
-		'@typescript-eslint/explicit-member-accessibility': 'off'
+		'@typescript-eslint/explicit-member-accessibility': 'off',
+
+		// This forces private properties to be prefixed with an underscore
+		'no-underscore-dangle': [
+			'error',
+			{
+				allowAfterThis: true
+			}
+		],
+		'@typescript-eslint/naming-convention': [
+			'error',
+			{
+				selector: 'classProperty',
+				modifiers: [ 'private' ],
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'require'
+			},
+			{
+				selector: 'classProperty',
+				modifiers: [ 'public' ],
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			},
+			{
+				selector: 'parameterProperty',
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			},
+			{
+				selector: 'parameter',
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			}
+		]
 	},
 	'overrides': [
 		{

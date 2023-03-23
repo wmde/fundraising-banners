@@ -1,5 +1,5 @@
 export interface ImpressionCount {
-	getOverallCount: () => number;
-	getBannerCount: () => number;
+	overallCount: number;
+	bannerCount: number;
 	incrementImpressionCounts: () => void;
 }

@@ -10,46 +10,46 @@ const DONORS_NEEDED_ROUNDING = 100_000;
  * We update campaign figures manually every few days, which is why this class is needed
  */
 export class CampaignProjection {
-	private readonly campaignProjectionParameters: CampaignProjectionParameters;
-	private readonly timeRange: TimeRange;
+	private readonly _campaignProjectionParameters: CampaignProjectionParameters;
+	private readonly _timeRange: TimeRange;
 
 	public constructor( campaignProjectionParameters: CampaignProjectionParameters, timeRange: TimeRange ) {
-		this.campaignProjectionParameters = campaignProjectionParameters;
-		this.timeRange = timeRange;
+		this._campaignProjectionParameters = campaignProjectionParameters;
+		this._timeRange = timeRange;
 	}
 
 	public projectedDonationCount(): number {
 		return this.calculateProjection(
-			this.campaignProjectionParameters.donationCountBase,
-			this.campaignProjectionParameters.donationCountPerMinute
+			this._campaignProjectionParameters.donationCountBase,
+			this._campaignProjectionParameters.donationCountPerMinute
 		);
 	}
 
 	public remainingNumberOfDonationsNeeded(): number {
-		return Math.round( this.projectedRemainingDonationSum() / this.campaignProjectionParameters.averageAmountPerDonation );
+		return Math.round( this.projectedRemainingDonationSum() / this._campaignProjectionParameters.averageAmountPerDonation );
 	}
 
 	public projectedDonationSum(): number {
 		return this.calculateProjection(
-			this.campaignProjectionParameters.donationSumBase,
-			this.campaignProjectionParameters.donationAmountPerMinute
+			this._campaignProjectionParameters.donationSumBase,
+			this._campaignProjectionParameters.donationAmountPerMinute
 		);
 	}
 
 	private projectedRemainingDonationSum(): number {
-		const remainingAmount = this.campaignProjectionParameters.donationTarget - this.projectedDonationSum();
+		const remainingAmount = this._campaignProjectionParameters.donationTarget - this.projectedDonationSum();
 		return Math.round( remainingAmount / DONORS_NEEDED_ROUNDING ) * DONORS_NEEDED_ROUNDING;
 	}
 
 	private calculateProjection( base: number, increasePerMinute: number ): number {
-		if ( !this.timeRange.hasStarted() ) {
+		if ( !this._timeRange.hasStarted() ) {
 			return 0;
 		}
 
-		if ( this.timeRange.hasEnded() ) {
-			return base + this.timeRange.minutesBetweenStartAndEnd() * increasePerMinute;
+		if ( this._timeRange.hasEnded() ) {
+			return base + this._timeRange.minutesBetweenStartAndEnd() * increasePerMinute;
 		}
 
-		return base + this.timeRange.minutesSinceStart() * increasePerMinute;
+		return base + this._timeRange.minutesSinceStart() * increasePerMinute;
 	}
 }

@@ -1,30 +1,30 @@
 import { Skin } from '@src/page/skin/Skin';
 
 class Vector implements Skin {
-	private searchField: HTMLInputElement;
-	private editButtons: HTMLCollection;
-	private hideBannerCallback: () => void;
-	private readonly referencedHideBannerCallback: () => void;
+	private _searchField: HTMLInputElement;
+	private _editButtons: HTMLCollection;
+	private _hideBannerCallback: () => void;
+	private readonly _referencedHideBannerCallback: () => void;
 
 	public constructor() {
-		this.searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
-		this.editButtons = document.getElementsByClassName( 'mw-editsection-visualeditor' );
-		this.referencedHideBannerCallback = (): void => this.hideBannerCallback();
+		this._searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
+		this._editButtons = document.getElementsByClassName( 'mw-editsection-visualeditor' );
+		this._referencedHideBannerCallback = (): void => this._hideBannerCallback();
 
-		this.searchField.addEventListener( 'focus', this.referencedHideBannerCallback );
-		for ( let i = 0; i < this.editButtons.length; i++ ) {
-			this.editButtons[ i ].addEventListener( 'click', this.referencedHideBannerCallback );
+		this._searchField.addEventListener( 'focus', this._referencedHideBannerCallback );
+		for ( let i = 0; i < this._editButtons.length; i++ ) {
+			this._editButtons[ i ].addEventListener( 'click', this._referencedHideBannerCallback );
 		}
 	}
 
 	public addHideBannerListener( hideBannerListener: () => void ): void {
-		this.hideBannerCallback = hideBannerListener;
+		this._hideBannerCallback = hideBannerListener;
 	}
 
 	public removeEventListeners(): void {
-		this.searchField.removeEventListener( 'focus', this.referencedHideBannerCallback );
-		for ( let i = 0; i < this.editButtons.length; i++ ) {
-			this.editButtons[ i ].removeEventListener( 'click', this.referencedHideBannerCallback );
+		this._searchField.removeEventListener( 'focus', this._referencedHideBannerCallback );
+		for ( let i = 0; i < this._editButtons.length; i++ ) {
+			this._editButtons[ i ].removeEventListener( 'click', this._referencedHideBannerCallback );
 		}
 	}
 

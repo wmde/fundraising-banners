@@ -2,11 +2,11 @@ import { BannerState } from '@src/components/BannerConductor/StateMachine/states
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 export class InitialState extends BannerState {
-	// TODO: Make this private and add getter
-	public stateName: BannerStates = BannerStates.Initial;
+	public readonly stateName: BannerStates = BannerStates.Initial;
 
 	public constructor() {
 		super();
+
 		this.canMoveToStates.push( BannerStates.Pending );
 	}
 

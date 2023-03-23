@@ -1,27 +1,27 @@
 import { Skin } from '@src/page/skin/Skin';
 
 class Minerva implements Skin {
-	private searchField: HTMLInputElement;
-	private searchButton: HTMLButtonElement;
-	private hideBannerCallback: () => void;
-	private readonly referencedHideBannerCallback: () => void;
+	private _searchField: HTMLInputElement;
+	private _searchButton: HTMLButtonElement;
+	private _hideBannerCallback: () => void;
+	private readonly _referencedHideBannerCallback: () => void;
 
 	public constructor() {
-		this.referencedHideBannerCallback = (): void => this.hideBannerCallback();
+		this._referencedHideBannerCallback = (): void => this._hideBannerCallback();
 
-		this.searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
-		this.searchButton = document.getElementById( 'searchIcon' ) as HTMLButtonElement;
-		this.searchField.addEventListener( 'focus', this.referencedHideBannerCallback );
-		this.searchButton.addEventListener( 'click', this.referencedHideBannerCallback );
+		this._searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
+		this._searchButton = document.getElementById( 'searchIcon' ) as HTMLButtonElement;
+		this._searchField.addEventListener( 'focus', this._referencedHideBannerCallback );
+		this._searchButton.addEventListener( 'click', this._referencedHideBannerCallback );
 	}
 
 	public addHideBannerListener( hideBannerListener: () => void ): void {
-		this.hideBannerCallback = hideBannerListener;
+		this._hideBannerCallback = hideBannerListener;
 	}
 
 	public removeEventListeners(): void {
-		this.searchField.removeEventListener( 'focus', this.referencedHideBannerCallback );
-		this.searchButton.removeEventListener( 'click', this.referencedHideBannerCallback );
+		this._searchField.removeEventListener( 'focus', this._referencedHideBannerCallback );
+		this._searchButton.removeEventListener( 'click', this._referencedHideBannerCallback );
 	}
 
 	public minimumVisiblePageBeneathBanner(): number {

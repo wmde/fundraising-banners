@@ -19,16 +19,16 @@ const dayNameMessageKeys: { [ key: number ]: string } = {
 };
 
 export class DayName implements TextGenerator {
-	private readonly date: Date;
-	private readonly translator: Translator;
+	private readonly _date: Date;
+	private readonly _translator: Translator;
 
 	public constructor( date: Date, translator: Translator ) {
-		this.date = date;
-		this.translator = translator;
+		this._date = date;
+		this._translator = translator;
 	}
 
 	public getText(): string {
-		return this.translator.translate( this.getDayNameMessageKey( this.date ) );
+		return this._translator.translate( this.getDayNameMessageKey( this._date ) );
 	}
 
 	private getDayNameMessageKey( date: Date ): string {

@@ -3,17 +3,17 @@ import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 import { Translator } from '@src/Translator';
 
 export class CurrentDate implements TextGenerator {
-	private date: Date;
-	private readonly translator: Translator;
-	private ordinalFormatter: Ordinal;
+	private _date: Date;
+	private readonly _translator: Translator;
+	private _ordinalFormatter: Ordinal;
 
 	public constructor( date: Date, translator: Translator, ordinalFormatter: Ordinal ) {
-		this.date = date;
-		this.translator = translator;
-		this.ordinalFormatter = ordinalFormatter;
+		this._date = date;
+		this._translator = translator;
+		this._ordinalFormatter = ordinalFormatter;
 	}
 
 	public getText(): string {
-		return this.translator.translate( 'month-name-' + ( this.date.getMonth() + 1 ) ) + ' ' + this.ordinalFormatter.getFormatted( this.date.getDate() );
+		return this._translator.translate( 'month-name-' + ( this._date.getMonth() + 1 ) ) + ' ' + this._ordinalFormatter.getFormatted( this._date.getDate() );
 	}
 }

@@ -4,50 +4,50 @@ import { Translator } from '@src/Translator';
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 export class CampaignDaySentence implements TextGenerator {
-	private readonly campaignTimeRange: TimeRange;
-	private readonly translator: Translator;
-	private ordinal: Ordinal;
+	private _ordinal: Ordinal;
+	private readonly _translator: Translator;
+	private readonly _campaignTimeRange: TimeRange;
 	/**
 	 * We show a more urgent sounding message to donors when days
 	 * left in the campaign is below this threshold
 	 */
-	private readonly urgencyMessageDaysLeft: number;
+	private readonly _urgencyMessageDaysLeft: number = 10;
 
 	public constructor( campaignTimeRange: TimeRange, translator: Translator, ordinal: Ordinal, urgencyMessageDaysLeft: number = 10 ) {
-		this.campaignTimeRange = campaignTimeRange;
-		this.translator = translator;
-		this.ordinal = ordinal;
-		this.urgencyMessageDaysLeft = urgencyMessageDaysLeft;
+		this._campaignTimeRange = campaignTimeRange;
+		this._translator = translator;
+		this._ordinal = ordinal;
+		this._urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 	}
 
 	public getText(): string {
-		if ( !this.campaignTimeRange.hasStarted() ) {
-			return this.translator.translate( 'campaign-day-before-campaign' );
+		if ( !this._campaignTimeRange.hasStarted() ) {
+			return this._translator.translate( 'campaign-day-before-campaign' );
 		}
 
-		if ( this.campaignTimeRange.hasEnded() ) {
+		if ( this._campaignTimeRange.hasEnded() ) {
 			return '';
 		}
 
-		const daysUntilCampaignEnds = this.campaignTimeRange.numberOfDaysUntilEnd();
-		const daysSinceCampaignStart = this.campaignTimeRange.daysSinceStart();
+		const daysUntilCampaignEnds = this._campaignTimeRange.numberOfDaysUntilEnd();
+		const daysSinceCampaignStart = this._campaignTimeRange.daysSinceStart();
 
 		if ( daysUntilCampaignEnds === 1 ) {
-			return this.translator.translate( 'campaign-day-last-day' );
+			return this._translator.translate( 'campaign-day-last-day' );
 		} else if ( daysUntilCampaignEnds === 2 ) {
-			return this.translator.translate( 'campaign-day-second-last-day' );
-		} else if ( daysUntilCampaignEnds <= this.urgencyMessageDaysLeft ) {
-			return this.translator.translate( 'campaign-day-only-n-days', {
+			return this._translator.translate( 'campaign-day-second-last-day' );
+		} else if ( daysUntilCampaignEnds <= this._urgencyMessageDaysLeft ) {
+			return this._translator.translate( 'campaign-day-only-n-days', {
 				days: daysUntilCampaignEnds
 			} );
 		}
 
 		if ( daysSinceCampaignStart === 1 ) {
-			return this.translator.translate( 'campaign-day-first-day' );
+			return this._translator.translate( 'campaign-day-first-day' );
 		}
 
-		return this.translator.translate( 'campaign-day-nth-day', {
-			days: this.ordinal.getFormatted( daysSinceCampaignStart )
+		return this._translator.translate( 'campaign-day-nth-day', {
+			days: this._ordinal.getFormatted( daysSinceCampaignStart )
 		} );
 	}
 }

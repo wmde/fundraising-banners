@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-	"target": "es5",
-	"skipLibCheck": true,
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-	"baseUrl": ".",
-	"paths": {
-      "@src/*": ["src/*"],
-		"@test/*": ["test/*"]
-    },
-	  "lib": [
-		  "dom",
-		  "es5",
-		  "scripthost",
-		  "es2015.promise"
-	  ]
-  }
+	"compilerOptions": {
+		"target": "es5",
+		"skipLibCheck": true,
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": [ "src/*" ],
+			"@test/*": [ "test/*" ]
+		},
+		"lib": [
+			"dom",
+			"es5",
+			"scripthost",
+			"es2015.promise"
+		]
+	}
 }

@@ -6,26 +6,26 @@ import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerato
  * Return a sentence that describes how many days are left in the campaign.
  */
 export class DaysLeftSentence implements TextGenerator {
-	private readonly campaignDays: TimeRange;
-	private readonly translator: Translator;
+	private readonly _campaignDays: TimeRange;
+	private readonly _translator: Translator;
 
 	public constructor( campaignDays: TimeRange, translator: Translator ) {
-		this.campaignDays = campaignDays;
-		this.translator = translator;
+		this._campaignDays = campaignDays;
+		this._translator = translator;
 	}
 
 	public getText(): string {
-		const numberOfDaysUntilCampaignEnd = this.campaignDays.numberOfDaysUntilEnd();
-		return this.translator.translate( 'prefix-days-left' ) + ' ' +
+		const numberOfDaysUntilCampaignEnd = this._campaignDays.numberOfDaysUntilEnd();
+		return this._translator.translate( 'prefix-days-left' ) + ' ' +
 			numberOfDaysUntilCampaignEnd + ' ' +
 			this.getDayTranslation( numberOfDaysUntilCampaignEnd ) + ' ' +
-			this.translator.translate( 'suffix-days-left' );
+			this._translator.translate( 'suffix-days-left' );
 	}
 
 	private getDayTranslation( numberOfDaysUntilCampaignEnd: number ): string {
 		return numberOfDaysUntilCampaignEnd === 1 ?
-			this.translator.translate( 'day-singular' ) :
-			this.translator.translate( 'day-plural' );
+			this._translator.translate( 'day-singular' ) :
+			this._translator.translate( 'day-plural' );
 	}
 
 }

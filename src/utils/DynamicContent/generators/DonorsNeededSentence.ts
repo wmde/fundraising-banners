@@ -2,22 +2,22 @@ import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerato
 import { Translator } from '@src/Translator';
 
 export class DonorsNeededSentence implements TextGenerator {
-	private readonly donorsNeeded: number;
-	private readonly translator: Translator;
+	private readonly _translator: Translator;
+	private readonly _donorsNeeded: number;
 
 	public constructor( donorsNeeded: number, translator: Translator ) {
-		this.donorsNeeded = donorsNeeded;
-		this.translator = translator;
+		this._donorsNeeded = donorsNeeded;
+		this._translator = translator;
 	}
 
 	public getText(): string {
-		if ( this.donorsNeeded <= 0 ) {
+		if ( this._donorsNeeded <= 0 ) {
 			return '';
 		}
 
-		const donorsNeededRounded = this.donorsNeeded > 100 ? Math.round( this.donorsNeeded / 100 ) * 100 : this.donorsNeeded;
+		const donorsNeededRounded = this._donorsNeeded > 100 ? Math.round( this._donorsNeeded / 100 ) * 100 : this._donorsNeeded;
 
-		return this.translator.translate( 'remaining-donors-needed-sentence', {
+		return this._translator.translate( 'remaining-donors-needed-sentence', {
 			donorsNeeded: donorsNeededRounded
 		} );
 	}

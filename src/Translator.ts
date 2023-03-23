@@ -1,14 +1,14 @@
 export type TranslationMessages = Record<string, string>;
 
 export class Translator {
-	private readonly translations: TranslationMessages;
+	private readonly _translations: TranslationMessages;
 
 	public constructor( translations: TranslationMessages ) {
-		this.translations = translations;
+		this._translations = translations;
 	}
 
 	public translate( key: string, templateTags: Record<string, string | number> = {} ): string {
-		let message = this.translations[ key ] || key;
+		let message = this._translations[ key ] || key;
 		for ( const templateTag in templateTags ) {
 			message = message.replace( `{{${ templateTag }}}`, templateTags[ templateTag ].toString() );
 		}
