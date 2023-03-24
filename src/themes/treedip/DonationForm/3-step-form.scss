@@ -27,7 +27,7 @@
 		.wmde-banner-select-group-label {
 			white-space: normal;
 
-			&:before {
+			&::before {
 				top: 8px;
 			}
 		}
@@ -97,20 +97,20 @@
 			margin: 0 auto 8px;
 			max-width: 100px;
 
-			&:before {
+			&::before {
 				display: none;
 			}
 		}
 	}
 
-	.wmde-banner-form--is-step-2 {
+	.wmde-banner-form-is-step-2 {
 		.wmde-banner-form-step-1,
 		.wmde-banner-form-step-2,
 		.wmde-banner-form-step-3 {
 			transform: translate3d( -100%, 0, 0 );
 		}
 	}
-	.wmde-banner-form--is-step-3 {
+	.wmde-banner-form-is-step-3 {
 		.wmde-banner-form-step-1,
 		.wmde-banner-form-step-2,
 		.wmde-banner-form-step-3 {

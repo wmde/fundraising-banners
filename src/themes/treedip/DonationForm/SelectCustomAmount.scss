@@ -22,7 +22,7 @@
 			}
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
-			&:checked + .wmde-banner-select-custom-amount-input-container:before {
+			&:checked + .wmde-banner-select-custom-amount-input-container::before {
 				border: 6px solid $color-primary;
 				box-shadow: none;
 			}
@@ -49,7 +49,7 @@
 			height: 26px;
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
-			&:before {
+			&::before {
 				height: 16px;
 				width: 16px;
 				margin-top: -6px;

@@ -23,7 +23,7 @@
 			.wmde-banner-error-icon {
 				padding-left: 20px;
 
-				&:before {
+				&::before {
 					content: $error-icon;
 					width: 16px;
 					height: 16px;
@@ -43,6 +43,7 @@
 			@media ( min-width: $breakpoint-m ) {
 				height: 29px;
 			}
+
 			@media ( min-width: $breakpoint-l ) {
 				height: 25px;
 			}
@@ -54,7 +55,7 @@
 			font-size: 0.95em;
 
 			/* This creates the "radio button" shape */
-			&:before {
+			&::before {
 				height: 16px;
 				width: 16px;
 				margin-top: -5px;
@@ -75,7 +76,7 @@
 			}
 
 			/* This creates the "selected radio button" shape */
-			&:checked + .wmde-banner-select-group-label:before {
+			&:checked + .wmde-banner-select-group-label::before {
 				border: 6px solid $color-primary;
 				box-shadow: none;
 			}

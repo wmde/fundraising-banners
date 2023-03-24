@@ -71,6 +71,7 @@
 		&--late-progress {
 			height: 60px;
 			margin-top: 0;
+
 			@media ( min-width: $breakpoint-l ) {
 				margin-top: -30px;
 			}
