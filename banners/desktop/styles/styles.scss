@@ -2,7 +2,31 @@
 @use 'variables';
 @use 'src/components/BannerConductor/banner-transition';
 
-// TODO import theme files for this banner (including only the used components)
+/* THEME */
+
+@use '../../../src/themes/treedip/theme-variables';
+
+/*
+@use '../../../src/themes/treedip/animated-text-highlight';
+@use '../../../src/themes/treedip/ButtonClose/ButtonClose';
+@use '../../../src/themes/treedip/MultistepDonationForm/MultistepDonationForm';
+@use '../../../src/themes/treedip/MultistepDonationForm/UpgradeToYearly';
+@use '../../../src/themes/treedip/MultistepDonationForm/CustomAmount';
+@use '../../../src/themes/treedip/DonationForm/SelectGroup';
+@use '../../../src/themes/treedip/DonationForm/SelectCustomAmount';
+@use '../../../src/themes/treedip/DonationForm/SmsBox';
+
+ */
+@use '../../../src/themes/treedip/ProgressBar/ProgressBar';
+/*
+@use '../../../src/themes/treedip/Footer/FooterAlreadyDonated';
+@use '../../../src/themes/treedip/Footer/SelectionInput';
+@use '../../../src/themes/treedip/Message/Message';
+@use '../../../src/themes/treedip/Slider/Slider';
+@use '../../../src/themes/treedip/SoftClose/SoftClose';
+@use '../../../src/themes/treedip/AlreadyDonatedModal/AlreadyDonatedModal';
+
+ */
 
 .wmde-banner {
 	background: #ffffff;
