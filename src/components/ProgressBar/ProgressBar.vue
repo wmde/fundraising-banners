@@ -26,7 +26,7 @@ import { inject } from 'vue';
 
 interface Props {
 	isLateProgress?: boolean;
-	amountToShowOnRight: 'TOTAL'|'MISSING'
+	amountToShowOnRight: 'TARGET'|'MISSING'
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -36,7 +36,7 @@ const props = withDefaults( defineProps<Props>(), {
 const { daysLeftSentence, progressBarContent }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const leftText = props.isLateProgress ? daysLeftSentence : progressBarContent.amountDonated;
-const rightText = props.amountToShowOnRight === 'TOTAL' ? progressBarContent.donationTarget : progressBarContent.amountNeeded;
+const rightText = props.amountToShowOnRight === 'TARGET' ? progressBarContent.donationTarget : progressBarContent.amountNeeded;
 </script>
 
 <style lang="scss">
