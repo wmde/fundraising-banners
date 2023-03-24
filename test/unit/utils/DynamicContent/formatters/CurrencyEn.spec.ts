@@ -5,14 +5,14 @@ describe( 'CurrencyEn', () => {
 	const formatter = new CurrencyEn();
 
 	describe( '#millions', () => {
-		it( 'adds suffix and currency', () => {
-			expect( formatter.millions( 8 ) ).toBe( '€8.0M' );
+		it( 'creates a fractional amount and adds suffix and currency', () => {
+			expect( formatter.millions( 8_000_000 ) ).toBe( '€8.0M' );
 		} );
 
 		it( 'rounds numbers', () => {
-			expect( formatter.millions( 0.09 ) ).toBe( '€0.1M' );
-			expect( formatter.millions( 8.1 ) ).toBe( '€8.1M' );
-			expect( formatter.millions( 8.04 ) ).toBe( '€8.0M' );
+			expect( formatter.millions( 90_000 ) ).toBe( '€0.1M' );
+			expect( formatter.millions( 8_100_000 ) ).toBe( '€8.1M' );
+			expect( formatter.millions( 8_040_000 ) ).toBe( '€8.0M' );
 		} );
 	} );
 

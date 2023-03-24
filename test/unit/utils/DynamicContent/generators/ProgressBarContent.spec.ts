@@ -20,4 +20,12 @@ describe( 'ProgressBarContent', function () {
 	it( 'should return donation target sentence', function () {
 		expect( progressBarContent.donationTarget ).toBe( 'amount-total €9.0M' );
 	} );
+
+	it( 'should return formatted amount donated', function () {
+		expect( progressBarContent.amountDonated ).toBe( '€3.0M' );
+	} );
+
+	it( 'should return amount needed sentence', function () {
+		expect( progressBarContent.amountNeeded ).toBe( 'missing-amount €6.0M' );
+	} );
 } );
