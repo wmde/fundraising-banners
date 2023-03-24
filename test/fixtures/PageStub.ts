@@ -1,51 +1,78 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import { CampaignParameters } from '@src/CampaignParameters';
+import { TrackingParameters } from '@src/TrackingParameters';
 
 export class PageStub implements Page {
-	getBannerContainer(): string {
+	public getBannerContainer(): string {
 		return '';
 	}
 
-	getReasonToNotShowBanner(): BannerNotShownReasons|null {
+	public getReasonToNotShowBanner(): BannerNotShownReasons|null {
 		return null;
 	}
 
-	preventImpressionCountForHiddenBanner(): Page {
+	public preventImpressionCountForHiddenBanner(): Page {
 		return this;
 	}
 
-	onPageEventThatShouldHideBanner(): void {
+	public onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): Page {
+	public removePageEventListeners(): Page {
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		return this;
 	}
 
-	setSpace(): Page {
+	public setSpace(): Page {
 		return this;
 	}
 
-	setTransitionDuration(): Page {
+	public setTransitionDuration(): Page {
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		return this;
 	}
 
-	setCloseCookieIfNecessary(): Page {
+	public setCloseCookieIfNecessary(): Page {
 		return this;
 	}
 
-	trackEvent(): void {
+	public trackEvent(): void {
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		return {
+			campaignProjection: {
+				averageAmountPerDonation: 0,
+				updatedAt: '',
+				donationSumBase: 0,
+				donationAmountPerMinute: 0,
+				donationCountBase: 0,
+				donationCountPerMinute: 0,
+				donationTarget: 0
+			},
+			endDate: '',
+			millionImpressionsPerDay: 0,
+			numberOfMembers: 0,
+			startDate: ''
+		};
+	}
+
+	public getTracking(): TrackingParameters {
+		return {
+			campaign: 'funny-campaign',
+			keyword: 'tracking-keyword-ctrl'
+		};
 	}
 
 }

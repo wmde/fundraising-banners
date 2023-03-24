@@ -7,15 +7,15 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 	 * This is for adding or removing space from the banner dimensions to allow individual
 	 * banners to adjust the parameters of when they are shown
 	 */
-	manualSpaceAdjustment: Vector2;
+	private _manualSpaceAdjustment: Vector2 = Vector2.zero;
 
-	constructor( manualSpaceAdjustment: Vector2 = null ) {
-		this.manualSpaceAdjustment = manualSpaceAdjustment ?? Vector2.zero;
+	public constructor( manualSpaceAdjustment: Vector2 = Vector2.zero ) {
+		this._manualSpaceAdjustment = manualSpaceAdjustment;
 	}
 
 	public hasSizeIssues( bannerDimensions: Vector2, skinSpaceAdjustment: Vector2 ): boolean {
 		const allowedBannerDimensions = bannerDimensions
-			.add( this.manualSpaceAdjustment )
+			.add( this._manualSpaceAdjustment )
 			.add( skinSpaceAdjustment );
 
 		return window.innerWidth < allowedBannerDimensions.x ||

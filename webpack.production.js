@@ -7,6 +7,7 @@ const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
 const LoadVueOnWpde = require( './webpack/load_vue_on_wpde' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
+const path = require( 'path' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 function readWrapperTemplate( name ) {
@@ -34,12 +35,17 @@ module.exports = ( env ) => {
 		{
 			devtool: false,
 			mode: 'production',
+			resolve: {
+				alias: {
+					'@environment': path.resolve( __dirname, 'src/environment/prod' )
+				}
+			},
 			plugins: [
 				new MediaWikiTextWrapper( {
 					templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 					context: {
 						bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
-						bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2022}}'
+						bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2023}}'
 					},
 					filePattern: '{B,WMDE}*.js',
 					campaignConfig: campaigns.getConfigForPages()

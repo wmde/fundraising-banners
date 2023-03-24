@@ -6,14 +6,14 @@ import { Skin } from '@src/page/skin/Skin';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 
 export class SkinFactory {
-	private mediaWiki: MediaWiki;
+	private _mediaWiki: MediaWiki;
 
-	constructor( mediaWiki: MediaWiki ) {
-		this.mediaWiki = mediaWiki;
+	public constructor( mediaWiki: MediaWiki ) {
+		this._mediaWiki = mediaWiki;
 	}
 
-	getSkin(): Skin {
-		switch ( this.mediaWiki.getConfigItem( 'skin' ) ) {
+	public getSkin(): Skin {
+		switch ( this._mediaWiki.getConfigItem( 'skin' ) ) {
 			case 'minerva':
 				return new Minerva();
 			case 'monobook':

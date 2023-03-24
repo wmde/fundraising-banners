@@ -7,36 +7,36 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 
 export class ClosedState extends BannerState {
-	stateName: BannerStates = BannerStates.Closed;
-	private page: Page;
-	private source: CloseSources;
-	private tracker: Tracker;
-	private resizeHandler: ResizeHandler;
+	public readonly stateName: BannerStates = BannerStates.Closed;
+	private readonly _source: CloseSources;
+	private _page: Page;
+	private _tracker: Tracker;
+	private _resizeHandler: ResizeHandler;
 
-	constructor( source: CloseSources, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor( source: CloseSources, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
 		super();
-		this.page = page;
-		this.source = source;
-		this.tracker = tracker;
-		this.resizeHandler = resizeHandler;
+		this._source = source;
+		this._page = page;
+		this._tracker = tracker;
+		this._resizeHandler = resizeHandler;
 	}
 
-	enter(): Promise<any> {
-		this.tracker.trackEvent( new CloseEvent( this.source ) );
-		this.page
+	public enter(): Promise<any> {
+		this._tracker.trackEvent( new CloseEvent( this._source ) );
+		this._page
 			.unsetAnimated()
 			.setSpace( 0 )
-			.setCloseCookieIfNecessary( this.source )
+			.setCloseCookieIfNecessary( this._source )
 			.removePageEventListeners();
-		this.resizeHandler.onClose();
+		this._resizeHandler.onClose();
 		return Promise.resolve();
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve();
 	}
 
-	onResize(): void {
+	public onResize(): void {
 	}
 
 }

@@ -1,56 +1,80 @@
 import { Page } from '@src/page/Page';
-import WPDE from '@src/page/skin/WPDE';
-import { Skin } from '@src/page/skin/Skin';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
+import { CampaignParameters } from '@src/CampaignParameters';
+import { TrackingParameters } from '@src/TrackingParameters';
+import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
+
+export interface WpdeWindow extends Window {
+	campaignParameters: CampaignParameters;
+	CampaignName: string,
+	BannerName: string
+}
+
+declare let window: WpdeWindow;
 
 class PageDe implements Page {
-	skin: Skin = new WPDE();
 
-	getBannerContainer() {
+	public getBannerContainer(): string {
 		return '#WMDE-Banner-Container';
 	}
 
-	shouldShowBanner(): boolean {
+	public shouldShowBanner(): boolean {
 		return true;
 	}
 
-	trackEvent(): void {
+	public trackEvent(): void {
 	}
 
-	trackSizeIssue(): void {
+	public trackSizeIssue(): void {
 	}
 
-	onPageEventThatShouldHideBanner(): void {
+	public onPageEventThatShouldHideBanner(): void {
 	}
 
-	removePageEventListeners(): Page {
+	public removePageEventListeners(): Page {
 		return this;
 	}
 
-	setSpace(): Page {
+	public setSpace(): Page {
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		return this;
 	}
 
-	setTransitionDuration(): Page {
+	public setTransitionDuration(): Page {
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		return this;
 	}
 
-	getReasonToNotShowBanner: () => BannerNotShownReasons;
-	preventImpressionCountForHiddenBanner: () => Page;
-	setCloseCookieIfNecessary() {
+	public getReasonToNotShowBanner: () => BannerNotShownReasons;
+	public preventImpressionCountForHiddenBanner: () => Page;
+	public setCloseCookieIfNecessary(): Page {
+		// our WPDE banner server does not have the "close cookie" feature
 		return this;
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		if ( !window.campaignParameters ) {
+			throw new Error( 'Campaign parameters are not set globally' );
+		}
+
+		return getCampaignParameterOverride( window.campaignParameters );
+	}
+
+	public getTracking(): TrackingParameters {
+		if ( !window.CampaignName || !window.BannerName ) {
+			throw new Error( 'Campaign tracking elements not found in global namespace!' );
+		}
+		return { campaign: window.CampaignName, keyword: window.BannerName };
 	}
 }
 

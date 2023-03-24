@@ -7,42 +7,46 @@ import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { Vector2 } from '@src/utils/Vector2';
+import { CampaignParameters } from '@src/CampaignParameters';
+import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
+import { TrackingParameters } from '@src/TrackingParameters';
 
-export const bannerContainerId = 'wmde-banner-app';
+export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
 export const showBannerClass = 'wmde-show-banner';
 export const bannerHeightCssVariable = '--wmde-banner-height';
 export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
+const centralNoticeBannerContainerId = 'WMDE-Banner-Container';
+const campaignParametersId = 'wmde-campaign-parameters';
 
 class PageOrg implements Page {
+	private _mediaWiki: MediaWiki;
+	private _skin: Skin;
+	private _sizeIssueChecker: SizeIssueChecker;
 
-	private mediaWiki: MediaWiki;
-	private skin: Skin;
-	private sizeIssueChecker: SizeIssueChecker;
-
-	constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
-		this.mediaWiki = mediaWiki;
-		this.skin = skin;
-		this.sizeIssueChecker = sizeIssueChecker;
+	public constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
+		this._sizeIssueChecker = sizeIssueChecker;
+		this._skin = skin;
+		this._mediaWiki = mediaWiki;
 	}
 
-	getBannerContainer(): string {
+	public getBannerContainer(): string {
 		const mountPoint = document.createElement( 'div' );
-		mountPoint.id = bannerContainerId;
+		mountPoint.id = bannerAppId;
 		document.body.prepend( mountPoint );
-		return '#' + bannerContainerId;
+		return '#' + bannerAppId;
 	}
 
-	getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
-		if ( !this.mediaWiki.isShowingContentPage() ) {
+	public getReasonToNotShowBanner( bannerDimensions: Vector2 ): BannerNotShownReasons {
+		if ( !this._mediaWiki.isShowingContentPage() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
 
-		if ( this.mediaWiki.isContentHiddenByLightbox() ) {
+		if ( this._mediaWiki.isContentHiddenByLightbox() ) {
 			return BannerNotShownReasons.UserInteraction;
 		}
 
-		if ( !this.mediaWiki.isInArticleNamespace() ) {
+		if ( !this._mediaWiki.isInArticleNamespace() ) {
 			return BannerNotShownReasons.DisallowedNamespace;
 		}
 
@@ -54,11 +58,11 @@ class PageOrg implements Page {
 	}
 
 	private hasSizeIssues( bannerDimensions: Vector2 ): boolean {
-		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this.skin.minimumVisiblePageBeneathBanner() );
-		return this.sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
+		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this._skin.minimumVisiblePageBeneathBanner() );
+		return this._sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
 	}
 
-	trackEvent( trackingData: EventData ): void {
+	public trackEvent( trackingData: EventData ): void {
 		const bannerEvent: BannerEvent = {
 			bannerAction: trackingData.eventName,
 			bannerName: '',
@@ -66,62 +70,62 @@ class PageOrg implements Page {
 			finalSlide: 0,
 			slidesShown: 0
 		};
-		this.mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
-		// this.mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
+		this._mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
+		// this._mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 
-	onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
-		this.skin.addHideBannerListener( hideBannerListener );
+	public onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
+		this._skin.addHideBannerListener( hideBannerListener );
 	}
 
-	removePageEventListeners(): Page {
-		this.skin.removeEventListeners();
+	public removePageEventListeners(): Page {
+		this._skin.removeEventListeners();
 		return this;
 	}
 
-	setSpace( space: number ): Page {
+	public setSpace( space: number ): Page {
 		document.body.style.setProperty( bannerHeightCssVariable, `${space}px` );
 		return this;
 	}
 
-	setAnimated(): Page {
+	public setAnimated(): Page {
 		document.body.classList.add( bannerAnimatedClass );
 		return this;
 	}
 
-	unsetAnimated(): Page {
+	public unsetAnimated(): Page {
 		document.body.classList.remove( bannerAnimatedClass );
 		return this;
 	}
 
-	setTransitionDuration( duration: number ): Page {
+	public setTransitionDuration( duration: number ): Page {
 		document.body.style.setProperty( bannerTransitionDurationCssVariable, `${duration}ms` );
 		return this;
 	}
 
-	showBanner(): Page {
+	public showBanner(): Page {
 		document.body.classList.add( showBannerClass );
 		return this;
 	}
 
-	preventImpressionCountForHiddenBanner(): Page {
-		this.mediaWiki.setBannerLoadedButHidden();
+	public preventImpressionCountForHiddenBanner(): Page {
+		this._mediaWiki.setBannerLoadedButHidden();
 		return this;
 	}
 
-	setCloseCookieIfNecessary( source: CloseSources ): Page {
+	public setCloseCookieIfNecessary( source: CloseSources ): Page {
 		switch ( source ) {
 			case CloseSources.AlreadyDonated:
-				this.mediaWiki.preventBannerDisplayUntilEndOfCampaign();
+				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
 				break;
 			case CloseSources.SoftCloseBannerRejected:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.MainBanner:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.MiniBanner:
-				this.mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod();
 				break;
 			case CloseSources.FollowUpBanner:
 				break;
@@ -129,6 +133,44 @@ class PageOrg implements Page {
 			// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
 		return this;
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		const element = document.getElementById( campaignParametersId );
+		if ( !element ) {
+			throw new Error( 'Campaign data element not found' );
+		}
+		const data = element.dataset;
+
+		const campaignParameters = {
+			campaignProjection: {
+				donationTarget: Number( data.donationTarget ),
+				updatedAt: data.updatedAt,
+				donationSumBase: Number( data.donationSumBase ),
+				donationCountBase: Number( data.donationCountBase ),
+				donationAmountPerMinute: Number( data.donationAmountPerMinute ),
+				donationCountPerMinute: Number( data.donationCountPerMinute ),
+				averageAmountPerDonation: Number( data.averageAmountPerDonation )
+			},
+			millionImpressionsPerDay: Number( data.millionImpressionsPerDay ),
+			startDate: data.startDate,
+			endDate: data.endDate,
+			numberOfMembers: Number( data.numberOfMembers )
+		};
+
+		return getCampaignParameterOverride( campaignParameters );
+	}
+
+	public getTracking(): TrackingParameters {
+
+		const element = document.getElementById( centralNoticeBannerContainerId );
+		if ( !element ) {
+			throw new Error( 'Banner container element not found' );
+		}
+		return {
+			campaign: element.dataset.campaignTracking,
+			keyword: element.dataset.tracking
+		};
 	}
 }
 

@@ -7,34 +7,34 @@ import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 
 export class NotShownState extends BannerState {
-	stateName: BannerStates = BannerStates.NotShown;
-	private readonly bannerNotShownReason: BannerNotShownReasons;
-	private page: Page;
-	private tracker: Tracker;
-	private resizeHandler: ResizeHandler;
+	public readonly stateName: BannerStates = BannerStates.NotShown;
+	private readonly _bannerNotShownReason: BannerNotShownReasons;
+	private _page: Page;
+	private _tracker: Tracker;
+	private _resizeHandler: ResizeHandler;
 
-	constructor( bannerNotShownReason: BannerNotShownReasons, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor( bannerNotShownReason: BannerNotShownReasons, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
 		super();
-		this.bannerNotShownReason = bannerNotShownReason;
-		this.page = page;
-		this.tracker = tracker;
-		this.resizeHandler = resizeHandler;
+		this._bannerNotShownReason = bannerNotShownReason;
+		this._page = page;
+		this._tracker = tracker;
+		this._resizeHandler = resizeHandler;
 	}
 
-	enter(): Promise<any> {
-		this.tracker.trackEvent( new NotShownEvent( this.bannerNotShownReason ) );
-		this.page
+	public enter(): Promise<any> {
+		this._tracker.trackEvent( new NotShownEvent( this._bannerNotShownReason ) );
+		this._page
 			.preventImpressionCountForHiddenBanner()
 			.removePageEventListeners();
-		this.resizeHandler.onClose();
+		this._resizeHandler.onClose();
 		return Promise.resolve( true );
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve( true );
 	}
 
-	onResize(): void {
+	public onResize(): void {
 		// Do nothing
 	}
 }

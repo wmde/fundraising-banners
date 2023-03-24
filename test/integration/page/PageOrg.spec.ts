@@ -1,11 +1,12 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
-import PageOrg, { bannerContainerId } from '@src/page/PageOrg';
+import PageOrg, { bannerAppId } from '@src/page/PageOrg';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
+import { JSDOM } from 'jsdom';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -78,8 +79,8 @@ describe( 'PageOrg', function () {
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 		const id = page.getBannerContainer();
 
-		expect( id ).toBe( '#' + bannerContainerId );
-		expect( document.body.innerHTML ).toBe( `<div id="${ bannerContainerId }"></div>` );
+		expect( id ).toBe( '#' + bannerAppId );
+		expect( document.body.innerHTML ).toBe( `<div id="${ bannerAppId }"></div>` );
 	} );
 
 	it( 'stores close cookie for already donated close events', () => {
@@ -112,6 +113,43 @@ describe( 'PageOrg', function () {
 		page.setCloseCookieIfNecessary( CloseSources.MiniBanner );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'returns campaign parameters', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p id="wmde-campaign-parameters" data-start-date="2084-12-12">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		const retrievedCampaignParameters = page.getCampaignParameters();
+
+		expect( retrievedCampaignParameters.startDate ).toBe( '2084-12-12' );
+	} );
+
+	it( 'throws error if campaign parameters element not found', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p data-start-date="2084-12-12">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign data element not found' );
+	} );
+
+	it( 'returns banner tracking keyword and campaign', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl" data-campaign-tracking="a-campaign">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		const retrievedTrackingKeyword = page.getTracking();
+
+		expect( retrievedTrackingKeyword.keyword ).toBe( 'org-00-2023-blabla-ctrl' );
+		expect( retrievedTrackingKeyword.campaign ).toBe( 'a-campaign' );
+	} );
+
+	it( 'throws error if banner tracking can not be retrieved', () => {
+		const dom = new JSDOM( `<!DOCTYPE html><p data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
+		vitest.stubGlobal( 'document', dom.window.document );
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
 	} );
 
 	it.todo( 'sends event tracking data in trackEvent()' );

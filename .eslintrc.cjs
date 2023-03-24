@@ -6,7 +6,8 @@ module.exports = {
 		'@vue/eslint-config-typescript'
 	],
 	'parserOptions': {
-		ecmaVersion: 'latest'
+		ecmaVersion: 'latest',
+		parser: '@typescript-eslint/parser'
 	},
 	'root': true,
 	'env': {
@@ -43,10 +44,55 @@ module.exports = {
 			style: { lang: 'scss' }
 		} ],
 
-		'@typescript-eslint/type-annotation-spacing': 'error',
-
 		// Workaround for Typescript enums, see https://github.com/typescript-eslint/typescript-eslint/issues/2483
 		'no-shadow': 'off',
-		'@typescript-eslint/no-shadow': [ 'error' ]
-	}
+		'@typescript-eslint/no-shadow': [ 'error' ],
+
+		'@typescript-eslint/type-annotation-spacing': 'error',
+		'@typescript-eslint/explicit-function-return-type': 'off',
+		'@typescript-eslint/explicit-member-accessibility': 'off',
+
+		// This forces private properties to be prefixed with an underscore
+		'no-underscore-dangle': [
+			'error',
+			{
+				allowAfterThis: true
+			}
+		],
+		'@typescript-eslint/naming-convention': [
+			'error',
+			{
+				selector: 'classProperty',
+				modifiers: [ 'private' ],
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'require'
+			},
+			{
+				selector: 'classProperty',
+				modifiers: [ 'public' ],
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			},
+			{
+				selector: 'parameterProperty',
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			},
+			{
+				selector: 'parameter',
+				format: [ 'camelCase' ],
+				leadingUnderscore: 'forbid'
+			}
+		]
+	},
+	'overrides': [
+		{
+			// enable the rule specifically for TypeScript files
+			files: [ '*.ts', '*.mts', '*.cts', '*.tsx', '*.vue' ],
+			rules: {
+				'@typescript-eslint/explicit-function-return-type': 'error',
+				'@typescript-eslint/explicit-member-accessibility': 'error'
+			}
+		}
+	]
 };

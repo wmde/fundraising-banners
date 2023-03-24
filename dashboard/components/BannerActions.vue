@@ -72,7 +72,7 @@ const isCompiled: boolean = !!props.compileInfo;
 let isCompiling: Ref<boolean> = ref( false );
 let isCopying: Ref<boolean> = ref( false );
 
-function onCompileBanner( e: Event ) {
+function onCompileBanner( e: Event ): void {
 	e.preventDefault();
 	isCompiling.value = true;
 	fetch( `/compile-banner/${ bannerPageName.value }` ).then( async response => {
@@ -85,7 +85,7 @@ function onCompileBanner( e: Event ) {
 	} );
 }
 
-function bannerCopyHandler( e: Event ) {
+function bannerCopyHandler( e: Event ): void {
 	e.preventDefault();
 	const bannerFileName = `/compiled-banners/${ bannerPageName.value }.js.wikitext`;
 	isCopying.value = true;
@@ -103,7 +103,7 @@ function bannerCopyHandler( e: Event ) {
 		await navigator.clipboard.writeText( bannerCode );
 	} );
 }
-let onCopyBannerToClipBoard = ( e: Event ) => e.preventDefault();
+let onCopyBannerToClipBoard = ( e: Event ): void => e.preventDefault();
 let bannerCopyTooltip = 'Banner not compiled';
 
 if ( !props.isWPDE ) {

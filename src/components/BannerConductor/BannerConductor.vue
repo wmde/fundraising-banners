@@ -20,13 +20,15 @@ import { ClosedState } from '@src/components/BannerConductor/StateMachine/states
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
+import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 interface Props {
 	page: Page,
 	bannerConfig: BannerConfig,
 	resizeHandler: ResizeHandler,
 	banner: Object,
-	bannerProps: Object
+	bannerProps: Object,
+	impressionCount: ImpressionCount
 }
 
 const props = defineProps<Props>();
@@ -42,14 +44,14 @@ onMounted( async () => {
 		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page, props.resizeHandler ) );
 	} else {
 		await stateMachine.changeState( new ShowingState( props.page, props.bannerConfig.transitionDuration ) );
-		await stateMachine.changeState( new VisibleState( props.page ) );
+		await stateMachine.changeState( new VisibleState( props.page, props.impressionCount ) );
 	}
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page, props.resizeHandler ) ) );
 
-async function onCloseHandler( source: CloseSources ) {
+async function onCloseHandler( source: CloseSources ): Promise<any> {
 	await stateMachine.changeState( new ClosedState( source, props.page, props.page, props.resizeHandler ) );
 }
 

@@ -22,7 +22,7 @@ function getTrackingForPage( pageName: string, config: CampaignConfig ): { campa
 
 }
 
-function injectTracking() {
+function injectTracking(): void {
 	const currentUrl = new URL( window.location.href );
 	const currentBanner = currentUrl.searchParams.get( 'devbanner' );
 	const { campaign, keyword } = getTrackingForPage( currentBanner, CAMPAIGNS );

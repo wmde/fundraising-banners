@@ -1,28 +1,33 @@
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
+import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class VisibleState extends BannerState {
-	stateName: BannerStates = BannerStates.Visible;
-	private page: Page;
+	public readonly stateName: BannerStates = BannerStates.Visible;
+	private _page: Page;
+	private _impressionCount: ImpressionCount;
 
-	constructor( page: Page ) {
+	public constructor( page: Page, impressionCount: ImpressionCount ) {
 		super();
-		this.page = page;
+		this._page = page;
+		this._impressionCount = impressionCount;
+
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
-	enter(): Promise<any> {
-		// Fire shown events here
+	public enter(): Promise<any> {
+		// TODO Fire shown events here
+		this._impressionCount.incrementImpressionCounts();
 		return Promise.resolve();
 	}
 
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve();
 	}
 
-	onResize( space: number ): void {
-		this.page.unsetAnimated().setSpace( space );
+	public onResize( space: number ): void {
+		this._page.unsetAnimated().setSpace( space );
 	}
 
 }

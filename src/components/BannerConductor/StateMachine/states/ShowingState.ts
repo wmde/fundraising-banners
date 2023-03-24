@@ -3,36 +3,36 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 
 export class ShowingState extends BannerState {
+	public readonly stateName: BannerStates = BannerStates.Showing;
+	private _timer: ReturnType<typeof setTimeout>;
+	private _page: Page;
+	private readonly _transitionDuration: number;
 
-	stateName: BannerStates = BannerStates.Showing;
-	private page: Page;
-	private readonly transitionDuration: number;
-	private timer: ReturnType<typeof setTimeout>;
-
-	constructor( page: Page, transitionDuration: number ) {
+	public constructor( page: Page, transitionDuration: number ) {
 		super();
-		this.page = page;
-		this.transitionDuration = transitionDuration;
+		this._page = page;
+		this._transitionDuration = transitionDuration;
+
 		this.canMoveToStates.push( BannerStates.Visible );
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
-	enter(): Promise<any> {
-		this.page.setAnimated()
-			.setTransitionDuration( this.transitionDuration )
+	public enter(): Promise<any> {
+		this._page.setAnimated()
+			.setTransitionDuration( this._transitionDuration )
 			.showBanner();
 
 		return new Promise( ( resolve ) => {
-			this.timer = setTimeout( () => resolve( true ), this.transitionDuration );
+			this._timer = setTimeout( () => resolve( true ), this._transitionDuration );
 		} );
 	}
 
-	exit(): Promise<any> {
-		clearTimeout( this.timer );
+	public exit(): Promise<any> {
+		clearTimeout( this._timer );
 		return Promise.resolve();
 	}
 
-	onResize( space: number ): void {
-		this.page.unsetAnimated().setSpace( space );
+	public onResize( space: number ): void {
+		this._page.unsetAnimated().setSpace( space );
 	}
 }

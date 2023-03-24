@@ -35,6 +35,11 @@ module.exports = () => Promise.all( [
 			// eslint-disable-next-line camelcase
 			inject_tracking: './dashboard/inject_tracking.ts'
 		},
+		resolve: {
+			alias: {
+				'@environment': path.resolve( __dirname, 'src/environment/dev/' )
+			}
+		},
 		plugins: [
 			new webpack.DefinePlugin( {
 				CAMPAIGNS: JSON.stringify( campaignInfoToCampaignConfig( campaignConfig ) ),

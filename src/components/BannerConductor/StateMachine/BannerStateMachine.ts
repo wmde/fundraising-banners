@@ -1,16 +1,16 @@
 import { StateMachine } from '@src/utils/StateMachine/StateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { Ref } from 'vue';
+import { ReactiveProperty } from '@src/utils/ReactiveProperty';
 
 export class BannerStateMachine implements StateMachine<BannerState> {
-	public currentState: Ref<BannerState>;
+	public currentState: ReactiveProperty<BannerState>;
 
-	constructor( stateRef: Ref<BannerState> ) {
+	public constructor( stateRef: ReactiveProperty<BannerState> ) {
 		this.currentState = stateRef;
 		this.currentState.value.enter( null ).then( ()=>{} );
 	}
 
-	async changeState( state: BannerState ): Promise<any> {
+	public async changeState( state: BannerState ): Promise<any> {
 
 		if ( this.currentState.value === null ) {
 			throw new Error( 'State machine must be started with an initial state' );

@@ -2,21 +2,22 @@ import { BannerState } from '@src/components/BannerConductor/StateMachine/states
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 export class InitialState extends BannerState {
-	stateName: BannerStates = BannerStates.Initial;
+	public readonly stateName: BannerStates = BannerStates.Initial;
 
-	constructor() {
+	public constructor() {
 		super();
+
 		this.canMoveToStates.push( BannerStates.Pending );
 	}
 
-	enter(): Promise<any> {
+	public enter(): Promise<any> {
 		return Promise.resolve( true );
 	}
-	exit(): Promise<any> {
+	public exit(): Promise<any> {
 		return Promise.resolve( true );
 	}
 
-	onResize(): void {
+	public onResize(): void {
 
 	}
 

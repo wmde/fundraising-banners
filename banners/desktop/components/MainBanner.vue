@@ -1,7 +1,8 @@
 <template>
 	<div class="wmde-banner-main">
 		<ButtonClose @click.prevent="onClose"/>
-		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{planet}} {{ bannerState }}</span></div>
+		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{ $translate('no-interval-message')}} {{ bannerState }}</span></div>
+		<BannerText />
 		<div class="tmp-progress-bar">
 			<div class="tmp-progress-bar-inner"></div>
 		</div>
@@ -9,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
+import BannerText from './BannerText.vue';
 
 interface Props {
 	greeting?: string,
@@ -25,11 +26,10 @@ withDefaults( defineProps<Props>(), {
 
 const emit = defineEmits( [ 'banner-closed' ] );
 
-function onClose() {
+function onClose(): void {
 	emit( 'banner-closed', CloseSources.MainBanner );
 }
 
-const planet = ref<string>( 'World' );
 </script>
 
 <style lang="scss">
