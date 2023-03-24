@@ -3,7 +3,7 @@
 		<ButtonClose @click.prevent="onClose"/>
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{ $translate('no-interval-message')}} {{ bannerState }}</span></div>
 		<BannerText />
-		<ProgressBar amount-to-show-on-right="TOTAL"/>
+		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</div>
 </template>
 
