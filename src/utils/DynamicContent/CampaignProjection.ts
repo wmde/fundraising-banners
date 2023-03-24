@@ -18,6 +18,10 @@ export class CampaignProjection {
 		this._timeRange = timeRange;
 	}
 
+	/**
+	 * The current number of individual donations that have been made this campaign
+	 * AKA number of donors
+	 */
 	public projectedDonationCount(): number {
 		return this.calculateProjection(
 			this._campaignProjectionParameters.donationCountBase,
@@ -25,10 +29,17 @@ export class CampaignProjection {
 		);
 	}
 
+	/**
+	 * The remaining number of individual donations that need to happen to reach the donation target
+	 * AKA remaining number of donors
+	 */
 	public remainingNumberOfDonationsNeeded(): number {
 		return Math.round( this.projectedRemainingDonationSum() / this._campaignProjectionParameters.averageAmountPerDonation );
 	}
 
+	/**
+	 * The current amount of euros donated to this campaign
+	 */
 	public projectedDonationSum(): number {
 		return this.calculateProjection(
 			this._campaignProjectionParameters.donationSumBase,
@@ -36,7 +47,14 @@ export class CampaignProjection {
 		);
 	}
 
-	private projectedRemainingDonationSum(): number {
+	public projectedPercentageTowardsTarget(): number {
+		return Math.min( ( this.projectedDonationSum() * 100 ) / this._campaignProjectionParameters.donationTarget, 100 );
+	}
+
+	/**
+	 * The current amount of euros left to be donated to this campaign in order to reach the target
+	 */
+	public projectedRemainingDonationSum(): number {
 		const remainingAmount = this._campaignProjectionParameters.donationTarget - this.projectedDonationSum();
 		return Math.round( remainingAmount / DONORS_NEEDED_ROUNDING ) * DONORS_NEEDED_ROUNDING;
 	}

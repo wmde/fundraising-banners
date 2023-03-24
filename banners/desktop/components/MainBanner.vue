@@ -3,9 +3,7 @@
 		<ButtonClose @click.prevent="onClose"/>
 		<div>WMDE Banner with a message: <span class="wmde-banner-greeting"> {{greeting}} {{ $translate('no-interval-message')}} {{ bannerState }}</span></div>
 		<BannerText />
-		<div class="tmp-progress-bar">
-			<div class="tmp-progress-bar-inner"></div>
-		</div>
+		<ProgressBar amount-to-show-on-right="TOTAL"/>
 	</div>
 </template>
 
@@ -14,6 +12,7 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import BannerText from './BannerText.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 interface Props {
 	greeting?: string,
@@ -42,7 +41,7 @@ function onClose(): void {
 	color: #008000ff;
 }
 
-.tmp-progress-bar {
+.wmde-banner-progress-bar {
 	height: 20px;
 	width: 100%;
 	position: relative;
@@ -50,18 +49,29 @@ function onClose(): void {
 	border: 2px solid #ff7863;
 	background: #ffffff;
 
-	&-inner {
+	&-fill {
 		width: 0;
 		height: 20px;
 		min-width: 30px;
 		background: #ff7863;
 		transition: width 5s ease-in-out;
 	}
+
+	&-text,
+	&-fill-text {
+		opacity: 0;
+		transition: opacity 1s ease-in-out;
+		transition-delay: 5s;
+	}
 }
 
 .wmde-banner-visible {
-	.tmp-progress-bar-inner {
-		width: 100%;
+	.wmde-banner-progress-bar-fill {
+		width: var( --wmde-banner-progress-bar-width );
+	}
+	.wmde-banner-progress-bar-text,
+	.wmde-banner-progress-bar-fill-text {
+		opacity: 1;
 	}
 }
 

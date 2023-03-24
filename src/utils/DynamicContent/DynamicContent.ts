@@ -1,3 +1,5 @@
+import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
+
 export interface DynamicContent {
 	currentDayName: string;
 	currentDate: string;
@@ -7,4 +9,5 @@ export interface DynamicContent {
 	donorsNeededSentence: string;
 	goalDonationSum: string;
 	overallImpressionCount: number;
+	progressBarContent: ProgressBarContent;
 }
