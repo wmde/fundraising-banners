@@ -17,7 +17,7 @@
 @use '../../../src/themes/treedip/DonationForm/SmsBox';
 
  */
-@use '../../../src/themes/treedip/ProgressBar/ProgressBar';
+@use '../../../src/themes/treedip/ProgressBar/ProgressBar' with ($progress-bar-height: 30px);
 
 /*
 @use '../../../src/themes/treedip/Footer/FooterAlreadyDonated';

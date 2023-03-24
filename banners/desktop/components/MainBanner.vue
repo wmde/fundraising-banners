@@ -33,36 +33,12 @@ function onClose(): void {
 
 <style lang="scss">
 /* Import theme */
-@import '../styles/styles';
+@use '../styles/styles';
 
 /* All layout styles defined in this component will be overridden by the imported theme file */
 .wmde-banner-main {
 	position: relative;
 	color: #008000ff;
-}
-
-.wmde-banner-progress-bar {
-	height: 20px;
-	width: 100%;
-	position: relative;
-	margin: 10px 0;
-	border: 2px solid #ff7863;
-	background: #ffffff;
-
-	&-fill {
-		width: 0;
-		height: 20px;
-		min-width: 30px;
-		background: #ff7863;
-		transition: width 5s ease-in-out;
-	}
-
-	&-text,
-	&-fill-text {
-		opacity: 0;
-		transition: opacity 1s ease-in-out;
-		transition-delay: 5s;
-	}
 }
 
 .wmde-banner-visible {

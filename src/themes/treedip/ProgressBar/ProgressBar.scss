@@ -1,7 +1,11 @@
+@use '../theme-variables' as v;
+
+$progress-bar-height: v.$progress-bar-height !default;
+
 .wmde-banner {
 	&-progress-bar {
 		position: relative;
-		font-family: $banner-main-font-family;
+		font-family: v.$banner-main-font-family;
 		font-size: 12px;
 		height: $progress-bar-height;
 		line-height: $progress-bar-height;
@@ -21,12 +25,12 @@
 			&-left,
 			&-right {
 				opacity: 0;
-				transition: opacity 300ms $banner-easing;
+				transition: opacity 300ms v.$banner-easing;
 			}
 
 			&-left {
 				visibility: hidden;
-				color: $color-white;
+				color: v.$color-white;
 				padding-left: 10px;
 			}
 
@@ -37,8 +41,8 @@
 
 		&-fill-wrapper {
 			position: relative;
-			background: $color-white;
-			border: 3px solid $color-primary;
+			background: v.$color-white;
+			border: 3px solid v.$color-primary;
 			height: $progress-bar-height;
 			border-radius: 15px;
 		}
@@ -46,17 +50,17 @@
 		&-fill {
 			min-width: 80px;
 			max-width: 100%;
-			background: $color-primary;
+			background: v.$color-primary;
 			border-radius: 15px;
-			transition: width 3000ms $banner-easing;
-			color: $color-white;
+			transition: width 3000ms v.$banner-easing;
+			color: v.$color-white;
 			text-align: right;
 			padding-right: 16px;
 			line-height: 26px;
 
 			&-text {
 				opacity: 0;
-				transition: opacity 300ms $banner-easing;
+				transition: opacity 300ms v.$banner-easing;
 			}
 		}
 
@@ -72,7 +76,7 @@
 			height: 60px;
 			margin-top: 0;
 
-			@media ( min-width: $breakpoint-l ) {
+			@media ( min-width: v.$breakpoint-l ) {
 				margin-top: -30px;
 			}
 
@@ -81,7 +85,7 @@
 			}
 			.wmde-banner-progress-bar-text-left {
 				margin-top: 30px;
-				color: $color-white;
+				color: v.$color-white;
 
 				@media ( min-width: 600px ) {
 					visibility: visible;
