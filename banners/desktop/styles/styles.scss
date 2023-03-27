@@ -14,10 +14,10 @@
  */
 
 @use 'src/themes/treedip/ProgressBar/ProgressBar';
+@use 'src/themes/treedip/Footer/Footer';
+@use 'src/themes/treedip/Footer/SelectionInput';
 
 /*
-@use '../../../src/themes/treedip/Footer/FooterAlreadyDonated';
-@use '../../../src/themes/treedip/Footer/SelectionInput';
 @use '../../../src/themes/treedip/Message/Message';
 @use '../../../src/themes/treedip/Slider/Slider';
 @use '../../../src/themes/treedip/SoftClose/SoftClose';

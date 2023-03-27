@@ -10,7 +10,7 @@
 				Donation Form
 			</div>
 		</div>
-
+		<BannerFooter />
 	</div>
 </template>
 
@@ -20,6 +20,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { CloseSources } from '@src/tracking/CloseSources';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
 interface Props {
 	greeting?: string,
