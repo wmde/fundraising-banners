@@ -7,49 +7,63 @@
 		}"
 	>
 
-	<div class="wmde-banner-select-group">
-		{ props.selectionItems.map( ( { value, label, notice } ) => (
-		<div key={ value } class={ classs(
-		'wmde-banner-select-group-option',
-		`${ props.fieldname }-${value.replace( ' ', '-' )}`,
-		{ 'wmde-banner-disabled': props.disabledOptions.indexOf( value ) > -1 }
-		) }>
-		<label>
-			<input
-				type="radio"
-				onClick={ props.onSelected }
-				checked={ value === props.currentValue }
-				name={ props.fieldname }
-				value={ value }
-				disabled={ props.disabledOptions.indexOf( value ) > -1 }
-			class="wmde-banner-select-group-input"/>
-			<span class="wmde-banner-select-group-label">{ label || value }</span>
-		</label>
-		{ notice ? <span class={ classs(
-		'wmde-banner-select-group-notice',
-		{
-		selected: value === props.currentValue
-		}
-		) }>{ notice }</span> : null }
-	</div>
-	) ) }
-	{ props.children }
-	</div>
+		<div class="wmde-banner-select-group">
 
-	{ errorPosition === ErrorPosition.BOTTOM ? error : null }
+			<div
+				v-for="{ value, label, notice } in selectionItems"
+				:key="value"
+				:class="{
+					'wmde-banner-select-group-option': true,
+					[ `${ fieldName }-${value.replace( ' ', '-' )}` ]: true,
+					'wmde-banner-disabled': disabledOptions.indexOf( value ) > -1
+				}"
+			>
+				<label>
+					<input
+						type="radio"
+						@click="$emit('valueSelected')"
+						:checked="value === currentValue"
+						:name="fieldName"
+						:value="value"
+						:disabled="disabledOptions.indexOf( value ) > -1"
+						class="wmde-banner-select-group-input"
+					/>
+					<span class="wmde-banner-select-group-label">{{ label || value }}</span>
+				</label>
+				<span v-if="notice" :class="{
+					'wmde-banner-select-group-notice': true,
+					selected: value === currentValue
+					}">
+					{{ notice }}
+				</span>
+			</div>
+			<slot/>
+		</div>
+
+		<span v-if="errorMessage" class="wmde-banner-select-group-error-message">
+			<span class="wmde-banner-error-icon">
+				{{ errorMessage }}
+			</span>
+		</span>;
 
 	</div>
 </template>
 
 <script setup lang="ts">
+import { FormItem } from '@src/utils/FormItemsBuilder';
+
 interface Props{
 	fieldName: string;
 	isValid: boolean;
+	selectionItems: FormItem[];
+	currentValue: string;
+	disabledOptions: string[];
+	errorMessage?: string;
 }
 
 defineProps<Props>();
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

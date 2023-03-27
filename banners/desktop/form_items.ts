@@ -1,10 +1,10 @@
 import FormItemsBuilder, {
-	CurrencyFormatter,
 	DonationFormItems,
 	Intervals,
 	PaymentMethods
 } from '@src/utils/FormItemsBuilder';
 import { Translator } from '@src/Translator';
+import { CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
 
 export function createFormItems( translations: Translator, amountFormatter: CurrencyFormatter ): DonationFormItems {
 	const builder = new FormItemsBuilder( translations, amountFormatter );

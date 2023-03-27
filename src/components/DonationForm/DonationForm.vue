@@ -9,12 +9,12 @@
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'intervals-header' ) }}</legend>
 			<SelectGroup
-				fieldname="select-interval"
+				:field-name="'select-interval'"
 				:selectionItems="formItems.intervals"
 				:isValid="isValidOrUnset( intervalValidity )"
 				:errorMessage="$translate( 'no-interval-message' )"
 				:currentValue="paymentInterval"
-				@selected="e => paymentInterval.value = e.target.value"  }
+				@selected="e => paymentInterval = e.target.value"  }
 				:disabledOptions="disabledIntervals"
 			/>
 		</fieldset>
@@ -26,6 +26,7 @@
 
 import { inject, ref } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder';
+import SelectGroup from '@src/components/DonationForm/SelectGroup.vue';
 
 interface Props {
 	formUrl: string;

@@ -23,7 +23,7 @@ export const AddressTypes = {
 	NO: { value: 'anonym', label: 'address-type-option-none', notice: 'address-type-notice-none' }
 };
 
-interface FormItem {
+export interface FormItem {
 	value: string;
 	label: string;
 	notice?: string;
