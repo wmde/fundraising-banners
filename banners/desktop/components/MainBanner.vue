@@ -41,14 +41,4 @@ function onClose(): void {
 	color: #008000ff;
 }
 
-.wmde-banner-visible {
-	.wmde-banner-progress-bar-fill {
-		width: var( --wmde-banner-progress-bar-width );
-	}
-	.wmde-banner-progress-bar-text,
-	.wmde-banner-progress-bar-fill-text {
-		opacity: 1;
-	}
-}
-
 </style>

@@ -8,7 +8,11 @@ export class Translator {
 	}
 
 	public translate( key: string, templateTags: Record<string, string | number> = {} ): string {
-		let message = this._translations[ key ] || key;
+		if ( !( key in this._translations ) ) {
+			return key;
+		}
+
+		let message = this._translations[ key ];
 		for ( const templateTag in templateTags ) {
 			message = message.replace( `{{${ templateTag }}}`, templateTags[ templateTag ].toString() );
 		}

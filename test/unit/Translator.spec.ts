@@ -14,6 +14,12 @@ describe( 'Translator', () => {
 		expect( translator.translate( 'message-that-does-not-exist' ) ).toEqual( 'message-that-does-not-exist' );
 	} );
 
+	it( 'returns the translation message if the translation is empty', () => {
+		const translator = new Translator( { 'empty-message': '' } );
+
+		expect( translator.translate( 'empty-message' ) ).toEqual( '' );
+	} );
+
 	it( 'replaces placeholders in messages', () => {
 		const translator = new Translator( { 'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million' +
 				' times a day, but currently only {{totalNumberOfDonors}} people have donated.' } );

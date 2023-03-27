@@ -1,10 +1,5 @@
-// This is the file where we import the theme-specifc component styles
-@use 'variables';
+// This is the file where we import the theme-specific component styles
 @use 'src/components/BannerConductor/banner-transition';
-
-/* THEME */
-
-@use '../../../src/themes/treedip/theme-variables';
 
 /*
 @use '../../../src/themes/treedip/animated-text-highlight';
@@ -17,7 +12,8 @@
 @use '../../../src/themes/treedip/DonationForm/SmsBox';
 
  */
-@use '../../../src/themes/treedip/ProgressBar/ProgressBar' with ($progress-bar-height: 30px);
+
+@use 'src/themes/treedip/ProgressBar/ProgressBar';
 
 /*
 @use '../../../src/themes/treedip/Footer/FooterAlreadyDonated';
@@ -28,14 +24,3 @@
 @use '../../../src/themes/treedip/AlreadyDonatedModal/AlreadyDonatedModal';
 
  */
-
-.wmde-banner {
-	background: #ffffff;
-	font-size: 200%;
-	padding: 15px;
-	border: solid 2px #006400;
-
-	&-greeting:hover {
-		opacity: 0.5;
-	}
-}

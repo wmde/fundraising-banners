@@ -1,11 +1,14 @@
-@use '../theme-variables' as v;
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+@use 'transitions';
 
-$progress-bar-height: v.$progress-bar-height !default;
+$progress-bar-height: 30px !default;
 
 .wmde-banner {
 	&-progress-bar {
 		position: relative;
-		font-family: v.$banner-main-font-family;
+		font-family: fonts.$ui;
 		font-size: 12px;
 		height: $progress-bar-height;
 		line-height: $progress-bar-height;
@@ -22,15 +25,9 @@ $progress-bar-height: v.$progress-bar-height !default;
 			display: flex;
 			justify-content: space-between;
 
-			&-left,
-			&-right {
-				opacity: 0;
-				transition: opacity 300ms v.$banner-easing;
-			}
-
 			&-left {
 				visibility: hidden;
-				color: v.$color-white;
+				color: colors.$white;
 				padding-left: 10px;
 			}
 
@@ -41,8 +38,8 @@ $progress-bar-height: v.$progress-bar-height !default;
 
 		&-fill-wrapper {
 			position: relative;
-			background: v.$color-white;
-			border: 3px solid v.$color-primary;
+			background: colors.$white;
+			border: 3px solid colors.$primary;
 			height: $progress-bar-height;
 			border-radius: 15px;
 		}
@@ -50,33 +47,19 @@ $progress-bar-height: v.$progress-bar-height !default;
 		&-fill {
 			min-width: 80px;
 			max-width: 100%;
-			background: v.$color-primary;
+			background: colors.$primary;
 			border-radius: 15px;
-			transition: width 3000ms v.$banner-easing;
-			color: v.$color-white;
+			color: colors.$white;
 			text-align: right;
 			padding-right: 16px;
 			line-height: 26px;
-
-			&-text {
-				opacity: 0;
-				transition: opacity 300ms v.$banner-easing;
-			}
-		}
-
-		&--finished {
-			.wmde-banner-progress-bar-text-left,
-			.wmde-banner-progress-bar-text-right,
-			.wmde-banner-progress-bar-fill-text {
-				opacity: 1;
-			}
 		}
 
 		&--late-progress {
 			height: 60px;
 			margin-top: 0;
 
-			@media ( min-width: v.$breakpoint-l ) {
+			@include breakpoints.large-up {
 				margin-top: -30px;
 			}
 
@@ -85,9 +68,9 @@ $progress-bar-height: v.$progress-bar-height !default;
 			}
 			.wmde-banner-progress-bar-text-left {
 				margin-top: 30px;
-				color: v.$color-white;
+				color: colors.$white;
 
-				@media ( min-width: 600px ) {
+				@include breakpoints.extra-small-up {
 					visibility: visible;
 				}
 			}

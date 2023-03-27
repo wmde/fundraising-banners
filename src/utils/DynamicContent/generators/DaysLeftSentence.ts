@@ -16,10 +16,12 @@ export class DaysLeftSentence implements TextGenerator {
 
 	public getText(): string {
 		const numberOfDaysUntilCampaignEnd = this._campaignDays.numberOfDaysUntilEnd();
-		return this._translator.translate( 'prefix-days-left' ) + ' ' +
-			numberOfDaysUntilCampaignEnd + ' ' +
-			this.getDayTranslation( numberOfDaysUntilCampaignEnd ) + ' ' +
-			this._translator.translate( 'suffix-days-left' );
+		return [
+			this._translator.translate( 'prefix-days-left' ),
+			numberOfDaysUntilCampaignEnd,
+			this.getDayTranslation( numberOfDaysUntilCampaignEnd ),
+			this._translator.translate( 'suffix-days-left' )
+		].join( ' ' );
 	}
 
 	private getDayTranslation( numberOfDaysUntilCampaignEnd: number ): string {
