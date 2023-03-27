@@ -1,4 +1,5 @@
 import { Translator } from '@src/Translator';
+import { CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
 
 export const Intervals = {
 	ONCE: { value: '0', label: 'interval-once' },
@@ -36,10 +37,10 @@ export interface DonationFormItems {
 }
 
 export default class FormItemsBuilder {
-	private _formatAmounts: ( amount: number ) => { label: string; value: string };
-	private _translate: ( item: FormItem ) => FormItem;
-	private _formItems: DonationFormItems;
-	public constructor( translator: Translator, amountFormatter: ( amount: number ) => string ) {
+	private readonly _formatAmounts: ( amount: number ) => { label: string; value: string };
+	private readonly _translate: ( item: FormItem ) => FormItem;
+	private readonly _formItems: DonationFormItems;
+	public constructor( translator: Translator, amountFormatter: CurrencyFormatter ) {
 		this._formItems = {
 			intervals: [],
 			amounts: [],

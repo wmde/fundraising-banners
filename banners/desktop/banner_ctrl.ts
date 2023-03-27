@@ -17,6 +17,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
+import { createFormItems } from './form_items';
 
 const translator = new Translator( Translations );
 
@@ -25,7 +26,8 @@ const mediaWiki = new WindowMediaWiki();
 const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 
 // This is language-specific and must be changed for EN banners
-const formatters: Formatters = { currency: new CurrencyDe(), ordinal: new OrdinalDe() };
+const currencyFormatter = new CurrencyDe();
+const formatters: Formatters = { currency: currencyFormatter, ordinal: new OrdinalDe() };
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
@@ -51,5 +53,6 @@ app.use( DynamicTextPlugin, {
 	impressionCount,
 	translator
 } );
+app.provide( 'formItems', createFormItems( translator, currencyFormatter ) );
 
 app.mount( page.getBannerContainer() );

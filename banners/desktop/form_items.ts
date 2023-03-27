@@ -1,11 +1,12 @@
 import FormItemsBuilder, {
+	CurrencyFormatter,
 	DonationFormItems,
 	Intervals,
 	PaymentMethods
-} from '@src/components/DonationForm/FormItemsBuilder';
+} from '@src/utils/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 
-export function createFormItems( translations: Translator, amountFormatter: ( amount: number ) => string ): DonationFormItems {
+export function createFormItems( translations: Translator, amountFormatter: CurrencyFormatter ): DonationFormItems {
 	const builder = new FormItemsBuilder( translations, amountFormatter );
 	builder.setIntervals(
 		Intervals.ONCE,
