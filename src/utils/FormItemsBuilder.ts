@@ -37,7 +37,7 @@ export interface DonationFormItems {
 }
 
 export default class FormItemsBuilder {
-	private readonly _formatAmounts: ( amount: number ) => { label: string; value: string };
+	private readonly _formatAmounts: ( amount: number ) => FormItem;
 	private readonly _translate: ( item: FormItem ) => FormItem;
 	private readonly _formItems: DonationFormItems;
 	public constructor( translator: Translator, amountFormatter: CurrencyFormatter ) {

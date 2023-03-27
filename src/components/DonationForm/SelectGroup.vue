@@ -8,7 +8,6 @@
 	>
 
 		<div class="wmde-banner-select-group">
-
 			<div
 				v-for="{ value, label, notice } in selectionItems"
 				:key="value"
@@ -30,7 +29,9 @@
 					/>
 					<span class="wmde-banner-select-group-label">{{ label || value }}</span>
 				</label>
-				<span v-if="notice" :class="{
+				<span
+					v-if="notice"
+					:class="{
 					'wmde-banner-select-group-notice': true,
 					selected: value === currentValue
 					}">
@@ -44,7 +45,7 @@
 			<span class="wmde-banner-error-icon">
 				{{ errorMessage }}
 			</span>
-		</span>;
+		</span>
 
 	</div>
 </template>
@@ -57,13 +58,96 @@ interface Props{
 	isValid: boolean;
 	selectionItems: FormItem[];
 	currentValue: string;
-	disabledOptions: string[];
+	disabledOptions?: string[];
 	errorMessage?: string;
 }
 
-defineProps<Props>();
+withDefaults( defineProps<Props>(),
+	{
+		disabledOptions: (): string[] => []
+	}
+);
+
 </script>
 
 <style lang="scss">
+.wmde-banner {
+	&-select-group {
+		border: 0;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		width: 100%;
+		flex-wrap: wrap;
 
+		&-container {
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			margin-bottom: 0;
+			margin-top: 0;
+			border: 0;
+			padding: 0;
+		}
+
+		&-error-message {
+			display: none;
+			width: 100%;
+		}
+
+		&-container--with-error {
+			.wmde-banner-error-icon {
+				position: relative;
+				display: block;
+
+				&::before {
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.wmde-banner-select-group-error-message {
+				display: block;
+			}
+		}
+
+		&-option {
+			label {
+				flex: 1 1 auto;
+				margin: 0;
+				box-sizing: border-box;
+				display: flex;
+				position: relative;
+				cursor: pointer;
+			}
+		}
+
+		&-label {
+			box-sizing: border-box;
+			display: inline-block;
+			white-space: nowrap;
+
+			/* This positions the "radio button" shape */
+			&::before {
+				box-sizing: border-box;
+				top: 50%;
+				left: 0;
+				content: '';
+				position: absolute;
+			}
+		}
+
+		&-input {
+			display: none;
+		}
+
+		/* The optional span element for giving hints for specific items (e.g. payment type requiring address) */
+		&-notice {
+			display: block;
+		}
+	}
+}
 </style>

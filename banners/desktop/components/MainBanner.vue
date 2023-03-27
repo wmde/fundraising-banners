@@ -7,7 +7,7 @@
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
-				Donation Form
+				<DonationForm formUrl="#"/>
 			</div>
 		</div>
 		<BannerFooter />
@@ -21,6 +21,7 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import DonationForm from '@src/components/DonationForm/DonationForm.vue';
 
 interface Props {
 	greeting?: string,

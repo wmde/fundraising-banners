@@ -53,6 +53,6 @@ app.use( DynamicTextPlugin, {
 	impressionCount,
 	translator
 } );
-app.provide( 'formItems', createFormItems( translator, currencyFormatter.amountInput ) );
+app.provide( 'formItems', createFormItems( translator, currencyFormatter.amountInput.bind( currencyFormatter ) ) );
 
 app.mount( page.getBannerContainer() );
