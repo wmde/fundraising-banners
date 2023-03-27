@@ -1,0 +1,82 @@
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+@use 'transitions';
+
+$progress-bar-height: 30px !default;
+
+.wmde-banner {
+	&-progress-bar {
+		position: relative;
+		font-family: fonts.$ui;
+		font-size: 12px;
+		height: $progress-bar-height;
+		line-height: $progress-bar-height;
+		font-weight: bold;
+		margin: 10px 0;
+
+		&-text {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 30px;
+			display: flex;
+			justify-content: space-between;
+
+			&-left {
+				visibility: hidden;
+				color: colors.$white;
+				padding-left: 10px;
+			}
+
+			&-right {
+				padding-right: 10px;
+			}
+		}
+
+		&-fill-wrapper {
+			position: relative;
+			background: colors.$white;
+			border: 3px solid colors.$primary;
+			height: $progress-bar-height;
+			border-radius: 15px;
+		}
+
+		&-fill {
+			min-width: 80px;
+			max-width: 100%;
+			background: colors.$primary;
+			border-radius: 15px;
+			color: colors.$white;
+			text-align: right;
+			padding-right: 16px;
+			line-height: 26px;
+		}
+
+		&--late-progress {
+			height: 60px;
+			margin-top: 0;
+
+			@include breakpoints.large-up {
+				margin-top: -30px;
+			}
+
+			.wmde-banner-progress-bar-text {
+				position: static;
+			}
+			.wmde-banner-progress-bar-text-left {
+				margin-top: 30px;
+				color: colors.$white;
+
+				@include breakpoints.extra-small-up {
+					visibility: visible;
+				}
+			}
+			.wmde-banner-progress-bar-fill {
+				min-width: 100px;
+			}
+		}
+	}
+}

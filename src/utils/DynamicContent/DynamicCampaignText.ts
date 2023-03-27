@@ -11,6 +11,7 @@ import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/V
 import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/DonorsNeededSentence';
 import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
 
 export default class DynamicCampaignText implements DynamicContent {
 	private readonly _date: Date;
@@ -21,6 +22,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _cache: Map<string, string>;
 	private _campaignTimeRange: TimeRange;
 	private _campaignProjection: CampaignProjection;
+	private _progressBarContent: ProgressBarContent;
 
 	public constructor( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters, impressionCount: ImpressionCount ) {
 		this._date = date;
@@ -72,7 +74,7 @@ export default class DynamicCampaignText implements DynamicContent {
 		} );
 	}
 
-	public getCampaignProjection(): CampaignProjection {
+	private getCampaignProjection(): CampaignProjection {
 		if ( this._campaignProjection === undefined ) {
 			const projectionRange = TimeRange.createFromStrings(
 				this._campaignParameters.campaignProjection.updatedAt,
@@ -116,5 +118,19 @@ export default class DynamicCampaignText implements DynamicContent {
 				this.getCampaignProjection().projectedDonationCount()
 			).getText();
 		} );
+	}
+
+	public get progressBarContent(): ProgressBarContent {
+		if ( this._progressBarContent === undefined ) {
+			this._progressBarContent = new ProgressBarContent(
+				this._campaignParameters.campaignProjection.donationTarget,
+				this._campaignProjection.projectedPercentageTowardsTarget(),
+				this._campaignProjection.projectedDonationSum(),
+				this._campaignProjection.projectedRemainingDonationSum(),
+				this._translator,
+				this._formatters.currency
+			);
+		}
+		return this._progressBarContent;
 	}
 }

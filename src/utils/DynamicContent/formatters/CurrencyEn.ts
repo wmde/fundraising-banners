@@ -11,7 +11,7 @@ export class CurrencyEn implements Currency {
 	}
 
 	public millions( amount: number ): string {
-		return this._millionsFormatter( amount );
+		return this._millionsFormatter( amount / 1_000_000 );
 	}
 
 	public millionsNumeric( amount: number ): string {

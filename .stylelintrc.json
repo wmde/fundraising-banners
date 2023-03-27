@@ -15,6 +15,7 @@
 		"declaration-property-unit-disallowed-list": null,
 		"color-function-notation": null,
 		"alpha-value-notation": null,
+		"scss/dollar-variable-empty-line-before": null,
 		"at-rule-no-unknown": [
 			true,
 			{
