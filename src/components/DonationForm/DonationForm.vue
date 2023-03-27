@@ -24,14 +24,20 @@
 
 <script setup lang="ts">
 
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder';
 
 interface Props {
 	formUrl: string;
 }
 
+type Validity = 'valid' | 'invalid' | 'unset';
+
 defineProps<Props>();
+
+const paymentInterval = ref<string>( '' );
+const disabledIntervals = ref<string[]>( [] );
+const intervalValidity = ref<Validity>( 'unset' );
 
 const formItems: DonationFormItems = inject( 'formItems' );
 
@@ -40,6 +46,10 @@ const onFormInteraction = (): void => {};
 
 // TODO implement validation based on form items
 const validate = (): void => {};
+
+const isValidOrUnset = ( validity: Validity ): boolean => {
+	return validity === 'valid' || validity === 'unset';
+};
 
 </script>
 
