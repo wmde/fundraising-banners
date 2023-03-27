@@ -18,7 +18,10 @@
 
 import { ref } from 'vue';
 
-interface Props { value: string, focusedValue?: string }
+interface Props {
+	value: string;
+	focusedValue?: string;
+}
 
 defineProps<Props>();
 
