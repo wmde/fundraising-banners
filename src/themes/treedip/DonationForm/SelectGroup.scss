@@ -1,3 +1,7 @@
+@use '../variables/colors';
+@use '../variables/globals';
+@use '../variables/breakpoints';
+
 .wmde-banner {
 
 	&-select-group {
@@ -12,7 +16,7 @@
 		&-error-message {
 			height: 16px;
 			line-height: 16px;
-			color: $color-black;
+			color: colors.$black;
 			font-weight: bold;
 			text-align: left;
 			margin-bottom: 0.2em;
@@ -24,14 +28,14 @@
 				padding-left: 20px;
 
 				&::before {
-					content: $error-icon;
+					content: globals.$error-icon;
 					width: 16px;
 					height: 16px;
 				}
 			}
 
 			.wmde-banner-select-group-error-message {
-				color: $color-error;
+				color: colors.$error;
 			}
 		}
 
@@ -40,17 +44,17 @@
 			cursor: pointer;
 			height: 25px;
 
-			@media ( min-width: $breakpoint-m ) {
+			@include breakpoints.medium-up {
 				height: 29px;
 			}
 
-			@media ( min-width: $breakpoint-l ) {
+			@include breakpoints.large-up {
 				height: 25px;
 			}
 		}
 
 		&-label {
-			color: $color-black;
+			color: colors.$black;
 			border: 0 none;
 			font-size: 0.95em;
 
@@ -59,7 +63,7 @@
 				height: 16px;
 				width: 16px;
 				margin-top: -5px;
-				background: $color-white;
+				background: colors.$white;
 				border-radius: 50%;
 				border: 1px solid #bbbbbb;
 			}
@@ -77,7 +81,7 @@
 
 			/* This creates the "selected radio button" shape */
 			&:checked + .wmde-banner-select-group-label::before {
-				border: 6px solid $color-primary;
+				border: 6px solid colors.$primary;
 				box-shadow: none;
 			}
 		}

@@ -3,11 +3,11 @@
 
 /*
 @use '../../../src/themes/treedip/animated-text-highlight';
-@use '../../../src/themes/treedip/ButtonClose/ButtonClose';
+
 @use '../../../src/themes/treedip/MultistepDonationForm/MultistepDonationForm';
 @use '../../../src/themes/treedip/MultistepDonationForm/UpgradeToYearly';
 @use '../../../src/themes/treedip/MultistepDonationForm/CustomAmount';
-@use '../../../src/themes/treedip/DonationForm/SelectGroup';
+
 @use '../../../src/themes/treedip/DonationForm/SelectCustomAmount';
 @use '../../../src/themes/treedip/DonationForm/SmsBox';
 
@@ -16,6 +16,8 @@
 @use 'src/themes/treedip/ProgressBar/ProgressBar';
 @use 'src/themes/treedip/Footer/Footer';
 @use 'src/themes/treedip/Footer/SelectionInput';
+@use '../../../src/themes/treedip/DonationForm/SelectGroup';
+@use '../../../src/themes/treedip/ButtonClose/ButtonClose';
 
 /*
 @use '../../../src/themes/treedip/Message/Message';
