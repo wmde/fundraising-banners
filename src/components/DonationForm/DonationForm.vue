@@ -19,17 +19,39 @@
 			/>
 		</fieldset>
 
+		<fieldset class="wmde-banner-form-field-group">
+			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
+			<SelectGroup
+				fieldName="select-amount"
+				:selectionItems="formItems.amounts"
+				:isValid="isValidOrUnset( amountValidity )"
+				:errorMessage="amountMessage( amountValidity, Translations )"
+				:currentValue="selectedAmount"
+				@selected="e => selectAmount = e.target.value"
+				>
+				<SelectCustomAmount
+					fieldname="select-amount"
+					:value="customAmount"
+					:selectedAmount="selectedAmount"
+					@input="e => updateCustomAmount( e.target.value )"
+					@blur="e => validateCustomAmount( e.target.value )"
+					:placeholder=" customAmountPlaceholder "
+					/>
+			</SelectGroup>
+		</fieldset>
+
 	</form>
 </template>
 
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import SelectGroup from '@src/components/DonationForm/SelectGroup.vue';
+import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 
 interface Props {
 	formUrl: string;
+	customAmountPlaceholder: string;
 }
 
 type Validity = 'valid' | 'invalid' | 'unset';

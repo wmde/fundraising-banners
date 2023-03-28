@@ -1,7 +1,6 @@
 import { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
-	'LANGUAGE': 'en',
 	'no-interval-message': 'How often would you like to donate?',
 	'amount-empty-message': 'How much would you like to donate?',
 	'amount-too-low-message': 'The donation needs to be at least 1 Euro.',
