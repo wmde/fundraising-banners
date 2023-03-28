@@ -2,7 +2,7 @@
 	<label :class="[
 		'wmde-banner-select-custom-amount',
 		{
-			'value-entered': customAmount !== '',
+			'value-entered': customAmount,
 			'focused': focused
 		}
 	]">
@@ -11,7 +11,7 @@
 			type="radio"
 			:name="fieldName"
 			value=""
-			:checked="focused || anyAmountWasSelected"
+			:checked="focused || customAmount"
 			@click="onRadioClicked"
 		/>
 
@@ -26,7 +26,7 @@
 				maxLength="8"
 				@focus="onFocus"
 				@blur="onBlur"
-				@input="$emit('customAmountInput', customAmount)"
+				@input="$emit( 'customAmountInput', customAmount )"
 				autoComplete="off"
 				:placeholder="focused ? '' : placeholder"
 				v-model="customAmount"
@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 interface Props {
 	placeholder: string,
@@ -53,10 +53,16 @@ const customAmount = ref<string>( '' );
 const focused = ref<boolean>( false );
 const inputRef = ref<HTMLInputElement>( null );
 
-const anyAmountWasSelected = computed( () => props.selectedAmount === null && customAmount.value !== '' );
+watch( () => props.selectedAmount, ( newValue ) => {
+	if ( newValue === null ) {
+		return;
+	}
+	customAmount.value = '';
+} );
 
 const onFocus = ( e: Event ): void => {
 	focused.value = true;
+	// Select the text in the input field
 	if ( customAmount.value !== '' ) {
 		( e.target as HTMLInputElement ).select();
 	}

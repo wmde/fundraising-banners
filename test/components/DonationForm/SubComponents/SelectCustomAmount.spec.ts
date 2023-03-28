@@ -28,4 +28,18 @@ describe( 'SelectCustomAmount.vue', () => {
 
 		expect( wrapper.attributes( 'class' ) ).toContain( 'focused' );
 	} );
+
+	it( 'clears the custom amount when the selectedAmount becomes not null', async () => {
+		const wrapper = shallowMount( SelectCustomAmount, {
+			props: {
+				placeholder: 'placeholder-text',
+				fieldName: 'fld-custom-amount'
+			}
+		} );
+		const textField = wrapper.find<HTMLInputElement>( 'input[type=text]' );
+		await textField.setValue( '2500' );
+		await wrapper.setProps( { selectedAmount: '42' } );
+
+		expect( textField.element.value ).toBe( '' );
+	} );
 } );
