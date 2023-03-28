@@ -14,7 +14,7 @@
 				:isValid="isValidOrUnset( intervalValidity )"
 				:errorMessage="$translate( 'no-interval-message' )"
 				:currentValue="paymentInterval"
-				@selected="e => paymentInterval = e.target.value"
+				@selected="setInterval"
 				:disabledOptions="disabledIntervals"
 			/>
 		</fieldset>
@@ -50,6 +50,10 @@ const validate = (): void => {};
 
 const isValidOrUnset = ( validity: Validity ): boolean => {
 	return validity === 'valid' || validity === 'unset';
+};
+
+const setInterval = ( e: Event ): void => {
+	paymentInterval.value = ( e.target as HTMLInputElement ).value;
 };
 
 </script>
