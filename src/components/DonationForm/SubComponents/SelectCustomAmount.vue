@@ -2,7 +2,7 @@
 	<label :class="[
 		'wmde-banner-select-custom-amount',
 		{
-			'value-entered': value,
+			'value-entered': customAmount !== '',
 			'focused': focused
 		}
 	]">
@@ -22,14 +22,14 @@
 				class="wmde-banner-select-custom-amount-input t-custom-amount"
 				tabIndex="-1"
 				type="text"
-				:value="value || ''"
-				@input="$emit( 'customAmountInput' )"
 				size="3"
 				maxLength="8"
 				@focus="onFocus"
 				@blur="onBlur"
+				@input="$emit('customAmountInput', customAmount)"
 				autoComplete="off"
 				:placeholder="focused ? '' : placeholder"
+				v-model="customAmount"
 				ref="inputRef"
 			/>
 		</span>
@@ -41,7 +41,6 @@
 import { computed, ref } from 'vue';
 
 interface Props {
-	value?: string,
 	placeholder: string,
 	fieldName: string,
 	selectedAmount?: string
@@ -50,28 +49,29 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'customAmountBlurred', 'customAmountInput' ] );
 
-const anyAmountWasSelected = computed( () => props.selectedAmount === null && props.value !== null );
-
+const customAmount = ref<string>( '' );
 const focused = ref<boolean>( false );
 const inputRef = ref<HTMLInputElement>( null );
 
+const anyAmountWasSelected = computed( () => props.selectedAmount === null && customAmount.value !== '' );
+
 const onFocus = ( e: Event ): void => {
 	focused.value = true;
-	if ( props.value !== '' ) {
+	if ( customAmount.value !== '' ) {
 		( e.target as HTMLInputElement ).select();
 	}
 };
 
 const onBlur = (): void => {
 	focused.value = false;
-	emit( 'customAmountBlurred' );
+	emit( 'customAmountBlurred', customAmount.value );
 };
 
 const onRadioClicked = (): void => {
 	inputRef.value?.focus();
 };
 
-const showEuro = computed( () => ( props.value !== null && props.value !== '' ) || focused.value );
+const showEuro = computed( () => customAmount.value !== '' || focused.value );
 
 </script>
 
