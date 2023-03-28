@@ -14,7 +14,7 @@
 				:isValid="isValidOrUnset( intervalValidity )"
 				:errorMessage="$translate( 'no-interval-message' )"
 				:currentValue="paymentInterval"
-				@selected="e => paymentInterval = e.target.value"  }
+				@selected="e => paymentInterval = e.target.value"
 				:disabledOptions="disabledIntervals"
 			/>
 		</fieldset>
@@ -25,8 +25,8 @@
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import { DonationFormItems } from '@src/utils/FormItemsBuilder';
 import SelectGroup from '@src/components/DonationForm/SelectGroup.vue';
+import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 
 interface Props {
 	formUrl: string;
