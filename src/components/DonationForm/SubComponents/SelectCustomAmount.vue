@@ -11,7 +11,7 @@
 			type="radio"
 			:name="fieldName"
 			value=""
-			:checked="focused || customAmount"
+			:checked="focused || customAmount !== '' "
 			@click="onRadioClicked"
 		/>
 

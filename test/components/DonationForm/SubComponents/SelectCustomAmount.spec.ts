@@ -42,4 +42,30 @@ describe( 'SelectCustomAmount.vue', () => {
 
 		expect( textField.element.value ).toBe( '' );
 	} );
+
+	it( 'should check radio button when input field is focused', async () => {
+		const wrapper = shallowMount( SelectCustomAmount, {
+			props: {
+				placeholder: 'placeholder-text',
+				fieldName: 'fld-custom-amount'
+			}
+		} );
+
+		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).trigger( 'focus' );
+
+		expect( wrapper.find<HTMLInputElement>( 'input[type=radio]' ).element.checked ).toBeTruthy();
+	} );
+
+	it( 'should check radio button when input field has custom amount', async () => {
+		const wrapper = shallowMount( SelectCustomAmount, {
+			props: {
+				placeholder: 'placeholder-text',
+				fieldName: 'fld-custom-amount'
+			}
+		} );
+
+		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '2500' );
+
+		expect( wrapper.find<HTMLInputElement>( 'input[type=radio]' ).element.checked ).toBeTruthy();
+	} );
 } );
