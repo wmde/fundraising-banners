@@ -80,7 +80,3 @@ const onRadioClicked = (): void => {
 const showEuro = computed( () => customAmount.value !== '' || focused.value );
 
 </script>
-
-<style lang="scss">
-
-</style>

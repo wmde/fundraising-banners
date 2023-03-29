@@ -13,8 +13,8 @@
 				<label>
 					<input
 						type="radio"
-						@click="$emit('valueSelected')"
-						:checked="value === currentValue"
+						@input="$emit('update:modelValue', $event.target.value)"
+						:checked="value === modelValue"
 						:name="fieldName"
 						:value="value"
 						:disabled="disabledOptions.indexOf( value ) > -1"
@@ -22,7 +22,7 @@
 					/>
 					<span class="wmde-banner-select-group-label">{{ label }}</span>
 				</label>
-				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === currentValue }">
+				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === modelValue }">
 					{{ notice }}
 				</span>
 			</div>
@@ -43,7 +43,6 @@ interface Props{
 	fieldName: string;
 	isValid: boolean;
 	selectionItems: FormItem[];
-	currentValue: string;
 	disabledOptions?: string[];
 	errorMessage?: string;
 	modelValue: string;

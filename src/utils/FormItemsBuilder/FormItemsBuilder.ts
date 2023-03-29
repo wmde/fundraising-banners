@@ -23,6 +23,7 @@ export default class FormItemsBuilder {
 		return {
 			value: item.value,
 			label: this._translator.translate( item.label ),
+			className: item.className,
 			notice: item.notice ? this._translator.translate( item.notice ) : null
 		};
 	}
@@ -30,7 +31,8 @@ export default class FormItemsBuilder {
 	private formatAmounts( amount: number ): FormItem {
 		return {
 			value: String( amount ),
-			label: this._amountFormatter( amount )
+			label: this._amountFormatter( amount ),
+			className: `amount-${amount}`
 		};
 	}
 

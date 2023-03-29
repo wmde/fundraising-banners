@@ -11,10 +11,9 @@
 			<SelectGroup
 				:field-name="'select-interval'"
 				:selectionItems="formItems.intervals"
-				:isValid="isValidOrUnset( intervalValidity )"
+				:isValid="isValidOrUnset( intervalValidity.value )"
 				:errorMessage="$translate( 'no-interval-message' )"
-				:currentValue="paymentInterval"
-				@selected="setInterval"
+				v-model="interval"
 				:disabledOptions="disabledIntervals"
 			/>
 		</fieldset>
@@ -24,10 +23,9 @@
 			<SelectGroup
 				fieldName="select-amount"
 				:selectionItems="formItems.amounts"
-				:isValid="isValidOrUnset( amountValidity )"
-				:errorMessage="amountMessage( amountValidity, Translations )"
-				:currentValue="selectedAmount"
-				@selected="e => selectAmount = e.target.value"
+				:isValid="isValidOrUnset( amountValidity.value )"
+				:errorMessage="'amountMessage( amountValidity, Translations )'"
+				v-model="amount"
 				>
 				<SelectCustomAmount
 					fieldname="select-amount"
@@ -45,17 +43,17 @@
 
 <script setup lang="ts">
 
-import { inject, ref } from 'vue';
+import { inject } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { Validity } from '@src/utils/FormModel/Validity';
+import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 
 interface Props {
 	formUrl: string;
 	customAmountPlaceholder: string;
 }
-
-type Validity = 'valid' | 'invalid' | 'unset';
 
 defineProps<Props>();
 
@@ -69,14 +67,13 @@ const onFormInteraction = (): void => {};
 const validate = (): void => {};
 
 const isValidOrUnset = ( validity: Validity ): boolean => {
-	return validity === 'valid' || validity === 'unset';
+	return validity === Validity.Valid || validity === Validity.Unset;
 };
 
-const setInterval = ( e: Event ): void => {
-	formModel.interval.value = ( e.target as HTMLInputElement ).value;
-};
-
-const { interval, intervalValidity } = formModel;
+const {
+	interval, intervalValidity, disabledIntervals,
+	amount, customAmount, amountValidity
+} = formModel;
 
 </script>
 
