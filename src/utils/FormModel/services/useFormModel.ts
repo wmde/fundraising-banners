@@ -2,15 +2,8 @@ import { computed, ref, watch } from 'vue';
 import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
-
-const allIntervalsExceptOnce = [
-	Intervals.MONTHLY.value,
-	Intervals.QUARTERLY.value,
-	Intervals.BIANNUAL.value,
-	Intervals.YEARLY.value
-];
 
 export function useFormModel(): FormModel {
 	const interval = ref<string>( '' );
@@ -35,7 +28,7 @@ export function useFormModel(): FormModel {
 
 	const disabledIntervals = computed( (): string[] => {
 		if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
-			return allIntervalsExceptOnce;
+			return RecurringIntervals;
 		} else {
 			return [];
 		}
@@ -53,7 +46,6 @@ export function useFormModel(): FormModel {
 		if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
 			return [ AddressTypes.NO.value ];
 		}
-
 		return [];
 	} );
 
