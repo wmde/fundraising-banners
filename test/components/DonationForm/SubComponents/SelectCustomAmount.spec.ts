@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 
