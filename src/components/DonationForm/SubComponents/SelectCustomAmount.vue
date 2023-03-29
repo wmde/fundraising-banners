@@ -2,7 +2,7 @@
 	<label :class="[
 		'wmde-banner-select-custom-amount',
 		{
-			'value-entered': customAmount,
+			'value-entered': modelValue,
 			'focused': focused
 		}
 	]">
@@ -11,7 +11,7 @@
 			type="radio"
 			:name="fieldName"
 			value=""
-			:checked="focused || customAmount !== '' "
+			:checked="focused || modelValue !== '' "
 			@click="onRadioClicked"
 		/>
 
@@ -26,10 +26,9 @@
 				maxLength="8"
 				@focus="onFocus"
 				@blur="onBlur"
-				@input="$emit( 'customAmountInput', customAmount )"
+				@input="$emit( 'update:modelValue', $event.target.value )"
 				autoComplete="off"
 				:placeholder="focused ? '' : placeholder"
-				v-model="customAmount"
 				ref="inputRef"
 			/>
 		</span>
@@ -38,45 +37,37 @@
 
 <script setup lang="ts">
 
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 
 interface Props {
-	placeholder: string,
-	fieldName: string,
-	selectedAmount?: string
+	placeholder: string;
+	fieldName: string;
+	modelValue: string;
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'customAmountBlurred', 'customAmountInput' ] );
+const emit = defineEmits( [ 'blur', 'update:modelValue' ] );
 
-const customAmount = ref<string>( '' );
 const focused = ref<boolean>( false );
 const inputRef = ref<HTMLInputElement>( null );
-
-watch( () => props.selectedAmount, ( newValue ) => {
-	if ( newValue === null ) {
-		return;
-	}
-	customAmount.value = '';
-} );
 
 const onFocus = ( e: Event ): void => {
 	focused.value = true;
 	// Select the text in the input field
-	if ( customAmount.value !== '' ) {
+	if ( props.modelValue !== '' ) {
 		( e.target as HTMLInputElement ).select();
 	}
 };
 
 const onBlur = (): void => {
 	focused.value = false;
-	emit( 'customAmountBlurred', customAmount.value );
+	emit( 'blur', props.modelValue );
 };
 
 const onRadioClicked = (): void => {
 	inputRef.value?.focus();
 };
 
-const showEuro = computed( () => customAmount.value !== '' || focused.value );
+const showEuro = computed( () => props.modelValue !== '' || focused.value );
 
 </script>

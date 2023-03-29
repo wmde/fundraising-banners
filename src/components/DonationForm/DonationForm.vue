@@ -29,10 +29,8 @@
 				>
 				<SelectCustomAmount
 					fieldname="select-amount"
-					:value="customAmount"
-					:selectedAmount="selectedAmount"
-					@input="e => updateCustomAmount( e.target.value )"
-					@blur="e => validateCustomAmount( e.target.value )"
+					v-model="customAmount"
+					@blur="validateCustomAmount"
 					:placeholder=" customAmountPlaceholder "
 					/>
 			</SelectGroup>
@@ -74,6 +72,8 @@ const {
 	interval, intervalValidity, disabledIntervals,
 	amount, customAmount, amountValidity
 } = formModel;
+
+const validateCustomAmount = (): void => {};
 
 </script>
 
