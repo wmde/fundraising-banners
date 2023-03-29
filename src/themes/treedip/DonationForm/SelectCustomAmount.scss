@@ -1,3 +1,5 @@
+@use "../variables/colors";
+
 .wmde-banner {
 	/*
 	The layout settings of this element should be similar to wmde-banner-select-group-option
@@ -23,7 +25,7 @@
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
 			&:checked + .wmde-banner-select-custom-amount-input-container::before {
-				border: 6px solid $color-primary;
+				border: 6px solid colors.$primary;
 				box-shadow: none;
 			}
 		}
@@ -31,7 +33,7 @@
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				border: 1px solid $color-secondary;
+				border: 1px solid colors.$secondary;
 			}
 
 			.wmde-banner-select-custom-amount-input {
@@ -42,7 +44,7 @@
 		}
 
 		&-input-container {
-			border: 1px solid $color-gray-light;
+			border: 1px solid colors.$gray-light;
 			min-width: 110px;
 			margin: -2px 0 0;
 			line-height: 25px;
@@ -53,7 +55,7 @@
 				height: 16px;
 				width: 16px;
 				margin-top: -6px;
-				background: $color-white;
+				background: colors.$white;
 				border-radius: 50%;
 				border: 1px solid #bbbbbb;
 			}
@@ -68,7 +70,7 @@
 		}
 
 		&-input {
-			color: $color-black;
+			color: colors.$black;
 			background-color: transparent;
 			padding: 0 1em;
 			height: 25px;
@@ -79,7 +81,7 @@
 
 			&:focus,
 			&:active {
-				border: 1px solid $color-secondary;
+				border: 1px solid colors.$secondary;
 			}
 		}
 	}

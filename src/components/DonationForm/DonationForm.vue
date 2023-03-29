@@ -26,22 +26,43 @@
 				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="'amountMessage( amountValidity, Translations )'"
 				v-model="amount"
-				>
+			>
 				<SelectCustomAmount
 					fieldName="select-amount"
 					v-model="customAmount"
 					@blur="validateCustomAmount"
 					:placeholder="customAmountPlaceholder"
-					/>
+				/>
 			</SelectGroup>
 		</fieldset>
+
+		<fieldset class="wmde-banner-form-field-group">
+			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'payments-header' ) }}</legend>
+			<SelectGroup
+				:field-name="'select-payment-method'"
+				:selectionItems="formItems.paymentMethods"
+				:isValid="isValidOrUnset( paymentMethodValidity )"
+				:errorMessage="$translate( 'no-payment-type-message' )"
+				v-model="paymentMethod"
+				:disabledOptions="disabledPaymentMethods"
+			/>
+		</fieldset>
+
+		<div class="wmde-banner-form-button-container">
+			<button class="wmde-banner-form-button" type="submit">
+				{{ $translate( 'submit-label' ) }}
+			</button>
+			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
+				{{ $translate( 'global-error' ) }}
+			</button>
+		</div>
 
 	</form>
 </template>
 
 <script setup lang="ts">
 
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
@@ -51,10 +72,14 @@ import SelectCustomAmount from '@src/components/DonationForm/SubComponents/Selec
 interface Props {
 	formUrl: string;
 	customAmountPlaceholder: string;
+	showErrorScrollLink?: boolean;
 }
 
-defineProps<Props>();
+withDefaults( defineProps<Props>(), {
+	showErrorScrollLink: false
+} );
 
+const isFormValid = ref<boolean>( true );
 const formItems: DonationFormItems = inject( 'formItems' );
 const formModel = useFormModel();
 
@@ -70,7 +95,8 @@ const isValidOrUnset = ( validity: Validity ): boolean => {
 
 const {
 	interval, intervalValidity, disabledIntervals,
-	amount, customAmount, amountValidity
+	amount, customAmount, amountValidity,
+	paymentMethod, paymentMethodValidity, disabledPaymentMethods
 } = formModel;
 
 const validateCustomAmount = (): void => {};

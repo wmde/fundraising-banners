@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 
@@ -7,6 +7,8 @@ describe( 'SelectCustomAmount.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		wrapper = shallowMount( SelectCustomAmount, {
+			// attachTo: document.body allows us to test if the text field was focused
+			attachTo: document.body,
 			props: {
 				placeholder: 'placeholder-text',
 				fieldName: 'fld-custom-amount',
@@ -66,11 +68,21 @@ describe( 'SelectCustomAmount.vue', () => {
 		expect( wrapper.find( 'input[type=radio]' ).attributes( 'name' ) ).toBe( 'fld-custom-amount' );
 	} );
 
-	it.todo( 'checks if radio element has focus on click', async () => {
+	it( 'checks if radio element has focus on click', async () => {
 		await wrapper.find( '.wmde-banner-select-custom-amount-radio' ).trigger( 'click' );
 
-		// TODO find out how to test this OR if the component code is broken
-		expect( wrapper.find( 'input[type=text]' ) ).toBe( document.activeElement );
+		expect( wrapper.find( 'input[type=text]' ).element ).toBe( document.activeElement );
+	} );
+
+	it( 'selects text on focus', async () => {
+		await wrapper.setProps( { modelValue: '42424242' } );
+
+		const input = wrapper.find<HTMLInputElement>( 'input[type=text]' );
+		await input.trigger( 'focus' );
+
+		const selected = input.element.value.slice( input.element.selectionStart, input.element.selectionEnd );
+
+		expect( selected ).toBe( '42424242' );
 	} );
 
 	it( 'should hide placeholder when the input has focus', async () => {

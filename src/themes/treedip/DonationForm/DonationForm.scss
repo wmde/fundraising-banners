@@ -1,3 +1,7 @@
+@use "../variables/globals";
+@use "../variables/fonts";
+@use "../variables/colors";
+
 .wmde-banner {
 	&-form {
 		&-field-group {
@@ -6,27 +10,27 @@
 			&-legend {
 				display: none;
 				visibility: hidden;
-				font-family: $banner-main-font-family;
+				font-family: fonts.$ui;
 				font-size: 12px;
 				line-height: 13px;
-				color: $color-black-light;
+				color: colors.$black-light;
 			}
 		}
 
 		&-button {
 			min-width: 240px;
-			color: $color-white;
-			background-color: $color-secondary;
+			color: colors.$white;
+			background-color: colors.$secondary;
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 35px;
 			height: 35px;
 			font-weight: bold;
 			text-align: center;
-			transition: background-color 500ms $banner-easing;
+			transition: background-color 500ms globals.$banner-easing;
 
 			&:hover {
-				background-color: $color-secondary-light;
+				background-color: colors.$secondary-light;
 			}
 		}
 	}

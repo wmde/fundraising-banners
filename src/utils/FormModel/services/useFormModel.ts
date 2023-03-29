@@ -57,7 +57,17 @@ export function useFormModel(): FormModel {
 		return [];
 	} );
 
-	// TODO clear custom amount (watch other fields for that)
+	watch( amount, ( newAmount: string, oldAmount: string ) => {
+		if ( oldAmount === '' && newAmount !== '' ) {
+			customAmount.value = '';
+		}
+	} );
+
+	watch( customAmount, ( newCustomAmount: string, oldCustomAmount: string ) => {
+		if ( oldCustomAmount === '' && newCustomAmount !== '' ) {
+			amount.value = '';
+		}
+	} );
 
 	return {
 		interval,

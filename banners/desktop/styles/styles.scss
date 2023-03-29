@@ -13,11 +13,13 @@
 
  */
 
+@use 'src/themes/treedip/ButtonClose/ButtonClose';
 @use 'src/themes/treedip/ProgressBar/ProgressBar';
+@use 'src/themes/treedip/DonationForm/DonationForm';
+@use 'src/themes/treedip/DonationForm/SelectGroup';
+@use 'src/themes/treedip/DonationForm/SelectCustomAmount';
 @use 'src/themes/treedip/Footer/Footer';
 @use 'src/themes/treedip/Footer/SelectionInput';
-@use '../../../src/themes/treedip/DonationForm/SelectGroup';
-@use '../../../src/themes/treedip/ButtonClose/ButtonClose';
 
 /*
 @use '../../../src/themes/treedip/Message/Message';
