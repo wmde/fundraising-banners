@@ -1,6 +1,6 @@
 <template>
 	<form
-		action="formUrl"
+		:action="formUrl"
 		method="post"
 		class="wmde-banner-form"
 		@click="onFormInteraction"
@@ -11,7 +11,7 @@
 			<SelectGroup
 				:field-name="'select-interval'"
 				:selectionItems="formItems.intervals"
-				:isValid="isValidOrUnset( intervalValidity.value )"
+				:isValid="isValidOrUnset( intervalValidity )"
 				:errorMessage="$translate( 'no-interval-message' )"
 				v-model="interval"
 				:disabledOptions="disabledIntervals"
@@ -23,12 +23,12 @@
 			<SelectGroup
 				fieldName="select-amount"
 				:selectionItems="formItems.amounts"
-				:isValid="isValidOrUnset( amountValidity.value )"
+				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="'amountMessage( amountValidity, Translations )'"
 				v-model="amount"
 				>
 				<SelectCustomAmount
-					fieldname="select-amount"
+					fieldName="select-amount"
 					v-model="customAmount"
 					@blur="validateCustomAmount"
 					:placeholder="customAmountPlaceholder"

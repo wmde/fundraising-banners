@@ -16,9 +16,9 @@ export function useFormModel(): FormModel {
 	const interval = ref<string>( '' );
 	const intervalValidity = ref<Validity>( Validity.Unset );
 
-	const amount = ref<number>( 0 );
+	const amount = ref<string>( '' );
 	const amountValidity = ref<Validity>( Validity.Unset );
-	const customAmount = ref<number>( null );
+	const customAmount = ref<string>( '' );
 
 	const paymentMethod = ref<string>( '' );
 	const paymentMethodValidity = ref<Validity>( Validity.Unset );

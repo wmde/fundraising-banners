@@ -26,7 +26,7 @@
 				maxLength="8"
 				@focus="onFocus"
 				@blur="onBlur"
-				@input="$emit( 'update:modelValue', $event.target.value )"
+				@input="onInput"
 				autoComplete="off"
 				:placeholder="focused ? '' : placeholder"
 				ref="inputRef"
@@ -66,6 +66,10 @@ const onBlur = (): void => {
 
 const onRadioClicked = (): void => {
 	inputRef.value?.focus();
+};
+
+const onInput = ( e: Event ): void => {
+	emit( 'update:modelValue', ( e.target as HTMLInputElement ).value );
 };
 
 const showEuro = computed( () => props.modelValue !== '' || focused.value );

@@ -13,7 +13,7 @@
 				<label>
 					<input
 						type="radio"
-						@change="$emit('update:modelValue', $event.target.value)"
+						@change="onChange"
 						:checked="value === modelValue"
 						:name="fieldName"
 						:value="value"
@@ -54,7 +54,11 @@ withDefaults( defineProps<Props>(),
 	}
 );
 
-defineEmits( [ 'update:modelValue' ] );
+const emit = defineEmits( [ 'update:modelValue' ] );
+
+const onChange = ( e: Event ): void => {
+	emit( 'update:modelValue', ( e.target as HTMLInputElement ).value );
+};
 
 </script>
 

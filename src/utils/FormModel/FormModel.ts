@@ -1,18 +1,17 @@
-import { ReactiveProperty } from '@src/domain/ReactiveProperty';
 import { Validity } from '@src/utils/FormModel/Validity';
-import { ComputedProperty } from '@src/domain/ComputedProperty';
+import { ComputedRef, Ref } from 'vue';
 
 export interface FormModel {
-	interval: ReactiveProperty<string>;
-	intervalValidity: ReactiveProperty<Validity>;
-	disabledIntervals: ComputedProperty<string[]>;
-	amount: ReactiveProperty<number>;
-	customAmount: ReactiveProperty<number>;
-	amountValidity: ReactiveProperty<Validity>;
-	paymentMethod: ReactiveProperty<string>;
-	paymentMethodValidity: ReactiveProperty<Validity>;
-	disabledPaymentMethods: ComputedProperty<string[]>;
-	addressType: ReactiveProperty<string>;
-	addressTypeValidity: ReactiveProperty<Validity>;
-	disabledAddressTypes: ReactiveProperty<string[]>;
+	interval: Ref<string>;
+	intervalValidity: Ref<Validity>;
+	disabledIntervals: ComputedRef<string[]>;
+	amount: Ref<string>;
+	customAmount: Ref<string>;
+	amountValidity: Ref<Validity>;
+	paymentMethod: Ref<string>;
+	paymentMethodValidity: Ref<Validity>;
+	disabledPaymentMethods: ComputedRef<string[]>;
+	addressType: Ref<string>;
+	addressTypeValidity: Ref<Validity>;
+	disabledAddressTypes: Ref<string[]>;
 }

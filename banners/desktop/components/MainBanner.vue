@@ -7,7 +7,7 @@
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
-				<DonationForm formUrl="#"/>
+				<DonationForm formUrl="#" :customAmountPlaceholder="$translate('custom-amount-placeholder')"/>
 			</div>
 		</div>
 		<BannerFooter />
