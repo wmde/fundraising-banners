@@ -13,7 +13,7 @@
 				<label>
 					<input
 						type="radio"
-						@input="$emit('update:modelValue', $event.target.value)"
+						@change="$emit('update:modelValue', $event.target.value)"
 						:checked="value === modelValue"
 						:name="fieldName"
 						:value="value"

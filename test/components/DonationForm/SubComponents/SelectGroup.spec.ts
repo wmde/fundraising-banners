@@ -42,6 +42,13 @@ describe( 'SelectGroup.vue', () => {
 		expect( wrapper.find<HTMLInputElement>( '.interval-1 input' ).element.checked ).toBeTruthy();
 	} );
 
+	it( 'emits event when a radio button (value) is selected', async () => {
+		await wrapper.find<HTMLInputElement>( '.interval-1 input' ).trigger( 'change' );
+
+		expect( wrapper.emitted( 'update:modelValue' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'update:modelValue' )[ 0 ] ).toEqual( [ '1' ] );
+	} );
+
 	it( 'disables the options when disabledOptions are set', async () => {
 		await wrapper.setProps( { disabledOptions: [ '1' ] } );
 

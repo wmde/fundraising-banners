@@ -31,7 +31,7 @@
 					fieldname="select-amount"
 					v-model="customAmount"
 					@blur="validateCustomAmount"
-					:placeholder=" customAmountPlaceholder "
+					:placeholder="customAmountPlaceholder"
 					/>
 			</SelectGroup>
 		</fieldset>

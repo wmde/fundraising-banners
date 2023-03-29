@@ -9,29 +9,29 @@ describe( 'SelectCustomAmount.vue', () => {
 		wrapper = shallowMount( SelectCustomAmount, {
 			props: {
 				placeholder: 'placeholder-text',
-				fieldName: 'fld-custom-amount'
+				fieldName: 'fld-custom-amount',
+				modelValue: ''
 			}
 		} );
 	} );
 
 	it( 'updates the CSS classes when a value is entered', async () => {
-		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '2500' );
+		await wrapper.setProps( { modelValue: '2500' } );
 
 		expect( wrapper.attributes( 'class' ) ).toContain( 'value-entered' );
 	} );
 
-	it( 'updates the CSS classes when a value is entered', async () => {
+	it( 'emits event when a value is entered', async () => {
+		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '5555' );
+
+		expect( wrapper.emitted( 'update:modelValue' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'update:modelValue' )[ 0 ] ).toEqual( [ '5555' ] );
+	} );
+
+	it( 'updates the CSS classes when input field gets focused', async () => {
 		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).trigger( 'focus' );
 
 		expect( wrapper.attributes( 'class' ) ).toContain( 'focused' );
-	} );
-
-	it( 'clears the custom amount when the selectedAmount becomes not null', async () => {
-		const textField = wrapper.find<HTMLInputElement>( 'input[type=text]' );
-		await textField.setValue( '2500' );
-		await wrapper.setProps( { selectedAmount: '42' } );
-
-		expect( textField.element.value ).toBe( '' );
 	} );
 
 	it( 'should check radio button when input field is focused', async () => {
@@ -41,7 +41,7 @@ describe( 'SelectCustomAmount.vue', () => {
 	} );
 
 	it( 'should check radio button when input field has custom amount', async () => {
-		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '2500' );
+		await wrapper.setProps( { modelValue: '2500' } );
 
 		expect( wrapper.find<HTMLInputElement>( 'input[type=radio]' ).element.checked ).toBeTruthy();
 	} );
@@ -57,7 +57,7 @@ describe( 'SelectCustomAmount.vue', () => {
 	it( 'should show euro symbol when field has an entered value', async () => {
 		expect( wrapper.find( '.wmde-banner-select-custom-amount-euro-symbol' ).exists() ).toBe( false );
 
-		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '2500' );
+		await wrapper.setProps( { modelValue: '2500' } );
 
 		expect( wrapper.find( '.wmde-banner-select-custom-amount-euro-symbol' ).exists() ).toBe( true );
 	} );

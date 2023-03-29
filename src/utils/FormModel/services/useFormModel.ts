@@ -57,6 +57,8 @@ export function useFormModel(): FormModel {
 		return [];
 	} );
 
+	// TODO clear custom amount (watch other fields for that)
+
 	return {
 		interval,
 		intervalValidity,
