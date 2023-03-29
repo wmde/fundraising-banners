@@ -5,9 +5,9 @@
 		{ 'wmde-banner-select-group-container-with-error': !isValid }
 	]">
 		<div class="wmde-banner-select-group">
-			<div v-for="{ value, label, notice } in selectionItems" :key="value" :class="[
+			<div v-for="{ value, label, className, notice } in selectionItems" :key="value" :class="[
 				'wmde-banner-select-group-option',
-				`${ fieldName }-${value.replace( ' ', '-' )}`,
+				className,
 				{ 'wmde-banner-disabled': disabledOptions.indexOf( value ) > -1 }
 			]">
 				<label>
@@ -20,7 +20,7 @@
 						:disabled="disabledOptions.indexOf( value ) > -1"
 						class="wmde-banner-select-group-input"
 					/>
-					<span class="wmde-banner-select-group-label">{{ label || value }}</span>
+					<span class="wmde-banner-select-group-label">{{ label }}</span>
 				</label>
 				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === currentValue }">
 					{{ notice }}

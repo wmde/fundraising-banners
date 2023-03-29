@@ -46,7 +46,7 @@ describe( 'SelectCustomAmount.vue', () => {
 		expect( wrapper.find<HTMLInputElement>( 'input[type=radio]' ).element.checked ).toBeTruthy();
 	} );
 
-	it( 'should show euro symbol when field is focussed', async () => {
+	it( 'should show euro symbol when field is focused', async () => {
 		expect( wrapper.find( '.wmde-banner-select-custom-amount-euro-symbol' ).exists() ).toBe( false );
 
 		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).trigger( 'focus' );
