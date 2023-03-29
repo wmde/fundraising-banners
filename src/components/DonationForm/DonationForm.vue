@@ -48,6 +48,7 @@
 import { inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
 interface Props {
 	formUrl: string;
@@ -58,11 +59,8 @@ type Validity = 'valid' | 'invalid' | 'unset';
 
 defineProps<Props>();
 
-const paymentInterval = ref<string>( '' );
-const disabledIntervals = ref<string[]>( [] );
-const intervalValidity = ref<Validity>( 'unset' );
-
 const formItems: DonationFormItems = inject( 'formItems' );
+const formModel = useFormModel();
 
 // TODO call tracker
 const onFormInteraction = (): void => {};
@@ -75,8 +73,10 @@ const isValidOrUnset = ( validity: Validity ): boolean => {
 };
 
 const setInterval = ( e: Event ): void => {
-	paymentInterval.value = ( e.target as HTMLInputElement ).value;
+	formModel.interval.value = ( e.target as HTMLInputElement ).value;
 };
+
+const { interval, intervalValidity } = formModel;
 
 </script>
 

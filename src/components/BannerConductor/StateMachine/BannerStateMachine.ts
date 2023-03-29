@@ -1,6 +1,6 @@
 import { StateMachine } from '@src/utils/StateMachine/StateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { ReactiveProperty } from '@src/utils/ReactiveProperty';
+import { ReactiveProperty } from '@src/domain/ReactiveProperty';
 
 export class BannerStateMachine implements StateMachine<BannerState> {
 	public currentState: ReactiveProperty<BannerState>;

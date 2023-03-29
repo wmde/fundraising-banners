@@ -46,6 +46,7 @@ interface Props{
 	currentValue: string;
 	disabledOptions?: string[];
 	errorMessage?: string;
+	modelValue: string;
 }
 
 withDefaults( defineProps<Props>(),
@@ -53,6 +54,8 @@ withDefaults( defineProps<Props>(),
 		disabledOptions: (): string[] => []
 	}
 );
+
+defineEmits( [ 'update:modelValue' ] );
 
 </script>
 
