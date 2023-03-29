@@ -57,6 +57,7 @@
 			</button>
 		</div>
 
+		<SubmitValues :amount="amount" :interval="interval" :payment-type="paymentMethod" />
 	</form>
 </template>
 
@@ -68,6 +69,7 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
+import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
 
 interface Props {
 	formUrl: string;
