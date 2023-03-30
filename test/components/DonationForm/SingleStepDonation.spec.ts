@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
@@ -45,13 +45,21 @@ describe( 'SingleStepDonation.vue', () => {
 	it( 'updates the amount when one is selected', async () => {
 		await wrapper.find( '.amount-5 input' ).trigger( 'change' );
 
-		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '5' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '500' );
 	} );
 
-	it( 'updates the amount when a custom amount is entered', async () => {
-		await wrapper.find( '.wmde-banner-select-custom-amount-input' ).setValue( '42' );
+	test.each( [
+		[ '23.23', '2323' ],
+		[ '23,200', '2320' ],
+		[ '123', '12300' ],
+		[ '123XXX', '12300' ],
+		[ '1', '100' ],
+		[ '12.34.56', '123456' ],
+		[ '12.34.567', '123457' ]
+	] )( 'updates the amount when a custom amount is entered', async ( inputValue: string, expectedFormattedValue: string ) => {
+		await wrapper.find( '.wmde-banner-select-custom-amount-input' ).setValue( inputValue );
 
-		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '4200' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( expectedFormattedValue );
 	} );
 
 	it( 'updates the payment method when one is selected', async () => {
