@@ -70,7 +70,7 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
-import { DonationFormValidator } from '@src/validation/DonationFormValidator';
+import { formFieldsAreValid } from '@src/validation/DonationFormValidator';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 interface Props {
@@ -87,13 +87,12 @@ const emit = defineEmits( [ 'submit' ] );
 
 const currencyFormatter: Function = inject( 'currencyFormatter' );
 const formModel = useFormModel();
-const validator = new DonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
 
 const onFormInteraction = (): void => {};
 
 const validate = ( e: Event ): void => {
-	isFormValid.value = validator.isValid();
+	isFormValid.value = formFieldsAreValid( formModel );
 
 	if ( !isFormValid.value ) {
 		e.stopPropagation();

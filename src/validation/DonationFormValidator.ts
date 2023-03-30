@@ -25,3 +25,17 @@ export class DonationFormValidator {
 			this._formModel.amountValidity.value === AmountValidity.Valid;
 	}
 }
+
+export function formFieldsAreValid( formModel: FormModel ): boolean {
+	formModel.intervalValidity.value = validateStringIsNotEmpty( formModel.interval.value );
+	formModel.paymentMethodValidity.value = validateStringIsNotEmpty( formModel.paymentMethod.value );
+	formModel.amountValidity.value = validateAmount(
+		formModel.numericAmount.value,
+		formModel.selectedAmount.value,
+		formModel.customAmount.value
+	);
+
+	return formModel.intervalValidity.value === Validity.Valid &&
+		formModel.paymentMethodValidity.value === Validity.Valid &&
+		formModel.amountValidity.value === AmountValidity.Valid;
+}
