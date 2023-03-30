@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it, test } from 'vitest';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
-import { DonationFormValidator } from '@src/validation/DonationFormValidator';
+import { formFieldsAreValid } from '@src/validation/DonationFormValidator';
 
-describe( 'DonationFormValidator', () => {
+describe( 'formFieldsAreValid', () => {
 
 	const model = useFormModel();
 
@@ -36,9 +36,8 @@ describe( 'DonationFormValidator', () => {
 	) => {
 		model.selectedAmount.value = amountInputInEuros;
 		model.customAmount.value = customAmountInputInEuros;
-		const validator = new DonationFormValidator( model );
 
-		validator.isValid();
+		formFieldsAreValid( model );
 
 		expect( model.amountValidity.value ).toBe( expectedAmountValidity );
 	} );
@@ -46,9 +45,7 @@ describe( 'DonationFormValidator', () => {
 	it( 'should set interval validity to invalid when interval is not set', function () {
 		model.interval.value = '';
 
-		const validator = new DonationFormValidator( model );
-
-		validator.isValid();
+		formFieldsAreValid( model );
 
 		expect( model.intervalValidity.value ).toBe( Validity.Invalid );
 	} );
@@ -56,9 +53,7 @@ describe( 'DonationFormValidator', () => {
 	it( 'should set interval validity to valid when interval is set', function () {
 		model.interval.value = '0';
 
-		const validator = new DonationFormValidator( model );
-
-		validator.isValid();
+		formFieldsAreValid( model );
 
 		expect( model.intervalValidity.value ).toBe( Validity.Valid );
 	} );
@@ -66,9 +61,7 @@ describe( 'DonationFormValidator', () => {
 	it( 'should set paymentMethod validity to invalid when paymentMethod is not set', function () {
 		model.paymentMethod.value = '';
 
-		const validator = new DonationFormValidator( model );
-
-		validator.isValid();
+		formFieldsAreValid( model );
 
 		expect( model.paymentMethodValidity.value ).toBe( Validity.Invalid );
 	} );
@@ -76,9 +69,7 @@ describe( 'DonationFormValidator', () => {
 	it( 'should set paymentMethod validity to valid when paymentMethod is set', function () {
 		model.paymentMethod.value = '0';
 
-		const validator = new DonationFormValidator( model );
-
-		validator.isValid();
+		formFieldsAreValid( model );
 
 		expect( model.paymentMethodValidity.value ).toBe( Validity.Valid );
 	} );
@@ -102,8 +93,7 @@ describe( 'DonationFormValidator', () => {
 		model.selectedAmount.value = amountInputInEuros;
 		model.interval.value = interval;
 		model.paymentMethod.value = paymentMethod;
-		const validator = new DonationFormValidator( model );
 
-		expect( validator.isValid() ).toBe( expectedValidationResult );
+		expect( formFieldsAreValid( model ) ).toBe( expectedValidationResult );
 	} );
 } );
