@@ -25,7 +25,10 @@ describe( 'SingleStepDonation.vue', () => {
 				formUrl: 'https://example.com'
 			},
 			global: {
-				provide: { formItems: formItems },
+				provide: {
+					formItems: formItems,
+					currencyFormatter: ( amount: number ) => String( amount )
+				},
 				mocks: {
 					$translate: ( key: string ) => key
 				}
@@ -48,7 +51,7 @@ describe( 'SingleStepDonation.vue', () => {
 	it( 'updates the amount when a custom amount is entered', async () => {
 		await wrapper.find( '.wmde-banner-select-custom-amount-input' ).setValue( '42' );
 
-		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '42' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '4200' );
 	} );
 
 	it( 'updates the payment method when one is selected', async () => {

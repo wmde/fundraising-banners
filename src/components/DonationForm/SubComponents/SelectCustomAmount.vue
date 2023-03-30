@@ -51,6 +51,7 @@ const emit = defineEmits( [ 'blur', 'update:modelValue' ] );
 
 const focused = ref<boolean>( false );
 const inputRef = ref<HTMLInputElement>( null );
+const showEuro = computed( () => props.modelValue !== '' || focused.value );
 
 const onFocus = ( e: Event ): void => {
 	focused.value = true;
@@ -73,8 +74,6 @@ const onRadioClicked = (): void => {
 const onInput = ( e: Event ): void => {
 	emit( 'update:modelValue', ( e.target as HTMLInputElement ).value );
 };
-
-const showEuro = computed( () => props.modelValue !== '' || focused.value );
 
 </script>
 

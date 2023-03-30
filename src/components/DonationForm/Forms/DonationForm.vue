@@ -64,12 +64,11 @@
 
 <script setup lang="ts">
 
-import { ref, toRefs } from 'vue';
+import { inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
-import { FormModel } from '@src/utils/FormModel/FormModel';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
 interface Props {
@@ -82,10 +81,11 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
-
 const emit = defineEmits( [ 'submit' ] );
 
 const isFormValid = ref<boolean>( true );
+
+const currencyFormatter: Function = inject( 'currencyFormatter' );
 
 // TODO call tracker
 const onFormInteraction = (): void => {};
@@ -102,11 +102,13 @@ const isValidOrUnset = ( validity: Validity ): boolean => {
 
 const {
 	interval, intervalValidity, disabledIntervals,
-	amount, customAmount, amountValidity,
+	amount, customAmount, numericAmount, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
 } = useFormModel();
 
-const validateCustomAmount = (): void => {};
+const validateCustomAmount = (): void => {
+	customAmount.value = currencyFormatter( numericAmount.value );
+};
 
 </script>
 

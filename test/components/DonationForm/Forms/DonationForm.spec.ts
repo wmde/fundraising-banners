@@ -5,7 +5,6 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.NO, AddressTypes.EMAIL ],
@@ -29,9 +28,21 @@ describe( 'DonationForm.vue', () => {
 			global: {
 				mocks: {
 					$translate: ( key: string ) => key
+				},
+				provide: {
+					currencyFormatter: ( amount: number ) => String( amount )
 				}
 			}
 		} );
+	} );
+
+	it( 'should format amount when input field is blurred', async () => {
+		const input = wrapper.find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( '3,14' );
+		await input.trigger( 'blur' );
+
+		expect( input.element.value ).toBe( '3.14' );
 	} );
 
 	it.todo( 'shows invalid fields on submit when fields are invalid' );
