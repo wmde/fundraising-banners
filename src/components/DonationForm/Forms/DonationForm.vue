@@ -25,7 +25,7 @@
 				:selectionItems="formItems.amounts"
 				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="'amountMessage( amountValidity, Translations )'"
-				v-model="amount"
+				v-model="selectedAmount"
 			>
 				<SelectCustomAmount
 					fieldName="select-amount"
@@ -112,7 +112,7 @@ const isValidOrUnset = ( validity: Validity|AmountValidity ): boolean => {
 
 const {
 	interval, intervalValidity, disabledIntervals,
-	amount, customAmount, numericAmount, amountValidity,
+	selectedAmount, customAmount, numericAmount, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
 } = formModel;
 

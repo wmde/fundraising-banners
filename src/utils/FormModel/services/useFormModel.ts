@@ -10,10 +10,10 @@ import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
-const amount = ref<string>( '' );
+const selectedAmount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const customAmount = ref<string>( '' );
-const numericAmount = computed( (): number => parseFloatFromFormattedString( amount.value || customAmount.value ) );
+const numericAmount = computed( (): number => parseFloatFromFormattedString( selectedAmount.value || customAmount.value ) );
 
 const paymentMethod = ref<string>( '' );
 const paymentMethodValidity = ref<Validity>( Validity.Unset );
@@ -51,7 +51,7 @@ watch( paymentMethod, ( newPaymentMethod: string ) => {
 	}
 } );
 
-watch( amount, ( newAmount: string, oldAmount: string ) => {
+watch( selectedAmount, ( newAmount: string, oldAmount: string ) => {
 	if ( oldAmount === '' && newAmount !== '' ) {
 		customAmount.value = '';
 	}
@@ -59,7 +59,7 @@ watch( amount, ( newAmount: string, oldAmount: string ) => {
 
 watch( customAmount, ( newCustomAmount: string, oldCustomAmount: string ) => {
 	if ( oldCustomAmount === '' && newCustomAmount !== '' ) {
-		amount.value = '';
+		selectedAmount.value = '';
 	}
 } );
 
@@ -69,7 +69,7 @@ export function useFormModel(): FormModel {
 		intervalValidity,
 		disabledIntervals,
 
-		amount,
+		selectedAmount,
 		customAmount,
 		numericAmount,
 		amountValidity,

@@ -5,6 +5,7 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { nextTick } from 'vue';
 import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Validity } from '@src/utils/FormModel/Validity';
+import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 const model = useFormModel();
 
@@ -14,8 +15,8 @@ describe( 'useFormModel', () => {
 	beforeEach( () => {
 		model.interval.value = '';
 		model.intervalValidity.value = Validity.Unset;
-		model.amount.value = '';
-		model.amountValidity.value = Validity.Unset;
+		model.selectedAmount.value = '';
+		model.amountValidity.value = AmountValidity.Unset;
 		model.customAmount.value = '';
 		model.paymentMethod.value = '';
 		model.paymentMethodValidity.value = Validity.Unset;
@@ -80,25 +81,25 @@ describe( 'useFormModel', () => {
 	} );
 
 	it( 'should clear custom amount when amount changes', async function () {
-		model.amount.value = '';
+		model.selectedAmount.value = '';
 		model.customAmount.value = '999';
 		await nextTick();
 
-		model.amount.value = '500';
+		model.selectedAmount.value = '500';
 		await nextTick();
 
 		expect( model.customAmount.value ).toEqual( '' );
 	} );
 
 	it( 'should clear amount when custom amount changes', async function () {
-		model.amount.value = '555';
+		model.selectedAmount.value = '555';
 		model.customAmount.value = '';
 		await nextTick();
 
 		model.customAmount.value = '500';
 		await nextTick();
 
-		expect( model.amount.value ).toEqual( '' );
+		expect( model.selectedAmount.value ).toEqual( '' );
 	} );
 
 	test.each( [
@@ -111,7 +112,7 @@ describe( 'useFormModel', () => {
 		[ '1234,67.5656', 123467.5656 ],
 		[ '1234,675,656', 1234675.656 ]
 	] )( 'should set numericAmount when amount changes', function ( inputAmount: string, expectedNumericAmount: number ) {
-		model.amount.value = inputAmount;
+		model.selectedAmount.value = inputAmount;
 
 		expect( model.numericAmount.value ).toEqual( expectedNumericAmount );
 	} );

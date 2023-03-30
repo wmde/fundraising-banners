@@ -1,7 +1,7 @@
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
-export function validateAmount( amount: number ): AmountValidity {
-	if ( amount === 0 ) {
+export function validateAmount( amount: number, selectedAmount: string, customAmount: string ): AmountValidity {
+	if ( selectedAmount === '' && customAmount === '' ) {
 		return AmountValidity.Unset;
 	}
 
