@@ -1,18 +1,16 @@
 <template>
-	<input type="hidden" name="addressType" :value="addressType" />
-	<input type="hidden" name="amount" :value="amount" />
-	<input type="hidden" name="interval" :value="interval" />
-	<input type="hidden" name="paymentType" :value="paymentType" />
+	<div class="wmde-banner-submit-values">
+		<input type="hidden" name="addressType" :value="addressType" />
+		<input type="hidden" name="amount" :value="amount" />
+		<input type="hidden" name="interval" :value="interval" />
+		<input type="hidden" name="paymentType" :value="paymentMethod" />
+	</div>
 </template>
 
 <script setup lang="ts">
 
-interface Props {
-	addressType?: string;
-	amount: string;
-	interval: string;
-	paymentType: string;
-}
+import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
-defineProps<Props>();
+const { addressType, amount, interval, paymentMethod } = useFormModel();
+
 </script>

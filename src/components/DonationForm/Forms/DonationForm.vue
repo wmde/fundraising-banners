@@ -31,7 +31,7 @@
 					fieldName="select-amount"
 					v-model="customAmount"
 					@blur="validateCustomAmount"
-					:placeholder="customAmountPlaceholder"
+					:placeholder="$translate( 'custom-amount-placeholder' )"
 				/>
 			</SelectGroup>
 		</fieldset>
@@ -57,39 +57,44 @@
 			</button>
 		</div>
 
-		<SubmitValues :amount="amount" :interval="interval" :payment-type="paymentMethod" />
+		<slot/>
+
 	</form>
 </template>
 
 <script setup lang="ts">
 
-import { inject, ref } from 'vue';
+import { ref, toRefs } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
-import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
+import { FormModel } from '@src/utils/FormModel/FormModel';
+import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
 interface Props {
 	formUrl: string;
-	customAmountPlaceholder: string;
+	formItems: DonationFormItems;
 	showErrorScrollLink?: boolean;
+	pageNumber?: number;
 }
 
-withDefaults( defineProps<Props>(), {
+const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
 
+const emit = defineEmits( [ 'submit' ] );
+
 const isFormValid = ref<boolean>( true );
-const formItems: DonationFormItems = inject( 'formItems' );
-const formModel = useFormModel();
 
 // TODO call tracker
 const onFormInteraction = (): void => {};
 
 // TODO implement validation based on form items
-const validate = (): void => {};
+const validate = (): void => {
+	// When valid emit and let the parent decide what to do
+	emit( 'submit', { pageNumber: props.pageNumber } );
+};
 
 const isValidOrUnset = ( validity: Validity ): boolean => {
 	return validity === Validity.Valid || validity === Validity.Unset;
@@ -99,7 +104,7 @@ const {
 	interval, intervalValidity, disabledIntervals,
 	amount, customAmount, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
-} = formModel;
+} = useFormModel();
 
 const validateCustomAmount = (): void => {};
 

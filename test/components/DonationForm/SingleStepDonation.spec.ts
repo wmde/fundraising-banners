@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import DonationForm from '@src/components/DonationForm/DonationForm.vue';
+import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
@@ -16,14 +16,13 @@ const formItems: DonationFormItems = {
 	paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD ]
 };
 
-describe( 'DonationForm.vue', () => {
+describe( 'SingleStepDonation.vue', () => {
 	let wrapper: VueWrapper<any>;
 
 	beforeEach( () => {
-		wrapper = mount( DonationForm, {
+		wrapper = mount( SingleStepDonation, {
 			props: {
-				formUrl: 'https://example.com',
-				customAmountPlaceholder: 'custom-amount-placeholder'
+				formUrl: 'https://example.com'
 			},
 			global: {
 				provide: { formItems: formItems },
@@ -37,18 +36,24 @@ describe( 'DonationForm.vue', () => {
 	it( 'updates the interval when one is selected', async () => {
 		await wrapper.find( '.interval-1 input' ).trigger( 'change' );
 
-		expect( wrapper.find<HTMLInputElement>( 'input[name=interval]' ).element.value ).toBe( '1' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=interval]' ).element.value ).toBe( '1' );
 	} );
 
 	it( 'updates the amount when one is selected', async () => {
 		await wrapper.find( '.amount-5 input' ).trigger( 'change' );
 
-		expect( wrapper.find<HTMLInputElement>( 'input[name=amount]' ).element.value ).toBe( '5' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '5' );
+	} );
+
+	it( 'updates the amount when a custom amount is entered', async () => {
+		await wrapper.find( '.wmde-banner-select-custom-amount-input' ).setValue( '42' );
+
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=amount]' ).element.value ).toBe( '42' );
 	} );
 
 	it( 'updates the payment method when one is selected', async () => {
 		await wrapper.find( '.payment-PPL input' ).trigger( 'change' );
 
-		expect( wrapper.find<HTMLInputElement>( 'input[name=paymentType]' ).element.value ).toBe( 'PPL' );
+		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=paymentType]' ).element.value ).toBe( 'PPL' );
 	} );
 } );

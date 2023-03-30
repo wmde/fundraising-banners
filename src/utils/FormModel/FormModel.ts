@@ -7,6 +7,7 @@ export interface FormModel {
 	disabledIntervals: ComputedRef<string[]>;
 	amount: Ref<string>;
 	customAmount: Ref<string>;
+	numericAmount: ComputedRef<number>;
 	amountValidity: Ref<Validity>;
 	paymentMethod: Ref<string>;
 	paymentMethodValidity: Ref<Validity>;

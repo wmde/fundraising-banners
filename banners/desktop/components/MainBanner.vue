@@ -21,7 +21,7 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import DonationForm from '@src/components/DonationForm/DonationForm.vue';
+import DonationForm from '@src/components/DonationForm/SingleStepDonation.vue';
 
 interface Props {
 	greeting?: string,
