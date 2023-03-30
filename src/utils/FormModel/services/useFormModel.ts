@@ -5,12 +5,13 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
+import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
 const amount = ref<string>( '' );
-const amountValidity = ref<Validity>( Validity.Unset );
+const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const customAmount = ref<string>( '' );
 const numericAmount = computed( (): number => parseFloatFromFormattedString( amount.value || customAmount.value ) );
 

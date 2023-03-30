@@ -70,6 +70,8 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { DonationFormValidator } from '@src/validation/DonationFormValidator';
+import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 interface Props {
 	formUrl: string;
@@ -83,28 +85,36 @@ const props = withDefaults( defineProps<Props>(), {
 } );
 const emit = defineEmits( [ 'submit' ] );
 
+const currencyFormatter: Function = inject( 'currencyFormatter' );
+const formModel = useFormModel();
+const validator = new DonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
 
-const currencyFormatter: Function = inject( 'currencyFormatter' );
-
-// TODO call tracker
 const onFormInteraction = (): void => {};
 
-// TODO implement validation based on form items
-const validate = (): void => {
-	// When valid emit and let the parent decide what to do
+const validate = ( e: Event ): void => {
+	isFormValid.value = validator.isValid();
+
+	if ( !isFormValid.value ) {
+		e.stopPropagation();
+		return;
+	}
+
 	emit( 'submit', { pageNumber: props.pageNumber } );
 };
 
-const isValidOrUnset = ( validity: Validity ): boolean => {
-	return validity === Validity.Valid || validity === Validity.Unset;
+const isValidOrUnset = ( validity: Validity|AmountValidity ): boolean => {
+	return validity === Validity.Valid ||
+		validity === Validity.Unset ||
+		validity === AmountValidity.Valid ||
+		validity === AmountValidity.Unset;
 };
 
 const {
 	interval, intervalValidity, disabledIntervals,
 	amount, customAmount, numericAmount, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
-} = useFormModel();
+} = formModel;
 
 const validateAndFormatCustomAmount = (): void => {
 	// TODO add validation here (check upper and lower limit etc)
