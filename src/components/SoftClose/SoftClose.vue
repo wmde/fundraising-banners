@@ -1,5 +1,4 @@
 <template>
-
 	<div class="wmde-banner-soft-close">
 		<div class="wmde-banner-soft-close-countdown-bar">
 			<div class="wmde-banner-soft-close-countdown-bar-fill"></div>
@@ -12,14 +11,14 @@
 				</slot>
 				<div class="wmde-banner-soft-close-buttons">
 					<button
-						class="wmde-banner-soft-close-button"
+						class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
 						@click="onMaybeLaterClick">
-						{{ $translate( 'soft-close-button-1' ) }}
+						{{ $translate( 'soft-close-button-maybe-later' ) }}
 					</button>
 					<button
-						class="wmde-banner-soft-close-button"
+						class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
 						@click="onCloseClick">
-						{{ $translate( 'soft-close-button-2' ) }}
+						{{ $translate( 'soft-close-button-close' ) }}
 					</button>
 				</div>
 			</div>

@@ -96,7 +96,13 @@ const Translations: TranslationMessages = {
 	'month-name-9': 'September',
 	'month-name-10': 'Oktober',
 	'month-name-11': 'November',
-	'month-name-12': 'Dezember'
+	'month-name-12': 'Dezember',
+
+	// SoftClose
+	'soft-close-prompt': 'Vielleicht möchten Sie Wikipedia später unterstützen?',
+	'soft-close-button-maybe-later': 'Ja',
+	'soft-close-button-close': 'Erstmal nicht',
+	'soft-close-countdown-text': 'Diese Mitteilung wird automatisch in <strong> {{seconds}} Sekunden</strong> ausgeblendet.'
 };
 
 export default Translations;
