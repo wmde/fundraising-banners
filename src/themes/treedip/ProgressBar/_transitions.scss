@@ -13,7 +13,7 @@
 		transition-delay: 3000ms;
 	}
 
-	&-visible {
+	&--visible {
 		.wmde-banner-progress-bar-fill {
 			width: var( --wmde-banner-progress-bar-width );
 		}

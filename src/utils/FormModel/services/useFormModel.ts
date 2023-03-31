@@ -44,7 +44,16 @@ const disabledAddressTypes = computed( (): string[] => {
 	return [];
 } );
 
+watch( interval, ( newInterval: string ) => {
+	if ( intervalValidity.value === Validity.Invalid && newInterval !== '' ) {
+		intervalValidity.value = Validity.Valid;
+	}
+} );
+
 watch( paymentMethod, ( newPaymentMethod: string ) => {
+	if ( paymentMethodValidity.value === Validity.Invalid && newPaymentMethod !== '' ) {
+		paymentMethodValidity.value = Validity.Valid;
+	}
 	if ( newPaymentMethod === PaymentMethods.DIRECT_DEBIT.value && addressType.value === AddressTypes.NO.value ) {
 		addressType.value = '';
 		addressTypeValidity.value = Validity.Unset;
@@ -52,12 +61,18 @@ watch( paymentMethod, ( newPaymentMethod: string ) => {
 } );
 
 watch( selectedAmount, ( newAmount: string, oldAmount: string ) => {
+	if ( ![ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity.value ) && newAmount !== '' ) {
+		amountValidity.value = AmountValidity.Valid;
+	}
 	if ( oldAmount === '' && newAmount !== '' ) {
 		customAmount.value = '';
 	}
 } );
 
 watch( customAmount, ( newCustomAmount: string, oldCustomAmount: string ) => {
+	if ( ![ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity.value ) && newCustomAmount !== '' ) {
+		amountValidity.value = AmountValidity.Valid;
+	}
 	if ( oldCustomAmount === '' && newCustomAmount !== '' ) {
 		selectedAmount.value = '';
 	}

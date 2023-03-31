@@ -116,4 +116,68 @@ describe( 'useFormModel', () => {
 
 		expect( model.numericAmount.value ).toEqual( expectedNumericAmount );
 	} );
+
+	it( 'sets Invalid paymentMethodValidity to valid when a payment method is selected', async () => {
+		model.paymentMethodValidity.value = Validity.Invalid;
+
+		model.paymentMethod.value = 'PPL';
+		await nextTick();
+
+		expect( model.paymentMethodValidity.value ).toBe( Validity.Valid );
+	} );
+
+	it( 'does not set Unset paymentMethodValidity to Valid when a payment method is selected', async () => {
+		model.paymentMethodValidity.value = Validity.Unset;
+
+		model.paymentMethod.value = 'PPL';
+		await nextTick();
+
+		expect( model.paymentMethodValidity.value ).toBe( Validity.Unset );
+	} );
+
+	it( 'sets Invalid intervalValidity to valid when an interval is selected', async () => {
+		model.intervalValidity.value = Validity.Invalid;
+
+		model.interval.value = '1';
+		await nextTick();
+
+		expect( model.intervalValidity.value ).toBe( Validity.Valid );
+	} );
+
+	it( 'does not set Unset paymentMethodValidity to Valid when a payment method is selected', async () => {
+		model.intervalValidity.value = Validity.Unset;
+
+		model.interval.value = '1';
+		await nextTick();
+
+		expect( model.intervalValidity.value ).toBe( Validity.Unset );
+	} );
+
+	test.each( [
+		[ AmountValidity.Unset, AmountValidity.Unset ],
+		[ AmountValidity.Invalid, AmountValidity.Valid ],
+		[ AmountValidity.TooHigh, AmountValidity.Valid ],
+		[ AmountValidity.TooLow, AmountValidity.Valid ]
+	] )( 'sets correct amountValidity when an amount is selected', async ( initialValidity: AmountValidity, expectedValidity: AmountValidity ) => {
+		model.amountValidity.value = initialValidity;
+
+		model.selectedAmount.value = '5';
+		await nextTick();
+
+		expect( model.amountValidity.value ).toBe( expectedValidity );
+	} );
+
+	test.each( [
+		[ AmountValidity.Unset, AmountValidity.Unset ],
+		[ AmountValidity.Invalid, AmountValidity.Valid ],
+		[ AmountValidity.TooHigh, AmountValidity.Valid ],
+		[ AmountValidity.TooLow, AmountValidity.Valid ]
+	] )( 'sets correct amountValidity when a custom amount is entered', async ( initialValidity: AmountValidity, expectedValidity: AmountValidity ) => {
+		model.amountValidity.value = initialValidity;
+
+		model.customAmount.value = '5';
+		await nextTick();
+
+		expect( model.amountValidity.value ).toBe( expectedValidity );
+	} );
 } );

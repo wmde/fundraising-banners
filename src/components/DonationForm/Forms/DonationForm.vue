@@ -24,7 +24,7 @@
 				fieldName="select-amount"
 				:selectionItems="formItems.amounts"
 				:isValid="isValidOrUnset( amountValidity )"
-				:errorMessage="'amountMessage( amountValidity, Translations )'"
+				:errorMessage="$translate( amountValidityMessageKey( amountValidity ) )"
 				v-model="selectedAmount"
 			>
 				<SelectCustomAmount
@@ -70,8 +70,9 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
-import { formFieldsAreValid } from '@src/validation/DonationFormValidator';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
+import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
+import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 
 interface Props {
 	formUrl: string;
@@ -83,23 +84,24 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
-const emit = defineEmits( [ 'submit' ] );
+const emit = defineEmits( [ 'formSubmit' ] );
 
 const currencyFormatter: Function = inject( 'currencyFormatter' );
 const formModel = useFormModel();
+const validator = newDonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
 
 const onFormInteraction = (): void => {};
 
 const validate = ( e: Event ): void => {
-	isFormValid.value = formFieldsAreValid( formModel );
+	isFormValid.value = validator.validate();
 
 	if ( !isFormValid.value ) {
-		e.stopPropagation();
+		e.preventDefault();
 		return;
 	}
 
-	emit( 'submit', { pageNumber: props.pageNumber } );
+	emit( 'formSubmit', { pageNumber: props.pageNumber } );
 };
 
 const isValidOrUnset = ( validity: Validity|AmountValidity ): boolean => {

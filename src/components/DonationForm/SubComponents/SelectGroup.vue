@@ -2,7 +2,7 @@
 	<div :class="[
 		'wmde-banner-select-group-container',
 		fieldName,
-		{ 'wmde-banner-select-group-container-with-error': !isValid }
+		{ 'wmde-banner-select-group-container--with-error': !isValid }
 	]">
 		<div class="wmde-banner-select-group">
 			<div v-for="{ value, label, className, notice } in selectionItems" :key="value" :class="[
@@ -82,28 +82,28 @@ const onChange = ( e: Event ): void => {
 			margin-top: 0;
 			border: 0;
 			padding: 0;
+
+			&--with-error {
+				.wmde-banner-error-icon {
+					position: relative;
+					display: block;
+
+					&::before {
+						position: absolute;
+						top: 0;
+						left: 0;
+					}
+				}
+
+				.wmde-banner-select-group-error-message {
+					display: block;
+				}
+			}
 		}
 
 		&-error-message {
 			display: none;
 			width: 100%;
-		}
-
-		&-container-with-error {
-			.wmde-banner-error-icon {
-				position: relative;
-				display: block;
-
-				&::before {
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
-			}
-
-			.wmde-banner-select-group-error-message {
-				display: block;
-			}
 		}
 
 		&-option {

@@ -16,7 +16,7 @@
 		&-error-message {
 			height: 16px;
 			line-height: 16px;
-			color: colors.$black;
+			color: colors.$error;
 			font-weight: bold;
 			text-align: left;
 			margin-bottom: 0.2em;
@@ -32,10 +32,6 @@
 					width: 16px;
 					height: 16px;
 				}
-			}
-
-			.wmde-banner-select-group-error-message {
-				color: colors.$error;
 			}
 		}
 

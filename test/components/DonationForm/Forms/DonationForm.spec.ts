@@ -1,11 +1,11 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import DonationForm from '@src/components/DonationForm/Forms/DonationForm.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { formFieldsAreValid } from '@src/validation/DonationFormValidator';
+import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.NO, AddressTypes.EMAIL ],
@@ -19,15 +19,13 @@ const formItems: DonationFormItems = {
 
 vi.mock( '@src/validation/DonationFormValidator', () => {
 	return {
-		formFieldsAreValid: vi.fn()
+		newDonationFormValidator: vi.fn()
 	};
 } );
 
 describe( 'DonationForm.vue', () => {
-	let wrapper: VueWrapper<any>;
-
-	beforeEach( () => {
-		wrapper = mount( DonationForm, {
+	const getWrapper = (): VueWrapper<any> => {
+		return mount( DonationForm, {
 			props: {
 				formUrl: 'https://example.com',
 				formItems: formItems
@@ -41,10 +39,10 @@ describe( 'DonationForm.vue', () => {
 				}
 			}
 		} );
-	} );
+	};
 
 	it( 'should format amount when input field is blurred', async () => {
-		const input = wrapper.find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+		const input = getWrapper().find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
 
 		await input.setValue( '3,14' );
 		await input.trigger( 'blur' );
@@ -52,26 +50,32 @@ describe( 'DonationForm.vue', () => {
 		expect( input.element.value ).toBe( '3.14' );
 	} );
 
-	it.todo( 'shows invalid fields on submit when fields are invalid' );
+	it( 'shows invalid fields on submit when fields are invalid', async () => {
+		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		const wrapper = getWrapper();
+
+		await wrapper.trigger( 'submit' );
+
+		expect( wrapper.find( '.select-interval .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.select-amount .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.select-payment-method .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
+	} );
 
 	it( 'emits an event on submit when fields are valid', () => {
-		const MockDonationFormValidator = vi.mocked( formFieldsAreValid );
-		MockDonationFormValidator.mockReturnValue( true );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => true } );
+		const wrapper = getWrapper();
 
 		wrapper.trigger( 'submit' );
 
-		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'formSubmit' ).length ).toBe( 1 );
 	} );
 
 	it( 'does not emit our own submit event when form fields are invalid', () => {
-		const MockDonationFormValidator = vi.mocked( formFieldsAreValid );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		const wrapper = getWrapper();
 
-		MockDonationFormValidator.mockReturnValue( false );
-
-		// this submit event is the submit event of the HTML form
 		wrapper.trigger( 'submit' );
 
-		// this submit event is our own named event
-		expect( wrapper.emitted( 'submit' ) ).toBeUndefined();
+		expect( wrapper.emitted( 'formSubmit' ) ).toBeUndefined();
 	} );
 } );

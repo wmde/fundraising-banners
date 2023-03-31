@@ -24,11 +24,11 @@ describe( 'SelectGroup.vue', () => {
 	} );
 
 	it( 'sets invalid css class when isValid becomes false', async () => {
-		expect( wrapper.attributes( 'class' ) ).not.toContain( 'wmde-banner-select-group-container-with-error' );
+		expect( wrapper.attributes( 'class' ) ).not.toContain( 'wmde-banner-select-group-container--with-error' );
 
 		await wrapper.setProps( { isValid: false } );
 
-		expect( wrapper.attributes( 'class' ) ).toContain( 'wmde-banner-select-group-container-with-error' );
+		expect( wrapper.attributes( 'class' ) ).toContain( 'wmde-banner-select-group-container--with-error' );
 	} );
 
 	it( 'adds selection items as options', () => {
