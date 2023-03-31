@@ -6,23 +6,14 @@ import { nextTick } from 'vue';
 import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
+import { resetFormModel } from '@test/resetFormModel';
 
 const model = useFormModel();
 
 describe( 'useFormModel', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
-	beforeEach( () => {
-		model.interval.value = '';
-		model.intervalValidity.value = Validity.Unset;
-		model.selectedAmount.value = '';
-		model.amountValidity.value = AmountValidity.Unset;
-		model.customAmount.value = '';
-		model.paymentMethod.value = '';
-		model.paymentMethodValidity.value = Validity.Unset;
-		model.addressType.value = '';
-		model.addressTypeValidity.value = Validity.Unset;
-	} );
+	beforeEach( () => resetFormModel( model ) );
 
 	it( 'should clear the address type when payment method is set to Direct debit and address type was NO', async function () {
 

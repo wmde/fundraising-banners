@@ -3,23 +3,14 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 import { DonationFormValidator } from '@src/validation/DonationFormValidator';
+import { resetFormModel } from '@test/resetFormModel';
 
 describe( 'DonationFormValidator', () => {
 
 	const model = useFormModel();
 
 	// The model values are in the global scope, and they need to be reset before each test
-	beforeEach( () => {
-		model.interval.value = '';
-		model.intervalValidity.value = Validity.Unset;
-		model.selectedAmount.value = '';
-		model.amountValidity.value = AmountValidity.Unset;
-		model.customAmount.value = '';
-		model.paymentMethod.value = '';
-		model.paymentMethodValidity.value = Validity.Unset;
-		model.addressType.value = '';
-		model.addressTypeValidity.value = Validity.Unset;
-	} );
+	beforeEach( () => resetFormModel( model ) );
 
 	test.each( [
 		[ '', '', AmountValidity.Invalid ],

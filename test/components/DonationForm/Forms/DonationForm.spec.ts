@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import DonationForm from '@src/components/DonationForm/Forms/DonationForm.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
@@ -6,6 +6,8 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
+import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { resetFormModel } from '@test/resetFormModel';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.NO, AddressTypes.EMAIL ],
@@ -23,7 +25,13 @@ vi.mock( '@src/validation/DonationFormValidator', () => {
 	};
 } );
 
+const formModel = useFormModel();
+
 describe( 'DonationForm.vue', () => {
+
+	// The model values are in the global scope, and they need to be reset before each test
+	beforeEach( () => resetFormModel( formModel ) );
+
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( DonationForm, {
 			props: {
@@ -41,13 +49,30 @@ describe( 'DonationForm.vue', () => {
 		} );
 	};
 
-	it( 'should format amount when input field is blurred', async () => {
+	it( 'should clear selected amount when input field is focused', () => {
+		const input = getWrapper().find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+		formModel.selectedAmount.value = '100';
+
+		input.trigger( 'focus' );
+
+		expect( formModel.selectedAmount.value ).toBe( '' );
+	} );
+
+	it( 'should format custom amount when custom amount input field is blurred and it has a value', async () => {
 		const input = getWrapper().find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
 
 		await input.setValue( '3,14' );
 		await input.trigger( 'blur' );
 
 		expect( input.element.value ).toBe( '3.14' );
+	} );
+
+	it( 'should not format custom amount to 0.00 when input field is blurred and is blank', async () => {
+		const input = getWrapper().find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+
+		await input.trigger( 'blur' );
+
+		expect( input.element.value ).toBe( '' );
 	} );
 
 	it( 'shows invalid fields on submit when fields are invalid', async () => {
