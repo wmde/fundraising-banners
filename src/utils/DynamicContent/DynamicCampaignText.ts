@@ -104,10 +104,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get overallImpressionCount(): number {
-		// Add +1 because this value is not reactive. The banner would show 0 on the first impression of a banner.
-		// Even though this value gets increased, the value will not be (reactively) updated in the banner text.
-		// TODO research ways to make this reactive to not have to add 1 here manually
-		return this._impressionCount.overallCount + 1;
+		return this._impressionCount.overallCountIncremented;
 	}
 
 	public get visitorsVsDonorsSentence(): string {

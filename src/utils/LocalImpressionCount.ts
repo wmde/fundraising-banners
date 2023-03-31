@@ -63,4 +63,12 @@ export class LocalImpressionCount implements ImpressionCount {
 	public get overallCount(): number {
 		return this._overallCount;
 	}
+
+	public get bannerCountIncremented(): number {
+		return this._bannerCount + 1;
+	}
+
+	public get overallCountIncremented(): number {
+		return this._overallCount + 1;
+	}
 }

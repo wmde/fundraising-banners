@@ -1,5 +1,5 @@
 <template>
-	<DonationForm :form-items="formItems" :form-url="formUrl">
+	<DonationForm :form-items="formItems" :form-url="formUrl.donateWithAddressAction">
 		<SubmitValues/>
 	</DonationForm>
 </template>
@@ -10,11 +10,13 @@ import { inject } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
 import DonationForm from '@src/components/DonationForm/Forms/DonationForm.vue';
+import { FormActions } from '@src/domain/FormActions';
 
 interface Props {
-	formUrl: string;
 	showErrorScrollLink?: boolean;
 }
+
+const formUrl = inject<FormActions>( 'formActions' );
 
 withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false

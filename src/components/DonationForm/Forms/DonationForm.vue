@@ -81,7 +81,6 @@ interface Props {
 	showErrorScrollLink?: boolean;
 	pageNumber?: number;
 }
-
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
