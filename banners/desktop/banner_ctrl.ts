@@ -18,6 +18,7 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { createFormItems } from './form_items';
+import { FormActionParameters } from '@src/domain/FormActionParameters';
 
 const translator = new Translator( Translations );
 
@@ -54,7 +55,15 @@ app.use( DynamicTextPlugin, {
 	translator
 } );
 
+const formActionParameters: FormActionParameters = {
+	bannerImpressionCount: String( impressionCount.bannerCount ),
+	bannerName: page.getTracking().keyword,
+	campaignName: page.getTracking().campaign,
+	overallImpressionCount: String( impressionCount.overallCount )
+};
+
 app.provide( 'currencyFormatter', currencyFormatter.customAmountInput.bind( currencyFormatter ) );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.amountInput.bind( currencyFormatter ) ) );
+app.provide( 'formActionParameters', formActionParameters );
 
 app.mount( page.getBannerContainer() );
