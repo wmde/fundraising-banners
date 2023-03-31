@@ -27,7 +27,11 @@ describe( 'SingleStepDonation.vue', () => {
 			global: {
 				provide: {
 					formItems: formItems,
-					currencyFormatter: ( amount: number ) => String( amount )
+					currencyFormatter: ( amount: number ) => String( amount ),
+					formActions: {
+						donateWithAddressAction: `https://example.com/withAddress`,
+						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
+					}
 				},
 				mocks: {
 					$translate: ( key: string ) => key

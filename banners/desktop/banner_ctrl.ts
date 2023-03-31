@@ -18,7 +18,6 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { createFormItems } from './form_items';
-import { FormActionParameters } from '@src/domain/FormActionParameters';
 import { createFormActions } from '@src/createFormActions';
 
 const translator = new Translator( Translations );
