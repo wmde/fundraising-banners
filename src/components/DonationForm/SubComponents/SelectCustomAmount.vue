@@ -47,7 +47,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'blur', 'update:modelValue' ] );
+const emit = defineEmits( [ 'blur', 'update:modelValue', 'focus' ] );
 
 const focused = ref<boolean>( false );
 const inputRef = ref<HTMLInputElement>( null );
@@ -59,6 +59,7 @@ const onFocus = ( e: Event ): void => {
 	if ( props.modelValue !== '' ) {
 		( e.target as HTMLInputElement ).select();
 	}
+	emit( 'focus' );
 };
 
 const onBlur = (): void => {
@@ -67,7 +68,6 @@ const onBlur = (): void => {
 };
 
 const onRadioClicked = (): void => {
-	console.log( 'radio clicked' );
 	inputRef.value?.focus();
 };
 

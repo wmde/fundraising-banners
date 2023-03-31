@@ -74,6 +74,24 @@ describe( 'SelectCustomAmount.vue', () => {
 		expect( wrapper.find( 'input[type=text]' ).element ).toBe( document.activeElement );
 	} );
 
+	it( 'should propagate focus event on text input to the parent', async () => {
+		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).trigger( 'focus' );
+
+		expect( wrapper.emitted( 'focus' ).length ).toBe( 1 );
+	} );
+
+	it( 'should propagate focus event when the radio button is clicked', async () => {
+		await wrapper.find( '.wmde-banner-select-custom-amount-radio' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'focus' ).length ).toBe( 1 );
+	} );
+
+	it( 'should propagate blur event on text input to the parent', async () => {
+		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).trigger( 'blur' );
+
+		expect( wrapper.emitted( 'blur' ).length ).toBe( 1 );
+	} );
+
 	it( 'selects text on focus', async () => {
 		await wrapper.setProps( { modelValue: '42424242' } );
 

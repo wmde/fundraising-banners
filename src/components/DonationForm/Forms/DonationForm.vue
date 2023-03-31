@@ -30,7 +30,8 @@
 				<SelectCustomAmount
 					fieldName="select-amount"
 					v-model="customAmount"
-					@blur="validateAndFormatCustomAmount"
+					@focus="clearSelectedAmount"
+					@blur="formatCustomAmount"
 					:placeholder="$translate( 'custom-amount-placeholder' )"
 				/>
 			</SelectGroup>
@@ -117,9 +118,14 @@ const {
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
 } = formModel;
 
-const validateAndFormatCustomAmount = (): void => {
-	// TODO add validation here (check upper and lower limit etc)
-	customAmount.value = currencyFormatter( numericAmount.value );
+const clearSelectedAmount = (): void => {
+	selectedAmount.value = '';
+};
+
+const formatCustomAmount = (): void => {
+	if ( customAmount.value !== '' ) {
+		customAmount.value = currencyFormatter( numericAmount.value );
+	}
 };
 
 </script>
