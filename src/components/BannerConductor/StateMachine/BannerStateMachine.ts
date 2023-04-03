@@ -24,3 +24,7 @@ export class BannerStateMachine implements StateMachine<BannerState> {
 		}
 	}
 }
+
+export function newBannerStateMachine( stateRef: ReactiveProperty<BannerState> ): StateMachine<BannerState> {
+	return new BannerStateMachine( stateRef );
+}

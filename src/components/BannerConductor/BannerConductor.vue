@@ -16,14 +16,9 @@ import { Page } from '@src/page/Page';
 import { onMounted, ref } from 'vue';
 import { BannerConfig } from '@src/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
-import { BannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
+import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
+import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { PendingState } from '@src/components/BannerConductor/StateMachine/states/PendingState';
-import { NotShownState } from '@src/components/BannerConductor/StateMachine/states/NotShownState';
-import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
-import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
-import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
-import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
@@ -39,30 +34,31 @@ interface Props {
 
 const props = defineProps<Props>();
 const bannerRef = ref( null );
-const bannerState = ref<BannerState>( new InitialState() );
-const stateMachine = new BannerStateMachine( bannerState );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, props.resizeHandler, props.impressionCount );
+const bannerState = ref<BannerState>( stateFactory.newInitialState() );
+const stateMachine = newBannerStateMachine( bannerState );
 
 onMounted( async () => {
-	await stateMachine.changeState( new PendingState( props.page, bannerRef.value.offsetHeight, props.bannerConfig.delay ) );
+	await stateMachine.changeState( stateFactory.newPendingState( bannerRef.value.offsetHeight ) );
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
 	if ( bannerNotShownReason ) {
-		await stateMachine.changeState( new NotShownState( bannerNotShownReason, props.page, props.page, props.resizeHandler ) );
+		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason ) );
 	} else {
-		await stateMachine.changeState( new ShowingState( props.page, props.bannerConfig.transitionDuration ) );
-		await stateMachine.changeState( new VisibleState( props.page, props.impressionCount ) );
+		await stateMachine.changeState( stateFactory.newShowingState() );
+		await stateMachine.changeState( stateFactory.newVisibleState() );
 	}
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page, props.resizeHandler ) ) );
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( CloseSources.PageInteraction ) ) );
 
 function onContentChanged(): void {
 	stateMachine.currentState.value.onContentChanged( bannerRef.value.offsetHeight );
 }
 
 async function onCloseHandler( source: CloseSources ): Promise<any> {
-	await stateMachine.changeState( new ClosedState( source, props.page, props.page, props.resizeHandler ) );
+	await stateMachine.changeState( stateFactory.newClosedState( source ) );
 }
 
 </script>
