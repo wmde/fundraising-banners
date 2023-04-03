@@ -33,8 +33,4 @@ export class NotShownState extends BannerState {
 	public exit(): Promise<any> {
 		return Promise.resolve( true );
 	}
-
-	public onResize(): void {
-		// Do nothing
-	}
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-soft-close">
+	<div class="wmde-banner-soft-close" :style="{ '--wmde-banner-soft-close-seconds': secondsTotal + 's' }">
 		<div class="wmde-banner-soft-close-countdown-bar">
 			<div class="wmde-banner-soft-close-countdown-bar-fill"></div>
 		</div>
@@ -38,8 +38,16 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 
+interface Props {
+	secondsTotal?: number
+}
+
+const props = withDefaults( defineProps<Props>(), {
+	secondsTotal: 15
+} );
+
 const timer = ref<number>( null );
-const secondsRemaining = ref<number>( 15 );
+const secondsRemaining = ref<number>( props.secondsTotal );
 
 const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose' ] );
 
@@ -80,24 +88,7 @@ onUnmounted( () => {
 	}
 
 	.wmde-banner {
-
-		&--soft-closing {
-			.wmde-banner-soft-close {
-				display: block;
-			}
-			.wmde-banner-wrapper,
-			.wmde-banner-mini,
-			.wmde-banner-full {
-				display: none;
-			}
-			.wmde-banner-soft-close-countdown-bar-fill {
-				animation: wmde-countdown-bar 15s linear;
-				animation-fill-mode: forwards;
-			}
-		}
-
 		&-soft-close {
-			display: none;
 			z-index: 20000;
 			width: 100%;
 
@@ -136,6 +127,8 @@ onUnmounted( () => {
 				width: 100%;
 				top: 0;
 				left: 0;
+				animation: wmde-countdown-bar var( --wmde-banner-soft-close-seconds ) linear;
+				animation-fill-mode: forwards;
 			}
 		}
 	}

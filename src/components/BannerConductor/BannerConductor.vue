@@ -1,6 +1,12 @@
 <template>
 	<div ref="bannerRef" class="wmde-banner" :class="bannerState.stateName">
-		<component :is="banner" v-bind="bannerProps" :bannerState="bannerState.stateName" @banner-closed="onCloseHandler"/>
+		<component
+			:is="banner"
+			v-bind="bannerProps"
+			:bannerState="bannerState.stateName"
+			@banner-closed="onCloseHandler"
+			@banner-content-changed="onContentChanged"
+		/>
 	</div>
 </template>
 
@@ -27,7 +33,7 @@ interface Props {
 	bannerConfig: BannerConfig,
 	resizeHandler: ResizeHandler,
 	banner: Object,
-	bannerProps: Object,
+	bannerProps?: Object,
 	impressionCount: ImpressionCount
 }
 
@@ -50,6 +56,10 @@ onMounted( async () => {
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( new ClosedState( CloseSources.PageInteraction, props.page, props.page, props.resizeHandler ) ) );
+
+function onContentChanged(): void {
+	stateMachine.currentState.value.onContentChanged( bannerRef.value.offsetHeight );
+}
 
 async function onCloseHandler( source: CloseSources ): Promise<any> {
 	await stateMachine.changeState( new ClosedState( source, props.page, props.page, props.resizeHandler ) );

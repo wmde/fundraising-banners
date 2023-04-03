@@ -1,6 +1,6 @@
 <template>
-	<div class="wmde-banner-wrapper">
-		<ButtonClose @click.prevent="onClose"/>
+	<div class="wmde-banner-main">
+		<ButtonClose @click.prevent="$emit( 'close' )"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<BannerText />
@@ -15,45 +15,22 @@
 </template>
 
 <script setup lang="ts">
+
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.vue';
+import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
-interface Props {
-	greeting?: string,
-	bannerState: BannerStates
-}
-
-withDefaults( defineProps<Props>(), {
-	greeting: 'Ahoy'
-} );
-
-const emit = defineEmits( [ 'banner-closed' ] );
-
-function onClose(): void {
-	emit( 'banner-closed', CloseSources.MainBanner );
-}
+defineEmits( [ 'close' ] );
 
 </script>
 
 <style lang="scss">
-@use '../styles/styles';
 @use 'src/themes/treedip/variables/globals';
-@use 'src/themes/treedip/variables/fonts';
 @use 'src/themes/treedip/variables/colors';
 
 .wmde-banner {
-	&-wrapper {
-		font-size: 14px;
-		font-family: fonts.$ui;
-		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		background-color: colors.$white;
-	}
-
 	&-content {
 		display: flex;
 		flex-direction: row;
@@ -90,5 +67,4 @@ function onClose(): void {
 		align-items: center;
 	}
 }
-
 </style>
