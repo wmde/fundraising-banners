@@ -119,11 +119,12 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public get progressBarContent(): ProgressBarContent {
 		if ( this._progressBarContent === undefined ) {
+			const projection = this.getCampaignProjection();
 			this._progressBarContent = new ProgressBarContent(
 				this._campaignParameters.campaignProjection.donationTarget,
-				this._campaignProjection.projectedPercentageTowardsTarget(),
-				this._campaignProjection.projectedDonationSum(),
-				this._campaignProjection.projectedRemainingDonationSum(),
+				projection.projectedPercentageTowardsTarget(),
+				projection.projectedDonationSum(),
+				projection.projectedRemainingDonationSum(),
 				this._translator,
 				this._formatters.currency
 			);
