@@ -3,7 +3,8 @@
 		<ButtonClose @click.prevent="$emit( 'close' )"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
-				<BannerText />
+				<BannerText v-if="onLargeScreen"/>
+				<div v-else >content for small screens</div>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
@@ -21,8 +22,11 @@ import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 
 defineEmits( [ 'close' ] );
+
+const onLargeScreen = useDisplaySwitch( 1300 );
 
 </script>
 
