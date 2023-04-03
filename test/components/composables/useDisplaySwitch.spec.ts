@@ -4,23 +4,35 @@ import { defineComponent } from 'vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe( 'useDisplaySwitch', () => {
-	it( 'starts with a components adapted to screen size', () => {
+	const TestComponent = defineComponent( {
+		props: {
+			minWidth: Number
+		},
+		setup( props ) {
+			return {
+				onLargeScreen: useDisplaySwitch( props.minWidth )
+			};
+		},
+		render() {
+			return '';
+		}
+	} );
+
+	it( 'starts with the component adapted to large screen size', () => {
 		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 100 } );
 
-		const TestComponent = defineComponent( {
-			setup() {
-				return {
-					onLargeScreen: useDisplaySwitch( 99 )
-				};
-			},
-			render() {
-				return '';
-			}
-		} );
-
-		const wrapper = shallowMount( TestComponent );
+		const wrapper = shallowMount( TestComponent, { props: { minWidth: 99 } } );
 
 		expect( wrapper.vm.onLargeScreen ).toBe( true );
+
+	} );
+
+	it( 'starts with the component adapted to small screen size', () => {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 100 } );
+
+		const wrapper = shallowMount( TestComponent, { props: { minWidth: 100 } } );
+
+		expect( wrapper.vm.onLargeScreen ).toBe( false );
 
 	} );
 } );
