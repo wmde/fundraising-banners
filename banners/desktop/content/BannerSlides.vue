@@ -1,5 +1,5 @@
 <template>
-	<KeenSlider>
+	<KeenSlider :interval="1" :with-navigation="true">
 		<template #slides-1><div>First slide</div></template>
 		<template #slides-2><div>Second slide</div></template>
 	</KeenSlider>
