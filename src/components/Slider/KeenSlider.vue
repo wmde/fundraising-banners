@@ -65,10 +65,12 @@ const props = withDefaults( defineProps<Props>(), {
 const slots = useSlots();
 const sliderPlayingState = ref<SliderPlayingStates>( SliderPlayingStates.PENDING );
 const timer = ref<number>( 0 );
-const [ container, slider ] = useKeenSlider( props.sliderOptions );
 
-// TODO connect this to KeenSlider
 const currentSlide = ref<number>( 0 );
+
+const [ container, slider ] = useKeenSlider( { ...props.sliderOptions, slideChanged: ( s ) => {
+	currentSlide.value = s.track.details.rel;
+} } );
 
 const usedSlotNames = Object.keys( slots );
 
