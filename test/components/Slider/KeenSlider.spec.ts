@@ -61,4 +61,20 @@ describe( 'KeenSlider', () => {
 		expect( paginationElements[ 0 ].attributes().class ).toContain( 'is-active' );
 	} );
 
+	it( 'should render navigation', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { withNavigation: false } );
+
+		expect( wrapper.find( '.wmde-banner-slider-navigation-previous' ).exists() ).toBe( false );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( false );
+
+		await wrapper.setProps( { withNavigation: true } );
+
+		expect( wrapper.find( '.wmde-banner-slider-navigation-previous' ).exists() ).toBe( true );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( true );
+	} );
+
+	// We can't test this because we couldn't mock the keen slider
+	it.todo( 'should stop the auto play when the slide is clicked' );
 } );
