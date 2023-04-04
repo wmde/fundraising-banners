@@ -83,7 +83,7 @@ const [ container, slider ] = useKeenSlider( {
 const usedSlotNames = Object.keys( slots );
 
 const startAutoplay = (): void => {
-	if ( sliderPlayingState.value !== SliderPlayingStates.PENDING ) {
+	if ( sliderPlayingState.value === SliderPlayingStates.PLAYING ) {
 		return;
 	}
 	timer.value = window.setInterval( slider.value.next, props.interval );

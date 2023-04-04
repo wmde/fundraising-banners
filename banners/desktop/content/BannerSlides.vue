@@ -1,5 +1,5 @@
 <template>
-	<KeenSlider :interval="1" :with-navigation="true" :start="true">
+	<KeenSlider :interval="5000" :with-navigation="true" :start="start">
 		<template #slides-1><div>
 			<p class="headline">
 				<InfoIcon fill="#990a00"/> <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
@@ -26,6 +26,12 @@ import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+
+interface Props {
+	start: boolean
+}
+
+defineProps<Props>();
 
 const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
 </script>

@@ -4,7 +4,7 @@
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<BannerText v-if="onLargeScreen"/>
-				<BannerSlides v-else/>
+				<BannerSlides v-else :start="bannerIsVisible"/>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
@@ -24,6 +24,12 @@ import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import BannerSlides from '../content/BannerSlides.vue';
+
+interface Props {
+	bannerIsVisible: boolean;
+}
+
+defineProps<Props>();
 
 defineEmits( [ 'close' ] );
 
