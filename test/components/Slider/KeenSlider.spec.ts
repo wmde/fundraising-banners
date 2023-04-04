@@ -42,14 +42,23 @@ describe( 'KeenSlider', () => {
 		expect( firstSlideContent.attributes().class ).toContain( 'wmde-banner-slide--current' );
 	} );
 
-	it( 'should advance the slides after the interval when the slider has started', async () => {
+	it.todo( 'should advance the slides after the interval when the slider has started', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.setProps( { start: true } );
 
-		await vi.advanceTimersByTimeAsync( 405 );
+		await vi.advanceTimersByTimeAsync( 1000 );
 
-		// TODO mock useKeenSlider and slider.next
+		// we were not able to mock keen-slider so far because we need to return a container ref for that
+	} );
+
+	it( 'should show a pagination dot for each exising slide', async () => {
+		const wrapper = getWrapper();
+
+		const paginationElements = wrapper.findAll( '.wmde-banner-slider-pagination-dot' );
+
+		expect( paginationElements.length ).toBe( 2 );
+		expect( paginationElements[ 0 ].attributes().class ).toContain( 'is-active' );
 	} );
 
 } );
