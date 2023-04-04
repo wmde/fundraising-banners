@@ -1,6 +1,9 @@
+@use '../variables/colors';
+@use '../variables/fonts';
+
 .wmde-banner {
 	&-slider-container {
-		font-family: $banner-text-font-family;
+		font-family: fonts.$content;
 		font-size: 1.3em;
 	}
 	&-navigation-wrapper {
@@ -27,21 +30,21 @@
 
 	&-slider-pagination {
 		&-dot {
-			background: $color-gray-light;
+			background: colors.$gray-light;
 			width: 15px;
 			height: 15px;
 			margin: 0 4px;
 			border-radius: 50%;
 			cursor: pointer;
-			border: 3px solid $color-white;
+			border: 3px solid colors.$white;
 
 			&:focus {
 				outline: 0;
 			}
 		}
 		.is-active {
-			background: $color-white;
-			border: 3px solid $color-primary;
+			background: colors.$white;
+			border: 3px solid colors.$primary;
 		}
 	}
 

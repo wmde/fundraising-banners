@@ -1,0 +1,15 @@
+.wmde-banner {
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	ul {
+		list-style-image: unset;
+	}
+}
