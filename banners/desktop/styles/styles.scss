@@ -7,8 +7,6 @@
 @use '../../../src/themes/treedip/MultistepDonationForm/MultistepDonationForm';
 @use '../../../src/themes/treedip/MultistepDonationForm/UpgradeToYearly';
 @use '../../../src/themes/treedip/MultistepDonationForm/CustomAmount';
-
-@use '../../../src/themes/treedip/DonationForm/SelectCustomAmount';
 @use '../../../src/themes/treedip/DonationForm/SmsBox';
 
  */
@@ -21,11 +19,12 @@
 @use 'src/themes/treedip/DonationForm/SelectCustomAmount';
 @use 'src/themes/treedip/Footer/Footer';
 @use 'src/themes/treedip/Footer/SelectionInput';
+@use 'src/themes/treedip/Message/Message';
 @use 'src/themes/treedip/Slider/KeenSlider';
 @use 'src/themes/treedip/SoftClose/SoftClose';
 
 /*
-@use '../../../src/themes/treedip/Message/Message';
+
 @use '../../../src/themes/treedip/AlreadyDonatedModal/AlreadyDonatedModal';
 
  */

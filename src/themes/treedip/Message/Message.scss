@@ -1,6 +1,8 @@
+@use '../variables/fonts';
+
 .wmde-banner {
 	&-message {
-		font-family: $banner-text-font-family;
+		font-family: fonts.$content;
 		font-size: 18px;
 		line-height: 1.3em;
 		text-align: left;
