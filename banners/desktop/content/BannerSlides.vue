@@ -1,5 +1,5 @@
 <template>
-	<KeenSlider :interval="1" :with-navigation="true">
+	<KeenSlider :interval="1" :with-navigation="true" :start="true">
 		<template #slides-1><div>
 			<p class="headline">
 				<InfoIcon fill="#990a00"/> <strong> An alle, die Wikipedia in Deutschland nutzen </strong>

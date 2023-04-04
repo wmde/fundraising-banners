@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useSlots } from 'vue';
+import { ref, useSlots, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
@@ -53,13 +53,16 @@ enum SliderPlayingStates {
 }
 
 interface Props {
-	interval: number;
+	interval?: number;
 	withNavigation: boolean;
 	sliderOptions?: KeenSliderOptions;
+	start?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	sliderOptions: () => ( {} )
+	sliderOptions: () => ( {} ),
+	interval: 5000,
+	start: false
 } );
 
 const slots = useSlots();
@@ -68,16 +71,37 @@ const timer = ref<number>( 0 );
 
 const currentSlide = ref<number>( 0 );
 
-const [ container, slider ] = useKeenSlider( { ...props.sliderOptions, slideChanged: ( s ) => {
-	currentSlide.value = s.track.details.rel;
-} } );
+const [ container, slider ] = useKeenSlider( {
+	...props.sliderOptions,
+	initial: 0,
+	loop: true,
+	slideChanged: ( s ) => {
+		currentSlide.value = s.track.details.rel;
+	}
+} );
 
 const usedSlotNames = Object.keys( slots );
+
+const startAutoplay = (): void => {
+	if ( sliderPlayingState.value !== SliderPlayingStates.PENDING ) {
+		return;
+	}
+	timer.value = window.setInterval( slider.value.next, props.interval );
+	sliderPlayingState.value = SliderPlayingStates.PLAYING;
+};
 
 const stopAutoplay = (): void => {
 	clearInterval( timer.value );
 	sliderPlayingState.value = SliderPlayingStates.STOPPED;
 };
+
+watch( () => props.start, ( newValue: boolean, oldValue: boolean ) => {
+	if ( oldValue === false && newValue === true ) {
+		startAutoplay();
+	} else if ( oldValue === true && newValue === false ) {
+		stopAutoplay();
+	}
+} );
 
 const goToPreviousSlide = (): void => {
 	slider.value.prev();
