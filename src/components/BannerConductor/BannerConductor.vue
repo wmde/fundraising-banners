@@ -64,14 +64,14 @@ async function onCloseHandler( source: CloseSources ): Promise<any> {
 </script>
 
 <style lang="scss">
-	#wmde-banner-app {
-		position: fixed;
-		top: 0;
-		width: 100%;
-		background: #ffffff;
-		z-index: 1000;
-	}
-	.wmde-banner-closed {
-		display: none;
-	}
+#wmde-banner-app {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: #ffffff;
+	z-index: 1000;
+}
+.wmde-banner-closed {
+	display: none;
+}
 </style>
