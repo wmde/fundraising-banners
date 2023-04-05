@@ -1,8 +1,10 @@
 @use '../variables/fonts';
-@use '../variables/mixins';
 
 .wmde-banner {
 	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
 		font-family: fonts.$content;
 		font-size: 18px;
 		line-height: 1.3em;
@@ -15,8 +17,5 @@
 				margin-bottom: 0;
 			}
 		}
-
-		// This does NOT work yet
-		@include mixins.animated-text-highlight( '.wmde-banner-text-animated-highlight' );
 	}
 }

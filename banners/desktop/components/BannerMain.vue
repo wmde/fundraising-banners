@@ -71,11 +71,5 @@ const onLargeScreen = useDisplaySwitch( 1300 );
 		min-height: 315px;
 		padding: 10px 0;
 	}
-
-	&-message {
-		height: 100%;
-		display: flex;
-		align-items: center;
-	}
 }
 </style>

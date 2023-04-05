@@ -68,42 +68,6 @@ function onClose( closeSource: CloseSources ): void {
 			display: none;
 		}
 	}
-
-	&-content {
-		display: flex;
-		flex-direction: row;
-		order: 1;
-		padding: 12px 24px 0;
-	}
-
-	&-column-left {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		flex: 1 1 auto;
-		margin-bottom: 0;
-		overflow-y: hidden;
-		margin-right: 30px;
-		padding: 0 15px;
-		border: 5px solid colors.$primary;
-		border-radius: 9px;
-	}
-
-	&-column-right {
-		order: 2;
-		flex: 0 0 globals.$form-width;
-		display: flex;
-		flex-direction: column;
-		width: globals.$form-width;
-		min-height: 315px;
-		padding: 10px 0;
-	}
-
-	&-message {
-		height: 100%;
-		display: flex;
-		align-items: center;
-	}
 }
 
 </style>
