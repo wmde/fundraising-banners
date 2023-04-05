@@ -68,12 +68,11 @@
 import { inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
-import { Validity } from '@src/utils/FormModel/Validity';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
-import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
+import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 
 interface Props {
 	formUrl: string;
@@ -102,13 +101,6 @@ const validate = ( e: Event ): void => {
 	}
 
 	emit( 'formSubmit', { pageNumber: props.pageNumber } );
-};
-
-const isValidOrUnset = ( validity: Validity|AmountValidity ): boolean => {
-	return validity === Validity.Valid ||
-		validity === Validity.Unset ||
-		validity === AmountValidity.Valid ||
-		validity === AmountValidity.Unset;
 };
 
 const {

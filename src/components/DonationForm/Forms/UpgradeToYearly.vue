@@ -50,7 +50,7 @@
         </div>
         </div>
 
-        <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom" @click="onNext">
+        <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom" @click="onNextPage">
             {{ $translate( 'form-step-2-link' ) }}
         </a>
 
@@ -65,8 +65,10 @@
 
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { Validity } from '@src/utils/FormModel/Validity';
+import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 
 enum Alternatives {
 	YES = 'YES',
@@ -74,7 +76,7 @@ enum Alternatives {
 }
 
 const upgradeToYearly = ref<Alternatives>( null );
-
+const upgradeToYearlyValidity = ref<Validity>( Validity.Unset );
 const formModel = useFormModel();
 
 const {
@@ -83,8 +85,12 @@ const {
 } = formModel;
 
 const onSubmit = (): void => {};
+const onNextPage = (): void => {};
 const onBack = (): void => {};
 const onChooseUpgradeToYearly = (): void => {};
+
+const currencyFormatter: Function = inject( 'currencyFormatter' );
+const secondPageAmount = computed( (): string => currencyFormatter( numericAmount ) );
 
 </script>
 
