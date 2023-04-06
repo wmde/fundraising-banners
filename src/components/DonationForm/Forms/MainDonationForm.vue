@@ -1,8 +1,8 @@
 <template>
 	<form
-		:action="formUrl"
+		:action="formActions.donateWithoutAddressAction"
 		method="post"
-		class="wmde-banner-form"
+		class="wmde-banner-sub-form wmde-banner-sub-form-donation"
 		@click="onFormInteraction"
 		@submit="validate"
 	>
@@ -73,19 +73,22 @@ import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
+import { FormActions } from '@src/domain/FormActions';
 
 interface Props {
-	formUrl: string;
-	formItems: DonationFormItems;
 	showErrorScrollLink?: boolean;
 	pageNumber?: number;
 }
+
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
-const emit = defineEmits( [ 'formSubmit' ] );
+const emit = defineEmits( [ 'submit' ] );
 
 const currencyFormatter: Function = inject( 'currencyFormatter' );
+const formActions = inject<FormActions>( 'formActions' );
+const formItems = inject<DonationFormItems>( 'formItems' );
+
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
@@ -100,7 +103,7 @@ const validate = ( e: Event ): void => {
 		return;
 	}
 
-	emit( 'formSubmit', { pageNumber: props.pageNumber } );
+	emit( 'submit', { event: e, pageNumber: props.pageNumber } );
 };
 
 const {
@@ -123,15 +126,8 @@ const formatCustomAmount = (): void => {
 
 <style lang="scss">
 .wmde-banner {
-	&-form {
-		display: flex;
-		height: 100%;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-end;
-		margin: 0;
-
-		&-field-group {
+	&-sub-form-donation {
+		.wmde-banner-form-field-group {
 			border: 0;
 			margin: 0;
 			display: block;
@@ -141,24 +137,6 @@ const formatCustomAmount = (): void => {
 				position: relative;
 				padding: 0;
 			}
-		}
-
-		&-button-container {
-			flex-wrap: wrap;
-			flex-direction: row;
-			justify-content: flex-start;
-			flex: 0 1 auto;
-			width: 100%;
-			margin-top: auto;
-		}
-
-		&-button {
-			width: 100%;
-			display: block;
-			box-sizing: border-box;
-			cursor: pointer;
-			border: 0 none;
-			white-space: nowrap;
 		}
 	}
 }

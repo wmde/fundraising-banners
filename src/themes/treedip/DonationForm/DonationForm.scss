@@ -4,17 +4,14 @@
 
 .wmde-banner {
 	&-form {
-		&-field-group {
-			padding: 0 0 10px;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		overflow: hidden;
 
-			&-legend {
-				display: none;
-				visibility: hidden;
-				font-family: fonts.$ui;
-				font-size: 12px;
-				line-height: 13px;
-				color: colors.$black-light;
-			}
+		&-page {
+			height: 100%;
+			width: 100%;
 		}
 
 		&-button {
@@ -33,5 +30,12 @@
 				background-color: colors.$secondary-light;
 			}
 		}
+	}
+
+	&-sub-form {
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: 100%;
+		max-width: 100%;
 	}
 }

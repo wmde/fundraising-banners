@@ -8,7 +8,7 @@
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
-				<SingleStepDonation />
+				<MultiStepDonation :form-controller="{}" :forms="[ DonationForm, UpgradeToYearly ]"/>
 			</div>
 		</div>
 		<BannerFooter />
@@ -20,10 +20,12 @@
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import SingleStepDonation from '@src/components/DonationForm/SingleStepDonation.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import BannerSlides from '../content/BannerSlides.vue';
+import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
+import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import UpgradeToYearly from '@src/components/DonationForm/Forms/UpgradeToYearly.vue';
 
 interface Props {
 	bannerIsVisible: boolean;
