@@ -4,7 +4,7 @@
 			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPage === idx }">
 				<component
 					:is="form"
-					:page-number="( idx as number ) + 1"
+					:page-number="idx"
 					@submit="onSubmit"
 					@next="onNext"
 					@previous="onPrevious"
@@ -54,8 +54,17 @@ props.formController.onNext( () => {
 	currentFormPage.value = currentFormPage.value + 1;
 	slider.value.next();
 } );
-props.formController.onPrevious( () => {} );
-props.formController.onGoToStep( () => {} );
+
+props.formController.onPrevious( () => {
+	currentFormPage.value = currentFormPage.value - 1;
+	slider.value.prev();
+} );
+
+props.formController.onGoToStep( ( pageNumber: number ) => {
+	currentFormPage.value = pageNumber;
+	slider.value.moveToIdx( pageNumber );
+} );
+
 props.formController.onSubmit( () => {} );
 
 </script>

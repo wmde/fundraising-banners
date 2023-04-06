@@ -89,10 +89,45 @@ describe( 'MultistepDonation.vue', () => {
 
 		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
 		callbackInvoker();
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '1' );
+	} );
+
+	it( 'should go to previous when callback is invoked', async function () {
+		let callbackInvokerNext: () => void;
+		mockedFormController.onNext = ( callback: () => void ): void => {
+			callbackInvokerNext = callback;
+		};
+
+		let callbackInvokerPrevious: () => void;
+		mockedFormController.onPrevious = ( callback: () => void ): void => {
+			callbackInvokerPrevious = callback;
+		};
+		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		callbackInvokerNext();
 
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
+		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '1' );
+
+		callbackInvokerPrevious();
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '0' );
+	} );
+
+	it( 'should go to previous when callback is invoked', async function () {
+		let callbackInvokerGoToStep: ( pageNumber: number ) => void;
+		mockedFormController.onGoToStep = ( callback: ( pageNumber: number ) => void ): void => {
+			callbackInvokerGoToStep = callback;
+		};
+
+		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		callbackInvokerGoToStep( 2 );
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '2' );
 	} );
 
 } );
