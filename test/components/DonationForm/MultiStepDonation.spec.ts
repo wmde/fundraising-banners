@@ -7,53 +7,70 @@ import { FormController } from '@src/utils/FormController/FormController';
 
 describe( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
-	let wrapper: VueWrapper<any>;
 
 	beforeEach( () => {
 		mockedFormController = {
-			submit: vi.fn(),
+			submitStep: vi.fn(),
 			next: vi.fn(),
 			previous: vi.fn(),
-			goToStep: vi.fn()
+			onNext: vi.fn(),
+			onPrevious: vi.fn(),
+			onGoToStep: vi.fn(),
+			onSubmit: vi.fn()
 		};
-
-		wrapper = mount( MultiStepDonation, {
-			props: {
-				formController: mockedFormController,
-				forms: [
-					markRaw( SubFormStub )
-				]
-			}
-		} );
 
 	} );
 
+	const getWrapper = ( forms: Array<any> = [] ): VueWrapper<any> => {
+		return mount( MultiStepDonation, {
+			props: {
+				formController: mockedFormController,
+				forms
+			}
+		} );
+	};
+
 	it( 'passes submit event to page controller', async () => {
+		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
 		const eventPayload = { event: new Event( 'submit' ), pageNumber: 1 };
 		subForm.vm.$emit( 'submit', eventPayload );
 		await nextTick();
 
-		expect( mockedFormController.submit ).toHaveBeenCalledWith( eventPayload );
+		expect( mockedFormController.submitStep ).toHaveBeenCalledWith( eventPayload );
 	} );
 
 	it( 'passes next event to page controller', async () => {
+		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
-		subForm.vm.$emit( 'next' );
+		const eventPayload = { event: new Event( 'next' ), pageNumber: 1 };
+		subForm.vm.$emit( 'next', eventPayload );
 		await nextTick();
 
-		expect( mockedFormController.next ).toHaveBeenCalled();
+		expect( mockedFormController.next ).toHaveBeenCalledWith( eventPayload );
 	} );
 
 	it( 'passes previous event to page controller', async () => {
+		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
-		subForm.vm.$emit( 'previous' );
+		const eventPayload = { event: new Event( 'previous' ), pageNumber: 1 };
+		subForm.vm.$emit( 'previous', eventPayload );
 		await nextTick();
 
-		expect( mockedFormController.previous ).toHaveBeenCalled();
+		expect( mockedFormController.previous ).toHaveBeenCalledWith( eventPayload );
+	} );
+
+	it( 'should render the sub form pages', function () {
+		const wrapper = getWrapper( [
+			markRaw( SubFormStub ),
+			markRaw( SubFormStub ),
+			markRaw( SubFormStub )
+		] );
+
+		expect( wrapper.findAll( '.wmde-banner-form-page' ).length ).toBe( 3 );
 	} );
 
 } );

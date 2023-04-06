@@ -5,8 +5,12 @@ import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
  */
 
 export interface FormController {
-	submit( step: FormSubmitData ): void;
-	next(): void;
-	previous(): void;
-	goToStep( step: number ): void;
+	submitStep( step: FormSubmitData ): void;
+	next( step: FormSubmitData ): void;
+	previous( step: FormSubmitData ): void;
+
+	onNext( callback: () => void ): void;
+	onPrevious( callback: () => void ): void;
+	onGoToStep( callback: ( step: number ) => void ): void;
+	onSubmit( callback: () => void ): void;
 }

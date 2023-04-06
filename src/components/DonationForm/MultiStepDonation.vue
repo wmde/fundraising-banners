@@ -39,15 +39,15 @@ const [ container, slider ] = useKeenSlider( {
 
 const onSubmit = ( payload: FormSubmitData ): void => {
 	payload.event.preventDefault();
-	props.formController.submit( payload );
+	props.formController.submitStep( payload );
 };
 
-const onPrevious = (): void => {
-	props.formController.previous();
+const onPrevious = ( payload: FormSubmitData ): void => {
+	props.formController.previous( payload );
 };
 
-const onNext = (): void => {
-	props.formController.next();
+const onNext = ( payload: FormSubmitData ): void => {
+	props.formController.next( payload );
 };
 
 </script>

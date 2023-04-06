@@ -12,8 +12,8 @@ export class FormControllerCtrl implements FormController {
 		this._currentStep = 1;
 	}
 
-	public goToStep( step: number ): void {
-		this._currentStep = step;
+	public submitStep( step: FormSubmitData ): void {
+		this._currentStep = step.pageNumber;
 	}
 
 	public next(): void {
@@ -24,7 +24,8 @@ export class FormControllerCtrl implements FormController {
 		this._currentStep--;
 	}
 
-	public submit( step: FormSubmitData ): void {
-		this._currentStep = step.pageNumber;
-	}
+	public onNext( callback: () => void ): void {}
+	public onPrevious( callback: () => void ): void {}
+	public onGoToStep( callback: ( step: number ) => void ): void {}
+	public onSubmit( callback: () => void ): void {}
 }
