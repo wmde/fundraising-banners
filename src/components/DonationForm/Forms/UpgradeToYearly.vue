@@ -69,6 +69,7 @@ import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 
 enum Alternatives {
 	YES = 'YES',

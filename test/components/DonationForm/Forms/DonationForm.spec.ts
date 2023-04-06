@@ -34,16 +34,14 @@ describe( 'DonationForm.vue', () => {
 
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( DonationForm, {
-			props: {
-				formUrl: 'https://example.com',
-				formItems: formItems
-			},
 			global: {
 				mocks: {
 					$translate: ( key: string ) => key
 				},
 				provide: {
-					currencyFormatter: ( amount: number ) => String( amount )
+					currencyFormatter: ( amount: number ) => String( amount ),
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formItems: formItems
 				}
 			}
 		} );
@@ -92,7 +90,7 @@ describe( 'DonationForm.vue', () => {
 
 		wrapper.trigger( 'submit' );
 
-		expect( wrapper.emitted( 'formSubmit' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
 	} );
 
 	it( 'does not emit our own submit event when form fields are invalid', () => {
@@ -101,6 +99,6 @@ describe( 'DonationForm.vue', () => {
 
 		wrapper.trigger( 'submit' );
 
-		expect( wrapper.emitted( 'formSubmit' ) ).toBeUndefined();
+		expect( wrapper.emitted( 'submit' ) ).toBeUndefined();
 	} );
 } );

@@ -19,6 +19,8 @@ import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { FormControllerCtrl } from './FormControllerCtrl';
+import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
 
 const translator = new Translator( Translations );
 
@@ -37,6 +39,9 @@ const app = createVueApp( BannerConductor, {
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000
+	},
+	bannerProps: {
+		formController: new FormControllerCtrl( useFormModel() )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

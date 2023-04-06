@@ -4,7 +4,7 @@
 			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPage === idx }">
 				<component
 					:is="form"
-					:page-number="idx + 1"
+					:page-number="( idx as number ) + 1"
 					@submit="onSubmit"
 					@next="onNext"
 					@previous="onPrevious"

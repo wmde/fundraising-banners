@@ -1,6 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
-		<BannerMain @close="onCloseMain" v-if="contentState === ContentStates.Main" :bannerIsVisible="bannerIsVisible"/>
+		<BannerMain @close="onCloseMain" v-if="contentState === ContentStates.Main" :bannerIsVisible="bannerIsVisible" :form-controller="formController"/>
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
@@ -16,6 +16,7 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, nextTick, ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
+import { FormController } from '@src/utils/FormController/FormController';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -23,7 +24,8 @@ enum ContentStates {
 }
 
 interface Props {
-	bannerState: BannerStates
+	bannerState: BannerStates;
+	formController: FormController;
 }
 
 const props = defineProps<Props>();
