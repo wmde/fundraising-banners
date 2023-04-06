@@ -50,6 +50,14 @@ const onNext = ( payload: FormSubmitData ): void => {
 	props.formController.next( payload );
 };
 
+props.formController.onNext( () => {
+	currentFormPage.value = currentFormPage.value + 1;
+	slider.value.next();
+} );
+props.formController.onPrevious( () => {} );
+props.formController.onGoToStep( () => {} );
+props.formController.onSubmit( () => {} );
+
 </script>
 
 <style lang="scss">

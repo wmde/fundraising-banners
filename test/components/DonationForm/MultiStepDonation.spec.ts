@@ -18,7 +18,6 @@ describe( 'MultistepDonation.vue', () => {
 			onGoToStep: vi.fn(),
 			onSubmit: vi.fn()
 		};
-
 	} );
 
 	const getWrapper = ( forms: Array<any> = [] ): VueWrapper<any> => {
@@ -71,6 +70,29 @@ describe( 'MultistepDonation.vue', () => {
 		] );
 
 		expect( wrapper.findAll( '.wmde-banner-form-page' ).length ).toBe( 3 );
+	} );
+
+	it( 'should add callbacks when initialised', function () {
+		getWrapper( [ markRaw( SubFormStub ) ] );
+
+		expect( mockedFormController.onNext ).toHaveBeenCalled();
+		expect( mockedFormController.onPrevious ).toHaveBeenCalled();
+		expect( mockedFormController.onGoToStep ).toHaveBeenCalled();
+		expect( mockedFormController.onSubmit ).toHaveBeenCalled();
+	} );
+
+	it( 'should go to next when callback is invoked', async function () {
+		let callbackInvoker: () => void;
+		mockedFormController.onNext = ( callback: () => void ): void => {
+			callbackInvoker = callback;
+		};
+
+		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		callbackInvoker();
+
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
 	} );
 
 } );
