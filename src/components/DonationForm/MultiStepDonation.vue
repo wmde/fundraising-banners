@@ -39,9 +39,7 @@ const [ container, slider ] = useKeenSlider( {
 
 const onSubmit = ( payload: FormSubmitData ): void => {
 	payload.event.preventDefault();
-	slider.value.next();
-	console.log( payload );
-	// props.formController.submit( { pageNumber: currentFormPage.value, extraData } );
+	props.formController.submit( payload );
 };
 
 const onPrevious = (): void => {
