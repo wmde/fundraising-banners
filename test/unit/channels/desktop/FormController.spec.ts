@@ -10,39 +10,70 @@ describe( 'FormControllerCtrl', () => {
 
 	beforeEach( () => resetFormModel( formModel ) );
 
-	it( 'should submit when recurring interval is selected', () => {
-		const controller = new FormControllerCtrl( formModel );
-		const onSubmit = vi.fn();
-		controller.onSubmit( onSubmit );
+	describe( 'Donation form', () => {
+		const pageIndex = 0;
 
-		formModel.interval.value = Intervals.BIANNUAL.value;
-		controller.submitStep( { event: null, pageIndex: 0 } );
+		it( 'should submit when recurring interval is selected', () => {
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
 
-		expect( onSubmit ).toHaveBeenCalledOnce();
+			formModel.interval.value = Intervals.BIANNUAL.value;
+			controller.submitStep( { event: null, pageIndex } );
+
+			expect( onSubmit ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'should submit when the payment type is sofort', () => {
+
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
+
+			formModel.interval.value = Intervals.ONCE.value;
+			formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
+			controller.submitStep( { event: null, pageIndex } );
+
+			expect( onSubmit ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'should go to next page when interval is "once"', () => {
+			const controller = new FormControllerCtrl( formModel );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+
+			formModel.interval.value = Intervals.ONCE.value;
+			controller.submitStep( { event: null, pageIndex } );
+
+			expect( onNext ).toHaveBeenCalledOnce();
+		} );
+
 	} );
 
-	it( 'should submit when the payment type is sofort', () => {
+	describe( 'Upgrade to yearly', () => {
+		const pageIndex = 1;
 
-		const controller = new FormControllerCtrl( formModel );
-		const onSubmit = vi.fn();
-		controller.onSubmit( onSubmit );
+		it( 'should submit tracking data for yearly interval', function () {
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
 
-		formModel.interval.value = Intervals.ONCE.value;
-		formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
-		controller.submitStep( { event: null, pageIndex: 0 } );
+			controller.submitStep( { event: null, pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
 
-		expect( onSubmit ).toHaveBeenCalledOnce();
-	} );
+			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onSubmit ).toHaveBeenCalledWith( 'submit-recurring' );
+		} );
 
-	it( 'should go to next page when interval is "once"', () => {
-		const controller = new FormControllerCtrl( formModel );
-		const onNext = vi.fn();
-		controller.onNext( onNext );
+		it( 'should submit tracking data for "once" interval', function () {
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
 
-		formModel.interval.value = Intervals.ONCE.value;
-		controller.submitStep( { event: null, pageIndex: 0 } );
+			controller.submitStep( { event: null, pageIndex, extraData: { upgradeToYearlyInterval: Intervals.ONCE.value } } );
 
-		expect( onNext ).toHaveBeenCalledOnce();
+			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onSubmit ).toHaveBeenCalledWith( 'submit-non-recurring' );
+		} );
 	} );
 
 } );
