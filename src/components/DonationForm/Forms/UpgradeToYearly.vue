@@ -1,7 +1,7 @@
 <template>
     <form @submit="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="back" @click="onBack">
+            <a tabIndex="-1" href="#" class="back" @click="$emit('back')">
                 <ChevronLeftIcon/>
             </a>
             {{ $translate( 'form-step-2-header', { amount: secondPageAmount } ) }}
@@ -55,7 +55,7 @@
         </a>
 
         <div class="wmde-banner-form-button-container form-step-2-button">
-            <button tabIndex="-1" class="wmde-banner-form-button" type="submit">
+            <button tabIndex="-1" class="wmde-banner-form-button" @click="onSubmit">
                 {{ $translate( 'form-step-2-button' ) }}
             </button>
         </div>
@@ -70,24 +70,42 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 
 enum Alternatives {
 	YES = 'YES',
 	NO = 'NO'
 }
 
+interface Props {
+    pageNumber: number
+}
+
+const props = defineProps<Props>();
+
+const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
+
 const upgradeToYearly = ref<Alternatives>( null );
 const upgradeToYearlyValidity = ref<Validity>( Validity.Unset );
 const formModel = useFormModel();
 
 const {
-	interval, intervalValidity, disabledIntervals,
 	numericAmount
 } = formModel;
 
-const onSubmit = (): void => {};
-const onNextPage = (): void => {};
-const onBack = (): void => {};
+const onSubmit = (): void => {
+	// validate that upgradetoyearly was selected (and update upgradeToYearlyValidity accordingly)
+	// if something was selected, emit submit event with new interval
+};
+const onNextPage = ( e: Event ): void => {
+	emit( 'next', {
+		event: e,
+		pageNumber: props.pageNumber,
+		extraData: {
+			upgradeToYearlyInterval: Intervals.YEARLY.value
+		}
+	} );
+};
 const onChooseUpgradeToYearly = (): void => {};
 
 const currencyFormatter: Function = inject( 'currencyFormatter' );
