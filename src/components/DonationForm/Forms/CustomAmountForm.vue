@@ -1,10 +1,9 @@
 <template>
+	<div class="wmde-banner-sub-form wmde-banner-form-new-custom-amount">
 
-	<div class="wmde-banner-form-step-3">
-
-		<div class="wmde-banner-form-step-3-title">
+		<div class="wmde-banner-form-new-custom-amount-title">
 			<a tabIndex="-1" href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" class="previous"
-					@click="$emit( 'previous' )">
+					@click.prevent="$emit( 'previous' )">
 				<ChevronLeftIcon/>
 			</a>
 		</div>
@@ -13,13 +12,13 @@
 				'wmde-banner-select-group-container',
 				{ 'wmde-banner-select-group-container--with-error': amountValidity === AmountValidity.Invalid }
             ]">
-		<p class="wmde-banner-form-step-3-header">
-			{{ $translate( 'form-step-3-header' ) }}
+		<p class="wmde-banner-form-new-custom-amount-header">
+			{{ $translate( 'form-new-custom-amount-header' ) }}
 		</p>
-		<p class="wmde-banner-form-step-3-notice">
-			{{ $translate( 'form-step-3-copy' ) }}
+		<p class="wmde-banner-form-new-custom-amount-notice">
+			{{ $translate( 'form-new-custom-amount-copy' ) }}
 		</p>
-		<div class="wmde-banner-select-custom-amount-input-container wmde-banner-form-step-3-input-container">
+		<div class="wmde-banner-select-custom-amount-input-container wmde-banner-form-new-custom-amount-input-container">
 			<span class="wmde-banner-select-custom-amount-euro-symbol">&euro;</span>
 			<input type="text"
 					tabIndex="-1"
@@ -32,17 +31,17 @@
 		</div>
 		<span class="wmde-banner-select-group-error-message">
 				<span class="wmde-banner-error-icon">
-					{{ $translate( 'form-step-3-error' ) }}
+					{{ $translate( 'form-new-custom-amount-error' ) }}
 				</span>
 			</span>
 	</div>
 
-	<div class="wmde-banner-form-button-container form-step-3-button">
+	<div class="wmde-banner-form-button-container form-new-custom-amount-button">
 		<button tabIndex="-1" class="wmde-banner-form-button t-submit-custom-amount" @click="onSubmit">
 			{{
 				numericAmount > 0 ?
-					$translate( 'form-step-3-button', { amount } ) :
-					$translate( 'form-step-3-button-blank' )
+					$translate( 'form-new-custom-amount-button', { amount } ) :
+					$translate( 'form-new-custom-amount-button-blank' )
 			}}
 		</button>
 	</div>
@@ -56,6 +55,7 @@ import { computed, inject, ref } from 'vue';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 
 interface Props {
 	pageIndex: number
@@ -63,14 +63,14 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
-const amount = ref<string>( null );
+const amount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const numericAmount = computed( (): number => parseFloatFromFormattedString( amount.value ) );
 
 const currencyFormatter: Function = inject( 'currencyFormatter' );
 const onBlur = (): void => {
 	amountValidity.value = validateAmount( numericAmount.value, '', amount.value );
-	amount.value = currencyFormatter( numericAmount );
+	amount.value = currencyFormatter( numericAmount.value );
 };
 
 const onSubmit = (): void => {
@@ -81,3 +81,49 @@ const onSubmit = (): void => {
 };
 
 </script>
+
+<style lang="scss">
+.wmde-banner {
+	&-form-new-custom-amount-title {
+		&-title {
+			width: 100%;
+			display: block;
+		}
+
+		&-options {
+			width: 100%;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
+
+		&-field {
+			flex-grow: 1;
+		}
+
+		.wmde-banner-select-group {
+			display: flex;
+			width: 100%;
+		}
+
+		.wmde-banner-select-group-notice {
+			height: auto;
+		}
+
+		.wmde-banner-select-group-option {
+			display: block;
+			height: auto;
+			width: 100%;
+		}
+
+		.wmde-banner-select-group-label {
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-content: center;
+			align-items: stretch;
+		}
+	}
+}
+</style>

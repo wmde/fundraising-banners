@@ -39,9 +39,11 @@ export class FormControllerCtrl implements FormController {
 	}
 
 	public next(): void {
+		this._nextCallback();
 	}
 
 	public previous(): void {
+		this._previousCallback();
 	}
 
 	public onNext( callback: () => void ): void {

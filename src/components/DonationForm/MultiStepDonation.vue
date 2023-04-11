@@ -43,7 +43,8 @@ const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
 const submitFormRef = ref<HTMLFormElement>( null );
 
 const [ container, slider ] = useKeenSlider( {
-	initial: 0
+	initial: 0,
+	drag: false
 } );
 
 const onSubmit = ( payload: FormSubmitData ): void => {
