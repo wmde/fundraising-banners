@@ -7,7 +7,7 @@ describe( 'UpgradeToYearly.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( UpgradeToYearly, {
 			props: {
-				pageNumber: 4
+				pageIndex: 4
 			},
 			global: {
 				mocks: {

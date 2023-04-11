@@ -9,7 +9,7 @@ describe( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
 	let callbackInvokerNext: () => void;
 	let callbackInvokerPrevious: () => void;
-	let callbackInvokerGoToStep: ( pageNumber: number ) => void;
+	let callbackInvokerGoToStep: ( pageIndex: number ) => void;
 	let callbackInvokerSubmit: () => void;
 
 	beforeEach( () => {
@@ -63,7 +63,7 @@ describe( 'MultistepDonation.vue', () => {
 		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
-		const eventPayload = { event: new Event( 'submit' ), pageNumber: 1 };
+		const eventPayload = { event: new Event( 'submit' ), pageIndex: 1 };
 		subForm.vm.$emit( 'submit', eventPayload );
 		await nextTick();
 
@@ -74,7 +74,7 @@ describe( 'MultistepDonation.vue', () => {
 		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
-		const eventPayload = { event: new Event( 'next' ), pageNumber: 1 };
+		const eventPayload = { event: new Event( 'next' ), pageIndex: 1 };
 		subForm.vm.$emit( 'next', eventPayload );
 		await nextTick();
 
@@ -85,7 +85,7 @@ describe( 'MultistepDonation.vue', () => {
 		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
 		const subForm = wrapper.findComponent( SubFormStub );
 
-		const eventPayload = { event: new Event( 'previous' ), pageNumber: 1 };
+		const eventPayload = { event: new Event( 'previous' ), pageIndex: 1 };
 		subForm.vm.$emit( 'previous', eventPayload );
 		await nextTick();
 
