@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
-import UpgradeToYearly from '@src/components/DonationForm/Forms/UpgradeToYearly.vue';
+import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 
-describe( 'UpgradeToYearly.vue', () => {
+describe( 'UpgradeToYearlyForm.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
-		return shallowMount( UpgradeToYearly, {
+		return shallowMount( UpgradeToYearlyForm, {
 			props: {
 				pageIndex: 4
 			},
