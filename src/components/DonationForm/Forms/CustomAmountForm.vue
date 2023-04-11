@@ -29,7 +29,7 @@
 					autoComplete="off"
 					class="wmde-banner-select-custom-amount-input t-custom-amount-annual-upgrade"/>
 		</div>
-		<span class="wmde-banner-select-group-error-message">
+		<span v-if="!isValidOrUnset( amountValidity )" class="wmde-banner-select-group-error-message">
 				<span class="wmde-banner-error-icon">
 					{{ $translate( 'form-new-custom-amount-error' ) }}
 				</span>
@@ -56,6 +56,7 @@ import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormatte
 import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 
 interface Props {
 	pageIndex: number

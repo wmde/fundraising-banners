@@ -51,7 +51,6 @@ withDefaults( defineProps<Props>(), {
 	&-sub-form {
 		display: flex;
 		height: 100%;
-		width: 100%; /* For IE11 */
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-end;
