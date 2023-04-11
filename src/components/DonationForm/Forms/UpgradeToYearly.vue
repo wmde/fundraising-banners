@@ -1,7 +1,7 @@
 <template>
     <form @submit="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="back" @click="$emit('back')">
+            <a tabIndex="-1" href="#" class="previous" @click="$emit('previous')">
                 <ChevronLeftIcon/>
             </a>
             {{ $translate( 'form-step-2-header', { amount: secondPageAmount } ) }}
