@@ -6,7 +6,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 
 const formItems: DonationFormItems = {

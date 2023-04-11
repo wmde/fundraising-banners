@@ -110,7 +110,8 @@ describe( 'MultistepDonation.vue', () => {
 		callbackInvokerNext();
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) )
+			.toContain( 'wmde-banner-form-page--current' );
 	} );
 
 	it( 'should go to specified step when goToStep callback is invoked', async function () {
@@ -120,7 +121,8 @@ describe( 'MultistepDonation.vue', () => {
 		callbackInvokerGoToStep( 3 );
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(3)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(3)' ).attributes( 'class' ) )
+			.toContain( 'wmde-banner-form-page--current' );
 	} );
 
 	it( 'should go to previous when previous callback is invoked', async function () {
@@ -132,7 +134,8 @@ describe( 'MultistepDonation.vue', () => {
 		callbackInvokerPrevious();
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(1)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(1)' ).attributes( 'class' ) )
+			.toContain( 'wmde-banner-form-page--current' );
 	} );
 
 } );

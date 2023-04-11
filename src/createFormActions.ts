@@ -3,8 +3,8 @@ import { FormActions } from '@src/domain/FormActions';
 import { TrackingParameters } from '@src/TrackingParameters';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
-const DONATION_WITH_ADDRESS_URL = 'https://spenden.wikimedia.de/donation/new';
-const DONATION_WITHOUT_ADDRESS_URL = 'https://spenden.wikimedia.de/donation/add';
+const DONATE_WITH_ADDRESS_URL = 'https://spenden.wikimedia.de/donation/new';
+const DONATE_ANONYMOUSLY_URL = 'https://spenden.wikimedia.de/donation/add';
 
 export function createFormActions( tracking: TrackingParameters, impressionCount: ImpressionCount, extraUrlParameters: Record<string, string> = {} ): FormActions {
 	const urlParameters = new URLSearchParams( {
@@ -17,7 +17,7 @@ export function createFormActions( tracking: TrackingParameters, impressionCount
 	} );
 
 	return {
-		donateWithAddressAction: `${DONATION_WITH_ADDRESS_URL}?${urlParameters}`,
-		donateWithoutAddressAction: `${DONATION_WITHOUT_ADDRESS_URL}?${urlParameters}`
+		donateWithAddressAction: `${DONATE_WITH_ADDRESS_URL}?${urlParameters}`,
+		donateAnonymouslyAction: `${DONATE_ANONYMOUSLY_URL}?${urlParameters}`
 	};
 }

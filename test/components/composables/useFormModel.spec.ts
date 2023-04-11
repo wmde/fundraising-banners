@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, test } from 'vitest';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { nextTick } from 'vue';

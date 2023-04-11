@@ -66,7 +66,7 @@
 <script setup lang="ts">
 
 import { computed, inject, ref } from 'vue';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';

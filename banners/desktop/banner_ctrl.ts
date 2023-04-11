@@ -20,7 +20,7 @@ import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { FormControllerCtrl } from './FormControllerCtrl';
-import { useFormModel } from '@src/utils/FormModel/services/useFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 
 const translator = new Translator( Translations );
 

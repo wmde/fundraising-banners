@@ -1,27 +1,32 @@
 <template>
 	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container">
 		<template v-for="( form, idx ) in forms" :key="idx">
-			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
+			<div class="keen-slider__slide wmde-banner-form-page"
+					:class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
 				<component
-					:is="form"
-					:page-number="idx"
-					@submit="onSubmit"
-					@next="onNext"
-					@previous="onPrevious"
+						:is="form"
+						:page-number="idx"
+						@submit="onSubmit"
+						@next="onNext"
+						@previous="onPrevious"
 				/>
 			</div>
 		</template>
 	</div>
+	<form ref="submitFormRef" :action="formAction" class="wmde-banner-submit-form">
+		<SubmitValues />
+	</form>
 </template>
 
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { inject, nextTick, ref } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
-
-const currentFormPageIndex = ref<number>( 0 );
+import { FormActions } from '@src/domain/FormActions';
+import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
+import { useFormAction } from '@src/components/composables/useFormAction';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -32,6 +37,10 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
+
+const currentFormPageIndex = ref<number>( 0 );
+const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
+const submitFormRef = ref<HTMLFormElement>( null );
 
 const [ container, slider ] = useKeenSlider( {
 	initial: 0
@@ -65,7 +74,10 @@ props.formController.onGoToStep( ( pageNumber: number ) => {
 	slider.value.moveToIdx( pageNumber - 1 );
 } );
 
-props.formController.onSubmit( () => {} );
+props.formController.onSubmit( async () => {
+	await nextTick();
+	submitFormRef.value.submit();
+} );
 
 </script>
 
