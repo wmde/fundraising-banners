@@ -1,54 +1,53 @@
 <template>
     <form @submit="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="previous" @click="$emit('previous')">
+            <a tabIndex="-1" href="#" class="previous" @click="$emit( 'previous' )">
                 <ChevronLeftIcon/>
             </a>
-            {{ $translate('form-step-2-header', {amount: secondPageAmount}) }}
+            {{ $translate('form-step-2-header', { amount: secondPageAmount } ) }}
         </div>
-        <div class="wmde-banner-form-upgrade-notice">{{ $translate('form-step-2-copy') }}</div>
+        <div class="wmde-banner-form-upgrade-notice">{{ $translate( 'form-step-2-copy' ) }}</div>
 
         <div class="wmde-banner-form-upgrade-options">
             <div :class="[
 				'wmde-banner-select-group-container',
-				{ 'wmde-banner-select-group-container--with-error': !isValidOrUnset( upgradeToYearlyValidity ) }
-				]"
-            >
+				{ 'wmde-banner-select-group-container--with-error': intervalValidity === Validity.Invalid }
+            ]">
                 <div class="wmde-banner-select-group">
                     <div class="wmde-banner-select-group-option wmde-banner-select-group-option-no">
                         <label class="t-annual-upgrade-no">
                             <input
-                                    tabIndex="-1"
-                                    type="radio"
-                                    @change="onChooseUpgradeToYearly"
-                                    :checked="upgradeToYearly === Alternatives.NO"
-                                    name="alternative"
-                                    :value="Alternatives.NO"
-                                    class="wmde-banner-select-group-input"/>
-                            <span class="wmde-banner-select-group-label">{{
-									$translate('form-step-2-no', {amount: secondPageAmount})
-                                }}</span>
+                                tabIndex="-1"
+                                type="radio"
+                                v-model="interval"
+                                name="alternative"
+                                :value="Intervals.ONCE.value"
+                                class="wmde-banner-select-group-input"
+                            />
+                            <span class="wmde-banner-select-group-label">
+                                {{ $translate( 'form-step-2-no', { amount: secondPageAmount } ) }}
+                            </span>
                         </label>
                     </div>
                     <div class="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
                         <label class="t-annual-upgrade-yes">
                             <input
-                                    tabIndex="-1"
-                                    type="radio"
-                                    @change="onChooseUpgradeToYearly"
-                                    :checked="upgradeToYearly === Alternatives.YES"
-                                    name="alternative"
-                                    value="Alternatives.YES"
-                                    class="wmde-banner-select-group-input"/>
-                            <span class="wmde-banner-select-group-label">{{
-									$translate('form-step-2-yes', {amount: secondPageAmount})
-                                }}</span>
+                                tabIndex="-1"
+                                type="radio"
+                                v-model="interval"
+                                name="alternative"
+                                :value="Intervals.YEARLY.value"
+                                class="wmde-banner-select-group-input"
+                            />
+                            <span class="wmde-banner-select-group-label">
+                                {{ $translate( 'form-step-2-yes', { amount: secondPageAmount } ) }}
+                            </span>
                         </label>
                     </div>
                 </div>
-                <span v-if="upgradeToYearlyValidity === Validity.Invalid" class="wmde-banner-select-group-error-message">
+                <span v-if="intervalValidity === Validity.Invalid" class="wmde-banner-select-group-error-message">
 					<span class="wmde-banner-error-icon">
-						{{ $translate('form-step-2-error') }}
+						{{ $translate( 'form-step-2-error' ) }}
 					</span>
 				</span>
             </div>
@@ -56,12 +55,12 @@
 
         <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
            @click="onNextPage">
-            {{ $translate('form-step-2-link') }}
+            {{ $translate( 'form-step-2-link' ) }}
         </a>
 
         <div class="wmde-banner-form-button-container form-step-2-button">
             <button tabIndex="-1" class="wmde-banner-form-button" @click="onSubmit">
-                {{ $translate('form-step-2-button') }}
+                {{ $translate( 'form-step-2-button' ) }}
             </button>
         </div>
 
@@ -73,14 +72,8 @@
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
-import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
-
-enum Alternatives {
-	YES = 'YES',
-	NO = 'NO'
-}
 
 interface Props {
 	pageNumber: number
@@ -90,25 +83,19 @@ const props = defineProps<Props>();
 
 const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
 
-const upgradeToYearly = ref<Alternatives>( null );
-const upgradeToYearlyValidity = ref<Validity>( Validity.Unset );
-const formModel = useFormModel();
-
-const {
-	numericAmount
-} = formModel;
+const interval = ref<string>( null );
+const intervalValidity = ref<Validity>( Validity.Unset );
 
 const onSubmit = ( e: Event ): void => {
-	if ( !upgradeToYearly.value ) {
-		upgradeToYearlyValidity.value = Validity.Invalid;
+	if ( !interval.value ) {
+		intervalValidity.value = Validity.Invalid;
 		return;
 	}
-	const upgradeToYearlyInterval = upgradeToYearly.value === Alternatives.YES ? Intervals.YEARLY.value : Intervals.ONCE.value;
 	emit( 'submit', {
 		event: e,
 		pageNumber: props.pageNumber,
 		extraData: {
-			upgradeToYearlyInterval
+			upgradeToYearlyInterval: interval.value
 		}
 	} );
 };
@@ -121,10 +108,8 @@ const onNextPage = ( e: Event ): void => {
 		}
 	} );
 };
-const onChooseUpgradeToYearly = ( e: Event ): void => {
-	upgradeToYearly.value = ( e.target as HTMLInputElement ).value as Alternatives;
-};
 
+const { numericAmount } = useFormModel();
 const currencyFormatter: Function = inject( 'currencyFormatter' );
 const secondPageAmount = computed( (): string => currencyFormatter( numericAmount ) );
 

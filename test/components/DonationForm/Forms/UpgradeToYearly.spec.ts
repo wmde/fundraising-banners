@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { mount, shallowMount, VueWrapper } from '@vue/test-utils';
+import { shallowMount, VueWrapper } from '@vue/test-utils';
 import UpgradeToYearly from '@src/components/DonationForm/Forms/UpgradeToYearly.vue';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import { nextTick } from 'vue';
 
 describe( 'UpgradeToYearly.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
@@ -57,5 +55,23 @@ describe( 'UpgradeToYearly.vue', () => {
 
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+	} );
+
+	it( 'should submit the chosen interval when form was submitted ', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-input' ).trigger( 'change' );
+		await wrapper.find( '.wmde-banner-form-button' ).trigger( 'click' );
+
+		await wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-input' ).trigger( 'change' );
+		await wrapper.find( '.wmde-banner-form-button' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 2 );
+
+		const emittedSubmitEvent1 = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
+		expect( emittedSubmitEvent1.extraData ).toEqual( { upgradeToYearlyInterval: '0' } );
+
+		const emittedSubmitEvent2 = wrapper.emitted( 'submit' )[ 1 ][ 0 ] as unknown as FormSubmitData;
+		expect( emittedSubmitEvent2.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
 	} );
 } );
