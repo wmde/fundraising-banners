@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container">
 		<template v-for="( form, idx ) in forms" :key="idx">
-			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPage === idx }">
+			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
 				<component
 					:is="form"
 					:page-number="idx"
@@ -21,7 +21,7 @@ import { useKeenSlider } from 'keen-slider/vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 
-const currentFormPage = ref<number>( 0 );
+const currentFormPageIndex = ref<number>( 0 );
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -51,18 +51,18 @@ const onNext = ( payload: FormSubmitData ): void => {
 };
 
 props.formController.onNext( () => {
-	currentFormPage.value = currentFormPage.value + 1;
+	currentFormPageIndex.value = currentFormPageIndex.value + 1;
 	slider.value.next();
 } );
 
 props.formController.onPrevious( () => {
-	currentFormPage.value = currentFormPage.value - 1;
+	currentFormPageIndex.value = currentFormPageIndex.value - 1;
 	slider.value.prev();
 } );
 
 props.formController.onGoToStep( ( pageNumber: number ) => {
-	currentFormPage.value = pageNumber;
-	slider.value.moveToIdx( pageNumber );
+	currentFormPageIndex.value = pageNumber - 1;
+	slider.value.moveToIdx( pageNumber - 1 );
 } );
 
 props.formController.onSubmit( () => {} );

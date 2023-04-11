@@ -7,6 +7,10 @@ import { FormController } from '@src/utils/FormController/FormController';
 
 describe( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
+	let callbackInvokerNext: () => void;
+	let callbackInvokerPrevious: () => void;
+	let callbackInvokerGoToStep: ( pageNumber: number ) => void;
+	let callbackInvokerSubmit: ( pageNumber: number ) => void;
 
 	beforeEach( () => {
 		mockedFormController = {
@@ -27,6 +31,24 @@ describe( 'MultistepDonation.vue', () => {
 				forms
 			}
 		} );
+	};
+
+	const addCallbackInvokers = (): void => {
+		mockedFormController.onNext = ( callback: () => void ): void => {
+			callbackInvokerNext = callback;
+		};
+
+		mockedFormController.onPrevious = ( callback: () => void ): void => {
+			callbackInvokerPrevious = callback;
+		};
+
+		mockedFormController.onGoToStep = ( callback: ( pageNumber: number ) => void ): void => {
+			callbackInvokerGoToStep = callback;
+		};
+
+		mockedFormController.onSubmit = ( callback: () => void ): void => {
+			callbackInvokerSubmit = callback;
+		};
 	};
 
 	it( 'passes submit event to page controller', async () => {
@@ -81,53 +103,36 @@ describe( 'MultistepDonation.vue', () => {
 		expect( mockedFormController.onSubmit ).toHaveBeenCalled();
 	} );
 
-	it( 'should go to next when callback is invoked', async function () {
-		let callbackInvoker: () => void;
-		mockedFormController.onNext = ( callback: () => void ): void => {
-			callbackInvoker = callback;
-		};
-
+	it( 'should go to next when next callback is invoked', async function () {
+		addCallbackInvokers();
 		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
-		callbackInvoker();
+
+		callbackInvokerNext();
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '1' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
 	} );
 
-	it( 'should go to previous when callback is invoked', async function () {
-		let callbackInvokerNext: () => void;
-		mockedFormController.onNext = ( callback: () => void ): void => {
-			callbackInvokerNext = callback;
-		};
-
-		let callbackInvokerPrevious: () => void;
-		mockedFormController.onPrevious = ( callback: () => void ): void => {
-			callbackInvokerPrevious = callback;
-		};
+	it( 'should go to specified step when goToStep callback is invoked', async function () {
+		addCallbackInvokers();
 		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
-		callbackInvokerNext();
 
+		callbackInvokerGoToStep( 3 );
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '1' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(3)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
+	} );
 
+	it( 'should go to previous when previous callback is invoked', async function () {
+		addCallbackInvokers();
+		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+
+		callbackInvokerGoToStep( 2 );
+		await nextTick();
 		callbackInvokerPrevious();
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '0' );
-	} );
-
-	it( 'should go to previous when callback is invoked', async function () {
-		let callbackInvokerGoToStep: ( pageNumber: number ) => void;
-		mockedFormController.onGoToStep = ( callback: ( pageNumber: number ) => void ): void => {
-			callbackInvokerGoToStep = callback;
-		};
-
-		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
-		callbackInvokerGoToStep( 2 );
-		await nextTick();
-
-		expect( wrapper.find( '.wmde-banner-form-page--current > div' ).attributes( 'page-number' ) ).toBe( '2' );
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(1)' ).attributes( 'class' ) ).toContain( 'wmde-banner-form-page--current' );
 	} );
 
 } );
