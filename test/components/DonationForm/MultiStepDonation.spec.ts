@@ -10,7 +10,7 @@ describe( 'MultistepDonation.vue', () => {
 	let callbackInvokerNext: () => void;
 	let callbackInvokerPrevious: () => void;
 	let callbackInvokerGoToStep: ( pageNumber: number ) => void;
-	let callbackInvokerSubmit: ( pageNumber: number ) => void;
+	let callbackInvokerSubmit: () => void;
 
 	beforeEach( () => {
 		mockedFormController = {
@@ -29,6 +29,14 @@ describe( 'MultistepDonation.vue', () => {
 			props: {
 				formController: mockedFormController,
 				forms
+			},
+			global: {
+				provide: {
+					formActions: {
+						donateWithAddressAction: `https://example.com/withAddress`,
+						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
+					}
+				}
 			}
 		} );
 	};
@@ -138,4 +146,15 @@ describe( 'MultistepDonation.vue', () => {
 			.toContain( 'wmde-banner-form-page--current' );
 	} );
 
+	it( 'should submit donation form when submit callback is invoked', async function () {
+		addCallbackInvokers();
+		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = vi.fn();
+
+		callbackInvokerSubmit();
+		await nextTick();
+
+		expect( submitForm.element.submit ).toHaveBeenCalledOnce();
+	} );
 } );
