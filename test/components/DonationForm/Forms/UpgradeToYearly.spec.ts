@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount, VueWrapper } from '@vue/test-utils';
 import UpgradeToYearly from '@src/components/DonationForm/Forms/UpgradeToYearly.vue';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
+import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
+import { nextTick } from 'vue';
 
 describe( 'UpgradeToYearly.vue', () => {
-	it( 'should emit "previous" event when back button is clicked', async () => {
-		const wrapper = shallowMount( UpgradeToYearly, {
+	const getWrapper = (): VueWrapper<any> => {
+		return shallowMount( UpgradeToYearly, {
 			props: {
 				pageNumber: 4
 			},
@@ -18,6 +20,10 @@ describe( 'UpgradeToYearly.vue', () => {
 				}
 			}
 		} );
+	};
+
+	it( 'should emit "previous" event when back button is clicked', async () => {
+		const wrapper = getWrapper();
 
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
@@ -25,19 +31,7 @@ describe( 'UpgradeToYearly.vue', () => {
 	} );
 
 	it( 'should emit "next" event with payload when user wants to donate yearly with different amount', async () => {
-		const wrapper = shallowMount( UpgradeToYearly, {
-			props: {
-				pageNumber: 4
-			},
-			global: {
-				mocks: {
-					$translate: ( key: string ) => key
-				},
-				provide: {
-					currencyFormatter: ( amount: number ) => String( amount )
-				}
-			}
-		} );
+		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
@@ -46,4 +40,22 @@ describe( 'UpgradeToYearly.vue', () => {
 		expect( emittedNextEvent.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
 	} );
 
+	it( 'should show an error when user does not select any interval ', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-form-button' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
+		expect( wrapper.emitted( 'submit' ) ).toBe( undefined );
+	} );
+
+	it( 'should emit "submit" event when user selects an interval and submits ', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-select-group-input' ).trigger( 'change' );
+		await wrapper.find( '.wmde-banner-form-button' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+	} );
 } );
