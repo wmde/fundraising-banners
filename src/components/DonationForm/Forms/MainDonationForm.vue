@@ -77,7 +77,7 @@ import { FormActions } from '@src/domain/FormActions';
 
 interface Props {
 	showErrorScrollLink?: boolean;
-	pageNumber?: number;
+	pageIndex?: number;
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -103,7 +103,7 @@ const validate = ( e: Event ): void => {
 		return;
 	}
 
-	emit( 'submit', { event: e, pageNumber: props.pageNumber } );
+	emit( 'submit', { event: e, pageIndex: props.pageIndex } );
 };
 
 const {

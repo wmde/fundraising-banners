@@ -76,7 +76,7 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 
 interface Props {
-	pageNumber: number
+	pageIndex: number
 }
 
 const props = defineProps<Props>();
@@ -93,7 +93,7 @@ const onSubmit = ( e: Event ): void => {
 	}
 	emit( 'submit', {
 		event: e,
-		pageNumber: props.pageNumber,
+		pageIndex: props.pageIndex,
 		extraData: {
 			upgradeToYearlyInterval: interval.value
 		}
@@ -102,7 +102,7 @@ const onSubmit = ( e: Event ): void => {
 const onNextPage = ( e: Event ): void => {
 	emit( 'next', {
 		event: e,
-		pageNumber: props.pageNumber,
+		pageIndex: props.pageIndex,
 		extraData: {
 			upgradeToYearlyInterval: Intervals.YEARLY.value
 		}

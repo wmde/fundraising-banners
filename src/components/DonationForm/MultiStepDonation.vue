@@ -5,7 +5,7 @@
 					:class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
 				<component
 						:is="form"
-						:page-number="idx"
+						:page-index="idx"
 						@submit="onSubmit"
 						@next="onNext"
 						@previous="onPrevious"
@@ -69,9 +69,9 @@ props.formController.onPrevious( () => {
 	slider.value.prev();
 } );
 
-props.formController.onGoToStep( ( pageNumber: number ) => {
-	currentFormPageIndex.value = pageNumber - 1;
-	slider.value.moveToIdx( pageNumber - 1 );
+props.formController.onGoToStep( ( pageIndex: number ) => {
+	currentFormPageIndex.value = pageIndex;
+	slider.value.moveToIdx( pageIndex );
 } );
 
 props.formController.onSubmit( async () => {

@@ -50,7 +50,7 @@ describe( 'MultistepDonation.vue', () => {
 			callbackInvokerPrevious = callback;
 		};
 
-		mockedFormController.onGoToStep = ( callback: ( pageNumber: number ) => void ): void => {
+		mockedFormController.onGoToStep = ( callback: ( indexNumber: number ) => void ): void => {
 			callbackInvokerGoToStep = callback;
 		};
 
@@ -126,7 +126,7 @@ describe( 'MultistepDonation.vue', () => {
 		addCallbackInvokers();
 		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
 
-		callbackInvokerGoToStep( 3 );
+		callbackInvokerGoToStep( 2 );
 		await nextTick();
 
 		expect( wrapper.find( '.wmde-banner-form-page:nth-child(3)' ).attributes( 'class' ) )
@@ -137,7 +137,7 @@ describe( 'MultistepDonation.vue', () => {
 		addCallbackInvokers();
 		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
 
-		callbackInvokerGoToStep( 2 );
+		callbackInvokerGoToStep( 1 );
 		await nextTick();
 		callbackInvokerPrevious();
 		await nextTick();

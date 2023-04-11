@@ -1,5 +1,5 @@
 export interface FormSubmitData {
 	event: Event;
-	pageNumber: number;
+	pageIndex: number;
 	extraData?: Record<string, string>;
 }
