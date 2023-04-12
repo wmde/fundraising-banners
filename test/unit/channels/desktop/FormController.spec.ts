@@ -96,7 +96,7 @@ describe( 'FormControllerCtrl', () => {
 			controller.onSubmit( vi.fn() );
 			formModel.interval.value = Intervals.ONCE.value;
 
-			controller.submitStep( { pageIndex } );
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '14.31' } } );
 
 			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );
 		} );
@@ -116,7 +116,7 @@ describe( 'FormControllerCtrl', () => {
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
-			controller.submitStep( { pageIndex } );
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
