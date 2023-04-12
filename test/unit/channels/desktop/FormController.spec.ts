@@ -4,6 +4,7 @@ import { FormControllerCtrl } from '../../../../banners/desktop/FormControllerCt
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
+import { v } from 'npm-check-updates/build/src/lib/version-util';
 
 describe( 'FormControllerCtrl', () => {
 	const formModel = useFormModel();
@@ -73,6 +74,43 @@ describe( 'FormControllerCtrl', () => {
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-non-recurring' );
+		} );
+
+		it( 'should set interval to once on previous', () => {
+			const controller = new FormControllerCtrl( formModel );
+			const onPrevious = vi.fn();
+			controller.onPrevious( onPrevious );
+			formModel.interval.value = Intervals.YEARLY.value;
+
+			controller.previous( { pageIndex } );
+
+			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
+			expect( onPrevious ).toHaveBeenCalledOnce();
+		} );
+	} );
+
+	describe( 'New custom amount', () => {
+		const pageIndex = 2;
+
+		it( 'should set interval to yearly on submit', () => {
+			const controller = new FormControllerCtrl( formModel );
+			controller.onSubmit( vi.fn() );
+			formModel.interval.value = Intervals.ONCE.value;
+
+			controller.submitStep( { pageIndex } );
+
+			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );
+		} );
+
+		it( 'should submit tracking data', function () {
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
+
+			controller.submitStep( { pageIndex } );
+
+			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
 		} );
 	} );
 
