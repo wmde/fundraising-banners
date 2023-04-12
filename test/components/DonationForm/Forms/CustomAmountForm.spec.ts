@@ -1,6 +1,7 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
+import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 
 describe( 'CustomAmountForm.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
@@ -10,10 +11,12 @@ describe( 'CustomAmountForm.vue', () => {
 			},
 			global: {
 				mocks: {
-					$translate: ( key: string ) => key
+					$translate: ( key: string, templateTags: Record<string, string | number> = {} ) => {
+						return `${key} ${JSON.stringify( templateTags )}`;
+					}
 				},
 				provide: {
-					currencyFormatter: ( amount: number ) => String( amount )
+					currencyFormatter: new CurrencyEn()
 				}
 			}
 		} );
@@ -31,6 +34,18 @@ describe( 'CustomAmountForm.vue', () => {
 		await input.trigger( 'blur' );
 
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( showError );
+	} );
+
+	test.each( [
+		[ '42', '€42' ],
+		[ '42,42', '€42.42' ]
+	] )( 'should format the custom amount for the button', async ( amount: string, buttonAmount: string ) => {
+		const wrapper = getWrapper();
+		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( amount );
+
+		expect( wrapper.find( '.wmde-banner-form-button' ).text() ).toContain( `{"amount":"${buttonAmount}"}` );
 	} );
 
 } );

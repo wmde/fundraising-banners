@@ -44,11 +44,14 @@ const submitFormRef = ref<HTMLFormElement>( null );
 
 const [ container, slider ] = useKeenSlider( {
 	initial: 0,
-	drag: false
+	drag: false,
+	loop: false,
+	slides: {
+		spacing: 15
+	}
 } );
 
 const onSubmit = ( payload: FormSubmitData ): void => {
-	payload.event.preventDefault();
 	props.formController.submitStep( payload );
 };
 

@@ -14,7 +14,7 @@ export class CurrencyEn implements Currency {
 		this._millionsNumericFormatter = formatter( { round: 1, decimal: '.', padRight: 1 } );
 	}
 
-	public amountInput( amount: number ): string {
+	public euroAmount( amount: number ): string {
 		return this._amountInputFormatter( amount );
 	}
 

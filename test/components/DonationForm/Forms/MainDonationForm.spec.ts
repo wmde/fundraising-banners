@@ -8,6 +8,7 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.NO, AddressTypes.EMAIL ],
@@ -27,7 +28,7 @@ vi.mock( '@src/validation/DonationFormValidator', () => {
 
 const formModel = useFormModel();
 
-describe( 'DonationForm.vue', () => {
+describe( 'MainDonationForm.vue', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( formModel ) );
@@ -39,7 +40,7 @@ describe( 'DonationForm.vue', () => {
 					$translate: ( key: string ) => key
 				},
 				provide: {
-					currencyFormatter: ( amount: number ) => String( amount ),
+					currencyFormatter: new CurrencyEn(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					formItems: formItems
 				}

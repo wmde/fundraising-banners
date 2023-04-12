@@ -1,10 +1,9 @@
 <template>
 	<form
-		:action="formActions.donateWithAddressAction"
 		method="post"
 		class="wmde-banner-sub-form wmde-banner-sub-form-donation"
 		@click="onFormInteraction"
-		@submit="validate"
+		@submit.prevent="validate"
 	>
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'intervals-header' ) }}</legend>
@@ -73,7 +72,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
-import { FormActions } from '@src/domain/FormActions';
+import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -85,8 +84,7 @@ const props = withDefaults( defineProps<Props>(), {
 } );
 const emit = defineEmits( [ 'submit' ] );
 
-const currencyFormatter: Function = inject( 'currencyFormatter' );
-const formActions = inject<FormActions>( 'formActions' );
+const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 
 const formModel = useFormModel();
@@ -95,15 +93,12 @@ const isFormValid = ref<boolean>( true );
 
 const onFormInteraction = (): void => {};
 
-const validate = ( e: Event ): void => {
+const validate = (): void => {
 	isFormValid.value = validator.validate();
 
-	if ( !isFormValid.value ) {
-		e.preventDefault();
-		return;
+	if ( isFormValid.value ) {
+		emit( 'submit', { pageIndex: props.pageIndex } );
 	}
-
-	emit( 'submit', { event: e, pageIndex: props.pageIndex } );
 };
 
 const {
@@ -118,7 +113,7 @@ const clearSelectedAmount = (): void => {
 
 const formatCustomAmount = (): void => {
 	if ( customAmount.value !== '' ) {
-		customAmount.value = currencyFormatter( numericAmount.value );
+		customAmount.value = currencyFormatter.customAmountInput( numericAmount.value );
 	}
 };
 

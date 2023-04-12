@@ -1,12 +1,12 @@
 <template>
-    <form @submit="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
+    <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
             <a tabIndex="-1" href="#" class="previous" @click.prevent="$emit( 'previous' )">
                 <ChevronLeftIcon/>
             </a>
-            {{ $translate('form-step-2-header', { amount: secondPageAmount } ) }}
+            {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
         </div>
-        <div class="wmde-banner-form-upgrade-notice">{{ $translate( 'form-step-2-copy' ) }}</div>
+        <div class="wmde-banner-form-upgrade-notice">{{ $translate( 'upgrade-to-yearly-copy' ) }}</div>
 
         <div class="wmde-banner-form-upgrade-options">
             <div :class="[
@@ -25,7 +25,7 @@
                                 class="wmde-banner-select-group-input"
                             />
                             <span class="wmde-banner-select-group-label">
-                                {{ $translate( 'form-step-2-no', { amount: secondPageAmount } ) }}
+                                {{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
                             </span>
                         </label>
                     </div>
@@ -40,14 +40,14 @@
                                 class="wmde-banner-select-group-input"
                             />
                             <span class="wmde-banner-select-group-label">
-                                {{ $translate( 'form-step-2-yes', { amount: secondPageAmount } ) }}
+                                {{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
                             </span>
                         </label>
                     </div>
                 </div>
                 <span v-if="intervalValidity === Validity.Invalid" class="wmde-banner-select-group-error-message">
 					<span class="wmde-banner-error-icon">
-						{{ $translate( 'form-step-2-error' ) }}
+						{{ $translate( 'upgrade-to-yearly-error' ) }}
 					</span>
 				</span>
             </div>
@@ -55,12 +55,12 @@
 
         <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
            @click="onNextPage">
-            {{ $translate( 'form-step-2-link' ) }}
+            {{ $translate( 'upgrade-to-yearly-link' ) }}
         </a>
 
-        <div class="wmde-banner-form-button-container form-step-2-button">
-            <button tabIndex="-1" class="wmde-banner-form-button" @click="onSubmit">
-                {{ $translate( 'form-step-2-button' ) }}
+        <div class="wmde-banner-form-button-container upgrade-to-yearly-button">
+            <button tabIndex="-1" class="wmde-banner-form-button" type="submit">
+                {{ $translate( 'upgrade-to-yearly-button' ) }}
             </button>
         </div>
 
@@ -74,6 +74,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 
 interface Props {
 	pageIndex: number
@@ -86,22 +87,21 @@ const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
-const onSubmit = ( e: Event ): void => {
+const onSubmit = (): void => {
 	if ( !interval.value ) {
 		intervalValidity.value = Validity.Invalid;
 		return;
 	}
 	emit( 'submit', {
-		event: e,
 		pageIndex: props.pageIndex,
 		extraData: {
 			upgradeToYearlyInterval: interval.value
 		}
 	} );
 };
-const onNextPage = ( e: Event ): void => {
+
+const onNextPage = (): void => {
 	emit( 'next', {
-		event: e,
 		pageIndex: props.pageIndex,
 		extraData: {
 			upgradeToYearlyInterval: Intervals.YEARLY.value
@@ -110,8 +110,8 @@ const onNextPage = ( e: Event ): void => {
 };
 
 const { numericAmount } = useFormModel();
-const currencyFormatter: Function = inject( 'currencyFormatter' );
-const secondPageAmount = computed( (): string => currencyFormatter( numericAmount ) );
+const currencyFormatter = inject<Currency>( 'currencyFormatter' );
+const secondPageAmount = computed( (): string => currencyFormatter.euroAmount( numericAmount.value ) );
 
 </script>
 

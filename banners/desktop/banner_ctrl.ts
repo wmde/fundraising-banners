@@ -57,8 +57,8 @@ app.use( DynamicTextPlugin, {
 	translator
 } );
 
-app.provide( 'currencyFormatter', currencyFormatter.customAmountInput.bind( currencyFormatter ) );
-app.provide( 'formItems', createFormItems( translator, currencyFormatter.amountInput.bind( currencyFormatter ) ) );
+app.provide( 'currencyFormatter', currencyFormatter );
+app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 
 app.mount( page.getBannerContainer() );

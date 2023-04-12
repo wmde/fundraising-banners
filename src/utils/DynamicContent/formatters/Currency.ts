@@ -13,9 +13,9 @@ export interface Currency {
     millions( amount: number ): string;
 
     /**
-     * Format an amount for displaying as a label for an amount selection element in a form
+     * Format an amount for displaying as a label or inline in text
      */
-    amountInput( amount: number ): string;
+    euroAmount( amount: number ): string;
 
     /**
      * Format an amount while editing it in the custom amount input field

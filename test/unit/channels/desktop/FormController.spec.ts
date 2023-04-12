@@ -19,7 +19,7 @@ describe( 'FormControllerCtrl', () => {
 			controller.onSubmit( onSubmit );
 
 			formModel.interval.value = Intervals.BIANNUAL.value;
-			controller.submitStep( { event: null, pageIndex } );
+			controller.submitStep( { pageIndex } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 		} );
@@ -32,7 +32,7 @@ describe( 'FormControllerCtrl', () => {
 
 			formModel.interval.value = Intervals.ONCE.value;
 			formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
-			controller.submitStep( { event: null, pageIndex } );
+			controller.submitStep( { pageIndex } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 		} );
@@ -43,7 +43,7 @@ describe( 'FormControllerCtrl', () => {
 			controller.onNext( onNext );
 
 			formModel.interval.value = Intervals.ONCE.value;
-			controller.submitStep( { event: null, pageIndex } );
+			controller.submitStep( { pageIndex } );
 
 			expect( onNext ).toHaveBeenCalledOnce();
 		} );
@@ -58,7 +58,7 @@ describe( 'FormControllerCtrl', () => {
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
-			controller.submitStep( { event: null, pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
+			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-recurring' );
@@ -69,7 +69,7 @@ describe( 'FormControllerCtrl', () => {
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
-			controller.submitStep( { event: null, pageIndex, extraData: { upgradeToYearlyInterval: Intervals.ONCE.value } } );
+			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.ONCE.value } } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-non-recurring' );

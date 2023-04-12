@@ -16,7 +16,7 @@ export class CurrencyDe implements Currency {
 
 	}
 
-	public amountInput( amount: number ): string {
+	public euroAmount( amount: number ): string {
 		return this._amountInputFormatter( amount );
 	}
 
