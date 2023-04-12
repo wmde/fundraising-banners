@@ -38,6 +38,7 @@ export class FormControllerCtrl implements FormController {
 				break;
 			case NEW_CUSTOM_AMOUNT_INDEX:
 				interval.value = Intervals.YEARLY.value;
+				this._formModel.customAmount.value = submitData.extraData.newCustomAmount;
 				this._submitCallback( 'submit-different-amount' );
 				break;
 		}

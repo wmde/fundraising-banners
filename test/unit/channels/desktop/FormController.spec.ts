@@ -101,6 +101,16 @@ describe( 'FormControllerCtrl', () => {
 			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );
 		} );
 
+		it( 'should overwrite numericAmount on submit', () => {
+			const controller = new FormControllerCtrl( formModel );
+			controller.onSubmit( vi.fn() );
+			formModel.customAmount.value = '9.05';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '12.01' } } );
+
+			expect( formModel.numericAmount.value ).toBe( 12.01 );
+		} );
+
 		it( 'should submit tracking data', function () {
 			const controller = new FormControllerCtrl( formModel );
 			const onSubmit = vi.fn();

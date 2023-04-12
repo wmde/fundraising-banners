@@ -39,7 +39,8 @@ describe( 'CustomAmountForm.vue', () => {
 
 	test.each( [
 		[ '42', '€42' ],
-		[ '42,42', '€42.42' ]
+		[ '42,42', '€42.42' ],
+		[ '42,40', '€42.40' ]
 	] )( 'should format the custom amount for the button', async ( amount: string, buttonAmount: string ) => {
 		const wrapper = getWrapper();
 		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
@@ -58,6 +59,16 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
 	} );
 
+	it( 'should clear new custom amount input when previous event is emitted', async () => {
+		const wrapper = getWrapper();
+		const input = await wrapper.find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( '34.34' );
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		expect( input.element.value ).toBe( '' );
+	} );
+
 	it( 'should emit "submit" event with new amount', async function () {
 		const wrapper = getWrapper();
 		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
@@ -70,6 +81,17 @@ describe( 'CustomAmountForm.vue', () => {
 		const emittedSubmitEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
 
 		expect( emittedSubmitEvent.extraData ).toEqual( { newCustomAmount: '56.79' } );
+	} );
+
+	it( 'should emit "submit" event with new amount', async function () {
+		const wrapper = getWrapper();
+		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( '0' );
+		await wrapper.trigger( 'submit' );
+
+		expect( wrapper.emitted( 'submit' ) ).toBe( undefined );
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
 	} );
 
 } );

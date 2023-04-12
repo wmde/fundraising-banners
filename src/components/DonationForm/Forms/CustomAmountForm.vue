@@ -3,7 +3,7 @@
 
 		<div class="wmde-banner-form-new-custom-amount-title">
 			<a tabIndex="-1" href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" class="previous"
-					@click.prevent="$emit( 'previous', { pageIndex } )">
+					@click.prevent="onPrevious">
 				<ChevronLeftIcon/>
 			</a>
 		</div>
@@ -12,41 +12,41 @@
 			'wmde-banner-form-new-custom-amount-content',
 			{ 'wmde-banner-select-group-container--with-error': amountValidity === AmountValidity.Invalid }
 		]">
-		<p class="wmde-banner-form-new-custom-amount-header">
-			{{ $translate( 'new-custom-amount-header' ) }}
-		</p>
-		<p class="wmde-banner-form-new-custom-amount-notice">
-			{{ $translate( 'new-custom-amount-copy' ) }}
-		</p>
-		<div class="wmde-banner-select-custom-amount-input-container wmde-banner-form-new-custom-amount-input-container">
-			<span class="wmde-banner-select-custom-amount-euro-symbol">&euro;</span>
-			<input
-				type="text"
-				tabIndex="-1"
-				v-model="amount"
-				@blur="onBlur"
-				size="3"
-				maxLength="8"
-				autoComplete="off"
-				class="wmde-banner-select-custom-amount-input t-custom-amount-annual-upgrade"
-			/>
-		</div>
-		<span v-if="!isValidOrUnset( amountValidity )" class="wmde-banner-select-group-error-message">
-			<span class="wmde-banner-error-icon">
-				{{ $translate( 'new-custom-amount-error' ) }}
+			<p class="wmde-banner-form-new-custom-amount-header">
+				{{ $translate( 'new-custom-amount-header' ) }}
+			</p>
+			<p class="wmde-banner-form-new-custom-amount-notice">
+				{{ $translate( 'new-custom-amount-copy' ) }}
+			</p>
+			<div class="wmde-banner-select-custom-amount-input-container wmde-banner-form-new-custom-amount-input-container">
+				<span class="wmde-banner-select-custom-amount-euro-symbol">&euro;</span>
+				<input
+					type="text"
+					tabIndex="-1"
+					v-model="amount"
+					@blur="onBlur"
+					size="3"
+					maxLength="8"
+					autoComplete="off"
+					class="wmde-banner-select-custom-amount-input t-custom-amount-annual-upgrade"
+				/>
+			</div>
+			<span v-if="!isValidOrUnset( amountValidity )" class="wmde-banner-select-group-error-message">
+				<span class="wmde-banner-error-icon">
+					{{ $translate( 'new-custom-amount-error' ) }}
+				</span>
 			</span>
-		</span>
-	</div>
+		</div>
 
-	<div class="wmde-banner-form-button-container form-new-custom-amount-button">
-		<button tabIndex="-1" class="wmde-banner-form-button t-submit-custom-amount" type="submit">
-			{{
-				numericAmount > 0 ?
-					$translate( 'new-custom-amount-button', { amount: buttonAmount } ) :
-					$translate( 'new-custom-amount-button-blank' )
-			}}
-		</button>
-	</div>
+		<div class="wmde-banner-form-button-container form-new-custom-amount-button">
+			<button tabIndex="-1" class="wmde-banner-form-button t-submit-custom-amount" type="submit">
+				{{
+					numericAmount > 0 ?
+						$translate( 'new-custom-amount-button', { amount: buttonAmount } ) :
+						$translate( 'new-custom-amount-button-blank' )
+				}}
+			</button>
+		</div>
 	</form>
 
 </template>
@@ -85,6 +85,12 @@ const onSubmit = (): void => {
 	if ( amountValidity.value === AmountValidity.Valid ) {
 		emit( 'submit', { pageIndex: props.pageIndex, extraData: { newCustomAmount: amount.value } } );
 	}
+};
+
+const onPrevious = (): void => {
+	amount.value = '';
+	amountValidity.value = AmountValidity.Unset;
+	emit( 'previous', { pageIndex: props.pageIndex } );
 };
 
 </script>
