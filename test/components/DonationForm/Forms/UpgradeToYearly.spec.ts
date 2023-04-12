@@ -58,6 +58,30 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.emitted( 'submit' ) ).toBe( undefined );
 	} );
 
+	it( 'should hide the error when user selects an option', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
+
+		await wrapper.find( '.wmde-banner-select-group-input' ).trigger( 'change' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
+	} );
+
+	it( 'should hide the error when user clicks on the "link" option', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
+
+		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
+	} );
+
 	it( 'should emit "submit" event when user selects an interval and submits ', async function () {
 		const wrapper = getWrapper();
 

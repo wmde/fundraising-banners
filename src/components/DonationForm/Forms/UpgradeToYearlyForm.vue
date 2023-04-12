@@ -23,6 +23,7 @@
                                 name="alternative"
                                 :value="Intervals.ONCE.value"
                                 class="wmde-banner-select-group-input"
+                                @change="onChange"
                             />
                             <span class="wmde-banner-select-group-label">
                                 {{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
@@ -38,6 +39,7 @@
                                 name="alternative"
                                 :value="Intervals.YEARLY.value"
                                 class="wmde-banner-select-group-input"
+                                @change="onChange"
                             />
                             <span class="wmde-banner-select-group-label">
                                 {{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
@@ -101,12 +103,17 @@ const onSubmit = (): void => {
 };
 
 const onNextPage = (): void => {
+	intervalValidity.value = Validity.Valid;
 	emit( 'next', {
 		pageIndex: props.pageIndex,
 		extraData: {
 			upgradeToYearlyInterval: Intervals.YEARLY.value
 		}
 	} );
+};
+
+const onChange = (): void => {
+	intervalValidity.value = Validity.Valid;
 };
 
 const { numericAmount } = useFormModel();
