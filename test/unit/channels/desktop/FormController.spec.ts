@@ -4,7 +4,6 @@ import { FormControllerCtrl } from '../../../../banners/desktop/FormControllerCt
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
-import { v } from 'npm-check-updates/build/src/lib/version-util';
 
 describe( 'FormControllerCtrl', () => {
 	const formModel = useFormModel();

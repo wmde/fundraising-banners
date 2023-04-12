@@ -2,6 +2,7 @@ import { describe, expect, it, test } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 
 describe( 'CustomAmountForm.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
@@ -12,7 +13,7 @@ describe( 'CustomAmountForm.vue', () => {
 			global: {
 				mocks: {
 					$translate: ( key: string, templateTags: Record<string, string | number> = {} ) => {
-						return `${key} ${JSON.stringify( templateTags )}`;
+						return `${ key } ${ JSON.stringify( templateTags ) }`;
 					}
 				},
 				provide: {
@@ -55,6 +56,20 @@ describe( 'CustomAmountForm.vue', () => {
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
+	} );
+
+	it( 'should emit "submit" event with new amount', async function () {
+		const wrapper = getWrapper();
+		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( '56,789' );
+		await wrapper.trigger( 'submit' );
+
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+
+		const emittedSubmitEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
+
+		expect( emittedSubmitEvent.extraData ).toEqual( { newCustomAmount: '56.79' } );
 	} );
 
 } );

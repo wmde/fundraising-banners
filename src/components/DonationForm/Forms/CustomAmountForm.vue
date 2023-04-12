@@ -75,11 +75,13 @@ const buttonAmount = computed( () => currencyFormatter.euroAmount( numericAmount
 
 const onBlur = (): void => {
 	amountValidity.value = validateAmount( numericAmount.value, '', amount.value );
+	// format amount in the input field according to selected locale
 	amount.value = currencyFormatter.customAmountInput( numericAmount.value );
 };
 
 const onSubmit = (): void => {
 	amountValidity.value = validateAmount( numericAmount.value, '', amount.value );
+	amount.value = currencyFormatter.customAmountInput( numericAmount.value );
 	if ( amountValidity.value === AmountValidity.Valid ) {
 		emit( 'submit', { pageIndex: props.pageIndex, extraData: { newCustomAmount: amount.value } } );
 	}
