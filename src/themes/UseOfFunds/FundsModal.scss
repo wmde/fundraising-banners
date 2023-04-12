@@ -1,0 +1,108 @@
+@use 'variables/breakpoints';
+
+.banner_modal {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	&.is-visible {
+		display: flex;
+	}
+	&__background {
+		display: none;
+		@include breakpoints.small-up {
+			display: block;
+			background-color: #000000;
+			opacity: 0.6;
+			width: 100vw;
+			height: 100vh;
+		}
+	}
+	&__container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+
+		@include breakpoints.small-up {
+			height: 80vh;
+			position: absolute;
+			min-width: max( 90vw, 700px );
+			top: 50%;
+			left: 50%;
+			transform: translate( -50%, -50% );
+		}
+
+		@include breakpoints.large-up {
+			width: 1024px;
+			max-width: 1024px;
+			min-width: 800px;
+		}
+		@include breakpoints.extra-large-up {
+			width: 1200px;
+			max-width: 1200px;
+		}
+		@include breakpoints.extra-extra-large-up {
+			width: 1500px;
+			max-width: 1500px;
+		}
+	}
+
+	&__content {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #ffffff;
+		overflow-y: scroll;
+		z-index: 1;
+	}
+
+	&_close {
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		top: 10px;
+		right: 16px;
+		padding: 4px;
+		background: #ffffff;
+		border-radius: 20px;
+		z-index: 2;
+
+		@include breakpoints.large-up {
+			top: 22px;
+			right: 32px;
+		}
+
+		button {
+			display: block;
+			height: 32px;
+			width: 32px;
+		}
+
+		&__link {
+			display: block;
+			background-color: transparent;
+			border: 0;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				background-color: transparent;
+			}
+		}
+
+		&:hover .banner_modal_close__link {
+			opacity: 0.75;
+		}
+	}
+}

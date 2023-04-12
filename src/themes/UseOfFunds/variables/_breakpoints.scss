@@ -1,0 +1,42 @@
+$use-of-funds-breakpoint-xs: 600px;
+$use-of-funds-breakpoint-s: 768px;
+$use-of-funds-breakpoint-m: 800px;
+$use-of-funds-breakpoint-l: 1090px;
+$use-of-funds-breakpoint-xl: 1300px;
+$use-of-funds-breakpoint-xxl: 1580px;
+
+@mixin extra-small-up {
+	@media ( min-width: $use-of-funds-breakpoint-xs ) {
+		@content;
+	}
+}
+
+@mixin small-up {
+	@media ( min-width: $use-of-funds-breakpoint-s ) {
+		@content;
+	}
+}
+
+@mixin medium-up {
+	@media ( min-width: $use-of-funds-breakpoint-m ) {
+		@content;
+	}
+}
+
+@mixin large-up {
+	@media ( min-width: $use-of-funds-breakpoint-l ) {
+		@content;
+	}
+}
+
+@mixin extra-large-up {
+	@media ( min-width: $use-of-funds-breakpoint-xl ) {
+		@content;
+	}
+}
+
+@mixin extra-extra-large-up {
+	@media ( min-width: $use-of-funds-breakpoint-xxl ) {
+		@content;
+	}
+}
