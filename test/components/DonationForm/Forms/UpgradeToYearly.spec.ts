@@ -94,4 +94,13 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-label' ).text() ).toContain( '{"amount":"€5"}' );
 		expect( wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-label' ).text() ).toContain( '{"amount":"€5"}' );
 	} );
+
+	it( 'should emit back event with pageIndex', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
+	} );
 } );

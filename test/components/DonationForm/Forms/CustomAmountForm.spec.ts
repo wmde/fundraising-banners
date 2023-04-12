@@ -48,4 +48,13 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-form-button' ).text() ).toContain( `{"amount":"${buttonAmount}"}` );
 	} );
 
+	it( 'should emit back event with pageIndex', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
+	} );
+
 } );

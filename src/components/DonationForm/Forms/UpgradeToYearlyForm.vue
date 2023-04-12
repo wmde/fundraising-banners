@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="previous" @click.prevent="$emit( 'previous' )">
+            <a tabIndex="-1" href="#" class="previous" @click.prevent="$emit( 'previous', { pageIndex } )">
                 <ChevronLeftIcon/>
             </a>
             {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}

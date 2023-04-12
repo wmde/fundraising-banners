@@ -3,7 +3,7 @@
 
 		<div class="wmde-banner-form-new-custom-amount-title">
 			<a tabIndex="-1" href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" class="previous"
-					@click.prevent="$emit( 'previous' )">
+					@click.prevent="$emit( 'previous', { pageIndex } )">
 				<ChevronLeftIcon/>
 			</a>
 		</div>

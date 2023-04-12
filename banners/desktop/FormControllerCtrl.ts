@@ -21,10 +21,10 @@ export class FormControllerCtrl implements FormController {
 		this._formModel = formModel;
 	}
 
-	public submitStep( step: FormSubmitData ): void {
+	public submitStep( submitData: FormSubmitData ): void {
 		const { interval, paymentMethod } = this._formModel;
 
-		switch ( step.pageIndex ) {
+		switch ( submitData.pageIndex ) {
 			case MAIN_DONATION_INDEX:
 				if ( interval.value !== Intervals.ONCE.value || paymentMethod.value === PaymentMethods.SOFORT.value ) {
 					this._submitCallback();
@@ -33,7 +33,7 @@ export class FormControllerCtrl implements FormController {
 				this._nextCallback();
 				break;
 			case UPGRADE_TO_YEARLY_INDEX:
-				interval.value = step.extraData.upgradeToYearlyInterval;
+				interval.value = submitData.extraData.upgradeToYearlyInterval;
 				this._submitCallback( interval.value === Intervals.YEARLY.value ? 'submit-recurring' : 'submit-non-recurring' );
 				break;
 			case NEW_CUSTOM_AMOUNT_INDEX:
