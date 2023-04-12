@@ -1,12 +1,13 @@
-import { Currency, CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
+import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import formatter from 'format-number';
+import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
 export class CurrencyDe implements Currency {
 
-	private readonly _amountInputFormatter: CurrencyFormatter;
-	private readonly _customAmountInputFormatter: CurrencyFormatter;
-	private readonly _millionsFormatter: CurrencyFormatter;
-	private readonly _millionsNumericFormatter: CurrencyFormatter;
+	private readonly _amountInputFormatter: NumberFormatter;
+	private readonly _customAmountInputFormatter: NumberFormatter;
+	private readonly _millionsFormatter: NumberFormatter;
+	private readonly _millionsNumericFormatter: NumberFormatter;
 
 	public constructor() {
 		this._amountInputFormatter = formatter( { round: 2, suffix: ' €', decimal: ',', integerSeparator: '' } );

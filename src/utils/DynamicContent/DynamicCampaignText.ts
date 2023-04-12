@@ -112,7 +112,8 @@ export default class DynamicCampaignText implements DynamicContent {
 			return new VisitorsVsDonorsSentence(
 				this._translator,
 				this._campaignParameters.millionImpressionsPerDay,
-				this.getCampaignProjection().projectedDonationCount()
+				this.getCampaignProjection().projectedDonationCount(),
+				this._formatters.integer
 			).getText();
 		} );
 	}

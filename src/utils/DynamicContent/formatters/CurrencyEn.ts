@@ -1,9 +1,10 @@
-import { Currency, CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
+import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import formatter from 'format-number';
+import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
 export class CurrencyEn implements Currency {
-	private readonly _amountInputFormatter: CurrencyFormatter;
-	private readonly _customAmountInputFormatter: CurrencyFormatter;
+	private readonly _amountInputFormatter: NumberFormatter;
+	private readonly _customAmountInputFormatter: NumberFormatter;
 	private readonly _millionsFormatter: ( amount: number ) => string;
 	private readonly _millionsNumericFormatter: ( amount: number ) => string;
 

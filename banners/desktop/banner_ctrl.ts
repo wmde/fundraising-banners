@@ -21,6 +21,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { FormControllerCtrl } from './FormControllerCtrl';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 
 const translator = new Translator( Translations );
 
@@ -30,7 +31,7 @@ const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(),
 
 // This is language-specific and must be changed for EN banners
 const currencyFormatter = new CurrencyDe();
-const formatters: Formatters = { currency: currencyFormatter, ordinal: new OrdinalDe() };
+const formatters: Formatters = { currency: currencyFormatter, ordinal: new OrdinalDe(), integer: new IntegerDe() };
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 

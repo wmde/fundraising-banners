@@ -1,5 +1,3 @@
-export type CurrencyFormatter = ( amount: number ) => string;
-
 export interface Currency {
     /**
      * Divide the amount by 1_000_000 and format the decimal number according to locale

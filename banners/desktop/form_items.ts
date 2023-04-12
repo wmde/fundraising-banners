@@ -1,11 +1,11 @@
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
-import { CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
-export function createFormItems( translations: Translator, amountFormatter: CurrencyFormatter ): DonationFormItems {
+export function createFormItems( translations: Translator, amountFormatter: NumberFormatter ): DonationFormItems {
 	return new FormItemsBuilder( translations, amountFormatter )
 		.setIntervals(
 			Intervals.ONCE,

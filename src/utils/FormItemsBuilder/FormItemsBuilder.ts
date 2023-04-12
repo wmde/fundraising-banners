@@ -1,14 +1,14 @@
 import { Translator } from '@src/Translator';
-import { CurrencyFormatter } from '@src/utils/DynamicContent/formatters/Currency';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
 export default class FormItemsBuilder {
 	private readonly _formItems: DonationFormItems;
 	private readonly _translator: Translator;
-	private readonly _amountFormatter: CurrencyFormatter;
+	private readonly _amountFormatter: NumberFormatter;
 
-	public constructor( translator: Translator, amountFormatter: CurrencyFormatter ) {
+	public constructor( translator: Translator, amountFormatter: NumberFormatter ) {
 		this._translator = translator;
 		this._amountFormatter = amountFormatter;
 		this._formItems = {
