@@ -6,7 +6,6 @@
 				<component
 						:is="form"
 						:page-index="idx"
-						:active="currentFormPageIndex === idx"
 						@submit="onSubmit"
 						@next="onNext"
 						@previous="onPrevious"

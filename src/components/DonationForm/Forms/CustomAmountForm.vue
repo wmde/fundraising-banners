@@ -10,7 +10,7 @@
 
 		<div :class="[
 			'wmde-banner-form-new-custom-amount-content',
-			{ 'wmde-banner-select-group-container--with-error': amountValidity === AmountValidity.Invalid }
+			{ 'wmde-banner-select-group-container--with-error': !isValidOrUnset( amountValidity ) }
 		]">
 			<p class="wmde-banner-form-new-custom-amount-header">
 				{{ $translate( 'new-custom-amount-header' ) }}
@@ -33,7 +33,7 @@
 			</div>
 			<span v-if="!isValidOrUnset( amountValidity )" class="wmde-banner-select-group-error-message">
 				<span class="wmde-banner-error-icon">
-					{{ $translate( 'new-custom-amount-error' ) }}
+					{{ $translate( amountValidityMessageKey( amountValidity ) ) }}
 				</span>
 			</span>
 		</div>
@@ -60,6 +60,7 @@ import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import { amountValidityMessageKey } from '../../../utils/amountValidityMessageKey';
 
 interface Props {
 	pageIndex: number
@@ -74,6 +75,10 @@ const numericAmount = computed( (): number => parseFloatFromFormattedString( amo
 const buttonAmount = computed( () => currencyFormatter.euroAmount( numericAmount.value ) );
 
 const onBlur = (): void => {
+	if ( amount.value === '' ) {
+		amountValidity.value = AmountValidity.Unset;
+		return;
+	}
 	amountValidity.value = validateAmount( numericAmount.value, '', amount.value );
 	// format amount in the input field according to selected locale
 	amount.value = currencyFormatter.customAmountInput( numericAmount.value );

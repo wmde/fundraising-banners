@@ -26,8 +26,9 @@ describe( 'CustomAmountForm.vue', () => {
 	test.each( [
 		[ 0, true ],
 		[ 100_000, true ],
-		[ 5000, false ]
-	] )( 'should show error message on blur when validation fails', async ( amount: number, showError: boolean ) => {
+		[ 5000, false ],
+		[ 'tttt', true ]
+	] )( 'should show error message on blur when validation fails', async ( amount: number|string, showError: boolean ) => {
 		const wrapper = getWrapper();
 		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
 
@@ -35,6 +36,19 @@ describe( 'CustomAmountForm.vue', () => {
 		await input.trigger( 'blur' );
 
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( showError );
+		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( showError );
+	} );
+
+	it( 'skips validation when amount input field is blurred with empty content', async () => {
+		const wrapper = getWrapper();
+		const input = await wrapper.find<HTMLInputElement>( '.wmde-banner-select-custom-amount-input' );
+
+		await input.setValue( '' );
+		await input.trigger( 'blur' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
+		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( false );
+		expect( input.element.value ).toBe( '' );
 	} );
 
 	test.each( [
@@ -83,15 +97,20 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( emittedSubmitEvent.extraData ).toEqual( { newCustomAmount: '56.79' } );
 	} );
 
-	it( 'should emit "submit" event with new amount', async function () {
+	test.each( [
+		[ '0' ],
+		[ 'tttt' ],
+		[ '100_000' ]
+	] )( 'should show error message when user hits submit with invalid custom amount', async function ( amount: string ) {
 		const wrapper = getWrapper();
 		const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
 
-		await input.setValue( '0' );
+		await input.setValue( amount );
 		await wrapper.trigger( 'submit' );
 
 		expect( wrapper.emitted( 'submit' ) ).toBe( undefined );
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
+		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( true );
 	} );
 
 } );
