@@ -28,6 +28,26 @@ describe( 'CurrencyDe', () => {
 		} );
 	} );
 
+	describe( '#customAmountInput', () => {
+		it( 'returns amount with 2 decimal places, 0-padding if needed', () => {
+			expect( formatter.customAmountInput( 1 ) ).toBe( '1,00' );
+			expect( formatter.customAmountInput( 1.0 ) ).toBe( '1,00' );
+			expect( formatter.customAmountInput( 24.00 ) ).toBe( '24,00' );
+			expect( formatter.customAmountInput( 24.000001 ) ).toBe( '24,00' );
+			expect( formatter.customAmountInput( 100 ) ).toBe( '100,00' );
+			expect( formatter.customAmountInput( 1.23 ) ).toBe( '1,23' );
+			expect( formatter.customAmountInput( 1.20 ) ).toBe( '1,20' );
+			expect( formatter.customAmountInput( 1.2 ) ).toBe( '1,20' );
+		} );
+
+		it( 'rounds cents to two digits', () => {
+			expect( formatter.customAmountInput( 1.594 ) ).toBe( '1,59' );
+			expect( formatter.customAmountInput( 1.595 ) ).toBe( '1,60' );
+			expect( formatter.customAmountInput( 1.599 ) ).toBe( '1,60' );
+			expect( formatter.customAmountInput( 1.201 ) ).toBe( '1,20' );
+		} );
+	} );
+
 	describe( '#millions', () => {
 		it( 'creates a fractional amount and adds suffix and currency', () => {
 			expect( formatter.millions( 8_000_000 ) ).toBe( '8,0 Mio. €' );

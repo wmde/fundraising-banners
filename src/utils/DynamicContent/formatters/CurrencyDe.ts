@@ -4,13 +4,13 @@ import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberForm
 
 export class CurrencyDe implements Currency {
 
-	private readonly _amountInputFormatter: NumberFormatter;
+	private readonly _euroAmountFormatter: NumberFormatter;
 	private readonly _customAmountInputFormatter: NumberFormatter;
 	private readonly _millionsFormatter: NumberFormatter;
 	private readonly _millionsNumericFormatter: NumberFormatter;
 
 	public constructor() {
-		this._amountInputFormatter = formatter( { round: 2, suffix: ' €', decimal: ',', integerSeparator: '', padRight: 2 } );
+		this._euroAmountFormatter = formatter( { round: 2, suffix: ' €', decimal: ',', integerSeparator: '', padRight: 2 } );
 		this._customAmountInputFormatter = formatter( { round: 2, decimal: ',', integerSeparator: '', padRight: 2 } );
 		this._millionsFormatter = formatter( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
 		this._millionsNumericFormatter = formatter( { round: 1, decimal: ',', padRight: 1 } );
@@ -18,7 +18,7 @@ export class CurrencyDe implements Currency {
 	}
 
 	public euroAmount( amount: number ): string {
-		return this._amountInputFormatter( amount ).replace( ',00', '' );
+		return this._euroAmountFormatter( amount ).replace( ',00', '' );
 	}
 
 	public customAmountInput( amount: number ): string {
