@@ -2,7 +2,7 @@
 	<div class="use-of-funds">
 		<div class="use-of-funds-section">
 			<div class="use-of-funds-section-intro">
-				<h2>{{ content.intro.headline }}</h2>
+				<h2>{{ content.intro.headline }}<span v-if="content.provisional !== ''">*</span></h2>
 				<div>{{ content.intro.text }}</div>
 			</div>
 		</div>
@@ -45,8 +45,7 @@
 			<div class="use-of-funds-orgchart-text">
 				<h2>{{ content.orgchart.headline }}</h2>
 				<div>
-					<p><span v-for="part in highlightedOrganization" :key="part.text" :class="part.className">{{ ' ' }}{{ part.text }}{{ ' ' }}</span> </p>
-					<p v-for="para in content.orgchart.paragraphs.slice( 1 )" :key="para">{{ para }}</p>
+					<p v-for="( paragraph, idx ) in orgChartParagraphs" :key="idx" v-html="paragraph"></p>
 				</div>
 			</div>
 			<div class="use-of-funds-orgchart-image">
@@ -65,27 +64,19 @@
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FundsDistributionAccordion from '@src/components/UseOfFunds/FundsDistributionAccordion.vue';
 import CompanyBudgets from '@src/components/UseOfFunds/CompanyBudgets.vue';
-import { computed } from 'vue';
+import { ref } from 'vue';
 
 interface Props {
 	content: UseOfFundsContent;
 }
 
 const props = defineProps<Props>();
+const orgChartParagraphs = ref<string[]>( props.content.orgchart.paragraphs );
 
-const splitStringAt = ( splitWords: string[], str: string ): string[] => {
-	const rx = new RegExp( '(' + splitWords.join( '|' ) + ')', 'g' );
-	return str.split( rx ).filter( w => w !== '' );
-};
-
-const highlightedOrganization = computed( () => {
-	const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );
-	const getHighlightClassName = ( part: string ): string => organizationClassLookup.has( part ) ?
-		`use-of-funds-org use-of-funds-org-${organizationClassLookup.get( part )}` : '';
-
-	return splitStringAt( Array.from( organizationClassLookup.keys() ), props.content.orgchart.paragraphs[ 0 ] ).map( part => {
-		return { text: part, className: getHighlightClassName( part ) };
-	} );
+const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );
+organizationClassLookup.forEach( ( cssClass: string, key: string ) => {
+	orgChartParagraphs.value[ 0 ] = orgChartParagraphs.value[ 0 ]
+		.replace( key, ` <span class="use-of-funds-org use-of-funds-org-${ cssClass }">${ key }</span> ` );
 } );
 
 </script>
