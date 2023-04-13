@@ -1,5 +1,5 @@
 <template>
-	<a v-if="company.budgetCitation" class="company_budgets__citation_link" :href="company.budgetCitation" target="_blank">
+	<a v-if="company.budgetCitation" class="company-budgets-citation-link" :href="company.budgetCitation" target="_blank">
 		{{ citationLabel }}
 	</a>
 </template>

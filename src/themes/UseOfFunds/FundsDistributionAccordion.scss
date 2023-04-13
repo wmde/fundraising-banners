@@ -1,0 +1,72 @@
+@use 'variables/colors';
+
+.funds-distribution-accordion {
+	border-bottom: 1px solid colors.$light-grey;
+	margin-bottom: 16px;
+
+	&-item {
+		&-title {
+			display: block;
+			background: none;
+			border: 0;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			text-align: left;
+			font-size: 14px;
+			font-weight: bold;
+			line-height: 36px;
+			cursor: pointer;
+			border-top: 1px solid colors.$light-grey;
+		}
+
+		&-chevron {
+			width: 18px;
+			float: right;
+			margin-top: 14px;
+			opacity: 0.5;
+		}
+
+		&-text {
+			overflow: hidden;
+			height: 0;
+		}
+
+		&-software {
+			.funds-distribution-accordion-item-title {
+				color: colors.$grey;
+			}
+		}
+		&-international {
+			.funds-distribution-accordion-item-title {
+				color: colors.$green;
+			}
+		}
+		&-communities {
+			.funds-distribution-accordion-item-title {
+				color: colors.$red;
+			}
+		}
+		&-society {
+			.funds-distribution-accordion-item-title {
+				color: colors.$purple;
+			}
+		}
+		&-operative {
+			.funds-distribution-accordion-item-title {
+				color: colors.$green;
+			}
+		}
+
+		&.active {
+			.funds-distribution-accordion-item-text {
+				height: auto;
+				padding-bottom: 8px;
+			}
+
+			.funds-distribution-accordion-item-chevron {
+				transform: rotate( 180deg );
+			}
+		}
+	}
+}

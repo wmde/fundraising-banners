@@ -30,8 +30,9 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
-import * as useOfFundsContent from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
+import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
 
+const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
 const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners

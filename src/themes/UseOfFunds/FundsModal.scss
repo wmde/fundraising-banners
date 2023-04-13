@@ -1,7 +1,8 @@
 @use 'variables/breakpoints';
 
-.banner_modal {
-	display: none;
+.banner-modal {
+	visibility: hidden;
+	display: flex;
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
@@ -11,15 +12,22 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	opacity: 0;
+	transform: scale( 1.1 );
+	transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+
 	* {
 		box-sizing: border-box;
 	}
 
 	&.is-visible {
-		display: flex;
+		visibility: visible;
+		opacity: 1;
+		transform: scale( 1 );
 	}
-	&__background {
+	&-background {
 		display: none;
+
 		@include breakpoints.small-up {
 			display: block;
 			background-color: #000000;
@@ -28,7 +36,7 @@
 			height: 100vh;
 		}
 	}
-	&__container {
+	&-container {
 		position: relative;
 		width: 100%;
 		height: 100%;
@@ -47,17 +55,19 @@
 			max-width: 1024px;
 			min-width: 800px;
 		}
+
 		@include breakpoints.extra-large-up {
 			width: 1200px;
 			max-width: 1200px;
 		}
+
 		@include breakpoints.extra-extra-large-up {
 			width: 1500px;
 			max-width: 1500px;
 		}
 	}
 
-	&__content {
+	&-content {
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -68,7 +78,7 @@
 		z-index: 1;
 	}
 
-	&_close {
+	&-close {
 		position: absolute;
 		width: 40px;
 		height: 40px;
@@ -90,7 +100,7 @@
 			width: 32px;
 		}
 
-		&__link {
+		&-link {
 			display: block;
 			background-color: transparent;
 			border: 0;
@@ -101,7 +111,7 @@
 			}
 		}
 
-		&:hover .banner_modal_close__link {
+		&:hover .banner-modal-close-link {
 			opacity: 0.75;
 		}
 	}

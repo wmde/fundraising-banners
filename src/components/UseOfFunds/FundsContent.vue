@@ -1,26 +1,25 @@
 <template>
-	<div class="use_of_funds">
-		<div class="use_of_funds__section">
-			<div class="use_of_funds__section_intro">
-				<h1 class="title is-1 has-margin-bottom-18">{{ content.intro.headline }}</h1>
+	<div class="use-of-funds">
+		<div class="use-of-funds-section">
+			<div class="use-of-funds-section-intro">
+				<h2>{{ content.intro.headline }}</h2>
 				<div>{{ content.intro.text }}</div>
 			</div>
 		</div>
 
 		<FundsDistributionAccordion :application-of-funds-data="content.applicationOfFundsData" />
-		<FundsDistributionInfo :application-of-funds-data="content.applicationOfFundsData" />
 
-		<div class="use_of_funds__section">
-			<p class="use_of_funds__info_text" v-html="content.detailedReports.mixed.text"></p>
+		<div class="use-of-funds-section">
+			<p class="use-of-funds-info-text" v-html="content.detailedReports.mixed.text"></p>
 		</div>
-		<div class="use_of_funds__section use_of_funds__section--two-cols">
-			<div class="use_of_funds__column">
-				<div class="use_of_funds__benefits_list">
+		<div class="use-of-funds-section use-of-funds-section-two-cols">
+			<div class="use-of-funds-column">
+				<div class="use-of-funds-benefits-list">
 					<h2>{{ content.benefitsList.headline }}</h2>
-					<ul class="use_of_funds__icon-list">
+					<ul class="use-of-funds-icon-list">
 						<li
 							v-for="benefit in content.benefitsList.benefits"
-							:class="'use_of_funds__icon-list_item--' + benefit.icon"
+							:class="'use-of-funds-icon-list-item-' + benefit.icon"
 							:key=benefit.text
 						>
 							{{ benefit.text }}
@@ -28,8 +27,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="use_of_funds__column">
-				<div class="use_of_funds__comparison">
+			<div class="use-of-funds-column">
+				<div class="use-of-funds-comparison">
 					<h2>{{ content.comparison.headline }}</h2>
 					<div>
 						<p v-for="text in content.comparison.paragraphs" :key="text">{{ text }}</p>
@@ -42,21 +41,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="use_of_funds__section use_of_funds__section--orgchart">
-			<div class="use_of_funds__orgchart_text">
+		<div class="use-of-funds-section use-of-funds-section-orgchart">
+			<div class="use-of-funds-orgchart-text">
 				<h2>{{ content.orgchart.headline }}</h2>
 				<div>
 					<p><span v-for="part in highlightedOrganization" :key="part.text" :class="part.className">{{ ' ' }}{{ part.text }}{{ ' ' }}</span> </p>
 					<p v-for="para in content.orgchart.paragraphs.slice( 1 )" :key="para">{{ para }}</p>
 				</div>
 			</div>
-			<div class="use_of_funds__orgchart_image">
+			<div class="use-of-funds-orgchart-image">
 				<img :src="content.orgchart.imageUrl"  :alt="content.orgchart.headline"/>
 			</div>
 		</div>
-		<div class="banner_model__section use_of_funds__section--call_to_action">
-			<button class="use_of_funds__button" onclick="location.href='/'">{{ content.callToAction }}</button>
+		<div class="banner_model-section use-of-funds-section-call-to-action">
+			<button class="use-of-funds-button" onclick="location.href='/'">{{ content.callToAction }}</button>
 		</div>
+		<div v-if="content.provisional !== ''" class="use-of-funds-provisional">{{ content.provisional }}</div>
 	</div>
 </template>
 
@@ -64,7 +64,6 @@
 
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FundsDistributionAccordion from '@src/components/UseOfFunds/FundsDistributionAccordion.vue';
-import FundsDistributionInfo from '@src/components/UseOfFunds/FundsDistributionInfo.vue';
 import CompanyBudgets from '@src/components/UseOfFunds/CompanyBudgets.vue';
 import { computed } from 'vue';
 
@@ -82,7 +81,7 @@ const splitStringAt = ( splitWords: string[], str: string ): string[] => {
 const highlightedOrganization = computed( () => {
 	const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );
 	const getHighlightClassName = ( part: string ): string => organizationClassLookup.has( part ) ?
-		`use_of_funds__org use_of_funds__org--${organizationClassLookup.get( part )}` : '';
+		`use-of-funds-org use-of-funds-org-${organizationClassLookup.get( part )}` : '';
 
 	return splitStringAt( Array.from( organizationClassLookup.keys() ), props.content.orgchart.paragraphs[ 0 ] ).map( part => {
 		return { text: part, className: getHighlightClassName( part ) };

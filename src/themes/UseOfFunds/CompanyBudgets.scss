@@ -1,20 +1,21 @@
 @use 'variables/breakpoints';
 
-.company_budgets {
+.company-budgets {
 	table-layout: fixed;
 	width: 100%;
 
-	&__col--company {
+	&-col-company {
 		width: 30%;
 		vertical-align: top;
+
 		@include breakpoints.small-up {
 			width: 17%;
 		}
 	}
-	&__col--graph {
+	&-col-graph {
 		position: relative;
 	}
-	&__col--budget_number {
+	&-col-budget-number {
 		white-space: nowrap;
 		text-align: right;
 		vertical-align: top;
@@ -25,7 +26,7 @@
 		}
 	}
 
-	&__col--citation {
+	&-col-citation {
 		display: none;
 
 		@include breakpoints.small-up {
@@ -36,23 +37,24 @@
 		}
 	}
 
-	&__number {
+	&-number {
 		display: block;
 	}
-	&__inline-citation {
+	&-inline-citation {
 		display: block;
 		line-height: 14px;
+
 		@include breakpoints.small-up {
 			display: none;
 		}
 	}
 
-	&__citation_link {
+	&-citation-link {
 		font-size: 12px;
 		color: #9b9b9b;
 	}
 
-	&__budget_line {
+	&-budget-line {
 		height: 9px;
 		display: inline-block;
 		background-color: #cecece;
@@ -61,13 +63,13 @@
 		min-width: 3px;
 	}
 
-	&__row--wikipedia {
+	&-row-wikipedia {
 
-		.company_budgets__col--company {
+		.company-budgets-col-company {
 			color: #4a90e2;
 		}
 
-		.company_budgets__budget_line {
+		.company-budgets-budget-line {
 			background-color: #4a90e2;
 		}
 	}

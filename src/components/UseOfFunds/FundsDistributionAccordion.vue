@@ -1,14 +1,14 @@
 <template>
-	<div class="funds_distribution_accordion">
+	<div class="funds-distribution-accordion">
 		<div v-for="( fundsItem, idx ) in applicationOfFundsData" :key="idx" :class="[
-			'funds_distribution_info_item',
-			'funds_distribution_info_item--' + fundsItem.id,
-			{ 'active' : currentActiveItem === idx }
+			'funds-distribution-accordion-item',
+			'funds-distribution-accordion-item-' + fundsItem.id,
+			{ 'active' : currentActiveItems.includes( idx ) }
 		]">
-			<div class="funds_distribution_info_item__title" @click="setActive( idx )">
-				{{ fundsItem.title }} {{ fundsItem.percentage }}%
-			</div>
-			<div class="funds_distribution_info_item__text">
+			<button class="funds-distribution-accordion-item-title" @click="toggleActive( idx )">
+				{{ fundsItem.title }} {{ fundsItem.percentage }}% <ChevronDownIcon class="funds-distribution-accordion-item-chevron"/>
+			</button>
+			<div class="funds-distribution-accordion-item-text">
 				{{ fundsItem.text }}
 			</div>
 		</div>
@@ -19,6 +19,7 @@
 
 import { ApplicationOfFundsItem } from '@src/domain/UseOfFunds/ApplicationOfFundsItem';
 import { ref } from 'vue';
+import ChevronDownIcon from '@src/components/Icons/ChevronDownIcon.vue';
 
 interface Props {
 	applicationOfFundsData: ApplicationOfFundsItem[]
@@ -26,10 +27,14 @@ interface Props {
 
 defineProps<Props>();
 
-const currentActiveItem = ref<number>( 0 );
+const currentActiveItems = ref<number[]>( [] );
 
-const setActive = ( idx: number ): void => {
-	currentActiveItem.value = idx;
+const toggleActive = ( idx: number ): void => {
+	if ( currentActiveItems.value.includes( idx ) ) {
+		currentActiveItems.value.splice( currentActiveItems.value.indexOf( idx ), 1 );
+	} else {
+		currentActiveItems.value.push( idx );
+	}
 };
 
 </script>

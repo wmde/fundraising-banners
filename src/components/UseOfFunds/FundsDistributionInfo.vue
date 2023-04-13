@@ -1,28 +1,28 @@
 <template>
-	<div class="funds_distribution_info">
+	<div class="funds-distribution-info">
 
-		<div class="funds_distribution_info__graph">
+		<div class="funds-distribution-info-graph">
 			<div
 				v-for="( fundsItem, idx ) in applicationOfFundsData"
 				:key="idx"
 				@mouseenter="setActive( idx )"
 				@click="setActive( idx )" :class="[
-					'funds_distribution_info_item',
-					`funds_distribution_info_item--${fundsItem.id}`,
+					'funds-distribution-info-item',
+					`funds-distribution-info-item-${fundsItem.id}`,
 					{ active : idx === currentActiveItem }
 				]"
 				:style="{
 					width: fundsItem.percentage + '%',
-					flexBase: fundsItem.percentage + '%'
+					'flex-basis': fundsItem.percentage + '%'
 				}"
 			>
-				<div class="funds_distribution_info_item__title">{{ fundsItem.title }}</div>
-				<div class="funds_distribution_info_item__box">{{ fundsItem.percentage }}%</div>
+				<div class="funds-distribution-info-item-title">{{ fundsItem.title }}</div>
+				<div class="funds-distribution-info-item-box">{{ fundsItem.percentage }}%</div>
 			</div>
 		</div>
 
 		<div v-for="( fundsItem, idx ) in applicationOfFundsData" :key="fundsItem.id" :class="[
-			'funds_distribution_info__text',
+			'funds-distribution-info-text',
 			{ active : idx === currentActiveItem }
 		]">
 			{{ fundsItem.text }}

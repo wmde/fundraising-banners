@@ -1,11 +1,11 @@
 @use 'variables/breakpoints';
 
-.funds_distribution_info {
-	&__graph {
+.funds-distribution-info {
+	&-graph {
 		display: flex;
 	}
 
-	&__text {
+	&-text {
 		display: none;
 		font-size: 14px;
 		margin-bottom: 14px;
@@ -16,28 +16,28 @@
 	}
 
 	/* 1st child is the graph */
-	&__text:nth-child( 2 ) {
+	&-text:nth-child( 2 ) {
 		margin: 0 auto 14px 0;
 	}
-	&__text:nth-child( 3 ) {
+	&-text:nth-child( 3 ) {
 		margin: 0 auto 14px 60px;
 	}
-	&__text:nth-child( 4 ) {
+	&-text:nth-child( 4 ) {
 		margin: 0 auto 14px;
 	}
-	&__text:nth-child( 5 ) {
+	&-text:nth-child( 5 ) {
 		margin: 0 60px 14px auto;
 	}
-	&__text:nth-child( 6 ) {
+	&-text:nth-child( 6 ) {
 		margin: 0 0 14px auto;
 	}
-	&__text.active {
+	&-text.active {
 		display: block;
 	}
 }
 
-.funds_distribution_info_item {
-	&__title {
+.funds-distribution-info-item {
+	&-title {
 		font-weight: bold;
 		margin-bottom: 2px;
 		white-space: nowrap;
@@ -47,7 +47,7 @@
 			font-size: max( 1.15vw, 9px );
 		}
 	}
-	&__box {
+	&-box {
 		position: relative;
 		line-height: 50px;
 		box-sizing: border-box;
@@ -57,7 +57,7 @@
 	}
 
 	/* diamond indicator on the bottom */
-	&.active .funds_distribution_info_item__box:after {
+	&.active .funds-distribution-info-item-box::after {
 		content: '';
 		position: absolute;
 		bottom: 0;
@@ -70,58 +70,58 @@
 		margin-bottom: -18px;
 	}
 
-	&--software {
-		.funds_distribution_info_item__title {
+	&-software {
+		.funds-distribution-info-item-title {
 			color: #808080;
 		}
-		.funds_distribution_info_item__box {
+		.funds-distribution-info-item-box {
 			background-color: #808080;
 		}
-		&.active .funds_distribution_info_item__box:after {
+		&.active .funds-distribution-info-item-box::after {
 			border-top-color: #808080;
 		}
 	}
-	&--international {
-		.funds_distribution_info_item__title {
+	&-international {
+		.funds-distribution-info-item-title {
 			color: #0ea789;
 		}
-		.funds_distribution_info_item__box {
+		.funds-distribution-info-item-box {
 			background-color: #0ea789;
 		}
-		&.active .funds_distribution_info_item__box:after {
+		&.active .funds-distribution-info-item-box::after {
 			border-top-color: #0ea789;
 		}
 	}
-	&--communities {
-		.funds_distribution_info_item__title {
+	&-communities {
+		.funds-distribution-info-item-title {
 			color: #f24825;
 		}
-		.funds_distribution_info_item__box {
+		.funds-distribution-info-item-box {
 			background-color: #f24825;
 		}
-		&.active .funds_distribution_info_item__box:after {
+		&.active .funds-distribution-info-item-box::after {
 			border-top-color: #f24825;
 		}
 	}
-	&--society {
-		.funds_distribution_info_item__title {
+	&-society {
+		.funds-distribution-info-item-title {
 			color: #9410ac;
 		}
-		.funds_distribution_info_item__box {
+		.funds-distribution-info-item-box {
 			background-color: #9410ac;
 		}
-		&.active .funds_distribution_info_item__box:after {
+		&.active .funds-distribution-info-item-box::after {
 			border-top-color: #9410ac;
 		}
 	}
-	&--operative {
-		.funds_distribution_info_item__title {
+	&-operative {
+		.funds-distribution-info-item-title {
 			color: #8ed14f;
 		}
-		.funds_distribution_info_item__box {
+		.funds-distribution-info-item-box {
 			background-color: #8ed14f;
 		}
-		&.active .funds_distribution_info_item__box:after {
+		&.active .funds-distribution-info-item-box::after {
 			border-top-color: #8ed14f;
 		}
 	}
