@@ -1,7 +1,6 @@
 import { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
-	'LANGUAGE': 'de',
 	'no-interval-message': 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 	'amount-empty-message': 'Bitte wählen Sie einen Betrag aus.',
 	'amount-too-low-message': '1 € muss es mindestens sein.',
@@ -97,7 +96,29 @@ const Translations: TranslationMessages = {
 	'month-name-9': 'September',
 	'month-name-10': 'Oktober',
 	'month-name-11': 'November',
-	'month-name-12': 'Dezember'
+	'month-name-12': 'Dezember',
+
+	// SoftClose
+	'soft-close-prompt': 'Vielleicht möchten Sie Wikipedia später unterstützen?',
+	'soft-close-button-maybe-later': 'Ja',
+	'soft-close-button-close': 'Erstmal nicht',
+	'soft-close-countdown-text': 'Diese Mitteilung wird automatisch in <strong> {{seconds}} Sekunden</strong> ausgeblendet.',
+
+	// DonationForm/Forms/UpgradeToYearly
+	'upgrade-to-yearly-header': 'Könnten Sie auch {{amount}} jährlich spenden?',
+	'upgrade-to-yearly-copy': 'Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen.' +
+		' Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.',
+	'upgrade-to-yearly-no': 'Nein, danke! Ich möchte eine einmalige Spende von {{amount}} machen.',
+	'upgrade-to-yearly-yes': 'Ja, ich möchte {{amount}} jährlich spenden.',
+	'upgrade-to-yearly-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
+	'upgrade-to-yearly-button': 'Weiter, um Spende abzuschließen',
+	'upgrade-to-yearly-error': 'Bitte wählen Sie eine der Optionen aus.',
+
+	// DonationForm/Forms/NewCustomAmount
+	'new-custom-amount-header': 'Vielen Dank für Ihre Unterstützung!',
+	'new-custom-amount-copy': 'Geben Sie Ihren jährlichen Spendenbetrag an.',
+	'new-custom-amount-button-blank': 'Jährlich spenden',
+	'new-custom-amount-button': 'Jährlich {{amount}} spenden'
 };
 
 export default Translations;

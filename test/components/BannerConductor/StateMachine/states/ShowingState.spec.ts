@@ -52,4 +52,13 @@ describe( 'ShowingState', function () {
 		expect( page.setSpace ).toHaveBeenCalledOnce();
 		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
 	} );
+
+	it( 'sets banner size on content changed', () => {
+		const showingState = new ShowingState( page, 1 );
+
+		showingState.onContentChanged( 42 );
+
+		expect( page.setSpace ).toHaveBeenCalledOnce();
+		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
+	} );
 } );

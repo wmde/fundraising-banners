@@ -1,0 +1,20 @@
+@use '../../variables/globals';
+@use '../../variables/fonts';
+@use '../../variables/colors';
+
+.wmde-banner {
+	&-sub-form-donation {
+		.wmde-banner-form-field-group {
+			padding: 0 0 10px;
+
+			&-legend {
+				display: none;
+				visibility: hidden;
+				font-family: fonts.$ui;
+				font-size: 12px;
+				line-height: 13px;
+				color: colors.$black-light;
+			}
+		}
+	}
+}

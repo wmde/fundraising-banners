@@ -1,3 +1,5 @@
+@use '../variables/colors';
+
 .wmde-banner {
 	&-close {
 		padding: 8px 8px 0 0;
@@ -7,11 +9,11 @@
 		line-height: 30px;
 
 		&-link {
-			color: $color-black-light;
+			color: colors.$black-light;
 			font-size: 25px;
 			&:hover {
 				text-decoration: none;
-				color: $color-gray-medium;
+				color: colors.$gray-medium;
 			}
 		}
 	}

@@ -1,0 +1,54 @@
+@use '../variables/colors';
+@use '../variables/fonts';
+
+.wmde-banner {
+	&-slider-container {
+		font-family: fonts.$content;
+		font-size: 1.3em;
+	}
+	&-navigation-wrapper {
+		padding: 0 0 15px;
+	}
+	&-slide {
+		cursor: grab;
+
+		&--current {
+			.wmde-banner-slider-text-animated-highlight {
+				background-position: 0 0;
+			}
+		}
+
+		&-content {
+			text-align: center;
+			padding: 1em 30px 0;
+
+			p {
+				margin: 0 0 1em;
+			}
+		}
+	}
+
+	&-slider-pagination {
+		&-dot {
+			background: colors.$gray-light;
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 3px solid colors.$white;
+
+			&:focus {
+				outline: 0;
+			}
+		}
+		.is-active {
+			background: colors.$white;
+			border: 3px solid colors.$primary;
+		}
+	}
+
+	.headline {
+		font-weight: bold;
+	}
+}

@@ -9,4 +9,14 @@ export interface Currency {
      * adding unit and currency symbol.
      */
     millions( amount: number ): string;
+
+    /**
+     * Format an amount for displaying as a label or inline in text
+     */
+    euroAmount( amount: number ): string;
+
+    /**
+     * Format an amount while editing it in the custom amount input field
+     */
+    customAmountInput( amount: number ): string;
 }

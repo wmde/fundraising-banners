@@ -30,4 +30,7 @@ export class VisibleState extends BannerState {
 		this._page.unsetAnimated().setSpace( space );
 	}
 
+	public onContentChanged( space: number ): void {
+		this._page.unsetAnimated().setSpace( space );
+	}
 }

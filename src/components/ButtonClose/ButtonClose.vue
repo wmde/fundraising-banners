@@ -18,6 +18,7 @@ import CloseIconDefault from '@src/components/Icons/CloseIconDefault.vue';
 	top: 5px;
 	width: 32px;
 	height: 32px;
+	z-index: 2;
 }
 
 .wmde-banner-close-link {

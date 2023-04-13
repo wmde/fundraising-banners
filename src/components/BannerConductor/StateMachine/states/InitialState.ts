@@ -17,8 +17,4 @@ export class InitialState extends BannerState {
 		return Promise.resolve( true );
 	}
 
-	public onResize(): void {
-
-	}
-
 }

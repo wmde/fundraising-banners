@@ -25,4 +25,8 @@ const app = createVueApp( BannerConductor, {
 	}
 } );
 
+// TODO: When getting translations make sure the 'custom-amount-placeholder' value is replace with 'custom-amount-placeholder-short'
+//       This means it doesn't have to be passed around as a prop
+//       Maybe rename it to 'custom-amount-placeholder-mobile'
+
 app.mount( page.getBannerContainer() );

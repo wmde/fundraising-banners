@@ -1,7 +1,6 @@
 import { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
-	'LANGUAGE': 'en',
 	'no-interval-message': 'How often would you like to donate?',
 	'amount-empty-message': 'How much would you like to donate?',
 	'amount-too-low-message': 'The donation needs to be at least 1 Euro.',
@@ -95,7 +94,13 @@ const Translations: TranslationMessages = {
 	'month-name-9': 'September',
 	'month-name-10': 'October',
 	'month-name-11': 'November',
-	'month-name-12': 'December'
+	'month-name-12': 'December',
+
+	// SoftClose
+	'soft-close-prompt': 'Do you want to support Wikipedia later?',
+	'soft-close-button-maybe-later': 'Yes',
+	'soft-close-button-close': 'Not now',
+	'soft-close-countdown-text': 'Automatically closes in <strong> {{seconds}} seconds</strong>.'
 };
 
 export default Translations;

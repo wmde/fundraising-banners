@@ -1,4 +1,4 @@
-import { ReactiveProperty } from '@src/utils/ReactiveProperty';
+import { ReactiveProperty } from '@src/domain/ReactiveProperty';
 
 export interface StateMachine<T> {
 	currentState: ReactiveProperty<T>;

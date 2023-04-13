@@ -104,10 +104,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	}
 
 	public get overallImpressionCount(): number {
-		// Add +1 because this value is not reactive. The banner would show 0 on the first impression of a banner.
-		// Even though this value gets increased, the value will not be (reactively) updated in the banner text.
-		// TODO research ways to make this reactive to not have to add 1 here manually
-		return this._impressionCount.overallCount + 1;
+		return this._impressionCount.overallCountIncremented;
 	}
 
 	public get visitorsVsDonorsSentence(): string {
@@ -115,18 +112,20 @@ export default class DynamicCampaignText implements DynamicContent {
 			return new VisitorsVsDonorsSentence(
 				this._translator,
 				this._campaignParameters.millionImpressionsPerDay,
-				this.getCampaignProjection().projectedDonationCount()
+				this.getCampaignProjection().projectedDonationCount(),
+				this._formatters.integer
 			).getText();
 		} );
 	}
 
 	public get progressBarContent(): ProgressBarContent {
 		if ( this._progressBarContent === undefined ) {
+			const projection = this.getCampaignProjection();
 			this._progressBarContent = new ProgressBarContent(
 				this._campaignParameters.campaignProjection.donationTarget,
-				this._campaignProjection.projectedPercentageTowardsTarget(),
-				this._campaignProjection.projectedDonationSum(),
-				this._campaignProjection.projectedRemainingDonationSum(),
+				projection.projectedPercentageTowardsTarget(),
+				projection.projectedDonationSum(),
+				projection.projectedRemainingDonationSum(),
 				this._translator,
 				this._formatters.currency
 			);

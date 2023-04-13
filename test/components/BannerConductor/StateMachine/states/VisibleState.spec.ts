@@ -16,6 +16,17 @@ describe( 'VisibleState', function () {
 		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
 	} );
 
+	it( 'sets banner size on content change', () => {
+		const page = new PageStub();
+		page.setSpace = vitest.fn( () => page );
+		const visibleState = new VisibleState( page, new ImpressionCountStub() );
+
+		visibleState.onContentChanged( 42 );
+
+		expect( page.setSpace ).toHaveBeenCalledOnce();
+		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
+	} );
+
 	it( 'increases banner impression count on enter', async () => {
 		const impressionCountStub = new ImpressionCountStub();
 		impressionCountStub.incrementImpressionCounts = vitest.fn();

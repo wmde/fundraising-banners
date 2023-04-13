@@ -1,19 +1,19 @@
-@use '../variables/main';
+@use '../variables/globals';
 
 .wmde-banner {
 	&-progress-bar-fill {
-		transition: width 3000ms main.$banner-easing;
+		transition: width 3000ms globals.$banner-easing;
 	}
 
 	&-progress-bar-text-left,
 	&-progress-bar-text-right,
 	&-progress-bar-fill-text {
 		opacity: 0;
-		transition: opacity 300ms main.$banner-easing;
+		transition: opacity 300ms globals.$banner-easing;
 		transition-delay: 3000ms;
 	}
 
-	&-visible {
+	&--visible {
 		.wmde-banner-progress-bar-fill {
 			width: var( --wmde-banner-progress-bar-width );
 		}

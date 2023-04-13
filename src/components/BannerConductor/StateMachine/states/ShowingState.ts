@@ -35,4 +35,8 @@ export class ShowingState extends BannerState {
 	public onResize( space: number ): void {
 		this._page.unsetAnimated().setSpace( space );
 	}
+
+	public onContentChanged( space: number ): void {
+		this._page.unsetAnimated().setSpace( space );
+	}
 }
