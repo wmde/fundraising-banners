@@ -18,9 +18,11 @@
 				<div class="use_of_funds__benefits_list">
 					<h2>{{ content.benefitsList.headline }}</h2>
 					<ul class="use_of_funds__icon-list">
-						<li v-for="benefit in content.benefitsList.benefits"
-								:class="'use_of_funds__icon-list_item--' + benefit.icon"
-								:key=benefit.text>
+						<li
+							v-for="benefit in content.benefitsList.benefits"
+							:class="'use_of_funds__icon-list_item--' + benefit.icon"
+							:key=benefit.text
+						>
 							{{ benefit.text }}
 						</li>
 					</ul>
@@ -34,8 +36,9 @@
 						<h3>{{ content.comparison.subhead }}</h3>
 					</div>
 					<CompanyBudgets
-							:companies="content.comparison.companies"
-							:citation-label="content.comparison.citationLabel"/>
+						:companies="content.comparison.companies"
+						:citation-label="content.comparison.citationLabel"
+					/>
 				</div>
 			</div>
 		</div>
@@ -48,7 +51,7 @@
 				</div>
 			</div>
 			<div class="use_of_funds__orgchart_image">
-				<img :src="assetsPath + '/images/WMDE-funds-forwarding.gif'"  :alt="content.orgchart.headline"/>
+				<img :src="content.orgchart.imageUrl"  :alt="content.orgchart.headline"/>
 			</div>
 		</div>
 		<div class="banner_model__section use_of_funds__section--call_to_action">
@@ -63,12 +66,27 @@ import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FundsDistributionAccordion from '@src/components/UseOfFunds/FundsDistributionAccordion.vue';
 import FundsDistributionInfo from '@src/components/UseOfFunds/FundsDistributionInfo.vue';
 import CompanyBudgets from '@src/components/UseOfFunds/CompanyBudgets.vue';
+import { computed } from 'vue';
 
 interface Props {
 	content: UseOfFundsContent;
-	assetsPath: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const splitStringAt = ( splitWords: string[], str: string ): string[] => {
+	const rx = new RegExp( '(' + splitWords.join( '|' ) + ')', 'g' );
+	return str.split( rx ).filter( w => w !== '' );
+};
+
+const highlightedOrganization = computed( () => {
+	const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );
+	const getHighlightClassName = ( part: string ): string => organizationClassLookup.has( part ) ?
+		`use_of_funds__org use_of_funds__org--${organizationClassLookup.get( part )}` : '';
+
+	return splitStringAt( Array.from( organizationClassLookup.keys() ), props.content.orgchart.paragraphs[ 0 ] ).map( part => {
+		return { text: part, className: getHighlightClassName( part ) };
+	} );
+} );
 
 </script>

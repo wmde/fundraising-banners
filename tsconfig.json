@@ -5,6 +5,7 @@
 		"outDir": "./dist/",
 		"noImplicitAny": true,
 		"baseUrl": ".",
+		"resolveJsonModule": true,
 		"paths": {
 			"@src/*": [ "src/*" ],
 			"@test/*": [ "test/*" ],

@@ -3,8 +3,7 @@
 		<tr v-for="company in companies" :class="'company_budgets__row--' + company.name.toLowerCase()" :key="company.name">
 			<td class="company_budgets__col--company">{{ company.name }} </td>
 			<td class="company_budgets__col--graph">
-						<span class="company_budgets__budget_line"
-								:style="{ width: ( company.budget / highestBudget * 100 ) + '%' }">&#xa0;</span>
+				<span class="company_budgets__budget_line" :style="{ width: ( company.budget / highestBudget * 100 ) + '%' }">&#xa0;</span>
 			</td>
 			<td class="company_budgets__col--budget_number has-text-right">
 				<span class="company_budgets__number">{{ company.budgetString }}</span>
@@ -23,6 +22,7 @@
 
 import { Company } from '@src/domain/UseOfFunds/Company';
 import { computed } from 'vue';
+import CompanyCitation from '@src/components/UseOfFunds/CompanyCitation.vue';
 
 interface Props {
 	companies: Company[];

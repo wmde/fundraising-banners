@@ -6,10 +6,10 @@
 
 <script setup lang="ts">
 
-import { Company } from '@src/domain/UseOfFunds/Company';
+import { Company as CompanyInterface } from '@src/domain/UseOfFunds/Company';
 
 interface Props {
-	company: Company;
+	company: CompanyInterface;
 	citationLabel: string;
 }
 

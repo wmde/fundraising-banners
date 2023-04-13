@@ -2,6 +2,7 @@
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<BannerMain
 			@close="onCloseMain"
+            @showFundsModal="isFundsModalVisible = true"
 			v-if="contentState === ContentStates.Main"
 			:bannerIsVisible="bannerIsVisible"
 			:form-controller="formController"
@@ -13,6 +14,11 @@
 			@maybe-later="() => onClose( CloseSources.MaybeLater )"
 			@time-out-close="() => onClose( CloseSources.TimeOut )"
 		/>
+		<FundsModal
+			:content="useOfFundsContent"
+			:is-funds-modal-visible="isFundsModalVisible"
+			@hideFundsModal="isFundsModalVisible = false"
+		/>
 	</div>
 </template>
 
@@ -23,6 +29,8 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { Component, computed, nextTick, ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
 import { FormController } from '@src/utils/FormController/FormController';
+import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -32,14 +40,15 @@ enum ContentStates {
 interface Props {
 	bannerState: BannerStates;
 	formController: FormController;
-	forms: Component[]
+	useOfFundsContent: useOfFundsContentInterface;
+	forms: Component[];
 }
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const bannerIsVisible = computed( () => props.bannerState === BannerStates.Visible );
-
+const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 
 watch( contentState, async () => {

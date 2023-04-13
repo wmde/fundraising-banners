@@ -14,7 +14,7 @@
 				/>
 			</div>
 		</div>
-		<BannerFooter />
+		<BannerFooter @showFundsModal="$emit( 'showFundsModal' )" />
 	</div>
 </template>
 
@@ -38,7 +38,7 @@ interface Props {
 
 defineProps<Props>();
 
-defineEmits( [ 'close' ] );
+defineEmits( [ 'showFundsModal', 'close' ] );
 
 const onLargeScreen = useDisplaySwitch( 1300 );
 
