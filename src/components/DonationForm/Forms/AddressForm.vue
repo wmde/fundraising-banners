@@ -8,23 +8,23 @@
 		</div>
 
 		<fieldset class="wmde-banner-form-field-group">
-			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'intervals-header' ) }}</legend>
+			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'address-type-header' ) }}</legend>
 			<SelectGroup
 					fieldName="select-address-option"
 					:selectionItems="formItems.addressType"
 					:isValid="isValidOrUnset( addressTypeValidity )"
-					:errorMessage="$translate('address-type-error-message' )"
+					:errorMessage="$translate( 'address-type-error-message' )"
 					v-model="addressType"
-					@change="TODO"
+					@change="onChange"
 					:disabledOptions="disabledAddressTypes"
 			/>
 		</fieldset>
 
-		<div class="wmde-banner-form-address-type-notice">{{ getFormNotice() }}</div>
+		<div class="wmde-banner-form-address-type-notice">{{ formNotice }}</div>
 
 		<div class="wmde-banner-form-button-container wmde-banner-form-address-type-button">
 			<button tabIndex="-1" class="wmde-banner-form-button" type="submit">
-				{{ getButtonText() }}
+				{{ buttonText }}
 			</button>
 		</div>
 	</form>
@@ -35,14 +35,16 @@
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Validity } from '@src/utils/FormModel/Validity';
+import { Translator } from '@src/Translator';
 
 const formItems = inject<DonationFormItems>( 'formItems' );
+const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
 const {
 	addressType, addressTypeValidity,
@@ -67,36 +69,32 @@ const onSubmit = (): void => {
 	}
 };
 
-
-const getFormNotice = (): string => {
-	if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-		//TODO
-		// return $translate( 'address-type-notice-direct-debit' );
-	}
-	return '';
+const onChange = (): void => {
+	addressTypeValidity.value = Validity.Valid;
 };
 
-const getButtonText = (): string => {
+const formNotice = computed( (): string => {
+	if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
+		return translator.translate( 'address-type-notice-direct-debit' );
+	}
+	return '';
+} );
+
+const buttonText = computed( (): string => {
 	if ( addressType.value !== AddressTypes.NO.value ) {
-		// return $translate( 'submit-label-default' );
-		return '';
+		return translator.translate( 'submit-label-default' );
 	}
 
 	if ( paymentMethod.value === PaymentMethods.PAYPAL.value ) {
-		// return $translate( 'submit-label-paypal' );
-		return '';
+		return translator.translate( 'submit-label-paypal' );
 	} else if ( paymentMethod.value === PaymentMethods.CREDIT_CARD.value ) {
-		// return $translate( 'submit-label-credit-card' );
-		return '';
+		return translator.translate( 'submit-label-credit-card' );
 	} else if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
-		// return $translate( 'submit-label-sofort' );
-		return '';
+		return translator.translate( 'submit-label-sofort' );
 	} else if ( paymentMethod.value === PaymentMethods.BANK_TRANSFER.value ) {
-		// return $translate( 'submit-label-bank-transfer' );
-		return '';
+		return translator.translate( 'submit-label-bank-transfer' );
 	}
-	// return $translate( 'submit-label-default' );
-	return '';
-};
+	return translator.translate( 'submit-label-default' );
+} );
 
 </script>

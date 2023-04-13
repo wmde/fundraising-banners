@@ -8,7 +8,10 @@
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
-				<MultiStepDonation :form-controller="formController" :forms="[ DonationForm, UpgradeToYearlyForm, CustomAmountForm ]"/>
+				<MultiStepDonation
+					:form-controller="formController"
+					:forms="[ DonationForm, UpgradeToYearlyForm, CustomAmountForm ]"
+				/>
 			</div>
 		</div>
 		<BannerFooter />

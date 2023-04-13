@@ -7,5 +7,6 @@ export default {
 		app.config.globalProperties.$translate =
 			( key: string, templateTags: Record<string, string | number> = {} ): string =>
 				translator.translate( key, templateTags );
+		app.provide( 'translator', translator );
 	}
 };
