@@ -119,6 +119,29 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-label' ).text() ).toContain( '{"amount":"€5"}' );
 	} );
 
+	it( 'should reset the error message when going to the previous page', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
+
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
+	} );
+
+	it( 'should reset the value when going to the previous page', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-input' ).trigger( 'change' );
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		const options = wrapper.findAll<HTMLInputElement>( '.wmde-banner-select-group-input' );
+		expect( options[ 0 ].element.checked ).toBe( false );
+		expect( options[ 1 ].element.checked ).toBe( false );
+	} );
+
 	it( 'should emit back event with pageIndex', async () => {
 		const wrapper = getWrapper();
 

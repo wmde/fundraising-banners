@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="previous" @click.prevent="$emit( 'previous', { pageIndex } )">
+            <a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
                 <ChevronLeftIcon/>
             </a>
             {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
@@ -90,8 +90,8 @@ const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
 const onSubmit = (): void => {
-	if ( !interval.value ) {
-		intervalValidity.value = Validity.Invalid;
+	intervalValidity.value = interval.value ? Validity.Valid : Validity.Invalid;
+	if ( intervalValidity.value === Validity.Invalid ) {
 		return;
 	}
 	emit( 'submit', {
@@ -114,6 +114,12 @@ const onNextPage = (): void => {
 
 const onChange = (): void => {
 	intervalValidity.value = Validity.Valid;
+};
+
+const onPrevious = (): void => {
+	intervalValidity.value = Validity.Unset;
+	interval.value = null;
+	emit( 'previous', { pageIndex: props.pageIndex } );
 };
 
 const { numericAmount } = useFormModel();
