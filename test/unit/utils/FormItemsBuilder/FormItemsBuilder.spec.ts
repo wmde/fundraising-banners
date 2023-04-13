@@ -18,7 +18,7 @@ describe( 'CampaignProjection', () => {
 		const items = new FormItemsBuilder( new Translator( messages ), formatter )
 			.setPaymentMethods( PaymentMethods.PAYPAL )
 			.setIntervals( Intervals.ONCE )
-			.setAddressType( AddressTypes.EMAIL )
+			.setAddressTypes( AddressTypes.EMAIL )
 			.getItems();
 
 		expect( items.intervals[ 0 ].label ).toBe( 'Bucky' );

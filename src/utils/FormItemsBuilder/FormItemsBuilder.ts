@@ -51,7 +51,7 @@ export default class FormItemsBuilder {
 		return this;
 	}
 
-	public setAddressType( ...addressType: FormItem[] ): FormItemsBuilder {
+	public setAddressTypes( ...addressType: FormItem[] ): FormItemsBuilder {
 		this._formItems.addressType = addressType.map( this.translate, this );
 		return this;
 	}
