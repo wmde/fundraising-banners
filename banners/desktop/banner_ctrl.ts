@@ -9,6 +9,10 @@ import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
+
+import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
+import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 // Change for EN banners
 import messages from './messages';
 import { Translator } from '@src/Translator';
@@ -42,7 +46,8 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() )
+		formController: new FormControllerCtrl( useFormModel() ),
+		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm ]
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
