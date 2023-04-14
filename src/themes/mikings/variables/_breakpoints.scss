@@ -1,0 +1,46 @@
+$extra-small: 360px !default;
+$small: 1024px !default;
+$medium: 1090px !default;
+$large: 1300px !default;
+$extra-large: 1580px !default;
+
+/*
+MIXIN USAGE:
+
+.my-selector {
+	@include breakpoints.small-up {
+		// Stuff that happens when bigger than $small
+	}
+}
+
+*/
+
+@mixin extra-small-up {
+	@media ( min-width: $extra-small ) {
+		@content;
+	}
+}
+
+@mixin small-up {
+	@media ( min-width: $small ) {
+		@content;
+	}
+}
+
+@mixin medium-up {
+	@media ( min-width: $medium ) {
+		@content;
+	}
+}
+
+@mixin large-up {
+	@media ( min-width: $large ) {
+		@content;
+	}
+}
+
+@mixin extra-large-up {
+	@media ( min-width: $extra-large ) {
+		@content;
+	}
+}

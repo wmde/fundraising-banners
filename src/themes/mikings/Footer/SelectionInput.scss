@@ -1,0 +1,34 @@
+@use '../variables/fonts';
+@use '../variables/colors';
+
+.wmde-banner {
+	&-selection-input {
+		margin-left: 5px;
+
+		&-text,
+		&-input {
+			font-weight: bold;
+			font-size: 12px;
+		}
+		&-input {
+			font-family: fonts.$ui;
+			outline: 0;
+			background: transparent;
+			color: transparent;
+		}
+
+		&.focused {
+			.wmde-banner-selection-input-text {
+				color: transparent;
+			}
+			.wmde-banner-selection-input-input {
+				color: colors.$black;
+
+				&::selection {
+					background: colors.$primary;
+					color: colors.$white;
+				}
+			}
+		}
+	}
+}

@@ -1,30 +1,26 @@
-// This is the file where we import the theme-specific component styles
-@use 'src/components/BannerConductor/banner-transition';
-
-/*
-
-@use '../../../src/themes/treedip/MultistepDonationForm/CustomAmount';
-@use '../../../src/themes/treedip/DonationForm/SmsBox';
-
+/**
+The order in which imports happen is important because component ones
+can be overridden by the theme and the individual banners. The variable
+weight should be component < theme < banner.
  */
 
-@use 'src/themes/treedip/defaults';
-@use 'src/themes/treedip/ButtonClose/ButtonClose';
-@use 'src/themes/treedip/ProgressBar/ProgressBar';
-@use 'src/themes/treedip/DonationForm/DonationForm';
-@use 'src/themes/treedip/DonationForm/SubComponents/SelectGroup';
-@use 'src/themes/treedip/DonationForm/SubComponents/SelectCustomAmount';
-@use 'src/themes/treedip/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/treedip/DonationForm/Forms/UpgradeToYearlyForm';
-@use 'src/themes/treedip/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/treedip/Footer/Footer';
-@use 'src/themes/treedip/Footer/SelectionInput';
-@use 'src/themes/treedip/Message/Message';
-@use 'src/themes/treedip/Slider/KeenSlider';
-@use 'src/themes/treedip/SoftClose/SoftClose';
+@use './MiniBanner';
+
+// @use 'src/themes/mikings/animated-text-highlight';
+@use 'src/themes/mikings/Footer/Footer';
+@use 'src/themes/mikings/Footer/SelectionInput';
+
+// @use 'src/themes/mikings/MultistepDonationForm/MultistepDonationForm';
+@use 'src/themes/mikings/MultistepDonationForm/UpgradeToYearly';
+@use 'src/themes/mikings/DonationFormCompact/SelectGroup';
+@use 'src/themes/mikings/DonationFormCompact/SelectCustomAmount';
+@use 'src/themes/mikings/DonationFormCompact/SmsBox';
+@use 'src/themes/mikings/Slider/Slider';
+@use 'src/themes/mikings/ProgressBar/ProgressBar';
 
 /*
+@use 'src/themes/mikings/DonationFormCompact/TwoStepFormSlide';
+@use 'src/themes/mikings/SubscriptionForm/SubscriptionForm';
+@use 'src/themes/mikings/SoftClose/SoftCloseWithSubscriptionsButton';
 
-@use '../../../src/themes/treedip/AlreadyDonatedModal/AlreadyDonatedModal';
-
- */
+*/
