@@ -1,5 +1,5 @@
 <template>
-	<form @submit="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
+	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
 		<div class="wmde-banner-form-address-type-title">
 			<a tabIndex="-1" href="#" class="back" @click="onPrevious">
 				<ChevronLeftIcon/>
@@ -10,13 +10,13 @@
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'address-type-header' ) }}</legend>
 			<SelectGroup
-					fieldName="select-address-option"
-					:selectionItems="formItems.addressType"
-					:isValid="isValidOrUnset( addressTypeValidity )"
-					:errorMessage="$translate( 'address-type-error-message' )"
-					v-model="addressType"
-					@change="onChange"
-					:disabledOptions="disabledAddressTypes"
+				fieldName="select-address-option"
+				:selectionItems="formItems.addressType"
+				:isValid="isValidOrUnset( addressTypeValidity )"
+				:errorMessage="$translate( 'address-type-error-message' )"
+				v-model="addressType"
+				@change="onChange"
+				:disabledOptions="disabledAddressTypes"
 			/>
 		</fieldset>
 
@@ -56,14 +56,12 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
-
 const onPrevious = (): void => {
-	// TODO reset selection? validity?
 	emit( 'previous', { pageIndex: props.pageIndex } );
 };
 
 const onSubmit = (): void => {
-	//TODO add more checks here? test this
+	addressTypeValidity.value = addressType.value === '' ? Validity.Invalid : Validity.Valid;
 	if ( addressTypeValidity.value === Validity.Valid ) {
 		emit( 'submit', { pageIndex: props.pageIndex } );
 	}
@@ -84,7 +82,6 @@ const buttonText = computed( (): string => {
 	if ( addressType.value !== AddressTypes.NO.value ) {
 		return translator.translate( 'submit-label-default' );
 	}
-
 	if ( paymentMethod.value === PaymentMethods.PAYPAL.value ) {
 		return translator.translate( 'submit-label-paypal' );
 	} else if ( paymentMethod.value === PaymentMethods.CREDIT_CARD.value ) {
@@ -98,3 +95,21 @@ const buttonText = computed( (): string => {
 } );
 
 </script>
+
+<style lang="scss">
+.wmde-banner {
+	&-form-address-type {
+		.wmde-banner-form-field-group {
+			border: 0;
+			margin: 0;
+			display: block;
+
+			&-legend {
+				width: 100%;
+				position: relative;
+				padding: 0;
+			}
+		}
+	}
+}
+</style>

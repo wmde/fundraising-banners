@@ -24,13 +24,10 @@ export class FormControllerVar implements FormController {
 	}
 
 	public submitStep( submitData: FormSubmitData ): void {
-		const { interval, paymentMethod } = this._formModel;
+		const { interval } = this._formModel;
 
 		switch ( submitData.pageIndex ) {
 			case MAIN_DONATION_INDEX:
-				if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value && this.shouldSkipUpsell() ) {
-					this._submitCallback();
-				}
 				if ( this.shouldSkipUpsell() ) {
 					this._goToStepCallback( ADDRESS_TYPES_INDEX );
 					// TODO tracking

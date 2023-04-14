@@ -20,7 +20,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
-import AddressForm from '@src/components/DonationForm/Forms/AddressForm.vue';
+import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 
 // Change for EN banners
 import Translations from './translations';
@@ -52,7 +52,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		formController: new FormControllerVar( useFormModel() ),
-		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm, AddressForm ]
+		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm, AddressTypeForm ]
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
