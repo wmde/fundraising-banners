@@ -13,7 +13,7 @@
 			</div>
 		</template>
 	</div>
-	<form ref="submitFormRef" :action="formAction" class="wmde-banner-submit-form">
+	<form ref="submitFormRef" :action="formAction" class="wmde-banner-submit-form" method="post">
 		<SubmitValues />
 	</form>
 </template>

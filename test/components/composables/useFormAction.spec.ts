@@ -12,7 +12,7 @@ describe( 'useFormAction', () => {
 		[ '', withAddressAction ],
 		[ AddressTypes.FULL.value, withAddressAction ],
 		[ AddressTypes.EMAIL.value, withAddressAction ],
-		[ AddressTypes.NO.value, anonymousAction ]
+		[ AddressTypes.ANONYMOUS.value, anonymousAction ]
 	] )( 'returns the correct action with address type', ( addressType: string, expectedAction: string ) => {
 		const formModel = useFormModel();
 		formModel.addressType.value = addressType;

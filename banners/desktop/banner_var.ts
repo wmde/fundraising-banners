@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerWrapper.vue';
@@ -13,16 +13,17 @@ import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIs
 import TranslationPlugin from '@src/TranslationPlugin';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormControllerVar } from './FormControllerVar';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
+import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 
 // Change for EN banners
-import messages from './messages';
+import Translations from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
@@ -31,7 +32,7 @@ import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 
-const translator = new Translator( messages );
+const translator = new Translator( Translations );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
@@ -50,8 +51,8 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() ),
-		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm ]
+		formController: new FormControllerVar( useFormModel() ),
+		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm, AddressTypeForm ]
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

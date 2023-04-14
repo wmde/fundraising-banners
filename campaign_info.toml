@@ -14,6 +14,11 @@ filename = "./banners/desktop/banner_ctrl.ts"
 pagename = "B23WMDE_00_230202_ctrl"
 tracking = "org-00-230202-ctrl"
 
+[desktop.banners.var]
+filename = "./banners/desktop/banner_var.ts"
+pagename = "B23WMDE_00_230202_var"
+tracking = "org-00-230202-var"
+
 [mobile]
 campaign_tracking = "00-ba-230202"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"

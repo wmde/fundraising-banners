@@ -1,6 +1,12 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
-		<BannerMain @close="onCloseMain" v-if="contentState === ContentStates.Main" :bannerIsVisible="bannerIsVisible" :form-controller="formController"/>
+		<BannerMain
+			@close="onCloseMain"
+			v-if="contentState === ContentStates.Main"
+			:bannerIsVisible="bannerIsVisible"
+			:form-controller="formController"
+			:forms="forms"
+		/>
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
@@ -14,7 +20,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { computed, nextTick, ref, watch } from 'vue';
+import { Component, computed, nextTick, ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 
@@ -26,6 +32,7 @@ enum ContentStates {
 interface Props {
 	bannerState: BannerStates;
 	formController: FormController;
+	forms: Component[]
 }
 
 const props = defineProps<Props>();
@@ -52,7 +59,6 @@ function onClose( closeSource: CloseSources ): void {
 </script>
 
 <style lang="scss">
-@use '../styles/styles';
 @use 'src/themes/treedip/variables/globals';
 @use 'src/themes/treedip/variables/fonts';
 @use 'src/themes/treedip/variables/colors';

@@ -60,7 +60,7 @@ import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import { amountValidityMessageKey } from '../../../utils/amountValidityMessageKey';
+import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 
 interface Props {
 	pageIndex: number
