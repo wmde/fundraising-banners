@@ -1,5 +1,7 @@
 import { createVueApp } from '@src/createVueApp';
 
+import './styles/styles_var.scss';
+
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerWrapper.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';

@@ -59,7 +59,6 @@ function onClose( closeSource: CloseSources ): void {
 </script>
 
 <style lang="scss">
-@use '../styles/styles';
 @use 'src/themes/treedip/variables/globals';
 @use 'src/themes/treedip/variables/fonts';
 @use 'src/themes/treedip/variables/colors';
