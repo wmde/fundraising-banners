@@ -1,18 +1,18 @@
 export type TranslationMessages = Record<string, string>;
 
 export class Translator {
-	private readonly _translations: TranslationMessages;
+	private readonly _messages: TranslationMessages;
 
-	public constructor( translations: TranslationMessages ) {
-		this._translations = translations;
+	public constructor( messages: TranslationMessages ) {
+		this._messages = messages;
 	}
 
 	public translate( key: string, templateTags: Record<string, string | number> = {} ): string {
-		if ( !( key in this._translations ) ) {
+		if ( !( key in this._messages ) ) {
 			return key;
 		}
 
-		let message = this._translations[ key ];
+		let message = this._messages[ key ];
 		for ( const templateTag in templateTags ) {
 			message = message.replace( `{{${ templateTag }}}`, templateTags[ templateTag ].toString() );
 		}

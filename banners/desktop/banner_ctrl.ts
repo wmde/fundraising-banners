@@ -10,7 +10,7 @@ import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
 // Change for EN banners
-import Translations from './translations';
+import messages from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
@@ -23,7 +23,7 @@ import { FormControllerCtrl } from './FormControllerCtrl';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 
-const translator = new Translator( Translations );
+const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
