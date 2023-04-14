@@ -4,6 +4,9 @@ import { FormControllerVar } from '../../../../banners/desktop/FormControllerVar
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
+import { FormControllerCtrl } from '../../../../banners/desktop/FormControllerCtrl';
+import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
+import { Validity } from '@src/utils/FormModel/Validity';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
@@ -13,30 +16,18 @@ describe( 'FormControllerVar', () => {
 	describe( 'Donation form', () => {
 		const pageIndex = 0;
 
-		it.todo( 'should submit when recurring interval is selected and payment is direct debit', () => {
+		it( 'should go to address page when recurring interval is selected', () => {
 			const controller = new FormControllerVar( formModel );
-			const onSubmit = vi.fn();
-			controller.onSubmit( onSubmit );
+			const onGoToStep = vi.fn();
+			controller.onGoToStep( onGoToStep );
 
 			formModel.interval.value = Intervals.BIANNUAL.value;
 			controller.submitStep( { pageIndex } );
 
-			expect( onSubmit ).toHaveBeenCalledOnce();
-		} );
-
-		it.todo( 'should go to address page when recurring interval is selected and payment is not direct debit', () => {
-			const controller = new FormControllerVar( formModel );
-			const onSubmit = vi.fn();
-			controller.onSubmit( onSubmit );
-
-			formModel.interval.value = Intervals.BIANNUAL.value;
-			controller.submitStep( { pageIndex } );
-
-			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onGoToStep ).toHaveBeenCalledOnce();
 		} );
 
 		it( 'should go to address page when the payment type is sofort', () => {
-
 			const controller = new FormControllerVar( formModel );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
@@ -49,7 +40,7 @@ describe( 'FormControllerVar', () => {
 			expect( onGoToStep ).toHaveBeenCalledWith( 3 );
 		} );
 
-		it.todo( 'should go to next page when interval is "once"', () => {
+		it( 'should go to next page when interval is "once"', () => {
 			const controller = new FormControllerVar( formModel );
 			const onNext = vi.fn();
 			controller.onNext( onNext );
@@ -57,7 +48,6 @@ describe( 'FormControllerVar', () => {
 			formModel.interval.value = Intervals.ONCE.value;
 			controller.submitStep( { pageIndex } );
 
-			// TODO we might not watch onNext but gotopage
 			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 
@@ -66,57 +56,78 @@ describe( 'FormControllerVar', () => {
 	describe( 'Upgrade to yearly', () => {
 		const pageIndex = 1;
 
-		it.todo( 'should go to address page when an interval was selected', function () {
+		it( 'should go to address page when an interval was selected', function () {
 			const controller = new FormControllerVar( formModel );
-			const onSubmit = vi.fn();
-			controller.onSubmit( onSubmit );
+			const onGoToStep = vi.fn();
+			controller.onGoToStep( onGoToStep );
 
 			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
 
-			expect( onSubmit ).toHaveBeenCalledOnce();
-			expect( onSubmit ).toHaveBeenCalledWith( 'submit-recurring' );
+			expect( onGoToStep ).toHaveBeenCalledOnce();
 		} );
 
-		it( 'should call "onPrevious" when going to previous', () => {
-			const controller = new FormControllerVar( formModel );
+		it( 'should set interval to once on previous', () => {
+			const controller = new FormControllerCtrl( formModel );
 			const onPrevious = vi.fn();
 			controller.onPrevious( onPrevious );
+			formModel.interval.value = Intervals.YEARLY.value;
 
 			controller.previous( { pageIndex } );
 
+			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 			expect( onPrevious ).toHaveBeenCalledOnce();
 		} );
-
-		it.todo( 'should submit when payment is direct debit' );
 	} );
 
 	describe( 'New custom amount', () => {
 		const pageIndex = 2;
 
-		it( 'should go to next page when payment type is not direct debit', function () {
+		it( 'should go to next page when submitting', function () {
+			const controller = new FormControllerVar( formModel );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( onNext ).toHaveBeenCalledOnce();
+		} );
+	} );
+
+	describe( 'Address form', () => {
+		const pageIndex = 3;
+
+		it( 'should submit', () => {
 			const controller = new FormControllerVar( formModel );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
-			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+			controller.submitStep( { pageIndex } );
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
-			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
 		} );
 
-		it.todo( 'should submit when payment is direct debit' );
-	} );
+		it( 'should go to donation form when "previous" is called', () => {
+			const controller = new FormControllerVar( formModel );
+			const onGoToStep = vi.fn();
+			controller.onGoToStep( onGoToStep );
 
-	describe( 'Address form', () => {
+			controller.previous( { pageIndex } );
 
-		it.todo( 'should submit tracking data when address was selected' );
-		it.todo( 'should submit tracking data when no address was selected' );
-		it.todo( 'should submit modified interval when original interval is "once" and user has chosen recurring interval' );
-		// eslint-disable-next-line max-len
-		it.todo( 'should submit modified interval and custom amount when original interval is "once" and user has chosen recurring interval and user has visited custom amount form' );
-		it.todo( 'should go to donation form when "previous" is called and interval is recurring' );
-		it.todo( 'should go to custom amount form when "previous" is called and interval is "once" and user has visited custom amount form' );
-		it.todo( 'should go to upsell form when "previous" is called and interval is "once" and user has not visited custom amount form' );
+			expect( onGoToStep ).toHaveBeenCalledOnce();
+			expect( onGoToStep ).toHaveBeenCalledWith( 0 );
+		} );
+
+		it( 'should unset address type in the model when "previous" is called', () => {
+			const controller = new FormControllerVar( formModel );
+			const onGoToStep = vi.fn();
+			controller.onGoToStep( onGoToStep );
+			formModel.addressType.value = AddressTypes.EMAIL.value;
+
+			controller.previous( { pageIndex } );
+
+			expect( formModel.addressType.value ).toBe( '' );
+			expect( formModel.addressTypeValidity.value ).toBe( Validity.Unset );
+		} );
 
 	} );
 
