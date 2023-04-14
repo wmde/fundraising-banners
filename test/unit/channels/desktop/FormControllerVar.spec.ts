@@ -35,17 +35,18 @@ describe( 'FormControllerVar', () => {
 			expect( onSubmit ).toHaveBeenCalledOnce();
 		} );
 
-		it( 'should to address page when the payment type is sofort', () => {
+		it( 'should go to address page when the payment type is sofort', () => {
 
 			const controller = new FormControllerVar( formModel );
-			const onSubmit = vi.fn();
-			controller.onSubmit( onSubmit );
+			const onGoToStep = vi.fn();
+			controller.onGoToStep( onGoToStep );
 
 			formModel.interval.value = Intervals.ONCE.value;
 			formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
 			controller.submitStep( { pageIndex } );
 
-			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onGoToStep ).toHaveBeenCalledOnce();
+			expect( onGoToStep ).toHaveBeenCalledWith( 3 );
 		} );
 
 		it.todo( 'should go to next page when interval is "once"', () => {
