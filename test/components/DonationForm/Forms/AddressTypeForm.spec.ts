@@ -9,6 +9,7 @@ import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { nextTick } from 'vue';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import { Validity } from '@src/utils/FormModel/Validity';
 
 const formModel = useFormModel();
 
@@ -45,6 +46,13 @@ describe( 'AddressTypeForm.vue', () => {
 				}
 			}
 		} );
+	} );
+
+	it( 'should change the form model when an address option is selected', async () => {
+		await wrapper.find( '.address-type-email input' ).trigger( 'change' );
+
+		expect( formModel.addressType.value ).toBe( AddressTypes.EMAIL.value );
+		expect( formModel.addressTypeValidity.value ).toBe( Validity.Valid );
 	} );
 
 	it( 'should show error message on submit when nothing was selected', async () => {
@@ -96,16 +104,18 @@ describe( 'AddressTypeForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-form-button' ).text() ).toBe( 'submit-label-default' );
 	} );
 
-	it.todo( 'should emit "previous" event when back button is clicked', () => {
+	it( 'should emit "previous" event when back button is clicked', async () => {
+		await wrapper.find( '.previous' ).trigger( 'click' );
 
+		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4444 } );
 	} );
 
-	it.todo( 'should emit "submit" event when user selects a valid address option and submits', () => {
+	it( 'should emit "submit" event when user selects a valid address option and submits', async () => {
+		await wrapper.find( '.address-type-email input' ).trigger( 'change' );
+		await wrapper.trigger( 'submit' );
 
-	} );
-
-	it.todo( 'should submit the chosen address option when form was submitted', () => {
-		// check form submit data of the emitted event
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
 	} );
 
 } );
