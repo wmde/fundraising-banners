@@ -79,7 +79,7 @@ const formNotice = computed( (): string => {
 } );
 
 const buttonText = computed( (): string => {
-	if ( addressType.value !== AddressTypes.NO.value ) {
+	if ( addressType.value !== AddressTypes.ANONYMOUS.value ) {
 		return translator.translate( 'submit-label-default' );
 	}
 	if ( paymentMethod.value === PaymentMethods.PAYPAL.value ) {

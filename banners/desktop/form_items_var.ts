@@ -24,7 +24,7 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setAddressTypes(
 			AddressTypes.FULL,
 			AddressTypes.EMAIL,
-			AddressTypes.NO
+			AddressTypes.ANONYMOUS
 		)
 		.getItems();
 }

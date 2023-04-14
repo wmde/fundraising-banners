@@ -6,7 +6,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 export function useFormAction( formActions: FormActions ): { formAction: Ref<string> } {
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
-		return formModel.addressType.value === AddressTypes.NO.value ?
+		return formModel.addressType.value === AddressTypes.ANONYMOUS.value ?
 			formActions.donateAnonymouslyAction :
 			formActions.donateWithAddressAction;
 	} );

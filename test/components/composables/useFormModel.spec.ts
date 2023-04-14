@@ -17,7 +17,7 @@ describe( 'useFormModel', () => {
 
 	it( 'should clear the address type when payment method is set to Direct debit and address type was NO', async function () {
 
-		model.addressType.value = AddressTypes.NO.value;
+		model.addressType.value = AddressTypes.ANONYMOUS.value;
 		model.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
 
 		await nextTick();
@@ -26,11 +26,11 @@ describe( 'useFormModel', () => {
 
 	it( 'should NOT change the address type when payment method is set to Bank transfer and address type was NO', async function () {
 
-		model.addressType.value = AddressTypes.NO.value;
+		model.addressType.value = AddressTypes.ANONYMOUS.value;
 		model.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
 
 		await nextTick();
-		expect( model.addressType.value ).toBe( AddressTypes.NO.value );
+		expect( model.addressType.value ).toBe( AddressTypes.ANONYMOUS.value );
 	} );
 
 	it( 'disables all recurring intervals if payment method is SOFORT', function () {
@@ -62,7 +62,7 @@ describe( 'useFormModel', () => {
 	it( 'disables anonymous address type when direct debit was selected', function () {
 		model.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
 
-		expect( model.disabledAddressTypes.value ).toEqual( [ AddressTypes.NO.value ] );
+		expect( model.disabledAddressTypes.value ).toEqual( [ AddressTypes.ANONYMOUS.value ] );
 	} );
 
 	it( 'allows all address types when any other payment type than direct debit was selected', function () {

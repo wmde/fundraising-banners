@@ -39,7 +39,7 @@ const disabledPaymentMethods = computed( (): string[] => {
 
 const disabledAddressTypes = computed( (): string[] => {
 	if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-		return [ AddressTypes.NO.value ];
+		return [ AddressTypes.ANONYMOUS.value ];
 	}
 	return [];
 } );
@@ -54,7 +54,7 @@ watch( paymentMethod, ( newPaymentMethod: string ) => {
 	if ( paymentMethodValidity.value === Validity.Invalid && newPaymentMethod !== '' ) {
 		paymentMethodValidity.value = Validity.Valid;
 	}
-	if ( newPaymentMethod === PaymentMethods.DIRECT_DEBIT.value && addressType.value === AddressTypes.NO.value ) {
+	if ( newPaymentMethod === PaymentMethods.DIRECT_DEBIT.value && addressType.value === AddressTypes.ANONYMOUS.value ) {
 		addressType.value = '';
 		addressTypeValidity.value = Validity.Unset;
 	}

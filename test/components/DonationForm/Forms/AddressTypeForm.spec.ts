@@ -18,7 +18,7 @@ describe( 'AddressTypeForm.vue', () => {
 	const translator = ( key: string ): string => key;
 
 	const formItems: DonationFormItems = {
-		addressType: [ AddressTypes.NO, AddressTypes.EMAIL, AddressTypes.FULL ],
+		addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL, AddressTypes.FULL ],
 		amounts: [
 			{ value: '1', label: '€1', className: 'amount-1' },
 			{ value: '5', label: '€5', className: 'amount-5' }
@@ -89,7 +89,7 @@ describe( 'AddressTypeForm.vue', () => {
 		[ PaymentMethods.PAYPAL, 'submit-label-paypal' ],
 		[ PaymentMethods.DIRECT_DEBIT, 'submit-label-default' ]
 	] )( 'should set the button label according to payment type when anonymous address type is selected', async ( paymentType: FormItem, expectedButtonLabel: string ) => {
-		formModel.addressType.value = AddressTypes.NO.value;
+		formModel.addressType.value = AddressTypes.ANONYMOUS.value;
 		formModel.paymentMethod.value = paymentType.value;
 		await nextTick();
 
