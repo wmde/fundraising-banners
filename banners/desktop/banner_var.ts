@@ -23,7 +23,7 @@ import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountFor
 import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 
 // Change for EN banners
-import Translations from './translations';
+import Translations from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
