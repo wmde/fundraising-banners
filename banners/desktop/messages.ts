@@ -7,7 +7,7 @@ import AddressFormDe from '@src/components/DonationForm/Forms/messages/AddressFo
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 
-const translations: TranslationMessages = {
+const messages: TranslationMessages = {
 	...CustomAmountFormDe,
 	...DynamicCampaignTextDe,
 	...UpgradeToYearlyDe,
@@ -17,4 +17,4 @@ const translations: TranslationMessages = {
 	...MainDonationFormDe
 };
 
-export default translations;
+export default messages;
