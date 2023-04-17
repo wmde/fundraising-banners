@@ -1,8 +1,8 @@
-$extra-small: 360px !default;
-$small: 1024px !default;
-$medium: 1090px !default;
-$large: 1300px !default;
-$extra-large: 1580px !default;
+$phone-s: 400px !default;
+$phone-m: 480px !default;
+$phone-l: 568px !default;
+$tablet-portrait: 768px !default;
+$tablet-landscape: 1024px !default;
 
 /*
 MIXIN USAGE:
@@ -15,32 +15,32 @@ MIXIN USAGE:
 
 */
 
-@mixin extra-small-up {
-	@media ( min-width: $extra-small ) {
+@mixin phone-s-up {
+	@media ( min-width: $phone-s ) {
 		@content;
 	}
 }
 
-@mixin small-up {
-	@media ( min-width: $small ) {
+@mixin phone-m-up {
+	@media ( min-width: $phone-m ) {
 		@content;
 	}
 }
 
-@mixin medium-up {
-	@media ( min-width: $medium ) {
+@mixin phone-l-up {
+	@media ( min-width: $phone-l ) {
 		@content;
 	}
 }
 
-@mixin large-up {
-	@media ( min-width: $large ) {
+@mixin tablet-portrait-up {
+	@media ( min-width: $tablet-portrait ) {
 		@content;
 	}
 }
 
-@mixin extra-large-up {
-	@media ( min-width: $extra-large ) {
+@mixin tablet-landscape-up {
+	@media ( min-width: $tablet-landscape ) {
 		@content;
 	}
 }

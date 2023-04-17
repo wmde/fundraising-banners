@@ -1,14 +1,20 @@
 .wmde-banner {
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
 	&-text-animated-highlight,
 	&-slider-text-animated-highlight {
 		padding: 0 5px;
 		/* stylelint-disable */
 		background: linear-gradient(
-						270deg,
-						$transparent-color 0%,
-						$transparent-color 50%,
-						$text-highlight-color 50%,
-						$text-highlight-color 100%
+			270deg,
+			$transparent-color 0%,
+			$transparent-color 50%,
+			$text-highlight-color 50%,
+			$text-highlight-color 100%
 		);
 		background-size: 201% 100%;
 		background-position: 100% 0;
