@@ -1,6 +1,6 @@
+@use 'src/components/Footer/SelectionInput';
 @use '../variables/fonts';
 @use '../variables/colors';
-@use 'src/components/Footer/SelectionInput';
 
 .wmde-banner {
 	@include SelectionInput.layout;

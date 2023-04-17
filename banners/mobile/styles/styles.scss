@@ -1,15 +1,16 @@
 @use 'src/components/BannerConductor/banner-transition';
+@use 'src/themes/mikings/defaults';
 @use './MiniBanner';
+@use './FullPageBanner';
 
 // @use 'src/themes/mikings/animated-text-highlight';
 @use 'src/themes/mikings/Footer/Footer';
 @use 'src/themes/mikings/Footer/SelectionInput';
-
-// @use 'src/themes/mikings/MultistepDonationForm/MultistepDonationForm';
-@use 'src/themes/mikings/MultistepDonationForm/UpgradeToYearly';
-@use 'src/themes/mikings/DonationFormCompact/SelectGroup';
-@use 'src/themes/mikings/DonationFormCompact/SelectCustomAmount';
-@use 'src/themes/mikings/DonationFormCompact/SmsBox';
+@use 'src/themes/mikings/DonationForm/MultistepDonationForm';
+@use 'src/themes/mikings/DonationForm/Forms/UpgradeToYearly';
+@use 'src/themes/mikings/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/mikings/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/mikings/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/mikings/Slider/Slider';
 @use 'src/themes/mikings/ProgressBar/ProgressBar';
 

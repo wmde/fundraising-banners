@@ -1,5 +1,5 @@
+@use '../../../components/DonationForm/MultiStepDonation';
 @use '../variables/colors';
-@use 'src/components/DonationForm/MultiStepDonation';
 
 .wmde-banner {
 	@include MultiStepDonation.layout;
@@ -50,7 +50,7 @@
 	&-sub-form {
 		flex-direction: column;
 		justify-content: space-between;
-		min-width: calc( 100% + 0 );
-		max-width: calc( 100% + 0 );
+		min-width: 100%;
+		max-width: 100%;
 	}
 }

@@ -1,5 +1,4 @@
-@use '../variables/fonts';
-@use '../variables/colors';
+@use '../../variables/colors';
 
 .wmde-banner {
 
@@ -7,16 +6,17 @@
 		text-align: center;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 8px;
 
 		&-container {
-			margin-bottom: 16px;
+			margin: 0 -4px 16px;
 		}
 
 		&-option {
 			font-size: colors.$radio-font-size;
-			font-weight: bold;
 			line-height: colors.$form-radio-height;
+			flex: 0 0 33.3333%;
+			width: 33.3333%;
+			padding: 0 4px 8px;
 		}
 
 		&-input {
@@ -69,37 +69,5 @@
 
 	&-disabled {
 		opacity: 0.3;
-	}
-
-	.wmde-banner-select-group-container.select-interval .wmde-banner-select-group {
-		flex-wrap: nowrap;
-		.wmde-banner-select-group-option {
-			flex: 1 1 auto;
-			width: 33.3333%;
-		}
-	}
-
-	.wmde-banner-select-group-container.select-amount .wmde-banner-select-group {
-		flex-wrap: wrap;
-		.wmde-banner-select-group-option {
-			flex: 1 1 auto;
-			width: 48%;
-		}
-	}
-
-	.wmde-banner-select-group-container.select-payment-method .wmde-banner-select-group {
-		flex-wrap: wrap;
-		.wmde-banner-select-group-option {
-			flex: 1 1 auto;
-			width: 100%;
-		}
-	}
-
-	.wmde-banner-select-group-container.select-address-option .wmde-banner-select-group {
-		flex-wrap: wrap;
-		.wmde-banner-select-group-option {
-			flex: 1 1 auto;
-			width: 100%;
-		}
 	}
 }

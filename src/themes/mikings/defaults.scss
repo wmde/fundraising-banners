@@ -1,3 +1,5 @@
+@use './variables/colors';
+
 .wmde-banner {
 	* {
 		box-sizing: border-box;
@@ -11,10 +13,10 @@
 		/* stylelint-disable */
 		background: linear-gradient(
 			270deg,
-			$transparent-color 0%,
-			$transparent-color 50%,
-			$text-highlight-color 50%,
-			$text-highlight-color 100%
+			colors.$transparent-color 0%,
+			colors.$transparent-color 50%,
+			colors.$text-highlight-color 50%,
+			colors.$text-highlight-color 100%
 		);
 		background-size: 201% 100%;
 		background-position: 100% 0;

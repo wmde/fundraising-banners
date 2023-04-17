@@ -1,7 +1,10 @@
+@use 'src/components/ProgressBar/ProgressBar';
 @use '../variables/colors';
 @use '../variables/fonts';
 
 .wmde-banner {
+	@include ProgressBar.layout;
+
 	&-progress-bar {
 		font-family: fonts.$ui;
 
