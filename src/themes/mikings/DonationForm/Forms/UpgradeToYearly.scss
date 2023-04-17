@@ -5,6 +5,19 @@
 		justify-content: normal;
 	}
 
+	.previous {
+		display: block;
+		color: colors.$black;
+		margin-bottom: 35px;
+		font-size: 16px;
+		height: 18px;
+		line-height: 18px;
+		svg {
+			float: left;
+			margin: 1px 8px 1px 0;
+		}
+	}
+
 	&-form-upgrade {
 		.wmde-banner-select-group-container {
 			justify-content: center;
@@ -25,19 +38,6 @@
 			margin-bottom: 8px;
 			label {
 				height: auto;
-			}
-		}
-
-		&-back {
-			display: block;
-			color: colors.$black;
-			margin-bottom: 35px;
-			font-size: 16px;
-			height: 18px;
-			line-height: 18px;
-			svg {
-				float: left;
-				margin: 1px 8px 1px 0;
 			}
 		}
 
