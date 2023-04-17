@@ -1,6 +1,8 @@
 @use '../variables/colors';
+@use 'src/components/DonationForm/MultiStepDonation';
 
 .wmde-banner {
+	@include MultiStepDonation.layout;
 
 	&-form {
 		padding: 16px;

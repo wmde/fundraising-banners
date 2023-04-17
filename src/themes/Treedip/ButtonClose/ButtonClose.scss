@@ -1,6 +1,9 @@
+@use 'src/components/ButtonClose/ButtonClose';
 @use '../variables/colors';
 
 .wmde-banner {
+	@include ButtonClose.layout;
+
 	&-close {
 		padding: 8px 8px 0 0;
 		text-align: center;

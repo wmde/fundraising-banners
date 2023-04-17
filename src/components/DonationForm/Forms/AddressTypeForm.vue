@@ -96,20 +96,3 @@ const buttonText = computed( (): string => {
 
 </script>
 
-<style lang="scss">
-.wmde-banner {
-	&-form-address-type {
-		.wmde-banner-form-field-group {
-			border: 0;
-			margin: 0;
-			display: block;
-
-			&-legend {
-				width: 100%;
-				position: relative;
-				padding: 0;
-			}
-		}
-	}
-}
-</style>
