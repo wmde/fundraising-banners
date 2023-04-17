@@ -1,41 +1,38 @@
 @use '../../variables/colors';
+@use 'src/components/DonationForm/SubComponents/SmsBox';
 
-.wmde-banner-sms-box {
-	flex: 0 0 33.3333%;
-	width: 33.3333%;
-	padding: 0 4px 8px;
+.wmde-banner {
+	@include SmsBox.layout;
 
-	label {
-		border: 1px solid colors.$radio-border-color;
-		border-radius: 2px;
-		background: colors.$radio-background;
-		height: colors.$form-radio-height;
-		line-height: colors.$form-radio-height;
-		font-size: colors.$radio-font-size;
-		text-align: center;
-		width: 100%;
-		align-content: center;
-	}
+	&-sms-box {
+		flex: 0 0 33.3333%;
+		width: 33.3333%;
+		padding: 0 4px 8px;
 
-	&-notice {
-		width: 100%;
-		padding: 4px 4px 0;
-		color: colors.$gray;
-		font-size: 11px;
-		font-weight: normal;
-		text-align: center;
-	}
+		label {
+			border: 1px solid colors.$radio-border-color;
+			border-radius: 2px;
+			background: colors.$radio-background;
+			height: colors.$form-radio-height;
+			line-height: colors.$form-radio-height;
+			font-size: colors.$radio-font-size;
+			text-align: center;
+			width: 100%;
+			align-content: center;
+		}
 
-	.wmde-banner-sms-box-notice {
-		display: none;
-	}
+		&-notice {
+			display: none;
+		}
 
-	a {
-		color: colors.$black;
-		&:hover,
-		&:focus {
+		a {
 			color: colors.$black;
-			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				color: colors.$black;
+				text-decoration: none;
+			}
 		}
 	}
 }
