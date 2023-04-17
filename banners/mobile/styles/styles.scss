@@ -1,9 +1,4 @@
-/**
-The order in which imports happen is important because component ones
-can be overridden by the theme and the individual banners. The variable
-weight should be component < theme < banner.
- */
-
+@use 'src/components/BannerConductor/banner-transition';
 @use './MiniBanner';
 
 // @use 'src/themes/mikings/animated-text-highlight';
