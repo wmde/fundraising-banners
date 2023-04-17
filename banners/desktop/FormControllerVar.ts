@@ -5,10 +5,10 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Validity } from '@src/utils/FormModel/Validity';
 
-const MAIN_DONATION_INDEX = 0;
-const UPGRADE_TO_YEARLY_INDEX = 1;
-const NEW_CUSTOM_AMOUNT_INDEX = 2;
-const ADDRESS_TYPES_INDEX = 3;
+export const MAIN_DONATION_INDEX = 0;
+export const UPGRADE_TO_YEARLY_INDEX = 1;
+export const NEW_CUSTOM_AMOUNT_INDEX = 2;
+export const ADDRESS_TYPES_INDEX = 3;
 
 export class FormControllerVar implements FormController {
 

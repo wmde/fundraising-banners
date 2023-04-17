@@ -4,8 +4,8 @@ import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
-const MAIN_DONATION_INDEX = 0;
-const UPGRADE_TO_YEARLY_INDEX = 1;
+export const MAIN_DONATION_INDEX = 0;
+export const UPGRADE_TO_YEARLY_INDEX = 1;
 
 export class FormControllerCtrl implements FormController {
 
@@ -42,7 +42,7 @@ export class FormControllerCtrl implements FormController {
 		switch ( step.pageIndex ) {
 			case UPGRADE_TO_YEARLY_INDEX:
 				this._formModel.interval.value = Intervals.YEARLY.value;
-				this._previousCallback();
+				this._goToStepCallback( MAIN_DONATION_INDEX );
 				return;
 		}
 		this._nextCallback();

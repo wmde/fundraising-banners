@@ -1,6 +1,11 @@
 import { describe, vi, it, expect, beforeEach } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { FormControllerVar } from '../../../../banners/desktop/FormControllerVar';
+import {
+	ADDRESS_TYPES_INDEX,
+	FormControllerVar,
+	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX,
+	UPGRADE_TO_YEARLY_INDEX
+} from '../../../../banners/desktop/FormControllerVar';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
@@ -14,7 +19,7 @@ describe( 'FormControllerVar', () => {
 	beforeEach( () => resetFormModel( formModel ) );
 
 	describe( 'Donation form', () => {
-		const pageIndex = 0;
+		const pageIndex = MAIN_DONATION_INDEX;
 
 		it( 'should go to address page when recurring interval is selected', () => {
 			const controller = new FormControllerVar( formModel );
@@ -25,6 +30,7 @@ describe( 'FormControllerVar', () => {
 			controller.submitStep( { pageIndex } );
 
 			expect( onGoToStep ).toHaveBeenCalledOnce();
+			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
 
 		it( 'should go to address page when the payment type is sofort', () => {
@@ -37,7 +43,7 @@ describe( 'FormControllerVar', () => {
 			controller.submitStep( { pageIndex } );
 
 			expect( onGoToStep ).toHaveBeenCalledOnce();
-			expect( onGoToStep ).toHaveBeenCalledWith( 3 );
+			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
 
 		it( 'should go to next page when interval is "once"', () => {
@@ -54,7 +60,7 @@ describe( 'FormControllerVar', () => {
 	} );
 
 	describe( 'Upgrade to yearly', () => {
-		const pageIndex = 1;
+		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
 		it( 'should go to address page when an interval was selected', function () {
 			const controller = new FormControllerVar( formModel );
@@ -80,7 +86,7 @@ describe( 'FormControllerVar', () => {
 	} );
 
 	describe( 'New custom amount', () => {
-		const pageIndex = 2;
+		const pageIndex = NEW_CUSTOM_AMOUNT_INDEX;
 
 		it( 'should go to next page when submitting', function () {
 			const controller = new FormControllerVar( formModel );
@@ -94,7 +100,7 @@ describe( 'FormControllerVar', () => {
 	} );
 
 	describe( 'Address form', () => {
-		const pageIndex = 3;
+		const pageIndex = ADDRESS_TYPES_INDEX;
 
 		it( 'should submit', () => {
 			const controller = new FormControllerVar( formModel );
@@ -114,7 +120,7 @@ describe( 'FormControllerVar', () => {
 			controller.previous( { pageIndex } );
 
 			expect( onGoToStep ).toHaveBeenCalledOnce();
-			expect( onGoToStep ).toHaveBeenCalledWith( 0 );
+			expect( onGoToStep ).toHaveBeenCalledWith( MAIN_DONATION_INDEX );
 		} );
 
 		it( 'should unset address type in the model when "previous" is called', () => {

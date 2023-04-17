@@ -1,6 +1,10 @@
 import { describe, vi, it, expect, beforeEach } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { FormControllerCtrl } from '../../../../banners/desktop/FormControllerCtrl';
+import {
+	FormControllerCtrl,
+	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX,
+	UPGRADE_TO_YEARLY_INDEX
+} from '../../../../banners/desktop/FormControllerCtrl';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
@@ -11,7 +15,7 @@ describe( 'FormControllerCtrl', () => {
 	beforeEach( () => resetFormModel( formModel ) );
 
 	describe( 'Donation form', () => {
-		const pageIndex = 0;
+		const pageIndex = MAIN_DONATION_INDEX;
 
 		it( 'should submit when recurring interval is selected', () => {
 			const controller = new FormControllerCtrl( formModel );
@@ -51,7 +55,7 @@ describe( 'FormControllerCtrl', () => {
 	} );
 
 	describe( 'Upgrade to yearly', () => {
-		const pageIndex = 1;
+		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
 		it( 'should submit tracking data for yearly interval', function () {
 			const controller = new FormControllerCtrl( formModel );
@@ -89,7 +93,7 @@ describe( 'FormControllerCtrl', () => {
 	} );
 
 	describe( 'New custom amount', () => {
-		const pageIndex = 2;
+		const pageIndex = NEW_CUSTOM_AMOUNT_INDEX;
 
 		it( 'should set interval to yearly on submit', () => {
 			const controller = new FormControllerCtrl( formModel );
