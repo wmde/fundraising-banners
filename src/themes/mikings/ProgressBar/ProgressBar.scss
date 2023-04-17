@@ -1,6 +1,7 @@
 @use 'src/components/ProgressBar/ProgressBar';
 @use '../variables/colors';
 @use '../variables/fonts';
+@use 'transitions';
 
 .wmde-banner {
 	@include ProgressBar.layout;

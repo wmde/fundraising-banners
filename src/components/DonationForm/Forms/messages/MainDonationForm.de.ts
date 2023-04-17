@@ -1,6 +1,10 @@
 import { TranslationMessages } from '@src/Translator';
 
 const translations: TranslationMessages = {
+	'intervals-header': 'Häufigkeit wählen',
+	'amounts-header': 'Betrag wählen',
+	'payments-header': 'Zahlweise wählen',
+
 	'no-interval-message': 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 	'amount-empty-message': 'Bitte wählen Sie einen Betrag aus.',
 	'amount-too-low-message': '1 € muss es mindestens sein.',

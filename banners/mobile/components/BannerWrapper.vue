@@ -8,7 +8,6 @@
 		/>
 		<FullPageBanner
 			v-if="contentState === ContentStates.FullPage"
-			:bannerIsVisible="false"
 			:form-controller="formController"
 			:forms="forms"
 		/>

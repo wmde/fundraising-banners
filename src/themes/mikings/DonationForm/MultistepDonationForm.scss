@@ -5,9 +5,6 @@
 	@include MultiStepDonation.layout;
 
 	&-form {
-		padding: 16px;
-		position: relative;
-
 		&-field-group-legend {
 			display: block;
 			width: 100%;
@@ -48,6 +45,7 @@
 	}
 
 	&-sub-form {
+		padding: 16px;
 		flex-direction: column;
 		justify-content: space-between;
 		min-width: 100%;

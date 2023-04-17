@@ -1,6 +1,8 @@
 @use '../../variables/colors';
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
 
 .wmde-banner {
+	@include SelectGroup.layout;
 
 	&-select-group {
 		text-align: center;

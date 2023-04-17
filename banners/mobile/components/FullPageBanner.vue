@@ -2,12 +2,13 @@
 	<div class="wmde-banner-full">
 		<ButtonClose class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
 		<div class="wmde-banner-full-info">
-			<BannerText v-if="onLargeScreen"/>
+			<BannerText/>
 			<ProgressBar amount-to-show-on-right="TARGET"/>
 		</div>
-		<div className="wmde-banner-full-call-to-action">
-			Jetzt sind Sie <span className="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
+		<div class="wmde-banner-full-call-to-action">
+			Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 		</div>
+
 		<MultiStepDonation
 			:form-controller="formController"
 			:forms="forms"
@@ -35,13 +36,11 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { Component } from 'vue';
 
 interface Props {
-	bannerIsVisible: boolean;
 	formController: FormController;
 	forms: Component[]
 }
@@ -49,8 +48,6 @@ interface Props {
 defineProps<Props>();
 
 defineEmits( [ 'close' ] );
-
-const onLargeScreen = useDisplaySwitch( 1300 );
 
 </script>
 

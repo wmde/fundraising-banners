@@ -1,6 +1,9 @@
 @use '../../variables/colors';
+@use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
 .wmde-banner {
+	@include SelectCustomAmount.layout;
+
 	/*
 	The layout settings of this element should be similar to wmde-banner-select-group-option
 	because the custom amount is presented as an "option" inside the amount select group
