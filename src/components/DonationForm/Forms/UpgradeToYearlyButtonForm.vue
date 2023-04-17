@@ -57,8 +57,8 @@ const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
-const onSubmit = ( e: Event ): void => {
-	const submitValue = ( e.target as HTMLInputElement ).value;
+const onSubmit = ( e: SubmitEvent ): void => {
+	const submitValue = ( e.submitter as HTMLInputElement ).value;
 
 	if ( [ Intervals.ONCE.value, Intervals.YEARLY.value ].includes( submitValue ) ) {
 		intervalValidity.value = Validity.Valid;

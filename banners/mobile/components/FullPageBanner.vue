@@ -17,11 +17,11 @@
 		<div class="wmde-banner-full-small-print">
 			<span>
 				<a
-					class="application-of-funds-link t-use-of-funds-link"
-					href="{`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}"
-					onClick="{ props.toggleFundsModal }"
+					id="application-of-funds-link"
+					class="wmde-banner-footer-usage-link t-use-of-funds-link"
+					@click="$emit( 'showFundsModal' )"
 				>
-					Wohin geht meine Spende?
+					{{ $translate( 'use-of-funds-link' ) }}
 				</a>
 			</span>
 		</div>

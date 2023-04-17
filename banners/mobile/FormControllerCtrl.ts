@@ -6,7 +6,6 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 
 const MAIN_DONATION_INDEX = 0;
 const UPGRADE_TO_YEARLY_INDEX = 1;
-const NEW_CUSTOM_AMOUNT_INDEX = 2;
 
 export class FormControllerCtrl implements FormController {
 
@@ -36,15 +35,16 @@ export class FormControllerCtrl implements FormController {
 				interval.value = submitData.extraData.upgradeToYearlyInterval;
 				this._submitCallback( interval.value === Intervals.YEARLY.value ? 'submit-recurring' : 'submit-non-recurring' );
 				break;
-			case NEW_CUSTOM_AMOUNT_INDEX:
-				interval.value = Intervals.YEARLY.value;
-				this._formModel.customAmount.value = submitData.extraData.newCustomAmount;
-				this._submitCallback( 'submit-different-amount' );
-				break;
 		}
 	}
 
-	public next(): void {
+	public next( step: FormSubmitData ): void {
+		switch ( step.pageIndex ) {
+			case UPGRADE_TO_YEARLY_INDEX:
+				this._formModel.interval.value = Intervals.YEARLY.value;
+				this._previousCallback();
+				return;
+		}
 		this._nextCallback();
 	}
 
