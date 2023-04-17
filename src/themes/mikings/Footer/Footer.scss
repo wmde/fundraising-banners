@@ -1,8 +1,11 @@
 @use '../variables/colors';
+@use 'src/components/Footer/BannerFooter';
 
 $footer-font-size: 12px;
 
 .wmde-banner {
+	@include BannerFooter.layout;
+
 	&-footer {
 		font-size: $footer-font-size;
 		text-align: center;

@@ -1,0 +1,16 @@
+@mixin layout {
+	&-progress-bar {
+		display: flex;
+		flex-direction: column;
+		&-fill-wrapper {
+			position: relative;
+		}
+		&-fill {
+			position: absolute;
+			left: 0;
+			height: 100%;
+			width: 0;
+			max-width: 100%;
+		}
+	}
+}

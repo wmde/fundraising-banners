@@ -118,21 +118,3 @@ const formatCustomAmount = (): void => {
 };
 
 </script>
-
-<style lang="scss">
-.wmde-banner {
-	&-sub-form-donation {
-		.wmde-banner-form-field-group {
-			border: 0;
-			margin: 0;
-			display: block;
-
-			&-legend {
-				width: 100%;
-				position: relative;
-				padding: 0;
-			}
-		}
-	}
-}
-</style>

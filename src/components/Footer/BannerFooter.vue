@@ -35,29 +35,3 @@ import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 defineEmits( [ 'showFundsModal' ] );
 
 </script>
-
-<style lang="scss">
-.wmde-banner {
-	&-footer {
-		display: flex;
-		flex-wrap: nowrap;
-		flex-direction: row;
-		justify-content: flex-start;
-
-		&-bank,
-		&-usage {
-			padding: 10px 0;
-		}
-
-		&-bank {
-			flex: 1 1 auto;
-			display: block;
-			flex-wrap: nowrap;
-
-			&-item {
-				float: left;
-			}
-		}
-	}
-}
-</style>

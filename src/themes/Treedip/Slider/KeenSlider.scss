@@ -1,7 +1,10 @@
 @use '../variables/colors';
 @use '../variables/fonts';
+@use 'src/components/Slider/KeenSlider';
 
 .wmde-banner {
+	@include KeenSlider.layout;
+
 	&-slider-container {
 		font-family: fonts.$content;
 		font-size: 1.3em;

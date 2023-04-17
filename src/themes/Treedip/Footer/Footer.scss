@@ -1,7 +1,10 @@
 @use '../variables/globals';
 @use '../variables/colors';
+@use 'src/components/Footer/BannerFooter';
 
 .wmde-banner {
+	@include BannerFooter.layout;
+
 	&-footer {
 		font-size: 12px;
 		line-height: 20px;

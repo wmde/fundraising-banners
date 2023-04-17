@@ -1,5 +1,4 @@
-
-.wmde-banner {
+@mixin layout {
 	&-already-donated {
 		visibility: hidden;
 		opacity: 0;

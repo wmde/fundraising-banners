@@ -2,10 +2,13 @@
 @use '../variables/fonts';
 @use '../variables/breakpoints';
 @use 'transitions';
+@use 'src/components/ProgressBar/ProgressBar';
 
 $progress-bar-height: 30px !default;
 
 .wmde-banner {
+	@include ProgressBar.layout;
+
 	&-progress-bar {
 		position: relative;
 		font-family: fonts.$ui;

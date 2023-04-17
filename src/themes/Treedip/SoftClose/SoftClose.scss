@@ -1,8 +1,11 @@
+@use 'src/components/SoftClose/SoftClose';
 @use '../variables/colors';
 @use '../variables/breakpoints';
 @use '../variables/fonts';
 
 .wmde-banner {
+	@include SoftClose.layout;
+
 	&-soft-close {
 		background: colors.$white;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );

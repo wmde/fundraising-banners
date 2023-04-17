@@ -1,8 +1,10 @@
 @use '../../variables/colors';
 @use '../../variables/globals';
 @use '../../variables/breakpoints';
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
 
 .wmde-banner {
+	@include SelectGroup.layout;
 
 	&-select-group {
 		font-size: 0.9em;

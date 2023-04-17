@@ -95,4 +95,3 @@ const buttonText = computed( (): string => {
 } );
 
 </script>
-

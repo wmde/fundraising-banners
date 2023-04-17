@@ -38,20 +38,3 @@ const { daysLeftSentence, progressBarContent }: DynamicContent = inject( 'dynami
 const leftText = props.isLateProgress ? daysLeftSentence : progressBarContent.amountDonated;
 const rightText = props.amountToShowOnRight === 'TARGET' ? progressBarContent.donationTarget : progressBarContent.amountNeeded;
 </script>
-
-<style lang="scss">
-	.wmde-banner-progress-bar {
-		display: flex;
-		flex-direction: column;
-		&-fill-wrapper {
-			position: relative;
-		}
-		&-fill {
-			position: absolute;
-			left: 0;
-			height: 100%;
-			width: 0;
-			max-width: 100%;
-		}
-	}
-</style>
