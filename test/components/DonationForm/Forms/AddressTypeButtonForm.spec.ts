@@ -1,0 +1,94 @@
+import { beforeEach, describe, expect, it } from 'vitest';
+import { mount, VueWrapper } from '@vue/test-utils';
+import AddressTypeButtonForm from '@src/components/DonationForm/Forms/AddressTypeButtonForm.vue';
+import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { nextTick } from 'vue';
+import { Validity } from '@src/utils/FormModel/Validity';
+
+const formModel = useFormModel();
+
+document.body.innerHTML = `<div id="app"></div>`;
+
+describe( 'AddressTypeForm.vue', () => {
+
+	const translator = ( key: string ): string => key;
+
+	const formItems: DonationFormItems = {
+		addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL, AddressTypes.FULL ],
+		amounts: [
+			{ value: '1', label: '€1', className: 'amount-1' },
+			{ value: '5', label: '€5', className: 'amount-5' }
+		],
+		intervals: [ Intervals.ONCE, Intervals.MONTHLY ],
+		paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD, PaymentMethods.DIRECT_DEBIT ]
+	};
+
+	let wrapper: VueWrapper<any>;
+
+	beforeEach( () => {
+		resetFormModel( formModel );
+
+		wrapper = mount( AddressTypeButtonForm, {
+			props: {
+				pageIndex: 4444
+			},
+			global: {
+				mocks: {
+					$translate: translator
+				},
+				provide: {
+					translator: { translate: translator },
+					formItems: formItems
+				}
+			},
+			attachTo: document.getElementById( 'app' )
+		} );
+	} );
+
+	it( 'should render all the address type items as buttons', () => {
+		expect( wrapper.findAll( `.wmde-banner-form-address-type-button` ).length ).toBe( 3 );
+		expect( wrapper.find( `button[value=${ AddressTypes.FULL.value }]` ).exists() ).toBe( true );
+		expect( wrapper.find( `button[value=${ AddressTypes.EMAIL.value }]` ).exists() ).toBe( true );
+		expect( wrapper.find( `button[value=${ AddressTypes.ANONYMOUS.value }]` ).exists() ).toBe( true );
+	} );
+
+	it( 'should change the form model when an address button is clicked', async () => {
+		await wrapper.find( `button[value=${ AddressTypes.FULL.value }]` ).trigger( 'click' );
+
+		expect( formModel.addressType.value ).toBe( AddressTypes.FULL.value );
+		expect( formModel.addressTypeValidity.value ).toBe( Validity.Valid );
+	} );
+
+	it( 'should emit a submit event when an address button is clicked', async () => {
+		await wrapper.find( `button[value=${ AddressTypes.ANONYMOUS.value }]` ).trigger( 'click' );
+
+		const emitted = wrapper.emitted( 'submit' );
+		expect( emitted.length ).toBe( 1 );
+		expect( emitted[ 0 ] ).toEqual( [ { pageIndex: 4444 } ] );
+	} );
+
+	it( 'should show direct debit hint when direct debit was selected on donation form page', async () => {
+		formModel.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-address-type-notice' ).text() ).toBe( 'address-type-notice-direct-debit' );
+
+		formModel.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
+		await nextTick();
+
+		expect( wrapper.find( '.wmde-banner-form-address-type-notice' ).text() ).toBe( '' );
+	} );
+
+	it( 'should emit "previous" event when back button is clicked', async () => {
+		await wrapper.find( '.previous' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'previous' )[ 0 ] ).toEqual( [ { pageIndex: 4444 } ] );
+	} );
+
+} );
