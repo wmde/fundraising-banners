@@ -1,7 +1,14 @@
+@use 'src/components/SoftClose/SoftClose';
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
 .wmde-banner {
+	@include SoftClose.layout;
+
 	&-soft-close {
-		background: $color-white;
-		border: 2px solid $color-primary;
+		background: colors.$white;
+		border: 2px solid colors.$primary;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 		text-align: center;
 		font-weight: bold;
@@ -11,7 +18,7 @@
 			flex-wrap: nowrap;
 			justify-content: center;
 
-			@media ( min-width: $breakpoint-l ) {
+			@include breakpoints.phone-l-up {
 				padding: 8px 27px 0;
 			}
 		}
@@ -25,7 +32,7 @@
 			height: 40px;
 			padding: 0 10px;
 			font-size: 18px;
-			font-family: $banner-font-family;
+			font-family: fonts.$ui;
 			margin-bottom: 8px;
 		}
 
@@ -35,8 +42,8 @@
 
 		&-button {
 			border: 0 none;
-			color: $color-white;
-			background-color: $color-secondary;
+			color: colors.$white;
+			background-color: colors.$secondary;
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 40px;
@@ -46,17 +53,13 @@
 			margin: 0 4px 8px;
 			min-width: 120px;
 
-			@media ( min-width: $breakpoint-xs ) {
+			@include breakpoints.phone-xs-up {
 				min-width: 150px;
 			}
 		}
 
 		&-countdown-text {
 			display: none;
-
-			@media ( min-width: $breakpoint-l ) {
-				display: none;
-			}
 		}
 
 		&-countdown-bar {
@@ -64,7 +67,7 @@
 		}
 
 		&-countdown-bar-fill {
-			background-color: $color-secondary;
+			background-color: colors.$secondary;
 		}
 	}
 }

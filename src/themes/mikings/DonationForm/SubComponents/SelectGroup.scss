@@ -32,6 +32,7 @@
 			border-radius: 2px;
 			background: colors.$radio-background;
 			height: colors.$form-radio-height;
+			font-size: 12px;
 		}
 
 		&-notice {
@@ -62,7 +63,7 @@
 		}
 
 		&-error-message {
-			font-size: 14px;
+			font-size: 12px;
 			font-weight: bold;
 			text-align: center;
 			color: colors.$error;

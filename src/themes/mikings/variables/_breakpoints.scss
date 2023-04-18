@@ -1,3 +1,4 @@
+$phone-xs: 360px !default;
 $phone-s: 400px !default;
 $phone-m: 480px !default;
 $phone-l: 568px !default;
@@ -14,6 +15,12 @@ MIXIN USAGE:
 }
 
 */
+
+@mixin phone-xs-up {
+	@media ( min-width: $phone-xs ) {
+		@content;
+	}
+}
 
 @mixin phone-s-up {
 	@media ( min-width: $phone-s ) {

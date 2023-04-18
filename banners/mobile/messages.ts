@@ -20,7 +20,8 @@ const messages: TranslationMessages = {
 	'address-type-notice-full': 'Nur so können wir Ihnen eine Spendenquittung per Post zusenden. Außerdem erhalten ' +
 		'Sie eine Bestätigung per E-Mail.',
 	'address-type-notice-none': 'Sie verzichten sowohl auf eine Spendenquittung als auch auf eine Bestätigung ' +
-		'per E-Mail. Sie erhalten von uns keine Information, wenn Wikipedia wieder Hilfe braucht.'
+		'per E-Mail. Sie erhalten von uns keine Information, wenn Wikipedia wieder Hilfe braucht.',
+	'soft-close-prompt': 'Wikipedia später unterstützen?'
 };
 
 export default messages;
