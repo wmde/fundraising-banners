@@ -22,7 +22,7 @@ export class FormControllerVar implements FormController {
 	}
 
 	public submitStep( submitData: FormSubmitData ): void {
-		const { interval, paymentMethod, addressType } = this._formModel;
+		const { interval, paymentMethod } = this._formModel;
 
 		switch ( submitData.pageIndex ) {
 			case MAIN_DONATION_INDEX:
@@ -48,9 +48,10 @@ export class FormControllerVar implements FormController {
 			case UPGRADE_TO_YEARLY_INDEX:
 				this._formModel.interval.value = Intervals.YEARLY.value;
 				this._goToStepCallback( MAIN_DONATION_INDEX );
-				return;
+				break;
+			default:
+				this._nextCallback();
 		}
-		this._nextCallback();
 	}
 
 	public previous( step: FormSubmitData ): void {
@@ -61,8 +62,9 @@ export class FormControllerVar implements FormController {
 			case ADDRESS_TYPES_INDEX:
 				this._goToStepCallback( MAIN_DONATION_INDEX );
 				break;
+			default:
+				this._previousCallback();
 		}
-		this._previousCallback();
 	}
 
 	public onNext( callback: () => void ): void {

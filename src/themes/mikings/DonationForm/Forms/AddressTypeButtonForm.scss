@@ -1,26 +1,16 @@
 @use '../../variables/colors';
-@use 'src/components/DonationForm/Forms/AddressTypeForm';
 
 .wmde-banner {
-	@include AddressTypeForm.layout;
 
 	&-form-address-type {
-		&-back {
-			display: block;
-			color: colors.$black;
-			margin-bottom: 0;
-			font-size: 16px;
-			height: 18px;
-			line-height: 18px;
-			svg {
-				float: left;
-				margin: 1px 8px 1px 0;
-			}
-		}
 
 		&-title {
 			font-weight: bold;
 			text-align: center;
+
+			.previous {
+				text-align: left;
+			}
 		}
 
 		&-notice {
@@ -42,10 +32,15 @@
 				height: 40px;
 				line-height: 40px;
 				margin-bottom: 4px;
+				font-size: 16px;
 			}
 
 			&--disabled {
 				opacity: 0.3;
+
+				button {
+					cursor: default;
+				}
 			}
 		}
 	}
