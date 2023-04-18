@@ -19,7 +19,7 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( UpgradeToYearlyButtonForm, {
 			props: {
-				pageIndex: 4
+				pageIndex: 5555
 			},
 			global: {
 				mocks: {
@@ -59,7 +59,7 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 
 		const emitted = wrapper.emitted( 'submit' );
 		expect( emitted.length ).toBe( 1 );
-		expect( emitted[ 0 ] ).toEqual( [ { pageIndex: 4, extraData: { upgradeToYearlyInterval: '12' } } ] );
+		expect( emitted[ 0 ] ).toEqual( [ { pageIndex: 5555, extraData: { upgradeToYearlyInterval: '12' } } ] );
 	} );
 
 	it( 'should insert the euroAmount into the translations', async () => {
@@ -76,6 +76,6 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ] ).toEqual( [ { pageIndex: 4 } ] );
+		expect( wrapper.emitted( 'previous' )[ 0 ] ).toEqual( [ { pageIndex: 5555 } ] );
 	} );
 } );

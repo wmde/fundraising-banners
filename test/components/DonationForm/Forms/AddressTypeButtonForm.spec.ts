@@ -84,6 +84,34 @@ describe( 'AddressTypeForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-form-address-type-notice' ).text() ).toBe( '' );
 	} );
 
+	it( 'should disable anonymous address option when direct debit was selected on donation form page', async () => {
+		formModel.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
+		await nextTick();
+
+		const anonButton = wrapper.find( `button[value=${ AddressTypes.ANONYMOUS.value }]` );
+
+		expect( anonButton.attributes().disabled ).toBeDefined();
+
+		formModel.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
+		await nextTick();
+
+		expect( anonButton.attributes().disabled ).toBe( undefined );
+	} );
+
+	it( 'should add "disabled" class to anonymous address wrapper when direct debit was selected on donation form page', async () => {
+		formModel.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
+		await nextTick();
+
+		const childElement = wrapper.find( `.wmde-banner-form-address-type-button:nth-child(1)` );
+
+		expect( childElement.classes() ).toContain( 'wmde-banner-form-address-type-button--disabled' );
+
+		formModel.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
+		await nextTick();
+
+		expect( childElement.classes() ).not.toContain( 'wmde-banner-form-address-type-button--disabled' );
+	} );
+
 	it( 'should emit "previous" event when back button is clicked', async () => {
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
