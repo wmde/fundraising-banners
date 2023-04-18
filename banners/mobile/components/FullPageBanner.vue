@@ -1,6 +1,6 @@
 <template>
 	<div class="wmde-banner-full">
-		<ButtonClose class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
+		<CloseIconMobile class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
 		<div class="wmde-banner-full-info">
 			<BannerText/>
 			<ProgressBar amount-to-show-on-right="TARGET"/>
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';

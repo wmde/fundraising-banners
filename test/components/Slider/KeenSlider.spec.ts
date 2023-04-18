@@ -77,4 +77,7 @@ describe( 'KeenSlider', () => {
 
 	// We can't test this because we couldn't mock the keen slider
 	it.todo( 'should stop the auto play when the slide is clicked' );
+
+	// We can't test this because we couldn't mock the keen slider
+	it.todo( 'should stop the auto play when a slider pagination dot is clicked' );
 } );

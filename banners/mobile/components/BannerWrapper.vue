@@ -3,13 +3,14 @@
 		<MiniBanner
 			v-if="contentState === ContentStates.Mini"
 			:banner-is-visible="bannerIsVisible"
-			@close="onCloseMain"
+			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 		/>
 		<FullPageBanner
 			v-if="contentState === ContentStates.FullPage"
 			:form-controller="formController"
 			:forms="forms"
+			@close="() => onClose( CloseSources.FollowUpBanner )"
 		/>
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
@@ -54,7 +55,7 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-function onCloseMain(): void {
+function onCloseMiniBanner(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
@@ -74,7 +75,7 @@ function onshowFullPageBanner(): void {
 
 .wmde-banner {
 	&-wrapper {
-		font-size: 14px;
+		font-size: 16px;
 		font-family: fonts.$ui;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 		background-color: colors.$white;

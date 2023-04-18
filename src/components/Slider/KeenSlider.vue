@@ -1,11 +1,12 @@
 <template>
-	<div class="wmde-banner-slider-container">
+	<div class="wmde-banner-slider-container"
+		@mousedown="stopAutoplay"
+		@touchstart="stopAutoplay"
+	>
 		<div class="wmde-banner-navigation-wrapper">
 			<div
 				ref="container"
 				class="keen-slider wmde-banner-slider"
-				@mousedown="stopAutoplay"
-				@touchstart="stopAutoplay"
 			>
 				<template v-for="( slotName, idx ) in usedSlotNames" :key="slotName">
 					<div class="keen-slider__slide wmde-banner-slide">
