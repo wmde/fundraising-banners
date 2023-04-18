@@ -30,6 +30,10 @@ filename = "./banners/mobile/banner_ctrl.ts"
 pagename = "B23WMDE_00_Mobile_230202_ctrl"
 tracking = "org-00-230202-ctrl"
 
+[mobile.banners.var]
+filename = "./banners/mobile/banner_var.ts"
+pagename = "B23WMDE_00_Mobile_230202_var"
+tracking = "org-00-230202-var"
 
 # desktop banners on wikipedia.de
 [wikipediade]

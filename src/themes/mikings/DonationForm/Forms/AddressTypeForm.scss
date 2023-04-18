@@ -1,6 +1,9 @@
 @use '../../variables/colors';
+@use 'src/components/DonationForm/Forms/AddressTypeForm';
 
 .wmde-banner {
+	@include AddressTypeForm.layout;
+
 	&-form-address-type {
 		&-back {
 			display: block;
