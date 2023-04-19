@@ -10,7 +10,8 @@ export default defineConfig( {
 		environmentMatchGlobs: [
 			[ 'test/unit/**', 'node' ],
 			[ 'test/integration/**', 'jsdom' ],
-			[ 'test/components/**', 'jsdom' ]
+			[ 'test/components/**', 'jsdom' ],
+			[ 'test/banners/**', 'jsdom' ]
 		]
 	},
 	resolve: {

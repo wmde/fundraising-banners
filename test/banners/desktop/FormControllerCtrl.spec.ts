@@ -4,7 +4,7 @@ import {
 	FormControllerCtrl,
 	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX,
 	UPGRADE_TO_YEARLY_INDEX
-} from '../../../../banners/desktop/FormControllerCtrl';
+} from '../../../banners/desktop/FormControllerCtrl';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';

@@ -71,6 +71,18 @@ function onshowFullPageBanner(): void {
 @use 'src/themes/treedip/variables/fonts';
 @use 'src/themes/treedip/variables/colors';
 
+@keyframes hide-mini {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 0;
+	}
+	100% {
+		display: none;
+	}
+}
+
 .wmde-banner {
 
 	&-full {
@@ -88,12 +100,18 @@ function onshowFullPageBanner(): void {
 
 		&--full-page {
 			.wmde-banner-mini {
-				visibility: hidden;
+				animation: hide-mini 500ms;
 			}
 			.wmde-banner-full {
 				visibility: visible;
 				opacity: 1;
 				transform: scale( 1 );
+			}
+		}
+
+		&--soft-closing {
+			.wmde-banner-mini {
+				display: none;
 			}
 		}
 	}

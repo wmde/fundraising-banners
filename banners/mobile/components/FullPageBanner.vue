@@ -1,7 +1,9 @@
 <template>
 	<div class="wmde-banner-full">
 		<div class="wmde-banner-full-content">
-			<CloseIconMobile class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
+			<button class="wmde-banner-full-close" @click.prevent="$emit( 'close' )">
+				<CloseIconMobile/>
+			</button>
 			<div class="wmde-banner-full-info">
 				<BannerText/>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
@@ -62,6 +64,7 @@ defineEmits( [ 'close', 'showFundsModal' ] );
 	&-full {
 		position: fixed;
 		top: 0;
+		z-index: 1000;
 		height: 100%;
 		width: 100%;
 		overflow-y: auto;
