@@ -29,6 +29,9 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
+import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
+
+const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
 
 const translator = new Translator( messages );
 
@@ -50,7 +53,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		formController: new FormControllerCtrl( useFormModel() ),
-		forms: [ DonationForm, UpgradeToYearlyFormButtons ]
+		forms: [ DonationForm, UpgradeToYearlyFormButtons ],
+		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

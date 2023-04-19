@@ -6,6 +6,7 @@
 			@show-full-page-banner="onshowFullPageBanner"
 		/>
 		<FullPageBanner
+			@showFundsModal="isFundsModalVisible = true"
 			:form-controller="formController"
 			:forms="forms"
 			@close="() => onClose( CloseSources.FollowUpBanner )"
@@ -16,6 +17,12 @@
 			@maybe-later="() => onClose( CloseSources.MaybeLater )"
 			@time-out-close="() => onClose( CloseSources.TimeOut )"
 		/>
+
+        <FundsModal
+                :content="useOfFundsContent"
+                :is-funds-modal-visible="isFundsModalVisible"
+                @hideFundsModal="isFundsModalVisible = false"
+        />
 	</div>
 </template>
 
@@ -27,6 +34,8 @@ import { Component, computed, nextTick, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import MiniBanner from './MiniBanner.vue';
+import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -37,11 +46,14 @@ enum ContentStates {
 interface Props {
 	bannerState: BannerStates;
 	formController: FormController;
-	forms: Component[]
+	forms: Component[];
+	useOfFundsContent: useOfFundsContentInterface;
 }
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+
+const isFundsModalVisible = ref<boolean>( false );
 
 const bannerIsVisible = computed( () => props.bannerState === BannerStates.Visible );
 

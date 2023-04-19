@@ -1,6 +1,7 @@
 // This is the file where we import the theme-specific component styles
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/Treedip/defaults';
+@use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
 @use 'src/themes/Treedip/ProgressBar/ProgressBar';
 @use 'src/themes/Treedip/DonationForm/DonationForm';
