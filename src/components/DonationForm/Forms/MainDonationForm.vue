@@ -12,7 +12,7 @@
 				:selectionItems="formItems.intervals"
 				:isValid="isValidOrUnset( intervalValidity )"
 				:errorMessage="$translate( 'no-interval-message' )"
-				v-model="interval"
+				v-model:inputValue="interval"
 				:disabledOptions="disabledIntervals"
 			/>
 		</fieldset>
@@ -24,7 +24,7 @@
 				:selectionItems="formItems.amounts"
 				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="$translate( amountValidityMessageKey( amountValidity ) )"
-				v-model="selectedAmount"
+				v-model:inputValue="selectedAmount"
 			>
 				<SelectCustomAmount
 					fieldName="select-amount"
@@ -43,7 +43,7 @@
 				:selectionItems="formItems.paymentMethods"
 				:isValid="isValidOrUnset( paymentMethodValidity )"
 				:errorMessage="$translate( 'no-payment-type-message' )"
-				v-model="paymentMethod"
+				v-model:inputValue="paymentMethod"
 				:disabledOptions="disabledPaymentMethods"
 			>
 				<SmsBox/>

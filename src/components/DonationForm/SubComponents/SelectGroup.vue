@@ -14,7 +14,7 @@
 					<input
 						type="radio"
 						@change="onChange"
-						:checked="value === modelValue"
+						:checked="value === inputValue"
 						:name="fieldName"
 						:value="value"
 						:disabled="disabledOptions.indexOf( value ) > -1"
@@ -22,7 +22,7 @@
 					/>
 					<span class="wmde-banner-select-group-label">{{ label }}</span>
 				</label>
-				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === modelValue }">
+				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === inputValue }">
 					{{ notice }}
 				</span>
 			</div>
@@ -45,7 +45,7 @@ interface Props{
 	selectionItems: FormItem[];
 	disabledOptions?: string[];
 	errorMessage?: string;
-	modelValue: string;
+	inputValue: string;
 }
 
 withDefaults( defineProps<Props>(),
@@ -54,10 +54,10 @@ withDefaults( defineProps<Props>(),
 	}
 );
 
-const emit = defineEmits( [ 'update:modelValue' ] );
+const emit = defineEmits( [ 'update:inputValue' ] );
 
 const onChange = ( e: Event ): void => {
-	emit( 'update:modelValue', ( e.target as HTMLInputElement ).value );
+	emit( 'update:inputValue', ( e.target as HTMLInputElement ).value );
 };
 
 </script>
