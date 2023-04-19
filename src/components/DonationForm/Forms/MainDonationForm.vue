@@ -28,7 +28,7 @@
 			>
 				<SelectCustomAmount
 					fieldName="select-amount"
-					v-model="customAmount"
+					v-model:inputValue="customAmount"
 					@focus="clearSelectedAmount"
 					@blur="formatCustomAmount"
 					:placeholder="$translate( 'custom-amount-placeholder' )"
