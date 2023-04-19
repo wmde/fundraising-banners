@@ -1,0 +1,200 @@
+@use 'variables/breakpoints';
+
+$padding: 32px;
+$padding-mobile: 16px;
+
+.use-of-funds {
+	background-color: #ffffff;
+	padding: $padding-mobile;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
+	line-height: 1.5;
+
+	@include breakpoints.large-up {
+		padding: $padding;
+	}
+
+	h2 {
+		font-size: 24px;
+		font-weight: bold;
+		border: 0;
+		padding-top: 0;
+	}
+
+	h3 {
+		font-size: 1em;
+		font-weight: bold;
+		margin-top: 1em;
+	}
+	&-content {
+		font-size: 14px;
+	}
+	&-info-text {
+		margin-bottom: 18px;
+	}
+	&-section-two-cols {
+		@include breakpoints.large-up {
+			display: flex;
+		}
+	}
+	&-section-orgchart {
+		padding-top: $padding;
+
+		@include breakpoints.small-up {
+			display: flex;
+		}
+
+		@include breakpoints.large-up {
+			font-size: 18px;
+		}
+	}
+	&-section-call-to-action {
+		text-align: center;
+		padding: $padding 0;
+	}
+	&-column {
+		flex: 1 1 auto;
+		flex-basis: 50%;
+		display: flex;
+		flex-direction: column;
+	}
+	&-section-intro {
+		margin-bottom: 34px;
+		width: 100%;
+
+		@include breakpoints.small-up {
+			display: table;
+		}
+		h2 {
+			@include breakpoints.small-up {
+				display: table-cell;
+				width: 30%;
+			}
+		}
+		div {
+			@include breakpoints.small-up {
+				font-size: 18px;
+				display: table-cell;
+				padding: 0 72px;
+			}
+		}
+	}
+
+	&-benefits-list {
+		background: #f4f4f4;
+		padding: $padding-mobile;
+		margin: 0 (-$padding-mobile) 0 (-$padding-mobile);
+		flex: 1 1 auto;
+
+		@include breakpoints.large-up {
+			padding: $padding;
+			margin-left: -$padding;
+		}
+	}
+	&-comparison {
+		background: #ebebeb;
+		padding: $padding-mobile;
+		flex: 1 1 auto;
+		margin: 0 (-$padding-mobile);
+
+		@include breakpoints.large-up {
+			padding: $padding;
+			margin: 0 (-$padding) 0 0;
+		}
+	}
+
+	&-icon-list {
+		margin: 0;
+		padding: 0;
+
+		li {
+			margin: 0 0 14px 90px;
+			padding: 0;
+			position: relative;
+			list-style: none;
+
+			&::before {
+				content: ' ';
+				position: absolute;
+				left: -90px;
+				width: 48px;
+				height: 52px;
+				background-repeat: no-repeat;
+				background-position-x: center;
+			}
+		}
+
+		&-item-hand::before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Icon_hand_holding_heart.svg' );
+		}
+
+		&-item-smartphone::before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/53/Icon_letter_W_on_smartphone.svg' );
+		}
+
+		&-item-world::before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Icon_world.svg' );
+		}
+
+		&-item-megaphone::before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Icon_werbung.svg' );
+		}
+
+		&-item-twentyfourseven::before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_24_7.svg' );
+		}
+	}
+
+	&-orgchart-text {
+		flex: 1 1 auto;
+	}
+	&-orgchart-image img {
+		padding: 0 50px;
+	}
+
+	&-org {
+		display: inline-block;
+	}
+	&-org-wmf {
+		background-color: rgba( 184, 233, 134, 0.5 );
+	}
+	&-org-wmfg {
+		background-color: rgba( 248, 231, 28, 0.5 );
+	}
+	&-org-wmde {
+		background-color: rgba( 245, 166, 35, 0.5 );
+	}
+
+	&-button {
+		padding: 15px;
+		border: 0;
+		border-radius: 5px;
+		background: #2c9bf0;
+		color: #ffffff;
+		font-size: 18px;
+		font-weight: bold;
+		cursor: pointer;
+		display: inline-block;
+	}
+
+	&-url {
+		margin: 10px 0;
+		padding: 10px 0;
+		border-bottom: 1px solid #9f9f9f;
+		> a {
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			color: #8f8f8f;
+			text-decoration: none;
+			&:hover {
+				color: #000000;
+			}
+		}
+	}
+
+	&-provisional {
+		text-align: left;
+		font-size: small;
+		padding-bottom: 16px;
+	}
+}

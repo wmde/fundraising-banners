@@ -20,7 +20,7 @@
 				<a
 					id="application-of-funds-link"
 					class="wmde-banner-footer-usage-link t-use-of-funds-link"
-					@click="$emit( 'showFundsModal' )"
+					@click.prevent="$emit( 'showFundsModal' )"
 				>
 					{{ $translate( 'use-of-funds-link' ) }}
 				</a>
@@ -31,6 +31,9 @@
 
 <script setup lang="ts">
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
+
+defineEmits( [ 'showFundsModal' ] );
+
 </script>
 
 <style lang="scss">
