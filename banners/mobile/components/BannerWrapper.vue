@@ -1,13 +1,11 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			v-if="contentState === ContentStates.Mini"
 			:banner-is-visible="bannerIsVisible"
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 		/>
 		<FullPageBanner
-			v-if="contentState === ContentStates.FullPage"
 			:form-controller="formController"
 			:forms="forms"
 			@close="() => onClose( CloseSources.FollowUpBanner )"
@@ -74,11 +72,30 @@ function onshowFullPageBanner(): void {
 @use 'src/themes/treedip/variables/colors';
 
 .wmde-banner {
+
+	&-full {
+		visibility: hidden;
+		opacity: 0;
+		transform: scale( 1.1 );
+		transition: opacity 500ms globals.$banner-easing, transform 500ms globals.$banner-easing;
+	}
+
 	&-wrapper {
 		font-size: 16px;
 		font-family: fonts.$ui;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 		background-color: colors.$white;
+
+		&--full-page {
+			.wmde-banner-mini {
+				visibility: hidden;
+			}
+			.wmde-banner-full {
+				visibility: visible;
+				opacity: 1;
+				transform: scale( 1 );
+			}
+		}
 	}
 
 	&--closed {

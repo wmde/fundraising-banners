@@ -1,32 +1,34 @@
 <template>
 	<div class="wmde-banner-full">
-		<CloseIconMobile class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
-		<div class="wmde-banner-full-info">
-			<BannerText/>
-			<ProgressBar amount-to-show-on-right="TARGET"/>
-		</div>
-		<div class="wmde-banner-full-call-to-action">
-			Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
-		</div>
+		<div class="wmde-banner-full-content">
+			<CloseIconMobile class="wmde-banner-full-close" @click.prevent="$emit( 'close' )"/>
+			<div class="wmde-banner-full-info">
+				<BannerText/>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</div>
+			<div class="wmde-banner-full-call-to-action">
+				Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
+			</div>
 
-		<MultiStepDonation
-			:form-controller="formController"
-			:forms="forms"
-		/>
+			<MultiStepDonation
+				:form-controller="formController"
+				:forms="forms"
+			/>
 
-		<div class="wmde-banner-full-small-print">
-			<span>
-				<a
-					id="application-of-funds-link"
-					class="wmde-banner-footer-usage-link t-use-of-funds-link"
-					@click="$emit( 'showFundsModal' )"
-				>
-					{{ $translate( 'use-of-funds-link' ) }}
-				</a>
-			</span>
+			<div class="wmde-banner-full-small-print">
+				<span>
+					<a
+						id="application-of-funds-link"
+						class="wmde-banner-footer-usage-link t-use-of-funds-link"
+						@click="$emit( 'showFundsModal' )"
+					>
+						{{ $translate( 'use-of-funds-link' ) }}
+					</a>
+				</span>
+			</div>
+
+			<BannerFooter />
 		</div>
-
-		<BannerFooter />
 	</div>
 </template>
 
@@ -47,7 +49,7 @@ interface Props {
 
 defineProps<Props>();
 
-defineEmits( [ 'close' ] );
+defineEmits( [ 'close', 'showFundsModal' ] );
 
 </script>
 
@@ -58,6 +60,11 @@ defineEmits( [ 'close' ] );
 
 .wmde-banner {
 	&-full {
+		position: fixed;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		overflow-y: auto;
 		border: 2px solid colors.$primary;
 		background: colors.$white;
 

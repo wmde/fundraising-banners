@@ -58,6 +58,7 @@ export class FormControllerVar implements FormController {
 		switch ( step.pageIndex ) {
 			case UPGRADE_TO_YEARLY_INDEX:
 				this._formModel.interval.value = Intervals.ONCE.value;
+				this._previousCallback();
 				break;
 			case ADDRESS_TYPES_INDEX:
 				this._goToStepCallback( MAIN_DONATION_INDEX );

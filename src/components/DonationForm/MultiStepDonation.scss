@@ -5,6 +5,10 @@
 		width: 100%;
 		overflow: hidden;
 
+		&-page {
+			width: 100%;
+		}
+
 		&-button-container {
 			flex-wrap: wrap;
 			flex-direction: row;
