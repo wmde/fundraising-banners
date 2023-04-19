@@ -58,4 +58,16 @@ describe( 'FundsContent.vue', () => {
 		expect( wrapper.find( '.use-of-funds-orgchart-text > div p:first-child' ).html() )
 			.toContain( '<span class="use-of-funds-org use-of-funds-org-gib-class"> replace me </span>' );
 	} );
+
+	it( 'emits event when call to action is clicked', async () => {
+		const wrapper = shallowMount( FundsContent, {
+			props: {
+				content: getContent()
+			}
+		} );
+
+		await wrapper.find( '.use-of-funds-button' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'hideFundsModal' ).length ).toBe( 1 );
+	} );
 } );

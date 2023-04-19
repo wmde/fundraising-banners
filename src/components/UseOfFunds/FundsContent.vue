@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="banner_model-section use-of-funds-section-call-to-action">
-			<button class="use-of-funds-button" onclick="location.href='/'">{{ content.callToAction }}</button>
+			<button class="use-of-funds-button" @click="$emit( 'hideFundsModal' )">{{ content.callToAction }}</button>
 		</div>
 		<div v-if="content.provisional !== ''" class="use-of-funds-provisional">{{ content.provisional }}</div>
 	</div>
@@ -71,6 +71,8 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+defineEmits( [ 'hideFundsModal' ] );
+
 const orgChartParagraphs = ref<string[]>( props.content.orgchart.paragraphs );
 
 const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );

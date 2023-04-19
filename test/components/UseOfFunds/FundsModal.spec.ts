@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
@@ -34,8 +34,8 @@ describe( 'FundsModal.vue', () => {
 		expect( wrapper.attributes( 'class' ) ).toContain( 'is-visible' );
 	} );
 
-	it( 'emits the hideFundsModal event', async () => {
-		const wrapper = shallowMount( FundsModal, {
+	it( 'emits the hideFundsModal events', async () => {
+		const wrapper = mount( FundsModal, {
 			props: {
 				isFundsModalVisible: false,
 				content
@@ -44,7 +44,11 @@ describe( 'FundsModal.vue', () => {
 
 		await wrapper.find( '.banner-modal-background' ).trigger( 'click' );
 		await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+		await wrapper.find( '.use-of-funds-button' ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'hideFundsModal' ).length ).toBe( 2 );
+		expect( wrapper.emitted( 'hideFundsModal' ).length ).toBe( 3 );
+		expect( wrapper.emitted( 'hideFundsModal' )[ 0 ][ 0 ] ).toEqual( { source: 'close' } );
+		expect( wrapper.emitted( 'hideFundsModal' )[ 1 ][ 0 ] ).toEqual( { source: 'close' } );
+		expect( wrapper.emitted( 'hideFundsModal' )[ 2 ][ 0 ] ).toEqual( { source: 'call-to-action' } );
 	} );
 } );
