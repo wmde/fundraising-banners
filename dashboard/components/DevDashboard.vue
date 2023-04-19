@@ -17,7 +17,7 @@
 		<section class="content">
 			<div class="campaigns">
 				<div
-					v-for="( campaign, index ) in Object.values( campaigns )"
+					v-for="( campaign, index ) in campaignList"
 					:key="campaign.name"
 					:class="[ 'campaign', { 'current-branch': campaign.name === branchName } ]"
 					:style="{ '--index': index }"
@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CampaignConfig } from '../../webpack/campaign_config_types';
+import type { Campaign, CampaignConfig } from '../../webpack/campaign_config_types';
 import BannerActions from './BannerActions.vue';
 import IconShutterbug from './IconShutterbug.vue';
 import IconGit from './IconGit.vue';
@@ -88,12 +88,14 @@ import IconRefresh from './IconRefresh.vue';
 import IconCog from './IconCog.vue';
 import IconCommand from './IconCommand.vue';
 import { CompileInfo, parseCompileInfo } from '../util';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps<{ campaigns: CampaignConfig, gitBranch: string }>();
 let branchName = ref<string>( props.gitBranch );
 const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
+
+const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
 
 onMounted( () => {
 	fetch( '/compiled-banners/' )
