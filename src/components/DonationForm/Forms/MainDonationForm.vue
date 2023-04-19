@@ -52,11 +52,7 @@
 
 		<div class="wmde-banner-form-button-container">
 			<button class="wmde-banner-form-button" type="submit">
-				{{
-					interval === Intervals.ONCE.value && paymentMethod !== PaymentMethods.SOFORT.value ?
-						$translate( 'submit-label-short' ) :
-						$translate( 'submit-label' )
-				}}
+				{{ submitButtonLabel }}
 			</button>
 			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
 				{{ $translate( 'global-error' ) }}
@@ -70,7 +66,7 @@
 
 <script setup lang="ts">
 
-import { inject, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
@@ -80,8 +76,9 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import { Intervals } from '../../../utils/FormItemsBuilder/fields/Intervals';
-import { PaymentMethods } from '../../../utils/FormItemsBuilder/fields/PaymentMethods';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { Translator } from '@src/Translator';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -95,6 +92,7 @@ const emit = defineEmits( [ 'submit' ] );
 
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const formItems = inject<DonationFormItems>( 'formItems' );
+const translator = inject<Translator>( 'translator' );
 
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
@@ -125,5 +123,16 @@ const formatCustomAmount = (): void => {
 		customAmount.value = currencyFormatter.customAmountInput( numericAmount.value );
 	}
 };
+
+// This label assumes that we have a multi-step form with an upsell page
+// Ig this assumption is no longer valid, we must extract the label generation
+// (dependent on formModel and form steps) into an injectable interface (or property)
+// As a workaround for single tests you can also use the same translation for both labels
+const submitButtonLabel = computed( (): string => {
+	return interval.value === Intervals.ONCE.value && paymentMethod.value !== PaymentMethods.SOFORT.value ?
+		translator.translate( 'submit-label-short' ) :
+		translator.translate( 'submit-label' );
+
+} );
 
 </script>
