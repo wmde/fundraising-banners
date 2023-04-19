@@ -14,7 +14,7 @@
 				:selectionItems="formItems.addressType"
 				:isValid="isValidOrUnset( addressTypeValidity )"
 				:errorMessage="$translate( 'address-type-error-message' )"
-				v-model="addressType"
+				v-model:inputValue="addressType"
 				@change="onChange"
 				:disabledOptions="disabledAddressTypes"
 			/>

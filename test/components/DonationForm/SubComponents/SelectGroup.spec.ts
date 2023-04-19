@@ -14,7 +14,7 @@ describe( 'SelectGroup.vue', () => {
 					{ value: '0', label: 'interval-once', className: 'interval-0' },
 					{ value: '1', label: 'interval-monthly', className: 'interval-1', notice: 'notice' }
 				],
-				modelValue: ''
+				inputValue: ''
 			}
 		} );
 	} );
@@ -37,7 +37,7 @@ describe( 'SelectGroup.vue', () => {
 	} );
 
 	it( 'selects the current option', async () => {
-		await wrapper.setProps( { modelValue: '1' } );
+		await wrapper.setProps( { inputValue: '1' } );
 
 		expect( wrapper.find<HTMLInputElement>( '.interval-1 input' ).element.checked ).toBeTruthy();
 	} );
@@ -45,8 +45,8 @@ describe( 'SelectGroup.vue', () => {
 	it( 'emits event when a radio button (value) is selected', async () => {
 		await wrapper.find<HTMLInputElement>( '.interval-1 input' ).trigger( 'change' );
 
-		expect( wrapper.emitted( 'update:modelValue' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'update:modelValue' )[ 0 ] ).toEqual( [ '1' ] );
+		expect( wrapper.emitted( 'update:inputValue' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'update:inputValue' )[ 0 ] ).toEqual( [ '1' ] );
 	} );
 
 	it( 'disables the options when disabledOptions are set', async () => {
