@@ -18,6 +18,18 @@ $color-current-branch: #dbe6f5;
 	}
 }
 
+@keyframes copied {
+	0% {
+		transform: scale( 1 );
+	}
+	50% {
+		transform: scale( 1.2 );
+	}
+	100% {
+		transform: scale( 1 );
+	}
+}
+
 h1 {
 	display: inline-block;
 }
@@ -151,6 +163,9 @@ a {
 		&.uncompiled {
 			opacity: 0.5;
 			cursor: default;
+		}
+		&.was-copied {
+			animation: copied 600ms cubic-bezier( 0, 0.865, 0.18, 1.55 );
 		}
 	}
 }
