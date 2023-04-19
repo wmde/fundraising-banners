@@ -67,9 +67,9 @@ function onshowFullPageBanner(): void {
 </script>
 
 <style lang="scss">
-@use 'src/themes/treedip/variables/globals';
-@use 'src/themes/treedip/variables/fonts';
-@use 'src/themes/treedip/variables/colors';
+@use 'src/themes/mikings/variables/globals';
+@use 'src/themes/mikings/variables/fonts';
+@use 'src/themes/mikings/variables/colors';
 
 @keyframes hide-mini {
 	0% {
