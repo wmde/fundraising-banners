@@ -13,7 +13,7 @@
 		</header>
 
 		<div class="wmde-banner-mini-banner-slideshow">
-			<BannerSlides :start="bannerIsVisible"/>
+			<BannerSlides :play="bannerIsVisible"/>
 		</div>
 
 		<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">

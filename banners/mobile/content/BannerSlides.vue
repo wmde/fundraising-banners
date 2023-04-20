@@ -1,5 +1,5 @@
 <template>
-	<KeenSlider :interval="5000" :with-navigation="false" :start="start">
+	<KeenSlider :interval="5000" :with-navigation="false" :play="play">
 		<template #slides-1>
 			<div class="wmde-banner-slide-content-with-progress-bar">
 				<p>Unser Spendenziel: {{ goalDonationSum }} Millionen Euro</p>
@@ -43,7 +43,7 @@ import { inject } from 'vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 interface Props {
-	start: boolean
+	play: boolean
 }
 
 defineProps<Props>();

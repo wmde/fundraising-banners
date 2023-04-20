@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 
@@ -8,11 +8,15 @@ describe( 'KeenSlider', () => {
 		vi.useFakeTimers();
 	} );
 
+	afterEach( () => {
+		vi.restoreAllMocks();
+	} );
+
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( KeenSlider, {
 			props: {
 				withNavigation: true,
-				start: false,
+				play: false,
 				interval: 200
 			},
 			slots: {
@@ -42,14 +46,15 @@ describe( 'KeenSlider', () => {
 		expect( firstSlideContent.attributes().class ).toContain( 'wmde-banner-slide--current' );
 	} );
 
+	// Keen seems to be slow in transitioning between slides so while the slider has started to move
+	// it takes a long time until the transition ends. That means this test is pretty brittle
 	it.todo( 'should advance the slides after the interval when the slider has started', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.setProps( { start: true } );
+		await wrapper.setProps( { play: true } );
+		await vi.advanceTimersByTimeAsync( 400 );
 
-		await vi.advanceTimersByTimeAsync( 1000 );
-
-		// we were not able to mock keen-slider so far because we need to return a container ref for that
+		expect( wrapper.find( '.wmde-banner-slide:nth-child(2) .wmde-banner-slide--current' ).exists ).toBeTruthy();
 	} );
 
 	it( 'should show a pagination dot for each exising slide', async () => {
@@ -75,9 +80,47 @@ describe( 'KeenSlider', () => {
 		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( true );
 	} );
 
-	// We can't test this because we couldn't mock the keen slider
-	it.todo( 'should stop the auto play when the slide is clicked' );
+	it( 'should stop the auto play when the slider is clicked', async () => {
+		const wrapper = getWrapper();
 
-	// We can't test this because we couldn't mock the keen slider
-	it.todo( 'should stop the auto play when a slider pagination dot is clicked' );
+		await wrapper.find( '.wmde-banner-slider-container' ).trigger( 'mousedown' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should stop the auto play when the slider is touched', async () => {
+		const wrapper = getWrapper();
+		await wrapper.setProps( { play: true } );
+
+		await wrapper.find( '.wmde-banner-slider-container' ).trigger( 'touchstart' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should stop the auto play when a pagination dot is clicked', async () => {
+		const wrapper = getWrapper();
+		await wrapper.setProps( { play: true } );
+
+		await wrapper.find( '.wmde-banner-slider-pagination button:nth-child(2)' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should stop the auto play when previous is clicked', async () => {
+		const wrapper = getWrapper();
+		await wrapper.setProps( { play: true } );
+
+		await wrapper.find( '.wmde-banner-slider-navigation-previous' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should stop the auto play when next is clicked', async () => {
+		const wrapper = getWrapper();
+		await wrapper.setProps( { play: true } );
+
+		await wrapper.find( '.wmde-banner-slider-navigation-next' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+	} );
 } );

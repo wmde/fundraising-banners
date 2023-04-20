@@ -1,5 +1,6 @@
 <template>
-	<div class="wmde-banner-slider-container"
+	<div
+		class="wmde-banner-slider-container"
 		@mousedown="stopAutoplay"
 		@touchstart="stopAutoplay"
 	>
@@ -7,6 +8,7 @@
 			<div
 				ref="container"
 				class="keen-slider wmde-banner-slider"
+				:class="sliderPlayingState"
 			>
 				<template v-for="( slotName, idx ) in usedSlotNames" :key="slotName">
 					<div class="keen-slider__slide wmde-banner-slide">
@@ -48,22 +50,22 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum SliderPlayingStates {
-	PENDING = 'PENDING',
-	PLAYING = 'PLAYING',
-	STOPPED = 'STOPPED'
+	PENDING = 'wmde-banner-slider--pending',
+	PLAYING = 'wmde-banner-slider--playing',
+	STOPPED = 'wmde-banner-slider--stopped'
 }
 
 interface Props {
 	interval?: number;
 	withNavigation: boolean;
 	sliderOptions?: KeenSliderOptions;
-	start?: boolean;
+	play?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
 	sliderOptions: () => ( {} ),
 	interval: 5000,
-	start: false
+	play: false
 } );
 
 const slots = useSlots();
@@ -96,7 +98,7 @@ const stopAutoplay = (): void => {
 	sliderPlayingState.value = SliderPlayingStates.STOPPED;
 };
 
-watch( () => props.start, ( newValue: boolean, oldValue: boolean ) => {
+watch( () => props.play, ( newValue: boolean, oldValue: boolean ) => {
 	if ( oldValue === false && newValue === true ) {
 		startAutoplay();
 	} else if ( oldValue === true && newValue === false ) {
@@ -105,14 +107,17 @@ watch( () => props.start, ( newValue: boolean, oldValue: boolean ) => {
 } );
 
 const goToPreviousSlide = (): void => {
+	stopAutoplay();
 	slider.value.prev();
 };
 
 const goToNextSlide = (): void => {
+	stopAutoplay();
 	slider.value.next();
 };
 
 const goToSlide = ( idx: number ): void => {
+	stopAutoplay();
 	slider.value.moveToIdx( idx );
 };
 
