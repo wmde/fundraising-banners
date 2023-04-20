@@ -31,6 +31,7 @@ import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
+import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 
 const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
 
@@ -46,6 +47,8 @@ const formatters: Formatters = { currency: currencyFormatter, ordinal: new Ordin
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
+const pageScroller = new WindowPageScroller();
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -53,9 +56,10 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerVar( useFormModel() ),
+		formController: new FormControllerVar( useFormModel(), pageScroller ),
 		forms: [ DonationForm, UpgradeToYearlyFormButtons, AddressTypeButtonForm ],
-		useOfFundsContent
+		useOfFundsContent,
+		pageScroller
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

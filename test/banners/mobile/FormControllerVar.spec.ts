@@ -9,17 +9,25 @@ import {
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
+	let pageScroller: PageScroller;
 
-	beforeEach( () => resetFormModel( formModel ) );
+	beforeEach( () => {
+		resetFormModel( formModel );
+		pageScroller = {
+			scrollIntoView: vi.fn(),
+			scrollToTop: vi.fn()
+		};
+	} );
 
 	describe( 'Donation form', () => {
 		const pageIndex = MAIN_DONATION_INDEX;
 
 		it( 'should go straight to address form page when recurring interval is selected', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
 
@@ -31,7 +39,7 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should go straight to address form page when the payment type is sofort', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
 
@@ -44,7 +52,7 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should go to next available page when interval is "once"', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onNext = vi.fn();
 			controller.onNext( onNext );
 
@@ -54,13 +62,25 @@ describe( 'FormControllerVar', () => {
 			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 
+		it( 'should scroll to top when submitted', () => {
+			const controller = new FormControllerVar( formModel, pageScroller );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+
+			formModel.interval.value = Intervals.ONCE.value;
+			controller.submitStep( { pageIndex } );
+
+			expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
+			expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
+		} );
+
 	} );
 
 	describe( 'Upgrade to yearly', () => {
 		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
 		it( 'should go to next page when an interval was submitted', function () {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onNext = vi.fn();
 			controller.onNext( onNext );
 
@@ -70,7 +90,7 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should set interval to yearly and go to previous form on "next"', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
 			formModel.interval.value = Intervals.ONCE.value;
@@ -83,7 +103,7 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should set interval to once on previous', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onPrevious = vi.fn();
 			controller.onPrevious( onPrevious );
 			formModel.interval.value = Intervals.YEARLY.value;
@@ -99,7 +119,7 @@ describe( 'FormControllerVar', () => {
 		const pageIndex = ADDRESS_TYPES_INDEX;
 
 		it( 'should submit when one of the address options was selected', function () {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -109,7 +129,7 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should jump back to main donation form when "previous" is called', () => {
-			const controller = new FormControllerVar( formModel );
+			const controller = new FormControllerVar( formModel, pageScroller );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
 			formModel.interval.value = Intervals.ONCE.value;

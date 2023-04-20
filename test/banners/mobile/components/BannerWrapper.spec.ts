@@ -1,10 +1,11 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import BannerWrapper from '../../../../banners/mobile/components/BannerWrapper.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
 const dynamicCampaignContent: DynamicContent = {
 	campaignDaySentence: '',
@@ -38,10 +39,17 @@ const useOfFundsContent: UseOfFundsContent = {
 	provisional: ''
 };
 
+let pageScroller: PageScroller;
+
 describe( 'BannerWrapper.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
+		pageScroller = {
+			scrollIntoView: vi.fn(),
+			scrollToTop: vi.fn()
+		};
+
 		wrapper = mount( BannerWrapper, {
 			props: {
 				bannerState: BannerStates.Visible,
@@ -55,7 +63,8 @@ describe( 'BannerWrapper.vue', () => {
 					onSubmit: () => {}
 				},
 				forms: [],
-				useOfFundsContent
+				useOfFundsContent,
+				pageScroller
 			},
 			global: {
 				mocks: {
@@ -107,6 +116,15 @@ describe( 'BannerWrapper.vue', () => {
 		await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
 
 		expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+	} );
+
+	it( 'Scrolls to the form when the use of funds call to action is clicked', async () => {
+		await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+		await wrapper.find( '.use-of-funds-button' ).trigger( 'click' );
+
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
 	} );
 
 } );

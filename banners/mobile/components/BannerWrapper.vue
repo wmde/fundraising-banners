@@ -20,7 +20,7 @@
         <FundsModal
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
+			@hideFundsModal="onHideFundsModal"
         />
 	</div>
 </template>
@@ -35,6 +35,8 @@ import { FormController } from '@src/utils/FormController/FormController';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -47,6 +49,7 @@ interface Props {
 	formController: FormController;
 	forms: Component[];
 	useOfFundsContent: useOfFundsContentInterface;
+	pageScroller: PageScroller;
 }
 
 const props = defineProps<Props>();
@@ -75,6 +78,14 @@ function onClose( closeSource: CloseSources ): void {
 function onshowFullPageBanner(): void {
 	contentState.value = ContentStates.FullPage;
 }
+
+const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
+	if ( payload.source === UseOfFundsCloseSources.callToAction ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
+	isFundsModalVisible.value = false;
+};
+
 </script>
 
 <style lang="scss">
