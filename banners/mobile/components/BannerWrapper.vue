@@ -78,9 +78,9 @@ function onshowFullPageBanner(): void {
 </script>
 
 <style lang="scss">
-@use 'src/themes/mikings/variables/globals';
-@use 'src/themes/mikings/variables/fonts';
-@use 'src/themes/mikings/variables/colors';
+@use 'src/themes/Mikings/variables/globals';
+@use 'src/themes/Mikings/variables/fonts';
+@use 'src/themes/Mikings/variables/colors';
 
 @keyframes hide-mini {
 	0% {

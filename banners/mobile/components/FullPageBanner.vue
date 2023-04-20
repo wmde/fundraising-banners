@@ -56,9 +56,9 @@ defineEmits( [ 'close', 'showFundsModal' ] );
 </script>
 
 <style lang="scss">
-@use 'src/themes/mikings/variables/globals';
-@use 'src/themes/mikings/variables/colors';
-@use 'src/themes/mikings/variables/breakpoints';
+@use 'src/themes/Mikings/variables/globals';
+@use 'src/themes/Mikings/variables/colors';
+@use 'src/themes/Mikings/variables/breakpoints';
 
 .wmde-banner {
 	&-full {
