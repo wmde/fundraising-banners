@@ -1,11 +1,6 @@
-import { Skin } from '@src/page/skin/Skin';
+import Vector from '@src/page/skin/Vector';
 
-class Vector2022 implements Skin {
-	public addHideBannerListener: ( hideBannerListener: () => void ) => void;
-	public removeEventListeners: () => void;
-	public minimumVisiblePageBeneathBanner(): number {
-		return 160;
-	}
+class Vector2022 extends Vector {
 }
 
 export default Vector2022;

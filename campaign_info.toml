@@ -19,6 +19,30 @@ filename = "./banners/desktop/banner_var.ts"
 pagename = "B23WMDE_00_230202_var"
 tracking = "org-00-230202-var"
 
+# A Campaign with global settings
+[desktop_vector_2022]
+campaign_tracking = "00-ba-230202"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=vector-2022"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_vector_2022.banners.ctrl]
+filename = "./banners/desktop/banner_ctrl.ts"
+pagename = "B23WMDE_00_230202_vector_2022"
+tracking = "org-00-230202-ctrl"
+
+# A Campaign with global settings
+[desktop_monobook]
+campaign_tracking = "00-ba-230202"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=monobook"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_monobook.banners.ctrl]
+filename = "./banners/desktop/banner_ctrl.ts"
+pagename = "B23WMDE_00_230202_monobook"
+tracking = "org-00-230202-ctrl"
+
 [mobile]
 campaign_tracking = "00-ba-230202"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"

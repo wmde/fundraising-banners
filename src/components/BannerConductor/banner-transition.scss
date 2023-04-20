@@ -14,7 +14,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 	#mw-head,
 	#mw-page-base,
 	// Vector 2022
-	.mw-page-container,
+	.vector-header-container,
 	// Minerva
 	#mw-mf-viewport,
 	#mw-mf-page-left,
@@ -34,7 +34,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 	#mw-page-base,
 	#mw-mf-viewport,
-	.mw-page-container {
+	.vector-header-container {
 		transition-property: padding-top;
 	}
 }
@@ -53,7 +53,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 	#mw-page-base,
 	#mw-mf-viewport,
-	.mw-page-container {
+	.vector-header-container {
 		padding-top: var( --wmde-banner-height );
 	}
 }
