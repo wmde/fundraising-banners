@@ -1,5 +1,3 @@
-/* stylelint-disable selector-id-pattern */
-
 $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 #wmde-banner-app {
@@ -17,9 +15,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 	.vector-header-container,
 	// Minerva
 	#mw-mf-viewport,
-	#mw-mf-page-left,
-	// Monobook
-	#globalWrapper {
+	#mw-mf-page-left {
 		transition-timing-function: $transition-easing;
 		transition-duration: var( --wmde-banner-transition-duration );
 	}
@@ -27,8 +23,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 	#wmde-banner-app,
 	#mw-panel,
 	#mw-head,
-	#mw-mf-page-left,
-	#globalWrapper {
+	#mw-mf-page-left {
 		transition-property: top;
 	}
 
@@ -46,8 +41,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 	#mw-panel,
 	#mw-head,
-	#mw-mf-page-left,
-	#globalWrapper {
+	#mw-mf-page-left {
 		top: var( --wmde-banner-height );
 	}
 
