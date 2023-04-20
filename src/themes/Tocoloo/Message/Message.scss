@@ -1,0 +1,21 @@
+@use '../variables/fonts';
+
+.wmde-banner {
+	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		font-family: fonts.$content;
+		font-size: 18px;
+		line-height: 1.3em;
+		text-align: left;
+
+		p {
+			margin: 0 0 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

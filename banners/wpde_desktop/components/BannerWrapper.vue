@@ -68,9 +68,9 @@ function onClose( closeSource: CloseSources ): void {
 </script>
 
 <style lang="scss">
-@use 'src/themes/Treedip/variables/globals';
-@use 'src/themes/Treedip/variables/fonts';
-@use 'src/themes/Treedip/variables/colors';
+@use 'src/themes/Tocoloo/variables/globals';
+@use 'src/themes/Tocoloo/variables/fonts';
+@use 'src/themes/Tocoloo/variables/colors';
 
 .wmde-banner {
 	&-wrapper {

@@ -45,8 +45,8 @@ const onLargeScreen = useDisplaySwitch( 1300 );
 </script>
 
 <style lang="scss">
-@use 'src/themes/Treedip/variables/globals';
-@use 'src/themes/Treedip/variables/colors';
+@use 'src/themes/Tocoloo/variables/globals';
+@use 'src/themes/Tocoloo/variables/colors';
 
 .wmde-banner {
 	&-content {
