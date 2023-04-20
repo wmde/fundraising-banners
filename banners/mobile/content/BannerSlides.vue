@@ -1,7 +1,7 @@
 <template>
 	<KeenSlider :interval="5000" :with-navigation="false" :start="start">
 		<template #slides-1>
-			<div>
+			<div class="wmde-banner-slide-content-with-progress-bar">
 				<p>Unser Spendenziel: {{ goalDonationSum }} Millionen Euro</p>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
