@@ -1,0 +1,5 @@
+@use 'src/components/DonationForm/MultiStepDonation';
+
+.wmde-banner {
+	@include MultiStepDonation.layout;
+}

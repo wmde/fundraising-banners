@@ -1,4 +1,8 @@
+@use 'src/components/DonationForm/Forms/UpgradeToYearlyForm';
+
 .wmde-banner {
+	@include UpgradeToYearlyForm.layout;
+
 	&-form-upgrade {
 		.wmde-banner-select-group-container {
 			justify-content: center;

@@ -4,7 +4,7 @@
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<BannerText v-if="onLargeScreen"/>
-				<BannerSlides v-else :start="bannerIsVisible"/>
+				<BannerSlides v-else :play="bannerIsVisible"/>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">

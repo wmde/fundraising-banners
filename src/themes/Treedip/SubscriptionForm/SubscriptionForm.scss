@@ -1,4 +1,6 @@
-.wmde-banner {
+@use '../variables/colors';
+
+@mixin layout {
 	&-subscription-form {
 		height: 40px;
 		&-link {
@@ -7,17 +9,17 @@
 			line-height: 40px;
 			text-align: center;
 			font-weight: bold;
-			color: $color-secondary;
+			color: colors.$secondary;
 
 			&:visited {
-				color: $color-secondary;
+				color: colors.$secondary;
 			}
 		}
 
 		&-modal {
 			left: -52px;
 			right: 0;
-			background: $color-white;
+			background: colors.$white;
 			padding: 32px 32px 10px;
 			box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2 );
 			border-radius: 5px;
@@ -34,7 +36,7 @@
 				height: 0;
 				border-style: solid;
 				border-width: 0 5px 5px;
-				border-color: transparent transparent $color-white transparent;
+				border-color: transparent transparent colors.$white transparent;
 			}
 
 			&-close {
@@ -58,7 +60,7 @@
 		&-input {
 			margin-bottom: 9px;
 			input {
-				border: 1px solid $color-gray-medium;
+				border: 1px solid colors.$gray-medium;
 				border-radius: 2px;
 				width: 100%;
 				line-height: 32px;
@@ -73,7 +75,7 @@
 			padding-left: 28px;
 			font-size: 12px;
 			margin-bottom: 16px;
-			color: $color-black-light;
+			color: colors.$black-light;
 
 			input {
 				position: absolute;
@@ -83,7 +85,7 @@
 		}
 
 		&-error {
-			color: $color-error;
+			color: colors.$error;
 			text-align: center;
 			font-weight: bold;
 			font-size: 12px;
@@ -96,15 +98,15 @@
 			padding: 0 16px;
 			margin-bottom: 10px;
 			border-radius: 16px;
-			color: $color-white;
-			background: $color-secondary;
+			color: colors.$white;
+			background: colors.$secondary;
 			border: 0;
 			cursor: pointer;
 			font-weight: bold;
 			transition: background-color 500ms $banner-easing;
 
 			&:hover {
-				background-color: $color-secondary-light;
+				background-color: colors.$secondary-light;
 			}
 		}
 
@@ -112,9 +114,9 @@
 			display: block;
 			text-align: center;
 			font-size: 11px;
-			color: $color-gray-medium;
+			color: colors.$gray-medium;
 			&:visited {
-				color: $color-gray-medium;
+				color: colors.$gray-medium;
 			}
 		}
 

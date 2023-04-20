@@ -12,13 +12,13 @@ describe( 'SelectCustomAmount.vue', () => {
 			props: {
 				placeholder: 'placeholder-text',
 				fieldName: 'fld-custom-amount',
-				modelValue: ''
+				inputValue: ''
 			}
 		} );
 	} );
 
 	it( 'updates the CSS classes when a value is entered', async () => {
-		await wrapper.setProps( { modelValue: '2500' } );
+		await wrapper.setProps( { inputValue: '2500' } );
 
 		expect( wrapper.attributes( 'class' ) ).toContain( 'value-entered' );
 	} );
@@ -26,8 +26,8 @@ describe( 'SelectCustomAmount.vue', () => {
 	it( 'emits event when a value is entered', async () => {
 		await wrapper.find<HTMLInputElement>( 'input[type=text]' ).setValue( '5555' );
 
-		expect( wrapper.emitted( 'update:modelValue' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'update:modelValue' )[ 0 ] ).toEqual( [ '5555' ] );
+		expect( wrapper.emitted( 'update:inputValue' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'update:inputValue' )[ 0 ] ).toEqual( [ '5555' ] );
 	} );
 
 	it( 'updates the CSS classes when input field gets focused', async () => {
@@ -43,7 +43,7 @@ describe( 'SelectCustomAmount.vue', () => {
 	} );
 
 	it( 'should check radio button when input field has custom amount', async () => {
-		await wrapper.setProps( { modelValue: '2500' } );
+		await wrapper.setProps( { inputValue: '2500' } );
 
 		expect( wrapper.find<HTMLInputElement>( 'input[type=radio]' ).element.checked ).toBeTruthy();
 	} );
@@ -59,7 +59,7 @@ describe( 'SelectCustomAmount.vue', () => {
 	it( 'should show euro symbol when field has an entered value', async () => {
 		expect( wrapper.find( '.wmde-banner-select-custom-amount-euro-symbol' ).exists() ).toBe( false );
 
-		await wrapper.setProps( { modelValue: '2500' } );
+		await wrapper.setProps( { inputValue: '2500' } );
 
 		expect( wrapper.find( '.wmde-banner-select-custom-amount-euro-symbol' ).exists() ).toBe( true );
 	} );
@@ -93,7 +93,7 @@ describe( 'SelectCustomAmount.vue', () => {
 	} );
 
 	it( 'selects text on focus', async () => {
-		await wrapper.setProps( { modelValue: '42424242' } );
+		await wrapper.setProps( { inputValue: '42424242' } );
 
 		const input = wrapper.find<HTMLInputElement>( 'input[type=text]' );
 		await input.trigger( 'focus' );

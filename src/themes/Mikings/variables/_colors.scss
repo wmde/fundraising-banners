@@ -1,0 +1,42 @@
+$primary: #386d94;
+$primary-light: #648196;
+$secondary: #da9000;
+$secondary-light: #caac72;
+$secondary-hover: #bd7d00;
+$error: #dd3333;
+
+$white: #ffffff;
+$black: #000000;
+$black-light: #202122;
+$gray: #54595d;
+$gray-medium: #a2a9b1;
+$gray-light: #e5e5e5;
+$highlight: #faeeb2;
+
+/* This is for the animated highlight */
+$text-highlight-color: rgba( 255, 222, 103 );
+$transparent-color: rgba( 255, 255, 255, 0 );
+
+// TODO CLEAN UP and put this somewhere where it fits (was here in the old banners)
+
+/* SELECT GROUP */
+$select-group-line-height: 30px;
+$radio-font-size: 12px;
+$form-radio-height: 40px;
+
+$radio-border-color: #c8ccd1;
+$radio-background: #f8f9fa;
+
+$radio-border-color-hover: #c8ccd1;
+$radio-background-hover: #eaecf0;
+
+$radio-border-color-active: #386d94;
+$radio-background-active: #f8f9fa;
+
+$radio-border-color-checked: #386d94;
+$radio-background-checked: #5d9fd0;
+$radio-color-checked: #ffffff;
+
+/* PROGRESS BAR */
+$progress-label-top-offset: 25px;
+$progress-label-x-padding: 10px;

@@ -14,7 +14,7 @@
 				:selectionItems="formItems.addressType"
 				:isValid="isValidOrUnset( addressTypeValidity )"
 				:errorMessage="$translate( 'address-type-error-message' )"
-				v-model="addressType"
+				v-model:inputValue="addressType"
 				@change="onChange"
 				:disabledOptions="disabledAddressTypes"
 			/>
@@ -95,21 +95,3 @@ const buttonText = computed( (): string => {
 } );
 
 </script>
-
-<style lang="scss">
-.wmde-banner {
-	&-form-address-type {
-		.wmde-banner-form-field-group {
-			border: 0;
-			margin: 0;
-			display: block;
-
-			&-legend {
-				width: 100%;
-				position: relative;
-				padding: 0;
-			}
-		}
-	}
-}
-</style>

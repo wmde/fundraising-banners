@@ -1,9 +1,11 @@
 @use '../../variables/fonts';
 @use '../../variables/colors';
+@use 'src/components/DonationForm/Forms/AddressTypeForm';
 
 .wmde-banner {
-	&-form-address-type {
+	@include AddressTypeForm.layout;
 
+	&-form-address-type {
 		.wmde-banner-form-field-group {
 			padding: 0 0 10px;
 

@@ -1,19 +1,14 @@
 // This is the file where we import the theme-specific component styles
 @use 'src/components/BannerConductor/banner-transition';
-
-/*
-
-@use '../../../src/themes/treedip/MultistepDonationForm/CustomAmount';
-@use '../../../src/themes/treedip/DonationForm/SmsBox';
-
- */
-
 @use 'src/themes/Treedip/defaults';
+@use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
 @use 'src/themes/Treedip/ProgressBar/ProgressBar';
 @use 'src/themes/Treedip/DonationForm/DonationForm';
+@use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
@@ -23,9 +18,3 @@
 @use 'src/themes/Treedip/Message/Message';
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-
-/*
-
-@use '../../../src/themes/treedip/AlreadyDonatedModal/AlreadyDonatedModal';
-
- */

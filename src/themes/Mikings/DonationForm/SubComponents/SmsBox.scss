@@ -1,0 +1,38 @@
+@use '../../variables/colors';
+@use 'src/components/DonationForm/SubComponents/SmsBox';
+
+.wmde-banner {
+	@include SmsBox.layout;
+
+	&-sms-box {
+		flex: 0 0 33.3333%;
+		width: 33.3333%;
+		padding: 0 4px 8px;
+
+		label {
+			border: 1px solid colors.$radio-border-color;
+			border-radius: 2px;
+			background: colors.$radio-background;
+			height: colors.$form-radio-height;
+			line-height: colors.$form-radio-height;
+			font-size: colors.$radio-font-size;
+			text-align: center;
+			width: 100%;
+			align-content: center;
+		}
+
+		&-notice {
+			display: none;
+		}
+
+		a {
+			color: colors.$black;
+
+			&:hover,
+			&:focus {
+				color: colors.$black;
+				text-decoration: none;
+			}
+		}
+	}
+}

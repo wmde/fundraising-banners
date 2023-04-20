@@ -1,0 +1,14 @@
+@mixin layout {
+	&-close {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		width: 32px;
+		height: 32px;
+		z-index: 2;
+	}
+
+	&-close-link {
+		text-decoration: none;
+	}
+}

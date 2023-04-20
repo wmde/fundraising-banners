@@ -1,6 +1,10 @@
 import { TranslationMessages } from '@src/Translator';
 
 const translations: TranslationMessages = {
+	'intervals-header': 'I will donate:',
+	'amounts-header': 'Amount:',
+	'payments-header': 'Using:',
+
 	'no-interval-message': 'How often would you like to donate?',
 	'amount-empty-message': 'How much would you like to donate?',
 	'amount-too-low-message': 'The donation needs to be at least 1 Euro.',

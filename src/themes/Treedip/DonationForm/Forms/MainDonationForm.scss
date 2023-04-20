@@ -1,8 +1,11 @@
 @use '../../variables/globals';
 @use '../../variables/fonts';
 @use '../../variables/colors';
+@use 'src/components/DonationForm/Forms/MainDonationForm';
 
 .wmde-banner {
+	@include MainDonationForm.layout;
+
 	&-sub-form-donation {
 		.wmde-banner-form-field-group {
 			padding: 0 0 10px;

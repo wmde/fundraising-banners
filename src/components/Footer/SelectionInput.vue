@@ -38,24 +38,3 @@ const handleBlur = (): void => {
 };
 
 </script>
-
-<style lang="scss">
-.wmde-banner {
-	&-selection-input {
-		display: inline-block;
-		position: relative;
-
-		&-input {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
-			padding: 0;
-			border: 0;
-			outline: 0;
-			z-index: 2;
-		}
-	}
-}
-</style>

@@ -27,6 +27,7 @@ vi.mock( '@src/validation/DonationFormValidator', () => {
 } );
 
 const formModel = useFormModel();
+const translate = ( key: string ): string => key;
 
 describe( 'MainDonationForm.vue', () => {
 
@@ -37,12 +38,13 @@ describe( 'MainDonationForm.vue', () => {
 		return mount( DonationForm, {
 			global: {
 				mocks: {
-					$translate: ( key: string ) => key
+					$translate: translate
 				},
 				provide: {
 					currencyFormatter: new CurrencyEn(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
-					formItems: formItems
+					formItems: formItems,
+					translator: { translate }
 				}
 			}
 		} );

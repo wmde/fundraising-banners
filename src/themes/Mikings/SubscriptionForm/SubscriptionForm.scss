@@ -1,0 +1,151 @@
+@use '../variables/colors';
+@use '../variables/globals';
+
+.wmde-banner {
+
+	&-mini {
+		.wmde-banner-subscription-form-link {
+			margin-top: 10px;
+		}
+	}
+
+	&-full {
+		.wmde-banner-subscription-form-link {
+			margin-bottom: 10px;
+		}
+	}
+
+	&-subscription-form {
+		position: static;
+		text-align: left;
+		font-weight: normal;
+
+		&-link {
+			display: block;
+			text-align: center;
+			color: colors.$secondary;
+			font-weight: bold;
+			font-size: 14px;
+		}
+
+		&-modal {
+			display: none;
+			position: static;
+			background: colors.$white;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2 );
+			margin: 16px;
+			padding: 16px;
+			transform: scale( 1.1 );
+			transition: transform 500ms globals.$banner-easing;
+
+			&-overlay {
+				position: fixed;
+				display: none;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba( 0, 0, 0, 0.6 );
+				z-index: 98;
+			}
+
+			&-close {
+				position: absolute;
+				top: 0;
+				right: 0;
+				border: 0;
+				background: none;
+				height: 42px;
+				width: 42px;
+				padding: 16px;
+				cursor: pointer;
+			}
+
+			&-content {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+
+		&-input {
+			margin-bottom: 9px;
+
+			input {
+				border: 1px solid colors.$gray-medium;
+				border-radius: 2px;
+				width: 100%;
+				line-height: 32px;
+				height: 32px;
+				padding: 0 9px;
+				margin-top: 12px;
+			}
+		}
+
+		&-checkbox {
+			position: relative;
+			padding-left: 28px;
+			font-size: 12px;
+			margin-bottom: 16px;
+			color: colors.$black-light;
+
+			input {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}
+
+		&-error {
+			color: colors.$error;
+			text-align: center;
+			font-weight: bold;
+			font-size: 12px;
+			line-height: 1.5;
+			margin-bottom: 16px;
+		}
+
+		&-submit {
+			line-height: 32px;
+			padding: 0 16px;
+			margin-bottom: 10px;
+			border-radius: 16px;
+			color: colors.$white;
+			background: colors.$secondary;
+			border: 0;
+			cursor: pointer;
+			font-weight: bold;
+			transition: background-color 500ms globals.$banner-easing;
+
+			&:hover {
+				background-color: colors.$secondary-hover;
+			}
+		}
+
+		&-privacy {
+			display: block;
+			text-align: center;
+			font-size: 11px;
+			color: colors.$gray-medium;
+
+			&:visited {
+				color: colors.$gray-medium;
+			}
+		}
+
+		&--modal-visible {
+			.wmde-banner-subscription-form-modal {
+				display: block;
+				transform: scale( 1 );
+
+				&-overlay {
+					display: flex;
+				}
+			}
+		}
+	}
+}

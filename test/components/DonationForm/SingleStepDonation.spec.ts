@@ -16,6 +16,8 @@ const formItems: DonationFormItems = {
 	paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD ]
 };
 
+const translate = ( key: string ): string => key;
+
 describe( 'SingleStepDonation.vue', () => {
 	let wrapper: VueWrapper<any>;
 
@@ -31,10 +33,11 @@ describe( 'SingleStepDonation.vue', () => {
 					formActions: {
 						donateWithAddressAction: `https://example.com/withAddress`,
 						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
-					}
+					},
+					translator: { translate }
 				},
 				mocks: {
-					$translate: ( key: string ) => key
+					$translate: translate
 				}
 			}
 		} );

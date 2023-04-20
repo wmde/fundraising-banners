@@ -1,4 +1,8 @@
+@use 'src/components/DonationForm/Forms/CustomAmountForm';
+
 .wmde-banner {
+	@include CustomAmountForm.layout;
+
 	&-form-new-custom-amount {
 		&-header {
 			text-align: center;

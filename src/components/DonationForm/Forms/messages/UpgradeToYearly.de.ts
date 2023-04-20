@@ -8,7 +8,8 @@ const Translations: TranslationMessages = {
 	'upgrade-to-yearly-yes': 'Ja, ich möchte {{amount}} jährlich spenden.',
 	'upgrade-to-yearly-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
 	'upgrade-to-yearly-button': 'Weiter, um Spende abzuschließen',
-	'upgrade-to-yearly-error': 'Bitte wählen Sie eine der Optionen aus.'
+	'upgrade-to-yearly-error': 'Bitte wählen Sie eine der Optionen aus.',
+	'back-button': 'Zurück'
 };
 
 export default Translations;

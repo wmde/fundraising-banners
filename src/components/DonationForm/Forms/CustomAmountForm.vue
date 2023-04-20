@@ -99,16 +99,3 @@ const onPrevious = (): void => {
 };
 
 </script>
-
-<style lang="scss">
-.wmde-banner {
-	&-form-new-custom-amount {
-		&-content {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			flex-grow: 1;
-		}
-	}
-}
-</style>

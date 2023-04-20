@@ -4,9 +4,9 @@ import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
-const MAIN_DONATION_INDEX = 0;
-const UPGRADE_TO_YEARLY_INDEX = 1;
-const NEW_CUSTOM_AMOUNT_INDEX = 2;
+export const MAIN_DONATION_INDEX = 0;
+export const UPGRADE_TO_YEARLY_INDEX = 1;
+export const NEW_CUSTOM_AMOUNT_INDEX = 2;
 
 export class FormControllerCtrl implements FormController {
 
