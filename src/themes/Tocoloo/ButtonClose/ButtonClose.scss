@@ -1,0 +1,23 @@
+@use '../variables/colors';
+@use 'src/components/ButtonClose/ButtonClose';
+
+.wmde-banner {
+	@include ButtonClose.layout;
+
+	&-close {
+		width: 32px;
+		height: 32px;
+		line-height: 32px;
+		opacity: 0.8;
+
+		&-link {
+			font-size: 27px;
+			color: colors.$gray;
+			text-decoration: none;
+			cursor: pointer;
+			&:hover {
+				color: colors.$gray-medium;
+			}
+		}
+	}
+}
