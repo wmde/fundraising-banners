@@ -127,6 +127,15 @@ describe( 'BannerWrapper.vue', () => {
 		expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
 	} );
 
+	it( 'Scrolls to the use of funds link when the use of funds close button is clicked', async () => {
+		await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+		await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-full-small-print .wmde-banner-footer-usage-link' );
+	} );
+
 	it( 'Plays the mini banner slideshow when the banner becomes visible', async () => {
 		await wrapper.setProps( { bannerState: BannerStates.Visible } );
 

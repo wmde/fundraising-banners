@@ -80,9 +80,10 @@ function onshowFullPageBanner(): void {
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
-	if ( payload.source === UseOfFundsCloseSources.callToAction ) {
-		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
-	}
+	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
+		'.wmde-banner-form' :
+		'.wmde-banner-full-small-print .wmde-banner-footer-usage-link'
+	);
 	isFundsModalVisible.value = false;
 };
 
