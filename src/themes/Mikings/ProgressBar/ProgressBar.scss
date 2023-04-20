@@ -20,8 +20,6 @@
 			&-right {
 				height: 18px;
 				line-height: 18px;
-				opacity: 0;
-				transition: opacity 200ms ease-in-out;
 			}
 
 			&-left {
@@ -53,16 +51,6 @@
 
 			&-text {
 				display: none;
-				opacity: 0;
-				transition: opacity 200ms ease-in-out;
-			}
-		}
-
-		&--finished {
-			.wmde-banner-progress-bar-text-left,
-			.wmde-banner-progress-bar-text-right,
-			.wmde-banner-progress-bar-fill-text {
-				opacity: 1;
 			}
 		}
 

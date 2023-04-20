@@ -7,25 +7,26 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	&-text-animated-highlight,
-	&-slider-text-animated-highlight {
+	&-text-animated-highlight {
 		padding: 0 5px;
+
 		/* stylelint-disable */
 		background: linear-gradient(
 			270deg,
-			colors.$transparent-color 0%,
-			colors.$transparent-color 50%,
-			colors.$text-highlight-color 50%,
-			colors.$text-highlight-color 100%
+			rgba( 255, 255, 255, 0 ) 0%,
+			rgba( 255, 255, 255, 0 ) 50%,
+			rgba( 255, 222, 103 ) 50%,
+			rgba( 255, 222, 103 ) 100%
 		);
+		/* stylelint-enable */
+
 		background-size: 201% 100%;
 		background-position: 100% 0;
-		/* stylelint-enable */
 		transition: background-position 2s;
 	}
 
-	&-slide--current .wmde-banner-slider-text-animated-highlight,
-	&--animate-highlight .wmde-banner-text-animated-highlight {
+	&-wrapper--full-page .wmde-banner-message .wmde-banner-text-animated-highlight,
+	&-slide--current .wmde-banner-text-animated-highlight {
 		background-position: 0 0;
 	}
 }
