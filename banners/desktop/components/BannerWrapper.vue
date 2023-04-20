@@ -4,7 +4,7 @@
 			@close="onCloseMain"
             @showFundsModal="isFundsModalVisible = true"
 			v-if="contentState === ContentStates.Main"
-			:bannerIsVisible="bannerIsVisible"
+			:bannerState="bannerState"
 			:form-controller="formController"
 			:forms="forms"
 		/>
@@ -26,7 +26,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { Component, computed, nextTick, ref, watch } from 'vue';
+import { Component, nextTick, ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
@@ -44,10 +44,9 @@ interface Props {
 	forms: Component[];
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
-const bannerIsVisible = computed( () => props.bannerState === BannerStates.Visible );
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 

@@ -4,13 +4,14 @@
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<BannerText v-if="onLargeScreen"/>
-				<BannerSlides v-else :play="bannerIsVisible"/>
+				<BannerSlides v-else :play="slideshowShouldPlay"/>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 			<div class="wmde-banner-column-right">
 				<MultiStepDonation
 					:form-controller="formController"
 					:forms="forms"
+					@form-interaction="onFormInteraction"
 				/>
 			</div>
 		</div>
@@ -28,19 +29,26 @@ import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import { FormController } from '@src/utils/FormController/FormController';
-import { Component } from 'vue';
+import { Component, computed, ref } from 'vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 interface Props {
-	bannerIsVisible: boolean;
+	bannerState: BannerStates;
 	formController: FormController;
 	forms: Component[]
 }
 
-defineProps<Props>();
-
+const props = defineProps<Props>();
 defineEmits( [ 'showFundsModal', 'close' ] );
 
+const slideShowStopped = ref<boolean>( false );
+const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
+
 const onLargeScreen = useDisplaySwitch( 1300 );
+
+const onFormInteraction = (): void => {
+	slideShowStopped.value = true;
+};
 
 </script>
 

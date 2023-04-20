@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container">
+	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container" @click="$emit( 'formInteraction' )">
 		<template v-for="( form, idx ) in forms" :key="idx">
 			<div class="keen-slider__slide wmde-banner-form-page"
 					:class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
@@ -37,6 +37,7 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
+defineEmits( [ 'formInteraction' ] );
 
 const currentFormPageIndex = ref<number>( 0 );
 const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
