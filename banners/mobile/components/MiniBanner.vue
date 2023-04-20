@@ -13,7 +13,7 @@
 		</header>
 
 		<div class="wmde-banner-mini-banner-slideshow">
-			<BannerSlides :play="bannerIsVisible"/>
+			<BannerSlides :play="playSlideshow"/>
 		</div>
 
 		<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
@@ -31,7 +31,7 @@ import BannerSlides from '../content/BannerSlides.vue';
 defineEmits( [ 'showFullPageBanner', 'close' ] );
 
 interface Props {
-	bannerIsVisible: boolean;
+	playSlideshow: boolean;
 }
 
 defineProps<Props>();

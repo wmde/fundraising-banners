@@ -52,7 +52,7 @@ describe( 'BannerWrapper.vue', () => {
 
 		wrapper = mount( BannerWrapper, {
 			props: {
-				bannerState: BannerStates.Visible,
+				bannerState: BannerStates.Pending,
 				formController: {
 					submitStep: () => {},
 					next: () => {},
@@ -125,6 +125,19 @@ describe( 'BannerWrapper.vue', () => {
 
 		expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
 		expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
+	} );
+
+	it( 'Plays the mini banner slideshow when the banner becomes visible', async () => {
+		await wrapper.setProps( { bannerState: BannerStates.Visible } );
+
+		expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'Stops the mini banner slideshow when the full page becomes visible', async () => {
+		await wrapper.setProps( { bannerState: BannerStates.Visible } );
+		await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 } );

@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			:banner-is-visible="bannerIsVisible"
+			:play-slideshow="slideshowShouldPlay"
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 		/>
@@ -56,9 +56,8 @@ const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
-
-const bannerIsVisible = computed( () => props.bannerState === BannerStates.Visible );
-
+const slideShowStopped = ref<boolean>( false );
+const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 
 watch( contentState, async () => {
@@ -76,6 +75,7 @@ function onClose( closeSource: CloseSources ): void {
 }
 
 function onshowFullPageBanner(): void {
+	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 }
 
