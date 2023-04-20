@@ -4,6 +4,7 @@ import BannerWrapper from '../../../../banners/mobile/components/BannerWrapper.v
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 const dynamicCampaignContent: DynamicContent = {
 	campaignDaySentence: '',
@@ -22,6 +23,21 @@ const dynamicCampaignContent: DynamicContent = {
 	visitorsVsDonorsSentence: ''
 };
 
+const useOfFundsContent: UseOfFundsContent = {
+	applicationOfFundsData: [],
+	benefitsList: { benefits: [], headline: '' },
+	callToAction: '',
+	comparison: { citationLabel: '', companies: [], headline: '', paragraphs: [], subhead: '' },
+	detailedReports: {
+		germany: { intro: '', linkName: '', linkUrl: '' },
+		international: { intro: '', linkName: '', linkUrl: '' },
+		mixed: { text: '' }
+	},
+	intro: { headline: '', text: '' },
+	orgchart: { headline: '', imageUrl: '', organizationClasses: {}, paragraphs: [] },
+	provisional: ''
+};
+
 describe( 'BannerWrapper.vue', () => {
 
 	let wrapper: VueWrapper<any>;
@@ -38,7 +54,8 @@ describe( 'BannerWrapper.vue', () => {
 					onGoToStep: () => {},
 					onSubmit: () => {}
 				},
-				forms: []
+				forms: [],
+				useOfFundsContent
 			},
 			global: {
 				mocks: {
@@ -75,6 +92,21 @@ describe( 'BannerWrapper.vue', () => {
 		expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 		expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 		expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.FollowUpBanner );
+	} );
+
+	it( 'Shows use of funds when the link is clicked from the full banner', async () => {
+		await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+
+		expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
+	} );
+
+	it( 'Hides use of funds when the close link is clicked', async () => {
+		await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+		await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+
+		expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
 	} );
 
 } );

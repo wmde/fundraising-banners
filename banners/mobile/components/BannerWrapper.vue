@@ -17,11 +17,10 @@
 			@maybe-later="() => onClose( CloseSources.MaybeLater )"
 			@time-out-close="() => onClose( CloseSources.TimeOut )"
 		/>
-
         <FundsModal
-                :content="useOfFundsContent"
-                :is-funds-modal-visible="isFundsModalVisible"
-                @hideFundsModal="isFundsModalVisible = false"
+			:content="useOfFundsContent"
+			:is-funds-modal-visible="isFundsModalVisible"
+			@hideFundsModal="isFundsModalVisible = false"
         />
 	</div>
 </template>
