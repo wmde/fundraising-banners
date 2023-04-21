@@ -2,17 +2,21 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<strong>An alle, die Wikipedia in Deutschland nutzen </strong>
+				<img class="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
+				An alle, die Wikipedia in Deutschland nutzen. Bitte verzeihen Sie die Störung. Es ist
+				ein bisschen unangenehm, daher kommen wir gleich zur Sache. An diesem Freitag sind Sie gefragt:
 			</p>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-				heutigen {{ currentDayName }} bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
-				unterstützen. {{ campaignDaySentence }}
-				<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
-				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende
-				beträgt 22,66&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in
-				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der
-				seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert, aber 99&nbsp;% der
+				Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
+				Spendenziel bereits heute erreicht.</strong> Menschen spenden aus einem einfachen Grund – weil
+				Wikipedia nützlich ist. Schon der Preis einer Tasse Kaffee würde genügen.
+				<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span> Wenn Wikipedia
+				eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit
+				Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht
+				vertrauen. Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie
+				Wikipedia nützlich finden, nehmen Sie sich an diesem {{ currentDayName }} bitte eine Minute Zeit und geben
+				Wikipedia mit Ihrer Spende etwas zurück. <em>Vielen Dank!</em>
 			</p>
 		</div>
 	</div>

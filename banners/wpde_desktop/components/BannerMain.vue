@@ -53,7 +53,7 @@ const onLargeScreen = useDisplaySwitch( 1300 );
 		display: flex;
 		flex-direction: row;
 		order: 1;
-		padding: 12px 24px 0;
+		padding: 8px 32px 0;
 	}
 
 	&-column-left {
@@ -64,9 +64,11 @@ const onLargeScreen = useDisplaySwitch( 1300 );
 		margin-bottom: 0;
 		overflow-y: hidden;
 		margin-right: 30px;
-		padding: 0 15px;
-		border: 5px solid colors.$primary;
-		border-radius: 9px;
+
+		// padding: 0 15px;
+		padding: 20px 30px 20px 20px;
+		border: 8px solid colors.$primary;
+		border-radius: 15px;
 	}
 
 	&-column-right {
