@@ -1,15 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import BannerWrapper from '../../../../banners/mobile/components/BannerWrapper.vue';
+import BannerCtrl from '../../../../banners/mobile/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { formItems } from '@test/banners/formItems';
 
 let pageScroller: PageScroller;
+const translator = ( key: string ): string => key;
 
-describe( 'BannerWrapper.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -18,7 +21,7 @@ describe( 'BannerWrapper.vue', () => {
 			scrollToTop: vi.fn()
 		};
 
-		wrapper = mount( BannerWrapper, {
+		wrapper = mount( BannerCtrl, {
 			props: {
 				bannerState: BannerStates.Pending,
 				formController: {
@@ -36,11 +39,14 @@ describe( 'BannerWrapper.vue', () => {
 			},
 			global: {
 				mocks: {
-					$translate: ( key: string ): string => key
+					$translate: translator
 				},
 				provide: {
+					translator: { translate: translator },
 					dynamicCampaignText: dynamicCampaignContent,
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' }
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					currencyFormatter: new CurrencyEn(),
+					formItems
 				}
 			}
 		} );

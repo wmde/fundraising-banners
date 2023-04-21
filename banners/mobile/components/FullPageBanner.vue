@@ -5,17 +5,14 @@
 				<CloseIconMobile/>
 			</button>
 			<div class="wmde-banner-full-info">
-				<BannerText/>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<slot name="banner-text"/>
+				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-full-call-to-action">
 				Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 			</div>
 
-			<MultiStepDonation
-				:form-controller="formController"
-				:forms="forms"
-			/>
+			<slot name="donation-form"/>
 
 			<div class="wmde-banner-full-small-print">
 				<span>
@@ -29,7 +26,7 @@
 				</span>
 			</div>
 
-			<BannerFooter />
+			<slot name="footer"/>
 		</div>
 	</div>
 </template>
@@ -37,19 +34,6 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
-import BannerText from '../content/BannerText.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import { FormController } from '@src/utils/FormController/FormController';
-import { Component } from 'vue';
-
-interface Props {
-	formController: FormController;
-	forms: Component[]
-}
-
-defineProps<Props>();
 
 defineEmits( [ 'close', 'showFundsModal' ] );
 

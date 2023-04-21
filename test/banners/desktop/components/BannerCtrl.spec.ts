@@ -1,14 +1,18 @@
 import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import BannerWrapper from '../../../../banners/desktop/components/BannerWrapper.vue';
+import BannerCtrl from '../../../../banners/desktop/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { formItems } from '@test/banners/formItems';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 
-describe( 'BannerWrapper.vue', () => {
+const translator = ( key: string ): string => key;
+
+describe( 'BannerCtrl.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
-		return mount( BannerWrapper, {
+		return mount( BannerCtrl, {
 			props: {
 				bannerState: BannerStates.Pending,
 				formController: {
@@ -20,20 +24,23 @@ describe( 'BannerWrapper.vue', () => {
 					onGoToStep: () => {},
 					onSubmit: () => {}
 				},
-				forms: [],
 				useOfFundsContent
 			},
 			global: {
 				mocks: {
-					$translate: ( key: string ): string => key
+					$translate: translator
 				},
 				provide: {
+					translator: { translate: translator },
 					dynamicCampaignText: dynamicCampaignContent,
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' }
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					currencyFormatter: new CurrencyEn(),
+					formItems
 				}
 			}
 		} );
 	};
+
 	describe( 'Content', () => {
 		it( 'Plays the slider when the banner state becomes visible', async () => {
 			const wrapper = getWrapper();

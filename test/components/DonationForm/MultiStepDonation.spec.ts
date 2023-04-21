@@ -1,9 +1,19 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import { markRaw, nextTick } from 'vue';
+import { nextTick } from 'vue';
 import SubFormStub from '@test/fixtures/SubFormStub.vue';
 import { FormController } from '@src/utils/FormController/FormController';
+
+const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, next, previous }">
+	<button
+		class="emitting-sub-form"
+		:page-index="pageIndex"
+		@submit="() => submit( { pageIndex } )"
+		@next="() => next( { pageIndex } )"
+		@previous="() => previous( { pageIndex } )"
+    />
+</template>`;
 
 describe( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
@@ -24,12 +34,12 @@ describe( 'MultistepDonation.vue', () => {
 		};
 	} );
 
-	const getWrapper = ( forms: Array<any> = [] ): VueWrapper<any> => {
+	const getWrapper = ( forms: Record<string, any> = {} ): VueWrapper<any> => {
 		return mount( MultiStepDonation, {
 			props: {
-				formController: mockedFormController,
-				forms
+				formController: mockedFormController
 			},
+			slots: forms,
 			global: {
 				provide: {
 					formActions: {
@@ -60,50 +70,37 @@ describe( 'MultistepDonation.vue', () => {
 	};
 
 	it( 'passes submit event to page controller', async () => {
-		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
-		const subForm = wrapper.findComponent( SubFormStub );
+		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
 
-		const eventPayload = { event: new Event( 'submit' ), pageIndex: 1 };
-		subForm.vm.$emit( 'submit', eventPayload );
-		await nextTick();
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
 
-		expect( mockedFormController.submitStep ).toHaveBeenCalledWith( eventPayload );
+		expect( mockedFormController.submitStep ).toHaveBeenCalledWith( { pageIndex: 0 } );
 	} );
 
 	it( 'passes next event to page controller', async () => {
-		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
-		const subForm = wrapper.findComponent( SubFormStub );
+		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
 
-		const eventPayload = { event: new Event( 'next' ), pageIndex: 1 };
-		subForm.vm.$emit( 'next', eventPayload );
-		await nextTick();
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'next' );
 
-		expect( mockedFormController.next ).toHaveBeenCalledWith( eventPayload );
+		expect( mockedFormController.next ).toHaveBeenCalledWith( { pageIndex: 0 } );
 	} );
 
 	it( 'passes previous event to page controller', async () => {
-		const wrapper = getWrapper( [ markRaw( SubFormStub ) ] );
-		const subForm = wrapper.findComponent( SubFormStub );
+		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
 
-		const eventPayload = { event: new Event( 'previous' ), pageIndex: 1 };
-		subForm.vm.$emit( 'previous', eventPayload );
-		await nextTick();
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'previous' );
 
-		expect( mockedFormController.previous ).toHaveBeenCalledWith( eventPayload );
+		expect( mockedFormController.previous ).toHaveBeenCalledWith( { pageIndex: 0 } );
 	} );
 
 	it( 'should render the sub form pages', function () {
-		const wrapper = getWrapper( [
-			markRaw( SubFormStub ),
-			markRaw( SubFormStub ),
-			markRaw( SubFormStub )
-		] );
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 
 		expect( wrapper.findAll( '.wmde-banner-form-page' ).length ).toBe( 3 );
 	} );
 
 	it( 'should add callbacks when initialised', function () {
-		getWrapper( [ markRaw( SubFormStub ) ] );
+		getWrapper( { form: SubFormStub } );
 
 		expect( mockedFormController.onNext ).toHaveBeenCalled();
 		expect( mockedFormController.onPrevious ).toHaveBeenCalled();
@@ -113,7 +110,7 @@ describe( 'MultistepDonation.vue', () => {
 
 	it( 'should go to next when next callback is invoked', async function () {
 		addCallbackInvokers();
-		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 
 		callbackInvokerNext();
 		await nextTick();
@@ -124,7 +121,7 @@ describe( 'MultistepDonation.vue', () => {
 
 	it( 'should go to specified step when goToStep callback is invoked', async function () {
 		addCallbackInvokers();
-		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 
 		callbackInvokerGoToStep( 2 );
 		await nextTick();
@@ -135,7 +132,7 @@ describe( 'MultistepDonation.vue', () => {
 
 	it( 'should go to previous when previous callback is invoked', async function () {
 		addCallbackInvokers();
-		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 
 		callbackInvokerGoToStep( 1 );
 		await nextTick();
@@ -148,7 +145,7 @@ describe( 'MultistepDonation.vue', () => {
 
 	it( 'should submit donation form when submit callback is invoked', async function () {
 		addCallbackInvokers();
-		const wrapper = getWrapper( [ markRaw( SubFormStub ), markRaw( SubFormStub ), markRaw( SubFormStub ) ] );
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 		submitForm.element.submit = vi.fn();
 
