@@ -20,6 +20,24 @@ filename = "./banners/desktop/banner_var.ts"
 pagename = "B23WMDE_00_230202_var"
 tracking = "org-00-230202-var"
 
+# English Campaign
+[english]
+# name = "C22_WMDE_Test_EN_00"
+campaign_tracking = "en00-ba-230421"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
+#preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+[english.banners.ctrl]
+filename = "./banners/english/banner_ctrl.ts"
+pagename = "B23_WMDE_Test_EN_00_ctrl"
+tracking = "org-en00-230421-ctrl"
+
+[english.banners.var]
+filename = "./banners/english/banner_var.ts"
+pagename = "B23_WMDE_Test_EN_00_var"
+tracking = "org-en00-230421-var"
+
 [mobile]
 campaign_tracking = "00-ba-230202"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"

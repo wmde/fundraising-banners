@@ -1,0 +1,48 @@
+<template>
+    <div :class="[ 'wmde-banner-already-donated', {
+		'wmde-banner-already-donated--is-visible': isVisible
+	} ]">
+    <div class="wmde-banner-already-donated-content">
+        <ButtonClose @click="onHideClick" />
+        <AlreadyDonatedContent/>
+        <div class="wmde-banner-already-donated-buttons">
+            <button
+                    class="wmde-banner-already-donated-button"
+                    @click="onMaybeLaterClick">
+                {{ $translate('already-donated-maybe-later-button') }}
+            </button>
+            <button
+                    class="wmde-banner-already-donated-button"
+                    @click="onGoAwayClick">
+                {{ $translate( 'already-donated-go-away-button' ) }}
+            </button>
+        </div>
+    </div>
+	</div>
+</template>
+
+<script setup lang="ts">
+
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import AlreadyDonatedContent from '../../../banners/english/content/AlreadyDonatedContent.vue';
+
+interface Props {
+	isVisible: boolean;
+}
+
+defineProps<Props>();
+const emit = defineEmits( [ 'onHide', 'maybeLater', 'onGoAway' ] );
+
+const onHideClick = (): void => {
+	emit( 'onHide' );
+};
+
+const onMaybeLaterClick = (): void => {
+	emit( 'maybeLater' );
+};
+
+const onGoAwayClick = (): void => {
+	emit( 'onGoAway' );
+};
+
+</script>
