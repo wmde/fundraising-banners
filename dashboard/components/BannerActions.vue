@@ -13,7 +13,7 @@
 			<a
 				class="banner-actions-icon"
 				data-tooltip="Preview in Production"
-				:href="campaign.previewUrlDev.replace('{{banner}}', bannerPageName)"
+				:href="campaign.previewUrlProd.replace('{{banner}}', bannerPageName)"
 				target="_blank"
 				title="Preview in prod environment"
 			>
