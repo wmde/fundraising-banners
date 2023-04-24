@@ -1,8 +1,7 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState">
+	<div class="wmde-banner-wrapper wmde-banner-wrapper--main">
 		<BannerMain
-			@close="onCloseMain"
-			v-if="contentState === ContentStates.Main"
+			@close="onClose"
 			:bannerState="bannerState"
 		>
 			<template #banner-text>
@@ -40,13 +39,6 @@
 			</template>
 		</BannerMain>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-			@maybe-later="() => onClose( CloseSources.MaybeLater )"
-			@time-out-close="() => onClose( CloseSources.TimeOut )"
-		/>
-
 		<FundsModal
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
@@ -58,10 +50,9 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { nextTick, ref, watch } from 'vue';
+import { ref } from 'vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import BannerMain from './BannerMain.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
@@ -73,11 +64,6 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 
-enum ContentStates {
-	Main = 'wmde-banner-wrapper--main',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
-}
-
 interface Props {
 	bannerState: BannerStates;
 	formController: FormController;
@@ -85,23 +71,12 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
-const contentState = ref<ContentStates>( ContentStates.Main );
 
-watch( contentState, async () => {
-	// Wait a tick in order to let the content re-render before notifying the parent
-	await nextTick();
-	emit( 'bannerContentChanged' );
-} );
-
-function onCloseMain(): void {
-	contentState.value = ContentStates.SoftClosing;
-}
-
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose(): void {
+	emit( 'bannerClosed', CloseSources.MainBanner );
 }
 
 </script>
