@@ -4,7 +4,7 @@
 	} ]">
     <div class="wmde-banner-already-donated-content">
         <ButtonClose @click="onHideClick" />
-        <AlreadyDonatedContent/>
+        <slot name="already-donated-content"/>
         <div class="wmde-banner-already-donated-buttons">
             <button
                     class="wmde-banner-already-donated-button"
@@ -24,7 +24,6 @@
 <script setup lang="ts">
 
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import AlreadyDonatedContent from '../../../banners/english/content/AlreadyDonatedContent.vue';
 
 interface Props {
 	isVisible: boolean;

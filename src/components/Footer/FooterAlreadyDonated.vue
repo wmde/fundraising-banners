@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
-import Tick from '@src/components/Icons/Tick.vue';
+import Tick from '@src/components/Icons/TickIcon.vue';
 
 defineEmits( [ 'showAlreadyDonatedModal', 'showFundsModal' ] );
 
