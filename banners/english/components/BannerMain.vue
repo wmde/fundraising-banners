@@ -71,8 +71,8 @@ const onFormInteraction = (): void => {
 		display: flex;
 		flex-direction: column;
 		width: globals.$form-width;
-		min-height: 315px;
-		padding: 10px 0;
+		min-height: 312px;
+		padding: 20px 0;
 	}
 }
 </style>
