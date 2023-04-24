@@ -13,7 +13,6 @@
 				display: none;
 				visibility: hidden;
 				font-family: fonts.$ui;
-				font-size: 12px;
 				line-height: 13px;
 				color: colors.$black-light;
 			}
@@ -38,7 +37,7 @@
 
 		&-notice {
 			font-weight: bold;
-			font-size: 12px;
+			font-size: fonts.$size-s;
 			margin-bottom: auto;
 
 			/* min-height is to reserve space and prevent 1st page from "jumping",
@@ -49,7 +48,6 @@
 
 		.wmde-banner-select-group-notice {
 			font-weight: normal;
-			font-size: 12px;
 			line-height: 1.5;
 			padding-left: 25px;
 		}

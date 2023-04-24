@@ -1,5 +1,6 @@
 @use 'src/components/ProgressBar/ProgressBar';
 @use '../variables/colors';
+@use '../variables/fonts';
 @use '../variables/globals';
 
 .wmde-banner {
@@ -7,11 +8,12 @@
 
 	&-progress-bar {
 		position: relative;
-		font-size: 0.9em;
+		font-size: fonts.$size-m;
 		font-weight: bold;
 		margin-top: 28px;
 
 		&-text {
+			position: absolute;
 			top: 0;
 			left: 0;
 			z-index: 2;

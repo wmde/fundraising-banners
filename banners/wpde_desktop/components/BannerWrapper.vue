@@ -74,7 +74,6 @@ function onClose( closeSource: CloseSources ): void {
 
 .wmde-banner {
 	&-wrapper {
-		font-size: 14px;
 		font-family: fonts.$ui;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 		background-color: colors.$white;

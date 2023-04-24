@@ -1,5 +1,6 @@
 @use 'src/components/DonationForm/SubComponents/SelectGroup';
 @use '../../variables/colors';
+@use '../../variables/fonts';
 @use '../../variables/globals';
 
 .wmde-banner {
@@ -7,7 +8,6 @@
 
 	&-select-group {
 		padding: 0 0 8px;
-		font-size: 0.9em;
 		font-weight: bold;
 
 		&-container {
@@ -23,7 +23,7 @@
 			text-align: left;
 			margin-top: -1em;
 			margin-bottom: 1em;
-			font-size: 0.8em;
+			font-size: fonts.$size-xs;
 		}
 
 		&-container--with-error {
@@ -63,7 +63,7 @@
 			line-height: globals.$donation-form-select-option-line-height;
 			cursor: pointer;
 			text-align: center;
-			font-size: 0.8em;
+			font-size: fonts.$size-s;
 			box-sizing: border-box;
 		}
 

@@ -1,4 +1,5 @@
 @use '../variables/colors';
+@use '../variables/fonts';
 @use '../variables/globals';
 
 .wmde-banner {
@@ -28,7 +29,7 @@
 		&-button {
 			flex: 1 1 auto;
 			line-height: globals.$donation-form-select-option-button-height;
-			font-size: 0.7em;
+			font-size: fonts.$size-s;
 			font-weight: bold;
 			text-align: center;
 			background: colors.$donation-form-button-colour;

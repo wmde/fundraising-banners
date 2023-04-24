@@ -1,4 +1,5 @@
 @use '../../variables/colors';
+@use '../../variables/fonts';
 @use '../../variables/globals';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
@@ -23,7 +24,7 @@
 			width: 100%;
 			padding: 0 0.4em;
 			line-height: globals.$donation-form-select-option-line-height;
-			font-size: 0.74em;
+			font-size: fonts.$size-xs;
 			text-align: center;
 			outline: 0;
 			background: transparent;

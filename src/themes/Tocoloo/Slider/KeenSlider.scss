@@ -8,11 +8,7 @@
 
 	&-navigation-wrapper {
 		box-sizing: content-box;
-		padding-bottom: 28px;
-
-		@include breakpoints.extra-small-up {
-			padding-bottom: 38px;
-		}
+		padding-bottom: 14px;
 	}
 
 	&-slider {
@@ -30,20 +26,20 @@
 	&-slide {
 		cursor: grab;
 		font-family: fonts.$ui;
-		padding: 10px 52px;
+		padding: 0 52px;
 
 		&-content {
 			text-align: center;
-			font-size: 17px;
+			font-size: fonts.$size-l;
 			line-height: 1.5;
 
 			.headline {
 				font-weight: bold;
-				font-size: 18px;
+				font-size: fonts.$size-xl;
 				margin-bottom: 6px;
 
 				@include breakpoints.extra-small-up {
-					font-size: 24px;
+					font-size: fonts.$size-xxl;
 				}
 			}
 		}

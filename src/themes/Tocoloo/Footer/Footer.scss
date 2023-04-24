@@ -1,6 +1,7 @@
 @use 'src/components/Footer/BannerFooter';
-@use '../variables/colors';
 @use '../variables/breakpoints';
+@use '../variables/colors';
+@use '../variables/fonts';
 @use '../variables/globals';
 
 .wmde-banner {
@@ -8,7 +9,7 @@
 
 	&-footer {
 		order: 2;
-		font-size: 0.8em;
+		font-size: fonts.$size-s;
 		line-height: 1.6em;
 		color: colors.$black;
 		width: 100%;

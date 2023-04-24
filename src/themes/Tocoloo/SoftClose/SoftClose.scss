@@ -30,7 +30,7 @@
 			line-height: 32px;
 			height: 32px;
 			margin-right: 20px;
-			font-size: 18px;
+			font-size: fonts.$size-xl;
 			font-family: fonts.$ui;
 			white-space: nowrap;
 		}
@@ -45,7 +45,7 @@
 			color: colors.$white;
 			background-color: colors.$primary;
 			border-radius: 18px;
-			font-size: 14px;
+			font-size: fonts.$size-m;
 			line-height: 32px;
 			height: 32px;
 			font-weight: bold;
@@ -56,7 +56,7 @@
 		&-countdown-text {
 			line-height: 32px;
 			height: 32px;
-			font-size: 14px;
+			font-size: fonts.$size-m;
 			text-align: right;
 		}
 
