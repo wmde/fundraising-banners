@@ -30,10 +30,10 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits( [ 'onHide', 'maybeLater', 'onGoAway' ] );
+const emit = defineEmits( [ 'hideAlreadyDonatedModal', 'maybeLater', 'onGoAway' ] );
 
 const onHideClick = (): void => {
-	emit( 'onHide' );
+	emit( 'hideAlreadyDonatedModal' );
 };
 
 const onMaybeLaterClick = (): void => {
