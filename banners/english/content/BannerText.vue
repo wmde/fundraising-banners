@@ -2,17 +2,19 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<strong>An alle, die Wikipedia in Deutschland nutzen </strong>
+				<InfoIcon/>
+				<strong>To all our readers in Germany, </strong>
 			</p>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-				heutigen {{ currentDayName }} bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
-				unterstützen. {{ campaignDaySentence }}
-				<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
-				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende
-				beträgt 22,66&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in
-				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der
-				seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+				This {{ currentDayName }} {{ currentDate }}, with only a few days before 2022 comes to an end, we humbly ask
+				for your support. We are the nonprofit that collects donations on Wikipedia to support free knowledge. If
+				you can, please join the 1% of readers who give. <span class="wmde-banner-text-animated-highlight">If
+				everyone reading this right now gave just €5, we'd hit our annual goal in a couple of hours.</span> The
+				price of a cup of coffee is all we ask. It's easy to ignore our messages, but we hope you'll take one
+				minute to think about how useful Wikipedia is in your life. Online, Wikipedia is the closest thing we
+				have to a public park or a library where everyone can go to learn. If Wikipedia has given you €5 worth
+				of knowledge this year, please support the technology that makes our projects possible and advance the
+				cause of free knowledge worldwide. — <i>Wikimedia Fördergesellschaft</i>
 			</p>
 		</div>
 	</div>
@@ -21,7 +23,8 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
-const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate }: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>

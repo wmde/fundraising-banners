@@ -6,6 +6,7 @@ import SoftCloseEn from '@src/components/SoftClose/messages/SoftClose.en';
 import AddressFormEn from '@src/components/DonationForm/Forms/messages/AddressForm.en';
 import FooterEn from '@src/components/Footer/messages/Footer.en';
 import MainDonationFormEn from '@src/components/DonationForm/Forms/messages/MainDonationForm.en';
+import AlreadyDonatedModalEn from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.en';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormEn,
@@ -14,7 +15,8 @@ const messages: TranslationMessages = {
 	...SoftCloseEn,
 	...AddressFormEn,
 	...FooterEn,
-	...MainDonationFormEn
+	...MainDonationFormEn,
+	...AlreadyDonatedModalEn
 };
 
 export default messages;

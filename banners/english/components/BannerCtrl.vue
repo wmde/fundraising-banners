@@ -77,11 +77,11 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import BannerSlides from '../../desktop/content/BannerSlides.vue';
+import BannerSlides from '../../english/content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../../desktop/content/BannerText.vue';
+import BannerText from '../../english/content/BannerText.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 
