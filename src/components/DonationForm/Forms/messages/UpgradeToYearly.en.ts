@@ -1,15 +1,15 @@
 import { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
-	'upgrade-to-yearly-header': 'Könnten Sie auch {{amount}} jährlich spenden?',
-	'upgrade-to-yearly-copy': 'Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen.' +
-		' Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.',
-	'upgrade-to-yearly-no': 'Nein, danke! Ich möchte eine einmalige Spende von {{amount}} machen.',
-	'upgrade-to-yearly-yes': 'Ja, ich möchte {{amount}} jährlich spenden.',
-	'upgrade-to-yearly-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
-	'upgrade-to-yearly-button': 'Weiter, um Spende abzuschließen',
-	'upgrade-to-yearly-error': 'Bitte wählen Sie eine der Optionen aus.',
-	'back-button': 'Zurück'
+	'upgrade-to-yearly-header': 'Can you make it €{{amount}} yearly?',
+	'upgrade-to-yearly-copy': 'Every year we are dependent on the support of people like you. Yearly donations' +
+		' help sustainably and enable long term development.',
+	'upgrade-to-yearly-no': 'No, thanks! I\'ll make a one-time donation of €{{amount}}.',
+	'upgrade-to-yearly-yes': 'Yes, I\'ll donate €{{amount}} each year.',
+	'upgrade-to-yearly-link': 'Yes, I\'ll donate yearly, but for a different amount.',
+	'upgrade-to-yearly-button': 'Proceed with the donation',
+	'upgrade-to-yearly-error': 'Please choose one of the above options.',
+	'back-button': 'Back'
 };
 
 export default Translations;
