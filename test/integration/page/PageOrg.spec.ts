@@ -83,12 +83,20 @@ describe( 'PageOrg', function () {
 		expect( document.body.innerHTML ).toBe( `<div id="${ bannerAppId }"></div>` );
 	} );
 
-	it( 'stores close cookie for already donated close events', () => {
+	it( 'stores "close" cookie for already donated "enough for this year" events', () => {
 		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonated );
+		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedGoAway );
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'does not store cookie for the AlreadyDonated "Maybe Later" event', () => {
+		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedMaybeLater );
+
+		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
 
 	it( 'stores close cookie when user closes soft close', () => {

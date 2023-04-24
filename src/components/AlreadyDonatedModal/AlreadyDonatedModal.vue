@@ -30,7 +30,7 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits( [ 'hideAlreadyDonatedModal', 'maybeLater', 'onGoAway' ] );
+const emit = defineEmits( [ 'hideAlreadyDonatedModal', 'maybeLater', 'goAway' ] );
 
 const onHideClick = (): void => {
 	emit( 'hideAlreadyDonatedModal' );
@@ -41,7 +41,7 @@ const onMaybeLaterClick = (): void => {
 };
 
 const onGoAwayClick = (): void => {
-	emit( 'onGoAway' );
+	emit( 'goAway' );
 };
 
 </script>

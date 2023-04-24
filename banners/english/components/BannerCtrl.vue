@@ -57,6 +57,8 @@
                 :is-visible="isAlreadyDonatedModalVisible"
                 :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
                 @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
+                @goAway="() => onAlreadyDonatedGoAway( CloseSources.AlreadyDonatedGoAway )"
+                @maybeLater="() => onAlreadyDonatedMaybeLater( CloseSources.AlreadyDonatedMaybeLater )"
         >
             <template #already-donated-content>
                 <AlreadyDonatedContent/>
@@ -97,7 +99,7 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
@@ -115,6 +117,14 @@ function onCloseMain(): void {
 
 function onClose( closeSource: CloseSources ): void {
 	emit( 'bannerClosed', closeSource );
+}
+
+function onAlreadyDonatedGoAway( closeSource: CloseSources ): void {
+	emit( 'bannerClosed', closeSource );
+}
+
+function onAlreadyDonatedMaybeLater( closeSource: CloseSources ): void {
+	emit( 'maybeLater', closeSource );
 }
 
 </script>
