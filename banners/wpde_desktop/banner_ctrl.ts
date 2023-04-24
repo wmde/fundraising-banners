@@ -16,7 +16,6 @@ import { FormControllerCtrl } from './FormControllerCtrl';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 
 // Change for EN banners
 import messages from './messages';
@@ -57,7 +56,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		formController: new FormControllerCtrl( useFormModel() ),
-		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm ],
+		forms: [ DonationForm, UpgradeToYearlyForm ],
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),

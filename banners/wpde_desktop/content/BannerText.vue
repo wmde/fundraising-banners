@@ -2,7 +2,7 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<img class="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
+                <InfoIcon fill="#990a00"/>
 				An alle, die Wikipedia in Deutschland nutzen. Bitte verzeihen Sie die Störung. Es ist
 				ein bisschen unangenehm, daher kommen wir gleich zur Sache. An diesem Freitag sind Sie gefragt:
 			</p>
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
 
