@@ -13,7 +13,7 @@
 		</header>
 
 		<div class="wmde-banner-mini-banner-slideshow">
-			<BannerSlides :play="playSlideshow"/>
+			<slot name="banner-slides"/>
 		</div>
 
 		<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
@@ -26,14 +26,7 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
-import BannerSlides from '../content/BannerSlides.vue';
 
 defineEmits( [ 'showFullPageBanner', 'close' ] );
-
-interface Props {
-	playSlideshow: boolean;
-}
-
-defineProps<Props>();
 
 </script>

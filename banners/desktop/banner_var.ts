@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerWrapper.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
@@ -17,10 +17,6 @@ import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import { FormControllerVar } from './FormControllerVar';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
-import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 
 // Change for EN banners
 import Translations from './messages';
@@ -55,7 +51,6 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		formController: new FormControllerVar( useFormModel() ),
-		forms: [ DonationForm, UpgradeToYearlyForm, CustomAmountForm, AddressTypeForm ],
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),

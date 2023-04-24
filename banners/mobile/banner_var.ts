@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerWrapper.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
@@ -17,9 +17,6 @@ import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import { FormControllerVar } from './FormControllerVar';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyFormButtons from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import AddressTypeButtonForm from '@src/components/DonationForm/Forms/AddressTypeButtonForm.vue';
 
 // Change for EN banners
 import messages from './messages';
@@ -57,7 +54,6 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		formController: new FormControllerVar( useFormModel(), pageScroller ),
-		forms: [ DonationForm, UpgradeToYearlyFormButtons, AddressTypeButtonForm ],
 		useOfFundsContent,
 		pageScroller
 	},

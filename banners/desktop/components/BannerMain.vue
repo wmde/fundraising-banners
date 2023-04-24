@@ -3,44 +3,40 @@
 		<ButtonClose @click.prevent="$emit( 'close' )"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
-				<BannerText v-if="onLargeScreen"/>
-				<BannerSlides v-else :play="bannerIsVisible"/>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<slot name="banner-text" v-if="onLargeScreen"/>
+				<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
+				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-column-right">
-				<MultiStepDonation
-					:form-controller="formController"
-					:forms="forms"
-				/>
+				<slot name="donation-form" :form-interaction="onFormInteraction"/>
 			</div>
 		</div>
-		<BannerFooter @showFundsModal="$emit( 'showFundsModal' )" />
+		<slot name="footer"/>
 	</div>
 </template>
 
 <script setup lang="ts">
 
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import BannerText from '../content/BannerText.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
-import BannerSlides from '../content/BannerSlides.vue';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import { FormController } from '@src/utils/FormController/FormController';
-import { Component } from 'vue';
+import { computed, ref } from 'vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 interface Props {
-	bannerIsVisible: boolean;
-	formController: FormController;
-	forms: Component[]
+	bannerState: BannerStates;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+defineEmits( [ 'close' ] );
 
-defineEmits( [ 'showFundsModal', 'close' ] );
+const slideShowStopped = ref<boolean>( false );
+const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 
 const onLargeScreen = useDisplaySwitch( 1300 );
+
+const onFormInteraction = (): void => {
+	slideShowStopped.value = true;
+};
 
 </script>
 
