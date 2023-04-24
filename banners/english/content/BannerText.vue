@@ -3,7 +3,7 @@
 		<div>
 			<p>
 				<InfoIcon/>
-				<strong>To all our readers in Germany, </strong>
+				<strong> To all our readers in Germany, </strong>
 			</p>
 			<p>
 				This {{ currentDayName }} {{ currentDate }}, with only a few days before 2022 comes to an end, we humbly ask
