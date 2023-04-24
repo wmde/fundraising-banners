@@ -57,8 +57,8 @@
                 :is-visible="isAlreadyDonatedModalVisible"
                 :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
                 @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-                @goAway="() => onAlreadyDonatedGoAway( CloseSources.AlreadyDonatedGoAway )"
-                @maybeLater="() => onAlreadyDonatedMaybeLater( CloseSources.AlreadyDonatedMaybeLater )"
+                @goAway="() => onClose( CloseSources.AlreadyDonatedGoAway )"
+                @maybe-later="() => onClose( CloseSources.MaybeLater )"
         >
             <template #already-donated-content>
                 <AlreadyDonatedContent/>
@@ -117,14 +117,6 @@ function onCloseMain(): void {
 
 function onClose( closeSource: CloseSources ): void {
 	emit( 'bannerClosed', closeSource );
-}
-
-function onAlreadyDonatedGoAway( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
-}
-
-function onAlreadyDonatedMaybeLater( closeSource: CloseSources ): void {
-	emit( 'maybeLater', closeSource );
 }
 
 </script>
