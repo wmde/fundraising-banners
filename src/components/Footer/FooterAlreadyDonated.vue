@@ -20,7 +20,8 @@
                 <a
                     id="application-of-funds-link"
                     class="wmde-banner-footer-usage-link t-use-of-funds-link"
-                    @click="$emit( 'showFundsModal' )">
+                    @click="$emit( 'showFundsModal' )"
+				>
                     {{ $translate('use-of-funds-link') }}
                 </a>
             </div>

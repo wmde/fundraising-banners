@@ -1,23 +1,25 @@
 <template>
-    <div :class="[ 'wmde-banner-already-donated', {
+	<div :class="[ 'wmde-banner-already-donated', {
 		'wmde-banner-already-donated--is-visible': isVisible
 	} ]">
-    <div class="wmde-banner-already-donated-content">
-        <ButtonClose @click="onHideClick" />
-        <slot name="already-donated-content"/>
-        <div class="wmde-banner-already-donated-buttons">
-            <button
-                    class="wmde-banner-already-donated-button wmde-banner-already-donated-button-maybe-later"
-                    @click="onMaybeLaterClick">
-                {{ $translate('already-donated-maybe-later-button') }}
-            </button>
-            <button
-                    class="wmde-banner-already-donated-button wmde-banner-already-donated-button-go-away"
-                    @click="onGoAwayClick">
-                {{ $translate( 'already-donated-go-away-button' ) }}
-            </button>
-        </div>
-    </div>
+		<div class="wmde-banner-already-donated-content">
+			<ButtonClose @click="onHideClick"/>
+			<slot name="already-donated-content"/>
+			<div class="wmde-banner-already-donated-buttons">
+				<button
+					class="wmde-banner-already-donated-button wmde-banner-already-donated-button-maybe-later"
+					@click="onMaybeLaterClick"
+				>
+					{{ $translate( 'already-donated-maybe-later-button' ) }}
+				</button>
+				<button
+					class="wmde-banner-already-donated-button wmde-banner-already-donated-button-go-away"
+					@click="onGoAwayClick"
+				>
+					{{ $translate( 'already-donated-go-away-button' ) }}
+				</button>
+			</div>
+		</div>
 	</div>
 </template>
 
