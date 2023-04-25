@@ -1,7 +1,7 @@
 <template>
     <div class="wmde-banner-footer">
         <div class="wmde-banner-footer-bank">
-            <a href="#" class="wmde-banner-footer-already-donated" @click="$emit( 'showAlreadyDonatedModal' )">
+            <a href="#" class="wmde-banner-footer-already-donated" @click.prevent="$emit( 'showAlreadyDonatedModal' )">
                 <TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-open-link' ) }}
             </a>
             <label class="wmde-banner-footer-bank-item account">{{ $translate( 'donation-account' ) }}:

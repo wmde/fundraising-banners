@@ -8,7 +8,7 @@
 	&-already-donated {
 		visibility: hidden;
 		opacity: 0;
-		transition: opacity 300ms globals.$banner-easing;
+		transition: opacity 300ms globals.$banner-easing, visibility 300ms globals.$banner-easing;
 		z-index: 9999;
 		background: rgba( 0, 0, 0, 0.6 );
 		font-size: 18px;
