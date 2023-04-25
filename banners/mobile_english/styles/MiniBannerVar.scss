@@ -1,0 +1,46 @@
+@use 'src/themes/Yperala/variables/globals';
+@use 'src/themes/Yperala/variables/colors';
+
+.wmde-banner {
+	&-mini {
+		&-content {
+			position: relative;
+			cursor: pointer;
+			text-align: center;
+			box-sizing: border-box;
+			display: flex;
+			flex-wrap: wrap;
+			margin: 5px auto 0;
+			background: colors.$primary-lighter;
+			border: 8px solid colors.$primary;
+			box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+			border-radius: 15px;
+			padding: 5px;
+			width: 98%;
+			justify-content: center;
+		}
+
+		&-close {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			z-index: 2;
+		}
+
+		&-banner-slideshow {
+			width: 100%;
+		}
+	}
+
+	&-mini-button {
+		height: 40px;
+		line-height: 40px;
+		border-radius: globals.$form-element-border-radius;
+		font-weight: bold;
+		color: colors.$white;
+		background-color: colors.$secondary;
+		text-align: center;
+		padding: 0 30px;
+		margin-bottom: 5px;
+	}
+}

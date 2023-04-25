@@ -77,7 +77,7 @@ const currentSlide = ref<number>( 0 );
 const [ container, slider ] = useKeenSlider( {
 	...props.sliderOptions,
 	initial: 0,
-	loop: true,
+	loop: false,
 	slideChanged: ( s ) => {
 		currentSlide.value = s.track.details.rel;
 	}

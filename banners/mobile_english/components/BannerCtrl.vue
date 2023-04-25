@@ -28,10 +28,6 @@
 						<MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
 					</template>
 
-					<template #form-page-2="{ pageIndex, submit, next, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-					</template>
-
 				</MultiStepDonation>
 			</template>
 
@@ -51,7 +47,7 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="onHideFundsModal"
-        />
+		/>
 	</div>
 </template>
 
@@ -71,7 +67,6 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 

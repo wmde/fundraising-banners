@@ -1,0 +1,127 @@
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
+@use '../../variables/globals';
+@use '../../variables/breakpoints';
+@use '../../variables/colors';
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		&-label {
+			width: 100%;
+			font-family: inherit;
+			font-size: 18px;
+			font-weight: bold;
+			line-height: 60px;
+			padding: 0 2px;
+			margin-bottom: 10px;
+			color: colors.$black-light;
+			background-color: colors.$gray-medium-bright;
+			border-radius: globals.$form-element-border-radius;
+
+			@include breakpoints.phone-s-up {
+				font-size: 24px;
+			}
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			background-color: colors.$primary;
+			color: colors.$white;
+			border-color: colors.$gray-medium;
+		}
+
+		&-error-message {
+			line-height: 16px;
+			color: colors.$black;
+			font-weight: bold;
+			text-align: left;
+			margin-bottom: 0.2em;
+			font-size: 0.8em;
+		}
+
+		&-container {
+			overflow: hidden;
+		}
+
+		&-container--with-error {
+			.wmde-banner-error-icon {
+				padding-left: 20px;
+
+				&::before {
+					content: globals.$error-icon;
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			.wmde-banner-select-group-error-message {
+				color: colors.$error;
+			}
+		}
+	}
+
+	&-disabled {
+		.wmde-banner-select-group-label {
+			color: colors.$secondary-light;
+			border-color: colors.$secondary-light;
+		}
+	}
+
+	.wmde-banner-select-group-container.select-interval .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 100%;
+			width: 100%;
+
+			@include breakpoints.phone-l-up {
+				width: 31%;
+				flex: 0 1 31%;
+			}
+		}
+	}
+
+	.wmde-banner-select-group-container.select-amount .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			width: 49%;
+			flex: 0 1 49%;
+
+			@include breakpoints.phone-s-up {
+				width: 31%;
+				flex: 0 1 31%;
+			}
+		}
+	}
+
+	.wmde-banner-select-group-container.select-payment-method .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-label {
+			line-height: 70px;
+		}
+		.wmde-banner-select-group-option {
+			flex: 1 1 100%;
+			width: 100%;
+
+			@include breakpoints.phone-l-up {
+				width: 49%;
+				flex: 0 1 49%;
+			}
+
+			&.payment-sub {
+				flex: 1 1 100%;
+				width: 100%;
+			}
+		}
+	}
+
+	.wmde-banner-select-group-container.select-address-option .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 auto;
+			width: 100%;
+		}
+	}
+}

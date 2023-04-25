@@ -28,10 +28,6 @@
 						<MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
 					</template>
 
-					<template #form-page-2="{ pageIndex, submit, next, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-					</template>
-
 				</MultiStepDonation>
 			</template>
 
@@ -51,7 +47,7 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="onHideFundsModal"
-        />
+		/>
 	</div>
 </template>
 
@@ -62,7 +58,7 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, nextTick, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import { FormController } from '@src/utils/FormController/FormController';
-import MiniBanner from './MiniBanner.vue';
+import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -71,7 +67,6 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 

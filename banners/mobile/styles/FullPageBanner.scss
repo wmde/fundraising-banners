@@ -6,6 +6,12 @@
 	&-full {
 		border: 2px solid colors.$primary;
 		background: colors.$white;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		height: 100%;
+		width: 100%;
+		overflow-y: auto;
 
 		p {
 			padding-bottom: 16px;
