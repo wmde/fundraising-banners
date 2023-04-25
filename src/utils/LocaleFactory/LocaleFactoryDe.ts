@@ -5,8 +5,7 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
-// TODO import from @environment instead of src
-import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
+import { UseOfFundsDeLoader } from '@environment/UseOfFundsDeLoader';
 
 export class LocaleFactoryDe implements LocaleFactory {
 	private readonly _currencyFormatter: Currency;
@@ -28,7 +27,6 @@ export class LocaleFactoryDe implements LocaleFactory {
 	}
 
 	public getUseOfFundsLoader(): FundsContentLoader {
-		return new DeJSONFundsContentLoader();
+		return new UseOfFundsDeLoader();
 	}
-
 }
