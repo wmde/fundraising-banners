@@ -1,0 +1,9 @@
+@use 'BannerFooter';
+
+@mixin layout {
+	&-footer {
+		&-already-donated {
+			float: right;
+		}
+	}
+}

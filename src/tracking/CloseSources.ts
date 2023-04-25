@@ -20,6 +20,9 @@ export enum CloseSources {
 	// user pressed a maybe-later option (on main banner or softclose banner for example)
 	MaybeLater = 'maybe-later-closed',
 
-	// user pressed "already donated" option, e.g in the footer
-	AlreadyDonated = 'already-donated-closed'
+	// user pressed "enough for this year" option on the already donated modal
+	AlreadyDonatedGoAway = 'already-donated-go-away',
+
+	// user pressed "maybe later" option on the already donated modal
+	AlreadyDonatedMaybeLater = 'already-donated-maybe-later',
 }

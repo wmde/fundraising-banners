@@ -115,8 +115,10 @@ class PageOrg implements Page {
 
 	public setCloseCookieIfNecessary( source: CloseSources ): Page {
 		switch ( source ) {
-			case CloseSources.AlreadyDonated:
+			case CloseSources.AlreadyDonatedGoAway:
 				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
+				break;
+			case CloseSources.AlreadyDonatedMaybeLater:
 				break;
 			case CloseSources.SoftCloseBannerRejected:
 				this._mediaWiki.preventBannerDisplayForPeriod();

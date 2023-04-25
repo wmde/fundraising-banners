@@ -1,23 +1,29 @@
-@mixin layout {
+@use '../variables/globals';
+@use '../variables/colors';
+@use '../variables/fonts';
+@use 'src/components/AlreadyDonatedModal/AlreadyDonatedModal';
+.wmde-banner {
+	@include AlreadyDonatedModal.layout;
+
 	&-already-donated {
 		visibility: hidden;
 		opacity: 0;
-		transition: opacity 300ms $banner-easing;
+		transition: opacity 300ms globals.$banner-easing, visibility 300ms globals.$banner-easing;
 		z-index: 9999;
 		background: rgba( 0, 0, 0, 0.6 );
 		font-size: 18px;
 		text-align: center;
-		font-family: $banner-text-font-family;
+		font-family: fonts.$content;
 
 		&-content {
 			transform: scale( 1.1 );
 			position: relative;
 			max-width: 800px;
 			margin: 0 10px;
-			background: $color-white;
+			background: colors.$white;
 			border-radius: 6px;
 			padding: 30px 30px 20px;
-			transition: transform 300ms $banner-easing;
+			transition: transform 300ms globals.$banner-easing;
 		}
 
 		&-buttons {
@@ -29,8 +35,8 @@
 			display: inline-block;
 			border: 0 none;
 			min-width: 220px;
-			color: $color-white;
-			background-color: $color-primary;
+			color: colors.$white;
+			background-color: colors.$primary;
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 32px;
@@ -38,7 +44,7 @@
 			text-align: center;
 			margin: 0 16px 10px;
 			cursor: pointer;
-			transition: border-radius 300ms $banner-easing;
+			transition: border-radius 300ms globals.$banner-easing;
 
 			&:hover,
 			&:focus {
