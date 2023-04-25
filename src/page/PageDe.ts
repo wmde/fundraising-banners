@@ -6,13 +6,14 @@ import { getCampaignParameterOverride } from '@environment/CampaignParameterOver
 
 export interface WpdeWindow extends Window {
 	campaignParameters: CampaignParameters;
-	CampaignName: string,
-	BannerName: string
 }
 
 declare let window: WpdeWindow;
 
 class PageDe implements Page {
+
+	public constructor( private readonly trackingParams: TrackingParameters ) {
+	}
 
 	public getBannerContainer(): string {
 		return '#WMDE-Banner-Container';
@@ -71,10 +72,7 @@ class PageDe implements Page {
 	}
 
 	public getTracking(): TrackingParameters {
-		if ( !window.CampaignName || !window.BannerName ) {
-			throw new Error( 'Campaign tracking elements not found in global namespace!' );
-		}
-		return { campaign: window.CampaignName, keyword: window.BannerName };
+		return this.trackingParams;
 	}
 }
 

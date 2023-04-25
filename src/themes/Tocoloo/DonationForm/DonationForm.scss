@@ -1,0 +1,44 @@
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/globals';
+
+.wmde-banner {
+	&-form {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		overflow: hidden;
+		padding: globals.$donation-form-padding;
+
+		&-field-group {
+			display: block;
+			margin: 0;
+			padding: 0;
+			&-legend {
+				display: none;
+				visibility: hidden;
+			}
+		}
+
+		&-button-container {
+			border: 0;
+			margin: 0 auto;
+			padding: 0 0 0.3em;
+		}
+
+		&-button {
+			flex: 1 1 auto;
+			line-height: globals.$donation-form-select-option-button-height;
+			font-size: fonts.$size-s;
+			font-weight: bold;
+			text-align: center;
+			background: colors.$donation-form-button-colour;
+			color: colors.$donation-form-button-label-colour;
+			border: 0;
+			border-radius: 2px;
+			padding: 0;
+			width: 100%;
+			margin: 0;
+		}
+	}
+}

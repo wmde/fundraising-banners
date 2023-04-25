@@ -1,0 +1,59 @@
+@use 'src/components/Footer/BannerFooter';
+@use '../variables/breakpoints';
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/globals';
+
+.wmde-banner {
+	@include BannerFooter.layout;
+
+	&-footer {
+		order: 2;
+		font-size: fonts.$size-s;
+		line-height: 1.6em;
+		color: colors.$black;
+		width: 100%;
+		padding: 4px 32px;
+
+		&-bank,
+		&-usage {
+			padding: 0;
+		}
+
+		&-bank {
+			@include breakpoints.large-up {
+				display: block;
+				flex-wrap: nowrap;
+			}
+
+			&-item {
+				white-space: nowrap;
+
+				padding-right: 1em;
+
+				@include breakpoints.extra-small-up {
+					padding-right: 2em;
+				}
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-usage {
+			flex-grow: 0;
+			text-align: center;
+
+			@include breakpoints.extra-small-up {
+				width: globals.$form-width;
+			}
+
+			&-link {
+				color: colors.$black;
+				cursor: pointer;
+			}
+		}
+	}
+}

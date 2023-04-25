@@ -24,6 +24,36 @@ module.exports = {
 				}
 			},
 			{
+				test: /(wpde_desktop|wpde_mobile)\/banner(_ctrl|_var)\.ts/,
+				use: [
+					{
+						loader: 'ts-loader',
+						options: {
+							appendTsSuffixTo: [ /\.vue$/ ]
+						}
+					},
+					{
+						loader: 'string-replace-loader',
+						options: {
+							search: /!insert-(campaign|keyword)-here!/g,
+							/**
+							 * @param { string } match The whole matched placeholder
+							 * @param { string } captureGroupMatch Either "campaign" or "keyword" from the regex match group
+							 * @return { string }
+							 */
+							replace( match, captureGroupMatch ) {
+								const tracking = campaigns.getCampaignTrackingForEntryPoint( this.resource );
+								const placeholderToTrackingKeyMap = {
+									campaign: 'campaignTracking',
+									keyword: 'bannerTracking'
+								};
+								return tracking[ placeholderToTrackingKeyMap[ captureGroupMatch ] ];
+							}
+						}
+					}
+				]
+			},
+			{
 				test: /\.vue$/,
 				loader: 'vue-loader'
 			},

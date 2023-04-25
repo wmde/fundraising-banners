@@ -1,0 +1,115 @@
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
+@use '../../variables/colors';
+@use '../../variables/fonts';
+@use '../../variables/globals';
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		padding: 0 0 8px;
+		font-weight: bold;
+
+		&-container {
+			width: auto;
+			max-width: 20em;
+			margin: 0 -4px;
+		}
+
+		&-error-message {
+			width: auto;
+			color: colors.$black;
+			font-weight: bold;
+			text-align: left;
+			margin-top: -1em;
+			margin-bottom: 1em;
+			font-size: fonts.$size-xs;
+		}
+
+		&-container--with-error {
+			.wmde-banner-error-icon {
+				padding-left: 20px;
+
+				&::before {
+					content: '';
+
+					// TODO use a SVG component, we shouldn't use files on commons for WPDE banners
+					background: url( 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Error_Icon_for_Wikimedia_Deutschland_Banners.svg' );
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			.wmde-banner-select-group-error-message {
+				color: colors.$error;
+				margin-left: 0.5em;
+			}
+		}
+
+		&-option {
+			padding: 0 4px 8px;
+
+			label {
+				display: block;
+				width: 100%;
+			}
+		}
+
+		&-label {
+			width: 100%;
+			background: colors.$white-off;
+			border: 1px solid colors.$gray-medium-light;
+			border-radius: 2px;
+			line-height: globals.$donation-form-select-option-line-height;
+			cursor: pointer;
+			text-align: center;
+			font-size: fonts.$size-s;
+			box-sizing: border-box;
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			background: colors.$secondary;
+			border-color: colors.$gray-medium;
+			color: colors.$white;
+		}
+
+		&-notice {
+			display: block;
+			font-weight: normal;
+			line-height: 1.3;
+		}
+
+		&__disabled {
+			opacity: 0.3;
+		}
+	}
+
+	&-select-group-container.select-amount {
+		.wmde-banner-select-group-option {
+			width: 25%;
+		}
+
+		.wmde-banner-select-custom-amount {
+			width: 50%;
+			position: relative;
+		}
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option {
+			width: 50%;
+		}
+	}
+
+	&-select-group-container.select-payment-method {
+		.wmde-banner-select-group-option {
+			width: 50%;
+		}
+	}
+
+	&-select-group-container.address-option {
+		.wmde-banner-select-group-option {
+			width: 100%;
+		}
+	}
+}

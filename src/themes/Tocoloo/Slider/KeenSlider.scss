@@ -1,0 +1,70 @@
+@use 'src/components/Slider/KeenSlider';
+@use '../variables/colors';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
+.wmde-banner {
+	@include KeenSlider.layout;
+
+	&-navigation-wrapper {
+		box-sizing: content-box;
+		padding-bottom: 14px;
+	}
+
+	&-slider {
+		height: 100%;
+
+		&-navigation-previous {
+			left: 16px;
+		}
+
+		&-navigation-next {
+			right: 16px;
+		}
+	}
+
+	&-slide {
+		cursor: grab;
+		font-family: fonts.$ui;
+		padding: 0 52px;
+
+		&-content {
+			text-align: center;
+			font-size: fonts.$size-l;
+			line-height: 1.5;
+
+			.headline {
+				font-weight: bold;
+				font-size: fonts.$size-xl;
+				margin-bottom: 6px;
+
+				@include breakpoints.extra-small-up {
+					font-size: fonts.$size-xxl;
+				}
+			}
+		}
+	}
+
+	&-slider-pagination {
+		height: 38px;
+		margin: 0;
+
+		&-dot {
+			background: colors.$gray-medium;
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border: 4px solid colors.$white;
+			border-radius: 50%;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: colors.$white;
+				border: 3px solid colors.$primary;
+			}
+		}
+	}
+}

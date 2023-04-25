@@ -1,0 +1,80 @@
+@use 'src/components/DonationForm/Forms/UpgradeToYearlyForm';
+@use '../../variables/colors';
+@use '../../variables/fonts';
+
+.wmde-banner {
+	@include UpgradeToYearlyForm.layout;
+
+	&-form-upgrade {
+		display: flex;
+		flex-direction: column;
+
+		// select-group overrides
+		.wmde-banner-select-group-container {
+			justify-content: center;
+			flex: 1;
+		}
+		.wmde-banner-select-group-label {
+			white-space: normal;
+			line-height: normal;
+			height: 38px;
+
+			&::before {
+				top: 8px;
+			}
+		}
+
+		.wmde-banner-select-group {
+			display: block;
+		}
+
+		.wmde-banner-select-group-option {
+			margin-bottom: 8px;
+			label {
+				height: auto;
+			}
+		}
+
+		&-title {
+			position: relative;
+			line-height: 16px;
+			padding-left: 20px;
+			padding-right: 20px;
+			margin-bottom: 10px;
+
+			.previous {
+				position: absolute;
+				display: block;
+				height: 16px;
+				width: 16px;
+				top: 0;
+				left: 0;
+			}
+		}
+
+		&-notice {
+			margin-bottom: auto;
+			font-size: fonts.$size-s;
+		}
+
+		&-options {
+			flex-grow: 1;
+		}
+
+		&-custom {
+			font-size: fonts.$size-s;
+			text-align: center;
+			margin-bottom: 8px;
+			font-weight: bold;
+			padding-left: 25px;
+		}
+		a.wmde-banner-form-upgrade-custom {
+			color: colors.$secondary-light;
+		}
+
+		&-button-container {
+			margin-top: auto;
+			background: #2c9bf0;
+		}
+	}
+}
