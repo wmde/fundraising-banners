@@ -1,0 +1,43 @@
+.wmde-banner {
+	&-close {
+		top: 6px;
+		right: 0;
+
+		&-link {
+			display: block;
+			font-size: 27px;
+			color: #808080;
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
+
+	&-slide {
+		padding: 10px 52px;
+	}
+
+	&-progress-bar {
+		margin: 0 32px;
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option {
+			width: 33.3333%;
+		}
+	}
+
+	&-select-group-label,
+	&-select-custom-amount-input {
+		font-size: 12px;
+		line-height: 28px;
+	}
+
+	&-sub-form-donation {
+		padding: 30px 0;
+	}
+
+	&-form-upgrade-title {
+		text-align: center;
+		margin: 5px 0;
+	}
+}

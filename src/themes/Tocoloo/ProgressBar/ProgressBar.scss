@@ -2,6 +2,7 @@
 @use '../variables/colors';
 @use '../variables/fonts';
 @use '../variables/globals';
+@use 'transitions';
 
 .wmde-banner {
 	@include ProgressBar.layout;
@@ -23,14 +24,9 @@
 			display: flex;
 			justify-content: space-between;
 
-			&-left,
-			&-right {
-				opacity: 0;
-				transition: opacity 300ms globals.$banner-easing;
-			}
-
 			&-left {
 				visibility: hidden;
+				color: colors.$white;
 				padding-left: 10px;
 			}
 			&-right {
@@ -50,23 +46,9 @@
 			min-width: 5em;
 			height: 100%;
 			border-radius: 5px 16px 16px 5px;
-			transition: width 3000ms globals.$banner-easing;
 			color: colors.$white;
 			text-align: right;
 			padding-right: 16px;
-
-			&-text {
-				opacity: 0;
-				transition: opacity 300ms globals.$banner-easing;
-			}
-		}
-
-		&--finished {
-			.wmde-banner-progress-bar-text-left,
-			.wmde-banner-progress-bar-text-right,
-			.wmde-banner-progress-bar-fill-text {
-				opacity: 1;
-			}
 		}
 
 		&--late-progress {

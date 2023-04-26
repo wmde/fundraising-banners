@@ -21,6 +21,8 @@
 		}
 
 		&-bank {
+			margin-right: 30px;
+
 			@include breakpoints.large-up {
 				display: block;
 				flex-wrap: nowrap;
