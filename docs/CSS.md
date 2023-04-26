@@ -1,13 +1,13 @@
 # CSS and Styling
 
-## Layout and themes
+## Layout and theme styles for components
 
 Each component has two sets of styles:
 
-- **layout** styles define how the component fits inside the banner (e.g. `display`, `width`, `flex` properties) and  
-  how it changes visibility/visual behavior when the component script adds "marker classes" (e.g. `.has-error`, `.is-visible` etc ) 
+- **Layout** styles define how the component fits inside the banner (e.g. `display`, `width`, `flex` properties) and  
+  how it changes visibility/visual behavior when the component script adds "marker classes" (e.g. `.has-error`, `.is-visible` etc.) 
   We define the layouts as SCSS mixins.
-- **theme** styles define the appearance of the component: margins, paddings, font sizes, colors, borders, etc.
+- **Theme** styles define the appearance of the component: margins, paddings, font sizes, colors, borders, etc.
   They may override *some* properties defined in the layout. 
 
 ## Including styles for a banner
@@ -36,14 +36,23 @@ Make sure to always delete the `styles_var.scss` file when you start a new banne
 in the previous test, copy its contents to `styles.scss` and delete the `styles_var.scss`.
 This makes sure that you're only using an alternate style file if you really need to. 
 
+### Style files for banner components
+
+You can put styles for components in the `banners/CHANNEL/components` directory in the `banners/CHANNEL/styles` directory
+and import them in the `styles.scss` file.
+
 ### Overriding styles for a channel
 
+If several banners share a style but have *small* channel-specific tweaks you may add
+[configuration values](https://sass-lang.com/documentation/at-rules/use#configuration) to the theme file and override
+them with the `@use` statements in `styles.scss`.
+
 In some rare cases you might put some additional styles in the `styles.scss` file at the bottom,
-but make sure to remove them at the start of the next test! 
+but make sure to remove them at the start of the next test!
 
 ## How to create layout and theme files for a component
 
-1. create the layout SCSS file, named after the component. Put all the styles in a [mixin](https://sass-lang.com/documentation/at-rules/mixin).
+1. Create the layout SCSS file, named after the component. Put all the styles in a [mixin](https://sass-lang.com/documentation/at-rules/mixin).
 2. Create the mixin under the assumption that it will be included in the class `.wmde-banner`.
 
 Example layout for a close button component:
