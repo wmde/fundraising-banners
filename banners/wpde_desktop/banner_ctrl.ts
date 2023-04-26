@@ -15,19 +15,14 @@ import { createFormActions } from '@src/createFormActions';
 import { FormControllerCtrl } from './FormControllerCtrl';
 import { useFormModel } from '@src/components/composables/useFormModel';
 
-// Change for EN banners
 import messages from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
-import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
-import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
-// TODO on Wikipedia.de we want to load the json from the banner server (or at least try that)
-import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
+import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
 
-const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
+const localeFactory = new LocaleFactoryWpDe();
+const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
 const translator = new Translator( messages );
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
@@ -39,10 +34,6 @@ const tracking = {
 
 // This is channel specific and must be changed for wp.org banners
 const page = new PageDe( tracking );
-
-// This is language-specific and must be changed for EN banners
-const currencyFormatter = new CurrencyDe();
-const formatters: Formatters = { currency: currencyFormatter, ordinal: new OrdinalDe(), integer: new IntegerDe() };
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
@@ -65,11 +56,12 @@ app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
 	date: new Date(),
-	formatters,
+	formatters: localeFactory.getFormatters(),
 	impressionCount,
 	translator
 } );
 
+const currencyFormatter = localeFactory.getCurrencyFormatter();
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );

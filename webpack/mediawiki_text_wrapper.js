@@ -52,10 +52,13 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 						.replace( 'T', ' ' )
 						.replace( /\.\d+Z$/, '' );
 					const compiledSource = compilation.assets[ filename ].source();
+					const bannerConfig = self.campaignConfig[ pagename ];
 					const templateContext = {
 						banner: compiledSource.replace( /\/\*! For license information please see.*?\*\/\s*/, '' ),
-						campaignConfig: self.campaignConfig[ pagename ] || {},
+						campaignConfig: bannerConfig || {},
+						useOfFundsTransclude: '{{' + bannerConfig.use_of_funds_source + '}}',
 						buildDate,
+						// BannerValues come from webpack.production config
 						...self.context
 					};
 					const wrappedFile = template( templateContext );

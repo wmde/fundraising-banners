@@ -44,7 +44,6 @@ module.exports = ( env ) => {
 				new MediaWikiTextWrapper( {
 					templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 					context: {
-						bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
 						bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2023}}'
 					},
 					filePattern: '{B,WMDE}*.js',
