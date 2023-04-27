@@ -12,6 +12,7 @@ import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/Donor
 import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
+import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
 
 export default class DynamicCampaignText implements DynamicContent {
 	private readonly _date: Date;
@@ -37,7 +38,8 @@ export default class DynamicCampaignText implements DynamicContent {
 		if ( this._campaignTimeRange === undefined ) {
 			this._campaignTimeRange = TimeRange.createFromStrings(
 				this._campaignParameters.startDate,
-				this._campaignParameters.endDate
+				this._campaignParameters.endDate,
+				this._date
 			);
 		}
 		return this._campaignTimeRange;
@@ -78,7 +80,8 @@ export default class DynamicCampaignText implements DynamicContent {
 		if ( this._campaignProjection === undefined ) {
 			const projectionRange = TimeRange.createFromStrings(
 				this._campaignParameters.campaignProjection.updatedAt,
-				this._campaignParameters.endDate
+				this._campaignParameters.endDate,
+				this._date
 			);
 			this._campaignProjection = new CampaignProjection(
 				this._campaignParameters.campaignProjection,
@@ -99,7 +102,7 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public get goalDonationSum(): string {
 		return this.getCachedValue( 'goalDonationSum', () => {
-			return this._formatters.currency.millionsNumeric( this.getCampaignProjection().projectedDonationSum() );
+			return this._formatters.currency.millionsNumeric( this._campaignParameters.campaignProjection.donationTarget );
 		} );
 	}
 
@@ -118,7 +121,7 @@ export default class DynamicCampaignText implements DynamicContent {
 		} );
 	}
 
-	public get progressBarContent(): ProgressBarContent {
+	public get progressBarContent(): DynamicProgressBarContent {
 		if ( this._progressBarContent === undefined ) {
 			const projection = this.getCampaignProjection();
 			this._progressBarContent = new ProgressBarContent(
