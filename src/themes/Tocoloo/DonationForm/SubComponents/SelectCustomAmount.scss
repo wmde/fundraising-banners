@@ -3,6 +3,9 @@
 @use '../../variables/globals';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
+$label-font-size: fonts.$size-s !default;
+$label-line-height: 36px !default;
+
 .wmde-banner {
 	@include SelectCustomAmount.layout;
 
@@ -23,8 +26,8 @@
 			box-sizing: border-box;
 			width: 100%;
 			padding: 0 0.4em;
-			line-height: globals.$donation-form-select-option-line-height;
-			font-size: fonts.$size-xs;
+			line-height: $label-line-height;
+			font-size: $label-font-size;
 			text-align: center;
 			outline: 0;
 			background: transparent;

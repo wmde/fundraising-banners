@@ -3,6 +3,8 @@
 @use '../variables/fonts';
 @use '../variables/breakpoints';
 
+$slide-padding: 0 52px !default;
+
 .wmde-banner {
 	@include KeenSlider.layout;
 
@@ -26,7 +28,7 @@
 	&-slide {
 		cursor: grab;
 		font-family: fonts.$content;
-		padding: 0 52px;
+		padding: $slide-padding;
 
 		&-content {
 			text-align: center;

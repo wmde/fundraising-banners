@@ -2,6 +2,9 @@
 @use '../../variables/colors';
 @use '../../variables/fonts';
 
+$title-text-align: left !default;
+$title-margin: 0 0 10px !default;
+
 .wmde-banner {
 	@include UpgradeToYearlyForm.layout;
 
@@ -36,11 +39,12 @@
 		}
 
 		&-title {
+			text-align: $title-text-align;
 			position: relative;
 			line-height: 16px;
 			padding-left: 20px;
 			padding-right: 20px;
-			margin-bottom: 10px;
+			margin: $title-margin;
 
 			.previous {
 				position: absolute;

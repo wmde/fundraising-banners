@@ -4,21 +4,39 @@
 @use './BannerMain';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Tocoloo/defaults';
-@use 'src/themes/Tocoloo/ButtonClose/ButtonClose';
-@use 'src/themes/Tocoloo/ProgressBar/ProgressBar';
+@use 'src/themes/Tocoloo/ButtonClose/ButtonClose' with (
+	$top: 6px,
+	$right: 0
+);
+@use 'src/themes/Tocoloo/ProgressBar/ProgressBar' with (
+	$margin: 0 32px
+);
 @use 'src/themes/Tocoloo/DonationForm/DonationForm';
 @use 'src/themes/Tocoloo/DonationForm/MultistepDonation';
-@use 'src/themes/Tocoloo/DonationForm/SubComponents/SelectGroup';
-@use 'src/themes/Tocoloo/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/Tocoloo/DonationForm/SubComponents/SelectGroup' with (
+	$label-font-size: 12px,
+	$label-line-height: 28px,
+	$interval-option-width: 33.3333%
+);
+@use 'src/themes/Tocoloo/DonationForm/SubComponents/SelectCustomAmount' with (
+	$label-font-size: 12px,
+	$label-line-height: 28px
+);
 @use 'src/themes/Tocoloo/DonationForm/SubComponents/SmsBox';
-@use 'src/themes/Tocoloo/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Tocoloo/DonationForm/Forms/UpgradeToYearlyForm';
+@use 'src/themes/Tocoloo/DonationForm/Forms/MainDonationForm' with (
+	$padding: 30px 0
+);
+@use 'src/themes/Tocoloo/DonationForm/Forms/UpgradeToYearlyForm' with (
+	$title-text-align: center,
+	$title-margin: 5px 0
+);
 @use 'src/themes/Tocoloo/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Tocoloo/Footer/FooterAlreadyDonated';
 @use 'src/themes/Tocoloo/Footer/Footer';
 @use 'src/themes/Tocoloo/Footer/SelectionInput';
 @use 'src/themes/Tocoloo/Message/Message';
-@use 'src/themes/Tocoloo/Slider/KeenSlider';
+@use 'src/themes/Tocoloo/Slider/KeenSlider' with (
+	$slide-padding: 10px 52px
+);
 @use 'src/themes/Tocoloo/AlreadyDonatedModal/AlreadyDonatedModal';
 @use 'src/themes/Tocoloo/SoftClose/SoftClose';
-@use './theme-overrides';

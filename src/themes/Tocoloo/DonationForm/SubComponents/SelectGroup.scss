@@ -3,6 +3,10 @@
 @use '../../variables/fonts';
 @use '../../variables/globals';
 
+$label-font-size: fonts.$size-s !default;
+$label-line-height: 36px !default;
+$interval-option-width: 50% !default;
+
 .wmde-banner {
 	@include SelectGroup.layout;
 
@@ -60,10 +64,10 @@
 			background: colors.$white-off;
 			border: 1px solid colors.$gray-medium-light;
 			border-radius: 2px;
-			line-height: globals.$donation-form-select-option-line-height;
+			line-height: $label-line-height;
 			cursor: pointer;
 			text-align: center;
-			font-size: fonts.$size-s;
+			font-size: $label-font-size;
 			box-sizing: border-box;
 		}
 
@@ -97,7 +101,7 @@
 
 	&-select-group-container.select-interval {
 		.wmde-banner-select-group-option {
-			width: 50%;
+			width: $interval-option-width;
 		}
 	}
 
