@@ -111,3 +111,15 @@ tracking = "org-pad00-230426-ctrl"
 filename = "./banners/pad/banner_var.ts"
 pagename = "B23_WMDE_ipad_Test_00_var"
 tracking = "org-pad00-230426-var"
+# iPad English campaign
+[pad_en]
+name = "Pad_en"
+campaign_tracking = "en-ipad01-230426"
+preview_link ='/wiki/Main_Page?banner={{banner}}&devMode=true'
+preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+[pad_en.banners.ctrl]
+filename = "./banners/pad_english/banner_ctrl.ts"
+pagename = "B23_WMDE_ipad_en_01_ctrl"
+tracking = "org-en-ipad01-230426-ctrl"
