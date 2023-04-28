@@ -6,6 +6,7 @@ import { FormModel } from '@src/utils/FormModel/FormModel';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
+export const NEW_CUSTOM_AMOUNT_INDEX = 2;
 
 export class FormController implements FormControllerInterface {
 
@@ -34,6 +35,11 @@ export class FormController implements FormControllerInterface {
 			case UPGRADE_TO_YEARLY_INDEX:
 				interval.value = submitData.extraData.upgradeToYearlyInterval;
 				this._submitCallback( interval.value === Intervals.YEARLY.value ? 'submit-recurring' : 'submit-non-recurring' );
+				break;
+			case NEW_CUSTOM_AMOUNT_INDEX:
+				interval.value = Intervals.YEARLY.value;
+				this._formModel.customAmount.value = submitData.extraData.newCustomAmount;
+				this._submitCallback( 'submit-different-amount' );
 				break;
 		}
 	}
