@@ -145,7 +145,3 @@ filename = "./banners/wpde_mobile/banner_ctrl.ts"
 pagename = "B23WPDE_mob00_ctrl"
 tracking = "wpde-mob00-230426-ctrl"
 
-[wikipediade_mobile.banners.var]
-filename = "./banners/wpde_mobile/banner_var.ts"
-pagename = "B23WPDE_mob00_var"
-tracking = "wpde-mob00-230426-var"
