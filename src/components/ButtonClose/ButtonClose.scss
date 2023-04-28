@@ -1,8 +1,8 @@
-@mixin layout {
+@mixin layout( $top: 5px, $right: 5px ) {
 	&-close {
 		position: absolute;
-		right: 5px;
-		top: 5px;
+		right: $right;
+		top: $top;
 		width: 32px;
 		height: 32px;
 		z-index: 2;

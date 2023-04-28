@@ -1,0 +1,33 @@
+@use 'src/themes/Tocoloo/variables/globals';
+@use 'src/themes/Tocoloo/variables/colors';
+
+.wmde-banner {
+	&-content {
+		display: flex;
+		flex-direction: row;
+		order: 1;
+		padding: 8px 32px 0;
+	}
+
+	&-column-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1 1 auto;
+		overflow-y: hidden;
+		margin-right: 32px;
+
+		border: 5px solid colors.$primary;
+		border-radius: 9px;
+		padding: 20px 0;
+	}
+
+	&-column-right {
+		flex: 0 0 globals.$form-width;
+		width: globals.$form-width;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+	}
+}
