@@ -58,6 +58,23 @@ filename = "./banners/mobile/banner_var.ts"
 pagename = "B23WMDE_00_Mobile_230202_var"
 tracking = "org-00-230202-var"
 
+# Mobile English Campaign
+[mobile_english]
+campaign_tracking = "mob_en00-ba-230425"
+preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&devMode"
+preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}'
+wrapper_template = "wikipedia_org"
+
+[mobile_english.banners.ctrl]
+filename = "./banners/mobile_english/banner_ctrl.ts"
+pagename = "B23_WMDE_Mobile_EN_Test_00_ctrl"
+tracking = "org-mob_en00-230425-ctrl"
+
+[mobile_english.banners.var]
+filename = "./banners/mobile_english/banner_var.ts"
+pagename = "B23_WMDE_Mobile_EN_Test_00_var"
+tracking = "org-mob_en00-230425-var"
+
 # desktop banners on wikipedia.de
 [wikipediade]
 name = "C23_WPDE_00"

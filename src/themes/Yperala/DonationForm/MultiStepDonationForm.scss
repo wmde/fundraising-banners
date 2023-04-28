@@ -1,0 +1,67 @@
+@use '../../../components/DonationForm/MultiStepDonation';
+@use '../variables/globals';
+@use '../variables/breakpoints';
+@use '../variables/colors';
+
+.wmde-banner {
+	@include MultiStepDonation.layout;
+
+	&-form {
+		margin-bottom: 12px;
+		position: relative;
+		height: 100%;
+
+		&-field-group {
+			margin-top: 20px;
+			border-top: 6px solid rgba( 219, 176, 173, 0.3 );
+			padding: 20px 0 0;
+			overflow: auto;
+			zoom: 1;
+
+			&-legend {
+				display: none;
+			}
+		}
+
+		&-button {
+			display: inline-block;
+			background-color: colors.$secondary;
+			color: colors.$white;
+			border-radius: globals.$form-element-border-radius;
+			padding: 24px 10px;
+			outline: 0;
+			text-align: center;
+			line-height: 1;
+			font-family: inherit;
+			font-weight: 500;
+			font-size: 18px;
+
+			@include breakpoints.phone-s-up {
+				font-size: 24px;
+			}
+		}
+	}
+
+	&-form-slider {
+		height: 100%;
+		width: 100%;
+	}
+
+	&-sub-form {
+		padding: 0 20px;
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: 100%;
+		max-width: 100%;
+
+		&-donation {
+			.wmde-banner-form-button-container {
+				margin-top: 30px;
+			}
+		}
+
+		@include breakpoints.phone-s-up {
+			padding: 0 40px;
+		}
+	}
+}

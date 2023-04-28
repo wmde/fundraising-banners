@@ -1,7 +1,8 @@
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { Translator } from '@src/Translator';
+import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
 
-export class ProgressBarContent {
+export class ProgressBarContent implements DynamicProgressBarContent {
 	private readonly _donationTarget: number;
 	private readonly _translator: Translator;
 	private readonly _currencyFormatter: Currency;

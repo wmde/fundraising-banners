@@ -1,10 +1,9 @@
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
+@use './Banner';
 @use './MiniBanner';
 @use './FullPageBanner';
-
-// @use 'src/themes/Mikings/animated-text-highlight';
 @use 'src/themes/Mikings/Footer/Footer';
 @use 'src/themes/Mikings/Footer/SelectionInput';
 @use 'src/themes/Mikings/DonationForm/MultistepDonationForm';

@@ -1,0 +1,79 @@
+@use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
+@use '../../variables/globals';
+@use '../../variables/breakpoints';
+@use '../../variables/colors';
+
+.wmde-banner {
+	@include SelectCustomAmount.layout;
+
+	/*
+	The layout settings of this element should be similar to wmde-banner-select-group-option
+	because the custom amount is presented as an "option" inside the amount select group
+	In the future, we might use tools of the CSS framework (e.g. SCSS mixins)
+	to keep the styles in sync
+	 */
+	&-select-custom-amount {
+		width: 49%;
+		flex: 0 1 49%;
+
+		@include breakpoints.phone-s-up {
+			width: 31%;
+			flex: 0 1 31%;
+		}
+
+		&-input-container {
+			border-radius: globals.$form-element-border-radius;
+			min-height: 54px;
+			display: block;
+			background-color: colors.$gray-medium-bright;
+			padding: 15px 2px;
+			height: 60px;
+			outline: 0;
+			cursor: pointer;
+		}
+
+		&-input {
+			width: 100%;
+			line-height: 32px;
+			color: colors.$black-light;
+			text-align: center;
+			font-weight: bold;
+			font-family: inherit;
+			outline: 0;
+			font-size: 18px;
+
+			@include breakpoints.phone-s-up {
+				font-size: 24px;
+			}
+		}
+
+		&-euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			left: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 24px;
+			color: colors.$white;
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				background-color: colors.$primary;
+				border-color: colors.$gray-medium;
+				color: colors.$white;
+			}
+			.wmde-banner-select-custom-amount-input {
+				color: colors.$white;
+			}
+			.wmde-banner-select-custom-amount-euro-symbol {
+				color: colors.$white;
+			}
+		}
+	}
+}

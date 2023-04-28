@@ -1,0 +1,77 @@
+@use 'src/components/SoftClose/SoftClose';
+@use '../variables/colors';
+@use '../variables/breakpoints';
+@use '../variables/fonts';
+
+.wmde-banner {
+	@include SoftClose.layout;
+
+	&-soft-close {
+		background: colors.$white;
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+		&-columns {
+			padding: 8px;
+			flex-wrap: nowrap;
+			justify-content: center;
+
+			@include breakpoints.phone-l-up {
+				padding: 8px 27px;
+				justify-content: space-between;
+			}
+		}
+
+		&-actions {
+			justify-content: center;
+		}
+
+		&-prompt {
+			text-align: center;
+			line-height: 32px;
+			height: 32px;
+			margin-right: 20px;
+			font-size: 18px;
+			font-family: fonts.$content;
+			white-space: nowrap;
+		}
+
+		&-buttons {
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+
+		&-button {
+			border: 0 none;
+			min-width: 150px;
+			color: colors.$white;
+			background-color: colors.$primary;
+			border-radius: 18px;
+			font-size: 14px;
+			line-height: 32px;
+			height: 32px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0 4px;
+		}
+
+		&-countdown-text {
+			line-height: 32px;
+			font-size: 14px;
+			text-align: right;
+
+			@include breakpoints.phone-l-up {
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		&-countdown-bar {
+			height: 3px;
+		}
+
+		&-countdown-bar-fill {
+			background-color: colors.$primary;
+		}
+	}
+}

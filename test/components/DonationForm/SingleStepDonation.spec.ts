@@ -70,7 +70,7 @@ describe( 'SingleStepDonation.vue', () => {
 	} );
 
 	it( 'updates the payment method when one is selected', async () => {
-		await wrapper.find( '.payment-PPL input' ).trigger( 'change' );
+		await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 
 		expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-values input[name=paymentType]' ).element.value ).toBe( 'PPL' );
 	} );
