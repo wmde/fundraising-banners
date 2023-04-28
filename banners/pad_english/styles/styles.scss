@@ -25,6 +25,7 @@
 @use 'src/themes/Tocoloo/DonationForm/Forms/MainDonationForm' with (
 	$padding: 30px 0
 );
+@use 'src/themes/Tocoloo/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Tocoloo/DonationForm/Forms/UpgradeToYearlyForm' with (
 	$title-text-align: center,
 	$title-margin: 5px 0
