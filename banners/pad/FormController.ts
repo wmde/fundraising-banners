@@ -38,8 +38,15 @@ export class FormController implements FormControllerInterface {
 		}
 	}
 
-	public next(): void {
-		this._nextCallback();
+	public next( submitData: FormSubmitData ): void {
+		switch ( submitData.pageIndex ) {
+			case UPGRADE_TO_YEARLY_INDEX:
+				this._formModel.interval.value = Intervals.YEARLY.value;
+				this._goToStepCallback( MAIN_DONATION_INDEX );
+				break;
+			default:
+				this._nextCallback();
+		}
 	}
 
 	public previous( step: FormSubmitData ): void {
