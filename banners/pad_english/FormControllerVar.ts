@@ -8,7 +8,7 @@ export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
 export const NEW_CUSTOM_AMOUNT_INDEX = 2;
 
-export class FormController implements FormControllerInterface {
+export class FormControllerVar implements FormControllerInterface {
 
 	private readonly _formModel: FormModel;
 

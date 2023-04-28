@@ -1,10 +1,14 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, vi, it, expect, beforeEach } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { resetFormModel } from '@test/resetFormModel';
-import { FormController, MAIN_DONATION_INDEX, UPGRADE_TO_YEARLY_INDEX } from '../../../banners/pad_english/FormController';
+import {
+	FormControllerCtrl,
+	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX, UPGRADE_TO_YEARLY_INDEX
+} from '../../../banners/pad_english/FormControllerCtrl';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-describe( 'FormController', () => {
+import { resetFormModel } from '@test/resetFormModel';
+
+describe( 'FormControllerCtrl', () => {
 	const formModel = useFormModel();
 
 	beforeEach( () => resetFormModel( formModel ) );
@@ -13,7 +17,7 @@ describe( 'FormController', () => {
 		const pageIndex = MAIN_DONATION_INDEX;
 
 		it( 'should submit when recurring interval is selected', () => {
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -25,7 +29,7 @@ describe( 'FormController', () => {
 
 		it( 'should submit when the payment type is sofort', () => {
 
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -37,7 +41,7 @@ describe( 'FormController', () => {
 		} );
 
 		it( 'should go to next page when interval is "once"', () => {
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onNext = vi.fn();
 			controller.onNext( onNext );
 
@@ -53,7 +57,7 @@ describe( 'FormController', () => {
 		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
 		it( 'should submit tracking data for yearly interval', function () {
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -64,7 +68,7 @@ describe( 'FormController', () => {
 		} );
 
 		it( 'should submit tracking data for "once" interval', function () {
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -75,7 +79,7 @@ describe( 'FormController', () => {
 		} );
 
 		it( 'should set interval to once on previous', () => {
-			const controller = new FormController( formModel );
+			const controller = new FormControllerCtrl( formModel );
 			const onPrevious = vi.fn();
 			controller.onPrevious( onPrevious );
 			formModel.interval.value = Intervals.YEARLY.value;
@@ -84,6 +88,41 @@ describe( 'FormController', () => {
 
 			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 			expect( onPrevious ).toHaveBeenCalledOnce();
+		} );
+	} );
+
+	describe( 'New custom amount', () => {
+		const pageIndex = NEW_CUSTOM_AMOUNT_INDEX;
+
+		it( 'should set interval to yearly on submit', () => {
+			const controller = new FormControllerCtrl( formModel );
+			controller.onSubmit( vi.fn() );
+			formModel.interval.value = Intervals.ONCE.value;
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '14.31' } } );
+
+			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );
+		} );
+
+		it( 'should overwrite numericAmount on submit', () => {
+			const controller = new FormControllerCtrl( formModel );
+			controller.onSubmit( vi.fn() );
+			formModel.customAmount.value = '9.05';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '12.01' } } );
+
+			expect( formModel.numericAmount.value ).toBe( 12.01 );
+		} );
+
+		it( 'should submit tracking data', function () {
+			const controller = new FormControllerCtrl( formModel );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( onSubmit ).toHaveBeenCalledOnce();
+			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
 		} );
 	} );
 

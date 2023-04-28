@@ -1,9 +1,9 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageOrg from '@src/page/PageOrg';
@@ -20,9 +20,9 @@ import messages from './messages';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 
 // Channel specific form setup
-import { createFormItems } from './form_items_ctrl';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormControllerVar } from './FormControllerVar';
 import { useFormModel } from '@src/components/composables/useFormModel';
 
 const localeFactory = new LocaleFactoryEn();
@@ -47,7 +47,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() ),
+		formController: new FormControllerVar( useFormModel() ),
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),

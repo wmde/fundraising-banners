@@ -124,3 +124,8 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN"
 filename = "./banners/pad_english/banner_ctrl.ts"
 pagename = "B23_WMDE_ipad_en_00_ctrl"
 tracking = "org-en-ipad00-230426-ctrl"
+
+[pad_en.banners.var]
+filename = "./banners/pad_english/banner_var.ts"
+pagename = "B23_WMDE_ipad_en_00_var"
+tracking = "org-en-ipad00-230426-var"
