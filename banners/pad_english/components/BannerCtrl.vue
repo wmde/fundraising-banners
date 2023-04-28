@@ -38,9 +38,9 @@
         </BannerMain>
 
         <FundsModal
-                :content="useOfFundsContent"
-                :is-funds-modal-visible="isFundsModalVisible"
-                @hideFundsModal="isFundsModalVisible = false"
+            :content="useOfFundsContent"
+            :is-funds-modal-visible="isFundsModalVisible"
+            @hideFundsModal="isFundsModalVisible = false"
         />
 
     </div>
