@@ -3,21 +3,24 @@ import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
-const MAIN_DONATION_INDEX = 0;
-const UPGRADE_TO_YEARLY_INDEX = 1;
+export const MAIN_DONATION_INDEX = 0;
+export const UPGRADE_TO_YEARLY_INDEX = 1;
 
 export class FormControllerCtrl implements FormController {
 
 	private readonly _formModel: FormModel;
+	private readonly _pageScroller: PageScroller;
 
 	private _nextCallback: () => void;
 	private _previousCallback: () => void;
 	private _goToStepCallback: ( step: number ) => void;
 	private _submitCallback: ( tracking?: string ) => void;
 
-	public constructor( formModel: FormModel ) {
+	public constructor( formModel: FormModel, pageScroller: PageScroller ) {
 		this._formModel = formModel;
+		this._pageScroller = pageScroller;
 	}
 
 	public submitStep( submitData: FormSubmitData ): void {
@@ -25,6 +28,7 @@ export class FormControllerCtrl implements FormController {
 
 		switch ( submitData.pageIndex ) {
 			case MAIN_DONATION_INDEX:
+				this._pageScroller.scrollIntoView( '.wmde-banner-form' );
 				if ( interval.value !== Intervals.ONCE.value || paymentMethod.value === PaymentMethods.SOFORT.value ) {
 					this._submitCallback();
 					return;

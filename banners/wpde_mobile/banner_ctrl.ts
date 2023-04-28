@@ -8,6 +8,7 @@ import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageDe from '@src/page/PageDe';
 import TranslationPlugin from '@src/TranslationPlugin';
+import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
@@ -37,6 +38,8 @@ const page = new PageDe( tracking );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
+const pageScroller = new WindowPageScroller();
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -44,8 +47,9 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() ),
-		useOfFundsContent
+		formController: new FormControllerCtrl( useFormModel(), pageScroller ),
+		useOfFundsContent,
+		pageScroller
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -60,8 +64,8 @@ app.use( DynamicTextPlugin, {
 	impressionCount,
 	translator
 } );
-
 const currencyFormatter = localeFactory.getCurrencyFormatter();
+
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
