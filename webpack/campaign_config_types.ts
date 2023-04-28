@@ -6,6 +6,7 @@ export interface Banner {
 
 export interface Campaign {
 	name: string,
+	description: string,
 	tracking: string,
 	previewUrlDev: string,
 	previewUrlProd: string,
