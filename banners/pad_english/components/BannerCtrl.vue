@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import BannerMain from './BannerMain.vue';
-import BannerSlides from '../../wpde_desktop/content/BannerSlides.vue';
+import BannerSlides from '../../pad_english/content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
