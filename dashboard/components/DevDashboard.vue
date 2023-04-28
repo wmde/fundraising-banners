@@ -24,6 +24,9 @@
 				>
 					<div class="campaign-title">
 						<span :title="campaign.name">{{ campaign.name }}</span>
+						<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
+							<IconInfo/>
+						</span>
 						<a
 							v-if="!campaign.banners.ctrl.pageName.includes('WPDE')"
 							target="_blank"
@@ -89,6 +92,7 @@ import IconCog from './IconCog.vue';
 import IconCommand from './IconCommand.vue';
 import { CompileInfo, parseCompileInfo } from '../util';
 import { computed, onMounted, ref } from 'vue';
+import IconInfo from './IconInfo.vue';
 
 const props = defineProps<{ campaigns: CampaignConfig, gitBranch: string }>();
 let branchName = ref<string>( props.gitBranch );
