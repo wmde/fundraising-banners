@@ -4,6 +4,7 @@ import UpgradeToYearly from '@src/components/DonationForm/Forms/messages/Upgrade
 import SoftClose from '@src/components/SoftClose/messages/SoftClose.de';
 import Footer from '@src/components/Footer/messages/Footer.de';
 import MainDonationForm from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
+import AddressFormDe from '@src/components/DonationForm/Forms/messages/AddressForm.de';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 
 const messages: TranslationMessages = {
@@ -12,6 +13,7 @@ const messages: TranslationMessages = {
 	...SoftClose,
 	...Footer,
 	...MainDonationForm,
+	...AddressFormDe,
 	...AlreadyDonatedModal
 };
 
