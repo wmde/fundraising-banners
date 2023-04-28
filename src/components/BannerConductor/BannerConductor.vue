@@ -70,7 +70,8 @@ async function onCloseHandler( source: CloseSources ): Promise<any> {
 	background: #ffffff;
 	z-index: 1000;
 }
-.wmde-banner-closed {
+.wmde-banner--not-shown,
+.wmde-banner--closed {
 	display: none;
 }
 </style>
