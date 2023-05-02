@@ -3,7 +3,7 @@
 		<template #slides-1>
 			<div>
 				<p>
-					<InfoIcon fill="#990a00"/> An alle, die Wikipedia in Deutschland nutzen: Vielleicht kommen wir gerade ungelegen,
+					<InfoIcon/> An alle, die Wikipedia in Deutschland nutzen: Vielleicht kommen wir gerade ungelegen,
 					aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen {{ currentDayName }} bitten wir Sie
 					bescheiden, die Unabhängigkeit von Wikipedia zu sichern.
 				</p>
@@ -18,7 +18,7 @@
 		<template #slides-3>
 			<div>
 				<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich
-					entwickeln. ><span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span></p>
+					entwickeln. <span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span></p>
 			</div>
 		</template>
 		<template #slides-4>
