@@ -1,6 +1,6 @@
 # The Page Classes
 
-We display banners on wikipedia.org and wikipedia.de. These sites have different html markup, have a different campaign configuration structure, and have different ways of logging events. We use a Page interface with 2 implementations which ensures our code is compatible with these 2 environments.
+We display banners on wikipedia.org and wikipedia.de. These sites have different HTML markup, have a different campaign configuration structure, and have different ways of logging events. We use a Page interface with 2 implementations which ensures our code is compatible with these 2 environments.
 
 They are used for:
 
@@ -8,13 +8,13 @@ They are used for:
 * Tracking events.
 * Passing the calculated banner height from our banner javascript to css.
 
-The BannerConductor is then given one of these implementations to perform actions as needed.
+In our entry points we give the BannerConductor one of these implementations to perform actions as needed.
 
 ## PageOrg (Used on wikipedia.org)
 This implementation is for interacting with wikipedia.org and is a little complex.
 
 ### The mw Object
-Wikipedia.org provides this javascript object on the page that the PageOrg class uses for various things such as:
+ikipedia.org provides the global `mw` JavaScript object. For PageOrg we wrap the object in a `MediaWiki` interface and use it for things like:
 
 * Discovering which skin the user has active.
 * Discovering the current namespace of the page the banner is being showed on.

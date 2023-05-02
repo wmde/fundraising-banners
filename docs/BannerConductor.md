@@ -1,8 +1,20 @@
 # Banner Conductor
 
-The Banner Conductor is the root Vue component and is responsible for handling the top level banner states, and is the gateway for interactions between the banners and the pages they are displayed on. It is largely invisible to the developers.
+The Banner Conductor is the root Vue component and is responsible for handling the top level banner states, and is the gateway for interactions between the banners and the [pages](Page.md) they are displayed on. It is largely invisible to the developers.
 
-Internally it uses a [Finite State Machine](https://en.wikipedia.org/wiki/Finite-state_machine) (FSM) with the following state flow: 
+Internally it uses a [Finite State Machine](https://en.wikipedia.org/wiki/Finite-state_machine) (FSM).
+
+These states perform various tasks such as:
+
+* Measuring impressions
+* Sending tracking events
+* Handling page resize events
+
+You can get an overview of each state's dependencies by looking in the `StateFactory`.
+
+Each state has 2 lifecycle methods `enter()` and `exit()` which are called automatically when the state is entered and exited. These methods return promises and allow the states to be run in an asynchronous manner, for example the `Pending` state will only resolve its promise when the banner delay timer has completed.
+
+This is the state flow: 
 
 ```mermaid
 stateDiagram-v2

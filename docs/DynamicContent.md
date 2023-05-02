@@ -18,7 +18,7 @@ These are for building the sentences and progress bar items. There is a single g
 These are tools used by the generators for localising numbers depending on if the banners are in German or English.
 
 ### Campaign Projection
-The current campaign stats are only uploaded every few days during the campaign. The stats are then projected forward from the last upload time in order to keep the data as current as possible. The CampaignProjection is responsible for doing this projection.
+The campaign team measures the progress of the campaign and uploads the current measurements every few days. We use these measurements to project the numbers displayed in the dynamic text. The calculation starts at the last upload time up to the point in time when the user sees the banner. The CampaignProjection is responsible for doing the calculations for this projection.
 
 ### Dynamic Campaign Text
 The DynamicCampaignText class acts as a factory that instantiates the various generators.
