@@ -111,3 +111,21 @@ tracking = "org-pad00-230426-ctrl"
 filename = "./banners/pad/banner_var.ts"
 pagename = "B23_WMDE_ipad_Test_00_var"
 tracking = "org-pad00-230426-var"
+# iPad English campaign
+[pad_en]
+name = "Pad_en"
+campaign_tracking = "en-ipad00-230426"
+preview_link ='/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode'
+preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}'
+wrapper_template = "wikipedia_org"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN"
+
+[pad_en.banners.ctrl]
+filename = "./banners/pad_english/banner_ctrl.ts"
+pagename = "B23_WMDE_ipad_en_00_ctrl"
+tracking = "org-en-ipad00-230426-ctrl"
+
+[pad_en.banners.var]
+filename = "./banners/pad_english/banner_var.ts"
+pagename = "B23_WMDE_ipad_en_00_var"
+tracking = "org-en-ipad00-230426-var"
