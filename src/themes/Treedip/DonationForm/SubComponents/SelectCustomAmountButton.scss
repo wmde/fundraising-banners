@@ -1,10 +1,10 @@
 @use '../../variables/colors';
-@use '../../variables/fonts';
 @use '../../variables/globals';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
-$label-font-size: fonts.$size-s !default;
-$label-line-height: 36px !default;
+$font-size: 12px !default;
+$height: 36px !default;
+$border-color: #9aa0a7 !default;
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
@@ -16,8 +16,9 @@ $label-line-height: 36px !default;
 		&-input-container {
 			width: 100%;
 			line-height: 2em;
+			height: $height;
 			margin: 0;
-			border: 1px solid colors.$gray-medium-light;
+			border: 1px solid $border-color;
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
@@ -26,8 +27,8 @@ $label-line-height: 36px !default;
 			box-sizing: border-box;
 			width: 100%;
 			padding: 0 0.4em;
-			line-height: $label-line-height;
-			font-size: $label-font-size;
+			line-height: #{ $height - 2px };
+			font-size: $font-size;
 			text-align: center;
 			outline: 0;
 			background: transparent;

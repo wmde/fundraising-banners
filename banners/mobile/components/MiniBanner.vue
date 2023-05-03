@@ -12,7 +12,7 @@
 			</div>
 		</header>
 
-		<div class="wmde-banner-mini-banner-slideshow">
+		<div class="wmde-banner-mini-slideshow">
 			<slot name="banner-slides"/>
 		</div>
 

@@ -50,11 +50,16 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		it( 'Stops the slider when the form is interacted with', async () => {
+			vi.useFakeTimers();
+
 			const wrapper = getWrapper();
 			await wrapper.setProps( { bannerState: BannerStates.Visible } );
 			await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
+			await vi.runOnlyPendingTimers();
 
 			expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+
+			vi.restoreAllMocks();
 		} );
 
 		it( 'Shows the slider on small sizes', async () => {
@@ -76,7 +81,7 @@ describe( 'BannerCtrl.vue', () => {
 		it( 'Shows soft close on main banner close', async () => {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 
 			expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeTruthy();
 		} );
@@ -84,7 +89,7 @@ describe( 'BannerCtrl.vue', () => {
 		it( 'Emits soft close close event', async () => {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 			await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -95,7 +100,7 @@ describe( 'BannerCtrl.vue', () => {
 		it( 'Emits soft close maybe later event', async () => {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 			await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -107,7 +112,7 @@ describe( 'BannerCtrl.vue', () => {
 
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 			await vi.runAllTimersAsync();
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -119,7 +124,7 @@ describe( 'BannerCtrl.vue', () => {
 		it( 'Emits bannerContentChanged event on soft close', async () => {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 
 			expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 		} );

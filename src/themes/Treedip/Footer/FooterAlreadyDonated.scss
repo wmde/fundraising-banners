@@ -1,11 +1,11 @@
 @use 'src/components/Footer/FooterAlreadyDonated';
-@use './Footer';
 @use '../variables/colors';
 
 .wmde-banner {
 	@include FooterAlreadyDonated.layout;
 
-	&-footer-already-donated {
+	&-footer-already-donated,
+	&-footer-already-donated:visited {
 		color: colors.$black;
 	}
 }

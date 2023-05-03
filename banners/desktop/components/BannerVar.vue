@@ -2,6 +2,7 @@
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<BannerMain
 			@close="onCloseMain"
+			@form-interaction="$emit( 'bannerContentChanged' )"
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
@@ -10,7 +11,21 @@
 			</template>
 
 			<template #banner-slides="{ play }: any">
-				<BannerSlides :play="play"/>
+				<KeenSlider :with-navigation="true" :play="play" :interval="5000">
+
+					<template #slides="{ currentSlide }: any">
+						<BannerSlides :currentSlide="currentSlide"/>
+					</template>
+
+					<template #left-icon>
+						<ChevronLeftIcon/>
+					</template>
+
+					<template #right-icon>
+						<ChevronRightIcon/>
+					</template>
+
+				</KeenSlider>
 			</template>
 
 			<template #progress>
@@ -62,7 +77,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { nextTick, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
@@ -77,6 +92,9 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -96,8 +114,6 @@ const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 
 watch( contentState, async () => {
-	// Wait a tick in order to let the content re-render before notifying the parent
-	await nextTick();
 	emit( 'bannerContentChanged' );
 } );
 
@@ -110,25 +126,3 @@ function onClose( closeSource: CloseSources ): void {
 }
 
 </script>
-
-<style lang="scss">
-@use 'src/themes/Treedip/variables/globals';
-@use 'src/themes/Treedip/variables/fonts';
-@use 'src/themes/Treedip/variables/colors';
-
-.wmde-banner {
-	&-wrapper {
-		font-size: 14px;
-		font-family: fonts.$ui;
-		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		background-color: colors.$white;
-	}
-
-	&--closed {
-		.wmde-banner-wrapper {
-			display: none;
-		}
-	}
-}
-
-</style>

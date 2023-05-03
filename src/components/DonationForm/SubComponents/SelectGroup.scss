@@ -19,17 +19,6 @@
 			padding: 0;
 
 			&--with-error {
-				.wmde-banner-error-icon {
-					position: relative;
-					display: block;
-
-					&::before {
-						position: absolute;
-						top: 0;
-						left: 0;
-					}
-				}
-
 				.wmde-banner-select-group-error-message {
 					display: block;
 				}

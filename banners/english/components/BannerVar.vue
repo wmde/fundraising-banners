@@ -50,24 +50,34 @@
                 </MultiStepDonation>
             </template>
             <template #footer>
-                <BannerFooter
+                <FooterAlreadyDonated
                     @showFundsModal="isFundsModalVisible = true"
+                    @showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
                 />
             </template>
         </BannerMain>
-
         <SoftClose
             v-if="contentState === ContentStates.SoftClosing"
             @close="() => onClose( CloseSources.SoftCloseBannerRejected )"
             @maybe-later="() => onClose( CloseSources.MaybeLater )"
             @time-out-close="() => onClose( CloseSources.TimeOut )"
         />
-
         <FundsModal
             :content="useOfFundsContent"
             :is-funds-modal-visible="isFundsModalVisible"
             @hideFundsModal="isFundsModalVisible = false"
         />
+        <AlreadyDonatedModal
+            :is-visible="isAlreadyDonatedModalVisible"
+            :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
+            @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
+            @goAway="() => onClose( CloseSources.AlreadyDonatedGoAway )"
+            @maybe-later="() => onClose( CloseSources.MaybeLater )"
+        >
+            <template #already-donated-content>
+                <AlreadyDonatedContent/>
+            </template>
+        </AlreadyDonatedModal>
     </div>
 </template>
 
@@ -80,6 +90,7 @@ import BannerMain from './BannerMain.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import BannerSlides from '../../english/content/BannerSlides.vue';
@@ -87,10 +98,11 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../../english/content/BannerText.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -107,6 +119,7 @@ defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
+const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 
 watch( contentState, async () => {

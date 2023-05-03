@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import { nextTick } from 'vue';
 
 describe( 'KeenSlider', () => {
 
@@ -20,23 +21,17 @@ describe( 'KeenSlider', () => {
 				interval: 200
 			},
 			slots: {
-				slide1: 'First Slide',
-				slide2: 'Second Slide'
+				slides: `<template #slides="{ currentSlide }">
+					<div class="wmde-banner-slide keen-slider__slide">
+						<div class="wmde-banner-slide-content keen-slider__slide-content" :class="{ 'wmde-banner-slide--current': currentSlide === 0 }">First Slide</div>
+					</div>
+					<div class="wmde-banner-slide keen-slider__slide">
+						<div class="wmde-banner-slide-content keen-slider__slide-content" :class="{ 'wmde-banner-slide--current': currentSlide === 1 }">Second Slide</div>
+					</div>
+				</template>`
 			}
 		} );
 	};
-
-	it( 'should display the slides and wrap them', () => {
-		const wrapper = getWrapper();
-
-		const slideElements = wrapper.findAll( '.wmde-banner-slide' );
-		const firstSlide = wrapper.find( '.wmde-banner-slide' );
-		const firstSlideContent = firstSlide.find( '.wmde-banner-slide-content' );
-
-		expect( slideElements.length ).toBe( 2 );
-		expect( firstSlide.attributes().class ).toContain( 'keen-slider__slide' );
-		expect( firstSlideContent.text() ).toBe( 'First Slide' );
-	} );
 
 	it( 'should mark the first slide as the current slide on initialization', () => {
 		const wrapper = getWrapper();
@@ -60,6 +55,7 @@ describe( 'KeenSlider', () => {
 	it( 'should show a pagination dot for each exising slide', async () => {
 		const wrapper = getWrapper();
 
+		await nextTick();
 		const paginationElements = wrapper.findAll( '.wmde-banner-slider-pagination-dot' );
 
 		expect( paginationElements.length ).toBe( 2 );

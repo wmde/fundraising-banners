@@ -5,49 +5,34 @@
 		@touchstart="stopAutoplay"
 	>
 		<div class="wmde-banner-navigation-wrapper">
-			<div
-				ref="container"
-				class="keen-slider wmde-banner-slider"
-				:class="sliderPlayingState"
-			>
-				<template v-for="( slotName, idx ) in usedSlotNames" :key="slotName">
-					<div class="keen-slider__slide wmde-banner-slide">
-						<div :class="[
-							'keen-slider__slide-content',
-							'wmde-banner-slide-content',
-							{ 'wmde-banner-slide--current': currentSlide === idx }
-						]">
-							<slot :name="slotName"/>
-						</div>
-					</div>
-				</template>
+
+			<div ref="container" class="keen-slider wmde-banner-slider" :class="sliderPlayingState">
+				<slot name="slides" :currentSlide="currentSlide"/>
 			</div>
 
-			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-previous" @click="goToPreviousSlide">
-				<ChevronLeftIcon/>
+			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-previous" @click.prevent="goToPreviousSlide">
+				<slot name="left-icon" class="wmde-banner-slider-icon-left"/>
 			</a>
 
-			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-next" @click="goToNextSlide">
-				<ChevronRightIcon/>
+			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-next" @click.prevent="goToNextSlide">
+				<slot name="right-icon" class="wmde-banner-slider-icon-left"/>
 			</a>
+		</div>
 
-			<div class="wmde-banner-slider-pagination">
-				<button
-					v-for="( slotName, idx ) in usedSlotNames" :key="slotName"
-					:class="[ 'wmde-banner-slider-pagination-dot', { 'is-active': currentSlide === idx } ]"
-					@click="() => goToSlide( idx )"
-				/>
-			</div>
+		<div class="wmde-banner-slider-pagination">
+			<button
+				v-for="idx in slider?.slides.length" :key="idx"
+				:class="[ 'wmde-banner-slider-pagination-dot', { 'is-active': currentSlide === idx - 1 } ]"
+				@click="() => goToSlide( idx - 1 )"
+			/>
 		</div>
 	</div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, useSlots, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum SliderPlayingStates {
 	PENDING = 'wmde-banner-slider--pending',
@@ -68,7 +53,6 @@ const props = withDefaults( defineProps<Props>(), {
 	play: false
 } );
 
-const slots = useSlots();
 const sliderPlayingState = ref<SliderPlayingStates>( SliderPlayingStates.PENDING );
 const timer = ref<number>( 0 );
 
@@ -82,8 +66,6 @@ const [ container, slider ] = useKeenSlider( {
 		currentSlide.value = s.track.details.rel;
 	}
 } );
-
-const usedSlotNames = Object.keys( slots );
 
 const startAutoplay = (): void => {
 	if ( sliderPlayingState.value === SliderPlayingStates.PLAYING ) {

@@ -46,7 +46,7 @@ const props = withDefaults( defineProps<Props>(), {
 	secondsTotal: 15
 } );
 
-const timer = ref<number>( null );
+const timer = ref<number>( 0 );
 const secondsRemaining = ref<number>( props.secondsTotal );
 
 const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose' ] );
@@ -64,7 +64,7 @@ const onCloseClick = (): void => {
 onMounted( () => {
 	timer.value = window.setInterval( () => {
 		secondsRemaining.value = secondsRemaining.value - 1;
-		if ( secondsRemaining.value <= 1 ) {
+		if ( secondsRemaining.value <= 0 ) {
 			window.clearInterval( timer.value );
 			emit( 'timeOutClose' );
 		}

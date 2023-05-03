@@ -4,6 +4,9 @@ import { CampaignParameters } from '@src/CampaignParameters';
 import { TrackingParameters } from '@src/TrackingParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
+export const bannerHeightCssVariable = '--wmde-banner-height';
+export const showBannerClass = 'wmde-show-banner';
+
 export interface WpdeWindow extends Window {
 	campaignParameters: CampaignParameters;
 }
@@ -36,7 +39,8 @@ class PageDe implements Page {
 		return this;
 	}
 
-	public setSpace(): Page {
+	public setSpace( space: number ): Page {
+		document.body.style.setProperty( bannerHeightCssVariable, `${space}px` );
 		return this;
 	}
 
@@ -53,6 +57,7 @@ class PageDe implements Page {
 	}
 
 	public showBanner(): Page {
+		document.body.classList.add( showBannerClass );
 		return this;
 	}
 

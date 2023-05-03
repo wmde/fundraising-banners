@@ -9,11 +9,6 @@
 	&-navigation-wrapper {
 		position: relative;
 		height: 100%;
-		padding-bottom: 28px;
-
-		@include breakpoints.phone-s-up {
-			padding-bottom: 38px;
-		}
 	}
 
 	&-slide {
@@ -25,6 +20,8 @@
 			font-size: 17px;
 			text-align: center;
 			padding: 0 10px;
+			flex-direction: column;
+			justify-content: center;
 			p {
 				margin: 0;
 			}
@@ -32,9 +29,6 @@
 	}
 
 	&-slider-pagination {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
 		height: 38px;
 		margin: 0;
 		list-style: none;

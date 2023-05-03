@@ -79,7 +79,7 @@ describe( 'AddressTypeForm.vue', () => {
 		formModel.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
 		await nextTick();
 
-		expect( wrapper.find( '.wmde-banner-form-address-type-notice' ).text() ).toBe( '' );
+		expect( wrapper.find( '.wmde-banner-form-address-type-notice' ).exists() ).toBeFalsy();
 	} );
 
 	test.each( [

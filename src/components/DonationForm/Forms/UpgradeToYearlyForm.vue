@@ -1,12 +1,12 @@
 <template>
     <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
-        <div class="wmde-banner-form-upgrade-title">
-            <a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
-                <ChevronLeftIcon/>
-            </a>
-            {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
+        <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-back" @click.prevent="onPrevious">
+            <ChevronLeftIcon/>
+        </a>
+        <div class="wmde-banner-form-upgrade-notice">
+            <p><strong>{{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}</strong></p>
+            <p>{{ $translate( 'upgrade-to-yearly-copy' ) }}</p>
         </div>
-        <div class="wmde-banner-form-upgrade-notice">{{ $translate( 'upgrade-to-yearly-copy' ) }}</div>
 
         <div class="wmde-banner-form-upgrade-options">
             <div :class="[
@@ -47,18 +47,19 @@
                         </label>
                     </div>
                 </div>
-                <span v-if="intervalValidity === Validity.Invalid" class="wmde-banner-select-group-error-message">
-					<span class="wmde-banner-error-icon">
-						{{ $translate( 'upgrade-to-yearly-error' ) }}
-					</span>
-				</span>
             </div>
         </div>
 
         <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-           @click="onNextPage">
+           @click.prevent="onNextPage">
             {{ $translate( 'upgrade-to-yearly-link' ) }}
         </a>
+
+        <span v-if="intervalValidity === Validity.Invalid" class="wmde-banner-select-group-error-message">
+            <span class="wmde-banner-error-icon">
+                {{ $translate( 'upgrade-to-yearly-error' ) }}
+            </span>
+        </span>
 
         <div class="wmde-banner-form-button-container upgrade-to-yearly-button">
             <button tabIndex="-1" class="wmde-banner-form-button" type="submit">

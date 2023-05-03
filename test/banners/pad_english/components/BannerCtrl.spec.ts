@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad_english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -49,11 +49,16 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		it( 'Stops the slider when the form is interacted with', async () => {
+			vi.useFakeTimers();
+
 			const wrapper = getWrapper();
 			await wrapper.setProps( { bannerState: BannerStates.Visible } );
 			await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
+			await vi.runOnlyPendingTimers();
 
 			expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
+
+			vi.restoreAllMocks();
 		} );
 	} );
 

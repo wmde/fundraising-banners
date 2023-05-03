@@ -2,7 +2,7 @@
     <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
             <a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
-                <ChevronLeftIcon/> {{ $translate ( 'back-button' ) }}
+                <slot name="back"/>
             </a>
             {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
         </div>
@@ -42,7 +42,6 @@
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 

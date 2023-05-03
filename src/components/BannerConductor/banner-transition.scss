@@ -39,6 +39,10 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 		top: 0;
 	}
 
+	#mainbox {
+		margin-top: var( --wmde-banner-height );
+	}
+
 	#mw-panel,
 	#mw-head,
 	#mw-mf-page-left {

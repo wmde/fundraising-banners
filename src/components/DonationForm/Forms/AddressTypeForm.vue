@@ -1,10 +1,13 @@
 <template>
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
-		<div class="wmde-banner-form-address-type-title">
-			<a tabIndex="-1" href="#" class="previous" @click="onPrevious">
+		<div class="wmde-banner-form-address-type-back">
+			<a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
 				<ChevronLeftIcon/>
 			</a>
-			{{ $translate( 'address-type-label' ) }}
+		</div>
+
+		<div class="wmde-banner-form-address-type-title">
+			<p><strong>{{ $translate( 'address-type-label' ) }}</strong></p>
 		</div>
 
 		<fieldset class="wmde-banner-form-field-group">
@@ -20,7 +23,7 @@
 			/>
 		</fieldset>
 
-		<div class="wmde-banner-form-address-type-notice">{{ formNotice }}</div>
+		<div v-if="formNotice !== ''" class="wmde-banner-form-address-type-notice">{{ formNotice }}</div>
 
 		<div class="wmde-banner-form-button-container wmde-banner-form-address-type-button">
 			<button tabIndex="-1" class="wmde-banner-form-button" type="submit">

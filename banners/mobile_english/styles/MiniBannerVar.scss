@@ -1,8 +1,12 @@
 @use 'src/themes/Yperala/variables/globals';
 @use 'src/themes/Yperala/variables/colors';
 
+$height: 228px !default;
+
 .wmde-banner {
 	&-mini {
+		min-height: $height;
+
 		&-content {
 			position: relative;
 			cursor: pointer;

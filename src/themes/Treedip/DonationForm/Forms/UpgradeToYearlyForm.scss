@@ -1,4 +1,8 @@
+@use '../../variables/colors';
 @use 'src/components/DonationForm/Forms/UpgradeToYearlyForm';
+
+$custom-link-padding: 0 0 0 25px !default;
+$custom-link-text-align: left !default;
 
 .wmde-banner {
 	@include UpgradeToYearlyForm.layout;
@@ -15,6 +19,10 @@
 			}
 		}
 
+		.wmde-banner-select-group-error-message {
+			display: block;
+		}
+
 		.wmde-banner-select-group {
 			line-height: 1.5;
 		}
@@ -26,27 +34,18 @@
 			}
 		}
 
-		&-title {
-			position: relative;
-			line-height: 16px;
-			padding-left: 20px;
-			padding-right: 20px;
+		&-back {
+			display: block;
+			height: 16px;
+			width: 50px;
 			margin-bottom: 10px;
-
-			.previous {
-				position: absolute;
-				display: block;
-				height: 16px;
-				width: 16px;
-				top: 0;
-				left: 0;
-			}
 		}
 
 		&-notice {
-			font-weight: bold;
 			font-size: 12px;
 			margin-bottom: auto;
+			text-align: justify;
+			hyphens: auto;
 		}
 
 		&-options {
@@ -54,11 +53,16 @@
 		}
 
 		&-custom {
+			color: colors.$secondary;
 			font-size: 12px;
-			text-align: left;
+			text-align: $custom-link-text-align;
 			margin-bottom: 8px;
 			font-weight: bold;
-			padding-left: 25px;
+			padding: $custom-link-padding;
+		}
+
+		&-custom:visited {
+			color: colors.$secondary;
 		}
 
 		&-button {
