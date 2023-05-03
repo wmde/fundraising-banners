@@ -78,21 +78,6 @@ filename = "./banners/mobile_english/banner_var.ts"
 pagename = "B23_WMDE_Mobile_EN_Test_00_var"
 tracking = "org-mob_en00-230425-var"
 
-# desktop banners on wikipedia.de
-[wikipediade]
-name = "C23_WPDE_00"
-description="Nothing to see here"
-campaign_tracking = "wpde-00-230202"
-preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
-wrapper_template = "wikipedia_de"
-wrap_in_wikitext = false
-preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
-
-[wikipediade.banners.ctrl]
-filename = "./banners/wpde_desktop/banner_ctrl.ts"
-pagename = "B23WPDE_00_ctrl"
-tracking = "wpde-00-230202-ctrl"
-
 # iPad campaign
 [pad]
 name = "iPad Test 00"
@@ -114,6 +99,7 @@ tracking = "org-pad00-230426-var"
 # iPad English campaign
 [pad_en]
 name = "Pad_en"
+description="VAR has soft close"
 campaign_tracking = "en-ipad00-230426"
 preview_link ='/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode'
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}'
@@ -129,3 +115,34 @@ tracking = "org-en-ipad00-230426-ctrl"
 filename = "./banners/pad_english/banner_var.ts"
 pagename = "B23_WMDE_ipad_en_00_var"
 tracking = "org-en-ipad00-230426-var"
+
+# desktop banners on wikipedia.de
+[wikipediade]
+name = "C23_WPDE_00"
+description="Nothing to see here"
+campaign_tracking = "wpde-00-230202"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
+
+[wikipediade.banners.ctrl]
+filename = "./banners/wpde_desktop/banner_ctrl.ts"
+pagename = "B23WPDE_00_ctrl"
+tracking = "wpde-00-230202-ctrl"
+
+# mobile banners on wikipedia.de
+[wikipediade_mobile]
+name = "C23_WPDE_mob00"
+description="Nothing to see here"
+campaign_tracking = "wpde-mob00-230202"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
+
+[wikipediade_mobile.banners.ctrl]
+filename = "./banners/wpde_mobile/banner_ctrl.ts"
+pagename = "B23WPDE_mob00_ctrl"
+tracking = "wpde-mob00-230426-ctrl"
+
