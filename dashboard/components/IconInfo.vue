@@ -5,10 +5,10 @@
         <g transform="matrix(1,0,0,1,0,492)">
             <g id="Info" transform="matrix(1.10345,0,0,1.10345,179,-518.897)">
                 <circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 231, 107, 0, 1 );"/>
-				<clipPath id="_clip1">
+				<clipPath id="_clip1_info">
                     <circle cx="652.5" cy="100.5" r="14.5"/>
                 </clipPath>
-				<g clip-path="url(#_clip1)">
+				<g clip-path="url(#_clip1_info)">
                     <g transform="matrix(0.90625,0,0,0.90625,-128.283,31.4578)">
                         <path d="M857.748,73.658L862.846,73.658L862.846,81.524L866.045,81.524L866.045,83.501L857.063,
                         83.501L857.063,81.524L860.271,81.524L860.271,75.635L857.748,75.635L857.748,73.658ZM860.271,
