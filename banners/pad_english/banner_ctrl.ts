@@ -6,7 +6,7 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import Banner from './components/BannerCtrl.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import PageOrg from '@src/page/PageOrg';
+import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
@@ -14,6 +14,8 @@ import TranslationPlugin from '@src/TranslationPlugin';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
+import eventMappings from './event_map';
+import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
 
 // Locale-specific imports
 import messages from './messages';
@@ -32,16 +34,18 @@ const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
-const page = new PageOrg(
+const page = new PageWPORG(
 	mediaWiki,
 	( new SkinFactory( mediaWiki ) ).getSkin(),
 	new WindowSizeIssueChecker()
 );
+const tracker = new TrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
 const app = createVueApp( BannerConductor, {
 	page,
+	tracker,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000

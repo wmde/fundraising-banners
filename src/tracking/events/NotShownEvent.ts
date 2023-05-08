@@ -5,9 +5,11 @@ export class NotShownEvent implements EventData {
 	// TODO: Make these private and add getters
 	public eventName: string;
 	public trackingRate: number;
+	public bannerSize: number;
 
-	public constructor( reason: BannerNotShownReasons, trackingRate: number = 1 ) {
+	public constructor( reason: BannerNotShownReasons, bannerSize: number, trackingRate: number = 1 ) {
 		this.eventName = reason;
+		this.bannerSize = bannerSize;
 		this.trackingRate = trackingRate;
 	}
 }

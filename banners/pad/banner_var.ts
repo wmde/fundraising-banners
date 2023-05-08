@@ -6,11 +6,13 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import PageOrg from '@src/page/PageOrg';
+import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
+import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
+import eventMappings from '../pad_english/event_map';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
@@ -31,7 +33,8 @@ const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
-const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
+const tracker = new TrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 // This is language-specific and must be changed for EN banners
 
@@ -49,7 +52,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount
+	impressionCount,
+	tracker
 } );
 
 app.use( TranslationPlugin, translator );

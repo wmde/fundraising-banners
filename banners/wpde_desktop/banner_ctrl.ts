@@ -6,7 +6,7 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import Banner from './components/BannerCtrl.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import PageDe from '@src/page/PageDe';
+import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
 
 // Channel specific form setup
@@ -20,6 +20,7 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
+import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 
 const localeFactory = new LocaleFactoryWpDe();
 const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
@@ -33,9 +34,11 @@ const tracking = {
 };
 
 // This is channel specific and must be changed for wp.org banners
-const page = new PageDe( tracking );
+const page = new PageWPDE( tracking );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+
+const tracker = new TrackerWPDE();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -49,7 +52,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount
+	impressionCount,
+	tracker
 } );
 
 app.use( TranslationPlugin, translator );

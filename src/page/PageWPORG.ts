@@ -1,11 +1,9 @@
 import { Page } from '@src/page/Page';
 import { Skin } from '@src/page/skin/Skin';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { EventData } from '@src/tracking/EventData';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/CampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
@@ -19,7 +17,7 @@ export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-dur
 const centralNoticeBannerContainerId = 'WMDE-Banner-Container';
 const campaignParametersId = 'wmde-campaign-parameters';
 
-class PageOrg implements Page {
+class PageWPORG implements Page {
 	private _mediaWiki: MediaWiki;
 	private _skin: Skin;
 	private _sizeIssueChecker: SizeIssueChecker;
@@ -60,18 +58,6 @@ class PageOrg implements Page {
 	private hasSizeIssues( bannerDimensions: Vector2 ): boolean {
 		const skinSpaceAdjustment: Vector2 = new Vector2( 0, this._skin.minimumVisiblePageBeneathBanner() );
 		return this._sizeIssueChecker.hasSizeIssues( bannerDimensions, skinSpaceAdjustment );
-	}
-
-	public trackEvent( trackingData: EventData ): void {
-		const bannerEvent: BannerEvent = {
-			bannerAction: trackingData.eventName,
-			bannerName: '',
-			eventRate: trackingData.trackingRate,
-			finalSlide: 0,
-			slidesShown: 0
-		};
-		this._mediaWiki.track( 'event.WMDEBannerEvents', bannerEvent );
-		// this._mediaWiki.track( 'event.WMDEBannerSizeIssue', trackingData );
 	}
 
 	public onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
@@ -176,4 +162,4 @@ class PageOrg implements Page {
 	}
 }
 
-export default PageOrg;
+export default PageWPORG;

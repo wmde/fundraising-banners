@@ -6,7 +6,7 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import Banner from './components/BannerCtrl.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import PageOrg from '@src/page/PageOrg';
+import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
@@ -15,6 +15,8 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
+import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
+import eventMappings from '../pad_english/event_map';
 
 // Locale-specific imports
 import messages from './messages';
@@ -33,14 +35,16 @@ const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
-const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const tracker = new TrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const pageScroller = new WindowPageScroller();
 
 const app = createVueApp( BannerConductor, {
 	page,
+	tracker,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000

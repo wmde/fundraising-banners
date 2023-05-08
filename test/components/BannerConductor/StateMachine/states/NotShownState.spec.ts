@@ -9,8 +9,8 @@ import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 describe( 'NotShownState', function () {
 	it( 'tracks not shown event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( BannerNotShownReasons.SizeIssue );
-		const state = new NotShownState( BannerNotShownReasons.SizeIssue, new PageStub(), tracker, new ResizeHandlerStub() );
+		const trackingEvent = new NotShownEvent( BannerNotShownReasons.SizeIssue, 0 );
+		const state = new NotShownState( BannerNotShownReasons.SizeIssue, new PageStub(), tracker, new ResizeHandlerStub(), 0 );
 
 		state.enter();
 
@@ -21,7 +21,7 @@ describe( 'NotShownState', function () {
 	it( 'marks banner as not shown on enter', function () {
 		const page = new PageStub();
 		page.preventImpressionCountForHiddenBanner = vitest.fn( () => page );
-		const state = new NotShownState( BannerNotShownReasons.SizeIssue, page, new TrackerStub(), new ResizeHandlerStub() );
+		const state = new NotShownState( BannerNotShownReasons.SizeIssue, page, new TrackerStub(), new ResizeHandlerStub(), 0 );
 
 		state.enter();
 
@@ -33,7 +33,7 @@ describe( 'NotShownState', function () {
 		const resizeHandler = new ResizeHandlerStub();
 		page.removePageEventListeners = vitest.fn( () => page );
 		resizeHandler.onClose = vitest.fn();
-		const state = new NotShownState( BannerNotShownReasons.UserInteraction, page, new TrackerStub(), resizeHandler );
+		const state = new NotShownState( BannerNotShownReasons.UserInteraction, page, new TrackerStub(), resizeHandler, 0 );
 
 		state.enter();
 
