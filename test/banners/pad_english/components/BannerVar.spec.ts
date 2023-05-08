@@ -6,6 +6,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
 
@@ -36,7 +37,8 @@ describe( 'BannerVar.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: {},
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );

@@ -13,7 +13,7 @@ export interface WpdeWindow extends Window {
 
 declare let window: WpdeWindow;
 
-class PageDe implements Page {
+class PageWPDE implements Page {
 
 	public constructor( private readonly trackingParams: TrackingParameters ) {
 	}
@@ -81,4 +81,4 @@ class PageDe implements Page {
 	}
 }
 
-export default PageDe;
+export default PageWPDE;

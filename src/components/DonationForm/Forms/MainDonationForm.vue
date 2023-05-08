@@ -64,6 +64,12 @@
 	</form>
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'MainDonationForm'
+};
+</script>
 <script setup lang="ts">
 
 import { computed, inject, ref } from 'vue';

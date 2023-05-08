@@ -51,7 +51,7 @@
         </div>
 
         <a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-           @click.prevent="onNextPage">
+           @click.prevent="onGoToChangeOfAmount">
             {{ $translate( 'upgrade-to-yearly-link' ) }}
         </a>
 
@@ -70,25 +70,42 @@
     </form>
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'UpgradeToYearlyForm'
+};
+</script>
 <script setup lang="ts">
 
-import { computed, inject, ref } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 interface Props {
-	pageIndex: number
+	pageIndex: number,
+    isCurrent: boolean
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
 
+const tracker = inject<Tracker>( 'tracker' );
+
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
+
+watch( () => props.isCurrent, ( isCurrent, oldIsCurrent ) => {
+	if ( oldIsCurrent === false && isCurrent === true ) {
+		tracker.trackEvent( new UpgradeToYearlyFormPageShownEvent() );
+	}
+} );
 
 const onSubmit = (): void => {
 	intervalValidity.value = interval.value ? Validity.Valid : Validity.Invalid;
@@ -98,16 +115,18 @@ const onSubmit = (): void => {
 	emit( 'submit', {
 		pageIndex: props.pageIndex,
 		extraData: {
+			changeOfAmount: false,
 			upgradeToYearlyInterval: interval.value
 		}
 	} );
 };
 
-const onNextPage = (): void => {
+const onGoToChangeOfAmount = (): void => {
 	intervalValidity.value = Validity.Valid;
-	emit( 'next', {
+	emit( 'submit', {
 		pageIndex: props.pageIndex,
 		extraData: {
+			changeOfAmount: true,
 			upgradeToYearlyInterval: Intervals.YEARLY.value
 		}
 	} );

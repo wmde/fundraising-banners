@@ -6,6 +6,7 @@ import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
@@ -38,7 +39,8 @@ describe( 'BannerCtrl.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );

@@ -4,6 +4,7 @@
 			:is="banner"
 			v-bind="bannerProps"
 			:bannerState="bannerState.stateName"
+			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="onCloseHandler"
 			@banner-content-changed="onContentChanged"
 		/>
@@ -13,7 +14,7 @@
 <script setup lang="ts">
 
 import { Page } from '@src/page/Page';
-import { nextTick, onMounted, ref } from 'vue';
+import { inject, nextTick, onMounted, ref } from 'vue';
 import { BannerConfig } from '@src/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
@@ -22,6 +23,7 @@ import { BannerState } from '@src/components/BannerConductor/StateMachine/states
 import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { Tracker } from '@src/tracking/Tracker';
 
 interface Props {
 	page: Page,
@@ -29,12 +31,14 @@ interface Props {
 	resizeHandler: ResizeHandler,
 	banner: Object,
 	bannerProps?: Object,
-	impressionCount: ImpressionCount
+	impressionCount: ImpressionCount,
 }
 
 const props = defineProps<Props>();
+const tracker = inject<Tracker>( 'tracker' );
+
 const bannerRef = ref( null );
-const stateFactory = newStateFactory( props.bannerConfig, props.page, props.resizeHandler, props.impressionCount );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 
@@ -43,7 +47,7 @@ onMounted( async () => {
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
 	if ( bannerNotShownReason ) {
-		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason ) );
+		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason, bannerRef.value.offsetHeight ) );
 	} else {
 		await stateMachine.changeState( stateFactory.newShowingState() );
 		await stateMachine.changeState( stateFactory.newVisibleState() );

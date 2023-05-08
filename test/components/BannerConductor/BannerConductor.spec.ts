@@ -11,6 +11,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -31,6 +32,11 @@ describe( 'BannerConductor.vue', () => {
 				resizeHandler: new ResizeHandlerStub(),
 				banner: {},
 				impressionCount: new ImpressionCountStub()
+			},
+			global: {
+				provide: {
+					tracker: new TrackerStub()
+				}
 			}
 		} );
 

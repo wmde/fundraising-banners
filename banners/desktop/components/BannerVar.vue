@@ -33,24 +33,22 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :form-controller="formController" @form-interaction="formInteraction">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+                    <template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+                        <MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+                    </template>
 
-					<template #form-page-1="{ pageIndex, submit, next, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+                    <template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+                        <UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+                    </template>
+
+                    <template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+                        <CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+                    </template>
+
+					<template #[FormStepNames.AddressTypeFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<AddressTypeForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
-
-					<template #form-page-2="{ pageIndex, submit, next, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-					</template>
-
-					<template #form-page-3="{ pageIndex, submit, next, previous }: any">
-						<CustomAmountForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-					</template>
-
-					<template #form-page-4="{ pageIndex, submit, next, previous }: any">
-						<AddressTypeForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-					</template>
-
 				</MultiStepDonation>
 			</template>
 
@@ -78,7 +76,6 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { ref, watch } from 'vue';
-import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import BannerMain from './BannerMain.vue';
@@ -91,6 +88,15 @@ import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { createSubmittableAddressType } from '@src/components/DonationForm/StepControllers/SubmittableAddressType';
+import {
+	createIntermediateMainDonationForm
+} from '@src/components/DonationForm/StepControllers/IntermediateMainDonationForm';
+import {
+	createIntermediateUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/IntermediateUpgradeToYearly';
+import { createIntermediateCustomAmount } from '@src/components/DonationForm/StepControllers/IntermediateCustomAmount';
 import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
@@ -101,9 +107,15 @@ enum ContentStates {
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
+enum FormStepNames {
+	CustomAmountFormStep = 'CustomAmountForm',
+	MainDonationFormStep = 'MainDonationForm',
+	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm',
+	AddressTypeFormStep = 'AddressTypeFormStep'
+}
+
 interface Props {
 	bannerState: BannerStates;
-	formController: FormController;
 	useOfFundsContent: useOfFundsContentInterface;
 }
 
@@ -112,6 +124,18 @@ const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
+
+const formModel = useFormModel();
+
+const stepControllers = [
+	createIntermediateMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep, FormStepNames.AddressTypeFormStep ),
+	createIntermediateUpgradeToYearly( formModel,
+		FormStepNames.CustomAmountFormStep,
+		FormStepNames.AddressTypeFormStep,
+		FormStepNames.MainDonationFormStep ),
+	createIntermediateCustomAmount( formModel, FormStepNames.AddressTypeFormStep, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableAddressType( formModel, FormStepNames.MainDonationFormStep )
+];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

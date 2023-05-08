@@ -36,8 +36,8 @@ export class StateFactory {
 		return new PendingState( this._page, bannerHeight, this._bannerConfig.delay );
 	}
 
-	public newNotShownState( bannerNotShownReason: BannerNotShownReasons ): BannerState {
-		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler );
+	public newNotShownState( bannerNotShownReason: BannerNotShownReasons, bannerHeight: number ): BannerState {
+		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler, bannerHeight );
 	}
 
 	public newShowingState(): BannerState {
@@ -53,11 +53,11 @@ export class StateFactory {
 	}
 }
 
-export function newStateFactory( bannerConfig: BannerConfig, page: Page, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ): StateFactory {
+export function newStateFactory( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ): StateFactory {
 	return new StateFactory(
 		bannerConfig,
 		page,
-		page,
+		tracker,
 		resizeHandler,
 		impressionCount
 	);

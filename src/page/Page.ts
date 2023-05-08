@@ -1,11 +1,10 @@
 import { CampaignParameters } from '@src/CampaignParameters';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { Tracker } from '@src/tracking/Tracker';
 import { Vector2 } from '@src/utils/Vector2';
 import { TrackingParameters } from '@src/TrackingParameters';
 
-export interface Page extends Tracker {
+export interface Page {
 	getReasonToNotShowBanner: ( bannerDimensions: Vector2 ) => BannerNotShownReasons|null;
 	getBannerContainer: () => string;
 	onPageEventThatShouldHideBanner: ( hideBannerListener: () => void ) => void;

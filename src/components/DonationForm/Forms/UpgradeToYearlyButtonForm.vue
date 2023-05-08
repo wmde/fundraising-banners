@@ -30,7 +30,8 @@
 			<a tabIndex="-1"
 				href="#"
 				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-				@click="onNext">
+				@click="onGoToChangeOfAmount"
+			>
 					{{ $translate( 'upgrade-to-yearly-link' ) }}
 			</a>
 		</div>
@@ -38,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
@@ -51,7 +51,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
+const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
@@ -76,11 +76,12 @@ const onSubmit = ( e: SubmitEvent ): void => {
 	} );
 };
 
-const onNext = (): void => {
+const onGoToChangeOfAmount = (): void => {
 	intervalValidity.value = Validity.Valid;
-	emit( 'next', {
+	emit( 'submit', {
 		pageIndex: props.pageIndex,
 		extraData: {
+			changeOfAmount: true,
 			upgradeToYearlyInterval: Intervals.YEARLY.value
 		}
 	} );

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import PageDe, { WpdeWindow } from '@src/page/PageDe';
+import PageWPDE, { WpdeWindow } from '@src/page/PageWPDE';
 
 const tracking = { campaign: 'testCampaign', keyword: 'testKeyword' };
 
@@ -21,7 +21,7 @@ describe( 'PageDe', function () {
 			numberOfMembers: 0,
 			startDate: '2023-11-01'
 		};
-		const page = new PageDe( tracking );
+		const page = new PageWPDE( tracking );
 
 		const retrievedCampaignParameters = page.getCampaignParameters();
 
@@ -30,13 +30,13 @@ describe( 'PageDe', function () {
 
 	it( 'throws error if campaign parameters are not set in global namespace', () => {
 		delete window.campaignParameters;
-		const page = new PageDe( tracking );
+		const page = new PageWPDE( tracking );
 		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign parameters are not set globally' );
 	} );
 
 	it( 'returns banner tracking keyword and campaign', () => {
 		const testTracking = { campaign: 'a-campaign', keyword: 'org-00-2023-blabla-ctrl' };
-		const page = new PageDe( testTracking );
+		const page = new PageWPDE( testTracking );
 
 		const retrievedTrackingKeyword = page.getTracking();
 

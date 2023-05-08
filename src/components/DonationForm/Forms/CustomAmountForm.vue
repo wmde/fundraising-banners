@@ -51,8 +51,14 @@
 
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'CustomAmountForm'
+};
+</script>
 
+<script setup lang="ts">
 import { computed, inject, ref } from 'vue';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { validateAmount } from '@src/validation/validateAmount';

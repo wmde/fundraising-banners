@@ -48,9 +48,9 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'next' ).length ).toBe( 1 );
-		const emittedNextEvent = wrapper.emitted( 'next' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedNextEvent.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+		const emittedNextEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
+		expect( emittedNextEvent.extraData ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should emit "submit" event when user selects an interval and submits ', async function () {

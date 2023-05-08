@@ -33,6 +33,13 @@
 
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'AddressTypeButtonForm'
+};
+</script>
+
 <script setup lang="ts">
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { computed, inject } from 'vue';

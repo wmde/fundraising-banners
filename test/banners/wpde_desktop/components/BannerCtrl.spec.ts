@@ -8,6 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 const translator = ( key: string ): string => key;
 
@@ -36,7 +37,8 @@ describe( 'BannerCtrl.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );

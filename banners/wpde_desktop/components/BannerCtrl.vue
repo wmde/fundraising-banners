@@ -32,18 +32,18 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :form-controller="formController" @form-interaction="formInteraction">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
-					<template #form-page-1="{ pageIndex, submit, next, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
-					<template #form-page-2="{ pageIndex, submit, next, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
-					<template #form-page-3="{ pageIndex, submit, next, previous }: any">
-						<CustomAmountForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+					<template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -66,7 +66,6 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { ref } from 'vue';
-import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import BannerMain from './BannerMain.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
@@ -81,17 +80,35 @@ import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountFor
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
+
+enum FormStepNames {
+	CustomAmountFormStep = 'CustomAmountForm',
+	MainDonationFormStep = 'MainDonationForm',
+	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+}
 
 interface Props {
 	bannerState: BannerStates;
-	formController: FormController;
 	useOfFundsContent: useOfFundsContentInterface;
 }
 
 defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
-
 const isFundsModalVisible = ref<boolean>( false );
+const formModel = useFormModel();
+const stepControllers = [
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
+	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
+];
 
 function onClose(): void {
 	emit( 'bannerClosed', CloseSources.MainBanner );

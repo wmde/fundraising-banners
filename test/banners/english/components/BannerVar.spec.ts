@@ -10,6 +10,7 @@ import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 const translator = ( key: string ): string => key;
 
@@ -38,7 +39,8 @@ describe( 'BannerVar.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );

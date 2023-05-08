@@ -36,6 +36,13 @@
 
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'AddressTypeForm'
+};
+</script>
+
 <script setup lang="ts">
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';

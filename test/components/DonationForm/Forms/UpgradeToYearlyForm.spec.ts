@@ -5,18 +5,25 @@ import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 
 const formModel = useFormModel();
 
 describe( 'UpgradeToYearlyForm.vue', () => {
+	let tracker: TrackerSpy;
 
 	// The model values are in the global scope, and they need to be reset before each test
-	beforeEach( () => resetFormModel( formModel ) );
+	beforeEach( () => {
+		resetFormModel( formModel );
+		tracker = new TrackerSpy();
+	} );
 
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( UpgradeToYearlyForm, {
 			props: {
-				pageIndex: 4
+				pageIndex: 4,
+				isCurrent: false
 			},
 			global: {
 				mocks: {
@@ -25,7 +32,8 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 					}
 				},
 				provide: {
-					currencyFormatter: new CurrencyEn()
+					currencyFormatter: new CurrencyEn(),
+					tracker
 				}
 			}
 		} );
@@ -44,9 +52,9 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'next' ).length ).toBe( 1 );
-		const emittedNextEvent = wrapper.emitted( 'next' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedNextEvent.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+		const emittedNextEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
+		expect( emittedNextEvent.extraData ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should show an error when user does not select any interval ', async function () {
@@ -104,10 +112,10 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 2 );
 
 		const emittedSubmitEvent1 = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent1.extraData ).toEqual( { upgradeToYearlyInterval: '0' } );
+		expect( emittedSubmitEvent1.extraData ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '0' } );
 
 		const emittedSubmitEvent2 = wrapper.emitted( 'submit' )[ 1 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent2.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
+		expect( emittedSubmitEvent2.extraData ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should insert the euroAmount into the translations', async () => {
@@ -149,5 +157,13 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
+	} );
+
+	it( 'sends the UpgradeToYearlyFormPageShownEvent to tracker when the form becomes the current form', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { isCurrent: true } );
+
+		expect( tracker.hasTrackedEvent( UpgradeToYearlyFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 	} );
 } );

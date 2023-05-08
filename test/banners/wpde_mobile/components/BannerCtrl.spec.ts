@@ -10,6 +10,7 @@ import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 let pageScroller: PageScroller;
 const translator = ( key: string ): string => key;
@@ -48,7 +49,8 @@ describe( 'BannerCtrl.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );

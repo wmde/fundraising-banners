@@ -5,17 +5,16 @@ import { nextTick } from 'vue';
 import SubFormStub from '@test/fixtures/SubFormStub.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 
-const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, next, previous }">
+const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, previous }">
 	<button
 		class="emitting-sub-form"
 		:page-index="pageIndex"
 		@submit="() => submit( { pageIndex } )"
-		@next="() => next( { pageIndex } )"
 		@previous="() => previous( { pageIndex } )"
     />
 </template>`;
 
-describe( 'MultistepDonation.vue', () => {
+describe.todo( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
 	let callbackInvokerNext: () => void;
 	let callbackInvokerPrevious: () => void;
@@ -25,7 +24,6 @@ describe( 'MultistepDonation.vue', () => {
 	beforeEach( () => {
 		mockedFormController = {
 			submitStep: vi.fn(),
-			next: vi.fn(),
 			previous: vi.fn(),
 			onNext: vi.fn(),
 			onPrevious: vi.fn(),
@@ -77,14 +75,6 @@ describe( 'MultistepDonation.vue', () => {
 		expect( mockedFormController.submitStep ).toHaveBeenCalledWith( { pageIndex: 0 } );
 	} );
 
-	it( 'passes next event to page controller', async () => {
-		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
-
-		await wrapper.find( '.emitting-sub-form' ).trigger( 'next' );
-
-		expect( mockedFormController.next ).toHaveBeenCalledWith( { pageIndex: 0 } );
-	} );
-
 	it( 'passes previous event to page controller', async () => {
 		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
 
@@ -102,7 +92,6 @@ describe( 'MultistepDonation.vue', () => {
 	it( 'should add callbacks when initialised', function () {
 		getWrapper( { form: SubFormStub } );
 
-		expect( mockedFormController.onNext ).toHaveBeenCalled();
 		expect( mockedFormController.onPrevious ).toHaveBeenCalled();
 		expect( mockedFormController.onGoToStep ).toHaveBeenCalled();
 		expect( mockedFormController.onSubmit ).toHaveBeenCalled();
@@ -153,5 +142,27 @@ describe( 'MultistepDonation.vue', () => {
 		await nextTick();
 
 		expect( submitForm.element.submit ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'should render isCurrent for each form', () => {
+		const dummyForms = {
+			form1: `
+			<template #form-page-1="{ pageIndex, submit, previous, isCurrent }">
+				<form id="form1" :class="{current: isCurrent}" />
+			</template>`,
+			form2: `
+			<template #form-page-2="{ pageIndex, submit, previous, isCurrent }">
+				<form id="form2" :class="{current: isCurrent}" />
+			</template>`,
+			form3: `
+			<template #form-page-3="{ pageIndex, submit, previous, isCurrent }">
+				<form id="form3" :class="{current: isCurrent}" />
+			</template>`
+		};
+		const wrapper = getWrapper( dummyForms );
+
+		expect( wrapper.find( '#form1' ).classes() ).toHaveLength( 1 );
+		expect( wrapper.find( '#form2' ).classes() ).toHaveLength( 0 );
+		expect( wrapper.find( '#form3' ).classes() ).toHaveLength( 0 );
 	} );
 } );

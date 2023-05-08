@@ -7,6 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
@@ -48,7 +49,8 @@ describe( 'BannerVar.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );
