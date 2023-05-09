@@ -44,13 +44,12 @@ const pageScroller = new WindowPageScroller();
 
 const app = createVueApp( BannerConductor, {
 	page,
-	tracker,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerVar( useFormModel(), pageScroller ),
+		formController: new FormControllerVar( useFormModel(), pageScroller, tracker ),
 		useOfFundsContent,
 		pageScroller
 	},

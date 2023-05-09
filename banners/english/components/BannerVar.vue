@@ -36,8 +36,9 @@
                 </MultiStepDonation>
             </template>
             <template #footer>
-                <BannerFooter
+                <FooterAlreadyDonated
                     @showFundsModal="isFundsModalVisible = true"
+                    @showAlreadyDonatedModal="onShowAlreadyDonated"
                 />
             </template>
         </BannerMain>
@@ -83,19 +84,20 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../../english/content/BannerText.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import { Tracker } from '@src/tracking/Tracker';
+import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 
 enum ContentStates {
-    Main = 'wmde-banner-wrapper--main',
-    SoftClosing = 'wmde-banner-wrapper--soft-closing'
+	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
 interface Props {
-    bannerState: BannerStates;
-    formController: FormController;
-    useOfFundsContent: useOfFundsContentInterface;
+	bannerState: BannerStates;
+	formController: FormController;
+	useOfFundsContent: useOfFundsContentInterface;
 }
 
 defineProps<Props>();
@@ -121,6 +123,10 @@ function onClose( closeSource: CloseSources ): void {
 	emit( 'bannerClosed', closeSource );
 }
 
+function onShowAlreadyDonated(): void {
+	isAlreadyDonatedModalVisible.value = true;
+	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+}
 </script>
 
 <style lang="scss">

@@ -14,7 +14,7 @@
 <script setup lang="ts">
 
 import { Page } from '@src/page/Page';
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import { BannerConfig } from '@src/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
@@ -32,12 +32,13 @@ interface Props {
 	banner: Object,
 	bannerProps?: Object,
 	impressionCount: ImpressionCount,
-	tracker: Tracker
 }
 
 const props = defineProps<Props>();
+const tracker = inject<Tracker>( 'tracker' );
+
 const bannerRef = ref( null );
-const stateFactory = newStateFactory( props.bannerConfig, props.page, props.tracker, props.resizeHandler, props.impressionCount );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 

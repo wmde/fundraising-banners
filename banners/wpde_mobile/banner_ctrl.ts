@@ -13,7 +13,7 @@ import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormController } from './FormController';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import supportedEvents from './supported_events';
@@ -50,14 +50,13 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel(), pageScroller ),
+		formController: new FormController( useFormModel(), pageScroller, tracker ),
 		useOfFundsContent,
 		pageScroller
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount,
-	tracker
+	impressionCount
 } );
 
 app.use( TranslationPlugin, translator );

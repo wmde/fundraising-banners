@@ -30,7 +30,7 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="isFundsModalVisible = true"
-					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+					@showAlreadyDonatedModal="onShowAlreadyDonatedModal"
 				/>
 			</template>
 		</BannerMain>
@@ -65,7 +65,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { nextTick, ref, watch } from 'vue';
+import { inject, nextTick, ref, watch } from 'vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
@@ -79,6 +79,8 @@ import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYea
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import AlreadyDonatedContent from '../../english/content/AlreadyDonatedContent.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import { Tracker } from '@src/tracking/Tracker';
+import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -93,6 +95,8 @@ interface Props {
 
 defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
@@ -110,6 +114,11 @@ function onCloseMain(): void {
 
 function onClose( closeSource: CloseSources ): void {
 	emit( 'bannerClosed', closeSource );
+}
+
+function onShowAlreadyDonatedModal(): void {
+	isAlreadyDonatedModalVisible.value = true;
+	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 }
 
 </script>

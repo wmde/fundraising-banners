@@ -50,7 +50,6 @@ const pageScroller = new WindowPageScroller();
 
 const app = createVueApp( BannerConductor, {
 	page,
-	tracker,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000

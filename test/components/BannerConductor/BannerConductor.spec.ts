@@ -28,11 +28,15 @@ describe( 'BannerConductor.vue', () => {
 		const wrapper = shallowMount( BannerConductor, {
 			props: {
 				page: page ?? new PageStub(),
-				tracker: new TrackerStub(),
 				bannerConfig: { delay: 42, transitionDuration: 5 },
 				resizeHandler: new ResizeHandlerStub(),
 				banner: {},
 				impressionCount: new ImpressionCountStub()
+			},
+			global: {
+				provide: {
+					tracker: new TrackerStub()
+				}
 			}
 		} );
 

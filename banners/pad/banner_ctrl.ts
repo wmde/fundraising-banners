@@ -12,7 +12,7 @@ import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
-import eventMappings from '../pad_english/event_map';
+import eventMappings from './event_map';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
@@ -45,13 +45,12 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormController( useFormModel() ),
+		formController: new FormController( useFormModel(), tracker ),
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount,
-	tracker
+	impressionCount
 } );
 
 app.use( TranslationPlugin, translator );
@@ -68,5 +67,6 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

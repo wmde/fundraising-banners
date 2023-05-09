@@ -3,6 +3,8 @@ import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { Tracker } from '@src/tracking/Tracker';
+import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
@@ -15,9 +17,11 @@ export class FormController implements FormControllerInterface {
 	private _previousCallback: () => void;
 	private _goToStepCallback: ( step: number ) => void;
 	private _submitCallback: ( tracking?: string ) => void;
+	private _tracker: Tracker;
 
-	public constructor( formModel: FormModel ) {
+	public constructor( formModel: FormModel, tracker: Tracker ) {
 		this._formModel = formModel;
+		this._tracker = tracker;
 	}
 
 	public submitStep( submitData: FormSubmitData ): void {
@@ -29,6 +33,7 @@ export class FormController implements FormControllerInterface {
 					this._submitCallback();
 					return;
 				}
+				this._tracker.trackEvent( new UpgradeToYearlyFormPageShownEvent() );
 				this._nextCallback();
 				break;
 			case UPGRADE_TO_YEARLY_INDEX:

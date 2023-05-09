@@ -1,26 +1,28 @@
-import { FormController } from '@src/utils/FormController/FormController';
+import { FormController as FormControllerInterface } from '@src/utils/FormController/FormController';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
+export const NEW_CUSTOM_AMOUNT_INDEX = 2;
 
-export class FormControllerCtrl implements FormController {
+export class FormController implements FormControllerInterface {
 
 	private readonly _formModel: FormModel;
-	private readonly _pageScroller: PageScroller;
 
 	private _nextCallback: () => void;
 	private _previousCallback: () => void;
 	private _goToStepCallback: ( step: number ) => void;
 	private _submitCallback: ( tracking?: string ) => void;
+	private _tracker: Tracker;
 
-	public constructor( formModel: FormModel, pageScroller: PageScroller ) {
+	public constructor( formModel: FormModel, tracker: Tracker ) {
 		this._formModel = formModel;
-		this._pageScroller = pageScroller;
+		this._tracker = tracker;
 	}
 
 	public submitStep( submitData: FormSubmitData ): void {
@@ -28,29 +30,27 @@ export class FormControllerCtrl implements FormController {
 
 		switch ( submitData.pageIndex ) {
 			case MAIN_DONATION_INDEX:
-				this._pageScroller.scrollIntoView( '.wmde-banner-form' );
 				if ( interval.value !== Intervals.ONCE.value || paymentMethod.value === PaymentMethods.SOFORT.value ) {
 					this._submitCallback();
 					return;
 				}
+				this._tracker.trackEvent( new UpgradeToYearlyFormPageShownEvent() );
 				this._nextCallback();
 				break;
 			case UPGRADE_TO_YEARLY_INDEX:
 				interval.value = submitData.extraData.upgradeToYearlyInterval;
 				this._submitCallback( interval.value === Intervals.YEARLY.value ? 'submit-recurring' : 'submit-non-recurring' );
 				break;
+			case NEW_CUSTOM_AMOUNT_INDEX:
+				interval.value = Intervals.YEARLY.value;
+				this._formModel.customAmount.value = submitData.extraData.newCustomAmount;
+				this._submitCallback( 'submit-different-amount' );
+				break;
 		}
 	}
 
-	public next( submitData: FormSubmitData ): void {
-		switch ( submitData.pageIndex ) {
-			case UPGRADE_TO_YEARLY_INDEX:
-				this._formModel.interval.value = Intervals.YEARLY.value;
-				this._goToStepCallback( MAIN_DONATION_INDEX );
-				break;
-			default:
-				this._nextCallback();
-		}
+	public next(): void {
+		this._nextCallback();
 	}
 
 	public previous( step: FormSubmitData ): void {

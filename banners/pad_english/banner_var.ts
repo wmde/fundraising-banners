@@ -24,7 +24,7 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerVar } from './FormControllerVar';
+import { FormController } from './FormController';
 import { useFormModel } from '@src/components/composables/useFormModel';
 
 const localeFactory = new LocaleFactoryEn();
@@ -45,13 +45,12 @@ const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 
 const app = createVueApp( BannerConductor, {
 	page,
-	tracker,
 	bannerConfig: {
 		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerVar( useFormModel() ),
+		formController: new FormController( useFormModel(), tracker ),
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),
@@ -73,5 +72,6 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

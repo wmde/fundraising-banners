@@ -1,23 +1,31 @@
 import { describe, vi, it, expect, beforeEach } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import {
-	FormControllerVar,
-	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX, UPGRADE_TO_YEARLY_INDEX
-} from '../../../banners/pad_english/FormControllerVar';
+import { FormController, MAIN_DONATION_INDEX, UPGRADE_TO_YEARLY_INDEX } from '../../../banners/wpde_mobile/FormController';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
-describe( 'FormControllerVar', () => {
+describe( 'FormController', () => {
 	const formModel = useFormModel();
+	let pageScroller: PageScroller;
 
-	beforeEach( () => resetFormModel( formModel ) );
+	beforeEach( () => {
+		resetFormModel( formModel );
+		pageScroller = {
+			scrollIntoView: vi.fn(),
+			scrollToTop: vi.fn()
+		};
+	} );
 
 	describe( 'Donation form', () => {
 		const pageIndex = MAIN_DONATION_INDEX;
 
 		it( 'should submit when recurring interval is selected', () => {
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -28,8 +36,8 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should submit when the payment type is sofort', () => {
-
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -41,13 +49,15 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should go to next page when interval is "once"', () => {
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onNext = vi.fn();
 			controller.onNext( onNext );
 
 			formModel.interval.value = Intervals.ONCE.value;
 			controller.submitStep( { pageIndex } );
 
+			expect( tracker.hasTrackedEvent( UpgradeToYearlyFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 
@@ -57,7 +67,8 @@ describe( 'FormControllerVar', () => {
 		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
 		it( 'should submit tracking data for yearly interval', function () {
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -68,7 +79,8 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should submit tracking data for "once" interval', function () {
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onSubmit = vi.fn();
 			controller.onSubmit( onSubmit );
 
@@ -79,7 +91,8 @@ describe( 'FormControllerVar', () => {
 		} );
 
 		it( 'should set interval to once on previous', () => {
-			const controller = new FormControllerVar( formModel );
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, pageScroller, tracker );
 			const onPrevious = vi.fn();
 			controller.onPrevious( onPrevious );
 			formModel.interval.value = Intervals.YEARLY.value;
@@ -88,41 +101,6 @@ describe( 'FormControllerVar', () => {
 
 			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 			expect( onPrevious ).toHaveBeenCalledOnce();
-		} );
-	} );
-
-	describe( 'New custom amount', () => {
-		const pageIndex = NEW_CUSTOM_AMOUNT_INDEX;
-
-		it( 'should set interval to yearly on submit', () => {
-			const controller = new FormControllerVar( formModel );
-			controller.onSubmit( vi.fn() );
-			formModel.interval.value = Intervals.ONCE.value;
-
-			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '14.31' } } );
-
-			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );
-		} );
-
-		it( 'should overwrite numericAmount on submit', () => {
-			const controller = new FormControllerVar( formModel );
-			controller.onSubmit( vi.fn() );
-			formModel.customAmount.value = '9.05';
-
-			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '12.01' } } );
-
-			expect( formModel.numericAmount.value ).toBe( 12.01 );
-		} );
-
-		it( 'should submit tracking data', function () {
-			const controller = new FormControllerVar( formModel );
-			const onSubmit = vi.fn();
-			controller.onSubmit( onSubmit );
-
-			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
-
-			expect( onSubmit ).toHaveBeenCalledOnce();
-			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
 		} );
 	} );
 

@@ -14,7 +14,7 @@ import supportedEvents from './supported_events';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormController } from './FormController';
 import { useFormModel } from '@src/components/composables/useFormModel';
 
 import messages from './messages';
@@ -46,13 +46,12 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() ),
+		formController: new FormController( useFormModel(), tracker ),
 		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount,
-	tracker
+	impressionCount
 } );
 
 app.use( TranslationPlugin, translator );
@@ -68,5 +67,6 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

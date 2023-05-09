@@ -15,7 +15,7 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
-import eventMappings from '../pad_english/event_map';
+import eventMappings from './event_map';
 
 // Locale-specific imports
 import messages from './messages';
@@ -24,9 +24,8 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormController } from './FormController';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import AlreadyDonatedContent from './content/AlreadyDonatedContent.vue';
 
 const localeFactory = new LocaleFactoryEn();
 const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
@@ -46,14 +45,12 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel() ),
-		useOfFundsContent,
-		alreadyDonatedContent: AlreadyDonatedContent
+		formController: new FormController( useFormModel(), tracker ),
+		useOfFundsContent
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount,
-	tracker
+	impressionCount
 } );
 
 app.use( TranslationPlugin, translator );
