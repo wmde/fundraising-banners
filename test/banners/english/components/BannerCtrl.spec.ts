@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/desktop/components/BannerCtrl.vue';
+import Banner from '../../../../banners/english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -113,7 +113,7 @@ describe( 'BannerCtrl.vue', () => {
 			const wrapper = getWrapper();
 
 			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-			await vi.runAllTimers();
+			await vi.runAllTimersAsync();
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.TimeOut );

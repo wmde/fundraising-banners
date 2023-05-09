@@ -1,4 +1,4 @@
-import { FormController } from '@src/utils/FormController/FormController';
+import { FormController as FormControllerInterface } from '@src/utils/FormController/FormController';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormModel } from '@src/utils/FormModel/FormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
@@ -8,7 +8,7 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
 
-export class FormControllerCtrl implements FormController {
+export class FormController implements FormControllerInterface {
 
 	private readonly _formModel: FormModel;
 	private readonly _pageScroller: PageScroller;

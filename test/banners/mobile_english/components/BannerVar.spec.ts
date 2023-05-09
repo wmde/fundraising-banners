@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import BannerCtrl from '../../../../banners/mobile_english/components/BannerVar.vue';
+import Banner from '../../../../banners/mobile_english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
@@ -12,7 +12,7 @@ import { formItems } from '@test/banners/formItems';
 let pageScroller: PageScroller;
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -21,7 +21,7 @@ describe( 'BannerCtrl.vue', () => {
 			scrollToTop: vi.fn()
 		};
 
-		wrapper = mount( BannerCtrl, {
+		wrapper = mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
 				formController: {

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/desktop/components/BannerCtrl.vue';
+import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -10,7 +10,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( Banner, {
 			props: {
@@ -113,7 +113,7 @@ describe( 'BannerCtrl.vue', () => {
 			const wrapper = getWrapper();
 
 			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-			await vi.runAllTimers();
+			await vi.runAllTimersAsync();
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.TimeOut );
@@ -146,6 +146,45 @@ describe( 'BannerCtrl.vue', () => {
 			await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
 
 			expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+		} );
+	} );
+
+	describe( 'Already Donated Modal', () => {
+		it( 'Shows the already donated modal', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+
+			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).toContain( 'wmde-banner-already-donated--is-visible' );
+		} );
+
+		it( 'Hides the already donated modal', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated .wmde-banner-close' ).trigger( 'click' );
+
+			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).not.toContain( 'wmde-banner-already-donated--is-visible' );
+		} );
+
+		it( 'Fires the maybe later event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated-button-maybe-later' ).trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.MaybeLater );
+		} );
+
+		it( 'Fires the go away event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated-button-go-away' ).trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.AlreadyDonatedGoAway );
 		} );
 	} );
 

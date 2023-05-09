@@ -135,4 +135,43 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 	} );
 
+	describe( 'Already Donated Modal', () => {
+		it( 'Shows the already donated modal', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+
+			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).toContain( 'wmde-banner-already-donated--is-visible' );
+		} );
+
+		it( 'Hides the already donated modal', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated .wmde-banner-close' ).trigger( 'click' );
+
+			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).not.toContain( 'wmde-banner-already-donated--is-visible' );
+		} );
+
+		it( 'Fires the maybe later event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated-button-maybe-later' ).trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.MaybeLater );
+		} );
+
+		it( 'Fires the go away event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-already-donated-button-go-away' ).trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.AlreadyDonatedGoAway );
+		} );
+	} );
+
 } );
