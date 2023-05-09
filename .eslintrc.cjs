@@ -67,6 +67,13 @@ module.exports = {
 				format: [ 'camelCase' ],
 				leadingUnderscore: 'require'
 			},
+			// Allow PHP-like public CLASS_CONSTANTS
+			{
+				selector: 'classProperty',
+				modifiers: [ 'public', 'static', 'readonly' ],
+				format: [ 'UPPER_CASE' ],
+				leadingUnderscore: 'forbid'
+			},
 			{
 				selector: 'classProperty',
 				modifiers: [ 'public' ],

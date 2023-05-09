@@ -59,7 +59,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, inject, nextTick, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import MiniBanner from './MiniBanner.vue';
@@ -74,6 +74,8 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import { Tracker } from '@src/tracking/Tracker';
+import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -90,6 +92,8 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
@@ -113,6 +117,7 @@ function onClose( closeSource: CloseSources ): void {
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {

@@ -35,7 +35,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( null );
 	} );
 
@@ -44,7 +44,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.DisallowedNamespace );
 	} );
 
@@ -53,7 +53,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( false );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
@@ -62,7 +62,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( true );
 
-		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
@@ -71,7 +71,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.SizeIssue );
 	} );
 

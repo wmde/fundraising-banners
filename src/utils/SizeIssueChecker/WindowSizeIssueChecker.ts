@@ -7,9 +7,9 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 	 * This is for adding or removing space from the banner dimensions to allow individual
 	 * banners to adjust the parameters of when they are shown
 	 */
-	private _manualSpaceAdjustment: Vector2 = Vector2.zero;
+	private _manualSpaceAdjustment: Vector2 = Vector2.ZERO;
 
-	public constructor( manualSpaceAdjustment: Vector2 = Vector2.zero ) {
+	public constructor( manualSpaceAdjustment: Vector2 = Vector2.ZERO ) {
 		this._manualSpaceAdjustment = manualSpaceAdjustment;
 	}
 

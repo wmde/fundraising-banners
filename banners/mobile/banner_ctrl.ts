@@ -16,7 +16,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
-import eventMappings from '../pad_english/event_map';
+import eventMappings from './event_map';
 
 // Locale-specific imports
 import messages from './messages';
@@ -72,5 +72,6 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );
