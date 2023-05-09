@@ -1,31 +1,31 @@
 import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
 
-// TODO define output type
-type EventDataConverterFactory = ( e: EventData ) => any;
-
-type EventNameMap = Map<string, EventDataConverterFactory>;
+type AllowedEventNames = Set<string>;
 
 export class TrackerWPDE implements Tracker {
 
-	private readonly _wpdeTracker: any;
+	private readonly _trackerName: string;
 	private readonly _bannerName: string;
-	private readonly _supportedTrackingEvents: EventNameMap;
+	private readonly _supportedTrackingEvents: AllowedEventNames;
+	private _trackFunction: ( eventName: 'Banner', actionName: string, bannerName: string ) => void;
 
-	// TODO implement wpdetracker
-	public constructor( wpdeTracker: any, bannerName: string, supportedTrackingEvents: EventNameMap ) {
-		this._wpdeTracker = wpdeTracker;
+	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames ) {
+		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._supportedTrackingEvents = supportedTrackingEvents;
+		this._trackFunction = (): void => {};
+		// TODO implement logic from https://github.com/wmde/fundraising-banners-until-2022/blob/main/shared/matomo_tracker.js
+
+		// TODO port the methods trackOrStore, trackerLibraryIsLoaded, waitForTrackerToInit from old code
 	}
 
 	public trackEvent( event: EventData ): void {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}
-		const wpDeEvent = this._supportedTrackingEvents.get( event.eventName )( event );
 		if ( this.isDevMode() || Math.random() > event.trackingRate ) {
-			this._wpdeTracker.sendData( wpDeEvent );
+			this.trackOrStore( event.eventName );
 		}
 	}
 
@@ -34,4 +34,8 @@ export class TrackerWPDE implements Tracker {
 		return check.test( window.location.search );
 	}
 
+	private trackOrStore( eventName: string ): void {
+		// TODO check if track function was initialized
+		this._trackFunction( 'Banner', eventName, this._bannerName );
+	}
 }

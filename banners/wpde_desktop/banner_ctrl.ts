@@ -8,6 +8,8 @@ import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
+import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
+import supportedEvents from './supported_events';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
@@ -20,7 +22,6 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
-import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 
 const localeFactory = new LocaleFactoryWpDe();
 const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
@@ -35,10 +36,8 @@ const tracking = {
 
 // This is channel specific and must be changed for wp.org banners
 const page = new PageWPDE( tracking );
-
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-
-const tracker = new TrackerWPDE();
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, supportedEvents );
 
 const app = createVueApp( BannerConductor, {
 	page,

@@ -11,6 +11,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CloseSources } from '@src/tracking/CloseSources';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -27,6 +28,7 @@ describe( 'BannerConductor.vue', () => {
 		const wrapper = shallowMount( BannerConductor, {
 			props: {
 				page: page ?? new PageStub(),
+				tracker: new TrackerStub(),
 				bannerConfig: { delay: 42, transitionDuration: 5 },
 				resizeHandler: new ResizeHandlerStub(),
 				banner: {},

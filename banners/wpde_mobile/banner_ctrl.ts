@@ -15,13 +15,14 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { FormControllerCtrl } from './FormControllerCtrl';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
+import supportedEvents from './supported_events';
 
 import messages from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
-import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 
 const localeFactory = new LocaleFactoryWpDe();
 const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
@@ -38,7 +39,7 @@ const tracking = {
 const page = new PageWPDE( tracking );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const tracker = new TrackerWPDE();
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, supportedEvents );
 
 const pageScroller = new WindowPageScroller();
 
