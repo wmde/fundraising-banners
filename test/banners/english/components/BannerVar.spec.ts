@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -7,6 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import SoftCloseFeatures from '@test/features/SoftCloseDesktop';
 
 const translator = ( key: string ): string => key;
 
@@ -78,55 +79,15 @@ describe( 'BannerVar.vue', () => {
 	} );
 
 	describe( 'Soft Close', () => {
-		it( 'Shows soft close on main banner close', async () => {
+		test.each( [
+			[ 'expectShowsSoftClose' ],
+			[ 'expectEmitsSoftCloseCloseEvent' ],
+			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseTimeOutEvent' ],
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+		] )( '%s', async ( testName: string ) => {
 			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-
-			expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeTruthy();
-		} );
-
-		it( 'Emits soft close close event', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.SoftCloseBannerRejected );
-
-		} );
-
-		it( 'Emits soft close maybe later event', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.MaybeLater );
-		} );
-
-		it( 'Emits soft close time out event', async () => {
-			vi.useFakeTimers();
-
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-			await vi.runAllTimersAsync();
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.TimeOut );
-
-			vi.restoreAllMocks();
-		} );
-
-		it( 'Emits bannerContentChanged event on soft close', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
+			await SoftCloseFeatures[ testName ]( wrapper );
 		} );
 	} );
 
