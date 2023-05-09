@@ -1,7 +1,9 @@
 // This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'BannerMain' with (
+	$banner-height: 394px,
 	$form-width: 300px
 );
 @use 'src/themes/UseOfFunds/UseOfFunds';
@@ -21,11 +23,13 @@
 );
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
-	$padding: 40px 0 0
+	$padding: 0
 );
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Treedip/Footer/BannerFooter';
 @use 'src/themes/Treedip/Footer/SelectionInput';
-@use 'src/themes/Treedip/Message/Message';
+@use 'src/themes/Treedip/Message/Message' with (
+	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large: 18px )
+);
 @use 'src/themes/Treedip/Slider/KeenSlider';

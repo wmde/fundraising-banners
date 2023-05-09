@@ -31,7 +31,8 @@
 					"error",
 					"warn",
 					"debug",
-					"at-root"
+					"at-root",
+					"each"
 				]
 			}
 		],

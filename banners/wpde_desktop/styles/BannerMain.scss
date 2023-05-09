@@ -1,6 +1,6 @@
 @use 'src/themes/Treedip/variables/colors';
 
-$banner-height: 357px !default;
+$banner-height: 394px !default;
 $form-width: 300px !default;
 
 .wmde-banner {
@@ -8,7 +8,7 @@ $form-width: 300px !default;
 		min-height: $banner-height;
 		display: flex;
 		flex-direction: column;
-		padding: 12px 24px 0;
+		padding: 12px 36px 0;
 	}
 
 	&-content {
@@ -41,6 +41,6 @@ $form-width: 300px !default;
 		flex-direction: column;
 		width: $form-width;
 		min-height: 315px;
-		padding: 10px 0;
+		padding: 10px 0 0;
 	}
 }
