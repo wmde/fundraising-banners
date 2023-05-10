@@ -8,6 +8,7 @@ import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import SoftCloseFeatures from '@test/features/SoftCloseMobile';
+import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 
 let pageScroller: PageScroller;
 const translator = ( key: string ): string => key;
@@ -66,37 +67,18 @@ describe( 'BannerVar.vue', () => {
 	} );
 
 	describe( 'Use of Funds', () => {
-		it( 'Shows use of funds when the link is clicked from the full banner', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
+		test.each( [
+			[ 'expectShowsUseOfFunds' ],
+			[ 'expectHidesUseOfFunds' ]
+		] )( '%s', async ( testName: string ) => {
+			await useOfFundsFeatures[ testName ]( wrapper );
 		} );
 
-		it( 'Hides use of funds when the close link is clicked', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-			await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
-		} );
-
-		it( 'Scrolls to the form when the use of funds call to action is clicked', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-			await wrapper.find( '.use-of-funds-button' ).trigger( 'click' );
-
-			expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
-			expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
-		} );
-
-		it( 'Scrolls to the use of funds link when the use of funds close button is clicked', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-			await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
-
-			expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
-			expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-full-small-print .wmde-banner-footer-usage-link' );
+		test.each( [
+			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
+			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
+		] )( '%s', async ( testName: string ) => {
+			await useOfFundsScrollFeatures[ testName ]( wrapper, pageScroller );
 		} );
 	} );
 

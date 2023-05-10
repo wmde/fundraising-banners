@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/wpde_desktop/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -6,6 +6,7 @@ import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 
 const translator = ( key: string ): string => key;
 
@@ -77,21 +78,12 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Use of Funds', () => {
-		it( 'Shows use of funds', async () => {
+		test.each( [
+			[ 'expectShowsUseOfFunds' ],
+			[ 'expectHidesUseOfFunds' ]
+		] )( '%s', async ( testName: string ) => {
 			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
-		} );
-
-		it( 'Hides use of funds', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-			await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+			await useOfFundsFeatures[ testName ]( wrapper );
 		} );
 	} );
 

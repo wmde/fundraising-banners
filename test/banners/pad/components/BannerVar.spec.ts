@@ -8,6 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CloseSources } from '@src/tracking/CloseSources';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import SoftCloseFeatures from '@test/features/SoftCloseDesktop';
+import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 
 const translator = ( key: string ): string => key;
 
@@ -78,21 +79,12 @@ describe( 'BannerVar.vue', () => {
 	} );
 
 	describe( 'Use of Funds', () => {
-		it( 'Shows use of funds', async () => {
+		test.each( [
+			[ 'expectShowsUseOfFunds' ],
+			[ 'expectHidesUseOfFunds' ]
+		] )( '%s', async ( testName: string ) => {
 			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
-		} );
-
-		it( 'Hides use of funds', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
-			await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+			await useOfFundsFeatures[ testName ]( wrapper );
 		} );
 	} );
 
