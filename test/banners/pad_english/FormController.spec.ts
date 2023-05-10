@@ -2,7 +2,9 @@ import { describe, vi, it, expect, beforeEach } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	FormController,
-	MAIN_DONATION_INDEX, NEW_CUSTOM_AMOUNT_INDEX, UPGRADE_TO_YEARLY_INDEX
+	MAIN_DONATION_INDEX,
+	NEW_CUSTOM_AMOUNT_INDEX,
+	UPGRADE_TO_YEARLY_INDEX
 } from '../../../banners/pad_english/FormController';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
@@ -10,6 +12,8 @@ import { resetFormModel } from '@test/resetFormModel';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
+import { IncreaseCustomAmountEvent } from '@src/tracking/events/IncreaseCustomAmountEvent';
+import { DecreaseCustomAmountEvent } from '@src/tracking/events/DecreaseCustomAmountEvent';
 
 describe( 'FormController', () => {
 	const formModel = useFormModel();
@@ -62,7 +66,7 @@ describe( 'FormController', () => {
 	describe( 'Upgrade to yearly', () => {
 		const pageIndex = UPGRADE_TO_YEARLY_INDEX;
 
-		it( 'should submit tracking data for yearly interval', function () {
+		it( 'should submit data for yearly interval', function () {
 			const tracker = new TrackerSpy();
 			const controller = new FormController( formModel, tracker );
 			const onSubmit = vi.fn();
@@ -74,7 +78,7 @@ describe( 'FormController', () => {
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-recurring' );
 		} );
 
-		it( 'should submit tracking data for "once" interval', function () {
+		it( 'should submit data for "once" interval', function () {
 			const tracker = new TrackerSpy();
 			const controller = new FormController( formModel, tracker );
 			const onSubmit = vi.fn();
@@ -111,7 +115,7 @@ describe( 'FormController', () => {
 			// the submit handler of the custom amount page will set the interval
 			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 			expect( tracker.hasTrackedEvent( CustomAmountFormPageShownEvent.EVENT_NAME ) ).toBe( true );
-
+			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 	} );
 
@@ -140,7 +144,7 @@ describe( 'FormController', () => {
 			expect( formModel.numericAmount.value ).toBe( 12.01 );
 		} );
 
-		it( 'should submit tracking data', function () {
+		it( 'should submit the new amount', function () {
 			const tracker = new TrackerSpy();
 			const controller = new FormController( formModel, tracker );
 			const onSubmit = vi.fn();
@@ -150,6 +154,30 @@ describe( 'FormController', () => {
 
 			expect( onSubmit ).toHaveBeenCalledOnce();
 			expect( onSubmit ).toHaveBeenCalledWith( 'submit-different-amount' );
+		} );
+
+		it( 'should track amount increase', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, tracker );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
+			formModel.customAmount.value = '5';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( tracker.hasTrackedEvent( IncreaseCustomAmountEvent.EVENT_NAME ) ).toBe( true );
+		} );
+
+		it( 'should track amount decrease', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, tracker );
+			const onSubmit = vi.fn();
+			controller.onSubmit( onSubmit );
+			formModel.customAmount.value = '789';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( tracker.hasTrackedEvent( DecreaseCustomAmountEvent.EVENT_NAME ) ).toBe( true );
 		} );
 	} );
 
