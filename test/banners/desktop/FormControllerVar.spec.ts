@@ -14,6 +14,8 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
+import { IncreaseCustomAmountEvent } from '@src/tracking/events/IncreaseCustomAmountEvent';
+import { DecreaseCustomAmountEvent } from '@src/tracking/events/DecreaseCustomAmountEvent';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
@@ -120,6 +122,30 @@ describe( 'FormControllerVar', () => {
 			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
 
 			expect( onNext ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'should track amount increase', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormControllerVar( formModel, tracker );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+			formModel.customAmount.value = '5';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( tracker.hasTrackedEvent( IncreaseCustomAmountEvent.EVENT_NAME ) ).toBe( true );
+		} );
+
+		it( 'should track amount decrease', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormControllerVar( formModel, tracker );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+			formModel.customAmount.value = '789';
+
+			controller.submitStep( { pageIndex, extraData: { newCustomAmount: '42.23' } } );
+
+			expect( tracker.hasTrackedEvent( DecreaseCustomAmountEvent.EVENT_NAME ) ).toBe( true );
 		} );
 	} );
 
