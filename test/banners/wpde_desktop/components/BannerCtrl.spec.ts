@@ -1,4 +1,4 @@
-import { describe, expect, it, test, vi } from 'vitest';
+import { describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/wpde_desktop/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -7,6 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
+import { desktopContentFeatures } from '@test/features/DesktopContent';
 
 const translator = ( key: string ): string => key;
 
@@ -42,38 +43,13 @@ describe( 'BannerCtrl.vue', () => {
 	};
 
 	describe( 'Content', () => {
-		it( 'Plays the slider when the banner state becomes visible', async () => {
-			const wrapper = getWrapper();
-			await wrapper.setProps( { bannerState: BannerStates.Visible } );
-
-			expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
-		} );
-
-		it( 'Stops the slider when the form is interacted with', async () => {
-			vi.useFakeTimers();
-
-			const wrapper = getWrapper();
-			await wrapper.setProps( { bannerState: BannerStates.Visible } );
-			await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
-			await vi.runOnlyPendingTimers();
-
-			expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
-
-			vi.restoreAllMocks();
-		} );
-
-		it( 'Shows the slider on small sizes', async () => {
-			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1300 } );
-			const wrapper = getWrapper();
-
-			expect( wrapper.find( '.wmde-banner-slider' ).exists() ).toBeTruthy();
-		} );
-
-		it( 'Shows the message on large sizes', async () => {
-			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
-			const wrapper = getWrapper();
-
-			expect( wrapper.find( '.wmde-banner-message' ).exists() ).toBeTruthy();
+		test.each( [
+			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
+			[ 'expectSlideShowStopsOnFormInteraction' ],
+			[ 'expectShowsSlideShowOnSmallSizes' ],
+			[ 'expectShowsMessageOnSmallSizes' ]
+		] )( '%s', async ( testName: string ) => {
+			await desktopContentFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
