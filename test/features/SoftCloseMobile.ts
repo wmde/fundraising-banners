@@ -54,7 +54,7 @@ const expectEmitsBannerContentChangedOnSoftClose = async ( wrapper: VueWrapper<a
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 };
 
-const softCloseFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
+export const softCloseFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectShowsSoftCloseOnMiniBannerClose,
 	expectDoesNotShowSoftCloseOnFullBannerClose,
 	expectEmitsSoftCloseCloseEvent,
@@ -62,5 +62,3 @@ const softCloseFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<
 	expectEmitsSoftCloseTimeOutEvent,
 	expectEmitsBannerContentChangedOnSoftClose
 };
-
-export default softCloseFeatures;

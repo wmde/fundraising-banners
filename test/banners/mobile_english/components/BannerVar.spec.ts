@@ -7,7 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
-import SoftCloseFeatures from '@test/features/SoftCloseMobile';
+import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 
 let pageScroller: PageScroller;
@@ -62,7 +62,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await SoftCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( wrapper );
 		} );
 	} );
 

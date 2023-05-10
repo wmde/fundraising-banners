@@ -6,7 +6,7 @@ import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import SoftCloseFeatures from '@test/features/SoftCloseDesktop';
+import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 
 const translator = ( key: string ): string => key;
@@ -87,7 +87,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
 			const wrapper = getWrapper();
-			await SoftCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( wrapper );
 		} );
 	} );
 
