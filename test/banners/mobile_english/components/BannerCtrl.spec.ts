@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi, test } from 'vitest';
+import { beforeEach, describe, vi, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/mobile_english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -9,6 +9,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import { miniBannerFeatures } from '@test/features/MiniBanner';
 
 let pageScroller: PageScroller;
 const translator = ( key: string ): string => key;
@@ -83,30 +84,13 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Mini Banner', () => {
-
-		it( 'Plays the mini banner slideshow when the banner becomes visible', async () => {
-			await wrapper.setProps( { bannerState: BannerStates.Visible } );
-
-			expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
-		} );
-
-		it( 'Stops the mini banner slideshow when the full page becomes visible', async () => {
-			await wrapper.setProps( { bannerState: BannerStates.Visible } );
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-
-			expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
-		} );
-
-		it( 'Shows the full page banner when the mini banner show button is clicked', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-
-			expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
-		} );
-
-		it( 'Emits bannerContentChanged when the mini banner show button is clicked', async () => {
-			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
+		test.each( [
+			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
+			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
+			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
+			[ 'expectEmitsBannerContentCHangedEventWhenCallToActionIsClicked' ]
+		] )( '%s', async ( testName: string ) => {
+			await miniBannerFeatures[ testName ]( wrapper );
 		} );
 	} );
 
