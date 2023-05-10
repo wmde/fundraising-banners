@@ -10,6 +10,7 @@ import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmoun
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { IncreaseCustomAmountEvent } from '@src/tracking/events/IncreaseCustomAmountEvent';
 import { DecreaseCustomAmountEvent } from '@src/tracking/events/DecreaseCustomAmountEvent';
+import { AddressTypeFormPageShownEvent } from '@src/tracking/events/AddressTypeFormPageShownEvent';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
@@ -38,6 +39,7 @@ export class FormControllerVar implements FormController {
 			case MAIN_DONATION_INDEX:
 				if ( this.shouldSkipUpsell() ) {
 					this._goToStepCallback( ADDRESS_TYPES_INDEX );
+					this._tracker.trackEvent( new AddressTypeFormPageShownEvent() );
 					// TODO submit tracking
 					return;
 				}
@@ -47,6 +49,7 @@ export class FormControllerVar implements FormController {
 			case UPGRADE_TO_YEARLY_INDEX:
 				interval.value = submitData.extraData.upgradeToYearlyInterval;
 				this._goToStepCallback( ADDRESS_TYPES_INDEX );
+				this._tracker.trackEvent( new AddressTypeFormPageShownEvent() );
 				// TODO tracking
 				break;
 			case NEW_CUSTOM_AMOUNT_INDEX:

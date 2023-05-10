@@ -12,6 +12,7 @@ import { resetFormModel } from '@test/resetFormModel';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { AddressTypeFormPageShownEvent } from '@src/tracking/events/AddressTypeFormPageShownEvent';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
@@ -37,6 +38,7 @@ describe( 'FormControllerVar', () => {
 			formModel.interval.value = Intervals.BIANNUAL.value;
 			controller.submitStep( { pageIndex } );
 
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onGoToStep ).toHaveBeenCalledOnce();
 			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
@@ -51,6 +53,7 @@ describe( 'FormControllerVar', () => {
 			formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
 			controller.submitStep( { pageIndex } );
 
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onGoToStep ).toHaveBeenCalledOnce();
 			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
@@ -94,16 +97,20 @@ describe( 'FormControllerVar', () => {
 
 			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.ONCE.value } } );
 
+			// TODO this is failing because of some inconsistencies of calling submit/next (or goToStep in other cases),
+			// we should unify the calls of submit / next events on form pages
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 
-		it( 'should set interval to yearly and go to previous form on "next"', () => {
+		it( 'should set interval to yearly and go back to the first form on "next" when user clicked on "donate yearly but different amount" link', () => {
 			const tracker = new TrackerSpy();
 			const controller = new FormControllerVar( formModel, pageScroller, tracker );
 			const onGoToStep = vi.fn();
 			controller.onGoToStep( onGoToStep );
 			formModel.interval.value = Intervals.ONCE.value;
 
+			// the "next" function means that the user has clicked on the "yes, upgrade to yearly" link here
 			controller.next( { pageIndex } );
 
 			expect( formModel.interval.value ).toBe( Intervals.YEARLY.value );

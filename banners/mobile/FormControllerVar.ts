@@ -6,6 +6,7 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { AddressTypeFormPageShownEvent } from '@src/tracking/events/AddressTypeFormPageShownEvent';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
@@ -36,6 +37,7 @@ export class FormControllerVar implements FormController {
 				this._pageScroller.scrollIntoView( '.wmde-banner-form' );
 				if ( interval.value !== Intervals.ONCE.value || paymentMethod.value === PaymentMethods.SOFORT.value ) {
 					this._goToStepCallback( ADDRESS_TYPES_INDEX );
+					this._tracker.trackEvent( new AddressTypeFormPageShownEvent() );
 					return;
 				}
 				this._tracker.trackEvent( new UpgradeToYearlyFormPageShownEvent() );
@@ -57,6 +59,10 @@ export class FormControllerVar implements FormController {
 			case UPGRADE_TO_YEARLY_INDEX:
 				this._formModel.interval.value = Intervals.YEARLY.value;
 				this._goToStepCallback( MAIN_DONATION_INDEX );
+				break;
+			case ADDRESS_TYPES_INDEX:
+				this._tracker.trackEvent( new AddressTypeFormPageShownEvent() );
+				this._goToStepCallback( ADDRESS_TYPES_INDEX );
 				break;
 			default:
 				this._nextCallback();

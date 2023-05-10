@@ -16,6 +16,7 @@ import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeT
 import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
 import { IncreaseCustomAmountEvent } from '@src/tracking/events/IncreaseCustomAmountEvent';
 import { DecreaseCustomAmountEvent } from '@src/tracking/events/DecreaseCustomAmountEvent';
+import { AddressTypeFormPageShownEvent } from '@src/tracking/events/AddressTypeFormPageShownEvent';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
@@ -34,6 +35,7 @@ describe( 'FormControllerVar', () => {
 			formModel.interval.value = Intervals.BIANNUAL.value;
 			controller.submitStep( { pageIndex } );
 
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onGoToStep ).toHaveBeenCalledOnce();
 			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
@@ -48,6 +50,7 @@ describe( 'FormControllerVar', () => {
 			formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
 			controller.submitStep( { pageIndex } );
 
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onGoToStep ).toHaveBeenCalledOnce();
 			expect( onGoToStep ).toHaveBeenCalledWith( ADDRESS_TYPES_INDEX );
 		} );
@@ -78,6 +81,7 @@ describe( 'FormControllerVar', () => {
 
 			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
 
+			expect( tracker.hasTrackedEvent( AddressTypeFormPageShownEvent.EVENT_NAME ) ).toBe( true );
 			expect( onGoToStep ).toHaveBeenCalledOnce();
 		} );
 
