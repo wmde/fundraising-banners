@@ -1,15 +1,15 @@
-import { describe, expect, it, test } from 'vitest';
+import { describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const translator = ( key: string ): string => key;
 
@@ -63,8 +63,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			const wrapper = getWrapper();
-			await softCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -73,47 +72,18 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			const wrapper = getWrapper();
-			await useOfFundsFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
 	describe( 'Already Donated Modal', () => {
-		it( 'Shows the already donated modal', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
-
-			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).toContain( 'wmde-banner-already-donated--is-visible' );
-		} );
-
-		it( 'Hides the already donated modal', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-already-donated .wmde-banner-close' ).trigger( 'click' );
-
-			expect( wrapper.find( '.wmde-banner-already-donated' ).classes() ).not.toContain( 'wmde-banner-already-donated--is-visible' );
-		} );
-
-		it( 'Fires the maybe later event', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-already-donated-button-maybe-later' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.MaybeLater );
-		} );
-
-		it( 'Fires the go away event', async () => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
-			await wrapper.find( '.wmde-banner-already-donated-button-go-away' ).trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.AlreadyDonatedGoAway );
+		test.each( [
+			[ 'expectShowsAlreadyDonatedModal' ],
+			[ 'expectHidesAlreadyDonatedModal' ],
+			[ 'expectFiresMaybeLaterEvent' ],
+			[ 'expectFiresGoAwayEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

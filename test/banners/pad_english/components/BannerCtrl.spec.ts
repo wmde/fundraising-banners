@@ -56,8 +56,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			const wrapper = getWrapper();
-			await useOfFundsFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
