@@ -9,6 +9,7 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { resetFormModel } from '@test/resetFormModel';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
 
 describe( 'FormController', () => {
 	const formModel = useFormModel();
@@ -96,6 +97,21 @@ describe( 'FormController', () => {
 
 			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 			expect( onPrevious ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'should go to custom amount page on next', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormController( formModel, tracker );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+			formModel.interval.value = Intervals.ONCE.value;
+
+			controller.next( { pageIndex } );
+
+			// the submit handler of the custom amount page will set the interval
+			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
+			expect( tracker.hasTrackedEvent( CustomAmountFormPageShownEvent.EVENT_NAME ) ).toBe( true );
+
 		} );
 	} );
 

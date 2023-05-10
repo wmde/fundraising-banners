@@ -6,6 +6,7 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { Validity } from '@src/utils/FormModel/Validity';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 import { Tracker } from '@src/tracking/Tracker';
+import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
 
 export const MAIN_DONATION_INDEX = 0;
 export const UPGRADE_TO_YEARLY_INDEX = 1;
@@ -63,7 +64,12 @@ export class FormControllerVar implements FormController {
 			this._formModel.paymentMethod.value === PaymentMethods.SOFORT.value;
 	}
 
-	public next(): void {
+	public next( step: FormSubmitData ): void {
+		switch ( step.pageIndex ) {
+			case UPGRADE_TO_YEARLY_INDEX:
+				this._tracker.trackEvent( new CustomAmountFormPageShownEvent() );
+				break;
+		}
 		this._nextCallback();
 	}
 

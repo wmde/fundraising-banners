@@ -13,6 +13,7 @@ import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
+import { CustomAmountFormPageShownEvent } from '@src/tracking/events/CustomAmountFormPageShownEvent';
 
 describe( 'FormControllerVar', () => {
 	const formModel = useFormModel();
@@ -76,6 +77,21 @@ describe( 'FormControllerVar', () => {
 			controller.submitStep( { pageIndex, extraData: { upgradeToYearlyInterval: Intervals.YEARLY.value } } );
 
 			expect( onGoToStep ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'should go to custom amount page on next', () => {
+			const tracker = new TrackerSpy();
+			const controller = new FormControllerVar( formModel, tracker );
+			const onNext = vi.fn();
+			controller.onNext( onNext );
+			formModel.interval.value = Intervals.ONCE.value;
+
+			controller.next( { pageIndex } );
+
+			// the submit handler of the custom amount page will set the interval
+			expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
+			expect( tracker.hasTrackedEvent( CustomAmountFormPageShownEvent.EVENT_NAME ) ).toBe( true );
+			expect( onNext ).toHaveBeenCalledOnce();
 		} );
 
 		it( 'should set interval to once on previous', () => {
