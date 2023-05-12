@@ -5,7 +5,21 @@
 			@show-full-page-banner="onshowFullPageBanner"
 		>
 			<template #banner-slides>
-				<BannerSlides :play="slideshowShouldPlay"/>
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
+
+					<template #slides="{ currentSlide }: any">
+						<BannerSlides :currentSlide="currentSlide"/>
+					</template>
+
+					<template #left-icon>
+						<ChevronLeftIcon/>
+					</template>
+
+					<template #right-icon>
+						<ChevronRightIcon/>
+					</template>
+
+				</KeenSlider>
 			</template>
 		</MiniBanner>
 
@@ -55,7 +69,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import MiniBanner from './MiniBanner.vue';
@@ -69,6 +83,9 @@ import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -92,8 +109,6 @@ const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.V
 const contentState = ref<ContentStates>( ContentStates.Mini );
 
 watch( contentState, async () => {
-	// Wait a tick in order to let the content re-render before notifying the parent
-	await nextTick();
 	emit( 'bannerContentChanged' );
 } );
 

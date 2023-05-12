@@ -3,10 +3,14 @@
 @use '../../variables/colors';
 @use 'src/components/DonationForm/Forms/MainDonationForm';
 
+$padding: 0 !default;
+
 .wmde-banner {
 	@include MainDonationForm.layout;
 
 	&-sub-form-donation {
+		padding: $padding;
+
 		.wmde-banner-form-field-group {
 			padding: 0 0 10px;
 

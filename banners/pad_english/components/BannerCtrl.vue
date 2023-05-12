@@ -1,11 +1,26 @@
 <template>
     <div class="wmde-banner-wrapper" :class="contentState" >
         <BannerMain
-                @close="onClose"
-                :bannerState="bannerState"
+            @close="onClose"
+            @form-interaction="$emit( 'bannerContentChanged' )"
+            :bannerState="bannerState"
         >
             <template #banner-slides="{ play }: any">
-                <BannerSlides :play="play"/>
+                <KeenSlider :with-navigation="true" :play="play" :interval="5000">
+
+                    <template #slides="{ currentSlide }: any">
+                        <BannerSlides :currentSlide="currentSlide"/>
+                    </template>
+
+                    <template #left-icon>
+                        <ChevronLeftIcon :fill="'#990a00'"/>
+                    </template>
+
+                    <template #right-icon>
+                        <ChevronRightIcon :fill="'#990a00'"/>
+                    </template>
+
+                </KeenSlider>
             </template>
 
             <template #progress>
@@ -20,7 +35,11 @@
                     </template>
 
                     <template #form-page-2="{ pageIndex, submit, next, previous }: any">
-                        <UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+                        <UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous">
+                            <template #back>
+                                <ChevronLeftIcon/>
+                            </template>
+                        </UpgradeToYearlyButtonForm>
                     </template>
 
                     <template #form-page-3="{ pageIndex, submit, next, previous }: any">
@@ -31,9 +50,7 @@
             </template>
 
             <template #footer>
-                <BannerFooter
-                        @showFundsModal="isFundsModalVisible = true"
-                />
+                <BannerFooter @showFundsModal="isFundsModalVisible = true"/>
             </template>
         </BannerMain>
 
@@ -52,7 +69,6 @@ import BannerSlides from '../../pad_english/content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { FormController } from '@src/utils/FormController/FormController';
@@ -61,6 +77,10 @@ import { CloseSources } from '@src/tracking/CloseSources';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 
 enum ContentStates {
     Main = 'wmde-banner-wrapper--main'
@@ -72,7 +92,7 @@ interface Props {
     useOfFundsContent: useOfFundsContentInterface;
 }
 defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const contentState = ref<ContentStates>( ContentStates.Main );
 const isFundsModalVisible = ref<boolean>( false );

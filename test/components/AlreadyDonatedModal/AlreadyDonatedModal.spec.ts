@@ -36,7 +36,7 @@ describe( 'AlreadyDonatedModal', () => {
 	it( 'should emit "hideAlreadyDonatedModal" event when user clicks the X button', function () {
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-close-link' ).trigger( 'click' );
+		wrapper.find( '.wmde-banner-already-donated .wmde-banner-close' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'hideAlreadyDonatedModal' ).length ).toBe( 1 );
 	} );

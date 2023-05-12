@@ -5,6 +5,8 @@ const translations: TranslationMessages = {
 	'address-type-option-full': 'Vollständige Kontaktdaten',
 	'address-type-option-email': 'Nur E-Mail-Adresse',
 	'address-type-option-none': 'Gar keine Kontaktdaten',
+	'address-type-notice-none': 'Sie verzichten sowohl auf eine Spendenquittung als auch auf eine Bestätigung ' +
+		'per E-Mail. Sie erhalten von uns keine Information, wenn Wikipedia wieder Hilfe braucht.',
 	'address-type-notice-full': 'Für Spendenquittung per Post und Bestätigung per E-Mail',
 	'address-type-notice-email': 'Für Bestätigung per E-Mail',
 	'address-type-notice-direct-debit': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',

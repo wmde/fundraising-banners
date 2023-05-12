@@ -5,6 +5,7 @@
 @use 'src/components/ProgressBar/ProgressBar';
 
 $progress-bar-height: 30px !default;
+$progress-bar-margin: 0 !default;
 
 .wmde-banner {
 	@include ProgressBar.layout;
@@ -16,7 +17,7 @@ $progress-bar-height: 30px !default;
 		height: $progress-bar-height;
 		line-height: $progress-bar-height;
 		font-weight: bold;
-		margin: 10px 0;
+		margin: $progress-bar-margin;
 
 		&-text {
 			position: absolute;

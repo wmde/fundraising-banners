@@ -2,11 +2,26 @@
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<BannerMain
 			@close="onCloseMain"
+			@form-interaction="$emit( 'bannerContentChanged' )"
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
 			<template #banner-slides="{ play }: any">
-				<BannerSlides :play="play"/>
+				<KeenSlider :with-navigation="true" :play="play" :interval="5000">
+
+					<template #slides="{ currentSlide }: any">
+						<BannerSlides :currentSlide="currentSlide"/>
+					</template>
+
+					<template #left-icon>
+						<ChevronLeftIcon :fill="'#990a00'"/>
+					</template>
+
+					<template #right-icon>
+						<ChevronRightIcon :fill="'#990a00'"/>
+					</template>
+
+				</KeenSlider>
 			</template>
 
 			<template #progress>
@@ -21,7 +36,11 @@
 					</template>
 
 					<template #form-page-2="{ pageIndex, submit, next, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous">
+							<template #back>
+								<ChevronLeftIcon/>
+							</template>
+						</UpgradeToYearlyButtonForm>
 					</template>
 
 				</MultiStepDonation>
@@ -65,7 +84,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
-import { nextTick, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { FormController } from '@src/utils/FormController/FormController';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
@@ -75,10 +94,13 @@ import BannerSlides from '../content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import AlreadyDonatedContent from '../../english/content/AlreadyDonatedContent.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -99,8 +121,6 @@ const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 
 watch( contentState, async () => {
-	// Wait a tick in order to let the content re-render before notifying the parent
-	await nextTick();
 	emit( 'bannerContentChanged' );
 } );
 

@@ -13,7 +13,7 @@ import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { FormControllerCtrl } from './FormControllerCtrl';
+import { FormController } from './FormController';
 import { useFormModel } from '@src/components/composables/useFormModel';
 
 import messages from './messages';
@@ -47,7 +47,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormControllerCtrl( useFormModel(), pageScroller ),
+		formController: new FormController( useFormModel(), pageScroller ),
 		useOfFundsContent,
 		pageScroller
 	},

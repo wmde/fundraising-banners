@@ -7,6 +7,7 @@ const BannerConfigMap = {
 const CamapignConfigMap = {
 	name: 'name',
 	description: 'description',
+	icon: 'icon',
 	tracking: 'campaign_tracking',
 	previewUrlDev: 'preview_link',
 	previewUrlProd: 'preview_url',

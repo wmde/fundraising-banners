@@ -2,7 +2,7 @@
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-new-custom-amount">
 
 		<div class="wmde-banner-form-new-custom-amount-title">
-			<a tabIndex="-1" href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" class="previous"
+			<a tabIndex="-1" href="#" class="previous"
 					@click.prevent="onPrevious">
 				<ChevronLeftIcon/>
 			</a>

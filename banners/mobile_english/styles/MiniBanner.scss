@@ -1,19 +1,27 @@
 @use 'src/themes/Yperala/variables/colors';
 
+$height: 228px !default;
+
 .wmde-banner {
 	&-mini {
+		display: flex;
+		flex-direction: column;
+		min-height: $height;
+		padding: 5px 0 0;
+
 		&-content {
 			position: relative;
 			cursor: pointer;
 			text-align: center;
 			box-sizing: border-box;
 			display: flex;
+			flex-grow: 1;
 			flex-wrap: wrap;
-			margin: 5px auto 0;
 			background: colors.$primary-lighter;
 			border: 8px solid colors.$primary;
 			box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 			border-radius: 15px;
+			margin: 0 auto;
 			padding: 5px;
 			width: 98%;
 		}

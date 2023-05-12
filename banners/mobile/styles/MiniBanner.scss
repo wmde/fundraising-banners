@@ -1,9 +1,14 @@
 @use '@src/themes/Mikings/variables/colors';
 @use '@src/themes/Mikings/variables/globals';
 
+$height: 288px !default;
+
 .wmde-banner {
 	&-mini {
-		padding: 16px;
+		display: flex;
+		flex-direction: column;
+		min-height: $height;
+		padding: 16px 0;
 		position: relative;
 		border: 2px solid colors.$primary;
 		background: colors.$white;
@@ -20,6 +25,7 @@
 			z-index: 2;
 
 			&-button {
+				margin-top: auto;
 				float: right;
 				height: 16px;
 				line-height: 16px;
@@ -38,22 +44,10 @@
 			}
 		}
 
-		.minimise-link {
-			display: inline-block;
-			svg {
-				margin-right: 5px;
-				float: left;
-				path {
-					fill: colors.$primary;
-					transition: fill 500ms globals.$banner-easing;
-				}
-			}
-		}
-
 		&-headline {
 			height: 25px;
 			text-align: center;
-			margin-bottom: 16px;
+			margin: 0 16px 16px;
 
 			&-background {
 				position: relative;
@@ -97,14 +91,21 @@
 			}
 		}
 
+		&-slideshow {
+			display: flex;
+			flex-direction: column;
+			flex: 1 1 auto;
+		}
+
 		&-button {
-			width: 100%;
+			width: auto;
 			height: 40px;
 			line-height: 40px;
 			border-radius: 20px;
 			font-weight: bold;
 			color: colors.$white;
 			background: colors.$secondary;
+			margin: 0 16px;
 
 			&:hover,
 			&:focus {

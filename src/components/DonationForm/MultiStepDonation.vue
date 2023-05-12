@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container" @click="$emit( 'formInteraction' )">
+	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container" @click="onClick">
 		<template v-for="( slotName, idx ) in usedSlotNames" :key="idx">
 			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
 				<slot
@@ -35,7 +35,7 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
-defineEmits( [ 'formInteraction' ] );
+const emit = defineEmits( [ 'formInteraction' ] );
 
 const slots = useSlots();
 const usedSlotNames = Object.keys( slots );
@@ -52,6 +52,14 @@ const [ container, slider ] = useKeenSlider( {
 		spacing: 15
 	}
 } );
+
+function onClick(): void {
+	// This is so the banner height is adjusted correctly if form errors change it when they appear
+	// We wait using setTimeout as nextTick() doesn't work here for some reason
+	setTimeout( () => {
+		emit( 'formInteraction' );
+	} );
+}
 
 const onSubmit = ( payload: FormSubmitData ): void => {
 	props.formController.submitStep( payload );

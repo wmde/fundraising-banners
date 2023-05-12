@@ -1,12 +1,19 @@
-@use 'src/themes/Tocoloo/variables/globals';
-@use 'src/themes/Tocoloo/variables/colors';
+@use 'src/themes/Treedip/variables/colors';
+
+$banner-height: 353px !default;
+$form-width: 256px !default;
 
 .wmde-banner {
+	&-main {
+		min-height: $banner-height;
+		display: flex;
+		flex-direction: column;
+		padding: 12px 24px 0;
+	}
+
 	&-content {
 		display: flex;
-		flex-direction: row;
-		order: 1;
-		padding: 8px 32px 0;
+		flex: 1 1 auto;
 	}
 
 	&-column-left {
@@ -19,25 +26,16 @@
 
 		border: 5px solid colors.$primary;
 		border-radius: 9px;
-		padding-bottom: 10px;
-		min-height: 345px;
-
-		@media ( min-width: 1114px ) {
-			min-height: 320px;
-		}
-
-		.wmde-banner-progress-bar {
-			margin-left: 32px;
-			margin-right: 32px;
-		}
+		padding: 20px 0;
 	}
 
 	&-column-right {
-		flex: 0 0 globals.$form-width;
-		width: globals.$form-width;
+		flex: 1 1 $form-width;
+		width: $form-width;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
+		padding: 10px 0;
 	}
 }

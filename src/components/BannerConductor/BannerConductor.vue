@@ -13,7 +13,7 @@
 <script setup lang="ts">
 
 import { Page } from '@src/page/Page';
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import { BannerConfig } from '@src/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
@@ -54,7 +54,10 @@ props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( ba
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( CloseSources.PageInteraction ) ) );
 
 function onContentChanged(): void {
-	stateMachine.currentState.value.onContentChanged( bannerRef.value.offsetHeight );
+	// Wait a tick in order to let the content re-render before updating the size
+	nextTick( () => {
+		stateMachine.currentState.value.onContentChanged( bannerRef.value.offsetHeight );
+	} );
 }
 
 async function onCloseHandler( source: CloseSources ): Promise<any> {
@@ -64,10 +67,11 @@ async function onCloseHandler( source: CloseSources ): Promise<any> {
 </script>
 
 <style lang="scss">
-#wmde-banner-app {
+/* stylelint-disable selector-id-pattern */
+#wmde-banner-app,
+#WMDE-Banner-Container {
 	position: fixed;
 	width: 100%;
-	background: #ffffff;
 	z-index: 1000;
 }
 .wmde-banner-closed {

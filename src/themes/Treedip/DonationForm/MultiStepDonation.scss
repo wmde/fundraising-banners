@@ -2,4 +2,15 @@
 
 .wmde-banner {
 	@include MultiStepDonation.layout;
+
+	&-sub-form {
+		opacity: 0;
+		transition: opacity 500ms;
+	}
+
+	&-form-page--current {
+		.wmde-banner-sub-form {
+			opacity: 1;
+		}
+	}
 }

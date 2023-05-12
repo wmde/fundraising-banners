@@ -34,7 +34,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 	it( 'should emit "previous" event when back button is clicked', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.previous' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 	} );
@@ -114,7 +114,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		formModel.selectedAmount.value = '5';
 		const wrapper = getWrapper();
 
-		expect( wrapper.find( '.wmde-banner-form-upgrade-title' ).text() ).toContain( '{"amount":"€5"}' );
+		expect( wrapper.find( '.wmde-banner-form-upgrade-notice strong' ).text() ).toContain( '{"amount":"€5"}' );
 		expect( wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-label' ).text() ).toContain( '{"amount":"€5"}' );
 		expect( wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-label' ).text() ).toContain( '{"amount":"€5"}' );
 	} );
@@ -126,7 +126,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( true );
 
-		await wrapper.find( '.previous' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		expect( wrapper.find( '.wmde-banner-select-group-error-message' ).exists() ).toBe( false );
 	} );
@@ -135,7 +135,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-input' ).trigger( 'change' );
-		await wrapper.find( '.previous' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		const options = wrapper.findAll<HTMLInputElement>( '.wmde-banner-select-group-input' );
 		expect( options[ 0 ].element.checked ).toBe( false );
@@ -145,7 +145,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 	it( 'should emit back event with pageIndex', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.previous' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
