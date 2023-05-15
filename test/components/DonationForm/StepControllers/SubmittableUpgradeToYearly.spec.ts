@@ -1,16 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { resetFormModel } from '@test/resetFormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 const formModel = useFormModel();
 
 describe( 'SubmittableUpgradeToYearly', () => {
-	let stepNavigation: StepNavigation;
+	let stepNavigation: StepAction;
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => {
@@ -55,5 +56,23 @@ describe( 'SubmittableUpgradeToYearly', () => {
 
 		expect( stepNavigation.goToStep ).toHaveBeenCalledOnce();
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'previous' );
+	} );
+
+	describe( 'tracking events', function () {
+		it( 'converts recurring interval to "submit" event with the correct option selected', async () => {
+			const upgrade = createSubmittableUpgradeToYearly( formModel, 'link', 'previous' );
+
+			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.YEARLY.value } );
+
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', { optionSelected: 'recurring' } ) );
+		} );
+
+		it( 'converts non-recurring interval to "submit" event with the correct option selected', async () => {
+			const upgrade = createSubmittableUpgradeToYearly( formModel, 'link', 'previous' );
+
+			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.ONCE.value } );
+
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', { optionSelected: 'non-recurring' } ) );
+		} );
 	} );
 } );

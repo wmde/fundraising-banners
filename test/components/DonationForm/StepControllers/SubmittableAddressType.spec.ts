@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createSubmittableAddressType } from '@src/components/DonationForm/StepControllers/SubmittableAddressType';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { resetFormModel } from '@test/resetFormModel';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { Validity } from '@src/utils/FormModel/Validity';
@@ -9,7 +9,7 @@ import { Validity } from '@src/utils/FormModel/Validity';
 const formModel = useFormModel();
 
 describe( 'SubmittableAddressType', () => {
-	let stepNavigation: StepNavigation;
+	let stepNavigation: StepAction;
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => {

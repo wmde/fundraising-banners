@@ -1,6 +1,6 @@
 import { beforeEach, describe, vi, it, expect } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { resetFormModel } from '@test/resetFormModel';
 import {
 	createIntermediateUpgradeToYearly
@@ -10,7 +10,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 const formModel = useFormModel();
 
 describe( 'IntermediateUpgradeToYearly', () => {
-	let stepNavigation: StepNavigation;
+	let stepNavigation: StepAction;
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => {

@@ -1,14 +1,29 @@
-import { describe, expect, it, test } from 'vitest';
+import { beforeEach, describe, expect, it, test } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
+import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
+
+const formModel = useFormModel();
 
 describe( 'CustomAmountForm.vue', () => {
+	let tracker: TrackerSpy;
+
+	beforeEach( () => {
+		resetFormModel( formModel );
+		tracker = new TrackerSpy();
+	} );
+
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( CustomAmountForm, {
 			props: {
-				pageIndex: 4
+				pageIndex: 4,
+				isCurrent: false
 			},
 			global: {
 				mocks: {
@@ -17,7 +32,8 @@ describe( 'CustomAmountForm.vue', () => {
 					}
 				},
 				provide: {
-					currencyFormatter: new CurrencyEn()
+					currencyFormatter: new CurrencyEn(),
+					tracker
 				}
 			}
 		} );
@@ -113,4 +129,32 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( true );
 	} );
 
+	describe( 'tracking events ', function () {
+
+		it( 'should track "increased amount"', async function () {
+			const wrapper = getWrapper();
+			// TODO insert higher custom amount setup
+
+			expect( tracker.hasTrackedEvent( CustomAmountChanged.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'upgraded-to-yearly' ) );
+
+		} );
+
+		it( 'should track "decreased amount"', async function () {
+			const wrapper = getWrapper();
+
+			// TODO insert lower custom amount setup
+			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'not-upgraded-to-yearly' ) );
+		} );
+
+		it( 'sends the FormStepShownEvent to tracker when the form becomes the current form', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.setProps( { isCurrent: true } );
+
+			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'CustomAmountForm' ) );
+		} );
+	} );
 } );

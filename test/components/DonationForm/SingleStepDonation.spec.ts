@@ -18,6 +18,8 @@ const formItems: DonationFormItems = {
 
 const translate = ( key: string ): string => key;
 
+// TODO remove this file and the component
+
 describe( 'SingleStepDonation.vue', () => {
 	let wrapper: VueWrapper<any>;
 

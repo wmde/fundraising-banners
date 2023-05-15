@@ -27,6 +27,8 @@ import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValue
 import { useFormAction } from '@src/components/composables/useFormAction';
 import { StepController } from '@src/components/DonationForm/StepController';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import { Tracker } from '@src/tracking/Tracker';
+import { EventData } from '@src/tracking/EventData';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -40,14 +42,12 @@ const props = withDefaults( defineProps<Props>(), {
 const emit = defineEmits( [ 'formInteraction' ] );
 
 const slots = useSlots();
-
 const usedSlotNames = Object.keys( slots );
-
 const slotNameIndices: Record<string, number> = {};
 usedSlotNames.forEach( ( slotName: string, index: number ): void => {
 	slotNameIndices[ slotName ] = index;
 } );
-
+const tracker = inject<Tracker>( 'tracker' );
 const currentStepIndex = ref<number>( 0 );
 const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
 const submitFormRef = ref<HTMLFormElement>( null );
@@ -75,8 +75,8 @@ const multistepCallbacks = {
 		currentStepIndex.value = pageIndex;
 		slider.value.moveToIdx( pageIndex );
 	},
-	async submit( submitId: string ): Promise<void> {
-		// TODO Add the submit events and call submit from the stepsControllers with EventData interface instead of a string
+	async submit( eventData: EventData ): Promise<void> {
+		tracker.trackEvent( eventData );
 		await nextTick();
 		submitFormRef.value.submit();
 	}

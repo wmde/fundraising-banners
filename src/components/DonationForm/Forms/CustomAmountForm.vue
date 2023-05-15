@@ -59,7 +59,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
@@ -67,18 +67,29 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 interface Props {
-	pageIndex: number
+	pageIndex: number,
+	isCurrent: boolean
 }
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const amount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const numericAmount = computed( (): number => parseFloatFromFormattedString( amount.value ) );
 const buttonAmount = computed( () => currencyFormatter.euroAmount( numericAmount.value ) );
+
+watch( () => props.isCurrent, ( isCurrent, oldIsCurrent ) => {
+	if ( oldIsCurrent === false && isCurrent === true ) {
+		tracker.trackEvent( new FormStepShownEvent( 'CustomAmountForm' ) );
+	}
+} );
 
 const onBlur = (): void => {
 	if ( amount.value === '' ) {

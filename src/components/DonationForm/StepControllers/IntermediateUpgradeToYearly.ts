@@ -1,7 +1,7 @@
 import { StepController } from '@src/components/DonationForm/StepController';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { FormModel } from '@src/utils/FormModel/FormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 
 export function createIntermediateUpgradeToYearly(
 	formModel: FormModel,
@@ -10,7 +10,7 @@ export function createIntermediateUpgradeToYearly(
 	stepNameOfPreviousPage: string
 ): StepController {
 	return {
-		async submit( navigation: StepNavigation, submitData: Record<string, string> ): Promise<void> {
+		async submit( navigation: StepAction, submitData: Record<string, string> ): Promise<void> {
 			formModel.interval.value = submitData.upgradeToYearlyInterval;
 			if ( submitData.changeOfAmount ) {
 				await navigation.goToStep( stepNameOfLinkClick );
@@ -18,7 +18,7 @@ export function createIntermediateUpgradeToYearly(
 			}
 			await navigation.goToStep( stepNameOfNextStep );
 		},
-		async previous( navigation: StepNavigation ): Promise<void> {
+		async previous( navigation: StepAction ): Promise<void> {
 			formModel.interval.value = Intervals.ONCE.value;
 			await navigation.goToStep( stepNameOfPreviousPage );
 		}

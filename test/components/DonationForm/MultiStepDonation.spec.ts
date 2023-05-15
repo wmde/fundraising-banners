@@ -14,6 +14,8 @@ const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, pre
     />
 </template>`;
 
+// TODO remove the todo and fix the tests!
+
 describe.todo( 'MultistepDonation.vue', () => {
 	let mockedFormController: FormController;
 	let callbackInvokerNext: () => void;

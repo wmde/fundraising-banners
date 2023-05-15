@@ -1,6 +1,6 @@
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 
 export interface StepController {
-	submit: ( navigation: StepNavigation, submitData: Record<string, string> ) => Promise<void>;
-	previous: ( navigation: StepNavigation, submitData: Record<string, string> ) => Promise<void>;
+	submit: ( navigation: StepAction, submitData: Record<string, string> ) => Promise<void>;
+	previous: ( navigation: StepAction, submitData: Record<string, string> ) => Promise<void>;
 }

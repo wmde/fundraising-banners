@@ -84,8 +84,9 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import { UpgradeToYearlyFormPageShownEvent } from '@src/tracking/events/UpgradeToYearlyFormPageShownEvent';
 import { Tracker } from '@src/tracking/Tracker';
+import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 
 interface Props {
 	pageIndex: number,
@@ -93,8 +94,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
+const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 
@@ -103,7 +103,7 @@ const intervalValidity = ref<Validity>( Validity.Unset );
 
 watch( () => props.isCurrent, ( isCurrent, oldIsCurrent ) => {
 	if ( oldIsCurrent === false && isCurrent === true ) {
-		tracker.trackEvent( new UpgradeToYearlyFormPageShownEvent() );
+		tracker.trackEvent( new FormStepShownEvent( 'UpgradeToYearlyForm' ) );
 	}
 } );
 
@@ -112,6 +112,11 @@ const onSubmit = (): void => {
 	if ( intervalValidity.value === Validity.Invalid ) {
 		return;
 	}
+
+	tracker.trackEvent( new UpgradeToYearlyEvent(
+		interval.value === Intervals.ONCE.value ? 'not-upgraded-to-yearly' : 'upgraded-to-yearly'
+	) );
+
 	emit( 'submit', {
 		pageIndex: props.pageIndex,
 		extraData: {

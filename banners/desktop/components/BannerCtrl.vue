@@ -122,7 +122,7 @@ const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep, ( interval: string ) => new SubmitEvent( interval === Intervals.YEARLY.value ? 'recurring' : 'non-recurring' ) ),
 	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
 

@@ -2,13 +2,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createIntermediateCustomAmount } from '@src/components/DonationForm/StepControllers/IntermediateCustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 
 const formModel = useFormModel();
 
 describe( 'IntermediateCustomAmount', () => {
-	let stepNavigation: StepNavigation;
+	let stepNavigation: StepAction;
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => {

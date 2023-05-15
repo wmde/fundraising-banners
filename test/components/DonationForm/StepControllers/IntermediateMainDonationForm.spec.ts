@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { StepNavigation } from '@src/components/DonationForm/StepNavigation';
+import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { resetFormModel } from '@test/resetFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import {
@@ -11,7 +11,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 const formModel = useFormModel();
 
 describe( 'IntermediateMainDonationForm', () => {
-	let stepNavigation: StepNavigation;
+	let stepNavigation: StepAction;
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => {

@@ -13,4 +13,8 @@ export class TrackerSpy implements Tracker {
 		return this._receivedEvents.find( ( eventData: EventData ) => eventData.eventName === eventName ) !== undefined;
 	}
 
+	public getTrackedEvent( eventName: string ): EventData|null {
+		return this._receivedEvents.find( ( eventData: EventData ) => eventData.eventName === eventName );
+	}
+
 }
