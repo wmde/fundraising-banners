@@ -1,6 +1,6 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export class MobileMiniBannerExpandedEvent implements EventData {
+export class MobileMiniBannerExpandedEvent implements TrackingEvent {
 
 	public static readonly EVENT_NAME = 'mobile-mini-banner-expanded';
 

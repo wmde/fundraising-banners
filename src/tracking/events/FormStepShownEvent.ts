@@ -1,7 +1,7 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export class FormStepShownEvent implements EventData {
-	public static readonly EVENT_NAME = 'decreased-amount';
+export class FormStepShownEvent implements TrackingEvent {
+	public static readonly EVENT_NAME = 'form-step-shown';
 
 	public readonly eventName = FormStepShownEvent.EVENT_NAME;
 	public readonly feature: string;

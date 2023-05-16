@@ -54,6 +54,8 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
+import { Tracker } from '@src/tracking/Tracker';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
@@ -63,10 +65,14 @@ const {
 	paymentMethod, disabledAddressTypes
 } = formModel;
 interface Props {
-	pageIndex: number
+	pageIndex: number,
+	isCurrent: boolean
 }
 const props = defineProps<Props>();
+const tracker = inject<Tracker>( 'tracker' );
 const emit = defineEmits( [ 'submit', 'previous' ] );
+
+useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
 const onPrevious = (): void => {
 	emit( 'previous', { pageIndex: props.pageIndex } );

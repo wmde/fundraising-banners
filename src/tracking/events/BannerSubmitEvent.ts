@@ -1,6 +1,6 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export class BannerSubmitEvent implements EventData {
+export class BannerSubmitEvent implements TrackingEvent {
 	public static readonly EVENT_NAME = 'submit';
 
 	public readonly eventName = BannerSubmitEvent.EVENT_NAME;

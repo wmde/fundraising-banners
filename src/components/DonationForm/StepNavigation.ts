@@ -1,6 +1,6 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export interface StepAction {
 	goToStep( pageName: string ): Promise<void>;
-	submit( eventData: EventData ): Promise<void>;
+	submit( eventData: TrackingEvent ): Promise<void>;
 }

@@ -78,7 +78,7 @@ export default {
 </script>
 <script setup lang="ts">
 
-import { computed, inject, ref, watch } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
@@ -86,7 +86,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
-import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
 interface Props {
 	pageIndex: number,
@@ -101,11 +101,7 @@ const tracker = inject<Tracker>( 'tracker' );
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
-watch( () => props.isCurrent, ( isCurrent, oldIsCurrent ) => {
-	if ( oldIsCurrent === false && isCurrent === true ) {
-		tracker.trackEvent( new FormStepShownEvent( 'UpgradeToYearlyForm' ) );
-	}
-} );
+useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
 
 const onSubmit = (): void => {
 	intervalValidity.value = interval.value ? Validity.Valid : Validity.Invalid;

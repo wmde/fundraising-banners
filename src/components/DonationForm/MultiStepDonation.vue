@@ -28,7 +28,7 @@ import { useFormAction } from '@src/components/composables/useFormAction';
 import { StepController } from '@src/components/DonationForm/StepController';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { Tracker } from '@src/tracking/Tracker';
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -75,7 +75,7 @@ const multistepCallbacks = {
 		currentStepIndex.value = pageIndex;
 		slider.value.moveToIdx( pageIndex );
 	},
-	async submit( eventData: EventData ): Promise<void> {
+	async submit( eventData: TrackingEvent ): Promise<void> {
 		tracker.trackEvent( eventData );
 		await nextTick();
 		submitFormRef.value.submit();

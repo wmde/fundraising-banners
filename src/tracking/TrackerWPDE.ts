@@ -1,5 +1,5 @@
 import { Tracker } from '@src/tracking/Tracker';
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 type AllowedEventNames = Set<string>;
 
@@ -20,7 +20,7 @@ export class TrackerWPDE implements Tracker {
 		// TODO port the methods trackOrStore, trackerLibraryIsLoaded, waitForTrackerToInit from old code
 	}
 
-	public trackEvent( event: EventData ): void {
+	public trackEvent( event: TrackingEvent ): void {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}

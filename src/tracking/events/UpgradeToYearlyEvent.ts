@@ -1,6 +1,6 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export class UpgradeToYearlyEvent implements EventData {
+export class UpgradeToYearlyEvent implements TrackingEvent {
 	public static readonly EVENT_NAME = 'upgrade-to-yearly';
 
 	public readonly eventName = UpgradeToYearlyEvent.EVENT_NAME;

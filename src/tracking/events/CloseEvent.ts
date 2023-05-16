@@ -1,7 +1,7 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CloseSources } from '@src/tracking/CloseSources';
 
-export class CloseEvent implements EventData {
+export class CloseEvent implements TrackingEvent {
 	public readonly eventName: string;
 	public readonly customData: Record<string, string> = {};
 	public readonly feature: string = '';

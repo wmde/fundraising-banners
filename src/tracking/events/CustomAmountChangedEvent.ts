@@ -1,6 +1,6 @@
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export class CustomAmountChangedEvent implements EventData {
+export class CustomAmountChangedEvent implements TrackingEvent {
 	public static readonly EVENT_NAME = 'custom-amount-changed';
 
 	public readonly eventName = CustomAmountChangedEvent.EVENT_NAME;

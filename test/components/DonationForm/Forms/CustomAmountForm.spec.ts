@@ -3,7 +3,6 @@ import { shallowMount, VueWrapper } from '@vue/test-utils';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
-import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { resetFormModel } from '@test/resetFormModel';
@@ -130,23 +129,31 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( true );
 	} );
 
-	describe.todo( 'tracking events ', function () {
+	describe( 'tracking events ', function () {
 
 		it( 'should track "increased amount"', async function () {
 			const wrapper = getWrapper();
-			// TODO insert higher custom amount setup
+			formModel.customAmount.value = '1';
+
+			const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
+			await input.setValue( '99.99' );
+			await wrapper.trigger( 'submit' );
 
 			expect( tracker.hasTrackedEvent( CustomAmountChangedEvent.EVENT_NAME ) ).toBe( true );
-			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'upgraded-to-yearly' ) );
+			expect( tracker.getTrackedEvent( CustomAmountChangedEvent.EVENT_NAME ) ).toEqual( new CustomAmountChangedEvent( 'increased' ) );
 
 		} );
 
 		it( 'should track "decreased amount"', async function () {
 			const wrapper = getWrapper();
+			formModel.customAmount.value = '42';
 
-			// TODO insert lower custom amount setup
-			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
-			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'not-upgraded-to-yearly' ) );
+			const input = await wrapper.find( '.wmde-banner-select-custom-amount-input' );
+			await input.setValue( '23' );
+			await wrapper.trigger( 'submit' );
+
+			expect( tracker.hasTrackedEvent( CustomAmountChangedEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( CustomAmountChangedEvent.EVENT_NAME ) ).toEqual( new CustomAmountChangedEvent( 'decreased' ) );
 		} );
 
 		it( 'sends the FormStepShownEvent to tracker when the form becomes the current form', async () => {

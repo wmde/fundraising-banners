@@ -1,12 +1,12 @@
 import { Tracker } from '@src/tracking/Tracker';
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 
-export type EventDataConverterFactory = ( event: EventData ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
+export type TrackingEventConverterFactory = ( event: TrackingEvent ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
 
-type EventNameMap = Map<string, EventDataConverterFactory>;
+type EventNameMap = Map<string, TrackingEventConverterFactory>;
 
 /**
  * @deprecated LegacyTrackerWPORG is for old tracking schemas
@@ -23,7 +23,7 @@ export class LegacyTrackerWPORG implements Tracker {
 		this._supportedTrackingEvents = supportedTrackingEvents;
 	}
 
-	public trackEvent( event: EventData ): void {
+	public trackEvent( event: TrackingEvent ): void {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}

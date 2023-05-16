@@ -44,17 +44,23 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 interface Props {
-	pageIndex: number
+	pageIndex: number,
+	isCurrent: boolean
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
+const tracker = inject<Tracker>( 'tracker' );
 const interval = ref<string>( null );
 const intervalValidity = ref<Validity>( Validity.Unset );
+
+useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
 
 const onSubmit = ( e: SubmitEvent ): void => {
 	const submitValue = ( e.submitter as HTMLInputElement ).value;
