@@ -3,6 +3,6 @@ import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChang
 
 export default new Set( [
 	CloseSources.MainBanner,
-	CustomAmountChangedEvent.EVENT_NAME // TODO convert custom data to event name
+	CustomAmountChangedEvent.EVENT_NAME
 	// TODO add more supported events (e.g. submit). We don't track SizeIssue events on WPDE
 ] );

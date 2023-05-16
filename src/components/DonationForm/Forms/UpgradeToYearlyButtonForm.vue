@@ -46,6 +46,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 import { Tracker } from '@src/tracking/Tracker';
+import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 
 interface Props {
 	pageIndex: number,
@@ -74,6 +75,11 @@ const onSubmit = ( e: SubmitEvent ): void => {
 	if ( intervalValidity.value === Validity.Invalid ) {
 		return;
 	}
+
+	tracker.trackEvent( new UpgradeToYearlyEvent(
+		submitValue === Intervals.YEARLY.value ? 'upgraded-to-yearly' : 'not-upgraded-to-yearly'
+	) );
+
 	emit( 'submit', {
 		pageIndex: props.pageIndex,
 		extraData: {

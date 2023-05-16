@@ -60,8 +60,9 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 		expect( emittedNextEvent.extraData ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
-	it( 'should emit "submit" event when user selects an interval and submits ', async function () {
+	it( 'should emit "submit" event when user clicks a submit button for an interval', async function () {
 		const wrapper = getWrapper();
+
 		await wrapper.find( `button[value="${ Intervals.YEARLY.value }"]` ).trigger( 'click' );
 
 		const emitted = wrapper.emitted( 'submit' );
@@ -88,22 +89,20 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 
 	describe( 'tracking events ', function () {
 
-		it.todo( 'should track "Upgrade to yearly" event when user chooses Upgrade to yearly', async function () {
+		it( 'should track "Upgrade to yearly" event when user chooses Upgrade to yearly', async function () {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-input' ).trigger( 'change' );
-			await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+			await wrapper.find( `button[value="${ Intervals.YEARLY.value }"]` ).trigger( 'click' );
 
 			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
 			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'upgraded-to-yearly' ) );
 
 		} );
 
-		it.todo( 'should track "Not upgraded to yearly" event when user does not choose Upgrade to yearly', async function () {
+		it( 'should track "Not upgraded to yearly" event when user does not choose Upgrade to yearly', async function () {
 			const wrapper = getWrapper();
 
-			await wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-input' ).trigger( 'change' );
-			await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+			await wrapper.find( `button[value="${ Intervals.ONCE.value }"]` ).trigger( 'click' );
 
 			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
 			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'not-upgraded-to-yearly' ) );

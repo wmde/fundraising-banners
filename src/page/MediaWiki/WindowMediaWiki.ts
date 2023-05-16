@@ -20,7 +20,10 @@ export class WindowMediaWiki implements MediaWiki {
 	}
 
 	public isContentHiddenByLightbox(): boolean {
-		return document.getElementsByClassName( 'mw-mmv-lightbox-open' ).length > 0;
+		// mw-mvv-lightbox-open is the CSS class name of the overlay on desktop
+		// media-viewer is the CSS class name of the overlay on mobile
+		return document.getElementsByClassName( 'mw-mmv-lightbox-open' ).length > 0 ||
+			document.getElementsByClassName( 'media-viewer' ).length > 0;
 	}
 
 	public isInArticleNamespace(): boolean {

@@ -10,8 +10,9 @@ import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChang
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseSources.MainBanner, (): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( 'banner-closed', 0.1 ) ],
-	[ CloseSources.AlreadyDonatedGoAway, (): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( 'banner-closed', 0.1 ) ],
+
 	[ BannerNotShownReasons.SizeIssue, ( e: NotShownEvent ): WMDESizeIssueEvent => new WMDESizeIssueEvent( '', Number( e.customData.bannerSize ), 1 ) ],
+	[ BannerNotShownReasons.DisallowedNamespace, (): WMDESizeIssueEvent => new WMDESizeIssueEvent( 'namespace-tracking', 0, 1 ) ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ CustomAmountChangedEvent.EVENT_NAME,
 		( e: CustomAmountChangedEvent ): WMDELegacyBannerEvent =>

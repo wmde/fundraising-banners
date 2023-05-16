@@ -84,7 +84,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -101,8 +101,6 @@ import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import { Tracker } from '@src/tracking/Tracker';
-import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
@@ -131,8 +129,6 @@ interface Props {
 defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
 
-const tracker = inject<Tracker>( 'tracker' );
-
 const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -157,7 +153,6 @@ function onClose( closeSource: CloseSources ): void {
 
 function onShowAlreadyDonated(): void {
 	isAlreadyDonatedModalVisible.value = true;
-	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 }
 
 </script>

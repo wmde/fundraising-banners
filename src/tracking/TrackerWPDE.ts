@@ -1,5 +1,6 @@
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 
 type AllowedEventNames = Set<string>;
 
@@ -24,9 +25,10 @@ export class TrackerWPDE implements Tracker {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}
+		const eventName = this.getEventNameFromEvent( event );
 		// TODO: Import event tracking rate from new map
 		if ( this.isDevMode() || Math.random() > 1 ) {
-			this.trackOrStore( event.eventName );
+			this.trackOrStore( eventName );
 		}
 	}
 
@@ -38,5 +40,26 @@ export class TrackerWPDE implements Tracker {
 	private trackOrStore( eventName: string ): void {
 		// TODO check if track function was initialized
 		this._trackFunction( 'Banner', eventName, this._bannerName );
+	}
+
+	/**
+	 * Tracking on WPDE only knows event names and can't handle our complex banner events
+	 * with action, feature, customData, etc. This method converts complex banner events
+	 * into event names.
+	 *
+	 * Since we only have 2 channels on WPDE we decided to share the code.
+	 *
+	 * We should regularly clean up this method and remove unused events!
+	 *
+	 * @param {TrackingEvent} event
+	 * @private
+	 */
+	private getEventNameFromEvent( event: TrackingEvent ): string {
+		switch ( event.eventName ) {
+			case CustomAmountChangedEvent.EVENT_NAME:
+				return event.customData.amountChange + '-amount';
+			default:
+				return event.eventName;
+		}
 	}
 }

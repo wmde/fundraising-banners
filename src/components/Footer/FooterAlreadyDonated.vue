@@ -1,7 +1,7 @@
 <template>
     <div class="wmde-banner-footer">
         <div class="wmde-banner-footer-bank">
-            <a href="#" class="wmde-banner-footer-already-donated" @click.prevent="$emit( 'showAlreadyDonatedModal' )">
+            <a href="#" class="wmde-banner-footer-already-donated" @click.prevent="onClickAlreadyDonated">
                 <TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-open-link' ) }}
             </a>
             <label class="wmde-banner-footer-bank-item account">{{ $translate( 'donation-account' ) }}:
@@ -32,7 +32,16 @@
 <script setup lang="ts">
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
+import { inject } from 'vue';
+import { Tracker } from '@src/tracking/Tracker';
+import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 
-defineEmits( [ 'showAlreadyDonatedModal', 'showFundsModal' ] );
+const tracker = inject<Tracker>( 'tracker' );
 
+const emit = defineEmits( [ 'showAlreadyDonatedModal', 'showFundsModal' ] );
+
+const onClickAlreadyDonated = (): void => {
+	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+	emit( 'showAlreadyDonatedModal' );
+};
 </script>
