@@ -4,21 +4,49 @@ import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChang
 
 type AllowedEventNames = Set<string>;
 
+interface Window {
+	[ key: string ]: any;
+}
+declare let window: Window;
+
 export class TrackerWPDE implements Tracker {
 
 	private readonly _trackerName: string;
 	private readonly _bannerName: string;
 	private readonly _supportedTrackingEvents: AllowedEventNames;
 	private _trackFunction: ( eventName: 'Banner', actionName: string, bannerName: string ) => void;
+	private _accumulatedTracking: Function[];
+	private _scheduleRetry: Function;
+	public trackerFindCounter: number;
+	private _tracker: any;
 
-	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames ) {
+	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames, scheduleRetry = scheduleRetryWithBackoff ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._supportedTrackingEvents = supportedTrackingEvents;
 		this._trackFunction = (): void => {};
-		// TODO implement logic from https://github.com/wmde/fundraising-banners-until-2022/blob/main/shared/matomo_tracker.js
+		this._tracker = null;
+		this.trackerFindCounter = 0;
+		this._accumulatedTracking = [];
+		this._scheduleRetry = scheduleRetry;
+		if ( !this.trackerLibraryIsLoaded( trackerName ) ) {
+			scheduleRetry( this );
+			return;
+		}
+		this._tracker = window[ this._trackerName ];
+	}
 
-		// TODO port the methods trackOrStore, trackerLibraryIsLoaded, waitForTrackerToInit from old code
+	public waitForTrackerToInit(): void {
+		if ( !this.trackerLibraryIsLoaded( this._trackerName ) ) {
+			this.trackerFindCounter++;
+			if ( this.trackerFindCounter < 10 ) {
+				this._scheduleRetry( this );
+			}
+			return;
+		}
+		this._tracker = window[ this._trackerName ];
+		this._accumulatedTracking.forEach( trackFn => trackFn( this._tracker ) );
+		this._accumulatedTracking = [];
 	}
 
 	public trackEvent( event: TrackingEvent ): void {
@@ -28,8 +56,12 @@ export class TrackerWPDE implements Tracker {
 		const eventName = this.getEventNameFromEvent( event );
 		// TODO: Import event tracking rate from new map
 		if ( this.isDevMode() || Math.random() > 1 ) {
-			this.trackOrStore( eventName );
+			this.trackOrStore( ( tracker: any ): void => tracker.trackEvent( 'Banners', eventName, this._bannerName ) );
 		}
+	}
+
+	private trackerLibraryIsLoaded( trackerName: string ): boolean {
+		return typeof window[ trackerName ] !== 'undefined' && window[ trackerName ] !== null;
 	}
 
 	private isDevMode(): boolean {
@@ -37,9 +69,12 @@ export class TrackerWPDE implements Tracker {
 		return check.test( window.location.search );
 	}
 
-	private trackOrStore( eventName: string ): void {
-		// TODO check if track function was initialized
-		this._trackFunction( 'Banner', eventName, this._bannerName );
+	private trackOrStore( trackFn: Function ): void {
+		if ( this._tracker === null ) {
+			this._accumulatedTracking.push( trackFn );
+			return;
+		}
+		trackFn();
 	}
 
 	/**
@@ -62,4 +97,12 @@ export class TrackerWPDE implements Tracker {
 				return event.eventName;
 		}
 	}
+}
+
+function scheduleRetryWithBackoff( tracker: TrackerWPDE ): void {
+	const RETRY_INTERVAL = 100;
+	setTimeout(
+		tracker.waitForTrackerToInit.bind( tracker ),
+		Math.max( RETRY_INTERVAL, RETRY_INTERVAL * tracker.trackerFindCounter )
+	);
 }

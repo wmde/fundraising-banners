@@ -159,6 +159,4 @@ describe( 'PageOrg', function () {
 
 		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
 	} );
-
-	it.todo( 'sends event tracking data in trackEvent()' );
 } );
