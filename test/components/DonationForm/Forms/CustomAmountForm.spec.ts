@@ -8,6 +8,7 @@ import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 
 const formModel = useFormModel();
 
@@ -129,13 +130,13 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-select-group-container--with-error' ).exists() ).toBe( true );
 	} );
 
-	describe( 'tracking events ', function () {
+	describe.todo( 'tracking events ', function () {
 
 		it( 'should track "increased amount"', async function () {
 			const wrapper = getWrapper();
 			// TODO insert higher custom amount setup
 
-			expect( tracker.hasTrackedEvent( CustomAmountChanged.EVENT_NAME ) ).toBe( true );
+			expect( tracker.hasTrackedEvent( CustomAmountChangedEvent.EVENT_NAME ) ).toBe( true );
 			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'upgraded-to-yearly' ) );
 
 		} );

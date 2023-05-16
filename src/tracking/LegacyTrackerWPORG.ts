@@ -2,13 +2,17 @@ import { Tracker } from '@src/tracking/Tracker';
 import { EventData } from '@src/tracking/EventData';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
-import { WMDEBannerEvent } from '@src/tracking/WPORG/WMDEBannerEvent';
+import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 
-export type EventDataConverterFactory = ( event: EventData ) => WMDEBannerEvent|WMDESizeIssueEvent;
+export type EventDataConverterFactory = ( event: EventData ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
 
 type EventNameMap = Map<string, EventDataConverterFactory>;
 
-export class TrackerWPORG implements Tracker {
+/**
+ * @deprecated LegacyTrackerWPORG is for old tracking schemas
+ *             It will be deleted when the new schema is implemented
+ */
+export class LegacyTrackerWPORG implements Tracker {
 	private readonly _mediaWiki: MediaWiki;
 	private readonly _bannerName: string;
 	private readonly _supportedTrackingEvents: EventNameMap;
@@ -24,8 +28,9 @@ export class TrackerWPORG implements Tracker {
 			return;
 		}
 		const wpOrgEvent = this._supportedTrackingEvents.get( event.eventName )( event );
-		if ( this.isDevMode() || Math.random() > event.trackingRate ) {
-			this._mediaWiki.track( wpOrgEvent.eventType, wpOrgEvent.getEventData( this._bannerName ) );
+		const eventData = wpOrgEvent.getEventData( this._bannerName );
+		if ( this.isDevMode() || Math.random() > eventData.eventRate ) {
+			this._mediaWiki.track( wpOrgEvent.eventType, eventData );
 		}
 	}
 

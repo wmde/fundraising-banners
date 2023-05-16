@@ -24,7 +24,8 @@ export class TrackerWPDE implements Tracker {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}
-		if ( this.isDevMode() || Math.random() > event.trackingRate ) {
+		// TODO: Import event tracking rate from new map
+		if ( this.isDevMode() || Math.random() > 1 ) {
 			this.trackOrStore( event.eventName );
 		}
 	}

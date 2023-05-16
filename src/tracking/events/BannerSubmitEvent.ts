@@ -4,13 +4,11 @@ export class BannerSubmitEvent implements EventData {
 	public static readonly EVENT_NAME = 'submit';
 
 	public readonly eventName = BannerSubmitEvent.EVENT_NAME;
-	public readonly trackingRate = 0.01;
-
-	public readonly eventFeature;
+	public readonly feature: string;
 	public readonly customData: Record<string, string>;
 
-	public constructor( eventFeature: string, customData: Record<string, string> = {} ) {
-		this.eventFeature = eventFeature;
+	public constructor( feature: string, customData: Record<string, string> = {} ) {
+		this.feature = feature;
 		this.customData = customData;
 	}
 }

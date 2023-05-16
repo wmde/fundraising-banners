@@ -11,7 +11,7 @@ import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
-import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
+import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 
 // Channel specific form setup
@@ -32,7 +32,7 @@ const translator = new Translator( messages );
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-const tracker = new TrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 

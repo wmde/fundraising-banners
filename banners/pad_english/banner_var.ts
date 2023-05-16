@@ -15,7 +15,7 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import eventMappings from './event_map';
-import { TrackerWPORG } from '@src/tracking/TrackerWPORG';
+import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 
 // Locale-specific imports
 import messages from './messages';
@@ -37,7 +37,7 @@ const page = new PageWPORG(
 	( new SkinFactory( mediaWiki ) ).getSkin(),
 	new WindowSizeIssueChecker()
 );
-const tracker = new TrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 

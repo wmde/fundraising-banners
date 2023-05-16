@@ -4,5 +4,6 @@ export class ClickAlreadyDonatedEvent implements EventData {
 	public static readonly EVENT_NAME = 'clicked-already-donated';
 
 	public readonly eventName = ClickAlreadyDonatedEvent.EVENT_NAME;
-	public readonly trackingRate = 0.01;
+	public readonly customData: Record<string, string> = {};
+	public readonly feature: string = 'AlreadyDonatedModal';
 }

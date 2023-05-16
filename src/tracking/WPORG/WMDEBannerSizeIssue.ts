@@ -1,11 +1,8 @@
-interface WMDESizeIssueEventData {
-	bannerName: string;
-	viewportWidth: number;
-	viewportHeight: number;
-	bannerHeight: number;
-	eventRate: number;
-}
+import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 
+/**
+ * @deprecated WMDESizeIssueEvent is for an old tracking schema
+ */
 export class WMDESizeIssueEvent {
 
 	private readonly _eventName: string;
@@ -19,7 +16,7 @@ export class WMDESizeIssueEvent {
 		this._trackingRate = trackingRate;
 	}
 
-	public getEventData( bannerName: string ): WMDESizeIssueEventData {
+	public getEventData( bannerName: string ): SizeIssue {
 		return {
 			bannerName: this._eventName + '-' + bannerName,
 			viewportWidth: window.innerWidth,

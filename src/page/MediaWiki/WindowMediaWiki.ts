@@ -1,10 +1,10 @@
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
-	track: ( name: string, trackingData: BannerEvent|SizeIssue ) => void;
+	track: ( name: string, trackingData: LegacyBannerEvent|SizeIssue ) => void;
 	centralNotice: any;
 }
 
@@ -43,7 +43,7 @@ export class WindowMediaWiki implements MediaWiki {
 		return this.getConfigItem( 'wgAction' ) === 'view';
 	}
 
-	public track( name: string, trackingData: BannerEvent | SizeIssue ): void {
+	public track( name: string, trackingData: LegacyBannerEvent | SizeIssue ): void {
 		window.mw.track( name, trackingData );
 	}
 
