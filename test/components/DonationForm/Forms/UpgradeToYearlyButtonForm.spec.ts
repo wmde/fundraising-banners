@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
@@ -50,14 +49,13 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit "next" event with payload when user wants to donate yearly with different amount', async () => {
+	it( 'should emit "submit" event with payload when user wants to donate yearly with different amount', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
-		const emittedNextEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedNextEvent.extraData ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should emit "submit" event when user clicks a submit button for an interval', async function () {
@@ -67,7 +65,7 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 
 		const emitted = wrapper.emitted( 'submit' );
 		expect( emitted.length ).toBe( 1 );
-		expect( emitted[ 0 ] ).toEqual( [ { pageIndex: 5555, extraData: { upgradeToYearlyInterval: '12' } } ] );
+		expect( emitted[ 0 ][ 0 ] ).toEqual( { upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should insert the euroAmount into the translations', async () => {
@@ -78,13 +76,12 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 		expect( wrapper.find( `button[value="${ Intervals.YEARLY.value }"]` ).text() ).toContain( '{"amount":"€5"}' );
 	} );
 
-	it( 'should emit back event with pageIndex', async () => {
+	it( 'should emit back event', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ] ).toEqual( [ { pageIndex: 5555 } ] );
 	} );
 
 	describe( 'tracking events ', function () {

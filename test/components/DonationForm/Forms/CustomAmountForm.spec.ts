@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, it, test } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { resetFormModel } from '@test/resetFormModel';
@@ -22,7 +21,6 @@ describe( 'CustomAmountForm.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( CustomAmountForm, {
 			props: {
-				pageIndex: 4,
 				isCurrent: false
 			},
 			global: {
@@ -80,13 +78,12 @@ describe( 'CustomAmountForm.vue', () => {
 		expect( wrapper.find( '.wmde-banner-form-button' ).text() ).toContain( `{"amount":"${buttonAmount}"}` );
 	} );
 
-	it( 'should emit back event with pageIndex', async () => {
+	it( 'should emit previous event', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
 	} );
 
 	it( 'should clear new custom amount input when previous event is emitted', async () => {
@@ -107,10 +104,7 @@ describe( 'CustomAmountForm.vue', () => {
 		await wrapper.trigger( 'submit' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
-
-		const emittedSubmitEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-
-		expect( emittedSubmitEvent.extraData ).toEqual( { newCustomAmount: '56.79' } );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { newCustomAmount: '56.79' } );
 	} );
 
 	test.each( [

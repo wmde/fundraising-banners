@@ -38,7 +38,6 @@ describe( 'AddressTypeForm.vue', () => {
 
 		wrapper = mount( AddressTypeForm, {
 			props: {
-				pageIndex: 4444,
 				isCurrent: false
 			},
 			global: {
@@ -114,7 +113,6 @@ describe( 'AddressTypeForm.vue', () => {
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4444 } );
 	} );
 
 	it( 'should emit "submit" event when user selects a valid address option and submits', async () => {

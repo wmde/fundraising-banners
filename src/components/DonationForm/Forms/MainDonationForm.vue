@@ -88,10 +88,9 @@ import { Translator } from '@src/Translator';
 
 interface Props {
 	showErrorScrollLink?: boolean;
-	pageIndex?: number;
 }
 
-const props = withDefaults( defineProps<Props>(), {
+withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false
 } );
 const emit = defineEmits( [ 'submit' ] );
@@ -99,7 +98,6 @@ const emit = defineEmits( [ 'submit' ] );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
-
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
@@ -110,7 +108,7 @@ const validate = (): void => {
 	isFormValid.value = validator.validate();
 
 	if ( isFormValid.value ) {
-		emit( 'submit', { pageIndex: props.pageIndex } );
+		emit( 'submit' );
 	}
 };
 
