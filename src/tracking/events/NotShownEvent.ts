@@ -2,14 +2,12 @@ import { EventData } from '@src/tracking/EventData';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 
 export class NotShownEvent implements EventData {
-	// TODO: Make these private and add getters
-	public eventName: string;
-	public trackingRate: number;
-	public bannerSize: number;
+	public readonly eventName: string;
+	public readonly customData: Record<string, string|number>;
+	public readonly feature: string = 'BannerConductor';
 
-	public constructor( reason: BannerNotShownReasons, bannerSize: number, trackingRate: number = 1 ) {
+	public constructor( reason: BannerNotShownReasons, bannerSize: number ) {
 		this.eventName = reason;
-		this.bannerSize = bannerSize;
-		this.trackingRate = trackingRate;
+		this.customData = { bannerSize };
 	}
 }

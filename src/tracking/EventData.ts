@@ -1,4 +1,5 @@
 export interface EventData {
-	eventName: string,
-	trackingRate: number,
+	eventName: string;
+	feature: string;
+	customData: Record<string, string|number>;
 }

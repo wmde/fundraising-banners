@@ -1,12 +1,9 @@
-interface WMDEBannerEventData {
-	bannerName: string;
-	bannerAction: string;
-	eventRate: number;
-	finalSlide: number;
-	slidesShown: number;
-}
+import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 
-export class WMDEBannerEvent {
+/**
+ * @deprecated WMDELegacyBannerEvent is for an old tracking schema
+ */
+export class WMDELegacyBannerEvent {
 
 	private readonly _eventName: string;
 	private readonly _trackingRate: number;
@@ -19,7 +16,7 @@ export class WMDEBannerEvent {
 		this._trackingRate = trackingRate;
 	}
 
-	public getEventData( bannerName: string ): WMDEBannerEventData {
+	public getEventData( bannerName: string ): LegacyBannerEvent {
 		return {
 			bannerName: bannerName,
 			bannerAction: this._eventName + '-' + bannerName,

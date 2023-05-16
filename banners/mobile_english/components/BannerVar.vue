@@ -87,7 +87,9 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
-import { createSubmittableSinglePage } from '@src/components/DonationForm/StepControllers/SubmittableSinglePage';
+import {
+	createSubmittableMainDonationFormSinglePage
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePage';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -110,7 +112,7 @@ const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const stepControllers = [ createSubmittableSinglePage() ];
+const stepControllers = [ createSubmittableMainDonationFormSinglePage() ];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
