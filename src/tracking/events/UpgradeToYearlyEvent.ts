@@ -6,9 +6,9 @@ export class UpgradeToYearlyEvent implements TrackingEvent {
 	public readonly eventName = UpgradeToYearlyEvent.EVENT_NAME;
 	public readonly customData: Record<string, string> = {};
 	public readonly feature: string = 'UpgradeToYearlyForm';
-	public readonly userInteraction: string;
+	public readonly userChoice: string;
 
-	public constructor( userInteraction: 'upgraded-to-yearly'|'not-upgraded-to-yearly' ) {
-		this.userInteraction = userInteraction;
+	public constructor( userChoice: 'upgraded-to-yearly'|'not-upgraded-to-yearly' ) {
+		this.userChoice = userChoice;
 	}
 }

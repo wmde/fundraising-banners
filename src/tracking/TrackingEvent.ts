@@ -21,7 +21,7 @@ export interface TrackingEvent {
 	 *
 	 * Examples: 'increase' or 'decrease' (custom amount), 'recurring' or 'non-recurring' ("upgrade to yearly" form)
 	 */
-	userInteraction: string;
+	userChoice: string;
 
 	/**
 	 * Event-specific structured data

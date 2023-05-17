@@ -101,7 +101,7 @@ describe( 'MultistepDonation.vue', () => {
 
 		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
 		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
-		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm', userInteraction: 'badchoice' } );
+		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm', userChoice: 'badchoice' } );
 
 		expect( submitForm.element.submit ).toHaveBeenCalledOnce();
 	} );
@@ -114,11 +114,11 @@ describe( 'MultistepDonation.vue', () => {
 
 		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
 		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
-		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm', userInteraction: 'goodChoice' } );
+		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm', userChoice: 'goodChoice' } );
 
 		expect( tracker.hasTrackedEvent( 'mushroom' ) ).toBeTruthy();
 		expect( tracker.getTrackedEvent( 'mushroom' ).feature ).toBe( '30StepForm' );
-		expect( tracker.getTrackedEvent( 'mushroom' ).userInteraction ).toBe( 'goodChoice' );
+		expect( tracker.getTrackedEvent( 'mushroom' ).userChoice ).toBe( 'goodChoice' );
 		expect( tracker.getTrackedEvent( 'mushroom' ).customData ).toEqual( { yoshi: 'horse' } );
 	} );
 
