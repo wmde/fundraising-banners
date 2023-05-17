@@ -1,6 +1,7 @@
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
+@use './Banner';
 @use './MiniBanner' with (
 	$height: 267px
 );
