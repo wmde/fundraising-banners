@@ -9,6 +9,7 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL ],
@@ -36,6 +37,9 @@ describe( 'MainDonationForm.vue', () => {
 
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( DonationForm, {
+			props: {
+				isCurrent: false
+			},
 			global: {
 				mocks: {
 					$translate: translate
@@ -44,7 +48,8 @@ describe( 'MainDonationForm.vue', () => {
 					currencyFormatter: new CurrencyEn(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					formItems: formItems,
-					translator: { translate }
+					translator: { translate },
+					tracker: new TrackerSpy()
 				}
 			}
 		} );

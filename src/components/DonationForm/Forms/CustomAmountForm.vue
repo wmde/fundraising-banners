@@ -73,14 +73,12 @@ import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChang
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
 interface Props {
-	pageIndex: number,
 	isCurrent: boolean
 }
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
-
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const formModel = useFormModel();
 const amount = ref<string>( '' );
@@ -112,13 +110,13 @@ const onSubmit = (): void => {
 	if ( numericAmount.value < formModel.numericAmount.value ) {
 		tracker.trackEvent( new CustomAmountChangedEvent( 'decreased' ) );
 	}
-	emit( 'submit', { pageIndex: props.pageIndex, extraData: { newCustomAmount: amount.value } } );
+	emit( 'submit', { newCustomAmount: amount.value } );
 };
 
 const onPrevious = (): void => {
 	amount.value = '';
 	amountValidity.value = AmountValidity.Unset;
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 </script>

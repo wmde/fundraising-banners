@@ -41,7 +41,7 @@ describe( 'SubmittableCustomAmount', () => {
 	it( 'goes to previous on previous', async () => {
 		const customAmount = createSubmittableCustomAmount( formModel, 'previous' );
 
-		await customAmount.previous( stepNavigation, {} );
+		await customAmount.previous( stepNavigation );
 
 		expect( stepNavigation.goToStep ).toHaveBeenCalledOnce();
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'previous' );

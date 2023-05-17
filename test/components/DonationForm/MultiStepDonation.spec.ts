@@ -1,43 +1,37 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import { nextTick } from 'vue';
 import SubFormStub from '@test/fixtures/SubFormStub.vue';
-import { FormController } from '@src/utils/FormController/FormController';
+import { StepController } from '@src/components/DonationForm/StepController';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import { StepControllerSpy } from '@test/fixtures/StepControllerSpy';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 
 const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, previous }">
 	<button
 		class="emitting-sub-form"
-		:page-index="pageIndex"
-		@submit="() => submit( { pageIndex } )"
-		@previous="() => previous( { pageIndex } )"
+		@submit="() => submit( { itsaMe: 'Mario' } )"
+		@previous="() => previous()"
     />
 </template>`;
 
-// TODO remove the todo and fix the tests!
-
-describe.todo( 'MultistepDonation.vue', () => {
-	let mockedFormController: FormController;
-	let callbackInvokerNext: () => void;
-	let callbackInvokerPrevious: () => void;
-	let callbackInvokerGoToStep: ( pageIndex: number ) => void;
-	let callbackInvokerSubmit: () => void;
+describe( 'MultistepDonation.vue', () => {
+	let pageScroller: PageScroller;
+	let tracker: TrackerSpy;
 
 	beforeEach( () => {
-		mockedFormController = {
-			submitStep: vi.fn(),
-			previous: vi.fn(),
-			onNext: vi.fn(),
-			onPrevious: vi.fn(),
-			onGoToStep: vi.fn(),
-			onSubmit: vi.fn()
+		pageScroller = {
+			scrollIntoView: vi.fn(),
+			scrollToTop: vi.fn()
 		};
+		tracker = new TrackerSpy();
 	} );
 
-	const getWrapper = ( forms: Record<string, any> = {} ): VueWrapper<any> => {
+	const getWrapper = ( forms: Record<string, any> = {}, stepControllers: StepController[] = [] ): VueWrapper<any> => {
 		return mount( MultiStepDonation, {
 			props: {
-				formController: mockedFormController
+				stepControllers,
+				pageScroller
 			},
 			slots: forms,
 			global: {
@@ -45,44 +39,39 @@ describe.todo( 'MultistepDonation.vue', () => {
 					formActions: {
 						donateWithAddressAction: `https://example.com/withAddress`,
 						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
-					}
+					},
+					tracker
 				}
 			}
 		} );
 	};
 
-	const addCallbackInvokers = (): void => {
-		mockedFormController.onNext = ( callback: () => void ): void => {
-			callbackInvokerNext = callback;
-		};
-
-		mockedFormController.onPrevious = ( callback: () => void ): void => {
-			callbackInvokerPrevious = callback;
-		};
-
-		mockedFormController.onGoToStep = ( callback: ( indexNumber: number ) => void ): void => {
-			callbackInvokerGoToStep = callback;
-		};
-
-		mockedFormController.onSubmit = ( callback: () => void ): void => {
-			callbackInvokerSubmit = callback;
-		};
-	};
-
-	it( 'passes submit event to page controller', async () => {
-		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
+	it( 'passes submit event to step controller', async () => {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
 
 		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
 
-		expect( mockedFormController.submitStep ).toHaveBeenCalledWith( { pageIndex: 0 } );
+		expect( ( stepController.submitWasCalled ) ).toBeTruthy();
+		expect( ( stepController.submitData ) ).toEqual( { itsaMe: 'Mario' } );
+	} );
+
+	it( 'calls the pageScroller scroll method on submit', async () => {
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ new StepControllerSpy() ] );
+
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
+		expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
 	} );
 
 	it( 'passes previous event to page controller', async () => {
-		const wrapper = getWrapper( { form: subFormEmitterTemplate } );
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
 
 		await wrapper.find( '.emitting-sub-form' ).trigger( 'previous' );
 
-		expect( mockedFormController.previous ).toHaveBeenCalledWith( { pageIndex: 0 } );
+		expect( stepController.previousWasCalled ).toBeTruthy();
 	} );
 
 	it( 'should render the sub form pages', function () {
@@ -91,59 +80,57 @@ describe.todo( 'MultistepDonation.vue', () => {
 		expect( wrapper.findAll( '.wmde-banner-form-page' ).length ).toBe( 3 );
 	} );
 
-	it( 'should add callbacks when initialised', function () {
-		getWrapper( { form: SubFormStub } );
+	it( 'should emit a form interaction event on click', async function () {
+		vi.useFakeTimers();
 
-		expect( mockedFormController.onPrevious ).toHaveBeenCalled();
-		expect( mockedFormController.onGoToStep ).toHaveBeenCalled();
-		expect( mockedFormController.onSubmit ).toHaveBeenCalled();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ new StepControllerSpy() ] );
+
+		await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
+		await vi.runAllTimers();
+
+		expect( wrapper.emitted( 'formInteraction' ).length ).toBe( 1 );
+
+		vi.restoreAllMocks();
 	} );
 
-	it( 'should go to next when next callback is invoked', async function () {
-		addCallbackInvokers();
-		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
-
-		callbackInvokerNext();
-		await nextTick();
-
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) )
-			.toContain( 'wmde-banner-form-page--current' );
-	} );
-
-	it( 'should go to specified step when goToStep callback is invoked', async function () {
-		addCallbackInvokers();
-		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
-
-		callbackInvokerGoToStep( 2 );
-		await nextTick();
-
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(3)' ).attributes( 'class' ) )
-			.toContain( 'wmde-banner-form-page--current' );
-	} );
-
-	it( 'should go to previous when previous callback is invoked', async function () {
-		addCallbackInvokers();
-		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
-
-		callbackInvokerGoToStep( 1 );
-		await nextTick();
-		callbackInvokerPrevious();
-		await nextTick();
-
-		expect( wrapper.find( '.wmde-banner-form-page:nth-child(1)' ).attributes( 'class' ) )
-			.toContain( 'wmde-banner-form-page--current' );
-	} );
-
-	it( 'should submit donation form when submit callback is invoked', async function () {
-		addCallbackInvokers();
-		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
+	it( 'should submit when submit navigation is invoked', async function () {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
 		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 		submitForm.element.submit = vi.fn();
 
-		callbackInvokerSubmit();
-		await nextTick();
+		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm' } );
 
 		expect( submitForm.element.submit ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'should track event data when submit navigation is invoked', async function () {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = vi.fn();
+
+		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+		await stepController.callSubmit( { customData: { yoshi: 'horse' }, eventName: 'mushroom', feature: '30StepForm' } );
+
+		expect( tracker.hasTrackedEvent( 'mushroom' ) ).toBeTruthy();
+		expect( tracker.getTrackedEvent( 'mushroom' ).feature ).toBe( '30StepForm' );
+		expect( tracker.getTrackedEvent( 'mushroom' ).customData ).toEqual( { yoshi: 'horse' } );
+	} );
+
+	it( 'should go to specified step when goToStep callback is invoked', async function () {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form01: subFormEmitterTemplate, form02: SubFormStub }, [ stepController, new StepControllerSpy() ] );
+
+		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+		await stepController.callGoToStep( 'form02' );
+
+		expect( wrapper.find( '.wmde-banner-form-page:nth-child(2)' ).attributes( 'class' ) )
+			.toContain( 'wmde-banner-form-page--current' );
 	} );
 
 	it( 'should render isCurrent for each form', () => {

@@ -77,6 +77,6 @@ describe( 'SubmittableMainDonationForm', () => {
 	it( 'rejects calls to previous', async () => {
 		const donationForm = createSubmittableMainDonationForm( formModel, 'yearly' );
 
-		expect( donationForm.previous( stepNavigation, {} ) ).rejects.toEqual( 'we can\'t go to previous! This should never happen' );
+		expect( donationForm.previous( stepNavigation ) ).rejects.toEqual( 'we can\'t go to previous! This should never happen' );
 	} );
 } );

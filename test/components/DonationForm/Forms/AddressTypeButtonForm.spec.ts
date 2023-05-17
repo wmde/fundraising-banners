@@ -36,10 +36,8 @@ describe( 'AddressTypeForm.vue', () => {
 	beforeEach( () => {
 		resetFormModel( formModel );
 		tracker = new TrackerSpy();
-
 		wrapper = mount( AddressTypeButtonForm, {
 			props: {
-				pageIndex: 4444,
 				isCurrent: false
 			},
 			global: {
@@ -48,7 +46,7 @@ describe( 'AddressTypeForm.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					formItems,
+					formItems: formItems,
 					tracker
 				}
 			},
@@ -73,9 +71,7 @@ describe( 'AddressTypeForm.vue', () => {
 	it( 'should emit a submit event when an address button is clicked', async () => {
 		await wrapper.find( `button[value=${ AddressTypes.ANONYMOUS.value }]` ).trigger( 'click' );
 
-		const emitted = wrapper.emitted( 'submit' );
-		expect( emitted.length ).toBe( 1 );
-		expect( emitted[ 0 ] ).toEqual( [ { pageIndex: 4444 } ] );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
 	} );
 
 	it( 'should show direct debit hint when direct debit was selected on donation form page', async () => {
@@ -122,7 +118,6 @@ describe( 'AddressTypeForm.vue', () => {
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ] ).toEqual( [ { pageIndex: 4444 } ] );
 	} );
 
 	describe( 'tracking events', function () {

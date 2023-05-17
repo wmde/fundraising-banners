@@ -40,7 +40,7 @@ describe( 'IntermediateCustomAmount', () => {
 	it( 'goes to step on previous', async () => {
 		const customAmount = createIntermediateCustomAmount( formModel, 'nextStepMagoo', 'previousStepMacPageName' );
 
-		await customAmount.previous( stepNavigation, {} );
+		await customAmount.previous( stepNavigation );
 
 		expect( stepNavigation.goToStep ).toHaveBeenCalledOnce();
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'previousStepMacPageName' );

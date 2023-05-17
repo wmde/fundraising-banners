@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
@@ -49,16 +49,14 @@ import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 
 interface Props {
-	pageIndex: number,
 	isCurrent: boolean
 }
 
 const props = defineProps<Props>();
-
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
-const interval = ref<string>( null );
+const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
 useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
@@ -80,29 +78,21 @@ const onSubmit = ( e: SubmitEvent ): void => {
 		submitValue === Intervals.YEARLY.value ? 'upgraded-to-yearly' : 'not-upgraded-to-yearly'
 	) );
 
-	emit( 'submit', {
-		pageIndex: props.pageIndex,
-		extraData: {
-			upgradeToYearlyInterval: submitValue
-		}
-	} );
+	emit( 'submit', { upgradeToYearlyInterval: submitValue } );
 };
 
 const onGoToChangeOfAmount = (): void => {
 	intervalValidity.value = Validity.Valid;
 	emit( 'submit', {
-		pageIndex: props.pageIndex,
-		extraData: {
-			changeOfAmount: true,
-			upgradeToYearlyInterval: Intervals.YEARLY.value
-		}
+		changeOfAmount: true,
+		upgradeToYearlyInterval: Intervals.YEARLY.value
 	} );
 };
 
 const onPrevious = (): void => {
 	intervalValidity.value = Validity.Unset;
 	interval.value = null;
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const { numericAmount } = useFormModel();

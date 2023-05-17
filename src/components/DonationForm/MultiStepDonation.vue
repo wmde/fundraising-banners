@@ -4,7 +4,6 @@
 			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentStepIndex === idx }">
 				<slot
 					:name="slotName"
-					:page-index="idx"
 					:isCurrent="idx === currentStepIndex"
 					:submit="onSubmit"
 					:previous="onPrevious"
@@ -21,7 +20,6 @@
 
 import { inject, nextTick, ref, useSlots } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormActions } from '@src/domain/FormActions';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
 import { useFormAction } from '@src/components/composables/useFormAction';
@@ -82,14 +80,13 @@ const multistepCallbacks = {
 	}
 };
 
-const onSubmit = async ( payload: FormSubmitData ): Promise<void> => {
-	// TODO set the language locale for spenden page
+const onSubmit = async ( extraData: Record<string, string> ): Promise<void> => {
 	props.pageScroller?.scrollIntoView( '.wmde-banner-form' );
-	await props.stepControllers[ currentStepIndex.value ].submit( multistepCallbacks, payload.extraData );
+	await props.stepControllers[ currentStepIndex.value ].submit( multistepCallbacks, extraData );
 };
 
-const onPrevious = async ( payload: FormSubmitData ): Promise<void> => {
-	await props.stepControllers[ currentStepIndex.value ].previous( multistepCallbacks, payload.extraData );
+const onPrevious = async (): Promise<void> => {
+	await props.stepControllers[ currentStepIndex.value ].previous( multistepCallbacks );
 };
 
 </script>

@@ -33,7 +33,7 @@ describe( 'SubmittableAddressType', () => {
 		formModel.addressTypeValidity.value = Validity.Valid;
 		const addressType = createSubmittableAddressType( formModel, 'previous' );
 
-		await addressType.previous( stepNavigation, {} );
+		await addressType.previous( stepNavigation );
 
 		expect( formModel.addressType.value ).toBe( '' );
 		expect( formModel.addressTypeValidity.value ).toBe( Validity.Unset );
@@ -42,7 +42,7 @@ describe( 'SubmittableAddressType', () => {
 	it( 'goes to previous on previous', async () => {
 		const addressType = createSubmittableAddressType( formModel, 'previous' );
 
-		await addressType.previous( stepNavigation, {} );
+		await addressType.previous( stepNavigation );
 
 		expect( stepNavigation.goToStep ).toHaveBeenCalledOnce();
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'previous' );

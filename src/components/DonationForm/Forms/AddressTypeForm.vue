@@ -47,7 +47,7 @@ export default {
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
-import { computed, inject } from 'vue';
+import { computed, inject, watch } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -57,6 +57,14 @@ import { Translator } from '@src/Translator';
 import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
+interface Props {
+	isCurrent: boolean
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits( [ 'submit', 'previous' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
@@ -64,24 +72,17 @@ const {
 	addressType, addressTypeValidity,
 	paymentMethod, disabledAddressTypes
 } = formModel;
-interface Props {
-	pageIndex: number,
-	isCurrent: boolean
-}
-const props = defineProps<Props>();
-const tracker = inject<Tracker>( 'tracker' );
-const emit = defineEmits( [ 'submit', 'previous' ] );
 
 useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
 const onPrevious = (): void => {
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const onSubmit = (): void => {
 	addressTypeValidity.value = addressType.value === '' ? Validity.Invalid : Validity.Valid;
 	if ( addressTypeValidity.value === Validity.Valid ) {
-		emit( 'submit', { pageIndex: props.pageIndex } );
+		emit( 'submit' );
 	}
 };
 

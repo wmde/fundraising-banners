@@ -51,6 +51,13 @@ import { Translator } from '@src/Translator';
 import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
+interface Props {
+	isCurrent: boolean
+}
+const props = defineProps<Props>();
+const emit = defineEmits( [ 'submit', 'previous' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
@@ -59,19 +66,10 @@ const {
 	paymentMethod, disabledAddressTypes
 } = formModel;
 
-interface Props {
-	pageIndex: number,
-	isCurrent: boolean
-}
-const props = defineProps<Props>();
-const emit = defineEmits( [ 'submit', 'previous' ] );
-
-const tracker = inject<Tracker>( 'tracker' );
-
 useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
 const onPrevious = (): void => {
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const onSubmit = ( e: SubmitEvent ): void => {
@@ -85,7 +83,7 @@ const onSubmit = ( e: SubmitEvent ): void => {
 
 	if ( addressTypeValidity.value === Validity.Valid ) {
 		addressType.value = submitValue;
-		emit( 'submit', { pageIndex: props.pageIndex } );
+		emit( 'submit' );
 	}
 };
 

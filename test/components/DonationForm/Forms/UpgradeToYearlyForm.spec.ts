@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
@@ -48,14 +47,13 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit "next" event with payload when user wants to donate yearly with different amount', async () => {
+	it( 'should emit "submit" event with payload when user wants to donate yearly with different amount', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
-		const emittedNextEvent = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedNextEvent.extraData ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should show an error when user does not select any interval ', async function () {
@@ -111,12 +109,8 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 2 );
-
-		const emittedSubmitEvent1 = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent1.extraData ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '0' } );
-
-		const emittedSubmitEvent2 = wrapper.emitted( 'submit' )[ 1 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent2.extraData ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '0' } );
+		expect( wrapper.emitted( 'submit' )[ 1 ][ 0 ] ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should insert the euroAmount into the translations', async () => {
@@ -151,13 +145,12 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( options[ 1 ].element.checked ).toBe( false );
 	} );
 
-	it( 'should emit back event with pageIndex', async () => {
+	it( 'should emit back event', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
 	} );
 
 	describe( 'tracking events ', function () {

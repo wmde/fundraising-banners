@@ -59,6 +59,6 @@ describe( 'IntermediateMainDonationForm', () => {
 	it( 'rejects calls to previous', async () => {
 		const donationForm = createIntermediateMainDonationForm( formModel, 'yearly', 'address' );
 
-		expect( donationForm.previous( stepNavigation, {} ) ).rejects.toEqual( 'we can\'t go to previous! This should never happen' );
+		expect( donationForm.previous( stepNavigation ) ).rejects.toEqual( 'we can\'t go to previous! This should never happen' );
 	} );
 } );

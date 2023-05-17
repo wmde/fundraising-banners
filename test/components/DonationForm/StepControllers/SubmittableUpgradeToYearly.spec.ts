@@ -43,7 +43,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 		formModel.interval.value = Intervals.YEARLY.value;
 		const upgrade = createSubmittableUpgradeToYearly( formModel, 'link', 'previous' );
 
-		await upgrade.previous( stepNavigation, {} );
+		await upgrade.previous( stepNavigation );
 
 		expect( formModel.interval.value ).toBe( Intervals.ONCE.value );
 	} );
@@ -52,7 +52,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 		formModel.interval.value = Intervals.YEARLY.value;
 		const upgrade = createSubmittableUpgradeToYearly( formModel, 'link', 'previous' );
 
-		await upgrade.previous( stepNavigation, {} );
+		await upgrade.previous( stepNavigation );
 
 		expect( stepNavigation.goToStep ).toHaveBeenCalledOnce();
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'previous' );
