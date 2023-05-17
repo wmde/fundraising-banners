@@ -2,7 +2,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 
-type AllowedEventNames = Set<string>;
+type TrackingRatesForEvents = Map<string, number>;
 
 interface Window {
 	[ key: string ]: any;
@@ -13,15 +13,15 @@ export class TrackerWPDE implements Tracker {
 
 	private readonly _trackerName: string;
 	private readonly _bannerName: string;
-	private readonly _supportedTrackingEvents: AllowedEventNames;
+	private readonly _trackingRatesForEvents: TrackingRatesForEvents;
 	private _preInitialisationEventQueue: Function[];
 	private _trackerFindCounter: number;
 	private _tracker: any;
 
-	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames ) {
+	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
-		this._supportedTrackingEvents = supportedTrackingEvents;
+		this._trackingRatesForEvents = trackingRatesForEvents;
 		this._tracker = null;
 		this._trackerFindCounter = 0;
 		this._preInitialisationEventQueue = [];
@@ -42,12 +42,11 @@ export class TrackerWPDE implements Tracker {
 	}
 
 	public trackEvent( event: TrackingEvent ): void {
-		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
+		if ( !this._trackingRatesForEvents.has( event.eventName ) ) {
 			return;
 		}
 		const eventName = this.getEventNameFromEvent( event );
-		// TODO: Import event tracking rate from new map
-		if ( this.isDevMode() || Math.random() < 1 ) {
+		if ( this.isDevMode() || Math.random() <= this._trackingRatesForEvents.get( event.eventName ) ) {
 			this.trackOrStore( ( tracker: any ): void => tracker.trackEvent( 'Banners', eventName, this._bannerName ) );
 		}
 	}

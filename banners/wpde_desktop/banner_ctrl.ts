@@ -9,7 +9,7 @@ import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
-import supportedEvents from './supported_events';
+import eventMap from './event_map';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
@@ -35,7 +35,7 @@ const tracking = {
 // This is channel specific and must be changed for wp.org banners
 const page = new PageWPDE( tracking );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, supportedEvents );
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
 
 const app = createVueApp( BannerConductor, {
 	page,

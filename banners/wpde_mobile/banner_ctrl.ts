@@ -9,13 +9,14 @@ import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
+import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
+import eventMap from './event_map';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
-import supportedEvents from './supported_events';
 
+// Language specific setup
 import messages from './messages';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
@@ -37,7 +38,7 @@ const tracking = {
 const page = new PageWPDE( tracking );
 
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, supportedEvents );
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
 
 const pageScroller = new WindowPageScroller();
 

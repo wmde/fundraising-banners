@@ -19,7 +19,7 @@ export class WMDELegacyBannerEvent {
 	public getEventData( bannerName: string ): LegacyBannerEvent {
 		return {
 			bannerName: bannerName,
-			bannerAction: this._eventName + '-' + bannerName,
+			bannerAction: this._eventName,
 			eventRate: this._trackingRate,
 			finalSlide: this.finalSlide,
 			slidesShown: this.slidesShown

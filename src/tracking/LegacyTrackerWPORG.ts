@@ -29,7 +29,7 @@ export class LegacyTrackerWPORG implements Tracker {
 		}
 		const wpOrgEvent = this._supportedTrackingEvents.get( event.eventName )( event );
 		const eventData = wpOrgEvent.getEventData( this._bannerName );
-		if ( this.isDevMode() || Math.random() < eventData.eventRate ) {
+		if ( this.isDevMode() || Math.random() <= eventData.eventRate ) {
 			this._mediaWiki.track( wpOrgEvent.eventType, eventData );
 		}
 	}
