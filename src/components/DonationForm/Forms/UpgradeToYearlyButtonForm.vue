@@ -30,7 +30,7 @@
 			<a tabIndex="-1"
 				href="#"
 				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-				@click="onGoToChangeOfAmount"
+				@click.prevent="onGoToChangeOfAmount"
 			>
 					{{ $translate( 'upgrade-to-yearly-link' ) }}
 			</a>

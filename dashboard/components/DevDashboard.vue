@@ -10,7 +10,7 @@
 			<div class="header-right">
 				<a href="https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice" class="header-link">CN</a>
 				<a href="https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners" class="header-link">CN Banners</a>
-				<a href="#" class="header-link header-link-refresh" @click="refresh"><IconRefresh /></a>
+				<a href="#" class="header-link header-link-refresh" @click.prevent="refresh"><IconRefresh /></a>
 			</div>
 		</header>
 

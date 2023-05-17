@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
 		<div class="wmde-banner-form-address-type-title">
-			<a tabIndex="-1" href="#" class="previous" @click="onPrevious">
+			<a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
 				<ChevronLeftIcon/>
 				{{ $translate( 'back-button' ) }}
 			</a>
