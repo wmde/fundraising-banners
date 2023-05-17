@@ -24,6 +24,7 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
+import { Locales } from '@src/domain/Locales';
 
 const localeFactory = new LocaleFactoryEn();
 const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
@@ -68,7 +69,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

@@ -29,6 +29,7 @@ import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { Locales } from '@src/domain/Locales';
 
 const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
 
@@ -73,7 +74,7 @@ app.use( DynamicTextPlugin, {
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );
