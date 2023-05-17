@@ -11,11 +11,15 @@
 			</div>
 
 			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-previous" @click.prevent="goToPreviousSlide">
-				<slot name="left-icon" class="wmde-banner-slider-icon-left"/>
+				<slot name="left-icon" class="wmde-banner-slider-icon-left">
+					<ChevronLeftIcon/>
+				</slot>
 			</a>
 
 			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-next" @click.prevent="goToNextSlide">
-				<slot name="right-icon" class="wmde-banner-slider-icon-left"/>
+				<slot name="right-icon" class="wmde-banner-slider-icon-left">
+					<ChevronRightIcon/>
+				</slot>
 			</a>
 		</div>
 
@@ -33,6 +37,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum SliderPlayingStates {
 	PENDING = 'wmde-banner-slider--pending',

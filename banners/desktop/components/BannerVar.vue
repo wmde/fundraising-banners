@@ -17,14 +17,6 @@
 						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
-					<template #left-icon>
-						<ChevronLeftIcon/>
-					</template>
-
-					<template #right-icon>
-						<ChevronRightIcon/>
-					</template>
-
 				</KeenSlider>
 			</template>
 
@@ -99,8 +91,6 @@ import {
 import { createIntermediateCustomAmount } from '@src/components/DonationForm/StepControllers/IntermediateCustomAmount';
 import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

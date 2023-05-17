@@ -11,14 +11,6 @@
 						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
-					<template #left-icon>
-						<ChevronLeftIcon/>
-					</template>
-
-					<template #right-icon>
-						<ChevronRightIcon/>
-					</template>
-
 				</KeenSlider>
 			</template>
 		</MiniBanner>
@@ -88,8 +80,6 @@ import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/Upgrad
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';

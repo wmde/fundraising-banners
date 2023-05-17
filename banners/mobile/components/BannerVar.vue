@@ -11,14 +11,6 @@
 						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
-					<template #left-icon>
-						<ChevronLeftIcon/>
-					</template>
-
-					<template #right-icon>
-						<ChevronRightIcon/>
-					</template>
-
 				</KeenSlider>
 			</template>
 		</MiniBanner>
@@ -101,7 +93,6 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import AddressTypeButtonForm from '@src/components/DonationForm/Forms/AddressTypeButtonForm.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import { createSubmittableAddressType } from '@src/components/DonationForm/StepControllers/SubmittableAddressType';
 import {
 	createIntermediateMainDonationForm

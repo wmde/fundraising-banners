@@ -16,14 +16,6 @@
                         <BannerSlides :currentSlide="currentSlide"/>
                     </template>
 
-                    <template #left-icon>
-                        <ChevronLeftIcon/>
-                    </template>
-
-                    <template #right-icon>
-                        <ChevronRightIcon/>
-                    </template>
-
                 </KeenSlider>
             </template>
 
@@ -85,9 +77,7 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../../english/content/BannerText.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
