@@ -14,39 +14,31 @@ export class TrackerWPDE implements Tracker {
 	private readonly _trackerName: string;
 	private readonly _bannerName: string;
 	private readonly _supportedTrackingEvents: AllowedEventNames;
-	private _trackFunction: ( eventName: 'Banner', actionName: string, bannerName: string ) => void;
-	private _accumulatedTracking: Function[];
-	private _scheduleRetry: Function;
-	public trackerFindCounter: number;
+	private _preInitialisationEventQueue: Function[];
+	private _trackerFindCounter: number;
 	private _tracker: any;
 
-	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames, scheduleRetry = scheduleRetryWithBackoff ) {
+	public constructor( trackerName: string, bannerName: string, supportedTrackingEvents: AllowedEventNames ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._supportedTrackingEvents = supportedTrackingEvents;
-		this._trackFunction = (): void => {};
 		this._tracker = null;
-		this.trackerFindCounter = 0;
-		this._accumulatedTracking = [];
-		this._scheduleRetry = scheduleRetry;
-		if ( !this.trackerLibraryIsLoaded( trackerName ) ) {
-			scheduleRetry( this );
-			return;
-		}
-		this._tracker = window[ this._trackerName ];
+		this._trackerFindCounter = 0;
+		this._preInitialisationEventQueue = [];
+
+		this.waitForTrackerToInit();
 	}
 
 	public waitForTrackerToInit(): void {
 		if ( !this.trackerLibraryIsLoaded( this._trackerName ) ) {
-			this.trackerFindCounter++;
-			if ( this.trackerFindCounter < 10 ) {
-				this._scheduleRetry( this );
+			if ( this._trackerFindCounter < 10 ) {
+				this._trackerFindCounter++;
+				this.scheduleRetryWithBackoff();
 			}
 			return;
 		}
 		this._tracker = window[ this._trackerName ];
-		this._accumulatedTracking.forEach( trackFn => trackFn( this._tracker ) );
-		this._accumulatedTracking = [];
+		this.trackItemsInEventQueue();
 	}
 
 	public trackEvent( event: TrackingEvent ): void {
@@ -55,9 +47,14 @@ export class TrackerWPDE implements Tracker {
 		}
 		const eventName = this.getEventNameFromEvent( event );
 		// TODO: Import event tracking rate from new map
-		if ( this.isDevMode() || Math.random() > 1 ) {
+		if ( this.isDevMode() || Math.random() < 1 ) {
 			this.trackOrStore( ( tracker: any ): void => tracker.trackEvent( 'Banners', eventName, this._bannerName ) );
 		}
+	}
+
+	private trackItemsInEventQueue(): void {
+		this._preInitialisationEventQueue.forEach( trackFn => trackFn( this._tracker ) );
+		this._preInitialisationEventQueue = [];
 	}
 
 	private trackerLibraryIsLoaded( trackerName: string ): boolean {
@@ -71,10 +68,10 @@ export class TrackerWPDE implements Tracker {
 
 	private trackOrStore( trackFn: Function ): void {
 		if ( this._tracker === null ) {
-			this._accumulatedTracking.push( trackFn );
+			this._preInitialisationEventQueue.push( trackFn );
 			return;
 		}
-		trackFn();
+		trackFn( this._tracker );
 	}
 
 	/**
@@ -97,12 +94,15 @@ export class TrackerWPDE implements Tracker {
 				return event.eventName;
 		}
 	}
-}
 
-function scheduleRetryWithBackoff( tracker: TrackerWPDE ): void {
-	const RETRY_INTERVAL = 100;
-	setTimeout(
-		tracker.waitForTrackerToInit.bind( tracker ),
-		Math.max( RETRY_INTERVAL, RETRY_INTERVAL * tracker.trackerFindCounter )
-	);
+	/**
+	 * This makes the retry interval longer every time it is called
+	 */
+	private scheduleRetryWithBackoff(): void {
+		const RETRY_INTERVAL = 100;
+		setTimeout(
+			this.waitForTrackerToInit.bind( this ),
+			RETRY_INTERVAL * ( this._trackerFindCounter + 1 )
+		);
+	}
 }
