@@ -52,7 +52,6 @@ import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
 interface Props {
-	pageIndex: number,
 	isCurrent: boolean
 }
 const props = defineProps<Props>();

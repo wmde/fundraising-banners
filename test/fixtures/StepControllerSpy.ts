@@ -1,6 +1,6 @@
 import { StepController } from '@src/components/DonationForm/StepController';
 import { StepAction } from '@src/components/DonationForm/StepNavigation';
-import { EventData } from '@src/tracking/EventData';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class StepControllerSpy implements StepController {
 	private _navigation: StepAction;
@@ -20,8 +20,8 @@ export class StepControllerSpy implements StepController {
 		return Promise.resolve( undefined );
 	}
 
-	public async callSubmit( eventData: EventData ): Promise<void> {
-		return this._navigation.submit( eventData );
+	public async callSubmit( trackingEvent: TrackingEvent ): Promise<void> {
+		return this._navigation.submit( trackingEvent );
 	}
 
 	public async callGoToStep( stepName: string ): Promise<void> {
