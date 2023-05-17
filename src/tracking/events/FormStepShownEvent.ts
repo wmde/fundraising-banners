@@ -6,6 +6,7 @@ export class FormStepShownEvent implements TrackingEvent {
 	public readonly eventName = FormStepShownEvent.EVENT_NAME;
 	public readonly feature: string;
 	public readonly customData: Record<string, string> = {};
+	public readonly userInteraction: string = '';
 
 	public constructor( feature: string ) {
 		this.feature = feature;

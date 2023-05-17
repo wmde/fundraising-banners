@@ -75,7 +75,7 @@ export class TrackerWPDE implements Tracker {
 
 	/**
 	 * Tracking on WPDE only knows event names and can't handle our complex banner events
-	 * with action, feature, customData, etc. This method converts complex banner events
+	 * with action, feature, userInteraction, customData, etc. This method converts complex banner events
 	 * into event names.
 	 *
 	 * Since we only have 2 channels on WPDE we decided to share the code.
@@ -88,7 +88,7 @@ export class TrackerWPDE implements Tracker {
 	private getEventNameFromEvent( event: TrackingEvent ): string {
 		switch ( event.eventName ) {
 			case CustomAmountChangedEvent.EVENT_NAME:
-				return event.customData.amountChange + '-amount';
+				return event.userInteraction + '-amount';
 			default:
 				return event.eventName;
 		}

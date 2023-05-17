@@ -12,9 +12,10 @@ export function createSubmittableUpgradeToYearly( formModel: FormModel, stepName
 				await navigation.goToStep( stepNameOfLinkClick );
 				return;
 			}
-			await navigation.submit( new BannerSubmitEvent( 'UpgradeToYearlyForm', {
-				optionSelected: formModel.interval.value === Intervals.YEARLY.value ? 'recurring' : 'non-recurring'
-			} ) );
+			await navigation.submit( new BannerSubmitEvent(
+				'UpgradeToYearlyForm',
+				formModel.interval.value === Intervals.YEARLY.value ? 'recurring' : 'non-recurring'
+			) );
 		},
 		async previous( navigation: StepAction ): Promise<void> {
 			formModel.interval.value = Intervals.ONCE.value;

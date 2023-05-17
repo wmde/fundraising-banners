@@ -22,7 +22,7 @@ describe( 'TrackerWPDE', function () {
 			'TestBanner05',
 			new Map<string, number>( [ [ 'some-action', 1 ] ] ) );
 
-		tracker.trackEvent( { eventName: 'some-action', feature: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'some-action', feature: '', userInteraction: '', customData: {} } );
 
 		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', 'some-action', 'TestBanner05' );
 	} );
@@ -36,8 +36,8 @@ describe( 'TrackerWPDE', function () {
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
-		tracker.trackEvent( { eventName: 'action-1', feature: '', customData: {} } );
-		tracker.trackEvent( { eventName: 'action-2', feature: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-1', feature: '', userInteraction: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-2', feature: '', userInteraction: '', customData: {} } );
 
 		window.TestTracker = { trackEvent: vi.fn() };
 
@@ -59,8 +59,8 @@ describe( 'TrackerWPDE', function () {
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
-		tracker.trackEvent( { eventName: 'action-1', feature: '', customData: {} } );
-		tracker.trackEvent( { eventName: 'action-2', feature: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-1', feature: '', userInteraction: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-2', feature: '', userInteraction: '', customData: {} } );
 
 		await vi.runAllTimers();
 
@@ -105,7 +105,7 @@ describe( 'TrackerWPDE', function () {
 				'TestBanner05',
 				new Map<string, number>( [ [ 'some-action', trackingRate ] ] ) );
 
-			tracker.trackEvent( { eventName: 'some-action', feature: '', customData: {} } );
+			tracker.trackEvent( { eventName: 'some-action', feature: '', userInteraction: '', customData: {} } );
 
 			expect( window.TestTracker.trackEvent ).toHaveBeenCalledTimes( wasTracked ? 1 : 0 );
 
@@ -121,7 +121,7 @@ describe( 'TrackerWPDE', function () {
 			'TestBanner05',
 			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
 
-		tracker.trackEvent( { eventName: 'some-action', feature: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'some-action', feature: '', userInteraction: '', customData: {} } );
 
 		expect( window.TestTracker.trackEvent ).toHaveBeenCalled();
 

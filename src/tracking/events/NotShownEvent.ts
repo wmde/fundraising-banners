@@ -5,9 +5,10 @@ export class NotShownEvent implements TrackingEvent {
 	public readonly eventName: string;
 	public readonly customData: Record<string, string|number>;
 	public readonly feature: string = 'BannerConductor';
+	public readonly userInteraction: string = '';
 
-	public constructor( reason: BannerNotShownReasons, bannerSize: number ) {
+	public constructor( reason: BannerNotShownReasons, customData: Record<string, string|number> = {} ) {
 		this.eventName = reason;
-		this.customData = { bannerSize };
+		this.customData = customData;
 	}
 }

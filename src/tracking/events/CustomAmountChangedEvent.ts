@@ -6,8 +6,9 @@ export class CustomAmountChangedEvent implements TrackingEvent {
 	public readonly eventName = CustomAmountChangedEvent.EVENT_NAME;
 	public readonly customData: Record<string, string> = {};
 	public readonly feature: string = 'CustomAmountForm';
+	public readonly userInteraction: string;
 
 	public constructor( amountChange: 'increased' | 'decreased' ) {
-		this.customData = { amountChange };
+		this.userInteraction = amountChange;
 	}
 }

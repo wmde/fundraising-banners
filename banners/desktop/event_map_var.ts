@@ -8,7 +8,7 @@ import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent
 // At the next reset of this test, you should either throw away this map or combine the two maps in one file
 CtrlEventMap.set( BannerSubmitEvent.EVENT_NAME,
 	(): WMDESizeIssueEvent => {
-		return new WMDESizeIssueEvent( `submit`, 0, 1 );
+		return new WMDESizeIssueEvent( `submit`, null, 1 );
 	}
 );
 CtrlEventMap.set( UpgradeToYearlyEvent.EVENT_NAME,

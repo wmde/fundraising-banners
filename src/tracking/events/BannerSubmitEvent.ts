@@ -5,10 +5,11 @@ export class BannerSubmitEvent implements TrackingEvent {
 
 	public readonly eventName = BannerSubmitEvent.EVENT_NAME;
 	public readonly feature: string;
-	public readonly customData: Record<string, string>;
+	public readonly userInteraction: string;
+	public readonly customData: Record<string, string> = {};
 
-	public constructor( feature: string, customData: Record<string, string> = {} ) {
+	public constructor( feature: string, userInteraction: string = '' ) {
 		this.feature = feature;
-		this.customData = customData;
+		this.userInteraction = userInteraction;
 	}
 }

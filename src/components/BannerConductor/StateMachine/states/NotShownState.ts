@@ -24,7 +24,15 @@ export class NotShownState extends BannerState {
 	}
 
 	public enter(): Promise<any> {
-		this._tracker.trackEvent( new NotShownEvent( this._bannerNotShownReason, this._bannerHeight ) );
+		let customEventData: Record<string, string | number> = {};
+		if ( this._bannerNotShownReason === BannerNotShownReasons.SizeIssue ) {
+			customEventData = {
+				bannerHeight: this._bannerHeight,
+				viewportWidth: window.innerWidth,
+				viewportHeight: window.innerHeight
+			};
+		}
+		this._tracker.trackEvent( new NotShownEvent( this._bannerNotShownReason, customEventData ) );
 		this._page
 			.preventImpressionCountForHiddenBanner()
 			.removePageEventListeners();

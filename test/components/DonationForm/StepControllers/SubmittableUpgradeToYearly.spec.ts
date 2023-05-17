@@ -64,7 +64,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 
 			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.YEARLY.value } );
 
-			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', { optionSelected: 'recurring' } ) );
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', 'recurring' ) );
 		} );
 
 		it( 'converts non-recurring interval to "submit" event with the correct option selected', async () => {
@@ -72,7 +72,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 
 			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.ONCE.value } );
 
-			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', { optionSelected: 'non-recurring' } ) );
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', 'non-recurring' ) );
 		} );
 	} );
 } );

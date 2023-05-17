@@ -7,4 +7,5 @@ export class MobileMiniBannerExpandedEvent implements TrackingEvent {
 	public readonly eventName = MobileMiniBannerExpandedEvent.EVENT_NAME;
 	public readonly customData: Record<string, string> = {};
 	public readonly feature: string = 'MiniBanner';
+	public readonly userInteraction: string = '';
 }
