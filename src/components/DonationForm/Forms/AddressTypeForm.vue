@@ -47,7 +47,7 @@ export default {
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
-import { computed, inject, watch } from 'vue';
+import { computed, inject } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { useFormModel } from '@src/components/composables/useFormModel';

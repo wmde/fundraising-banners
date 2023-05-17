@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
