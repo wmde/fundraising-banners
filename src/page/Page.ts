@@ -1,7 +1,7 @@
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { Vector2 } from '@src/utils/Vector2';
-import { TrackingParameters } from '@src/TrackingParameters';
+import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export interface Page {

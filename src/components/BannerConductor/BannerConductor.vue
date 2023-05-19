@@ -15,7 +15,7 @@
 
 import { Page } from '@src/page/Page';
 import { inject, nextTick, onMounted, ref } from 'vue';
-import { BannerConfig } from '@src/BannerConfig';
+import { BannerConfig } from '@src/domain/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';

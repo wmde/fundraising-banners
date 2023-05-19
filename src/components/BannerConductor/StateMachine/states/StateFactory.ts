@@ -6,7 +6,7 @@ import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { Tracker } from '@src/tracking/Tracker';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
-import { BannerConfig } from '@src/BannerConfig';
+import { BannerConfig } from '@src/domain/BannerConfig';
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';

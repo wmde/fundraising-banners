@@ -3,7 +3,7 @@ import { DayName } from '@src/utils/DynamicContent/generators/DayName';
 import { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 import TimeRange from '@src/utils/TimeRange';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';

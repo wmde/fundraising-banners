@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { FormActions } from '@src/domain/FormActions';
-import { TrackingParameters } from '@src/TrackingParameters';
+import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 const DONATE_WITH_ADDRESS_URL = 'https://spenden.wikimedia.de/donation/new';

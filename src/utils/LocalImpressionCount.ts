@@ -1,4 +1,4 @@
-import hasLocalStorage from './has_local_storage';
+import hasLocalStorage from './hasLocalStorage';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class LocalImpressionCount implements ImpressionCount {

@@ -4,9 +4,9 @@ import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { Vector2 } from '@src/utils/Vector2';
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
-import { TrackingParameters } from '@src/TrackingParameters';
+import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 

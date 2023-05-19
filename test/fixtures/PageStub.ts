@@ -1,7 +1,7 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CampaignParameters } from '@src/CampaignParameters';
-import { TrackingParameters } from '@src/TrackingParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
+import { TrackingParameters } from '@src/domain/TrackingParameters';
 
 export class PageStub implements Page {
 	public getBannerContainer(): string {

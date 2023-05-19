@@ -1,4 +1,4 @@
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 
 /**
  * Use this function to override the campaign parameters for local development (e.g. acceptance-testing dynamic text)
