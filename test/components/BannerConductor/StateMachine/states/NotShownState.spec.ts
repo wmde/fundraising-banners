@@ -9,7 +9,7 @@ import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 describe( 'NotShownState', function () {
 	it( 'tracks not shown event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( BannerNotShownReasons.DisallowedNamespace, {} );
+		const trackingEvent = new NotShownEvent( {} );
 		const state = new NotShownState( BannerNotShownReasons.DisallowedNamespace, new PageStub(), tracker, new ResizeHandlerStub(), 0 );
 
 		state.enter();
@@ -20,7 +20,8 @@ describe( 'NotShownState', function () {
 
 	it( 'adds banner and screen size when tracking size issues', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( BannerNotShownReasons.SizeIssue, {
+		const trackingEvent = new NotShownEvent( {
+			reason: BannerNotShownReasons.SizeIssue,
 			bannerHeight: 300,
 			viewportWidth: window.innerWidth,
 			viewportHeight: window.innerHeight
