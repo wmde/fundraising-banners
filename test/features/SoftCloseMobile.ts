@@ -1,6 +1,7 @@
 import { expect, vi } from 'vitest';
 import { VueWrapper } from '@vue/test-utils';
-import { CloseSources } from '@src/tracking/CloseSources';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 const expectShowsSoftCloseOnMiniBannerClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
@@ -17,7 +18,7 @@ const expectDoesNotShowSoftCloseOnFullBannerClose = async ( wrapper: VueWrapper<
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.FollowUpBanner );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.Close ) );
 };
 
 const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
@@ -25,7 +26,7 @@ const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promi
 	await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.SoftCloseBannerRejected );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.Close ) );
 };
 
 const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
@@ -33,7 +34,7 @@ const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): 
 	await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.MaybeLater );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.MaybeLater ) );
 };
 
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
@@ -43,7 +44,7 @@ const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Pro
 	await vi.runAllTimersAsync();
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toBe( CloseSources.TimeOut );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );
 
 	vi.restoreAllMocks();
 };

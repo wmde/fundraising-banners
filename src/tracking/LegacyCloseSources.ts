@@ -1,4 +1,8 @@
-export enum CloseSources {
+/**
+ * @deprecated This is used to map the close events to the legacy close schema
+ *             It should be deleted when the new schema is implemented
+ */
+export enum LegacyCloseSources {
 	/** user pressed X button on a desktop banner without softclose */
 	MainBanner = 'main-banner-closed',
 
@@ -6,7 +10,7 @@ export enum CloseSources {
 	MiniBanner = 'mini-banner-closed',
 
 	/** user pressed X on a follow up banner on mobile */
-	FollowUpBanner = 'follow-up-banner-closed',
+	FullPageBanner = 'follow-up-banner-closed',
 
 	/** user pressed "don't bother me again" option on the microbanner/softclosebanner */
 	SoftCloseBannerRejected = 'soft-close-banner-rejected',

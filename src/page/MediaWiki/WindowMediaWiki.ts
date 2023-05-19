@@ -1,10 +1,11 @@
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
+import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
-	track: ( name: string, trackingData: LegacyBannerEvent|SizeIssue ) => void;
+	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	centralNotice: any;
 }
 
@@ -51,7 +52,6 @@ export class WindowMediaWiki implements MediaWiki {
 	}
 
 	public preventBannerDisplayForPeriod(): void {
-		// TODO check if mw.centralNotice.internal.hide.setHideWithCloseButtonCookies should be called instead when using softclose e.g.
 		window.mw.centralNotice.hideBanner();
 	}
 

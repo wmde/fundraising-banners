@@ -4,9 +4,10 @@ import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { JSDOM } from 'jsdom';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -86,7 +87,7 @@ describe( 'PageOrg', function () {
 	it( 'stores "close" cookie for already donated "enough for this year" events', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedGoAway );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.NoMoreBannersForCampaign ) );
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).toHaveBeenCalledOnce();
 	} );
@@ -94,7 +95,7 @@ describe( 'PageOrg', function () {
 	it( 'does not store cookie for the AlreadyDonated "Maybe Later" event', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedMaybeLater );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.MaybeLater ) );
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
@@ -102,7 +103,15 @@ describe( 'PageOrg', function () {
 	it( 'stores close cookie when user closes soft close', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.SoftCloseBannerRejected );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.Close ) );
+
+		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user ignores soft close', () => {
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -110,7 +119,7 @@ describe( 'PageOrg', function () {
 	it( 'stores close cookie when user closes main banner', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.MainBanner );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -118,7 +127,7 @@ describe( 'PageOrg', function () {
 	it( 'stores close cookie when user closes mini banner', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.MiniBanner );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );

@@ -59,9 +59,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-			@maybe-later="() => onClose( CloseSources.MaybeLater )"
-			@time-out-close="() => onClose( CloseSources.TimeOut )"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
         <FundsModal
@@ -85,7 +85,6 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { ref, watch } from 'vue';
-import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -99,6 +98,8 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -135,8 +136,8 @@ function onCloseMain(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose( feature: string, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 </script>

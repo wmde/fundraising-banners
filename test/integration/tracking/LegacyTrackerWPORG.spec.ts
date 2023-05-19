@@ -52,22 +52,21 @@ describe( 'LegacyTrackerWPORG', function () {
 		[ 0.7777, 0.01, false ],
 		[ 0.009, 0.01, true ],
 		[ 0.1, 0.1, true ]
-	] )( 'should only do tracking when the random threshold (%f) is smaller the tracking rate (%f)',
-		( randomValue: number, trackingRate: number, wasTracked: boolean ) => {
-			const oldRandom = Math.random;
-			Math.random = vi.fn( () => randomValue );
-			const mediaWikiStub = new MediaWikiStub();
-			mediaWikiStub.track = vi.fn();
-			const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', trackingRate ) );
-			const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
-			const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap );
+	] )( 'should only do tracking when the random threshold (%f) is smaller the tracking rate (%f)', ( randomValue: number, trackingRate: number, wasTracked: boolean ) => {
+		const oldRandom = Math.random;
+		Math.random = vi.fn( () => randomValue );
+		const mediaWikiStub = new MediaWikiStub();
+		mediaWikiStub.track = vi.fn();
+		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', trackingRate ) );
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
+		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap );
 
-			tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 
-			expect( mediaWikiStub.track ).toHaveBeenCalledTimes( wasTracked ? 1 : 0 );
+		expect( mediaWikiStub.track ).toHaveBeenCalledTimes( wasTracked ? 1 : 0 );
 
-			Math.random = oldRandom;
-		} );
+		Math.random = oldRandom;
+	} );
 
 	it( 'should always track in "devMode" and ignore tracking rate', () => {
 		const windowLocationBackup = window.location;

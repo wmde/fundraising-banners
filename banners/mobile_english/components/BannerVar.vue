@@ -17,7 +17,7 @@
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( CloseSources.FollowUpBanner )"
+			@close="() => onClose( 'FullPageBanner', CloseChoices.Close )"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -44,9 +44,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-			@maybe-later="() => onClose( CloseSources.MaybeLater )"
-			@time-out-close="() => onClose( CloseSources.TimeOut )"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
 		<FundsModal
@@ -59,7 +59,6 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
@@ -80,6 +79,8 @@ import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBa
 import {
 	createSubmittableMainDonationFormSinglePage
 } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePage';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -112,8 +113,8 @@ function onCloseMiniBanner(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose( feature: string, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 function onshowFullPageBanner(): void {

@@ -3,11 +3,12 @@ import { Skin } from '@src/page/skin/Skin';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/CampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 import { TrackingParameters } from '@src/TrackingParameters';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -99,27 +100,20 @@ class PageWPORG implements Page {
 		return this;
 	}
 
-	public setCloseCookieIfNecessary( source: CloseSources ): Page {
-		switch ( source ) {
-			case CloseSources.AlreadyDonatedGoAway:
+	public setCloseCookieIfNecessary( closeEvent: TrackingEvent ): Page {
+		switch ( closeEvent.userChoice ) {
+			case CloseChoices.Close:
+			case CloseChoices.TimeOut:
+				this._mediaWiki.preventBannerDisplayForPeriod();
+				break;
+			case CloseChoices.NoMoreBannersForCampaign:
 				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
 				break;
-			case CloseSources.AlreadyDonatedMaybeLater:
+			case CloseChoices.MaybeLater:
+				// Don't add cookie
 				break;
-			case CloseSources.SoftCloseBannerRejected:
-				this._mediaWiki.preventBannerDisplayForPeriod();
-				break;
-			case CloseSources.MainBanner:
-				this._mediaWiki.preventBannerDisplayForPeriod();
-				break;
-			case CloseSources.MiniBanner:
-				this._mediaWiki.preventBannerDisplayForPeriod();
-				break;
-			case CloseSources.FollowUpBanner:
-				break;
-
-			// TODO add more cases for banner display prevention with central notice cookies after closing
 		}
+
 		return this;
 	}
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper wmde-banner-wrapper--main">
 		<BannerMain
-			@close="onClose"
+			@close="() => onClose( 'BannerMain', CloseChoices.Close )"
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			:bannerState="bannerState"
 		>
@@ -64,7 +64,6 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { ref } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import BannerMain from './BannerMain.vue';
@@ -88,6 +87,8 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 enum FormStepNames {
 	CustomAmountFormStep = 'CustomAmountForm',
@@ -102,6 +103,7 @@ interface Props {
 
 defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+
 const isFundsModalVisible = ref<boolean>( false );
 const formModel = useFormModel();
 const stepControllers = [
@@ -110,8 +112,8 @@ const stepControllers = [
 	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
 
-function onClose(): void {
-	emit( 'bannerClosed', CloseSources.MainBanner );
+function onClose( feature: string, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 </script>

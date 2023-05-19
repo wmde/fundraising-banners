@@ -10,8 +10,8 @@ import { BannerConfig } from '@src/BannerConfig';
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -48,8 +48,8 @@ export class StateFactory {
 		return new VisibleState( this._page, this._impressionCount );
 	}
 
-	public newClosedState( source: CloseSources ): BannerState {
-		return new ClosedState( source, this._page, this._tracker, this._resizeHandler );
+	public newClosedState( closeEvent: TrackingEvent ): BannerState {
+		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler );
 	}
 }
 

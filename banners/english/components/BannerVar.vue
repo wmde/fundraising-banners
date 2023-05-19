@@ -47,23 +47,26 @@
                 />
             </template>
         </BannerMain>
-        <SoftClose
-            v-if="contentState === ContentStates.SoftClosing"
-            @close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-            @maybe-later="() => onClose( CloseSources.MaybeLater )"
-            @time-out-close="() => onClose( CloseSources.TimeOut )"
-        />
+
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+		/>
+
         <FundsModal
             :content="useOfFundsContent"
             :is-funds-modal-visible="isFundsModalVisible"
             @hideFundsModal="isFundsModalVisible = false"
         />
+
         <AlreadyDonatedModal
             :is-visible="isAlreadyDonatedModalVisible"
             :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
             @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-            @goAway="() => onClose( CloseSources.AlreadyDonatedGoAway )"
-            @maybe-later="() => onClose( CloseSources.MaybeLater )"
+            @goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
+            @maybe-later="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
         >
             <template #already-donated-content>
                 <AlreadyDonatedContent/>
@@ -74,7 +77,6 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
@@ -99,6 +101,8 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -137,8 +141,8 @@ function onCloseMain(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose( feature: string, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 function onShowAlreadyDonated(): void {
