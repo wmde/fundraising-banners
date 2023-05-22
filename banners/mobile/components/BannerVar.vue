@@ -17,7 +17,7 @@
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.Close )"
+			@close="() => onClose( TrackingFeatures.FullPageBanner, CloseChoices.Close )"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -56,9 +56,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.Close )"
+			@maybe-later="() => onClose( TrackingFeatures.SoftClose, CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.TimeOut )"
 		/>
 
 		<FundsModal
@@ -101,6 +101,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/IntermediateUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

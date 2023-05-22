@@ -7,6 +7,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 const formModel = useFormModel();
 
@@ -182,7 +183,7 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 			await wrapper.setProps( { isCurrent: true } );
 
 			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
-			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'UpgradeToYearlyForm' ) );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( TrackingFeatures.UpgradeToYearlyForm ) );
 		} );
 	} );
 } );

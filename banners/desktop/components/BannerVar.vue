@@ -51,9 +51,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.Close )"
+			@maybe-later="() => onClose( TrackingFeatures.SoftClose, CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.TimeOut )"
 		/>
 
 		<FundsModal
@@ -92,6 +92,7 @@ import AddressTypeForm from '@src/components/DonationForm/Forms/AddressTypeForm.
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

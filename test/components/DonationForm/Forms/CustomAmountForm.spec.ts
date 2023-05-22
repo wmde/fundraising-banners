@@ -7,6 +7,7 @@ import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 const formModel = useFormModel();
 
@@ -156,7 +157,7 @@ describe( 'CustomAmountForm.vue', () => {
 			await wrapper.setProps( { isCurrent: true } );
 
 			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
-			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'CustomAmountForm' ) );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( TrackingFeatures.CustomAmountForm ) );
 		} );
 	} );
 } );

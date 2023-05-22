@@ -25,6 +25,7 @@ import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 interface Props {
 	page: Page,
@@ -56,7 +57,11 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) ) );
+props.page.onPageEventThatShouldHideBanner(
+	() => stateMachine.changeState(
+		stateFactory.newClosedState( new CloseEvent( TrackingFeatures.Page, 'page-interaction' ) )
+	)
+);
 
 function onContentChanged(): void {
 	// Wait a tick in order to let the content re-render before updating the size

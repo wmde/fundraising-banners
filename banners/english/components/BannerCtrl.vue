@@ -49,9 +49,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.Close )"
+			@maybe-later="() => onClose( TrackingFeatures.SoftClose, CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( TrackingFeatures.SoftClose, CloseChoices.TimeOut )"
 		/>
 
         <FundsModal
@@ -88,6 +88,7 @@ import {
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

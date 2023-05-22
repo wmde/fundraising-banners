@@ -12,6 +12,7 @@ import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 const formModel = useFormModel();
 
@@ -128,7 +129,7 @@ describe( 'AddressTypeForm.vue', () => {
 			await wrapper.setProps( { isCurrent: true } );
 
 			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
-			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'AddressTypeForm' ) );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( TrackingFeatures.AddressTypeForm ) );
 		} );
 	} );
 

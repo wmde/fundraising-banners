@@ -2,6 +2,7 @@ import { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 const expectShowsAlreadyDonatedModal = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
@@ -21,7 +22,7 @@ const expectFiresMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): Promise<a
 	await wrapper.find( '.wmde-banner-already-donated-button-maybe-later' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonatedModal', CloseChoices.MaybeLater ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( TrackingFeatures.AlreadyDonatedModal, CloseChoices.MaybeLater ) );
 };
 
 const expectFiresGoAwayEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
@@ -29,7 +30,7 @@ const expectFiresGoAwayEvent = async ( wrapper: VueWrapper<any> ): Promise<any> 
 	await wrapper.find( '.wmde-banner-already-donated-button-go-away' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( TrackingFeatures.AlreadyDonatedModal, CloseChoices.NoMoreBannersForCampaign ) );
 };
 
 export const alreadyDonatedModalFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {

@@ -5,11 +5,12 @@ import { PageStub } from '@test/fixtures/PageStub';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 import { CloseChoices } from '@src/domain/CloseChoices';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 describe( 'ClosedState', function () {
 	it( 'tracks close event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
+		const closeEvent = new CloseEvent( TrackingFeatures.MainBanner, CloseChoices.Close );
 		const state = new ClosedState( closeEvent, new PageStub(), tracker, new ResizeHandlerStub() );
 
 		state.enter();
@@ -21,7 +22,7 @@ describe( 'ClosedState', function () {
 		const page = new PageStub();
 		page.setSpace = vitest.fn( () => page );
 		page.unsetAnimated = vitest.fn( () => page );
-		const state = new ClosedState( new CloseEvent( 'MainBanner', CloseChoices.Close ), page, new TrackerStub(), new ResizeHandlerStub() );
+		const state = new ClosedState( new CloseEvent( TrackingFeatures.MainBanner, CloseChoices.Close ), page, new TrackerStub(), new ResizeHandlerStub() );
 
 		state.enter();
 
@@ -32,7 +33,7 @@ describe( 'ClosedState', function () {
 	it( 'sets closed cookie', function () {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vitest.fn( () => page );
-		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
+		const closeEvent = new CloseEvent( TrackingFeatures.MainBanner, CloseChoices.Close );
 		const state = new ClosedState( closeEvent, page, new TrackerStub(), new ResizeHandlerStub() );
 
 		state.enter();
@@ -46,7 +47,7 @@ describe( 'ClosedState', function () {
 		const resizeHandler = new ResizeHandlerStub();
 		page.removePageEventListeners = vitest.fn( () => page );
 		resizeHandler.onClose = vitest.fn();
-		const state = new ClosedState( new CloseEvent( 'MainBanner', CloseChoices.Close ), page, new TrackerStub(), resizeHandler );
+		const state = new ClosedState( new CloseEvent( TrackingFeatures.MainBanner, CloseChoices.Close ), page, new TrackerStub(), resizeHandler );
 
 		state.enter();
 

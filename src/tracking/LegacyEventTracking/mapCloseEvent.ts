@@ -2,6 +2,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { LegacyCloseSources } from '@src/tracking/LegacyCloseSources';
 import { CloseChoices } from '@src/domain/CloseChoices';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 // These are the close sources that the legacy tracking was interested in, we don't track other close sources
 const closeSourceToLegacyEventName = new Map<string, string>( [
@@ -13,7 +14,7 @@ const closeSourceToLegacyEventName = new Map<string, string>( [
 ] );
 
 export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
-	if ( event.feature === 'AlreadyDonatedModal' ) {
+	if ( event.feature === TrackingFeatures.AlreadyDonatedModal ) {
 		if ( event.userChoice === CloseChoices.NoMoreBannersForCampaign ) {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.AlreadyDonatedGoAway ), 0.1 );
 		}
@@ -23,7 +24,7 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 		}
 	}
 
-	if ( event.feature === 'SoftClose' ) {
+	if ( event.feature === TrackingFeatures.SoftClose ) {
 		if ( event.userChoice === CloseChoices.MaybeLater ) {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.MaybeLater ), 0.1 );
 		}
@@ -33,7 +34,7 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 		}
 	}
 
-	if ( event.feature === 'FullPageBanner' ) {
+	if ( event.feature === TrackingFeatures.FullPageBanner ) {
 		return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.FullPageBanner ), 0.1 );
 	}
 

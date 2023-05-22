@@ -7,6 +7,7 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 const formModel = useFormModel();
 
@@ -64,7 +65,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 
 			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.YEARLY.value } );
 
-			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', 'recurring' ) );
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( TrackingFeatures.UpgradeToYearlyForm, 'recurring' ) );
 		} );
 
 		it( 'converts non-recurring interval to "submit" event with the correct option selected', async () => {
@@ -72,7 +73,7 @@ describe( 'SubmittableUpgradeToYearly', () => {
 
 			await upgrade.submit( stepNavigation, { upgradeToYearlyInterval: Intervals.ONCE.value } );
 
-			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', 'non-recurring' ) );
+			expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( TrackingFeatures.UpgradeToYearlyForm, 'non-recurring' ) );
 		} );
 	} );
 } );

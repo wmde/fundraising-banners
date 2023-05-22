@@ -4,12 +4,13 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { StepController } from '@src/components/DonationForm/StepController';
 import { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
+import { TrackingFeatures } from '@src/domain/TrackingFeatures';
 
 export function createSubmittableMainDonationForm( formModel: FormModel, stepNameOfUpgradeToYearly: string ): StepController {
 	return {
 		async submit( navigation: StepAction ): Promise<void> {
 			if ( formModel.interval.value !== Intervals.ONCE.value || formModel.paymentMethod.value === PaymentMethods.SOFORT.value ) {
-				await navigation.submit( new BannerSubmitEvent( 'MainDonationForm' ) );
+				await navigation.submit( new BannerSubmitEvent( TrackingFeatures.MainDonationForm ) );
 				return;
 			}
 			await navigation.goToStep( stepNameOfUpgradeToYearly );
