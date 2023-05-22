@@ -15,7 +15,7 @@
 				class="wmde-banner-form-button t-annual-upgrade-no"
 				:value="Intervals.ONCE.value"
 			>
-					{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
+				{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
 			</button>
 
 			<button
@@ -24,7 +24,7 @@
 				class="wmde-banner-form-button t-annual-upgrade-yes"
 				:value="Intervals.YEARLY.value"
 			>
-					{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
+				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
 			</button>
 
 			<a tabIndex="-1"
@@ -32,7 +32,7 @@
 				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
 				@click.prevent="onGoToChangeOfAmount"
 			>
-					{{ $translate( 'upgrade-to-yearly-link' ) }}
+				{{ $translate( 'upgrade-to-yearly-link' ) }}
 			</a>
 		</div>
     </form>

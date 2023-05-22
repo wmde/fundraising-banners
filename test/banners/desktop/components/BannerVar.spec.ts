@@ -1,6 +1,6 @@
-import { afterEach, beforeEach, describe, test } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/pad/components/BannerCtrl.vue';
+import Banner from '../../../../banners/desktop/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -9,25 +9,22 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { desktopContentDisplaySwitchFeatures, desktopContentFeatures } from '@test/features/DesktopContent';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount_AddressType';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
-	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+	} );
 
-		// attachTo the document body to fix an issue with Vue Test Utils where
-		// clicking a submit button in a form does not fire the submit event
-		wrapper = mount( Banner, {
-			attachTo: document.body,
+	const getWrapper = (): VueWrapper<any> => {
+		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent
@@ -46,31 +43,36 @@ describe( 'BannerCtrl.vue', () => {
 				}
 			}
 		} );
-	} );
-
-	afterEach( () => {
-		wrapper.unmount();
-	} );
+	};
 
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( wrapper );
+			await desktopContentFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectShowsSlideShowOnSmallSizes' ],
+			[ 'expectShowsMessageOnSmallSizes' ]
+		] )( '%s', async ( testName: string ) => {
+			await desktopContentDisplaySwitchFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
-			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
-			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToAddressFormWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormGoesToAddressFormWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormGoesToAddressTypeOnUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToAddressTypeOnDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
+			[ 'expectCustomAmountGoesToAddressFormOnSubmit' ],
+			[ 'expectAddressFormSubmits' ]
 		] )( '%s', async ( testName: string ) => {
-			await donationFormFeatures[ testName ]( wrapper );
+			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -82,7 +84,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -91,18 +93,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( wrapper );
-		} );
-	} );
-
-	describe( 'Already Donated Modal', () => {
-		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
