@@ -1,3 +1,20 @@
+export type TrackingFeatureName = '' |
+	'SoftClose' |
+	'Page' |
+	'AlreadyDonated' |
+	'CustomAmount' |
+	'BannerConductor' |
+
+	'MainBanner' |
+	'MiniBanner' |
+	'FullPageBanner' |
+	'AlreadyDonatedModal' |
+
+	'MainDonationForm' |
+	'CustomAmountForm' |
+	'UpgradeToYearlyForm' |
+	'AddressTypeForm';
+
 export interface TrackingEvent {
 	/**
 	 * What type of event this is
@@ -10,10 +27,8 @@ export interface TrackingEvent {
 	 * Which part of the banner the event comes from.
 	 * Can be a Component name or a general feature description like "SoftClose".
 	 * Can be empty, if exact source is not needed (defined by Campaigns Team)
-	 *
-	 * Examples: MainDonationForm, SoftClose
 	 */
-	feature: string;
+	feature: TrackingFeatureName;
 
 	/**
 	 * For tracking the same event where the user has a choice between several options or specific actions.
