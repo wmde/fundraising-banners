@@ -67,9 +67,6 @@ module.exports = {
 			}
 		]
 	},
-	externals: {
-		jquery: 'jQuery'
-	},
 	resolve: {
 		extensions: [ '.ts', '.js', '.json' ],
 		alias: {
