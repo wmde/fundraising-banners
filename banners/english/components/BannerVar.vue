@@ -103,6 +103,7 @@ import {
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -141,7 +142,7 @@ function onCloseMain(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( feature: string, userChoice: CloseChoices ): void {
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 

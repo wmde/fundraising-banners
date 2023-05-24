@@ -1,4 +1,4 @@
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 export class CloseEvent implements TrackingEvent {
 	public static readonly EVENT_NAME = 'close';
@@ -7,7 +7,7 @@ export class CloseEvent implements TrackingEvent {
 	public readonly customData: Record<string, string> = {};
 
 	public constructor(
-		public readonly feature: string = '',
+		public readonly feature: TrackingFeatureName = '',
 		public readonly userChoice: string = ''
 	) {
 	}

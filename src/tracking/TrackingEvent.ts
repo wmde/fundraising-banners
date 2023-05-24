@@ -3,7 +3,6 @@ export type TrackingFeatureName = '' |
 	'Page' |
 	'AlreadyDonated' |
 	'CustomAmount' |
-	'BannerConductor' |
 
 	'MainBanner' |
 	'MiniBanner' |
