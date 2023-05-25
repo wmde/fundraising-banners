@@ -2,17 +2,15 @@ import { VueWrapper } from '@vue/test-utils';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { expect, vi } from 'vitest';
 
-const expectSlideShowPlaysWhenBecomesVisible = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
-	const wrapper = getWrapper();
+const expectSlideShowPlaysWhenBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
 
 	expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 };
 
-const expectSlideShowStopsOnFormInteraction = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
+const expectSlideShowStopsOnFormInteraction = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	vi.useFakeTimers();
 
-	const wrapper = getWrapper();
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
 	await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
 	await vi.runOnlyPendingTimers();
@@ -38,9 +36,12 @@ const expectShowsMessageOnSmallSizes = async ( getWrapper: () => VueWrapper<any>
 	expect( wrapper.find( '.wmde-banner-message' ).exists() ).toBeTruthy();
 };
 
-export const desktopContentFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
+export const desktopContentFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenBecomesVisible,
-	expectSlideShowStopsOnFormInteraction,
+	expectSlideShowStopsOnFormInteraction
+};
+
+export const desktopContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
 	expectShowsSlideShowOnSmallSizes,
 	expectShowsMessageOnSmallSizes
 };

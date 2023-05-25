@@ -1,4 +1,4 @@
-import { beforeEach, describe, vi, test } from 'vitest';
+import { afterEach, beforeEach, describe, vi, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/wpde_mobile/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -11,32 +11,31 @@ import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { resetFormModel } from '@test/resetFormModel';
 
 let pageScroller: PageScroller;
+const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
+		resetFormModel( formModel );
+
 		pageScroller = {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
 		};
 
+		// attachTo the document body to fix an issue with Vue Test Utils where
+		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
+			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
-				formController: {
-					submitStep: () => {},
-					next: () => {},
-					previous: () => {},
-					onNext: () => {},
-					onPrevious: () => {},
-					onGoToStep: () => {},
-					onSubmit: () => {}
-				},
-				forms: [],
 				useOfFundsContent,
 				pageScroller
 			},
@@ -53,6 +52,23 @@ describe( 'BannerCtrl.vue', () => {
 					tracker: new TrackerStub()
 				}
 			}
+		} );
+	} );
+
+	afterEach( () => {
+		wrapper.unmount();
+	} );
+
+	describe( 'Donation Form Happy Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormFeatures[ testName ]( wrapper );
 		} );
 	} );
 

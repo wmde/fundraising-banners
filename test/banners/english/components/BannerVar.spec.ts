@@ -1,4 +1,4 @@
-import { describe, test } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -8,26 +8,26 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { desktopContentDisplaySwitchFeatures, desktopContentFeatures } from '@test/features/DesktopContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 
+const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerVar.vue', () => {
+
+	beforeEach( () => {
+		resetFormModel( formModel );
+	} );
+
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
-				formController: {
-					submitStep: () => {},
-					next: () => {},
-					previous: () => {},
-					onNext: () => {},
-					onPrevious: () => {},
-					onGoToStep: () => {},
-					onSubmit: () => {}
-				},
 				useOfFundsContent
 			},
 			global: {
@@ -49,11 +49,30 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
-			[ 'expectSlideShowStopsOnFormInteraction' ],
+			[ 'expectSlideShowStopsOnFormInteraction' ]
+		] )( '%s', async ( testName: string ) => {
+			await desktopContentFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
 			[ 'expectShowsSlideShowOnSmallSizes' ],
 			[ 'expectShowsMessageOnSmallSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( getWrapper );
+			await desktopContentDisplaySwitchFeatures[ testName ]( getWrapper );
+		} );
+	} );
+
+	describe( 'Donation Form Happy Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
+			[ 'expectCustomAmountFormSubmits' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
