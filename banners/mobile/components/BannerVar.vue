@@ -101,6 +101,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/IntermediateUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -146,7 +147,7 @@ function onCloseMiniBanner(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( feature: string, userChoice: CloseChoices ): void {
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 

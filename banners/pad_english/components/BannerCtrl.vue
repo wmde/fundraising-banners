@@ -1,7 +1,7 @@
 <template>
     <div class="wmde-banner-wrapper" :class="contentState" >
         <BannerMain
-			@close="() => onClose( 'BannerMain', CloseChoices.Close )"
+			@close="() => onClose( 'MainBanner', CloseChoices.Close )"
             @form-interaction="$emit( 'bannerContentChanged' )"
             :bannerState="bannerState"
         >
@@ -89,6 +89,7 @@ import {
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main'
@@ -116,7 +117,7 @@ const stepControllers = [
 	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
 
-function onClose( feature: string, userChoice: CloseChoices ): void {
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
