@@ -1,17 +1,19 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { shallowMount, VueWrapper } from '@vue/test-utils';
+import { mount, VueWrapper } from '@vue/test-utils';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { PageStub } from '@test/fixtures/PageStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 import { ImpressionCountStub } from '@test/fixtures/ImpressionCountStub';
-import { nextTick } from 'vue';
+import { defineComponent, h, markRaw, nextTick } from 'vue';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
-import { bannerStateMachineSpy, newBannerStateMachineSpy } from '@test/fixtures/BannerStateMachineSpy';
+import { BannerStateMachineSpy } from '@test/fixtures/BannerStateMachineSpy';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { LegacyCloseSources } from '@src/tracking/LegacyCloseSources';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
+import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
+import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -24,13 +26,27 @@ vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', asyn
 
 describe( 'BannerConductor.vue', () => {
 
+	let stateMachineSpy: BannerStateMachineSpy;
+
 	async function getShownBannerWrapper( page: Page|null = null ): Promise<VueWrapper<any>> {
-		const wrapper = shallowMount( BannerConductor, {
+		const banner = defineComponent( {
+			props: {
+				bannerState: String
+			},
+			emits: [
+				'bannerClosed',
+				'bannerContentChanged'
+			],
+			render() {
+				return h( 'div', { 'class': 'test-banner', 'innerHTML': 'hello' } );
+			}
+		} );
+		const wrapper = mount( BannerConductor, {
 			props: {
 				page: page ?? new PageStub(),
 				bannerConfig: { delay: 42, transitionDuration: 5 },
 				resizeHandler: new ResizeHandlerStub(),
-				banner: {},
+				banner: markRaw( banner ),
 				impressionCount: new ImpressionCountStub()
 			},
 			global: {
@@ -46,11 +62,16 @@ describe( 'BannerConductor.vue', () => {
 		await nextTick();
 		await vi.runAllTimersAsync();
 
+		console.log( wrapper.html() );
+
 		return Promise.resolve( wrapper );
 	}
 
 	beforeEach( () => {
-		vi.mocked( newBannerStateMachine ).mockImplementation( newBannerStateMachineSpy );
+		vi.mocked( newBannerStateMachine ).mockImplementation( ( stateRef: ReactiveProperty<BannerState> ) => {
+			stateMachineSpy = new BannerStateMachineSpy( stateRef );
+			return stateMachineSpy;
+		} );
 		vi.useFakeTimers();
 	} );
 
@@ -61,7 +82,7 @@ describe( 'BannerConductor.vue', () => {
 	it( 'runs through correct state flow on mounted', async () => {
 		await getShownBannerWrapper();
 
-		expect( bannerStateMachineSpy.statesCalled ).toEqual( [
+		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible
@@ -74,7 +95,7 @@ describe( 'BannerConductor.vue', () => {
 
 		await getShownBannerWrapper( page );
 
-		expect( bannerStateMachineSpy.statesCalled ).toEqual( [
+		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.NotShown
 		] );
@@ -108,7 +129,7 @@ describe( 'BannerConductor.vue', () => {
 		page.setSpace = vi.fn().mockReturnValue( page );
 		const wrapper = await getShownBannerWrapper( page );
 
-		await wrapper.find( 'anonymous-stub' ).trigger( 'banner-content-changed' );
+		await wrapper.find( '.test-banner' ).trigger( 'banner-content-changed' );
 
 		expect( page.setSpace ).toHaveBeenCalledTimes( 2 );
 	} );
@@ -119,7 +140,7 @@ describe( 'BannerConductor.vue', () => {
 		const wrapper = await getShownBannerWrapper( page );
 		await wrapper.find( 'anonymous-stub' ).trigger( 'banner-closed', { blah: LegacyCloseSources.MaybeLater } );
 
-		expect( bannerStateMachineSpy.statesCalled ).toEqual( [
+		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible,
