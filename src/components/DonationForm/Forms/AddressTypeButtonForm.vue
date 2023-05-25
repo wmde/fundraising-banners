@@ -19,6 +19,7 @@
 				<button type="submit"
 						tabIndex="-1"
 						class="wmde-banner-form-button"
+						:class="[ item.value === AddressTypes.FULL.value ? 't-submit-address-type-person' : 't-submit-address-type-anonym' ]"
 						:value="item.value"
 						:disabled="disabledAddressTypes.indexOf( item.value ) > -1"
 				>
@@ -50,6 +51,8 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
 import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 
 interface Props {
 	isCurrent: boolean

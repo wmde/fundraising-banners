@@ -7,7 +7,8 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	&-text-animated-highlight {
+	&-text-animated-highlight,
+	&-slider-text-animated-highlight {
 		padding: 0 5px;
 
 		/* stylelint-disable */
@@ -25,8 +26,9 @@
 		transition: background-position 2s;
 	}
 
-	&-wrapper--full-page .wmde-banner-message .wmde-banner-text-animated-highlight,
-	&-slide--current .wmde-banner-text-animated-highlight {
+	/* stylelint-disable max-line-length */
+	&-wrapper--full-page .wmde-banner-message .wmde-banner-text-animated-highlight .wmde-banner-slider-text-animated-highlight,
+	&-slide--current .wmde-banner-text-animated-highlight .wmde-banner-slider-text-animated-highlight {
 		background-position: 0 0;
 	}
 }

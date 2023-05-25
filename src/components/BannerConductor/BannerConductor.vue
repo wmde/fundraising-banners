@@ -1,5 +1,6 @@
 <template>
-	<div ref="bannerRef" class="wmde-banner" :class="bannerState.stateName">
+	<div ref="bannerRef" class="wmde-banner"
+		 :class="[{'t-banner-visible': bannerState.stateName === BannerStates.Visible}, bannerState.stateName]">
 		<component
 			:is="banner"
 			v-bind="bannerProps"
@@ -25,6 +26,7 @@ import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 interface Props {
 	page: Page,

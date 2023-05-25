@@ -15,7 +15,8 @@
 		list-style-image: unset;
 	}
 
-	&-text-animated-highlight {
+	&-text-animated-highlight,
+	&-slider-text-animated-highlight {
 		padding: 0 5px;
 
 		/* stylelint-disable */

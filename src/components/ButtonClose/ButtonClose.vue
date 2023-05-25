@@ -1,5 +1,5 @@
 <template>
-	<button class="wmde-banner-close">
+	<button class="wmde-banner-close t-close-main-banner">
 		<slot>
 			<CloseIconDefault/>
 		</slot>
