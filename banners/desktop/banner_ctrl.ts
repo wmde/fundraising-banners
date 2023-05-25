@@ -2,7 +2,6 @@ import { createVueApp } from '@src/createVueApp';
 
 import './styles/styles.scss';
 
-import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerCtrl.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -36,18 +35,17 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
-const app = createVueApp( BannerConductor, {
-	page,
-	bannerConfig: {
-		delay: getBannerDelay( 7500 ),
-		transitionDuration: 1000
-	},
-	bannerProps: {
-		useOfFundsContent
-	},
-	resizeHandler: new WindowResizeHandler(),
-	banner: Banner,
-	impressionCount
+const app = createVueApp( Banner, {
+	useOfFundsContent,
+	bannerConductorProps: {
+		page,
+		impressionCount,
+		bannerConfig: {
+			delay: getBannerDelay( 7500 ),
+			transitionDuration: 1000
+		},
+		resizeHandler: new WindowResizeHandler()
+	}
 } );
 
 app.use( TranslationPlugin, translator );

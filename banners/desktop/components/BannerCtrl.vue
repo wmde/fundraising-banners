@@ -1,70 +1,75 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState">
-		<BannerMain
-			@close="onCloseMain"
-			@form-interaction="$emit( 'bannerContentChanged' )"
-			v-if="contentState === ContentStates.Main"
-			:bannerState="bannerState"
-		>
-			<template #banner-text>
-				<BannerText/>
-			</template>
+	<BannerConductor v-bind="bannerConductorProps">
 
-			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="5000">
-
-					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
+		<template #banner="{ bannerState, bannerContentChanged, bannerClosed }: any">
+			<div class="wmde-banner-wrapper" :class="contentState">
+				<BannerMain
+					@close="() => onCloseMain( bannerContentChanged )"
+					@form-interaction="bannerContentChanged"
+					v-if="contentState === ContentStates.Main"
+					:bannerState="bannerState"
+				>
+					<template #banner-text>
+						<BannerText/>
 					</template>
 
-				</KeenSlider>
-			</template>
+					<template #banner-slides="{ play }: any">
+						<KeenSlider :with-navigation="true" :play="play" :interval="5000">
 
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
+							<template #slides="{ currentSlide }: any">
+								<BannerSlides :currentSlide="currentSlide"/>
+							</template>
 
-			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+						</KeenSlider>
+					</template>
 
-                    <template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-                        <MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
-                    </template>
+					<template #progress>
+						<ProgressBar amount-to-show-on-right="TARGET"/>
+					</template>
 
-                    <template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-                        <UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
-                    </template>
+					<template #donation-form="{ formInteraction }: any">
+						<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
-                    <template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-                        <CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
-                    </template>
+							<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+								<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+							</template>
 
-				</MultiStepDonation>
-			</template>
+							<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+								<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+							</template>
 
-			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
-			</template>
-		</BannerMain>
+							<template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+								<CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+							</template>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+						</MultiStepDonation>
+					</template>
 
-		<FundsModal
-			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
-		/>
-	</div>
+					<template #footer>
+						<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
+					</template>
+				</BannerMain>
+
+				<SoftClose
+					v-if="contentState === ContentStates.SoftClosing"
+					@close="() => bannerClosed( 'SoftClose', CloseChoices.Close )"
+					@maybe-later="() => bannerClosed( 'SoftClose', CloseChoices.MaybeLater )"
+					@time-out-close="() => bannerClosed( 'SoftClose', CloseChoices.TimeOut )"
+				/>
+
+				<FundsModal
+					:content="useOfFundsContent"
+					:is-funds-modal-visible="isFundsModalVisible"
+					@hideFundsModal="isFundsModalVisible = false"
+				/>
+			</div>
+		</template>
+
+	</BannerConductor>
 </template>
 
 <script setup lang="ts">
-import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import BannerMain from './BannerMain.vue';
@@ -87,8 +92,8 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
+import { BannerConductorProps } from '@src/components/BannerConductor/BannerConductorProps';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -102,12 +107,11 @@ enum FormStepNames {
 }
 
 interface Props {
-	bannerState: BannerStates;
+	bannerConductorProps: BannerConductorProps;
 	useOfFundsContent: useOfFundsContentInterface;
 }
 
 defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -118,16 +122,9 @@ const stepControllers = [
 	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
 
-watch( contentState, async () => {
-	emit( 'bannerContentChanged' );
-} );
-
-function onCloseMain(): void {
+function onCloseMain( bannerContentChangedCallback: Function ): void {
 	contentState.value = ContentStates.SoftClosing;
-}
-
-function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	bannerContentChangedCallback();
 }
 
 </script>

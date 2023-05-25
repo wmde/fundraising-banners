@@ -1,12 +1,10 @@
 <template>
 	<div ref="bannerRef" class="wmde-banner" :class="bannerState.stateName">
-		<component
-			:is="banner"
-			v-bind="bannerProps"
-			:bannerState="bannerState.stateName"
-			:bannerHeight="bannerRef?.offsetHeight"
-			@banner-closed="closeHandler"
-			@banner-content-changed="onContentChanged"
+		<slot
+			name="banner"
+			:banner-state="bannerState.stateName"
+			:banner-closed="onClosed"
+			:banner-content-changed="onContentChanged"
 		/>
 	</div>
 </template>
@@ -23,16 +21,15 @@ import { BannerState } from '@src/components/BannerConductor/StateMachine/states
 import { Vector2 } from '@src/utils/Vector2';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { Tracker } from '@src/tracking/Tracker';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { CloseChoices } from '@src/domain/CloseChoices';
 
 interface Props {
-	page: Page,
-	bannerConfig: BannerConfig,
-	resizeHandler: ResizeHandler,
-	banner: Object,
-	bannerProps?: Object,
-	impressionCount: ImpressionCount,
+	page: Page;
+	bannerConfig: BannerConfig;
+	resizeHandler: ResizeHandler;
+	impressionCount: ImpressionCount;
 }
 
 const props = defineProps<Props>();
@@ -58,16 +55,16 @@ onMounted( async () => {
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
 props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) ) );
 
-function onContentChanged(): void {
+const onContentChanged = (): void => {
 	// Wait a tick in order to let the content re-render before updating the size
 	nextTick( () => {
 		stateMachine.currentState.value.onContentChanged( bannerRef.value.offsetHeight );
 	} );
-}
+};
 
-async function closeHandler( closeEvent: TrackingEvent ): Promise<any> {
-	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
-}
+const onClosed = async ( feature: TrackingFeatureName, userChoice: CloseChoices ): Promise<any> => {
+	await stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( feature, userChoice ) ) );
+};
 
 </script>
 
