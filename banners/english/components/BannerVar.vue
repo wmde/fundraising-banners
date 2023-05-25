@@ -16,14 +16,6 @@
                         <BannerSlides :currentSlide="currentSlide"/>
                     </template>
 
-                    <template #left-icon>
-                        <ChevronLeftIcon/>
-                    </template>
-
-                    <template #right-icon>
-                        <ChevronRightIcon/>
-                    </template>
-
                 </KeenSlider>
             </template>
 
@@ -32,47 +24,49 @@
             </template>
 
             <template #donation-form="{ formInteraction }: any">
-                <MultiStepDonation :form-controller="formController" @form-interaction="formInteraction">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
-                    <template #form-page-1="{ pageIndex, submit, next, previous }: any">
-                        <MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-                    </template>
+					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+					</template>
 
-                    <template #form-page-2="{ pageIndex, submit, next, previous }: any">
-                        <UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" @next="next"
-                                             @previous="previous"/>
-                    </template>
+					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+					</template>
 
-                    <template #form-page-3="{ pageIndex, submit, next, previous }: any">
-                        <CustomAmountForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
-                    </template>
+					<template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+					</template>
 
-                </MultiStepDonation>
+				</MultiStepDonation>
             </template>
             <template #footer>
                 <FooterAlreadyDonated
                     @showFundsModal="isFundsModalVisible = true"
-                    @showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+                    @showAlreadyDonatedModal="onShowAlreadyDonated"
                 />
             </template>
         </BannerMain>
-        <SoftClose
-            v-if="contentState === ContentStates.SoftClosing"
-            @close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-            @maybe-later="() => onClose( CloseSources.MaybeLater )"
-            @time-out-close="() => onClose( CloseSources.TimeOut )"
-        />
+
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+		/>
+
         <FundsModal
             :content="useOfFundsContent"
             :is-funds-modal-visible="isFundsModalVisible"
             @hideFundsModal="isFundsModalVisible = false"
         />
+
         <AlreadyDonatedModal
             :is-visible="isAlreadyDonatedModalVisible"
             :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
             @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-            @goAway="() => onClose( CloseSources.AlreadyDonatedGoAway )"
-            @maybe-later="() => onClose( CloseSources.MaybeLater )"
+            @goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
+            @maybe-later="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
         >
             <template #already-donated-content>
                 <AlreadyDonatedContent/>
@@ -83,11 +77,9 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { ref, watch } from 'vue';
 import BannerMain from './BannerMain.vue';
-import { FormController } from '@src/utils/FormController/FormController';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
@@ -100,18 +92,32 @@ import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vu
 import BannerText from '../../english/content/BannerText.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
+enum FormStepNames {
+	CustomAmountFormStep = 'CustomAmountForm',
+	MainDonationFormStep = 'MainDonationForm',
+	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+}
+
 interface Props {
 	bannerState: BannerStates;
-	formController: FormController;
 	useOfFundsContent: useOfFundsContentInterface;
 }
 
@@ -121,6 +127,12 @@ const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged'
 const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
+const formModel = useFormModel();
+const stepControllers = [
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
+	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
+];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -130,8 +142,12 @@ function onCloseMain(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onShowAlreadyDonated(): void {
+	isAlreadyDonatedModalVisible.value = true;
 }
 
 </script>

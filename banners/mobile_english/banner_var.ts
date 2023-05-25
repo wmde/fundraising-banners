@@ -6,16 +6,17 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import PageOrg from '@src/page/PageOrg';
+import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
+import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
+import eventMappings from './event_map';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { FormController } from './FormController';
 
 // Change for EN banners
 import messages from './messages';
@@ -28,6 +29,7 @@ import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { Locales } from '@src/domain/Locales';
 
 const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
 
@@ -35,7 +37,8 @@ const translator = new Translator( messages );
 
 // This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
-const page = new PageOrg( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 // This is language-specific and must be changed for EN banners
 const currencyFormatter = new CurrencyEn();
@@ -52,7 +55,6 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		formController: new FormController(),
 		useOfFundsContent,
 		pageScroller
 	},
@@ -72,6 +74,7 @@ app.use( DynamicTextPlugin, {
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
+app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
-import PageOrg, { bannerAppId } from '@src/page/PageOrg';
+import PageWPORG, { bannerAppId } from '@src/page/PageWPORG';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { JSDOM } from 'jsdom';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 describe( 'PageOrg', function () {
 	let mediaWiki: MediaWiki;
@@ -35,7 +36,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( null );
 	} );
 
@@ -44,7 +45,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.DisallowedNamespace );
 	} );
 
@@ -53,7 +54,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( false );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
@@ -62,7 +63,7 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( true );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
@@ -71,12 +72,12 @@ describe( 'PageOrg', function () {
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
-		expect( ( new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner( Vector2.zero ) )
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub( true ) ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.SizeIssue );
 	} );
 
 	it( 'creates a mount point when getBannerContainer() is called', function () {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 		const id = page.getBannerContainer();
 
 		expect( id ).toBe( '#' + bannerAppId );
@@ -84,41 +85,49 @@ describe( 'PageOrg', function () {
 	} );
 
 	it( 'stores "close" cookie for already donated "enough for this year" events', () => {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedGoAway );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.NoMoreBannersForCampaign ) );
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).toHaveBeenCalledOnce();
 	} );
 
 	it( 'does not store cookie for the AlreadyDonated "Maybe Later" event', () => {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.AlreadyDonatedMaybeLater );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.MaybeLater ) );
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
 
 	it( 'stores close cookie when user closes soft close', () => {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.SoftCloseBannerRejected );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.Close ) );
+
+		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user ignores soft close', () => {
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
 
 	it( 'stores close cookie when user closes main banner', () => {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.MainBanner );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
 
 	it( 'stores close cookie when user closes mini banner', () => {
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( CloseSources.MiniBanner );
+		page.setCloseCookieIfNecessary( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -126,7 +135,7 @@ describe( 'PageOrg', function () {
 	it( 'returns campaign parameters', () => {
 		const dom = new JSDOM( `<!DOCTYPE html><p id="wmde-campaign-parameters" data-start-date="2084-12-12">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		const retrievedCampaignParameters = page.getCampaignParameters();
 
@@ -136,7 +145,7 @@ describe( 'PageOrg', function () {
 	it( 'throws error if campaign parameters element not found', () => {
 		const dom = new JSDOM( `<!DOCTYPE html><p data-start-date="2084-12-12">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		expect( () => page.getCampaignParameters() ).toThrow( 'Campaign data element not found' );
 	} );
@@ -144,7 +153,7 @@ describe( 'PageOrg', function () {
 	it( 'returns banner tracking keyword and campaign', () => {
 		const dom = new JSDOM( `<!DOCTYPE html><p id="WMDE-Banner-Container" data-tracking="org-00-2023-blabla-ctrl" data-campaign-tracking="a-campaign">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		const retrievedTrackingKeyword = page.getTracking();
 
@@ -155,10 +164,8 @@ describe( 'PageOrg', function () {
 	it( 'throws error if banner tracking can not be retrieved', () => {
 		const dom = new JSDOM( `<!DOCTYPE html><p data-tracking="org-00-2023-blabla-ctrl">Hello world</p>` );
 		vitest.stubGlobal( 'document', dom.window.document );
-		const page = new PageOrg( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
 	} );
-
-	it.todo( 'sends event tracking data in trackEvent()' );
 } );

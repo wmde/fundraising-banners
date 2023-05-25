@@ -10,6 +10,8 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { nextTick } from 'vue';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import { Validity } from '@src/utils/FormModel/Validity';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 
 const formModel = useFormModel();
 
@@ -28,13 +30,15 @@ describe( 'AddressTypeForm.vue', () => {
 	};
 
 	let wrapper: VueWrapper<any>;
+	let tracker: TrackerSpy;
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		tracker = new TrackerSpy();
 
 		wrapper = mount( AddressTypeForm, {
 			props: {
-				pageIndex: 4444
+				isCurrent: false
 			},
 			global: {
 				mocks: {
@@ -42,7 +46,8 @@ describe( 'AddressTypeForm.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					formItems: formItems
+					formItems: formItems,
+					tracker
 				}
 			}
 		} );
@@ -108,7 +113,6 @@ describe( 'AddressTypeForm.vue', () => {
 		await wrapper.find( '.previous' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4444 } );
 	} );
 
 	it( 'should emit "submit" event when user selects a valid address option and submits', async () => {
@@ -116,6 +120,16 @@ describe( 'AddressTypeForm.vue', () => {
 		await wrapper.trigger( 'submit' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+	} );
+
+	describe( 'tracking events', function () {
+
+		it( 'sends the FormStepShownEvent to tracker when the form becomes the current form', async () => {
+			await wrapper.setProps( { isCurrent: true } );
+
+			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'AddressTypeForm' ) );
+		} );
 	} );
 
 } );

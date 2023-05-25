@@ -1,11 +1,10 @@
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CloseSources } from '@src/tracking/CloseSources';
-import { Tracker } from '@src/tracking/Tracker';
 import { Vector2 } from '@src/utils/Vector2';
-import { TrackingParameters } from '@src/TrackingParameters';
+import { TrackingParameters } from '@src/domain/TrackingParameters';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
-export interface Page extends Tracker {
+export interface Page {
 	getReasonToNotShowBanner: ( bannerDimensions: Vector2 ) => BannerNotShownReasons|null;
 	getBannerContainer: () => string;
 	onPageEventThatShouldHideBanner: ( hideBannerListener: () => void ) => void;
@@ -16,7 +15,7 @@ export interface Page extends Tracker {
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
 	preventImpressionCountForHiddenBanner: () => Page;
-	setCloseCookieIfNecessary: ( source: CloseSources ) => Page;
+	setCloseCookieIfNecessary: ( closeEvent: TrackingEvent ) => Page;
 	getCampaignParameters: () => CampaignParameters;
 	getTracking: () => TrackingParameters;
 }

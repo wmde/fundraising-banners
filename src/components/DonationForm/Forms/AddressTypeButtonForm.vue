@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
 		<div class="wmde-banner-form-address-type-title">
-			<a tabIndex="-1" href="#" class="previous" @click="onPrevious">
+			<a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
 				<ChevronLeftIcon/>
 				{{ $translate( 'back-button' ) }}
 			</a>
@@ -33,6 +33,13 @@
 
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'AddressTypeButtonForm'
+};
+</script>
+
 <script setup lang="ts">
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { computed, inject } from 'vue';
@@ -41,7 +48,16 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
+import { Tracker } from '@src/tracking/Tracker';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
+interface Props {
+	isCurrent: boolean
+}
+const props = defineProps<Props>();
+const emit = defineEmits( [ 'submit', 'previous' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
@@ -49,14 +65,11 @@ const {
 	addressType, addressTypeValidity,
 	paymentMethod, disabledAddressTypes
 } = formModel;
-interface Props {
-	pageIndex: number
-}
-const props = defineProps<Props>();
-const emit = defineEmits( [ 'submit', 'previous' ] );
+
+useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
 const onPrevious = (): void => {
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const onSubmit = ( e: SubmitEvent ): void => {
@@ -70,7 +83,7 @@ const onSubmit = ( e: SubmitEvent ): void => {
 
 	if ( addressTypeValidity.value === Validity.Valid ) {
 		addressType.value = submitValue;
-		emit( 'submit', { pageIndex: props.pageIndex } );
+		emit( 'submit' );
 	}
 };
 

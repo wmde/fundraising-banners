@@ -11,21 +11,13 @@
 						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
-					<template #left-icon>
-						<ChevronLeftIcon/>
-					</template>
-
-					<template #right-icon>
-						<ChevronRightIcon/>
-					</template>
-
 				</KeenSlider>
 			</template>
 		</MiniBanner>
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( CloseSources.FollowUpBanner )"
+			@close="() => onClose( 'FullPageBanner', CloseChoices.Close )"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -36,10 +28,10 @@
 			</template>
 
 			<template #donation-form>
-				<MultiStepDonation :form-controller="formController">
+				<MultiStepDonation :step-controllers="stepControllers" :page-scroller="pageScroller">
 
-					<template #form-page-1="{ pageIndex, submit, next, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" @next="next" @previous="previous"/>
+					<template #form-page-1="{ pageIndex, submit, previous, isCurrent }: any">
+						<MainDonationForm :page-index="pageIndex" :is-current="isCurrent" @submit="submit" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -52,9 +44,9 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( CloseSources.SoftCloseBannerRejected )"
-			@maybe-later="() => onClose( CloseSources.MaybeLater )"
-			@time-out-close="() => onClose( CloseSources.TimeOut )"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
 		<FundsModal
@@ -67,11 +59,9 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { CloseSources } from '@src/tracking/CloseSources';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import { FormController } from '@src/utils/FormController/FormController';
 import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -84,8 +74,14 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
+import { Tracker } from '@src/tracking/Tracker';
+import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
+import {
+	createSubmittableMainDonationFormSinglePage
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePage';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -95,7 +91,6 @@ enum ContentStates {
 
 interface Props {
 	bannerState: BannerStates;
-	formController: FormController;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 }
@@ -103,10 +98,13 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
+const tracker = inject<Tracker>( 'tracker' );
+
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
+const stepControllers = [ createSubmittableMainDonationFormSinglePage() ];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -116,13 +114,14 @@ function onCloseMiniBanner(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
-function onClose( closeSource: CloseSources ): void {
-	emit( 'bannerClosed', closeSource );
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {

@@ -1,13 +1,14 @@
-import { EventData } from '@src/tracking/EventData';
-import { CloseSources } from '@src/tracking/CloseSources';
+import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
-export class CloseEvent implements EventData {
-	// TODO: Make these private and add getters
-	public eventName: string;
-	public trackingRate: number;
+export class CloseEvent implements TrackingEvent {
+	public static readonly EVENT_NAME = 'close';
 
-	public constructor( source: CloseSources, trackingRate = 0.01 ) {
-		this.eventName = source;
-		this.trackingRate = trackingRate;
+	public readonly eventName: string = CloseEvent.EVENT_NAME;
+	public readonly customData: Record<string, string> = {};
+
+	public constructor(
+		public readonly feature: TrackingFeatureName = '',
+		public readonly userChoice: string = ''
+	) {
 	}
 }

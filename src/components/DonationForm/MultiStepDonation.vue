@@ -1,12 +1,11 @@
 <template>
 	<div class="wmde-banner-form wmde-banner-form-multi-step keen-slider" ref="container" @click="onClick">
 		<template v-for="( slotName, idx ) in usedSlotNames" :key="idx">
-			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentFormPageIndex === idx }">
+			<div class="keen-slider__slide wmde-banner-form-page" :class="{ 'wmde-banner-form-page--current': currentStepIndex === idx }">
 				<slot
 					:name="slotName"
-					:page-index="idx"
+					:isCurrent="idx === currentStepIndex"
 					:submit="onSubmit"
-					:next="onNext"
 					:previous="onPrevious"
 				/>
 			</div>
@@ -21,15 +20,18 @@
 
 import { inject, nextTick, ref, useSlots } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
-import { FormController } from '@src/utils/FormController/FormController';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { FormActions } from '@src/domain/FormActions';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
 import { useFormAction } from '@src/components/composables/useFormAction';
+import { StepController } from '@src/components/DonationForm/StepController';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import { Tracker } from '@src/tracking/Tracker';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 interface Props {
 	showErrorScrollLink?: boolean;
-	formController: FormController;
+	stepControllers: StepController[];
+	pageScroller?: PageScroller
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -39,8 +41,12 @@ const emit = defineEmits( [ 'formInteraction' ] );
 
 const slots = useSlots();
 const usedSlotNames = Object.keys( slots );
-
-const currentFormPageIndex = ref<number>( 0 );
+const slotNameIndices: Record<string, number> = {};
+usedSlotNames.forEach( ( slotName: string, index: number ): void => {
+	slotNameIndices[ slotName ] = index;
+} );
+const tracker = inject<Tracker>( 'tracker' );
+const currentStepIndex = ref<number>( 0 );
 const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
 const submitFormRef = ref<HTMLFormElement>( null );
 
@@ -61,36 +67,26 @@ function onClick(): void {
 	} );
 }
 
-const onSubmit = ( payload: FormSubmitData ): void => {
-	props.formController.submitStep( payload );
+const multistepCallbacks = {
+	async goToStep( pageName: string ): Promise<void> {
+		const pageIndex = slotNameIndices[ pageName ];
+		currentStepIndex.value = pageIndex;
+		slider.value.moveToIdx( pageIndex );
+	},
+	async submit( eventData: TrackingEvent ): Promise<void> {
+		tracker.trackEvent( eventData );
+		await nextTick();
+		submitFormRef.value.submit();
+	}
 };
 
-const onPrevious = ( payload: FormSubmitData ): void => {
-	props.formController.previous( payload );
+const onSubmit = async ( extraData: Record<string, string> ): Promise<void> => {
+	props.pageScroller?.scrollIntoView( '.wmde-banner-form' );
+	await props.stepControllers[ currentStepIndex.value ].submit( multistepCallbacks, extraData );
 };
 
-const onNext = ( payload: FormSubmitData ): void => {
-	props.formController.next( payload );
+const onPrevious = async (): Promise<void> => {
+	await props.stepControllers[ currentStepIndex.value ].previous( multistepCallbacks );
 };
-
-props.formController.onNext( () => {
-	currentFormPageIndex.value = currentFormPageIndex.value + 1;
-	slider.value.next();
-} );
-
-props.formController.onPrevious( () => {
-	currentFormPageIndex.value = currentFormPageIndex.value - 1;
-	slider.value.prev();
-} );
-
-props.formController.onGoToStep( ( pageIndex: number ) => {
-	currentFormPageIndex.value = pageIndex;
-	slider.value.moveToIdx( pageIndex );
-} );
-
-props.formController.onSubmit( async () => {
-	await nextTick();
-	submitFormRef.value.submit();
-} );
 
 </script>

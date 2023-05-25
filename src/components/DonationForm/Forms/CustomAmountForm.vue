@@ -51,8 +51,14 @@
 
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'CustomAmountForm'
+};
+</script>
 
+<script setup lang="ts">
 import { computed, inject, ref } from 'vue';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { validateAmount } from '@src/validation/validateAmount';
@@ -61,18 +67,26 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
+import { Tracker } from '@src/tracking/Tracker';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
 interface Props {
-	pageIndex: number
+	isCurrent: boolean
 }
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
+const tracker = inject<Tracker>( 'tracker' );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
+const formModel = useFormModel();
 const amount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const numericAmount = computed( (): number => parseFloatFromFormattedString( amount.value ) );
 const buttonAmount = computed( () => currencyFormatter.euroAmount( numericAmount.value ) );
+
+useFormStepShownEvent( 'CustomAmountForm', tracker, props );
 
 const onBlur = (): void => {
 	if ( amount.value === '' ) {
@@ -87,15 +101,22 @@ const onBlur = (): void => {
 const onSubmit = (): void => {
 	amountValidity.value = validateAmount( numericAmount.value, '', amount.value );
 	amount.value = currencyFormatter.customAmountInput( numericAmount.value );
-	if ( amountValidity.value === AmountValidity.Valid ) {
-		emit( 'submit', { pageIndex: props.pageIndex, extraData: { newCustomAmount: amount.value } } );
+	if ( amountValidity.value !== AmountValidity.Valid ) {
+		return;
 	}
+	if ( numericAmount.value > formModel.numericAmount.value ) {
+		tracker.trackEvent( new CustomAmountChangedEvent( 'increased' ) );
+	}
+	if ( numericAmount.value < formModel.numericAmount.value ) {
+		tracker.trackEvent( new CustomAmountChangedEvent( 'decreased' ) );
+	}
+	emit( 'submit', { newCustomAmount: amount.value } );
 };
 
 const onPrevious = (): void => {
 	amount.value = '';
 	amountValidity.value = AmountValidity.Unset;
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 </script>

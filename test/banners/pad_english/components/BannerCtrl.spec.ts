@@ -1,4 +1,4 @@
-import { describe, test } from 'vitest';
+import { afterEach, beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad_english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -6,25 +6,27 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_CustomAmount';
 
+const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
-	const getWrapper = (): VueWrapper<any> => {
-		return mount( Banner, {
+	let wrapper: VueWrapper<any>;
+	beforeEach( () => {
+		resetFormModel( formModel );
+
+		// attachTo the document body to fix an issue with Vue Test Utils where
+		// clicking a submit button in a form does not fire the submit event
+		wrapper = mount( Banner, {
+			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
-				formController: {
-					submitStep: () => {},
-					next: () => {},
-					previous: () => {},
-					onNext: () => {},
-					onPrevious: () => {},
-					onGoToStep: () => {},
-					onSubmit: () => {}
-				},
 				useOfFundsContent
 			},
 			global: {
@@ -34,20 +36,39 @@ describe( 'BannerCtrl.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicCampaignContent,
-					formActions: {},
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );
-	};
+	} );
+
+	afterEach( () => {
+		wrapper.unmount();
+	} );
 
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( getWrapper );
+			await desktopContentFeatures[ testName ]( wrapper );
+		} );
+	} );
+
+	describe( 'Donation Form Happy Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesCustomAmount' ],
+			[ 'expectCustomAmountFormSubmits' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormFeatures[ testName ]( wrapper );
 		} );
 	} );
 
@@ -56,7 +77,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await useOfFundsFeatures[ testName ]( wrapper );
 		} );
 	} );
 

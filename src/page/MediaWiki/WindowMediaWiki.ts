@@ -1,10 +1,11 @@
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
+import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
-	track: ( name: string, trackingData: BannerEvent|SizeIssue ) => void;
+	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	centralNotice: any;
 }
 
@@ -20,7 +21,10 @@ export class WindowMediaWiki implements MediaWiki {
 	}
 
 	public isContentHiddenByLightbox(): boolean {
-		return document.getElementsByClassName( 'mw-mmv-lightbox-open' ).length > 0;
+		// mw-mvv-lightbox-open is the CSS class name of the overlay on desktop
+		// media-viewer is the CSS class name of the overlay on mobile
+		return document.getElementsByClassName( 'mw-mmv-lightbox-open' ).length > 0 ||
+			document.getElementsByClassName( 'media-viewer' ).length > 0;
 	}
 
 	public isInArticleNamespace(): boolean {
@@ -43,12 +47,11 @@ export class WindowMediaWiki implements MediaWiki {
 		return this.getConfigItem( 'wgAction' ) === 'view';
 	}
 
-	public track( name: string, trackingData: BannerEvent | SizeIssue ): void {
+	public track( name: string, trackingData: LegacyBannerEvent | SizeIssue ): void {
 		window.mw.track( name, trackingData );
 	}
 
 	public preventBannerDisplayForPeriod(): void {
-		// TODO check if mw.centralNotice.internal.hide.setHideWithCloseButtonCookies should be called instead when using softclose e.g.
 		window.mw.centralNotice.hideBanner();
 	}
 

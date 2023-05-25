@@ -1,22 +1,29 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import { FormSubmitData } from '@src/utils/FormController/FormSubmitData';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 
 const formModel = useFormModel();
 
 describe( 'UpgradeToYearlyForm.vue', () => {
+	let tracker: TrackerSpy;
 
 	// The model values are in the global scope, and they need to be reset before each test
-	beforeEach( () => resetFormModel( formModel ) );
+	beforeEach( () => {
+		resetFormModel( formModel );
+		tracker = new TrackerSpy();
+	} );
 
 	const getWrapper = (): VueWrapper<any> => {
 		return shallowMount( UpgradeToYearlyForm, {
 			props: {
-				pageIndex: 4
+				pageIndex: 4,
+				isCurrent: false
 			},
 			global: {
 				mocks: {
@@ -25,7 +32,8 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 					}
 				},
 				provide: {
-					currencyFormatter: new CurrencyEn()
+					currencyFormatter: new CurrencyEn(),
+					tracker
 				}
 			}
 		} );
@@ -39,14 +47,13 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit "next" event with payload when user wants to donate yearly with different amount', async () => {
+	it( 'should emit "submit" event with payload when user wants to donate yearly with different amount', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'next' ).length ).toBe( 1 );
-		const emittedNextEvent = wrapper.emitted( 'next' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedNextEvent.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should show an error when user does not select any interval ', async function () {
@@ -102,12 +109,8 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
 
 		expect( wrapper.emitted( 'submit' ).length ).toBe( 2 );
-
-		const emittedSubmitEvent1 = wrapper.emitted( 'submit' )[ 0 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent1.extraData ).toEqual( { upgradeToYearlyInterval: '0' } );
-
-		const emittedSubmitEvent2 = wrapper.emitted( 'submit' )[ 1 ][ 0 ] as unknown as FormSubmitData;
-		expect( emittedSubmitEvent2.extraData ).toEqual( { upgradeToYearlyInterval: '12' } );
+		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '0' } );
+		expect( wrapper.emitted( 'submit' )[ 1 ][ 0 ] ).toEqual( { changeOfAmount: false, upgradeToYearlyInterval: '12' } );
 	} );
 
 	it( 'should insert the euroAmount into the translations', async () => {
@@ -142,12 +145,44 @@ describe( 'UpgradeToYearlyForm.vue', () => {
 		expect( options[ 1 ].element.checked ).toBe( false );
 	} );
 
-	it( 'should emit back event with pageIndex', async () => {
+	it( 'should emit back event', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.wmde-banner-form-upgrade-back' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'previous' )[ 0 ][ 0 ] ).toEqual( { pageIndex: 4 } );
+	} );
+
+	describe( 'tracking events ', function () {
+
+		it( 'should track "Upgrade to yearly" event when user chooses Upgrade to yearly', async function () {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-select-group-option-yes .wmde-banner-select-group-input' ).trigger( 'change' );
+			await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+
+			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'upgraded-to-yearly' ) );
+
+		} );
+
+		it( 'should track "Not upgraded to yearly" event when user does not choose Upgrade to yearly', async function () {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-select-group-option-no .wmde-banner-select-group-input' ).trigger( 'change' );
+			await wrapper.find( '.wmde-banner-sub-form' ).trigger( 'submit' );
+
+			expect( tracker.hasTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( UpgradeToYearlyEvent.EVENT_NAME ) ).toEqual( new UpgradeToYearlyEvent( 'not-upgraded-to-yearly' ) );
+		} );
+
+		it( 'sends the FormStepShownEvent to tracker when the form becomes the current form', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.setProps( { isCurrent: true } );
+
+			expect( tracker.hasTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toBe( true );
+			expect( tracker.getTrackedEvent( FormStepShownEvent.EVENT_NAME ) ).toEqual( new FormStepShownEvent( 'UpgradeToYearlyForm' ) );
+		} );
 	} );
 } );

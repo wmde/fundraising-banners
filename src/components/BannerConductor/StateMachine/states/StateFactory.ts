@@ -6,12 +6,12 @@ import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { Tracker } from '@src/tracking/Tracker';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
-import { BannerConfig } from '@src/BannerConfig';
+import { BannerConfig } from '@src/domain/BannerConfig';
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -36,8 +36,8 @@ export class StateFactory {
 		return new PendingState( this._page, bannerHeight, this._bannerConfig.delay );
 	}
 
-	public newNotShownState( bannerNotShownReason: BannerNotShownReasons ): BannerState {
-		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler );
+	public newNotShownState( bannerNotShownReason: BannerNotShownReasons, bannerHeight: number ): BannerState {
+		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler, bannerHeight );
 	}
 
 	public newShowingState(): BannerState {
@@ -48,16 +48,16 @@ export class StateFactory {
 		return new VisibleState( this._page, this._impressionCount );
 	}
 
-	public newClosedState( source: CloseSources ): BannerState {
-		return new ClosedState( source, this._page, this._tracker, this._resizeHandler );
+	public newClosedState( closeEvent: TrackingEvent ): BannerState {
+		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler );
 	}
 }
 
-export function newStateFactory( bannerConfig: BannerConfig, page: Page, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ): StateFactory {
+export function newStateFactory( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ): StateFactory {
 	return new StateFactory(
 		bannerConfig,
 		page,
-		page,
+		tracker,
 		resizeHandler,
 		impressionCount
 	);

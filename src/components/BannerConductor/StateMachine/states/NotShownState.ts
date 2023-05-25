@@ -12,17 +12,28 @@ export class NotShownState extends BannerState {
 	private _page: Page;
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
+	private _bannerHeight: number;
 
-	public constructor( bannerNotShownReason: BannerNotShownReasons, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor( bannerNotShownReason: BannerNotShownReasons, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, bannerHeight: number ) {
 		super();
 		this._bannerNotShownReason = bannerNotShownReason;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
+		this._bannerHeight = bannerHeight;
 	}
 
 	public enter(): Promise<any> {
-		this._tracker.trackEvent( new NotShownEvent( this._bannerNotShownReason ) );
+		let customEventData: Record<string, string | number> = {};
+		if ( this._bannerNotShownReason === BannerNotShownReasons.SizeIssue ) {
+			customEventData = {
+				reason: this._bannerNotShownReason,
+				bannerHeight: this._bannerHeight,
+				viewportWidth: window.innerWidth,
+				viewportHeight: window.innerHeight
+			};
+		}
+		this._tracker.trackEvent( new NotShownEvent( customEventData ) );
 		this._page
 			.preventImpressionCountForHiddenBanner()
 			.removePageEventListeners();

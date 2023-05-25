@@ -1,4 +1,4 @@
-import { describe, test } from 'vitest';
+import { afterEach, beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -6,27 +6,29 @@ import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { desktopContentFeatures } from '@test/features/DesktopContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 
+const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerVar.vue', () => {
-	const getWrapper = (): VueWrapper<any> => {
-		return mount( Banner, {
+	let wrapper: VueWrapper<any>;
+	beforeEach( () => {
+		resetFormModel( formModel );
+
+		// attachTo the document body to fix an issue with Vue Test Utils where
+		// clicking a submit button in a form does not fire the submit event
+		wrapper = mount( Banner, {
+			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
-				formController: {
-					submitStep: () => {},
-					next: () => {},
-					previous: () => {},
-					onNext: () => {},
-					onPrevious: () => {},
-					onGoToStep: () => {},
-					onSubmit: () => {}
-				},
 				useOfFundsContent
 			},
 			global: {
@@ -38,18 +40,36 @@ describe( 'BannerVar.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
 		} );
-	};
+	} );
+
+	afterEach( () => {
+		wrapper.unmount();
+	} );
 
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( getWrapper );
+			await desktopContentFeatures[ testName ]( wrapper );
+		} );
+	} );
+
+	describe( 'Donation Form Happy Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormFeatures[ testName ]( wrapper );
 		} );
 	} );
 
@@ -61,7 +81,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( wrapper );
 		} );
 	} );
 
@@ -70,7 +90,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await useOfFundsFeatures[ testName ]( wrapper );
 		} );
 	} );
 
@@ -81,7 +101,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectFiresMaybeLaterEvent' ],
 			[ 'expectFiresGoAwayEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
+			await alreadyDonatedModalFeatures[ testName ]( wrapper );
 		} );
 	} );
 

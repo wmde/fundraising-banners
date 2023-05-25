@@ -15,7 +15,7 @@
 				class="wmde-banner-form-button t-annual-upgrade-no"
 				:value="Intervals.ONCE.value"
 			>
-					{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
+				{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
 			</button>
 
 			<button
@@ -24,37 +24,42 @@
 				class="wmde-banner-form-button t-annual-upgrade-yes"
 				:value="Intervals.YEARLY.value"
 			>
-					{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
+				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
 			</button>
 
 			<a tabIndex="-1"
 				href="#"
 				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-				@click="onNext">
-					{{ $translate( 'upgrade-to-yearly-link' ) }}
+				@click.prevent="onGoToChangeOfAmount"
+			>
+				{{ $translate( 'upgrade-to-yearly-link' ) }}
 			</a>
 		</div>
     </form>
 </template>
 
 <script setup lang="ts">
-
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import { Tracker } from '@src/tracking/Tracker';
+import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 
 interface Props {
-	pageIndex: number
+	isCurrent: boolean
 }
 
 const props = defineProps<Props>();
+const emit = defineEmits( [ 'submit', 'previous' ] );
 
-const emit = defineEmits( [ 'submit', 'next', 'previous' ] );
-
-const interval = ref<string>( null );
+const tracker = inject<Tracker>( 'tracker' );
+const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
+
+useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
 
 const onSubmit = ( e: SubmitEvent ): void => {
 	const submitValue = ( e.submitter as HTMLInputElement ).value;
@@ -68,28 +73,26 @@ const onSubmit = ( e: SubmitEvent ): void => {
 	if ( intervalValidity.value === Validity.Invalid ) {
 		return;
 	}
-	emit( 'submit', {
-		pageIndex: props.pageIndex,
-		extraData: {
-			upgradeToYearlyInterval: submitValue
-		}
-	} );
+
+	tracker.trackEvent( new UpgradeToYearlyEvent(
+		submitValue === Intervals.YEARLY.value ? 'upgraded-to-yearly' : 'not-upgraded-to-yearly'
+	) );
+
+	emit( 'submit', { upgradeToYearlyInterval: submitValue } );
 };
 
-const onNext = (): void => {
+const onGoToChangeOfAmount = (): void => {
 	intervalValidity.value = Validity.Valid;
-	emit( 'next', {
-		pageIndex: props.pageIndex,
-		extraData: {
-			upgradeToYearlyInterval: Intervals.YEARLY.value
-		}
+	emit( 'submit', {
+		changeOfAmount: true,
+		upgradeToYearlyInterval: Intervals.YEARLY.value
 	} );
 };
 
 const onPrevious = (): void => {
 	intervalValidity.value = Validity.Unset;
 	interval.value = null;
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const { numericAmount } = useFormModel();

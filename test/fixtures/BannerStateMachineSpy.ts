@@ -1,8 +1,8 @@
 import { BannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ReactiveProperty } from '@src/domain/ReactiveProperty';
-import { StateMachine } from '@src/utils/StateMachine/StateMachine';
+import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
+import { StateMachine } from '@src/domain/StateMachine/StateMachine';
 
 export class BannerStateMachineSpy extends BannerStateMachine {
 	public statesCalled: BannerStates[] = [];

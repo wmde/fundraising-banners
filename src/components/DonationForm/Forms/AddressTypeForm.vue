@@ -36,6 +36,13 @@
 
 </template>
 
+<script lang="ts">
+// All form components must have names
+export default {
+	name: 'AddressTypeForm'
+};
+</script>
+
 <script setup lang="ts">
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
@@ -47,7 +54,17 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
+import { Tracker } from '@src/tracking/Tracker';
+import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 
+interface Props {
+	isCurrent: boolean
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits( [ 'submit', 'previous' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
@@ -55,20 +72,17 @@ const {
 	addressType, addressTypeValidity,
 	paymentMethod, disabledAddressTypes
 } = formModel;
-interface Props {
-	pageIndex: number
-}
-const props = defineProps<Props>();
-const emit = defineEmits( [ 'submit', 'previous' ] );
+
+useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
 const onPrevious = (): void => {
-	emit( 'previous', { pageIndex: props.pageIndex } );
+	emit( 'previous' );
 };
 
 const onSubmit = (): void => {
 	addressTypeValidity.value = addressType.value === '' ? Validity.Invalid : Validity.Valid;
 	if ( addressTypeValidity.value === Validity.Valid ) {
-		emit( 'submit', { pageIndex: props.pageIndex } );
+		emit( 'submit' );
 	}
 };
 

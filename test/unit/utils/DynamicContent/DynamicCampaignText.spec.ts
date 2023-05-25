@@ -5,7 +5,7 @@ import { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
-import { CampaignParameters } from '@src/CampaignParameters';
+import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 

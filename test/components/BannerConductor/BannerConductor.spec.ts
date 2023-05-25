@@ -10,7 +10,8 @@ import { bannerStateMachineSpy, newBannerStateMachineSpy } from '@test/fixtures/
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { CloseSources } from '@src/tracking/CloseSources';
+import { LegacyCloseSources } from '@src/tracking/LegacyCloseSources';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -31,6 +32,11 @@ describe( 'BannerConductor.vue', () => {
 				resizeHandler: new ResizeHandlerStub(),
 				banner: {},
 				impressionCount: new ImpressionCountStub()
+			},
+			global: {
+				provide: {
+					tracker: new TrackerStub()
+				}
 			}
 		} );
 
@@ -111,7 +117,7 @@ describe( 'BannerConductor.vue', () => {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vi.fn().mockReturnValue( page );
 		const wrapper = await getShownBannerWrapper( page );
-		await wrapper.find( 'anonymous-stub' ).trigger( 'banner-closed', { blah: CloseSources.MaybeLater } );
+		await wrapper.find( 'anonymous-stub' ).trigger( 'banner-closed', { blah: LegacyCloseSources.MaybeLater } );
 
 		expect( bannerStateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
@@ -120,7 +126,7 @@ describe( 'BannerConductor.vue', () => {
 			BannerStates.Closed
 		] );
 
-		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( CloseSources.MaybeLater );
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( LegacyCloseSources.MaybeLater );
 	} );
 
 	it.todo( 'moves to closed state when an page event that should hide the banner happens', () => {

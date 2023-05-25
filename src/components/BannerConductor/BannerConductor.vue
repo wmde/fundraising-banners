@@ -4,7 +4,8 @@
 			:is="banner"
 			v-bind="bannerProps"
 			:bannerState="bannerState.stateName"
-			@banner-closed="onCloseHandler"
+			:bannerHeight="bannerRef?.offsetHeight"
+			@banner-closed="closeHandler"
 			@banner-content-changed="onContentChanged"
 		/>
 	</div>
@@ -13,15 +14,17 @@
 <script setup lang="ts">
 
 import { Page } from '@src/page/Page';
-import { nextTick, onMounted, ref } from 'vue';
-import { BannerConfig } from '@src/BannerConfig';
+import { inject, nextTick, onMounted, ref } from 'vue';
+import { BannerConfig } from '@src/domain/BannerConfig';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { CloseSources } from '@src/tracking/CloseSources';
 import { Vector2 } from '@src/utils/Vector2';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { Tracker } from '@src/tracking/Tracker';
+import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 interface Props {
 	page: Page,
@@ -29,12 +32,14 @@ interface Props {
 	resizeHandler: ResizeHandler,
 	banner: Object,
 	bannerProps?: Object,
-	impressionCount: ImpressionCount
+	impressionCount: ImpressionCount,
 }
 
 const props = defineProps<Props>();
+const tracker = inject<Tracker>( 'tracker' );
+
 const bannerRef = ref( null );
-const stateFactory = newStateFactory( props.bannerConfig, props.page, props.resizeHandler, props.impressionCount );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 
@@ -43,7 +48,7 @@ onMounted( async () => {
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
 	if ( bannerNotShownReason ) {
-		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason ) );
+		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason, bannerRef.value.offsetHeight ) );
 	} else {
 		await stateMachine.changeState( stateFactory.newShowingState() );
 		await stateMachine.changeState( stateFactory.newVisibleState() );
@@ -51,7 +56,7 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( CloseSources.PageInteraction ) ) );
+props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) ) );
 
 function onContentChanged(): void {
 	// Wait a tick in order to let the content re-render before updating the size
@@ -60,8 +65,8 @@ function onContentChanged(): void {
 	} );
 }
 
-async function onCloseHandler( source: CloseSources ): Promise<any> {
-	await stateMachine.changeState( stateFactory.newClosedState( source ) );
+async function closeHandler( closeEvent: TrackingEvent ): Promise<any> {
+	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
 }
 
 </script>

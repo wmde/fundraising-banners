@@ -24,7 +24,7 @@
 				data-tooltip="Build Banner"
 				href="#"
 				title="Build Banner"
-				@click="onCompileBanner"
+				@click.prevent="onCompileBanner"
 			>
 				<LoadingSpinner :loading="isCompiling"/>
 				<IconBuild />
@@ -35,7 +35,7 @@
 				href="#"
 				title="Copy Banner Code"
 				:data-tooltip="bannerCopyTooltip"
-				@click="onCopyBannerToClipBoard"
+				@click.prevent="onCopyBannerToClipBoard"
 			>
 				<CopyingAnimation :is-copying="isCopying" />
 				<IconCopy  />

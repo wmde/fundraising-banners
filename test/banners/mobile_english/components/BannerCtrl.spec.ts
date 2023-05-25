@@ -1,4 +1,4 @@
-import { beforeEach, describe, vi, test } from 'vitest';
+import { beforeEach, describe, vi, test, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/mobile_english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -7,17 +7,26 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
+import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
+import { expectMainDonationFormSubmits } from '@test/features/forms/subForms/MainDonationForm';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
 
 let pageScroller: PageScroller;
+const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
+		resetFormModel( formModel );
+
 		pageScroller = {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
@@ -26,16 +35,6 @@ describe( 'BannerCtrl.vue', () => {
 		wrapper = mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
-				formController: {
-					submitStep: () => {},
-					next: () => {},
-					previous: () => {},
-					onNext: () => {},
-					onPrevious: () => {},
-					onGoToStep: () => {},
-					onSubmit: () => {}
-				},
-				forms: [],
 				useOfFundsContent,
 				pageScroller
 			},
@@ -48,9 +47,16 @@ describe( 'BannerCtrl.vue', () => {
 					dynamicCampaignText: dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
-					formItems
+					formItems,
+					tracker: new TrackerStub()
 				}
 			}
+		} );
+	} );
+
+	describe( 'Donation Form Happy Paths', () => {
+		it( 'Submits the main donation form', () => {
+			expectMainDonationFormSubmits( wrapper, Intervals.ONCE, PaymentMethods.PAYPAL );
 		} );
 	} );
 
