@@ -31,6 +31,6 @@
 
 import CloseIconChunky from '@src/components/Icons/CloseIconChunky.vue';
 
-defineEmits( [ 'close', 'showFundsModal' ] );
+defineEmits( [ 'close' ] );
 
 </script>
