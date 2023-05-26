@@ -17,6 +17,7 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { bannerMainFeatures } from '@test/features/BannerMain';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -48,6 +49,14 @@ describe( 'BannerCtrl.vue', () => {
 			}
 		} );
 	};
+
+	describe( 'Banner Main', () => {
+		test.each( [
+			[ 'expectEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( getWrapper() );
+		} );
+	} );
 
 	describe( 'Content', () => {
 		test.each( [

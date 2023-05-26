@@ -12,6 +12,7 @@ import { bannerContentFeatures } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -78,6 +79,18 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( wrapper );
+		} );
+	} );
+
+	describe( 'Soft Close', () => {
+		test.each( [
+			[ 'expectShowsSoftClose' ],
+			[ 'expectEmitsSoftCloseCloseEvent' ],
+			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseTimeOutEvent' ],
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseFeatures[ testName ]( wrapper );
 		} );
 	} );
 

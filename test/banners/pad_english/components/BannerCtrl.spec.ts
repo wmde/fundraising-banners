@@ -12,6 +12,7 @@ import { bannerContentFeatures } from '@test/features/BannerContent';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_CustomAmount';
+import { bannerMainFeatures } from '@test/features/BannerMain';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -47,6 +48,14 @@ describe( 'BannerCtrl.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
+	} );
+
+	describe( 'Banner Main', () => {
+		test.each( [
+			[ 'expectEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( wrapper );
+		} );
 	} );
 
 	describe( 'Content', () => {

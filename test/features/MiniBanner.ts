@@ -21,7 +21,7 @@ const expectShowsFullPageWhenCallToActionIsClicked = async ( wrapper: VueWrapper
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
 };
 
-const expectEmitsBannerContentCHangedEventWhenCallToActionIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+const expectEmitsBannerContentChangedEventWhenCallToActionIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
@@ -31,5 +31,5 @@ export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => 
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
 	expectShowsFullPageWhenCallToActionIsClicked,
-	expectEmitsBannerContentCHangedEventWhenCallToActionIsClicked
+	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked
 };
