@@ -4,6 +4,8 @@ import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 
 export class PageStub implements Page {
+	public hideBannerCallback: () => void;
+
 	public getBannerContainer(): string {
 		return '';
 	}
@@ -16,7 +18,8 @@ export class PageStub implements Page {
 		return this;
 	}
 
-	public onPageEventThatShouldHideBanner(): void {
+	public onPageEventThatShouldHideBanner( hideBannerListener: () => void ): void {
+		this.hideBannerCallback = hideBannerListener;
 	}
 
 	public removePageEventListeners(): Page {
