@@ -4,16 +4,17 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import { PageStub } from '@test/fixtures/PageStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 import { ImpressionCountStub } from '@test/fixtures/ImpressionCountStub';
-import { defineComponent, h, markRaw, nextTick } from 'vue';
+import { defineComponent, markRaw, nextTick } from 'vue';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerStateMachineSpy } from '@test/fixtures/BannerStateMachineSpy';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { LegacyCloseSources } from '@src/tracking/LegacyCloseSources';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { ResizeHandler } from '@src/utils/ResizeHandler';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -28,7 +29,7 @@ describe( 'BannerConductor.vue', () => {
 
 	let stateMachineSpy: BannerStateMachineSpy;
 
-	async function getShownBannerWrapper( page: Page|null = null ): Promise<VueWrapper<any>> {
+	async function getShownBannerWrapper( page: Page|null = null, resizeHandler: ResizeHandler|null = null ): Promise<VueWrapper<any>> {
 		const banner = defineComponent( {
 			props: {
 				bannerState: String
@@ -37,15 +38,22 @@ describe( 'BannerConductor.vue', () => {
 				'bannerClosed',
 				'bannerContentChanged'
 			],
-			render() {
-				return h( 'div', { 'class': 'test-banner', 'innerHTML': 'hello' } );
-			}
+			methods: {
+				onClose() {
+					this.$emit( 'bannerClosed', new CloseEvent( 'MainBanner', 'closed' ) );
+				}
+			},
+			template: `<div class="test-banner" style="height: 100px">
+				Hello, world!
+				<button class="emit-banner-closed" @click="onClose"></button>
+				<button class="emit-banner-content-changed" @click="$emit( 'bannerContentChanged' )"></button>
+			</div>`
 		} );
 		const wrapper = mount( BannerConductor, {
 			props: {
 				page: page ?? new PageStub(),
 				bannerConfig: { delay: 42, transitionDuration: 5 },
-				resizeHandler: new ResizeHandlerStub(),
+				resizeHandler: resizeHandler ?? new ResizeHandlerStub(),
 				banner: markRaw( banner ),
 				impressionCount: new ImpressionCountStub()
 			},
@@ -61,8 +69,6 @@ describe( 'BannerConductor.vue', () => {
 		await nextTick();
 		await nextTick();
 		await vi.runAllTimersAsync();
-
-		console.log( wrapper.html() );
 
 		return Promise.resolve( wrapper );
 	}
@@ -80,25 +86,29 @@ describe( 'BannerConductor.vue', () => {
 	} );
 
 	it( 'runs through correct state flow on mounted', async () => {
-		await getShownBannerWrapper();
+		const wrapper = await getShownBannerWrapper();
 
 		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible
 		] );
+
+		expect( wrapper.classes() ).toContain( 'wmde-banner--visible' );
 	} );
 
 	it( 'runs through correct state flow on mounted when there is a reason to not show banner', async () => {
 		const page = new PageStub();
 		page.getReasonToNotShowBanner = vi.fn().mockReturnValue( BannerNotShownReasons.SizeIssue );
 
-		await getShownBannerWrapper( page );
+		const wrapper = await getShownBannerWrapper( page );
 
 		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.NotShown
 		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.NotShown );
 	} );
 
 	it( 'passes the banner height to the page on load', async () => {
@@ -107,7 +117,7 @@ describe( 'BannerConductor.vue', () => {
 
 		await getShownBannerWrapper( page );
 
-		// This will be 0 because we shallow mount the component meaning it has no content
+		// This will be 0 because jsdom doesn't set this value
 		expect( page.setSpace ).toHaveBeenCalledWith( 0 );
 	} );
 
@@ -124,21 +134,42 @@ describe( 'BannerConductor.vue', () => {
 		expect( page.showBanner ).toHaveBeenCalled();
 	} );
 
-	it.todo( 'updates the page with a new height on content change', async () => {
+	it( 'updates the page with a new height on window resize', async () => {
+		const page = new PageStub();
+		page.setSpace = vi.fn().mockReturnValue( page );
+		const resizeHandler = new ResizeHandlerStub();
+		const wrapper = await getShownBannerWrapper( page, resizeHandler );
+
+		Object.defineProperty( wrapper.element, 'offsetHeight', { value: 100, writable: true, configurable: true } );
+		resizeHandler.callOnResize();
+
+		Object.defineProperty( wrapper.element, 'offsetHeight', { value: 42, writable: true, configurable: true } );
+		resizeHandler.callOnResize();
+
+		expect( page.setSpace ).toHaveBeenCalledTimes( 3 );
+		expect( page.setSpace ).toHaveBeenCalledWith( 100 );
+		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
+	} );
+
+	it( 'updates the page with a new height on content change', async () => {
 		const page = new PageStub();
 		page.setSpace = vi.fn().mockReturnValue( page );
 		const wrapper = await getShownBannerWrapper( page );
 
-		await wrapper.find( '.test-banner' ).trigger( 'banner-content-changed' );
+		Object.defineProperty( wrapper.element, 'offsetHeight', { value: 100, writable: true, configurable: true } );
+		await wrapper.find( '.emit-banner-content-changed' ).trigger( 'click' );
 
-		expect( page.setSpace ).toHaveBeenCalledTimes( 2 );
+		Object.defineProperty( wrapper.element, 'offsetHeight', { value: 42, writable: true, configurable: true } );
+		await wrapper.find( '.emit-banner-content-changed' ).trigger( 'click' );
+
+		expect( page.setSpace ).toHaveBeenCalledTimes( 3 );
+		expect( page.setSpace ).toHaveBeenCalledWith( 100 );
+		expect( page.setSpace ).toHaveBeenCalledWith( 42 );
 	} );
 
-	it.todo( 'moves to closed state when donor closes banner', async () => {
-		const page = new PageStub();
-		page.setCloseCookieIfNecessary = vi.fn().mockReturnValue( page );
-		const wrapper = await getShownBannerWrapper( page );
-		await wrapper.find( 'anonymous-stub' ).trigger( 'banner-closed', { blah: LegacyCloseSources.MaybeLater } );
+	it( 'moves to closed state when donor closes banner', async () => {
+		const wrapper = await getShownBannerWrapper();
+		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
 
 		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
@@ -147,9 +178,31 @@ describe( 'BannerConductor.vue', () => {
 			BannerStates.Closed
 		] );
 
-		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( LegacyCloseSources.MaybeLater );
+		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 
-	it.todo( 'moves to closed state when an page event that should hide the banner happens', () => {
+	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
+		const page = new PageStub();
+		page.setCloseCookieIfNecessary = vi.fn().mockReturnValue( page );
+		const wrapper = await getShownBannerWrapper( page );
+		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
+
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( new CloseEvent( 'MainBanner', 'closed' ) );
+	} );
+
+	it( 'moves to closed state when an page event that should hide the banner happens', async () => {
+		const page = new PageStub();
+		const wrapper = await getShownBannerWrapper( page );
+
+		await page.hideBannerCallback();
+
+		expect( stateMachineSpy.statesCalled ).toEqual( [
+			BannerStates.Pending,
+			BannerStates.Showing,
+			BannerStates.Visible,
+			BannerStates.Closed
+		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 } );
