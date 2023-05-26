@@ -2,7 +2,7 @@
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
-@use 'BannerMain' with (
+@use 'MainBanner' with (
 	$banner-height: 394px,
 	$form-width: 300px
 );

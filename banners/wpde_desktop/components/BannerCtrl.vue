@@ -1,6 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper wmde-banner-wrapper--main">
-		<BannerMain
+		<MainBanner
 			@close="() => onClose( 'MainBanner', CloseChoices.Close )"
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			:bannerState="bannerState"
@@ -52,7 +52,7 @@
 			<template #footer>
 				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
 			</template>
-		</BannerMain>
+		</MainBanner>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -66,7 +66,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import BannerMain from './BannerMain.vue';
+import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
