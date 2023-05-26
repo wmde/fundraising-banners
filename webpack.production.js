@@ -11,7 +11,8 @@ const path = require( 'path' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 function readWrapperTemplate( name ) {
-	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' );
+	// eslint-disable-next-line security/detect-non-literal-fs-filename
+	return fs.readFileSync( `./webpack/wikitext_templates/${name}.hbs`, 'utf8' );
 }
 
 module.exports = ( env ) => {

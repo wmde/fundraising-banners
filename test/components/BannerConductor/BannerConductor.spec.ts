@@ -181,7 +181,7 @@ describe( 'BannerConductor.vue', () => {
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 
-	it( 'sets the close cookie when the donor closes banner', async () => {
+	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vi.fn().mockReturnValue( page );
 		const wrapper = await getShownBannerWrapper( page );
