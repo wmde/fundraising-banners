@@ -2,7 +2,7 @@ import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
@@ -36,7 +36,7 @@ describe( 'BannerVar.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,

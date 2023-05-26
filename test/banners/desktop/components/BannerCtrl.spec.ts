@@ -2,14 +2,18 @@ import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/desktop/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
+import {
+	bannerContentAnimatedTextFeatures,
+	bannerContentDisplaySwitchFeatures,
+	bannerContentFeatures
+} from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -24,7 +28,7 @@ describe( 'BannerCtrl.vue', () => {
 		resetFormModel( formModel );
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent|null = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
@@ -36,7 +40,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicContent ?? dynamicCampaignContent,
+					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -59,6 +63,15 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsMessageOnSmallSizes' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

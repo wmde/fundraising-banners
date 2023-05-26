@@ -10,7 +10,8 @@
 				von Wikipedia zu sichern. {{ campaignDaySentence }} Insgesamt spenden 99% nichts – sie
 				übergehen diesen Aufruf. Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert.
 				Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
-				erfolgreich entwickeln. <span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span> Die
+				erfolgreich entwickeln. <span v-if="visitorsVsDonorsSentence !== ''"
+				class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span> Die
 				meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia
 				Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann nehmen Sie sich doch bitte
 				eine Minute Zeit und geben Sie etwas zurück. <em>Vielen Dank!</em>
@@ -23,6 +24,10 @@
 import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
-const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const {
+	currentDayName,
+	campaignDaySentence,
+	visitorsVsDonorsSentence
+}: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>

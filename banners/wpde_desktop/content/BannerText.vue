@@ -11,7 +11,7 @@
 				Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong> Menschen spenden aus einem einfachen Grund – weil
 				Wikipedia nützlich ist. Schon der Preis einer Tasse Kaffee würde genügen.
-				<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span> Wenn Wikipedia
+				<span v-if="visitorsVsDonorsSentence !== ''" class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span> Wenn Wikipedia
 				eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit
 				Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht
 				vertrauen. Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie

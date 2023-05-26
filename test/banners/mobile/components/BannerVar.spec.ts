@@ -4,7 +4,7 @@ import Banner from '../../../../banners/mobile/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
@@ -14,6 +14,8 @@ import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_AddressTypeButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -29,7 +31,9 @@ describe( 'BannerVar.vue', () => {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
 		};
+	} );
 
+	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -45,7 +49,7 @@ describe( 'BannerVar.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -53,10 +57,23 @@ describe( 'BannerVar.vue', () => {
 				}
 			}
 		} );
-	} );
+
+		return wrapper;
+	};
 
 	afterEach( () => {
 		wrapper.unmount();
+	} );
+
+	describe( 'Content', () => {
+		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
@@ -69,7 +86,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
 			[ 'expectAddressTypeButtonFormSubmits' ]
 		] )( '%s', async ( testName: string ) => {
-			await donationFormFeatures[ testName ]( wrapper );
+			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -82,7 +99,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -91,14 +108,14 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
 			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsScrollFeatures[ testName ]( wrapper, pageScroller );
+			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );
 	} );
 
@@ -109,7 +126,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentCHangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
-			await miniBannerFeatures[ testName ]( wrapper );
+			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

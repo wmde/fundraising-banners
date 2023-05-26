@@ -3,7 +3,7 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad_english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
@@ -35,7 +35,7 @@ describe( 'BannerVar.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
