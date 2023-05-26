@@ -8,7 +8,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentFeatures } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -54,7 +54,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( wrapper );
+			await bannerContentFeatures[ testName ]( wrapper );
 		} );
 	} );
 

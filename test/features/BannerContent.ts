@@ -36,12 +36,12 @@ const expectShowsMessageOnSmallSizes = async ( getWrapper: () => VueWrapper<any>
 	expect( wrapper.find( '.wmde-banner-message' ).exists() ).toBeTruthy();
 };
 
-export const desktopContentFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
+export const bannerContentFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenBecomesVisible,
 	expectSlideShowStopsOnFormInteraction
 };
 
-export const desktopContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
+export const bannerContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
 	expectShowsSlideShowOnSmallSizes,
 	expectShowsMessageOnSmallSizes
 };

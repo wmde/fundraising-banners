@@ -9,7 +9,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentFeatures } from '@test/features/BannerContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -57,7 +57,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( wrapper );
+			await bannerContentFeatures[ testName ]( wrapper );
 		} );
 	} );
 

@@ -8,7 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentDisplaySwitchFeatures, desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -50,14 +50,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( getWrapper() );
+			await bannerContentFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectShowsSlideShowOnSmallSizes' ],
 			[ 'expectShowsMessageOnSmallSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentDisplaySwitchFeatures[ testName ]( getWrapper );
+			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

@@ -9,10 +9,11 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentDisplaySwitchFeatures, desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -23,7 +24,7 @@ describe( 'BannerCtrl.vue', () => {
 		resetFormModel( formModel );
 	} );
 
-	const getWrapper = (): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent|null = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
@@ -35,7 +36,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: dynamicContent ?? dynamicCampaignContent,
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -50,14 +51,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( getWrapper() );
+			await bannerContentFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectShowsSlideShowOnSmallSizes' ],
 			[ 'expectShowsMessageOnSmallSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentDisplaySwitchFeatures[ testName ]( getWrapper );
+			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
