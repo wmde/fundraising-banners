@@ -2,7 +2,6 @@
 	<form
 		method="post"
 		class="wmde-banner-sub-form wmde-banner-sub-form-donation"
-		@click="onFormInteraction"
 		@submit.prevent="validate"
 	>
 		<fieldset class="wmde-banner-form-field-group">
@@ -95,8 +94,6 @@ const formItems = inject<DonationFormItems>( 'formItems' );
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
 const isFormValid = ref<boolean>( true );
-
-const onFormInteraction = (): void => {};
 
 const validate = (): void => {
 	isFormValid.value = validator.validate();
