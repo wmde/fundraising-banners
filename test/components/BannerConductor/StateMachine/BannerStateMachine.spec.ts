@@ -1,7 +1,7 @@
 import { describe, expect, it, vitest } from 'vitest';
 import { ref } from 'vue';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { BannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
+import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 describe( 'BannerStateMachine', function () {
@@ -15,7 +15,7 @@ describe( 'BannerStateMachine', function () {
 		};
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
-		const stateMachine = new BannerStateMachine( ref<BannerState>( startState as unknown as BannerState ) );
+		const stateMachine = newBannerStateMachine( ref<BannerState>( startState as unknown as BannerState ) );
 
 		stateMachine.changeState( nextState as unknown as BannerState );
 
@@ -33,7 +33,7 @@ describe( 'BannerStateMachine', function () {
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
 		const currentState = ref<BannerState>( startState as unknown as BannerState );
-		const stateMachine = new BannerStateMachine( currentState );
+		const stateMachine = newBannerStateMachine( currentState );
 
 		await stateMachine.changeState( nextState as unknown as BannerState );
 
@@ -52,7 +52,7 @@ describe( 'BannerStateMachine', function () {
 		const nextState = { stateName: BannerStates.Showing, enter: vitest.fn() };
 
 		const currentState = ref<BannerState>( startState as unknown as BannerState );
-		const stateMachine = new BannerStateMachine( currentState );
+		const stateMachine = newBannerStateMachine( currentState );
 
 		await stateMachine.changeState( nextState as unknown as BannerState );
 

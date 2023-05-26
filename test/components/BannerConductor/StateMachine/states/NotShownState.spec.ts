@@ -56,4 +56,16 @@ describe( 'NotShownState', function () {
 		expect( page.removePageEventListeners ).toHaveBeenCalledOnce();
 		expect( resizeHandler.onClose ).toHaveBeenCalledOnce();
 	} );
+
+	it( 'throws error on exit', function () {
+		const state = new NotShownState(
+			BannerNotShownReasons.UserInteraction,
+			new PageStub(),
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			0
+		);
+
+		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );
+	} );
 } );

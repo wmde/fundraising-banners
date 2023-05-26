@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StateMachineState } from '@src/domain/StateMachine/StateMachineState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
@@ -10,7 +9,7 @@ export abstract class BannerState implements StateMachineState<BannerStates> {
 
 	public abstract exit( nextState: BannerStates ): Promise<any>;
 
-	public onResize( space: number ): void {}
+	public onResize?( space: number ): void;
 
-	public onContentChanged( space: number ): void {}
+	public onContentChanged?( space: number ): void;
 }

@@ -42,6 +42,6 @@ export class NotShownState extends BannerState {
 	}
 
 	public exit(): Promise<any> {
-		return Promise.resolve( true );
+		throw new Error( 'This state will never be exited' );
 	}
 }

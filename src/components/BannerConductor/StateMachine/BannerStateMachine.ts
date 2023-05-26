@@ -11,11 +11,6 @@ export class BannerStateMachine implements StateMachine<BannerState> {
 	}
 
 	public async changeState( state: BannerState ): Promise<any> {
-
-		if ( this.currentState.value === null ) {
-			throw new Error( 'State machine must be started with an initial state' );
-		}
-
 		if ( this.currentState.value.canMoveToStates.includes( state.stateName ) ) {
 			await this.currentState.value.exit( state.stateName );
 			const lastStateType = this.currentState.value.stateName;

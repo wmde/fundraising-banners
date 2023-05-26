@@ -32,7 +32,7 @@ export class ClosedState extends BannerState {
 	}
 
 	public exit(): Promise<any> {
-		return Promise.resolve();
+		throw new Error( 'This state will never be exited' );
 	}
 
 }
