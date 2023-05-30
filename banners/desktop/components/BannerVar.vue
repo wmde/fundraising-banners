@@ -26,7 +26,8 @@
 
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
-                    <template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+
+					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
                         <MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
                     </template>
 
@@ -102,7 +103,7 @@ enum FormStepNames {
 	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm',
-	AddressTypeFormStep = 'AddressTypeFormStep'
+	AddressTypeFormStep = 'AddressTypeForm'
 }
 
 interface Props {

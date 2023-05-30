@@ -134,7 +134,10 @@ const formModel = useFormModel();
 
 const stepControllers = [
 	createIntermediateMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep, FormStepNames.AddressTypeFormStep ),
-	createIntermediateUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.AddressTypeFormStep, FormStepNames.MainDonationFormStep ),
+	createIntermediateUpgradeToYearly( formModel,
+		FormStepNames.MainDonationFormStep,
+		FormStepNames.AddressTypeFormStep,
+		FormStepNames.MainDonationFormStep ),
 	createSubmittableAddressType( formModel, FormStepNames.MainDonationFormStep )
 ];
 
