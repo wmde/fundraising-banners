@@ -3,7 +3,7 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 
 const notShownReasonToLegacyName = new Map<string, string>( [
-	[ BannerNotShownReasons.SizeIssue, 'viewport_tracking' ],
+	[ BannerNotShownReasons.SizeIssue, 'size_issue' ],
 	[ BannerNotShownReasons.DisallowedNamespace, 'namespace_tracking' ],
 	[ BannerNotShownReasons.UserInteraction, 'user_interaction' ]
 ] );
