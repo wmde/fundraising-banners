@@ -11,7 +11,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<span class="wmde-banner-slider-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
+			<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 			Die durchschnittliche Spende beträgt 22,66&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter.
 		</p>

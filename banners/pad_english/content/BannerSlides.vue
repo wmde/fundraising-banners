@@ -17,7 +17,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>Online, Wikipedia is the closest thing we have to a public park or a library where everyone can
-			go to learn. And that's priceless. <span class="wmde-banner-slider-text-animated-highlight">If
+			go to learn. And that's priceless. <span class="wmde-banner-text-animated-highlight">If
                     Wikipedia has given you €5 worth of knowledge this year, please support the technology that
                     makes our projects possible and advance the cause of free knowledge
                     worldwide.</span> —<em>Wikimedia Fördergesellschaft</em></p>

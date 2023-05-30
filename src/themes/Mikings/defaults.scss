@@ -26,9 +26,8 @@
 		transition: background-position 2s;
 	}
 
-	/* stylelint-disable max-line-length */
-	&-wrapper--full-page .wmde-banner-message .wmde-banner-text-animated-highlight .wmde-banner-slider-text-animated-highlight,
-	&-slide--current .wmde-banner-text-animated-highlight .wmde-banner-slider-text-animated-highlight {
+	&-wrapper--full-page .wmde-banner-message .wmde-banner-text-animated-highlight,
+	&-slide--current .wmde-banner-text-animated-highlight {
 		background-position: 0 0;
 	}
 }

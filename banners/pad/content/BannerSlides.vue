@@ -16,7 +16,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich
-			entwickeln. <span class="wmde-banner-slider-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
+			entwickeln. <span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
 		</p>
 	</KeenSliderSlide>
 

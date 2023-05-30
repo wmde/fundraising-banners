@@ -11,7 +11,7 @@
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p><span class="wmde-banner-slider-text-animated-highlight">If everyone reading this right now
+		<p><span class="wmde-banner-text-animated-highlight">If everyone reading this right now
 					gave just €5, we'd hit our annual goal in a couple of hours.</span> The price of a cup of
 			coffee is all we ask. It's easy to ignore our messages, but we hope you'll take one minute to
 			think about how useful Wikipedia is in your life.
