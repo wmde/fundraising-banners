@@ -3,15 +3,16 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad_english/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentFeatures } from '@test/features/BannerContent';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_CustomAmount';
+import { bannerMainFeatures } from '@test/features/MainBanner';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -35,7 +36,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -49,12 +50,20 @@ describe( 'BannerCtrl.vue', () => {
 		wrapper.unmount();
 	} );
 
+	describe( 'Main Banner', () => {
+		test.each( [
+			[ 'expectEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( wrapper );
+		} );
+	} );
+
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( wrapper );
+			await bannerContentFeatures[ testName ]( wrapper );
 		} );
 	} );
 

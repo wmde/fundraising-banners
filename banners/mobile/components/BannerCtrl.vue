@@ -46,7 +46,7 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
+				<BannerFooter :show-funds-link="false"/>
 			</template>
 		</FullPageBanner>
 

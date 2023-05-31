@@ -49,4 +49,23 @@ describe( 'SelectionInput.vue', () => {
 
 		expect( selected ).toBe( 'value' );
 	} );
+
+	it( 'sets and removes focus class', async () => {
+		const wrapper = shallowMount( SelectionInput, {
+			props: {
+				value: 'value',
+				focusedValue: 'focusedValue'
+			}
+		} );
+
+		const input = wrapper.find<HTMLInputElement>( '.wmde-banner-selection-input-input' );
+
+		await input.trigger( 'focus' );
+
+		expect( wrapper.classes() ).toContain( 'focused' );
+
+		await input.trigger( 'blur' );
+
+		expect( wrapper.classes() ).not.toContain( 'focused' );
+	} );
 } );

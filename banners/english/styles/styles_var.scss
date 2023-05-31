@@ -1,7 +1,7 @@
 // This is the file where we import the theme-specific component styles
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
-@use 'BannerMain' with (
+@use 'MainBanner' with (
 	$banner-height: 376px,
 	$form-width: 300px
 );

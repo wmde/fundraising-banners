@@ -1,6 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
-		<BannerMain
+		<MainBanner
 			@close="onCloseMain"
 			@form-interaction="onFormInteraction"
 			v-if="contentState === ContentStates.Main"
@@ -55,7 +55,7 @@
 					@showAlreadyDonatedModal="onShowAlreadyDonatedModal"
 				/>
 			</template>
-		</BannerMain>
+		</MainBanner>
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
@@ -89,7 +89,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { nextTick, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import BannerMain from './BannerMain.vue';
+import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerSlides from '../content/BannerSlidesVar.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';

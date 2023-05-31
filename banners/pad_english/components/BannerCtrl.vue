@@ -1,6 +1,6 @@
 <template>
     <div class="wmde-banner-wrapper" :class="contentState" >
-        <BannerMain
+        <MainBanner
 			@close="() => onClose( 'MainBanner', CloseChoices.Close )"
             @form-interaction="$emit( 'bannerContentChanged' )"
             :bannerState="bannerState"
@@ -52,7 +52,7 @@
             <template #footer>
                 <BannerFooter @showFundsModal="isFundsModalVisible = true"/>
             </template>
-        </BannerMain>
+        </MainBanner>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import BannerMain from './BannerMain.vue';
+import MainBanner from './MainBanner.vue';
 import BannerSlides from '../../pad_english/content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';

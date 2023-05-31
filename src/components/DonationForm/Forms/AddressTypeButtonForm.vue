@@ -17,10 +17,10 @@
 				} ]"
 			>
 				<button type="submit"
-						tabIndex="-1"
-						class="wmde-banner-form-button"
-						:value="item.value"
-						:disabled="disabledAddressTypes.indexOf( item.value ) > -1"
+					tabIndex="-1"
+					class="wmde-banner-form-button"
+					:value="item.value"
+					:disabled="disabledAddressTypes.indexOf( item.value ) > -1"
 				>
 					{{ $translate( item.label ) }}
 				</button>
@@ -46,7 +46,6 @@ import { computed, inject } from 'vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
 import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
@@ -61,10 +60,7 @@ const tracker = inject<Tracker>( 'tracker' );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const translator = inject<Translator>( 'translator' );
 const formModel = useFormModel();
-const {
-	addressType, addressTypeValidity,
-	paymentMethod, disabledAddressTypes
-} = formModel;
+const { addressType, paymentMethod, disabledAddressTypes } = formModel;
 
 useFormStepShownEvent( 'AddressTypeForm', tracker, props );
 
@@ -73,18 +69,8 @@ const onPrevious = (): void => {
 };
 
 const onSubmit = ( e: SubmitEvent ): void => {
-	const submitValue = ( e.submitter as HTMLInputElement ).value;
-
-	if ( formItems.addressType.find( item => item.value === submitValue ) ) {
-		addressTypeValidity.value = Validity.Valid;
-	} else {
-		addressTypeValidity.value = Validity.Invalid;
-	}
-
-	if ( addressTypeValidity.value === Validity.Valid ) {
-		addressType.value = submitValue;
-		emit( 'submit' );
-	}
+	addressType.value = ( e.submitter as HTMLInputElement ).value;
+	emit( 'submit' );
 };
 
 const formNotice = computed( (): string => {

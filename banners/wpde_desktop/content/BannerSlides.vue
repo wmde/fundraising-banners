@@ -17,7 +17,7 @@
 		<p>
 			Menschen spenden aus einem einfachen Grund – weil Wikipedia nützlich ist.
 			Schon der Preis einer Tasse Kaffee würde genügen.
-			<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
+			<span v-if="visitorsVsDonorsSentence !== ''" class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">

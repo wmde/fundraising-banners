@@ -53,4 +53,15 @@ describe( 'ClosedState', function () {
 		expect( page.removePageEventListeners ).toHaveBeenCalledOnce();
 		expect( resizeHandler.onClose ).toHaveBeenCalledOnce();
 	} );
+
+	it( 'throws error on exit', function () {
+		const state = new ClosedState(
+			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			new PageStub(),
+			new TrackerStub(),
+			new ResizeHandlerStub()
+		);
+
+		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );
+	} );
 } );

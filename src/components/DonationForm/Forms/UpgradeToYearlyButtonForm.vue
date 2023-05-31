@@ -41,7 +41,6 @@
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { Validity } from '@src/utils/FormModel/Validity';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
@@ -57,22 +56,11 @@ const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 const interval = ref<string>( '' );
-const intervalValidity = ref<Validity>( Validity.Unset );
 
 useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
 
 const onSubmit = ( e: SubmitEvent ): void => {
 	const submitValue = ( e.submitter as HTMLInputElement ).value;
-
-	if ( [ Intervals.ONCE.value, Intervals.YEARLY.value ].includes( submitValue ) ) {
-		intervalValidity.value = Validity.Valid;
-	} else {
-		intervalValidity.value = Validity.Invalid;
-	}
-
-	if ( intervalValidity.value === Validity.Invalid ) {
-		return;
-	}
 
 	tracker.trackEvent( new UpgradeToYearlyEvent(
 		submitValue === Intervals.YEARLY.value ? 'upgraded-to-yearly' : 'not-upgraded-to-yearly'
@@ -82,7 +70,6 @@ const onSubmit = ( e: SubmitEvent ): void => {
 };
 
 const onGoToChangeOfAmount = (): void => {
-	intervalValidity.value = Validity.Valid;
 	emit( 'submit', {
 		changeOfAmount: true,
 		upgradeToYearlyInterval: Intervals.YEARLY.value
@@ -90,7 +77,6 @@ const onGoToChangeOfAmount = (): void => {
 };
 
 const onPrevious = (): void => {
-	intervalValidity.value = Validity.Unset;
 	interval.value = null;
 	emit( 'previous' );
 };

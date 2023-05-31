@@ -3,12 +3,10 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import AddressTypeButtonForm from '@src/components/DonationForm/Forms/AddressTypeButtonForm.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
-import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { nextTick } from 'vue';
-import { Validity } from '@src/utils/FormModel/Validity';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 
@@ -22,12 +20,9 @@ describe( 'AddressTypeForm.vue', () => {
 
 	const formItems: DonationFormItems = {
 		addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL, AddressTypes.FULL ],
-		amounts: [
-			{ value: '1', label: '€1', className: 'amount-1' },
-			{ value: '5', label: '€5', className: 'amount-5' }
-		],
-		intervals: [ Intervals.ONCE, Intervals.MONTHLY ],
-		paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD, PaymentMethods.DIRECT_DEBIT ]
+		amounts: [],
+		intervals: [],
+		paymentMethods: []
 	};
 
 	let wrapper: VueWrapper<any>;
@@ -65,7 +60,6 @@ describe( 'AddressTypeForm.vue', () => {
 		await wrapper.find( `button[value=${ AddressTypes.FULL.value }]` ).trigger( 'click' );
 
 		expect( formModel.addressType.value ).toBe( AddressTypes.FULL.value );
-		expect( formModel.addressTypeValidity.value ).toBe( Validity.Valid );
 	} );
 
 	it( 'should emit a submit event when an address button is clicked', async () => {

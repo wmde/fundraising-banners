@@ -2,18 +2,19 @@ import { afterEach, beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { dynamicCampaignContent } from '@test/banners/dynamicCampaignContent';
+import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { desktopContentFeatures } from '@test/features/DesktopContent';
+import { bannerContentAnimatedTextFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -23,7 +24,9 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+	} );
 
+	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -38,7 +41,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: dynamicCampaignContent,
+					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -46,7 +49,9 @@ describe( 'BannerCtrl.vue', () => {
 				}
 			}
 		} );
-	} );
+
+		return wrapper;
+	};
 
 	afterEach( () => {
 		wrapper.unmount();
@@ -57,7 +62,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
-			await desktopContentFeatures[ testName ]( wrapper );
+			await bannerContentFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
@@ -70,7 +82,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
 			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
 		] )( '%s', async ( testName: string ) => {
-			await donationFormFeatures[ testName ]( wrapper );
+			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -82,7 +94,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -91,7 +103,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -102,7 +114,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectFiresMaybeLaterEvent' ],
 			[ 'expectFiresGoAwayEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( wrapper );
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

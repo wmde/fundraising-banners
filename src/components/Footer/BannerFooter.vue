@@ -15,7 +15,7 @@
 			</label>
 		</div>
 
-		<div class="wmde-banner-footer-usage">
+		<div v-if="showFundsLink" class="wmde-banner-footer-usage">
 			<div class="wmde-banner-footer-item">
 				<a
 					id="application-of-funds-link"
@@ -31,6 +31,14 @@
 
 <script setup lang="ts">
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
+
+interface Props {
+	showFundsLink?: boolean
+}
+
+withDefaults( defineProps<Props>(), {
+	showFundsLink: true
+} );
 
 defineEmits( [ 'showFundsModal' ] );
 

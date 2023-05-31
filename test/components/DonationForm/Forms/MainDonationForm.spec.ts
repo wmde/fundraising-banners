@@ -35,10 +35,10 @@ describe( 'MainDonationForm.vue', () => {
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( formModel ) );
 
-	const getWrapper = (): VueWrapper<any> => {
+	const getWrapper = ( showErrorScrollLink: boolean = false ): VueWrapper<any> => {
 		return mount( DonationForm, {
 			props: {
-				isCurrent: false
+				showErrorScrollLink
 			},
 			global: {
 				mocks: {
@@ -90,6 +90,15 @@ describe( 'MainDonationForm.vue', () => {
 		expect( wrapper.find( '.select-interval .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
 		expect( wrapper.find( '.select-amount .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
 		expect( wrapper.find( '.select-payment-method .wmde-banner-select-group-error-message' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'shows the error scroll link when form fields are invalid', async () => {
+		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		const wrapper = getWrapper( true );
+
+		await wrapper.trigger( 'submit' );
+
+		expect( wrapper.find( '.wmde-banner-form-button-error' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'emits an event on submit when fields are valid', () => {
