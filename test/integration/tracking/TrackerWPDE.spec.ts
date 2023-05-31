@@ -127,4 +127,20 @@ describe( 'TrackerWPDE', function () {
 
 		window.location = windowLocationBackup;
 	} );
+
+	it( 'only tracks known events', () => {
+		window.TestTracker = { trackEvent: vi.fn() };
+		const windowLocationBackup = window.location;
+		window.location = { search: '....devMode...' };
+		const tracker = new TrackerWPDE(
+			'TestTracker',
+			'TestBanner05',
+			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
+
+		tracker.trackEvent( { eventName: 'unknown-event', feature: '', userChoice: '', customData: {} } );
+
+		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
+
+		window.location = windowLocationBackup;
+	} );
 } );
