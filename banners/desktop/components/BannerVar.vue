@@ -103,7 +103,7 @@ enum FormStepNames {
 	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm',
-	AddressTypeFormStep = 'AddressTypeFormStep'
+	AddressTypeFormStep = 'AddressTypeForm'
 }
 
 interface Props {

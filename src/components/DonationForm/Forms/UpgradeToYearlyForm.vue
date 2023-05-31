@@ -62,7 +62,7 @@
         </span>
 
 		<div class="wmde-banner-form-button-container upgrade-to-yearly-button">
-			<button tabIndex="-1" class="wmde-banner-form-button" type="submit">
+			<button tabIndex="-1" class="wmde-banner-form-button t-submit-upgrade-to-yearly" type="submit">
 				{{ $translate( 'upgrade-to-yearly-button' ) }}
 			</button>
 		</div>
