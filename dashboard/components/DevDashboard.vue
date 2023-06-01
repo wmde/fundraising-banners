@@ -19,29 +19,30 @@
 				<div
 					v-for="( campaign, index ) in campaignList"
 					:key="campaign.name"
-					:class="[ 'campaign', { 'current-branch': campaign.name === branchName } ]"
+					:class="[ 'campaign', { 'current-branch': campaign.campaign === branchName } ]"
 					:style="{ '--index': index }"
 				>
-					<div class="campaign-icon">
-						<DeviceMobile v-if="campaign.icon === 'mobile'"/>
-						<DevicePad v-else-if="campaign.icon === 'pad'"/>
-						<DeviceDesktop v-else/>
-					</div>
-					<div class="campaign-content">
-						<div class="campaign-title">
-							<span :title="campaign.name">{{ campaign.name }}</span>
-							<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
-							<IconInfo/>
-						</span>
+					<div class="campaign-title">
+						<div class="campaign-icon">
+							<DeviceMobile v-if="campaign.icon === 'mobile'"/>
+							<DevicePad v-else-if="campaign.icon === 'pad'"/>
+							<DeviceDesktop v-else/>
+						</div>
+						<div :title="campaign.name">{{ campaign.name }}
+							<pre class="campaign-cn-link" v-if="campaign.banners.ctrl.pageName.includes('WPDE')">{{ campaign.campaign }}</pre>
 							<a
-								v-if="!campaign.banners.ctrl.pageName.includes('WPDE')"
-								target="_blank"
-								:href="`https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${campaign.name}`"
-								class="link-icon link-icon-large"
+								v-else
+								class="campaign-cn-link"
+								:href="`https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${campaign.campaign}`"
 								data-tooltip="View Central Notice Settings"
 							>
-								<IconCog />
+								{{ campaign.campaign }}
 							</a>
+						</div>
+						<div class="campaign-title-icons">
+							<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
+								<IconInfo/>
+							</span>
 							<a
 								:href="`https://shutterbug.wikimedia.de/#/slides/${campaign.tracking}`"
 								target="_blank"
@@ -59,6 +60,8 @@
 								<IconCommand />
 							</a>
 						</div>
+					</div>
+					<div class="campaign-content">
 						<div class="campaign-banners">
 							<div class="campaign-banner">
 								<BannerActions
@@ -95,7 +98,6 @@ import BannerActions from './BannerActions.vue';
 import IconShutterbug from './IconShutterbug.vue';
 import IconGit from './IconGit.vue';
 import IconRefresh from './IconRefresh.vue';
-import IconCog from './IconCog.vue';
 import IconCommand from './IconCommand.vue';
 import { CompileInfo, parseCompileInfo } from '../util';
 import { computed, onMounted, ref } from 'vue';

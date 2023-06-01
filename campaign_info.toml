@@ -4,74 +4,80 @@
 
 # A Campaign with global settings
 [desktop]
-icon="desktop"
-description="3 step form vs 4 step form"
-campaign_tracking = "00-ba-230202"
+name = "Desktop"
+icon = "desktop"
+campaign = "C23_WMDE_Desktop_00"
+description = "3 step form vs 4 step form"
+campaign_tracking = "00-ba-230501"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}'
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
-pagename = "B23WMDE_00_230202_ctrl"
-tracking = "org-00-230202-ctrl"
+pagename = "B23_WMDE_Desktop_00_ctrl"
+tracking = "org-00-230501-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
-pagename = "B23WMDE_00_230202_var"
-tracking = "org-00-230202-var"
+pagename = "B23_WMDE_Desktop_00_var"
+tracking = "org-00-230501-var"
 
 
 
 [mobile]
-icon="mobile"
-description="2 step form vs 3 step form"
-campaign_tracking = "00-ba-230202"
+name = "Mobile"
+icon = "mobile"
+campaign = "C23_WMDE_Mobile_00"
+description = "2 step form vs 3 step form"
+campaign_tracking = "00-ba-230501"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
-preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}'
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
 filename = "./banners/mobile/banner_ctrl.ts"
-pagename = "B23WMDE_00_Mobile_230202_ctrl"
-tracking = "org-00-230202-ctrl"
+pagename = "B23_WMDE_Mobile_00_ctrl"
+tracking = "org-mob00-230501-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/banner_var.ts"
-pagename = "B23WMDE_00_Mobile_230202_var"
-tracking = "org-00-230202-var"
+pagename = "B23_WMDE_Mobile_00_var"
+tracking = "org-mob00-230501-var"
 
 
 [pad]
-icon="pad"
 name = "iPad"
-description="VAR has a header text above the slider"
+icon = "pad"
+campaign = "C23_WMDE_iPad_00"
+description = "VAR has a header text above the slider"
 campaign_tracking = "pad00-ba-230426"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
 filename = "./banners/pad/banner_ctrl.ts"
-pagename = "B23_WMDE_ipad_Test_00_ctrl"
-tracking = "org-pad00-230426-ctrl"
+pagename = "B23_WMDE_iPad_00_ctrl"
+tracking = "org-pad00-230501-ctrl"
 
 [pad.banners.var]
 filename = "./banners/pad/banner_var.ts"
-pagename = "B23_WMDE_ipad_Test_00_var"
-tracking = "org-pad00-230426-var"
+pagename = "B23_WMDE_iPad_00_var"
+tracking = "org-pad00-230501-var"
 
 
 
 [wikipediade]
-icon="desktop"
 name = "WPDE Desktop"
-description="Nothing to see here"
-campaign_tracking = "wpde-00-230202"
+icon = "desktop"
+campaign = "C23_WPDE_Desktop_00"
+description = "Nothing to see here"
+campaign_tracking = "wpde-00-230501"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -79,16 +85,17 @@ preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wikipediade.banners.ctrl]
 filename = "./banners/wpde_desktop/banner_ctrl.ts"
-pagename = "B23WPDE_00_ctrl"
-tracking = "wpde-00-230202-ctrl"
+pagename = "B23_WPDE_Desktop_00_ctrl"
+tracking = "wpde-00-230501-ctrl"
 
 
 
 [wikipediade_mobile]
-icon="mobile"
 name = "WPDE Mobile"
-description="Nothing to see here"
-campaign_tracking = "wpde-mob00-230202"
+icon = "mobile"
+campaign = "C23_WPDE_Mobile_00"
+description = "Nothing to see here"
+campaign_tracking = "wpde-mob00-230501"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -96,70 +103,73 @@ preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wikipediade_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/banner_ctrl.ts"
-pagename = "B23WPDE_mob00_ctrl"
-tracking = "wpde-mob00-230426-ctrl"
+pagename = "B23_WPDE_Mobile_00_ctrl"
+tracking = "wpde-mob00-230501-ctrl"
 
 
 
 [english]
-icon="desktop"
 name = "English Desktop"
-description="VAR has the already donated modal"
+icon = "desktop"
+campaign = "C23_WMDE_Desktop_EN_00"
+description = "VAR has the already donated modal"
 campaign_tracking = "en00-ba-230421"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
-preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}'
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN"
 
 [english.banners.ctrl]
 filename = "./banners/english/banner_ctrl.ts"
-pagename = "B23_WMDE_Test_EN_00_ctrl"
+pagename = "B23_WMDE_Desktop_EN_00_ctrl"
 tracking = "org-en00-230421-ctrl"
 
 [english.banners.var]
 filename = "./banners/english/banner_var.ts"
-pagename = "B23_WMDE_Test_EN_00_var"
+pagename = "B23_WMDE_Desktop_EN_00_var"
 tracking = "org-en00-230421-var"
 
 
 
 [mobile_english]
-icon="mobile"
 name = "English Mobile"
-description="Tab button VS interior button on mini banners"
+icon = "mobile"
+campaign = "C23_WMDE_Mobile_EN_00"
+description = "Tab button VS interior button on mini banners"
 campaign_tracking = "mob_en00-ba-230425"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&devMode"
-preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}'
+preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva'
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
 filename = "./banners/mobile_english/banner_ctrl.ts"
-pagename = "B23_WMDE_Mobile_EN_Test_00_ctrl"
-tracking = "org-mob_en00-230425-ctrl"
+pagename = "B23_WMDE_Mobile_EN_00_ctrl"
+tracking = "org-mob_en00-230501-ctrl"
 
 [mobile_english.banners.var]
 filename = "./banners/mobile_english/banner_var.ts"
-pagename = "B23_WMDE_Mobile_EN_Test_00_var"
-tracking = "org-mob_en00-230425-var"
+pagename = "B23_WMDE_Mobile_EN_00_var"
+tracking = "org-mob_en00-230501-var"
 
 
 
 [pad_en]
-icon="pad"
 name = "English iPad"
-description="VAR has soft close"
+icon = "pad"
+campaign = "C23_WMDE_iPad_EN_00"
+description = "VAR has soft close"
 campaign_tracking = "en-ipad00-230426"
-preview_link ='/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode'
-preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}'
+preview_link ='/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype'
+preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN"
 
 [pad_en.banners.ctrl]
 filename = "./banners/pad_english/banner_ctrl.ts"
-pagename = "B23_WMDE_ipad_en_00_ctrl"
-tracking = "org-en-ipad00-230426-ctrl"
+pagename = "B23_WMDE_iPad_EN_00_ctrl"
+tracking = "org-en-ipad00-230501-ctrl"
 
 [pad_en.banners.var]
 filename = "./banners/pad_english/banner_var.ts"
-pagename = "B23_WMDE_ipad_en_00_var"
-tracking = "org-en-ipad00-230426-var"
+pagename = "B23_WMDE_iPad_EN_00_var"
+tracking = "org-en-ipad00-230501-var"
