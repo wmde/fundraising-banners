@@ -3,7 +3,7 @@
 		'wmde-banner-already-donated--is-visible': isVisible
 	} ]">
 		<div class="wmde-banner-already-donated-content">
-			<ButtonClose @click="onHideClick"/>
+			<ButtonClose @close="onHideClick"/>
 			<slot name="already-donated-content"/>
 			<div class="wmde-banner-already-donated-buttons">
 				<button
