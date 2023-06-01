@@ -10,19 +10,19 @@ import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from './event_map';
+import { Translator } from '@src/Translator';
+import DynamicTextPlugin from '@src/DynamicTextPlugin';
+import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
+// Content
 import messages from './messages';
-import { Translator } from '@src/Translator';
-import DynamicTextPlugin from '@src/DynamicTextPlugin';
-import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
 
 const localeFactory = new LocaleFactoryWpDe();
-const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
 const translator = new Translator( messages );
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
@@ -44,7 +44,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

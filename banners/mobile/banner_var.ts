@@ -27,18 +27,11 @@ import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 
 const localeFactory = new LocaleFactoryDe();
-const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
-
 const translator = new Translator( messages );
-
-// This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-
-const pageScroller = new WindowPageScroller();
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -47,8 +40,8 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent,
-		pageScroller
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
+		pageScroller: new WindowPageScroller()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

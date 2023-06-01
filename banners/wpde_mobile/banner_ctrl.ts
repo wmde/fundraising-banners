@@ -11,20 +11,19 @@ import TranslationPlugin from '@src/TranslationPlugin';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from './event_map';
+import { Translator } from '@src/Translator';
+import DynamicTextPlugin from '@src/DynamicTextPlugin';
+import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
-// Language specific setup
+// Content
 import messages from './messages';
-import { Translator } from '@src/Translator';
-import DynamicTextPlugin from '@src/DynamicTextPlugin';
-import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
 
 const localeFactory = new LocaleFactoryWpDe();
-const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
 const translator = new Translator( messages );
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
@@ -34,13 +33,9 @@ const tracking = {
 	keyword: '!insert-keyword-here!'
 };
 
-// This is channel specific and must be changed for wp.org banners
 const page = new PageWPDE( tracking );
-
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
-
-const pageScroller = new WindowPageScroller();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -49,8 +44,8 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent,
-		pageScroller
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
+		pageScroller: new WindowPageScroller()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

@@ -13,28 +13,24 @@ import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIs
 import TranslationPlugin from '@src/TranslationPlugin';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
+import { Translator } from '@src/Translator';
+import DynamicTextPlugin from '@src/DynamicTextPlugin';
+import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
-// Change for EN banners
+// Content
 import messages from './messages';
-import { Translator } from '@src/Translator';
-import DynamicTextPlugin from '@src/DynamicTextPlugin';
-import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 const localeFactory = new LocaleFactoryDe();
-const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
 const translator = new Translator( messages );
-
-// This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -43,7 +39,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
