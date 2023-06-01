@@ -151,9 +151,9 @@ a {
 	}
 
 	&-banners {
-		display: flex;
-		flex-grow: 1;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 80px;
 	}
 
 	&-banner {
