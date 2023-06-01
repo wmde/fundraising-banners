@@ -34,6 +34,7 @@
 								v-else
 								class="campaign-cn-link"
 								:href="`https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${campaign.campaign}`"
+								target="_blank"
 								data-tooltip="View Central Notice Settings"
 							>
 								{{ campaign.campaign }}
