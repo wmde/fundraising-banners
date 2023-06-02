@@ -68,7 +68,7 @@
     "vue-tsc": "^1.4.4",
     "webpack": "^5.76.1",
     "webpack-cli": "^5.1.0",
-    "webpack-dev-server": "^4.13",
+    "webpack-dev-server": "^4.15",
     "webpack-merge": "^5.8.0",
     "webpack-sources": "^3.2.3"
   },
