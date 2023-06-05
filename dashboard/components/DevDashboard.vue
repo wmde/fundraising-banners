@@ -25,7 +25,7 @@
 					@doScreenshots="onDoScreenshots"
 				/>
 				<BannerCampaign
-					v-for="( campaign, index ) in campaignList.filter( c => c !== currentCampaign )"
+					v-for="( campaign, index ) in campaignList.filter( (c : Campaign) => c !== currentCampaign )"
 					:key="campaign.campaign"
 					class="campaign"
 					:campaign="campaign"
