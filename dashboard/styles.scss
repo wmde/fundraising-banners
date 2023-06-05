@@ -2,10 +2,11 @@
 @import 'tooltip';
 
 $color-dark: #141414;
+$color-medium: #c1c1c1;
 $color-light: #ffffff;
-$color-grey: #f8f8f8;
+$color-grey: #f3f3f3;
+$color-grey-lighter: #f8f8f8;
 $color-grey-darker: #d0d0d0;
-$color-current-branch: #dbe6f5;
 
 @keyframes show-campaigns {
 	0% {
@@ -45,6 +46,7 @@ a {
 .header,
 .footer {
 	position: fixed;
+	z-index: 99;
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
@@ -90,14 +92,15 @@ a {
 
 .content {
 	padding: 50px 0;
+	overflow-x: hidden;
 }
 
 .campaign {
 	display: flex;
+	flex-direction: column;
 	min-height: 40px;
 	line-height: 40px;
-	padding: 24px;
-	border-bottom: 1px dotted $color-dark;
+	border-bottom: 1px solid $color-medium;
 
 	transform: translateX( 60px );
 	opacity: 0;
@@ -105,13 +108,10 @@ a {
 	animation-fill-mode: forwards;
 	animation-delay: calc( 0.1s * var( --index ) );
 
-	&.current-branch {
-		background: $color-current-branch;
-	}
-
 	&-icon {
 		width: 50px;
 		height: 50px;
+		margin-bottom: -18px;
 		padding-right: 10px;
 	}
 
@@ -119,13 +119,36 @@ a {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		padding: 24px 0;
 	}
 
 	&-title {
 		display: flex;
+		flex: 0 0 100%;
+		width: 100%;
 		font-size: 20px;
 		font-weight: bold;
 		text-transform: capitalize;
+		background-color: $color-grey;
+		padding: 5px 24px;
+
+		&-icons {
+			display: flex;
+			justify-content: flex-end;
+			flex-grow: 1;
+		}
+	}
+
+	&-cn-link {
+		display: inline-block;
+		font-size: 12px;
+		margin: 0;
+		font-weight: normal;
+		background-color: $color-dark;
+		color: $color-light;
+		padding: 2px 6px;
+		line-height: 16px;
+		border-radius: 10px;
 	}
 
 	&-banners {
@@ -137,9 +160,44 @@ a {
 	&-banner {
 		flex: 0 0 100%;
 		font-size: 16px;
+		margin-bottom: 12px;
+		padding: 0 18px;
 
 		@media screen and ( min-width: 1100px ) {
 			flex: 0 0 50%;
+			margin-bottom: 0;
+
+			&:first-child {
+				padding-right: 40px;
+			}
+
+			&:last-child {
+				padding-left: 40px;
+			}
+		}
+	}
+}
+
+.link-icon,
+.banner-actions-icon {
+	svg {
+		filter: saturate( 0% ) opacity( 40% );
+		transition: filter 500ms;
+	}
+
+	&:hover,
+	&:focus {
+		svg {
+			filter: saturate( 100% ) opacity( 100% );
+		}
+	}
+}
+
+.current-branch {
+	.link-icon,
+	.banner-actions-icon {
+		svg {
+			filter: saturate( 100% ) opacity( 100% );
 		}
 	}
 }
@@ -153,6 +211,10 @@ a {
 .banner-actions {
 	display: flex;
 	flex-wrap: nowrap;
+	justify-content: space-between;
+	background: $color-grey-lighter;
+	border-radius: 20px;
+	padding: 0 6px 0 12px;
 
 	&-title {
 		color: $color-dark;
@@ -167,7 +229,7 @@ a {
 
 	&-icon {
 		display: inline-block;
-		margin: 0 8px;
+		margin-left: 8px;
 		height: 28px;
 		width: 28px;
 		&.uncompiled {

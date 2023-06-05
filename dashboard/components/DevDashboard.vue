@@ -16,69 +16,23 @@
 
 		<section class="content">
 			<div class="campaigns">
-				<div
-					v-for="( campaign, index ) in campaignList"
-					:key="campaign.name"
-					:class="[ 'campaign', { 'current-branch': campaign.name === branchName } ]"
-					:style="{ '--index': index }"
-				>
-					<div class="campaign-icon">
-						<DeviceMobile v-if="campaign.icon === 'mobile'"/>
-						<DevicePad v-else-if="campaign.icon === 'pad'"/>
-						<DeviceDesktop v-else/>
-					</div>
-					<div class="campaign-content">
-						<div class="campaign-title">
-							<span :title="campaign.name">{{ campaign.name }}</span>
-							<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
-							<IconInfo/>
-						</span>
-							<a
-								v-if="!campaign.banners.ctrl.pageName.includes('WPDE')"
-								target="_blank"
-								:href="`https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${campaign.name}`"
-								class="link-icon link-icon-large"
-								data-tooltip="View Central Notice Settings"
-							>
-								<IconCog />
-							</a>
-							<a
-								:href="`https://shutterbug.wikimedia.de/#/slides/${campaign.tracking}`"
-								target="_blank"
-								class="link-icon link-icon-large"
-								data-tooltip="View in Shutterbug"
-							>
-								<IconShutterbug />
-							</a>
-							<a
-								href="#"
-								class="link-icon link-icon-large"
-								data-tooltip="Copy Shutterbug Command"
-								@click.prevent="onDoScreenshots(campaign.name, $event)"
-							>
-								<IconCommand />
-							</a>
-						</div>
-						<div class="campaign-banners">
-							<div class="campaign-banner">
-								<BannerActions
-									:campaign="campaign"
-									:banner="campaign.banners.ctrl"
-									:compileInfo="compileInfo[campaign.banners.ctrl.pageName]"
-									:isWPDE="campaign.banners.ctrl.pageName.includes('WPDE')"
-								/>
-							</div>
-							<div class="campaign-banner" v-if="campaign.banners.var">
-								<BannerActions
-									:campaign="campaign"
-									:banner="campaign.banners.var"
-									:compileInfo="compileInfo[campaign.banners.var.pageName]"
-									:isWPDE="campaign.banners.var.pageName.includes('WPDE')"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+				<BannerCampaign
+					v-if="currentCampaign"
+					class="campaign current-branch"
+					:campaign="currentCampaign"
+					:compile-info="compileInfo[ currentCampaign.banners.ctrl.pageName ]"
+					:style="{ '--index': 0 }"
+					@doScreenshots="onDoScreenshots"
+				/>
+				<BannerCampaign
+					v-for="( campaign, index ) in campaignList.filter( c => c !== currentCampaign )"
+					:key="campaign.campaign"
+					class="campaign"
+					:campaign="campaign"
+					:compile-info="compileInfo[ campaign.banners.ctrl.pageName ]"
+					:style="{ '--index': index + 1 }"
+					@doScreenshots="onDoScreenshots"
+				/>
 			</div>
 		</section>
 
@@ -91,18 +45,11 @@
 
 <script setup lang="ts">
 import type { Campaign, CampaignConfig } from '../../webpack/campaign_config_types';
-import BannerActions from './BannerActions.vue';
-import IconShutterbug from './IconShutterbug.vue';
 import IconGit from './IconGit.vue';
 import IconRefresh from './IconRefresh.vue';
-import IconCog from './IconCog.vue';
-import IconCommand from './IconCommand.vue';
 import { CompileInfo, parseCompileInfo } from '../util';
 import { computed, onMounted, ref } from 'vue';
-import IconInfo from './IconInfo.vue';
-import DeviceDesktop from './DeviceDesktop.vue';
-import DeviceMobile from './DeviceMobile.vue';
-import DevicePad from './DevicePad.vue';
+import BannerCampaign from './BannerCampaign.vue';
 
 const props = defineProps<{ campaigns: CampaignConfig, gitBranch: string }>();
 let branchName = ref<string>( props.gitBranch );
@@ -110,6 +57,7 @@ const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
 
 const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
+const currentCampaign = computed( (): Campaign => Object.values( props.campaigns ).find( ( c: Campaign ) => c.campaign === branchName.value ) );
 
 onMounted( () => {
 	fetch( '/compiled-banners/' )
@@ -122,8 +70,7 @@ onMounted( () => {
 		} );
 } );
 
-const onDoScreenshots = ( campaignName: string, e: Event ): void => {
-	e.preventDefault();
+const onDoScreenshots = ( campaignName: string ): void => {
 	navigator.clipboard.writeText( `ssh -t funweb3-deploy "queue_screenshots ${ campaignName }"` )
 		.then( () => {
 			// TODO indicate the copying was successful by making something flash

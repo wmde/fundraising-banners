@@ -2,7 +2,7 @@
 	<div class="wmde-banner-full">
 		<div class="wmde-banner-full-content">
 
-			<button class="wmde-banner-full-close" @click.prevent="$emit( 'close' )">
+			<button class="wmde-banner-full-close t-close-full-banner" @click.prevent="$emit( 'close' )">
 				<CloseIconChunky/>
 			</button>
 

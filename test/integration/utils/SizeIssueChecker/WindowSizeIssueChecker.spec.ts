@@ -9,9 +9,9 @@ describe( 'WindowSizeIssueChecker', function () {
 		Object.defineProperty( window, 'innerHeight', { writable: true, configurable: true, value: 100 } );
 	} );
 
-	it( 'returns size issue when banner is too wide', () => {
-		const bannerDimensions = new Vector2( 101, 100 );
-		const checker = new WindowSizeIssueChecker();
+	it( 'returns size issue when window is too thin', () => {
+		const bannerDimensions = new Vector2( 100, 100 );
+		const checker = new WindowSizeIssueChecker( 101 );
 
 		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeTruthy();
 	} );
@@ -23,18 +23,10 @@ describe( 'WindowSizeIssueChecker', function () {
 		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeTruthy();
 	} );
 
-	it( 'returns size issue when banner with offset is too wide', () => {
-		const bannerDimensions = new Vector2( 100, 100 );
-		const spaceAdjustment = new Vector2( 1, 0 );
-		const checker = new WindowSizeIssueChecker( spaceAdjustment );
-
-		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeTruthy();
-	} );
-
 	it( 'returns size issue when banner with offset is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 100 );
 		const spaceAdjustment = new Vector2( 0, 1 );
-		const checker = new WindowSizeIssueChecker( spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( 0, spaceAdjustment );
 
 		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeTruthy();
 	} );
@@ -42,7 +34,7 @@ describe( 'WindowSizeIssueChecker', function () {
 	it( 'returns size issue when banner with skin adjustment is too tall', () => {
 		const bannerDimensions = new Vector2( 100, 100 );
 		const spaceAdjustment = Vector2.ZERO;
-		const checker = new WindowSizeIssueChecker( spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( 0, spaceAdjustment );
 
 		expect( checker.hasSizeIssues( bannerDimensions, new Vector2( 0, 1 ) ) ).toBeTruthy();
 	} );
@@ -50,7 +42,7 @@ describe( 'WindowSizeIssueChecker', function () {
 	it( 'returns no size issue when banner fits', () => {
 		const bannerDimensions = new Vector2( 90, 90 );
 		const spaceAdjustment = new Vector2( 4, 2 );
-		const checker = new WindowSizeIssueChecker( spaceAdjustment );
+		const checker = new WindowSizeIssueChecker( 100, spaceAdjustment );
 
 		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeFalsy();
 	} );
@@ -61,7 +53,7 @@ describe( 'WindowSizeIssueChecker', function () {
 		Object.defineProperty( screen, 'width', { writable: true, configurable: true, value: 180 } );
 		Object.defineProperty( screen, 'height', { writable: true, configurable: true, value: 180 } );
 
-		const checker = new WindowSizeIssueChecker( Vector2.ZERO );
+		const checker = new WindowSizeIssueChecker( 0, Vector2.ZERO );
 
 		expect( checker.getDimensions() ).toEqual( {
 			screen: {

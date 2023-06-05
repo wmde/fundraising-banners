@@ -16,6 +16,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
+import { Locales } from '@src/domain/Locales';
 
 // Locale-specific imports
 import messages from './messages';
@@ -24,16 +25,11 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { Locales } from '@src/domain/Locales';
 
 const localeFactory = new LocaleFactoryEn();
-const useOfFundsContent = localeFactory.getUseOfFundsLoader().getContent();
 const translator = new Translator( messages );
-
-// This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
-const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 
@@ -44,7 +40,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

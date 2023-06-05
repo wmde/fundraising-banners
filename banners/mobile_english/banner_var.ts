@@ -13,40 +13,27 @@ import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIs
 import TranslationPlugin from '@src/TranslationPlugin';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
+import { Translator } from '@src/Translator';
+import DynamicTextPlugin from '@src/DynamicTextPlugin';
+import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
+import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
+import { Locales } from '@src/domain/Locales';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
-// Change for EN banners
+// Content for EN banners
 import messages from './messages';
-import { Translator } from '@src/Translator';
-import DynamicTextPlugin from '@src/DynamicTextPlugin';
-import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
-import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
-import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
-import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
-import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { Locales } from '@src/domain/Locales';
+import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 
-const useOfFundsContent = ( new DeJSONFundsContentLoader() ).getContent();
-
+const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
-
-// This is channel specific and must be changed for wp.de banners
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-
-// This is language-specific and must be changed for EN banners
-const currencyFormatter = new CurrencyEn();
-const formatters: Formatters = { currency: currencyFormatter, ordinal: new OrdinalEn(), integer: new IntegerEn() };
-
+const currencyFormatter = localeFactory.getCurrencyFormatter();
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-
-const pageScroller = new WindowPageScroller();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -55,8 +42,8 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent,
-		pageScroller
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
+		pageScroller: new WindowPageScroller()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -67,7 +54,7 @@ app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
 	date: new Date(),
-	formatters,
+	formatters: localeFactory.getFormatters(),
 	impressionCount,
 	translator
 } );

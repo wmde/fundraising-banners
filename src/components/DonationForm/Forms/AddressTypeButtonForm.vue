@@ -16,9 +16,10 @@
 					'wmde-banner-form-address-type-button--disabled': disabledAddressTypes.indexOf( item.value ) > -1
 				} ]"
 			>
-				<button type="submit"
+				<button
+					type="submit"
 					tabIndex="-1"
-					class="wmde-banner-form-button"
+					:class="[ 'wmde-banner-form-button', `t-submit-address-type-${ item.value }` ]"
 					:value="item.value"
 					:disabled="disabledAddressTypes.indexOf( item.value ) > -1"
 				>
