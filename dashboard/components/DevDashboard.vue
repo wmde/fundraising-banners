@@ -57,7 +57,7 @@ const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
 
 const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
-const currentCampaign = computed( (): Campaign => Object.values( props.campaigns ).find( c => c.campaign === branchName.value ) );
+const currentCampaign = computed( (): Campaign => Object.values( props.campaigns ).find( ( c: Campaign ) => c.campaign === branchName.value ) );
 
 onMounted( () => {
 	fetch( '/compiled-banners/' )
