@@ -25,12 +25,12 @@
 					@doScreenshots="onDoScreenshots"
 				/>
 				<BannerCampaign
-					v-for="( campaign, index ) in campaignList.filter( c => c !== currentCampaign )"
+					v-for="( campaign, index ) in filteredCampaignList"
 					:key="campaign.campaign"
 					class="campaign"
 					:campaign="campaign"
 					:compile-info="compileInfo[ campaign.banners.ctrl.pageName ]"
-					:style="{ '--index': index + 1 }"
+					:style="{ '--index': Number( index ) + 1 }"
 					@doScreenshots="onDoScreenshots"
 				/>
 			</div>
@@ -58,6 +58,7 @@ const gitFailurePrefix = /^UNKNOWN -/;
 
 const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
 const currentCampaign = computed( (): Campaign => Object.values( props.campaigns ).find( ( c: Campaign ) => c.campaign === branchName.value ) );
+const filteredCampaignList = computed( (): Campaign[] => campaignList.value.filter( ( c: Campaign ) => c !== currentCampaign.value ) );
 
 onMounted( () => {
 	fetch( '/compiled-banners/' )
