@@ -30,7 +30,7 @@
 					class="campaign"
 					:campaign="campaign"
 					:compile-info="compileInfo[ campaign.banners.ctrl.pageName ]"
-					:style="{ '--index': index + 1 }"
+					:style="{ '--index': Number( index ) + 1 }"
 					@doScreenshots="onDoScreenshots"
 				/>
 			</div>
