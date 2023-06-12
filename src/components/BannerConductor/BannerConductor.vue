@@ -83,7 +83,8 @@ async function closeHandler( closeEvent: TrackingEvent ): Promise<any> {
 	width: 100%;
 	z-index: 1000;
 }
-.wmde-banner-closed {
+.wmde-banner--not-shown,
+.wmde-banner--closed {
 	display: none;
 }
 </style>
