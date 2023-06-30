@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C23_WMDE_Desktop_00"
+campaign = "C23_WMDE_Desktop_DE_01"
 description = "3 step form vs 4 step form"
-campaign_tracking = "00-ba-230501"
+campaign_tracking = "01-ba-300630"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -17,13 +17,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
-pagename = "B23_WMDE_Desktop_00_ctrl"
-tracking = "org-00-230501-ctrl"
+pagename = "C23_WMDE_Desktop_DE_01_ctrl"
+tracking = "org-01-300630-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
-pagename = "B23_WMDE_Desktop_00_var"
-tracking = "org-00-230501-var"
+pagename = "C23_WMDE_Desktop_DE_01_var"
+tracking = "org-01-300630-var"
 
 
 

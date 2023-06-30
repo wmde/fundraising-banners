@@ -20,10 +20,6 @@
 				</KeenSlider>
 			</template>
 
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
-
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
@@ -71,7 +67,6 @@ import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';

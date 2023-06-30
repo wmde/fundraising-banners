@@ -37,5 +37,5 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 		return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.FullPageBanner ), 0.1 );
 	}
 
-	return new WMDELegacyBannerEvent( 'banner-closed', 0.1 );
+	return new WMDELegacyBannerEvent( 'banner-closed' );
 }
