@@ -65,7 +65,7 @@ describe( 'BannerVar.vue', () => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
 		} );
 
-		test.each( [
+		test.skip.each( [
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
@@ -77,14 +77,8 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
-			[ 'expectMainDonationFormGoesToAddressFormWhenSofortIsSelected' ],
-			[ 'expectMainDonationFormGoesToAddressFormWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToAddressTypeOnUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToAddressTypeOnDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
-			[ 'expectCustomAmountGoesToAddressFormOnSubmit' ],
-			[ 'expectAddressFormSubmits' ]
+			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

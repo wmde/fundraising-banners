@@ -2,15 +2,15 @@
 	<div class="wmde-banner-footer">
 		<div class="wmde-banner-footer-bank">
 			<label class="wmde-banner-footer-bank-item account">{{ $translate('donation-account') }}:
-				<SelectionInput :value="'Wikimedia e. V.'"/>
+				<SelectionInput :value="'Wikimedia'"/>
 			</label>
 			<label class="wmde-banner-footer-bank-item bic">BIC:
 				<SelectionInput :value="'BFSWDE33BER'"/>
 			</label>
 			<label class="wmde-banner-footer-bank-item iban">IBAN:
 				<SelectionInput
-					:value="'DE05 1002 0500 0003 2873 00'"
-					:focusedValue="'DE05100205000003287300'"
+					:value="'DE09 3702 0500 0003 2873 00'"
+					:focusedValue="'DE09370205000003287300'"
 				/>
 			</label>
 		</div>

@@ -16,14 +16,14 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ CustomAmountChangedEvent.EVENT_NAME,
 		( e: CustomAmountChangedEvent ): WMDELegacyBannerEvent =>
-			new WMDELegacyBannerEvent( e.customData.amountChange + '-amount', 1 )
+			new WMDELegacyBannerEvent( e.userChoice + '-amount', 1 )
 	],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
 			case 'UpgradeToYearlyForm':
-				return new WMDESizeIssueEvent( `submit-${e.customData.optionSelected}`, null, 1 );
-			case 'CustomAmount':
+				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, null, 1 );
+			case 'CustomAmountForm':
 				return new WMDESizeIssueEvent( `submit-different-amount`, null, 1 );
 			default:
 				return new WMDESizeIssueEvent( `submit`, null, 1 );

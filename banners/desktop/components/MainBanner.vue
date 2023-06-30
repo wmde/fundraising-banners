@@ -5,7 +5,6 @@
 			<div class="wmde-banner-column-left">
 				<slot name="banner-text" v-if="onLargeScreen"/>
 				<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
-				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-column-right">
 				<slot name="donation-form" :form-interaction="onFormInteraction"/>
