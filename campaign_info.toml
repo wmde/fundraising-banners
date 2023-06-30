@@ -30,9 +30,9 @@ tracking = "org-00-230501-var"
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "C23_WMDE_Mobile_00"
-description = "2 step form vs 3 step form"
-campaign_tracking = "00-ba-230501"
+campaign = "C23_WMDE_Mobile_DE_01"
+description = "text changes, VAR removes some payment type options"
+campaign_tracking = "01-ba-230705"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
@@ -41,13 +41,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
 filename = "./banners/mobile/banner_ctrl.ts"
-pagename = "B23_WMDE_Mobile_00_ctrl"
-tracking = "org-mob00-230501-ctrl"
+pagename = "B23_WMDE_Mobile_01_ctrl"
+tracking = "org-mob01-230705-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/banner_var.ts"
-pagename = "B23_WMDE_Mobile_00_var"
-tracking = "org-mob00-230501-var"
+pagename = "B23_WMDE_Mobile_01_var"
+tracking = "org-mob01-230705-var"
 
 
 [pad]
