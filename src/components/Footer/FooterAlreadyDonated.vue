@@ -11,7 +11,7 @@
                 <SelectionInput :value="'BFSWDE33BER'"/>
             </label>
             <label class="wmde-banner-footer-bank-item iban">IBAN:
-                <SelectionInput :value="'DE33 1002 0500 0001 1947 00'" :focusedValue="'DE33100205000001194700'"/>
+                <SelectionInput :value="'DE09 3702 0500 0003 2873 00'" :focusedValue="'DE09370205000003287300'"/>
             </label>
         </div>
 

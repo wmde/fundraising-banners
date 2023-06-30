@@ -65,7 +65,8 @@ describe( 'BannerCtrl.vue', () => {
 		wrapper.unmount();
 	} );
 
-	describe( 'Content', () => {
+	// skipped because the sentence is not part of the current test
+	describe.skip( 'Content', () => {
 		test.each( [
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],

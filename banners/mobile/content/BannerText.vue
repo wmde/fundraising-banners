@@ -12,9 +12,9 @@
 					Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht – sie übergehen diesen Aufruf.
 				</span>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende
-				beträgt 22,66&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in
-				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der
-				seltenen Ausnahmen zu sein, und geben Sie etwas zurück. <em>Vielen Dank!</em>
+				beträgt 22,25&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in
+				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann entscheiden Sie sich, eine der
+				seltenen Ausnahmen zu sein, und geben Sie etwas zurück.</strong> Vielen Dank!
 			</p>
 		</div>
 	</div>

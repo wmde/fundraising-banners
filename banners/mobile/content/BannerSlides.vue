@@ -19,9 +19,8 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 4">
 		<p>
-			<strong>
-				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
-			</strong>
+			<strong>Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. </strong>
+			Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>
@@ -38,9 +37,6 @@ interface Props {
 defineProps<Props>();
 
 const {
-	currentDayName,
-	campaignDaySentence,
-	visitorsVsDonorsSentence,
-	goalDonationSum
+	currentDayName
 }: DynamicContent = inject( 'dynamicCampaignText' );
 </script>
