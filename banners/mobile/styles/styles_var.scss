@@ -10,10 +10,19 @@
 @use 'src/themes/Mikings/Footer/SelectionInput';
 @use 'src/themes/Mikings/DonationForm/MultiStepDonation';
 @use 'src/themes/Mikings/DonationForm/Forms/UpgradeToYearlyButtonForm';
-@use 'src/themes/Mikings/DonationForm/Forms/AddressTypeButtonForm';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectCustomAmount';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Mikings/Slider/Slider';
-@use 'src/themes/Mikings/ProgressBar/ProgressBar';
 @use 'src/themes/Mikings/SoftClose/SoftClose';
+
+// temporary for B23_WMDE_Mobile_DE_01_var
+.wmde-banner-sms-box {
+	display: none;
+}
+
+.payment-ppl,
+.payment-bez {
+	flex: 0 0 50%;
+	width: 50%;
+}

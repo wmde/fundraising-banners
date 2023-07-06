@@ -23,10 +23,6 @@
 				<BannerText/>
 			</template>
 
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
-
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
@@ -78,7 +74,6 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
