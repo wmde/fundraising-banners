@@ -14,6 +14,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ CustomAmountChangedEvent.EVENT_NAME,
 		( e: CustomAmountChangedEvent ): WMDELegacyBannerEvent =>
-			new WMDELegacyBannerEvent( e.customData.amountChange + '-amount', 1 )
+			new WMDELegacyBannerEvent( e.userChoice + '-amount', 1 )
 	]
 ] );

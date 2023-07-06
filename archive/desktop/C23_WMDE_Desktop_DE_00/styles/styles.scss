@@ -8,6 +8,9 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
+@use 'src/themes/Treedip/ProgressBar/ProgressBar' with (
+	$progress-bar-margin: 0 15px
+);
 @use 'src/themes/Treedip/DonationForm/DonationForm';
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
@@ -17,7 +20,6 @@
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/Treedip/DonationForm/Forms/AddressTypeForm';
 @use 'src/themes/Treedip/Footer/BannerFooter' with (
 	$right-column-width: 300px
 );

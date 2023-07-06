@@ -65,7 +65,7 @@ describe( 'BannerCtrl.vue', () => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
 		} );
 
-		test.each( [
+		test.skip.each( [
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],

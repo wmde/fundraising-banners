@@ -4,7 +4,6 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
-import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 
 export function createFormItems( translations: Translator, amountFormatter: NumberFormatter ): DonationFormItems {
 	return new FormItemsBuilder( translations, amountFormatter )
@@ -18,12 +17,7 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
 			PaymentMethods.BANK_TRANSFER,
-			PaymentMethods.DIRECT_DEBIT
-		)
-		.setAddressTypes(
-			AddressTypes.FULL,
-			AddressTypes.EMAIL,
-			AddressTypes.ANONYMOUS
-		)
-		.getItems();
+			PaymentMethods.DIRECT_DEBIT,
+			PaymentMethods.CREDIT_CARD
+		).getItems();
 }
