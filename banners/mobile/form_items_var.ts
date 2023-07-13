@@ -16,7 +16,8 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setAmounts( 5, 15, 25, 50, 100 )
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
-			PaymentMethods.DIRECT_DEBIT
+			PaymentMethods.DIRECT_DEBIT,
+			PaymentMethods.CREDIT_CARD
 		)
 		.setAddressTypes(
 			AddressTypes.FULL,
