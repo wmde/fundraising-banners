@@ -17,8 +17,8 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat
-			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia Ihnen in
+			diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
