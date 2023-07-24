@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-message">
 		<div>
-			<p>
+			<p class="banner-text-title">
 				<strong>An alle, die Wikipedia in Deutschland nutzen: </strong>
 			</p>
 			<p>
@@ -12,7 +12,7 @@
 					Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht – sie übergehen diesen Aufruf.
 				</span>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende
-				beträgt 22,25&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in
+				beträgt 22,25&nbsp;€, doch bereits 5 € helfen uns weiter. Hat Wikipedia Ihnen in
 				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann entscheiden Sie sich, eine der
 				seltenen Ausnahmen zu sein, und geben Sie etwas zurück.</strong> Vielen Dank!
 			</p>

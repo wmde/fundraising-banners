@@ -1,11 +1,14 @@
 <template>
+
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>An alle, die Wikipedia in Deutschland nutzen:</p>
 		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
 	</KeenSliderSlide>
+
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>Am heutigen {{ currentDayName }} bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen.</p>
 	</KeenSliderSlide>
+
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
 			<span class="wmde-banner-text-animated-highlight">
@@ -13,16 +16,21 @@
 			</span>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
 	</KeenSliderSlide>
+
 	<KeenSliderSlide :is-current="currentSlide === 3">
-		<p>Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits eine Spende von 5&nbsp;€ hilft uns
-			weiter. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?</p>
+		<p>
+			Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 5 € helfen uns weiter. Hat Wikipedia Ihnen
+			in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+		</p>
 	</KeenSliderSlide>
+
 	<KeenSliderSlide :is-current="currentSlide === 4">
 		<p>
-			<strong>Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. </strong>
+			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			Vielen Dank!
 		</p>
 	</KeenSliderSlide>
+
 </template>
 
 <script setup lang="ts">

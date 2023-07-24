@@ -9,9 +9,14 @@
 		position: fixed;
 		top: 0;
 		z-index: 1000;
-		height: 100%;
-		width: 100%;
-		overflow-y: auto;
+		height: 100vh;
+		width: 100vw;
+
+		&-content {
+			overflow-y: scroll;
+			height: 100%;
+			width: 100%;
+		}
 
 		p {
 			padding-bottom: 16px;
