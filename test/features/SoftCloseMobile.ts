@@ -18,7 +18,7 @@ const expectDoesNotShowSoftCloseOnFullBannerClose = async ( wrapper: VueWrapper<
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.Close ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.MaybeLater ) );
 };
 
 const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
