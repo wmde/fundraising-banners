@@ -16,6 +16,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -97,6 +98,14 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( wrapper );
+		} );
+	} );
+
+	describe( 'Full Page Banner', () => {
+		test.each( [
+			[ 'expectEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await fullPageBannerFeatures[ testName ]( wrapper );
 		} );
 	} );
 
