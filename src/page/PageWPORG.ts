@@ -109,6 +109,7 @@ class PageWPORG implements Page {
 			case CloseChoices.NoMoreBannersForCampaign:
 				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
 				break;
+			case CloseChoices.Hide:
 			case CloseChoices.MaybeLater:
 				// Don't add cookie
 				break;

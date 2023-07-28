@@ -17,7 +17,7 @@
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.MaybeLater )"
+			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
 				<BannerText/>

@@ -8,7 +8,7 @@ const expectEmitsCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> =
 	await wrapper.find( '.wmde-banner-full-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.MaybeLater ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.Hide ) );
 };
 
 export const fullPageBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
