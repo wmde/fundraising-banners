@@ -13,7 +13,7 @@
 		width: 100vw;
 
 		&-content {
-			overflow-y: scroll;
+			overflow-y: auto;
 			height: 100%;
 			width: 100%;
 		}
@@ -26,8 +26,12 @@
 			position: absolute;
 			top: 16px;
 			right: 16px;
-			height: 25px;
+			height: 35px;
+			width: 35px;
+			padding: 5px;
 			background: colors.$white;
+			z-index: 99;
+			border-radius: 50%;
 
 			&:hover {
 				cursor: pointer;
