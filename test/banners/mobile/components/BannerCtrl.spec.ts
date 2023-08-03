@@ -16,6 +16,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
+import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -127,6 +128,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Full Page Banner', () => {
+		test.each( [
+			[ 'expectEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

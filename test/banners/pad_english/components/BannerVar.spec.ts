@@ -13,6 +13,7 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
+import { bannerMainFeatures } from '@test/features/MainBanner';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -48,6 +49,14 @@ describe( 'BannerVar.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
+	} );
+
+	describe( 'Main Banner', () => {
+		test.each( [
+			[ 'expectDoesNotEmitCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( wrapper );
+		} );
 	} );
 
 	describe( 'Content', () => {

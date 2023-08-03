@@ -100,6 +100,14 @@ describe( 'PageOrg', function () {
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
 
+	it( 'does not store cookie for the "Hide" event', () => {
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( new CloseEvent( 'FullPageBanner', CloseChoices.Hide ) );
+
+		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
+	} );
+
 	it( 'stores close cookie when user closes soft close', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 

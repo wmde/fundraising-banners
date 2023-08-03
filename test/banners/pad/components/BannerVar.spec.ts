@@ -15,6 +15,7 @@ import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { bannerMainFeatures } from '@test/features/MainBanner';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -54,6 +55,14 @@ describe( 'BannerVar.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
+	} );
+
+	describe( 'Main Banner', () => {
+		test.each( [
+			[ 'expectDoesNotEmitCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( getWrapper() );
+		} );
 	} );
 
 	describe( 'Content', () => {
