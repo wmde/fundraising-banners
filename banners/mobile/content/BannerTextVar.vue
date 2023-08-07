@@ -5,7 +5,7 @@
 				<strong>Hi,</strong>
 			</p>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
+				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 				heutigen {{ currentDayName }} bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
 				unterstützen.
 				<span class="wmde-banner-text-animated-highlight">
