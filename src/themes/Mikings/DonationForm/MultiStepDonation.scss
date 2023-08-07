@@ -5,6 +5,8 @@
 	@include MultiStepDonation.layout;
 
 	&-form {
+		height: auto;
+
 		&-field-group-legend {
 			display: block;
 			width: 100%;

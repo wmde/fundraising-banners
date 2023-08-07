@@ -1,12 +1,11 @@
 <template>
 	<div class="wmde-banner-full">
-		<button class="wmde-banner-full-close t-close-full-banner" @click.prevent="$emit( 'close' )">
-			<CloseIconMobile/>
-		</button>
 		<div class="wmde-banner-full-content">
+			<button class="wmde-banner-full-close t-close-full-banner" @click.prevent="$emit( 'close' )">
+				<CloseIconMobile/>
+			</button>
 			<div class="wmde-banner-full-info">
 				<slot name="banner-text"/>
-				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-full-call-to-action">
 				Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.

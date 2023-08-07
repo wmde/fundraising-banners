@@ -8,7 +8,6 @@
 		z-index: 1000;
 		height: 100%;
 		width: 100%;
-		overflow-y: auto;
 		background: colors.$primary-lighter;
 		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 		text-align: center;
@@ -18,11 +17,22 @@
 		border: 8px solid colors.$primary;
 		padding: 5px 5px 15px;
 
+		&-content {
+			overflow-y: auto;
+			height: 100%;
+			width: 100%;
+		}
+
 		&-close {
 			position: absolute;
-			top: 8px;
-			right: 8px;
+			top: 3px;
+			right: 3px;
 			z-index: 2;
+			height: 36px;
+			width: 36px;
+			padding: 5px;
+			border-radius: 50%;
+			background: colors.$primary-lighter;
 		}
 
 		&-info {
