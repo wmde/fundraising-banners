@@ -1,0 +1,56 @@
+@use 'src/themes/Mikings/variables/globals';
+@use 'src/themes/Mikings/variables/fonts';
+@use 'src/themes/Mikings/variables/colors';
+
+@keyframes hide-mini {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 0;
+	}
+	100% {
+		display: none;
+	}
+}
+
+.wmde-banner {
+
+	&-full {
+		visibility: hidden;
+		opacity: 0;
+		transform: scale( 1.1 );
+		transition: opacity 500ms globals.$banner-easing, transform 500ms globals.$banner-easing;
+	}
+
+	&-wrapper {
+		font-size: 16px;
+		font-family: fonts.$ui;
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		background-color: colors.$white;
+
+		&--full-page {
+			.wmde-banner-mini {
+				animation: hide-mini 500ms;
+			}
+			.wmde-banner-full {
+				visibility: visible;
+				opacity: 1;
+				transform: scale( 1 );
+			}
+		}
+
+		&--soft-closing {
+			.wmde-banner-mini {
+				display: none;
+			}
+		}
+	}
+
+	&--closed,
+	&--not-shown {
+		.wmde-banner-wrapper {
+			display: none;
+		}
+	}
+}
