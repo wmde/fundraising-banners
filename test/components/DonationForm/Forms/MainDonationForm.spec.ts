@@ -118,4 +118,31 @@ describe( 'MainDonationForm.vue', () => {
 
 		expect( wrapper.emitted( 'submit' ) ).toBeUndefined();
 	} );
+
+	it( 'passes payment label slots dynamically to select group', () => {
+		const wrapper = mount( DonationForm, {
+			props: {
+				showErrorScrollLink: false
+			},
+			slots: {
+				'label-payment-ppl': `<template #label-payment-ppl><span class="custom-label-paypal"></span></template>`,
+				'label-payment-mcp': `<template #label-payment-mcp><span class="custom-label-credit-cards"></span></template>`
+			},
+			global: {
+				mocks: {
+					$translate: translate
+				},
+				provide: {
+					currencyFormatter: new CurrencyEn(),
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formItems: formItems,
+					translator: { translate },
+					tracker: new TrackerSpy()
+				}
+			}
+		} );
+
+		expect( wrapper.find( '.custom-label-paypal' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.custom-label-credit-cards' ).exists() ).toBeTruthy();
+	} );
 } );

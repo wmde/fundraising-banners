@@ -76,4 +76,23 @@ describe( 'SelectGroup.vue', () => {
 		expect( error.exists() ).toBeTruthy();
 		expect( error.text() ).toBe( 'this is the error message' );
 	} );
+
+	it( 'displays the labels as slots if provided', () => {
+		wrapper = shallowMount( SelectGroup, {
+			slots: {
+				'select-group-label': `<template #select-group-label><span class="custom-label"></span></template>`
+			},
+			props: {
+				fieldName: 'interval',
+				isValid: true,
+				selectionItems: [
+					{ value: '0', label: 'interval-once', className: 'interval-0' },
+					{ value: '1', label: 'interval-monthly', className: 'interval-1', notice: 'notice' }
+				],
+				inputValue: ''
+			}
+		} );
+
+		expect( wrapper.find( '.custom-label' ).exists() ).toBeTruthy();
+	} );
 } );

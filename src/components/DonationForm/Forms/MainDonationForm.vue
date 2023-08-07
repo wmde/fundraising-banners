@@ -45,6 +45,9 @@
 				v-model:inputValue="paymentMethod"
 				:disabledOptions="disabledPaymentMethods"
 			>
+				<template #select-group-label="{ label, slotName }: any">
+					<slot :name="'label-' + slotName" :label="label"/>
+				</template>
 				<SmsBox/>
 			</SelectGroup>
 		</fieldset>
