@@ -45,7 +45,7 @@
 			<div class="use-of-funds-orgchart-text">
 				<h2>{{ content.orgchart.headline }}</h2>
 				<div>
-					<p v-for="( paragraph, idx ) in orgChartParagraphs" :key="idx" v-html="paragraph"></p>
+					<p v-for="( paragraph, idx ) in content.orgchart.paragraphs" :key="idx" v-html="replaceOrganisations( paragraph )"></p>
 				</div>
 			</div>
 			<div class="use-of-funds-orgchart-image">
@@ -64,21 +64,16 @@
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FundsDistributionAccordion from '@src/components/UseOfFunds/FundsDistributionAccordion.vue';
 import CompanyBudgets from '@src/components/UseOfFunds/CompanyBudgets.vue';
-import { ref } from 'vue';
 
 interface Props {
 	content: UseOfFundsContent;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 defineEmits( [ 'hideFundsModal' ] );
 
-const orgChartParagraphs = ref<string[]>( props.content.orgchart.paragraphs );
-
-const organizationClassLookup = new Map<string, string>( Object.entries( props.content.orgchart.organizationClasses ) );
-organizationClassLookup.forEach( ( cssClass: string, key: string ) => {
-	orgChartParagraphs.value[ 0 ] = orgChartParagraphs.value[ 0 ]
-		.replace( key, ` <span class="use-of-funds-org use-of-funds-org-${ cssClass }">${ key }</span> ` );
-} );
+const replaceOrganisations = ( content: string ): string => {
+	return content.replace( /<(wmf|wmde)>([^<]*)<\/\1>/g, '<span class="use-of-funds-org-$1">$2</span>' );
+};
 
 </script>

@@ -19,8 +19,7 @@ describe( 'FundsContent.vue', () => {
 			orgchart: {
 				headline: '',
 				imageUrl: '',
-				organizationClasses: { ' replace me ': 'gib-class' },
-				paragraphs: [ 'This is some text where I want you to replace me with text wrapped in a span' ]
+				paragraphs: [ 'This is some text where I want you to<wmde> replace me </wmde>with text wrapped in a span' ]
 			},
 			provisional: ''
 		};
@@ -56,7 +55,7 @@ describe( 'FundsContent.vue', () => {
 		} );
 
 		expect( wrapper.find( '.use-of-funds-orgchart-text > div p:first-child' ).html() )
-			.toContain( '<span class="use-of-funds-org use-of-funds-org-gib-class"> replace me </span>' );
+			.toContain( '<span class="use-of-funds-org-wmde"> replace me </span>' );
 	} );
 
 	it( 'emits event when call to action is clicked', async () => {

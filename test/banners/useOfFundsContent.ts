@@ -11,6 +11,6 @@ export const useOfFundsContent: UseOfFundsContent = {
 		mixed: { text: '' }
 	},
 	intro: { headline: '', text: '' },
-	orgchart: { headline: '', imageUrl: '', organizationClasses: {}, paragraphs: [] },
+	orgchart: { headline: '', imageUrl: '', paragraphs: [] },
 	provisional: ''
 };
