@@ -43,7 +43,6 @@ export interface UseOfFundsContent {
 		headline: string;
 		imageUrl: string;
 		paragraphs: string[];
-		organizationClasses: { [ key: string ]: string };
 	}
 
 	callToAction: string;
