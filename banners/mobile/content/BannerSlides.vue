@@ -1,8 +1,8 @@
 <template>
 
 	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p>An alle, die Wikipedia in Deutschland nutzen:</p>
-		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
+		<p>Hi,</p>
+		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">

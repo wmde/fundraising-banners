@@ -73,9 +73,9 @@ import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsClo
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerTextVar.vue';
+import BannerText from '../content/BannerText.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
