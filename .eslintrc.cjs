@@ -23,6 +23,10 @@ module.exports = {
 		// TODO: Turn this rule back on when this is merged https://github.com/vuejs/eslint-plugin-vue/pull/2268
 		'vue/no-setup-props-destructure': [ 'off' ],
 
+		// Make unused vars throw a linter error
+		'no-unused-vars': 'off',
+		'@typescript-eslint/no-unused-vars': 'error',
+
 		// We want to use const and let wherever we like. TypeScript will inform us about use-before-declaration situations
 		'vars-on-top': [ 'off' ],
 
