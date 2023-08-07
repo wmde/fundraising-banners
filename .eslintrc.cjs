@@ -20,6 +20,9 @@ module.exports = {
 		mw: false
 	},
 	'rules': {
+		// TODO: Turn this rule back on when this is merged https://github.com/vuejs/eslint-plugin-vue/pull/2268
+		'vue/no-setup-props-destructure': [ 'off' ],
+
 		// We want to use const and let wherever we like. TypeScript will inform us about use-before-declaration situations
 		'vars-on-top': [ 'off' ],
 
