@@ -5,7 +5,7 @@
                 <TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-open-link' ) }}
             </a>
             <label class="wmde-banner-footer-bank-item account">{{ $translate( 'donation-account' ) }}:
-                <SelectionInput :value="'Wikimedia'"/>
+                <SelectionInput :value="'Wikimedia e. V.'"/>
             </label>
             <label class="wmde-banner-footer-bank-item bic">BIC:
                 <SelectionInput :value="'BFSWDE33BER'"/>

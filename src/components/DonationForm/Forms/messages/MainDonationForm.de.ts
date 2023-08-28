@@ -27,7 +27,7 @@ const translations: TranslationMessages = {
 	'interval-yearly': 'jährlich',
 
 	'payment-direct-debit': 'Lastschrift',
-	'payment-bank-transfer': 'Überweisung',
+	'payment-bank-transfer': 'Banküberweisung',
 	'payment-credit-card': 'Kreditkarte',
 	'payment-paypal': 'PayPal',
 	'payment-sofort': 'Sofortüberweisung'
