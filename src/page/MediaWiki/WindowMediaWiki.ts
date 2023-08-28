@@ -2,6 +2,8 @@ import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import { setCookie } from '@src/page/MediaWiki/setCookie';
+import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSetter';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
@@ -52,16 +54,21 @@ export class WindowMediaWiki implements MediaWiki {
 	}
 
 	public preventBannerDisplayForPeriod(): void {
-		window.mw.centralNotice.hideBanner();
+		this.hideBanner( 'close', this.getConfigItem( 'wgNoticeCookieDurations' ).close );
 	}
 
 	public preventBannerDisplayUntilEndOfCampaign(): void {
 		const endOfYear = new Date( new Date().getFullYear(), 11, 31, 23, 59, 59 );
 		const secondsToEndOfYear = Math.abs( ( endOfYear.getTime() - Date.now() ) / 1000 );
-		window.mw.centralNotice.customHideBanner( 'donate', secondsToEndOfYear );
+		this.hideBanner( 'donate', secondsToEndOfYear );
 	}
 
 	public setBannerLoadedButHidden(): void {
 		window.mw.centralNotice.setBannerLoadedButHidden();
+	}
+
+	private hideBanner( reason: string, durationInSeconds: number ): void {
+		setCookie( reason, new Date(), durationInSeconds );
+		createImageCookieSetter( reason, durationInSeconds, this.getConfigItem( 'wgNoticeHideUrls' )[ 0 ] );
 	}
 }
