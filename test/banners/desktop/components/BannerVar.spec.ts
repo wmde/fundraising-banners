@@ -86,8 +86,14 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
