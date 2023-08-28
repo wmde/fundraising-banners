@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
+import { computed, inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 

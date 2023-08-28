@@ -65,8 +65,8 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';

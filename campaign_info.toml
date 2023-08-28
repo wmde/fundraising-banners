@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C23_WMDE_Desktop_DE_02"
-description = "Text change: Wikipedia's usefulness"
-campaign_tracking = "02-ba-230724"
+campaign = "C23_WMDE_Desktop_DE_03"
+description = "Address type options test on the Fundraising Application"
+campaign_tracking = "03-ba-230810"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -17,13 +17,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
-pagename = "B23_WMDE_Desktop_DE_02_ctrl"
-tracking = "org-02-230724-ctrl"
+pagename = "B23_WMDE_Desktop_DE_03_ctrl"
+tracking = "org-03-230810-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
-pagename = "B23_WMDE_Desktop_DE_02_var"
-tracking = "org-02-230724-var"
+pagename = "B23_WMDE_Desktop_DE_03_var"
+tracking = "org-03-230810-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]

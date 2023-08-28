@@ -5,7 +5,7 @@
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
-			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen.
+			Am heutigen {{ currentDayName }} bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { computed, inject, ref } from 'vue';
+import { inject } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 
@@ -41,12 +41,4 @@ interface Props {
 defineProps<Props>();
 
 const { currentDayName }: DynamicContent = inject( 'dynamicCampaignText' );
-
-const currentDate = computed( () => {
-	return new Intl.DateTimeFormat( 'de-DE', {
-		day: '2-digit',
-		month: 'long'
-	} ).format( new Date() );
-} );
-
 </script>
