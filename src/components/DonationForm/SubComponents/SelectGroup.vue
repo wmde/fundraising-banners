@@ -20,7 +20,9 @@
 						:disabled="disabledOptions.indexOf( value ) > -1"
 						class="wmde-banner-select-group-input"
 					/>
-					<span class="wmde-banner-select-group-label">{{ label }}</span>
+					<slot name="select-group-label" :label="label" :slotName="className">
+						<span class="wmde-banner-select-group-label">{{ label }}</span>
+					</slot>
 				</label>
 				<span v-if="notice" class="wmde-banner-select-group-notice" :class="{ selected: value === inputValue }">
 					{{ notice }}

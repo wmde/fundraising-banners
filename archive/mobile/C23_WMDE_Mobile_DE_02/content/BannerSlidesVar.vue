@@ -2,7 +2,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>Hi,</p>
-		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
+		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">

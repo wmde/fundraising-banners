@@ -16,6 +16,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -87,6 +88,16 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsCreditCardLogos' ],
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsSepaLogo' ]
+		] )( '%s', ( testName: string ) => {
+			paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

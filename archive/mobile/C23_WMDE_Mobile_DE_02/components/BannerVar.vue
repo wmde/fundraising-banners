@@ -27,31 +27,13 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-bez>
-								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-									<AmexLogo/>
-								</span>
-							</template>
-
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+								<ChevronLeftIcon/> {{ $translate ( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -91,9 +73,9 @@ import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsClo
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText.vue';
+import BannerText from '../content/BannerTextVar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -109,11 +91,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import PayPalLogo from './PaymentLogos/PayPalLogo.vue';
-import SepaLogo from './PaymentLogos/SepaLogo.vue';
-import VisaLogo from './PaymentLogos/VisaLogo.vue';
-import MastercardLogo from './PaymentLogos/MastercardLogo.vue';
-import AmexLogo from './PaymentLogos/AmexLogo.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

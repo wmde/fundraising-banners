@@ -17,7 +17,7 @@
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.MaybeLater )"
+			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -27,31 +27,13 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-bez>
-								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-									<AmexLogo/>
-								</span>
-							</template>
-
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+								<ChevronLeftIcon/> {{ $translate ( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -109,11 +91,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import PayPalLogo from './PaymentLogos/PayPalLogo.vue';
-import SepaLogo from './PaymentLogos/SepaLogo.vue';
-import VisaLogo from './PaymentLogos/VisaLogo.vue';
-import MastercardLogo from './PaymentLogos/MastercardLogo.vue';
-import AmexLogo from './PaymentLogos/AmexLogo.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

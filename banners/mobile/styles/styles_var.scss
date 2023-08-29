@@ -16,5 +16,6 @@
 @use 'src/themes/Mikings/Slider/Slider';
 @use 'src/themes/Mikings/SoftClose/SoftClose';
 
-// This is to match the inputs with the VAR of C23_WMDE_Mobile_DE_03
+// This is for the payment type images in the VAR of C23_WMDE_Mobile_DE_03
+@use 'SelectGroupImageLabel';
 @use './HideSms';
