@@ -14,7 +14,7 @@ import {
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount_AddressType';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -86,8 +86,14 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ]
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

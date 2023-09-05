@@ -30,6 +30,11 @@
                     <template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
                         <UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
                     </template>
+
+                    <template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+                        <CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+                    </template>
+
 				</MultiStepDonation>
 			</template>
 
@@ -66,6 +71,7 @@ import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vu
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
+import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
@@ -74,6 +80,7 @@ import {
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -84,6 +91,7 @@ enum ContentStates {
 }
 
 enum FormStepNames {
+	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
 }
@@ -101,7 +109,8 @@ const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
+	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
 
 watch( contentState, async () => {
