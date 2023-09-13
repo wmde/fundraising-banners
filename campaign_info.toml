@@ -34,7 +34,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 name = "Mobile"
 icon = "mobile"
 campaign = "C23_WMDE_Mobile_DE_04"
-description = "VAR has payment type icon buttons"
+description = "based on VAR 02, has all payment types as text, VAR leads to different address page"
 campaign_tracking = "mob-de-04-ba-230914"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
