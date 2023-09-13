@@ -17,7 +17,7 @@
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
+			@close="() => onClose( 'FullPageBanner', CloseChoices.MaybeLater )"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -33,7 +33,7 @@
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate ( 'back-button' ) }}
+								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -57,7 +57,7 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="onHideFundsModal"
-        />
+		/>
 	</div>
 </template>
 
