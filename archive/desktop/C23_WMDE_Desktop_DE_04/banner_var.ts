@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -59,7 +59,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '1' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ast: '0' } ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );
