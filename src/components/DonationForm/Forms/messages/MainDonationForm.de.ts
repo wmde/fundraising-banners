@@ -20,11 +20,11 @@ const translations: TranslationMessages = {
 	'custom-amount-placeholder-short': 'anderer',
 	'submit-label': 'Weiter, um Spende abzuschließen',
 
-	'interval-once': 'einmalig',
-	'interval-monthly': 'monatlich',
-	'interval-quarterly': 'vierteljährlich',
+	'interval-once': 'Einmalig',
+	'interval-monthly': 'Monatlich',
+	'interval-quarterly': 'Vierteljährlich',
 	'interval-biannual': 'halbjährlich',
-	'interval-yearly': 'jährlich',
+	'interval-yearly': 'Jährlich',
 
 	'payment-direct-debit': 'Lastschrift',
 	'payment-bank-transfer': 'Banküberweisung',

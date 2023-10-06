@@ -14,7 +14,10 @@
 				{ 'wmde-banner-select-group-container--with-error': intervalValidity === Validity.Invalid }
             ]">
 				<div class="wmde-banner-select-group">
-					<div class="wmde-banner-select-group-option wmde-banner-select-group-option-no">
+					<div
+						class="wmde-banner-select-group-option wmde-banner-select-group-option-no"
+						:class="{ 'active': interval === Intervals.ONCE.value }"
+					>
 						<label class="t-annual-upgrade-no">
 							<input
 								tabIndex="-1"
@@ -30,7 +33,10 @@
                             </span>
 						</label>
 					</div>
-					<div class="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
+					<div
+						class="wmde-banner-select-group-option wmde-banner-select-group-option-yes"
+						:class="{ 'active': interval === Intervals.YEARLY.value }"
+					>
 						<label class="t-annual-upgrade-yes">
 							<input
 								tabIndex="-1"
@@ -50,8 +56,13 @@
 			</div>
 		</div>
 
-		<a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-			@click.prevent="onGoToChangeOfAmount">
+		<a
+			tabIndex="-1"
+			href="#"
+			class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
+			:class="{ 'wmde-banner-form-upgrade-custom--with-error': intervalValidity === Validity.Invalid }"
+			@click.prevent="onGoToChangeOfAmount"
+		>
 			{{ $translate( 'upgrade-to-yearly-link' ) }}
 		</a>
 

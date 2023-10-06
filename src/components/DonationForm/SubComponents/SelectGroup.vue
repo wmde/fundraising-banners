@@ -8,7 +8,10 @@
 			<div v-for="{ value, label, className, notice } in selectionItems" :key="value" :class="[
 				'wmde-banner-select-group-option',
 				className,
-				{ 'wmde-banner-disabled': disabledOptions.indexOf( value ) > -1 }
+				{
+					'wmde-banner-disabled': disabledOptions.indexOf( value ) > -1,
+					'active': value === inputValue
+				}
 			]">
 				<label>
 					<input

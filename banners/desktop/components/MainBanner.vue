@@ -1,6 +1,6 @@
-<template>
+tart<template>
 	<div class="wmde-banner-main">
-		<ButtonClose @close="$emit( 'close' )"/>
+		<slot name="close-button"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<slot name="banner-text" v-if="onLargeScreen"/>
@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import { computed, nextTick, ref } from 'vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -26,7 +25,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'close', 'formInteraction' ] );
+const emit = defineEmits( [ 'formInteraction' ] );
 
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );

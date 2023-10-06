@@ -1,0 +1,56 @@
+@use 'src/themes/Treedip/variables/colors';
+
+$banner-height: 357px !default;
+$form-width: 300px !default;
+
+.wmde-banner {
+	&-main {
+		min-height: $banner-height;
+		display: flex;
+		flex-direction: column;
+		padding: 16px 16px 0;
+	}
+
+	&-content {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		border: 5px solid colors.$primary;
+		border-radius: 9px;
+	}
+
+	&-message {
+		padding: 0 15px;
+	}
+
+	&-column-left {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		flex: 1 1 auto;
+		margin-bottom: 0;
+		overflow-y: hidden;
+		margin-right: 30px;
+		padding: 0 0 10px;
+
+		&::after {
+			position: absolute;
+			top: 5px;
+			bottom: 20px;
+			right: 0;
+			width: 1px;
+			content: '';
+			background: linear-gradient( 0deg, colors.$white 0%, #c8ccd1 50%, colors.$white 100% );
+		}
+	}
+
+	&-column-right {
+		order: 2;
+		flex: 0 0 $form-width;
+		display: flex;
+		flex-direction: column;
+		width: $form-width;
+		padding: 10px 15px 10px 0;
+	}
+}
