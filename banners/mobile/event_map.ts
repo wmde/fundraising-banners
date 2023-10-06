@@ -13,7 +13,7 @@ import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ MobileMiniBannerExpandedEvent.EVENT_NAME,
-		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
+		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
 

@@ -8,4 +8,8 @@ export class MobileMiniBannerExpandedEvent implements TrackingEvent {
 	public readonly customData: Record<string, string> = {};
 	public readonly feature: TrackingFeatureName = 'MiniBanner';
 	public readonly userChoice: string = '';
+
+	public constructor( userChoice: string = '' ) {
+		this.userChoice = userChoice;
+	}
 }
