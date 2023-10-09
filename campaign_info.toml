@@ -8,7 +8,7 @@ name = "Desktop"
 icon = "desktop"
 campaign = "C23_WMDE_Desktop_DE_06"
 description = "CTRL as base, VAR points to a new style on spenden"
-campaign_tracking = "06-ba-231005"
+campaign_tracking = "06-ba-231009"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -18,12 +18,12 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
 pagename = "B23_WMDE_Desktop_DE_06_ctrl"
-tracking = "org-06-231005-ctrl"
+tracking = "org-06-231009-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
 pagename = "B23_WMDE_Desktop_DE_06_var"
-tracking = "org-06-231005-var"
+tracking = "org-06-231009-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
