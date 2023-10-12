@@ -11,8 +11,10 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			<span class="wmde-banner-text-animated-highlight">Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht
-			– sie übergehen diesen Aufruf.</span> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
+			<span class="wmde-banner-text-animated-highlight">
+				Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht – sie übergehen diesen Aufruf.
+			</span>
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 3">
