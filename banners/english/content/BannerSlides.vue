@@ -2,7 +2,7 @@
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p class="headline">
 			<InfoIcon fill="#990a00"/>
-			<strong> An alle, die Wikipedia in Deutschland nutzen </strong>
+			<strong> To all our readers in Germany,</strong>
 		</p>
 		<p>
 			This {{ currentDayName }}, {{ currentDate }}, with only a few weeks before 2023 comes to an end, we humbly

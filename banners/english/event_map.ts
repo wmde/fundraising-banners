@@ -7,6 +7,8 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
+import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -16,7 +18,15 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		( e: CustomAmountChangedEvent ): WMDELegacyBannerEvent =>
 			new WMDELegacyBannerEvent( e.userChoice + '-amount', 1 )
 	],
-
-	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ]
-	// TODO add more events
+	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
+	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
+		switch ( e.feature ) {
+			case 'UpgradeToYearlyForm':
+				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, null, 1 );
+			case 'CustomAmountForm':
+				return new WMDESizeIssueEvent( `submit-different-amount`, null, 1 );
+			default:
+				return new WMDESizeIssueEvent( `submit`, null, 1 );
+		}
+	} ]
 ] );
