@@ -1,9 +1,9 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.scss';
+import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import Banner from './components/BannerCtrl.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -15,7 +15,7 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import eventMappings from './event_map_var';
+import { Locales } from '@src/domain/Locales';
 
 // Locale-specific imports
 import messages from './messages';
@@ -24,7 +24,7 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { Locales } from '@src/domain/Locales';
+import eventMappings from './event_map';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
