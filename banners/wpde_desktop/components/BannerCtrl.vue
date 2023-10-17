@@ -1,9 +1,10 @@
 <template>
-	<div class="wmde-banner-wrapper wmde-banner-wrapper--main">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
-			@close="() => onClose( 'MainBanner', CloseChoices.Close )"
+			@close="onCloseMain"
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			:bannerState="bannerState"
+			v-if="contentState === ContentStates.Main"
 		>
 			<template #banner-text>
 				<BannerText/>
@@ -59,12 +60,19 @@
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
 		/>
+
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+		/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
@@ -90,6 +98,12 @@ import { createSubmittableCustomAmount } from '@src/components/DonationForm/Step
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+
+enum ContentStates {
+	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing'
+}
 
 enum FormStepNames {
 	CustomAmountFormStep = 'CustomAmountForm',
@@ -106,12 +120,21 @@ defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
+const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
 	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
 ];
+
+watch( contentState, async () => {
+	emit( 'bannerContentChanged' );
+} );
+
+function onCloseMain(): void {
+	contentState.value = ContentStates.SoftClosing;
+}
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );

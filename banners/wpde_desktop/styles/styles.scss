@@ -33,3 +33,4 @@
 	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large: 18px )
 );
 @use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/themes/Treedip/SoftClose/SoftClose';
