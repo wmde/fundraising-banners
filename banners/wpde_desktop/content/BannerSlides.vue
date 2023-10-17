@@ -9,7 +9,7 @@
 			Sache. An diesem {{ currentDayName }} sind Sie gefragt: {{ campaignDaySentence }}</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p>Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert, aber 99&nbsp;% der
+		<p>Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
 			Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong></p>
 	</KeenSliderSlide>
@@ -28,7 +28,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 4">
 		<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia
-			nützlich finden, nehmen Sie sich an diesem { currentDayName } bitte
+			nützlich finden, nehmen Sie sich an diesem {{currentDayName }} bitte
 			eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück. <em>Vielen Dank!</em></p>
 	</KeenSliderSlide>
 </template>

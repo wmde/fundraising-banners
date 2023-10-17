@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPDE from '@src/page/PageWPDE';
@@ -40,7 +40,7 @@ const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keywor
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: getBannerDelay( 7500 ),
+		delay: getBannerDelay( 0 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {

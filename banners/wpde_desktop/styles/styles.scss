@@ -30,7 +30,7 @@
 @use 'src/themes/Treedip/Footer/BannerFooter';
 @use 'src/themes/Treedip/Footer/SelectionInput';
 @use 'src/themes/Treedip/Message/Message' with (
-	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large: 18px )
+	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large + 100px: 18px )
 );
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
