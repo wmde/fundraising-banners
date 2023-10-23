@@ -77,7 +77,7 @@ import { CompileInfo } from '../util';
 
 interface Props {
 	campaign: Campaign,
-	compileInfo: CompileInfo
+	compileInfo?: CompileInfo
 }
 
 defineProps<Props>();

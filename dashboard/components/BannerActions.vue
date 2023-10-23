@@ -65,12 +65,14 @@ import { CompileInfo } from '../util';
 import LoadingSpinner from './BuildingAnimation.vue';
 import CopyingAnimation from './CopyingAnimation.vue';
 
-const props = defineProps<{
-	banner: Banner,
-	campaign: Campaign,
-	isWPDE: boolean,
-	compileInfo?: CompileInfo
-}>();
+interface Props {
+	banner: Banner;
+	campaign: Campaign;
+	isWPDE: boolean;
+	compileInfo?: CompileInfo;
+}
+
+const props = defineProps<Props>();
 
 const bannerPageName = ref( props.banner.pageName );
 
