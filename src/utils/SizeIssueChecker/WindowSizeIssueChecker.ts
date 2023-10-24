@@ -1,6 +1,5 @@
 import { Vector2 } from '@src/utils/Vector2';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
-import { WindowDimensions } from '@src/utils/SizeIssueChecker/WindowDimensions';
 
 export class WindowSizeIssueChecker implements SizeIssueChecker {
 	private readonly _minimumAllowedWidth: number;
@@ -25,22 +24,5 @@ export class WindowSizeIssueChecker implements SizeIssueChecker {
 		const spaceUnderBanner = window.innerHeight - adjustedBannerDimensions.y;
 
 		return spaceUnderBanner <= 0 || bannerWidth < this._minimumAllowedWidth;
-	}
-
-	public getDimensions(): WindowDimensions {
-		return {
-			screen: {
-				width: screen.width,
-				height: screen.height
-			},
-			window: {
-				width: window.innerWidth,
-				height: window.innerHeight
-			},
-			windowOuter: {
-				width: window.outerWidth,
-				height: window.outerHeight
-			}
-		};
 	}
 }
