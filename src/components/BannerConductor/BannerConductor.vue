@@ -39,7 +39,9 @@ interface Props {
 	impressionCount: ImpressionCount,
 }
 
-const props = defineProps<Props>();
+const props = withDefaults( defineProps<Props>(), {
+	bannerProps: (): any => {}
+} );
 const tracker = inject<Tracker>( 'tracker' );
 
 const bannerRef = ref( null );
