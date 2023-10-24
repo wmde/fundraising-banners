@@ -10,5 +10,5 @@ export function mapFormStepShownEvent( e: FormStepShownEvent ): WMDELegacyBanner
 		CustomAmountForm: 'custom-amount-form-page-shown',
 		AddressTypeForm: 'address-type-form-page-shown'
 	};
-	return new WMDELegacyBannerEvent( stepNameToEventLookup[ e.feature ] );
+	return new WMDELegacyBannerEvent( stepNameToEventLookup[ e.feature ], 1 );
 }
