@@ -15,7 +15,6 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 
 let pageScroller: PageScroller;
@@ -68,17 +67,6 @@ describe( 'BannerCtrl.vue', () => {
 
 		return wrapper;
 	};
-
-	describe( 'Content', () => {
-		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
-		} );
-	} );
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
