@@ -1,6 +1,6 @@
 import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 
-interface ViewportAndBannerSize {
+export interface ViewportAndBannerSize {
 	viewportWidth: number;
 	viewportHeight: number;
 	bannerHeight: number;

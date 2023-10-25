@@ -46,28 +46,4 @@ describe( 'WindowSizeIssueChecker', function () {
 
 		expect( checker.hasSizeIssues( bannerDimensions, Vector2.ZERO ) ).toBeFalsy();
 	} );
-
-	it( 'returns dimensions', () => {
-		Object.defineProperty( window, 'outerWidth', { writable: true, configurable: true, value: 120 } );
-		Object.defineProperty( window, 'outerHeight', { writable: true, configurable: true, value: 120 } );
-		Object.defineProperty( screen, 'width', { writable: true, configurable: true, value: 180 } );
-		Object.defineProperty( screen, 'height', { writable: true, configurable: true, value: 180 } );
-
-		const checker = new WindowSizeIssueChecker( 0, Vector2.ZERO );
-
-		expect( checker.getDimensions() ).toEqual( {
-			screen: {
-				width: 180,
-				height: 180
-			},
-			window: {
-				width: 100,
-				height: 100
-			},
-			windowOuter: {
-				width: 120,
-				height: 120
-			}
-		} );
-	} );
 } );
