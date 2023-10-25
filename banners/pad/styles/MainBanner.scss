@@ -1,4 +1,5 @@
 @use 'src/themes/Treedip/variables/colors';
+@use 'src/themes/Treedip/variables/fonts';
 
 $banner-height: 353px !default;
 $form-width: 256px !default;
@@ -14,6 +15,36 @@ $form-width: 256px !default;
 	&-content {
 		display: flex;
 		flex: 1 1 auto;
+
+		&-headline {
+			font-family: fonts.$content;
+			font-size: 21px;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 20px;
+			padding: 0 52px;
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				height: 1px;
+				top: 50%;
+				left: 52px;
+				right: 52px;
+				background: colors.$primary;
+				z-index: 98;
+			}
+
+			&-text {
+				position: relative;
+				display: inline-block;
+				z-index: 99;
+				padding: 0 10px;
+				line-height: 24px;
+				background: colors.$white;
+			}
+		}
 	}
 
 	&-column-left {
