@@ -25,7 +25,6 @@ $height-large: 288px !default;
 			justify-content: space-between;
 			align-items: center;
 			margin: 0 auto;
-			padding-bottom: 10px;
 			background: colors.$primary-lighter;
 			border: 8px solid colors.$primary;
 			box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
@@ -50,19 +49,38 @@ $height-large: 288px !default;
 			}
 		}
 
+		&-banner-slideshow {
+			width: 100%;
+			flex: 1 0 auto;
+		}
+
 		.wmde-banner-progress-bar-text {
 			visibility: hidden;
 		}
 
-		&-banner-slideshow {
+		&-payment-icons {
+			display: flex;
+			justify-content: center;
 			width: 100%;
-			flex: 1 0 auto;
+			height: 45px;
+			padding: 10px 0;
+			text-align: center;
+
+			svg {
+				display: inline-block;
+				height: 18px;
+				width: auto;
+				margin: 0 5px;
+			}
+
+			.sms-icon {
+				height: 24px;
+			}
 		}
 	}
 
 	&-mini-button {
 		height: 40px;
-		width: 160px;
 		line-height: 40px;
 		border-radius: globals.$form-element-border-radius;
 		font-weight: bold;

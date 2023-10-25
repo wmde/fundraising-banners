@@ -10,7 +10,10 @@
 		width: 100%;
 
 		&-label {
-			display: block;
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
 			font-family: inherit;
 			font-size: 18px;
 			font-weight: bold;
@@ -18,8 +21,8 @@
 			background-color: colors.$gray-medium-bright;
 			border-radius: globals.$form-element-border-radius;
 			margin-bottom: 6px;
-			padding: 18px 2px;
-			min-height: 54px;
+			padding: 0 2px;
+			height: 60px;
 
 			@include breakpoints.phone-s-up {
 				font-size: 24px;
@@ -34,6 +37,12 @@
 			width: 100%;
 			padding: 0 0 15px;
 			color: colors.$secondary-dark;
+		}
+
+		.sms-icon {
+			width: 26px;
+			margin-right: 10px;
+			margin-top: 5px;
 		}
 	}
 }

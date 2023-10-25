@@ -21,7 +21,7 @@ $font-size: 17px !default;
 			font-family: fonts.$ui;
 			font-size: $font-size;
 			text-align: center;
-			padding: 0 10px;
+			padding: 0;
 			flex-direction: column;
 			justify-content: center;
 			p {
@@ -31,7 +31,7 @@ $font-size: 17px !default;
 	}
 
 	&-slider-pagination {
-		height: 38px;
+		height: 28px;
 		margin: 0;
 		list-style: none;
 		text-align: center;

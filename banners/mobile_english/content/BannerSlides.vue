@@ -1,10 +1,10 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
-		<p><strong>Our donation target: {{ goalDonationSum }} million</strong></p>
+		<p><strong>Our donation target: €{{ goalDonationSum }} million</strong></p>
 		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p><strong>Wikipedia is not for sale. A personal appeal from Wikipedia-Founder Jimmy Wales</strong></p>
+		<p><strong>&#8220;Wikipedia is not for sale.&#8221; – A personal appeal from Wikipedia-Founder Jimmy Wales</strong></p>
 		<p>Please don't ignore this 1-minute read.</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
