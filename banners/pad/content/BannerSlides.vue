@@ -3,13 +3,13 @@
 		<p>
 			<InfoIcon/>
 			An alle, die Wikipedia in Deutschland nutzen: Vielleicht kommen wir gerade ungelegen,
-			aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen {{ currentDayName }} den {{ currentDate }} bitten wir Sie
+			aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie
 			bescheiden, die Unabhängigkeit von Wikipedia zu sichern.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>{{ campaignDaySentence }} Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia wird
-			durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert.</p>
+			durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert.</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich

@@ -5,13 +5,14 @@
 $font-size: 12px !default;
 $height: 36px !default;
 $border-color: #9aa0a7 !default;
+$padding: 0 4px 8px !default;
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
 
 	&-select-custom-amount {
 		position: relative;
-		padding: 0 4px 8px;
+		padding: $padding;
 
 		&-input-container {
 			width: 100%;

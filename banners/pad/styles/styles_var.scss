@@ -1,9 +1,9 @@
 // This is the file where we import the theme-specific component styles
 @use 'src/components/BannerConductor/banner-transition';
 @use './Banner';
-@use 'MainBanner' with (
+@use './MainBannerVar' with (
 	$banner-height: 378px,
-	$form-width: 256px
+	$form-width: 35%
 );
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/defaults';
@@ -18,21 +18,24 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup' with (
 	$interval-option-width: 33.3333%
 );
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupImageLabel';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupButtons' with (
-	$height: 30px
+	$height: 42px,
+	$padding: 0 8px 8px
 );
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountButton' with (
-	$height: 30px
+	$height: 42px,
+	$padding: 0 8px 8px
 );
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
-	$padding: 40px 0 0
+	$padding: 0
 );
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Treedip/Footer/FooterAlreadyDonated';
 @use 'src/themes/Treedip/Footer/BannerFooter' with (
-	$right-column-width: 256px
+	$right-column-width: 35%
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
 @use 'src/themes/Treedip/Message/Message';

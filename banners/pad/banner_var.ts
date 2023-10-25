@@ -1,9 +1,9 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -18,7 +18,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 
 // Content
