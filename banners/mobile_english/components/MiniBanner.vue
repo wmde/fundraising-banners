@@ -10,8 +10,7 @@
 			<div class="wmde-banner-mini-banner-slideshow">
 				<slot name="banner-slides"/>
 			</div>
-		</div>
-		<div class="wmde-banner-mini-button-wrapper">
+
 			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
 				Donate now
 			</button>

@@ -15,10 +15,11 @@
 		margin: 0 auto;
 		border-radius: 15px;
 		border: 8px solid colors.$primary;
-		padding: 5px 5px 15px;
 
 		&-content {
+			padding: 5px 5px 15px;
 			overflow-y: auto;
+			overflow-x: hidden;
 			height: 100%;
 			width: 100%;
 		}

@@ -3,6 +3,8 @@
 @use '../variables/colors';
 @use '../variables/fonts';
 
+$font-size: 17px !default;
+
 .wmde-banner {
 	@include KeenSlider.layout;
 
@@ -17,7 +19,7 @@
 
 		&-content {
 			font-family: fonts.$ui;
-			font-size: 17px;
+			font-size: $font-size;
 			text-align: center;
 			padding: 0 10px;
 			flex-direction: column;

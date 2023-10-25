@@ -4,26 +4,28 @@
 		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p><strong>To all our readers in Germany: </strong></p>
-		<p>This {{ currentDayName }} your support is requested by the nonprofit that collects donations on
-			Wikipedia to support free knowledge.</p>
+		<p><strong>Wikipedia is not for sale. A personal appeal from Wikipedia-Founder Jimmy Wales</strong></p>
+		<p>Please don't ignore this 1-minute read.</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
-		<p>Each year, thanks to the 1% of readers who give to support our nonprofit mission, we can expand the
-			reach of free knowledge to new corners of the world.</p>
+		<p>
+			This {{ currentDayName }}, {{ currentDate }}, I ask you to reflect on the number of times you visited
+			Wikipedia in the past year, the value you got from it, and whether you're able to give €5 back.
+		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
-		<p><span class="wmde-banner-text-animated-highlight">If Wikipedia matters and is useful to you too, please join them and donate €5 today.</span>
-			Give only what you can comfortably give: what matters is your support, not the size of your gift.
+		<p>
+			If you can, please join the 1% of readers who give. <span class="wmde-banner-text-animated-highlight">If
+			everyone reading this right now gave just €5, we'd hit our goal in a couple of hours.</span>
+			It's hard to know what to trust online these days. Disinformation and scammers are everywhere.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 4">
-		<p>Online, Wikipedia is the closest thing we have to a public park or a library where everyone can go to
-			learn. And that's priceless. Thank you.
+		<p>
+			We are passionate about our model because we want everyone to have equal access to quality information
+			- something that is becoming harder and harder to find online. If Wikipedia has given you €5 worth
+			of knowledge this year, please give back. <em>Thank you</em>.
 		</p>
-		<div>
-			<i> — Wikimedia Fördergesellschaft</i>
-		</div>
 	</KeenSliderSlide>
 </template>
 
@@ -41,6 +43,7 @@ defineProps<Props>();
 
 const {
 	currentDayName,
+	currentDate,
 	goalDonationSum
 }: DynamicContent = inject( 'dynamicCampaignText' );
 </script>
