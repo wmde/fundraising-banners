@@ -6,6 +6,7 @@
 		<div class="wmde-banner-full-content">
 			<div class="wmde-banner-full-info">
 				<slot name="banner-text"/>
+				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-full-call-to-action">
 				Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
