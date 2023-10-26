@@ -1,0 +1,37 @@
+// This is the file where we import the theme-specific component styles
+@use 'src/components/BannerConductor/banner-transition';
+@use 'Banner';
+@use 'MainBannerVar' with (
+	$banner-height: 357px,
+	$form-width: 352px
+);
+@use 'src/themes/UseOfFunds/UseOfFunds';
+@use 'src/themes/Treedip/defaults';
+@use 'src/themes/Treedip/ButtonClose/ButtonClose'with (
+	$padding: 4px,
+	$top: 8px,
+	$right: 8px,
+	$margin: -4.5px
+);
+@use 'src/themes/Treedip/DonationForm/DonationForm' with (
+	$background-color: #3366cc,
+	$border-radius: 14px,
+	$height: 40.95px,
+);
+@use 'src/themes/Treedip/DonationForm/MultiStepDonation';
+@use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubble';
+@use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupRadioBubbles';
+@use 'src/themes/Treedip/DonationForm/BubbleForm/SelectCustomAmountRadioBubble';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Treedip/DonationForm/BubbleForm/UpgradeToYearlyFormBubble';
+@use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
+@use 'src/themes/Treedip/Footer/BannerFooter' with (
+	$right-column-width: 360px
+);
+@use 'src/themes/Treedip/Footer/SelectionInput';
+@use 'src/themes/Treedip/Message/Message';
+@use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/themes/Treedip/SoftClose/SoftClose' with (
+	$background-color: #3366cc,
+);
