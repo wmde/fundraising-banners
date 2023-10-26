@@ -6,7 +6,9 @@
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p>Hi,</p>
+		<p>
+			<strong>Hi,</strong>
+		</p>
 		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 			heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie bescheiden, die Unabhängigkeit
 			von Wikipedia zu unterstützen.</p>
@@ -39,7 +41,7 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
@@ -52,7 +54,14 @@ defineProps<Props>();
 const {
 	currentDayName,
 	goalDonationSum,
-	currentDate,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
+
+const currentDate = computed( () => {
+	return new Intl.DateTimeFormat( 'de-DE', {
+		day: '2-digit',
+		month: 'long'
+	} ).format( new Date() );
+} );
+
 </script>

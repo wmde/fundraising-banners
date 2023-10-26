@@ -9,6 +9,7 @@ import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
+import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -20,9 +21,9 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
 			case 'UpgradeToYearlyForm':
-				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, null, 1 );
+				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, createViewportInfo(), 1 );
 			default:
-				return new WMDESizeIssueEvent( `submit`, null, 1 );
+				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
 		}
 	} ]
 ] );

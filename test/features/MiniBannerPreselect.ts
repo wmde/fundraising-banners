@@ -12,7 +12,7 @@ const expectShowsFullPageWhenPreselectIsClicked = async ( wrapper: VueWrapper<an
 const expectPreselectsAmountWhenPreselectIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
 
-	expect( wrapper.find<HTMLInputElement>( '.wmde-banner-select-group-input:checked' ).element.value ).toStrictEqual( '5' );
+	expect( wrapper.find<HTMLInputElement>( '.wmde-banner-select-group-input:checked' ).element.value ).toStrictEqual( '10' );
 };
 
 const expectTrackingEventIsFiredWhenPreselectIsClicked = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
