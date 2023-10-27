@@ -4,10 +4,10 @@ import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 const translator = new Translator( {
-	'month-name-1': 'Ick',
-	'month-name-2': 'Offle',
-	'month-name-10': 'Spune',
-	'month-name-11': 'Sektober'
+	'date-month-1': 'Ick {{day}}',
+	'date-month-2': 'Offle {{day}}',
+	'date-month-10': 'Spune {{day}}',
+	'date-month-11': 'Sektober {{day}}'
 } );
 
 const staticOrdinal: Ordinal = {
