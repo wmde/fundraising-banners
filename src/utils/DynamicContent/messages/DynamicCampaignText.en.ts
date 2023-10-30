@@ -31,18 +31,18 @@ const Translations: TranslationMessages = {
 	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million' +
 		' times a day, but currently only {{totalNumberOfDonors}} people have donated.',
 
-	'month-name-1': 'January',
-	'month-name-2': 'February',
-	'month-name-3': 'March',
-	'month-name-4': 'April',
-	'month-name-5': 'May',
-	'month-name-6': 'June',
-	'month-name-7': 'July',
-	'month-name-8': 'August',
-	'month-name-9': 'September',
-	'month-name-10': 'October',
-	'month-name-11': 'November',
-	'month-name-12': 'December'
+	'date-month-1': 'January {{day}}',
+	'date-month-2': 'February {{day}}',
+	'date-month-3': 'March {{day}}',
+	'date-month-4': 'April {{day}}',
+	'date-month-5': 'May {{day}}',
+	'date-month-6': 'June {{day}}',
+	'date-month-7': 'July {{day}}',
+	'date-month-8': 'August {{day}}',
+	'date-month-9': 'September {{day}}',
+	'date-month-10': 'October {{day}}',
+	'date-month-11': 'November {{day}}',
+	'date-month-12': 'December {{day}}'
 };
 
 export default Translations;

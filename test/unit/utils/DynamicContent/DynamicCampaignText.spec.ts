@@ -11,7 +11,7 @@ import { ImpressionCount } from '@src/utils/ImpressionCount';
 
 const translator = new Translator( {
 	'campaign-day-nth-day': 'campaign day {{days}}',
-	'month-name-11': 'current month',
+	'date-month-11': 'current month {{day}}',
 	'day-name-friday': 'current day name',
 	'prefix-days-left': 'only',
 	'suffix-days-left': 'left',

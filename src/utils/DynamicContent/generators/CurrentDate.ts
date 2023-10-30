@@ -14,6 +14,8 @@ export class CurrentDate implements TextGenerator {
 	}
 
 	public getText(): string {
-		return this._translator.translate( 'month-name-' + ( this._date.getMonth() + 1 ) ) + ' ' + this._ordinalFormatter.getFormatted( this._date.getDate() );
+		return this._translator.translate( 'date-month-' + ( this._date.getMonth() + 1 ), {
+			day: this._ordinalFormatter.getFormatted( this._date.getDate() )
+		} );
 	}
 }
