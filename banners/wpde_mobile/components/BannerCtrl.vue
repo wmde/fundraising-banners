@@ -1,5 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
+		<SetCookieImage v-if="showSetCookieImage"/>
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
@@ -96,6 +97,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -120,6 +122,7 @@ const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
+const showSetCookieImage = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
@@ -138,6 +141,10 @@ function onCloseMiniBanner(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+
+	if ( userChoice !== CloseChoices.MaybeLater ) {
+		showSetCookieImage.value = true;
+	}
 }
 
 function onshowFullPageBanner(): void {

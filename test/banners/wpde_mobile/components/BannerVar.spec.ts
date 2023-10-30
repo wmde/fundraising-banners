@@ -16,6 +16,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
+import { setCookieImageFeatures } from '@test/features/SetCookieImageMobile';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -91,6 +92,16 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Set Cookie Image', () => {
+		test.each( [
+			[ 'expectSetsCookieImageOnSoftCloseClose' ],
+			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
+			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ]
+		] )( '%s', async ( testName: string ) => {
+			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

@@ -40,7 +40,7 @@ const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keywor
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: getBannerDelay( 7500 ),
+		delay: getBannerDelay( 0 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {

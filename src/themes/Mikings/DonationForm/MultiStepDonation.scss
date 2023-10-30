@@ -7,6 +7,11 @@
 	&-form {
 		height: auto;
 
+		&-field-group {
+			padding: 0;
+			margin: 0;
+		}
+
 		&-field-group-legend {
 			display: block;
 			width: 100%;
