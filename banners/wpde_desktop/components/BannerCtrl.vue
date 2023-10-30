@@ -1,5 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
+		<SetCookieImage v-if="showSetCookieImage"/>
 		<MainBanner
 			@close="onCloseMain"
 			@form-interaction="$emit( 'bannerContentChanged' )"
@@ -99,6 +100,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -120,6 +122,7 @@ defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
+const showSetCookieImage = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -138,6 +141,9 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	if ( userChoice !== CloseChoices.MaybeLater ) {
+		showSetCookieImage.value = true;
+	}
 }
 
 </script>

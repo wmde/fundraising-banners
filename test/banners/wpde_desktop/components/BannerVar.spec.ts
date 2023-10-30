@@ -15,6 +15,7 @@ import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
+import { setCookieImageFeatures } from '@test/features/SetCookieImage';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -94,6 +95,16 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Set Cookie Image', () => {
+		test.each( [
+			[ 'expectSetsCookieImageOnSoftCloseClose' ],
+			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
+			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ]
+		] )( '%s', async ( testName: string ) => {
+			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
