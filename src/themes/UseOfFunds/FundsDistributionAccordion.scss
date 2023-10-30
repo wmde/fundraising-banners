@@ -32,14 +32,25 @@
 			height: 0;
 		}
 
-		&-software {
+		&-software,
+		&-infrastructure {
 			.funds-distribution-accordion-item-title {
 				color: colors.$grey;
 			}
 		}
 		&-international {
 			.funds-distribution-accordion-item-title {
-				color: colors.$green;
+				color: colors.$dark-green;
+			}
+		}
+		&-diversity {
+			.funds-distribution-accordion-item-title {
+				color: colors.$pink;
+			}
+		}
+		&-access {
+			.funds-distribution-accordion-item-title {
+				color: colors.$orange;
 			}
 		}
 		&-communities {
