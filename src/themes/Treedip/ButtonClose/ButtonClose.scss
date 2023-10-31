@@ -1,16 +1,24 @@
 @use 'src/components/ButtonClose/ButtonClose';
 @use '../variables/colors';
 
+$top: 12px !default;
+$right: 12px !default;
+$padding: 0 !default;
+$margin: 0 !default;
+$width: 30px !default;
+$height: 30px !default;
+
 .wmde-banner {
-	@include ButtonClose.layout( $top: 12px, $right: 12px );
+	@include ButtonClose.layout( $top: $top, $right: $right );
 
 	&-close {
-		padding: 0;
+		padding: $padding;
+		margin: $margin;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 30px;
-		height: 30px;
+		width: $width;
+		height: $height;
 		border: 0;
 		background: none;
 

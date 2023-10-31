@@ -6,7 +6,9 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
+				<ButtonClose @close="onCloseMain">
+					<CloseIconDesktopCircle/>
+				</ButtonClose>
 			</template>
 
 			<template #banner-text>
@@ -81,6 +83,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import CloseIconDesktopCircle from '@src/components/Icons/CloseIconDesktopCircle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

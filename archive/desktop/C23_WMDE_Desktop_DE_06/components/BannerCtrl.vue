@@ -1,14 +1,11 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
+			@close="onCloseMain"
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
-			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
-			</template>
-
 			<template #banner-text>
 				<BannerText/>
 			</template>
@@ -80,7 +77,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

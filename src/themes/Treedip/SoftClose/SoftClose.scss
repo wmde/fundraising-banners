@@ -3,6 +3,8 @@
 @use '../variables/breakpoints';
 @use '../variables/fonts';
 
+$background-color: colors.$primary !default;
+
 .wmde-banner {
 	@include SoftClose.layout;
 
@@ -45,7 +47,7 @@
 			border: 0 none;
 			min-width: 150px;
 			color: colors.$white;
-			background-color: colors.$primary;
+			background-color: $background-color;
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 32px;
