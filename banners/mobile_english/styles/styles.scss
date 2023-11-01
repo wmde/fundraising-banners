@@ -2,9 +2,7 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Yperala/defaults';
 @use './Banner';
-@use './MiniBanner' with (
-	$height: 228px
-);
+@use './MiniBanner';
 @use './FullPageBanner';
 @use 'src/themes/Yperala/Slider/Slider';
 @use 'src/themes/Yperala/ProgressBar/ProgressBar';

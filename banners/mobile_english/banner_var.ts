@@ -20,7 +20,7 @@ import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { Locales } from '@src/domain/Locales';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 
 // Content for EN banners

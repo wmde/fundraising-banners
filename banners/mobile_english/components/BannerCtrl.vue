@@ -31,7 +31,13 @@
 				<MultiStepDonation :step-controllers="stepControllers" :page-scroller="pageScroller">
 
 					<template #form-page-1="{ pageIndex, submit, previous, isCurrent }: any">
-						<MainDonationForm :page-index="pageIndex" :is-current="isCurrent" @submit="submit" @previous="previous"/>
+						<MainDonationForm
+							:page-index="pageIndex"
+							:is-current="isCurrent"
+							@submit="submit"
+							@previous="previous"
+							custom-amount-placeholder-key="custom-amount-placeholder-short"
+						/>
 					</template>
 
 				</MultiStepDonation>
@@ -99,6 +105,7 @@ const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
+
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );

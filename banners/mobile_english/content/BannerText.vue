@@ -2,18 +2,19 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p class="banner-text-title">
-				To all our readers in Germany,
+				&#8220;Wikipedia is not for sale.&#8221; – A personal appeal from Wikipedia-Founder Jimmy Wales
 			</p>
 			<p>
-				This {{ currentDayName }} your support is requested by the nonprofit that collects donations on
-				Wikipedia to support free knowledge. Each year, thanks to the 1% of readers who give to support our
-				nonprofit mission, we can expand the reach of free knowledge to new corners of the world. <span
-				class="wmde-banner-text-animated-highlight">If Wikipedia matters and is useful to you too, please join them and donate €5 today.</span>
-				Give only what you can comfortably give: what matters is your support, not the size of your gift.
-				Together, let's preserve this special space on the internet. Online, Wikipedia is the closest thing we
-				have to a public park or a library where everyone can go to learn. And that's priceless. Thank you.
+				Please don't ignore this 1-minute read. This {{ currentDayName }}, {{ currentDate }}, I ask you to
+				reflect on the number of times you visited Wikipedia in the past year, the value you got from it,
+				and whether you're able to give €5 back. If you can, please join the 1% of readers who give. <span
+				class="wmde-banner-text-animated-highlight">If everyone reading this right now gave just €5, we'd
+				hit our goal in a couple of hours.</span> It's hard to know what
+				to trust online these days. Disinformation and scammers are everywhere. We are passionate about our
+				model because we want everyone to have equal access to quality information - something that is becoming
+				harder and harder to find online. If Wikipedia has given you €5 worth of knowledge this year, please
+				give back. Thank you.
 			</p>
-			<i>— Wikimedia Fördergesellschaft</i>
 		</div>
 	</div>
 </template>
@@ -22,6 +23,6 @@
 import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
-const { currentDayName }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate }: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>

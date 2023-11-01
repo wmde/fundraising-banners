@@ -1,0 +1,52 @@
+@use '@src/themes/Yperala/variables/colors';
+@use '@src/themes/Yperala/variables/breakpoints';
+
+.wmde-banner {
+	&-select-group-label {
+		svg {
+			width: auto;
+			padding: 0 5px;
+		}
+		&.with-logos {
+			display: flex;
+			justify-content: center;
+		}
+
+		.paypal-logo {
+			max-width: 118px;
+		}
+
+		&.credit-cards {
+			svg {
+				padding: 16px 10px;
+			}
+		}
+
+		.mastercard-logo {
+			transform: scale( 1.5 );
+		}
+
+		.amex-logo {
+			display: none;
+
+			@include breakpoints.phone-m-up {
+				display: inline;
+			}
+		}
+	}
+
+	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
+		svg path,
+		svg rect {
+			fill: colors.$white !important; // stylelint-disable-line
+
+			&.highlight-transparent {
+				fill: transparent !important; // stylelint-disable-line
+			}
+
+			&.highlight {
+				fill: colors.$primary !important; // stylelint-disable-line
+			}
+		}
+	}
+}

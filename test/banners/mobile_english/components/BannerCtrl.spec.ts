@@ -14,8 +14,8 @@ import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { expectMainDonationFormSubmits } from '@test/features/forms/subForms/MainDonationForm';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import { resetFormModel } from '@test/resetFormModel';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 
 let pageScroller: PageScroller;

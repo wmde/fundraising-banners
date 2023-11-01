@@ -31,7 +31,31 @@
 				<MultiStepDonation :step-controllers="stepControllers" :page-scroller="pageScroller">
 
 					<template #form-page-1="{ pageIndex, submit, previous, isCurrent }: any">
-						<MainDonationForm :page-index="pageIndex" :is-current="isCurrent" @submit="submit" @previous="previous"/>
+						<MainDonationForm
+							:page-index="pageIndex"
+							:is-current="isCurrent"
+							@submit="submit"
+							@previous="previous"
+							custom-amount-placeholder-key="custom-amount-placeholder-short"
+						>
+
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<VisaLogo/>
+									<MastercardLogo/>
+									<AmexLogo/>
+								</span>
+							</template>
+
+							<template #sms-icon>
+								<SmsIcon/>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 				</MultiStepDonation>
@@ -74,6 +98,10 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import {
@@ -82,6 +110,7 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

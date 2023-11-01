@@ -30,7 +30,7 @@
 					v-model:inputValue="customAmount"
 					@focus="clearSelectedAmount"
 					@blur="formatCustomAmount"
-					:placeholder="$translate( 'custom-amount-placeholder' )"
+					:placeholder="$translate( customAmountPlaceholderKey )"
 				/>
 			</SelectGroup>
 		</fieldset>
@@ -48,7 +48,11 @@
 				<template #select-group-label="{ label, slotName }: any">
 					<slot :name="'label-' + slotName" :label="label"/>
 				</template>
-				<SmsBox/>
+				<SmsBox>
+					<template #sms-icon>
+						<slot name="sms-icon"/>
+					</template>
+				</SmsBox>
 			</SelectGroup>
 		</fieldset>
 
@@ -85,10 +89,12 @@ import MainDonationFormButtonMultiStep from '@src/components/DonationForm/Forms/
 
 interface Props {
 	showErrorScrollLink?: boolean;
+	customAmountPlaceholderKey?: string;
 }
 
 withDefaults( defineProps<Props>(), {
-	showErrorScrollLink: false
+	showErrorScrollLink: false,
+	customAmountPlaceholderKey: 'custom-amount-placeholder'
 } );
 const emit = defineEmits( [ 'submit' ] );
 

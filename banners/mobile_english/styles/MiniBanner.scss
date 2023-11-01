@@ -1,13 +1,19 @@
+@use 'src/themes/Yperala/variables/globals';
 @use 'src/themes/Yperala/variables/colors';
+@use 'src/themes/Yperala/variables/breakpoints';
 
-$height: 228px !default;
+$height-small: 328px !default;
+$height-large: 288px !default;
 
 .wmde-banner {
 	&-mini {
+		padding: 5px 0;
+		min-height: $height-small;
 		display: flex;
-		flex-direction: column;
-		min-height: $height;
-		padding: 5px 0 0;
+
+		@include breakpoints.phone-m-up {
+			min-height: $height-large;
+		}
 
 		&-content {
 			position: relative;
@@ -15,53 +21,55 @@ $height: 228px !default;
 			text-align: center;
 			box-sizing: border-box;
 			display: flex;
-			flex-grow: 1;
-			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			margin: 0 auto;
+			padding-bottom: 10px;
 			background: colors.$primary-lighter;
 			border: 8px solid colors.$primary;
 			box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 			border-radius: 15px;
-			margin: 0 auto;
-			padding: 5px;
 			width: 98%;
 		}
 
 		&-close {
 			position: absolute;
-			top: 8px;
-			right: 8px;
+			top: 0;
+			right: -2px;
 			z-index: 2;
+			height: 30px;
+			width: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			svg {
+				height: 20px;
+				width: 20px;
+			}
+		}
+
+		.wmde-banner-progress-bar-text {
+			visibility: hidden;
 		}
 
 		&-banner-slideshow {
 			width: 100%;
+			flex: 1 0 auto;
 		}
 	}
 
 	&-mini-button {
-		position: absolute;
-		top: -9px;
-		left: 50%;
-		display: inline-block;
-		width: 170px;
 		height: 40px;
-		padding: 5px 15px 4px;
-		margin-left: -85px;
-		cursor: pointer;
-		background: colors.$primary-lighter;
-		border: 8px solid colors.$primary;
-		border-radius: 8px;
-		border-top: 2px solid colors.$primary-lighter;
-		text-transform: uppercase;
-		color: colors.$primary-darker;
-		font-size: 0.9em;
+		width: 160px;
+		line-height: 40px;
+		border-radius: globals.$form-element-border-radius;
 		font-weight: bold;
-
-		&-wrapper {
-			position: relative;
-			z-index: 1000;
-			height: 40px;
-			text-align: center;
-		}
+		color: colors.$white;
+		background-color: colors.$secondary;
+		text-align: center;
+		padding: 0 30px;
+		margin-bottom: 5px;
 	}
 }

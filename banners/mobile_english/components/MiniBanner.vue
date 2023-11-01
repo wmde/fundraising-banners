@@ -3,15 +3,14 @@
 		<div class="wmde-banner-mini-content">
 			<div class="wmde-banner-mini-close">
 				<button class="wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
-					<CloseIconChunky/>
+					<CloseIconCircle/>
 				</button>
 			</div>
 
 			<div class="wmde-banner-mini-banner-slideshow">
 				<slot name="banner-slides"/>
 			</div>
-		</div>
-		<div class="wmde-banner-mini-button-wrapper">
+
 			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
 				Donate now
 			</button>
@@ -21,7 +20,7 @@
 
 <script setup lang="ts">
 
-import CloseIconChunky from '@src/components/Icons/CloseIconChunky.vue';
+import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
 
 defineEmits( [ 'showFullPageBanner', 'close' ] );
 
