@@ -19,11 +19,11 @@
                 </KeenSlider>
             </template>
 
-            <template #progress>
-                <ProgressBar amount-to-show-on-right="TARGET"/>
-            </template>
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</template>
 
-            <template #donation-form="{ formInteraction }: any">
+			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -34,16 +34,11 @@
 						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
-					<template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
-					</template>
-
-				</MultiStepDonation>
+                </MultiStepDonation>
             </template>
             <template #footer>
-                <FooterAlreadyDonated
+                <BannerFooter
                     @showFundsModal="isFundsModalVisible = true"
-                    @showAlreadyDonatedModal="onShowAlreadyDonated"
                 />
             </template>
         </MainBanner>
@@ -60,18 +55,6 @@
             :is-funds-modal-visible="isFundsModalVisible"
             @hideFundsModal="isFundsModalVisible = false"
         />
-
-        <AlreadyDonatedModal
-            :is-visible="isAlreadyDonatedModalVisible"
-            :is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
-            @hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-            @goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-            @maybe-later="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
-        >
-            <template #already-donated-content>
-                <AlreadyDonatedContent/>
-            </template>
-        </AlreadyDonatedModal>
     </div>
 </template>
 
@@ -82,17 +65,14 @@ import { ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
-import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import BannerSlides from '../../english/content/BannerSlides.vue';
+import BannerSlides from '../../english/content/BannerSlidesVar.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../../english/content/BannerText.vue';
-import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
+import BannerText from '../../english/content/BannerTextVar.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
@@ -100,7 +80,6 @@ import {
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -125,13 +104,11 @@ defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
-const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
-	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
 watch( contentState, async () => {
@@ -144,10 +121,6 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-}
-
-function onShowAlreadyDonated(): void {
-	isAlreadyDonatedModalVisible.value = true;
 }
 
 </script>

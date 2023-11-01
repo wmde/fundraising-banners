@@ -9,17 +9,16 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
-import { resetFormModel } from '@test/resetFormModel';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import { resetFormModel } from '@test/resetFormModel';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerVar.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -78,8 +77,9 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
-			[ 'expectCustomAmountFormSubmits' ]
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
@@ -103,17 +103,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Already Donated Modal', () => {
-		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
