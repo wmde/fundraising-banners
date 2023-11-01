@@ -2,7 +2,7 @@
 @use 'src/components/BannerConductor/banner-transition';
 @use './Banner';
 @use 'MainBanner' with (
-	$banner-height: 353px,
+	$banner-height: 378px,
 	$form-width: 256px
 );
 @use 'src/themes/UseOfFunds/UseOfFunds';

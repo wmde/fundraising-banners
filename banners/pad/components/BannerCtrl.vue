@@ -2,11 +2,14 @@
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
 			@close="onCloseMain"
-			@form-interaction="$emit( 'bannerContentChanged' )"
+			@form-interaction="onFormInteraction"
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
 			<template #banner-slides="{ play }: any">
+				<div class="wmde-banner-content-headline">
+					<span class="wmde-banner-content-headline-text">Ist Ihnen Wikipedia 5&nbsp;€ wert?</span>
+				</div>
 				<KeenSlider :with-navigation="true" :play="play" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
@@ -47,10 +50,7 @@
 			</template>
 
 			<template #footer>
-				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
-					@showAlreadyDonatedModal="onShowAlreadyDonatedModal"
-				/>
+				<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
 			</template>
 		</MainBanner>
 
@@ -67,23 +67,12 @@
 			@hideFundsModal="isFundsModalVisible = false"
 		/>
 
-		<AlreadyDonatedModal
-			:is-visible="isAlreadyDonatedModalVisible"
-			:is-already-donated-modal-visible="isAlreadyDonatedModalVisible"
-			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybe-later="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
-		>
-			<template #already-donated-content>
-				<AlreadyDonatedContent/>
-			</template>
-		</AlreadyDonatedModal>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
@@ -92,12 +81,9 @@ import BannerSlides from '../content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
-import AlreadyDonatedContent from '../../english/content/AlreadyDonatedContent.vue';
-import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
@@ -109,6 +95,7 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -129,7 +116,6 @@ defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
-const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -141,16 +127,18 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
+function onFormInteraction(): void {
+	nextTick( () => {
+		emit( 'bannerContentChanged' );
+	} );
+}
+
 function onCloseMain(): void {
 	contentState.value = ContentStates.SoftClosing;
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-}
-
-function onShowAlreadyDonatedModal(): void {
-	isAlreadyDonatedModalVisible.value = true;
 }
 
 </script>

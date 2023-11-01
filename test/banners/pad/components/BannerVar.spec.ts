@@ -10,7 +10,6 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentFeatures } from '@test/features/BannerContent';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
@@ -112,17 +111,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Already Donated Modal', () => {
-		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

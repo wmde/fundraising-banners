@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 
-import { inject, nextTick, ref, useSlots } from 'vue';
+import { inject, nextTick, onMounted, ref, useSlots } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
 import { FormActions } from '@src/domain/FormActions';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
@@ -88,5 +88,10 @@ const onSubmit = async ( extraData: Record<string, string> ): Promise<void> => {
 const onPrevious = async (): Promise<void> => {
 	await props.stepControllers[ currentStepIndex.value ].previous( multistepCallbacks );
 };
+
+onMounted( () => {
+	// This fixes Keen Slider rendering a little early and not having the correct width
+	setTimeout( () => slider.value.update() );
+} );
 
 </script>
