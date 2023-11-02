@@ -45,7 +45,7 @@ export class StateFactory {
 	}
 
 	public newVisibleState(): BannerState {
-		return new VisibleState( this._page, this._impressionCount );
+		return new VisibleState( this._page, this._impressionCount, this._tracker );
 	}
 
 	public newClosedState( closeEvent: TrackingEvent ): BannerState {
