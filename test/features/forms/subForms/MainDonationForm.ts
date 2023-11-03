@@ -9,17 +9,28 @@ export const submitMainDonationForm = async ( wrapper: VueWrapper<any>, interval
 	await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
 };
 
-export const expectMainDonationFormSubmits = async ( wrapper: VueWrapper<any>, interval: FormItem, payment: FormItem ): Promise<any> => {
+export const expectMainDonationFormSubmits = async (
+	wrapper: VueWrapper<any>,
+	interval: FormItem,
+	payment: FormItem,
+	amount: string = '5'
+): Promise<any> => {
 	const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 	submitForm.element.submit = vi.fn();
 
-	await submitMainDonationForm( wrapper, interval, '5', payment );
+	await submitMainDonationForm( wrapper, interval, amount, payment );
 
 	expect( submitForm.element.submit ).toHaveBeenCalledOnce();
 };
 
-export const expectMainDonationFormGoesToPageOnSubmit = async ( wrapper: VueWrapper<any>, page: number, interval: FormItem, payment: FormItem ): Promise<any> => {
-	await submitMainDonationForm( wrapper, interval, '5', payment );
+export const expectMainDonationFormGoesToPageOnSubmit = async (
+	wrapper: VueWrapper<any>,
+	page: number,
+	interval: FormItem,
+	payment: FormItem,
+	amount: string = '5'
+): Promise<any> => {
+	await submitMainDonationForm( wrapper, interval, amount, payment );
 
 	expect( wrapper.find( `.wmde-banner-form-page:nth-child(${page})` ).attributes( 'class' ) )
 		.toContain( 'wmde-banner-form-page--current' );

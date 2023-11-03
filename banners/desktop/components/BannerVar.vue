@@ -6,9 +6,7 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<ButtonClose @close="onCloseMain">
-					<CloseIconDesktopCircle/>
-				</ButtonClose>
+				<ButtonClose @close="onCloseMain"/>
 			</template>
 
 			<template #banner-text>
@@ -25,22 +23,34 @@
 				</KeenSlider>
 			</template>
 
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</template>
+
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+
+							<template #button>
+								<MainDonationFormButtonMultiStepAmount :max-amount="25"/>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
+
 				</MultiStepDonation>
 			</template>
 
 			<template #footer>
 				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
 			</template>
+
 		</MainBanner>
 
 		<SoftClose
@@ -74,8 +84,8 @@ import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYea
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+	createSubmittableMainDonationFormWhenOverAmount
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormWhenOverAmount';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
@@ -83,7 +93,9 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import CloseIconDesktopCircle from '@src/components/Icons/CloseIconDesktopCircle.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import MainDonationFormButtonMultiStepAmount
+	from '@src/components/DonationForm/Forms/MainDonationFormButtonMultiStepAmount.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -107,7 +119,7 @@ const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableMainDonationFormWhenOverAmount( formModel, FormStepNames.UpgradeToYearlyFormStep, 25 ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 

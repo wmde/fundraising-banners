@@ -13,7 +13,13 @@ import { Translator } from '@src/Translator';
 
 const formModel = useFormModel();
 const translator = inject<Translator>( 'translator' );
-const { interval, paymentMethod } = formModel;
+const { interval, paymentMethod, numericAmount } = formModel;
+
+interface Props {
+	maxAmount: number;
+}
+
+const props = defineProps<Props>();
 
 const submitButtonLabel = computed( (): string => {
 	if ( interval.value !== Intervals.ONCE.value ) {
@@ -21,6 +27,10 @@ const submitButtonLabel = computed( (): string => {
 	}
 
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
+		return translator.translate( 'submit-label' );
+	}
+
+	if ( numericAmount.value >= props.maxAmount ) {
 		return translator.translate( 'submit-label' );
 	}
 

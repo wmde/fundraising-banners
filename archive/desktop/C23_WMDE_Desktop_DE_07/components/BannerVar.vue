@@ -6,7 +6,9 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
+				<ButtonClose @close="onCloseMain">
+					<CloseIconDesktopCircle/>
+				</ButtonClose>
 			</template>
 
 			<template #banner-text>
@@ -23,10 +25,6 @@
 				</KeenSlider>
 			</template>
 
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
-
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
@@ -37,14 +35,12 @@
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
-
 				</MultiStepDonation>
 			</template>
 
 			<template #footer>
 				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
 			</template>
-
 		</MainBanner>
 
 		<SoftClose
@@ -87,7 +83,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import CloseIconDesktopCircle from '@src/components/Icons/CloseIconDesktopCircle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

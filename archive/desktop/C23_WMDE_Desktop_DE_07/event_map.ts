@@ -9,7 +9,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
-import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -23,9 +22,12 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
 			case 'UpgradeToYearlyForm':
-				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, createViewportInfo(), 1 );
+				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, null, 1 );
+			case 'CustomAmountForm':
+				return new WMDESizeIssueEvent( `submit-different-amount`, null, 1 );
 			default:
-				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
+				return new WMDESizeIssueEvent( `submit`, null, 1 );
 		}
 	} ]
+	// TODO add more events
 ] );
