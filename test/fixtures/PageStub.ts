@@ -78,4 +78,8 @@ export class PageStub implements Page {
 		};
 	}
 
+	public getMaxBannerImpressions(): number {
+		return 10;
+	}
+
 }

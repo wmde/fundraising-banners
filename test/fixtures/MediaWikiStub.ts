@@ -29,4 +29,8 @@ export class MediaWikiStub implements MediaWiki {
 
 	public getConfigItem(): any {
 	}
+
+	public getMaxBannerImpressions(): number {
+		return 10;
+	}
 }

@@ -9,7 +9,7 @@ import { JSDOM } from 'jsdom';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
-describe( 'PageOrg', function () {
+describe( 'PageWPORG', function () {
 	let mediaWiki: MediaWiki;
 
 	beforeEach( () => {
@@ -24,6 +24,7 @@ describe( 'PageOrg', function () {
 				return false;
 			},
 			getConfigItem: vitest.fn(),
+			getMaxBannerImpressions: (): number => 0,
 			track: vitest.fn(),
 			preventBannerDisplayForPeriod: vitest.fn(),
 			preventBannerDisplayForHours: vitest.fn(),

@@ -4,7 +4,7 @@ import PageWPDE, { WpdeWindow } from '@src/page/PageWPDE';
 const tracking = { campaign: 'testCampaign', keyword: 'testKeyword' };
 
 declare let window: WpdeWindow;
-describe( 'PageDe', function () {
+describe( 'PageWPDE', function () {
 	it( 'returns campaign parameters', () => {
 		window.campaignParameters = {
 			campaignProjection: {

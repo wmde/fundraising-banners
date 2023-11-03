@@ -8,7 +8,22 @@ import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSe
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
-	centralNotice: any;
+	centralNotice: {
+		setBannerLoadedButHidden: () => void,
+		internal: {
+			state: {
+				getData: () => { campaign?: string }
+			}
+		},
+		choiceData: {
+			name: string,
+			mixins: {
+				impressionDiet: {
+					maximumSeen: number
+				}
+			}
+		}[]
+	};
 }
 
 interface MwWindow extends Window {
@@ -17,9 +32,28 @@ interface MwWindow extends Window {
 
 declare let window: MwWindow;
 
+const DEFAULT_BANNER_IMPRESSION_COUNT = 10;
+
 export class WindowMediaWiki implements MediaWiki {
 	public getConfigItem( name: string ): any {
 		return window.mw.config.get( name );
+	}
+
+	public getMaxBannerImpressions(): number {
+		const campaign = window.mw.centralNotice.internal.state.getData().campaign;
+
+		// Dev environments have an empty campaign so return a default impression count
+		if ( !campaign || campaign === '' ) {
+			return DEFAULT_BANNER_IMPRESSION_COUNT;
+		}
+
+		const banner = window.mw.centralNotice.choiceData.find( c => c.name === campaign );
+
+		if ( !banner ) {
+			return DEFAULT_BANNER_IMPRESSION_COUNT;
+		}
+
+		return banner.mixins.impressionDiet.maximumSeen;
 	}
 
 	public isContentHiddenByLightbox(): boolean {

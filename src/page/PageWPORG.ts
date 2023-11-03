@@ -23,6 +23,8 @@ class PageWPORG implements Page {
 	private _skin: Skin;
 	private _sizeIssueChecker: SizeIssueChecker;
 
+	private _trackingParameters: TrackingParameters;
+
 	public constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
 		this._sizeIssueChecker = sizeIssueChecker;
 		this._skin = skin;
@@ -147,15 +149,23 @@ class PageWPORG implements Page {
 	}
 
 	public getTracking(): TrackingParameters {
+		if ( !this._trackingParameters ) {
+			const element = document.getElementById( centralNoticeBannerContainerId );
+			if ( !element ) {
+				throw new Error( 'Banner container element not found' );
+			}
 
-		const element = document.getElementById( centralNoticeBannerContainerId );
-		if ( !element ) {
-			throw new Error( 'Banner container element not found' );
+			this._trackingParameters = {
+				campaign: element.dataset.campaignTracking,
+				keyword: element.dataset.tracking
+			};
 		}
-		return {
-			campaign: element.dataset.campaignTracking,
-			keyword: element.dataset.tracking
-		};
+
+		return this._trackingParameters;
+	}
+
+	public getMaxBannerImpressions(): number {
+		return this._mediaWiki.getMaxBannerImpressions();
 	}
 }
 
