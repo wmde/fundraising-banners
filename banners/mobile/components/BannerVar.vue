@@ -24,6 +24,10 @@
 				<BannerText/>
 			</template>
 
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</template>
+
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
@@ -92,6 +96,7 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -145,7 +150,7 @@ function onshowFullPageBanner(): void {
 
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '5';
+	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }

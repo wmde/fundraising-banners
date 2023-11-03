@@ -33,9 +33,9 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "C23_WMDE_Mobile_DE_05"
-description = "based on CTRL 04, VAR has an extra button"
-campaign_tracking = "mob-de-05-ba-231009"
+campaign = "C23_WMDE_Mobile_DE_06"
+description = "based on CTRL and VAR 05, var uses 2 buttons of previous test but with changed amount, banner copy changed"
+campaign_tracking = "mob-de-06-ba-231030"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
@@ -44,13 +44,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
 filename = "./banners/mobile/banner_ctrl.ts"
-pagename = "B23_WMDE_Mobile_DE_05_ctrl"
-tracking = "org-mob05-231009-ctrl"
+pagename = "B23_WMDE_Mobile_DE_06_ctrl"
+tracking = "org-mob06-231030-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/banner_var.ts"
-pagename = "B23_WMDE_Mobile_DE_05_var"
-tracking = "org-mob05-231009-var"
+pagename = "B23_WMDE_Mobile_DE_06_var"
+tracking = "org-mob06-231030-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]

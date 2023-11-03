@@ -2,7 +2,7 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
-@use './MiniBannerVar' with (
+@use './MiniBanner' with (
 	$height: 288px
 );
 @use './FullPageBanner';
@@ -15,4 +15,3 @@
 @use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Mikings/Slider/Slider';
 @use 'src/themes/Mikings/SoftClose/SoftClose';
-@use 'src/themes/Mikings/ProgressBar/ProgressBar';

@@ -3,6 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
+			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -21,10 +22,6 @@
 		>
 			<template #banner-text>
 				<BannerText/>
-			</template>
-
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -70,7 +67,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBanner.vue';
+import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -95,7 +92,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -145,6 +141,13 @@ function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+}
+
+function onshowFullPageBannerPreselected(): void {
+	slideShowStopped.value = true;
+	formModel.selectedAmount.value = '5';
+	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
