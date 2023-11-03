@@ -23,9 +23,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			<span class="wmde-banner-text-animated-highlight">
-				{{ visitorsVsDonorsSentence }}
-			</span>
+			<AnimatedText :content="visitorsVsDonorsSentence"/>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
@@ -44,6 +42,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { computed, inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 interface Props {
 	currentSlide: number

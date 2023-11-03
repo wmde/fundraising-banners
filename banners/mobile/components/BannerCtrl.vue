@@ -3,6 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
+			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -145,6 +146,13 @@ function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+}
+
+function onshowFullPageBannerPreselected(): void {
+	slideShowStopped.value = true;
+	formModel.selectedAmount.value = '10';
+	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {

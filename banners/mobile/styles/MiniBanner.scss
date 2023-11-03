@@ -1,5 +1,6 @@
 @use '@src/themes/Mikings/variables/colors';
 @use '@src/themes/Mikings/variables/globals';
+@use 'sass:color';
 
 $height: 288px !default;
 
@@ -48,6 +49,7 @@ $height: 288px !default;
 			height: 25px;
 			text-align: center;
 			margin: 0 16px 16px;
+			white-space: nowrap;
 
 			&-background {
 				position: relative;
@@ -97,19 +99,43 @@ $height: 288px !default;
 			flex: 1 1 auto;
 		}
 
-		&-button {
-			width: auto;
+		&-button-group {
+			display: flex;
+			justify-content: center;
+		}
+
+		&-button,
+		&-button-preselect {
+			width: 50%;
 			height: 40px;
 			line-height: 40px;
 			border-radius: 20px;
 			font-weight: bold;
 			color: colors.$white;
-			background: colors.$secondary;
 			margin: 0 16px;
+			font-size: 14px;
+			white-space: nowrap;
+
+			@media ( min-width: 370px ) {
+				font-size: 16px;
+			}
+		}
+
+		&-button {
+			background: colors.$secondary;
 
 			&:hover,
 			&:focus {
 				background: colors.$secondary-hover;
+			}
+		}
+
+		&-button-preselect {
+			background: colors.$green;
+
+			&:hover,
+			&:focus {
+				background: color.adjust( colors.$green, $lightness: -5% );
 			}
 		}
 
