@@ -22,7 +22,7 @@ const Translations: TranslationMessages = {
 	'amount-total': 'Spendenziel:',
 	'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
 	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
-	'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
+	'campaign-day-nth-day': 'Heute ist der {{days}} Tag unserer Spendenkampagne.',
 	'campaign-day-only-n-days': 'In {{days}} Tagen endet unsere Spendenkampagne.',
 	'campaign-day-second-last-day': 'Es bleiben nur noch zwei Tage, um für Wikipedia in diesem Jahr zu spenden.',
 	'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um für Wikipedia in diesem Jahr zu spenden.',
