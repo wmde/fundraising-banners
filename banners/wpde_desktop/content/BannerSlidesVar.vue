@@ -6,7 +6,7 @@
 		</p>
 		<p>
 			Schenken Sie mir eine Minute Ihrer Zeit. Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitte
-			ich Sie darüber nachzudenken, wie oft Sie Wikipedia in diesem Jahr aufgerufen haben, wieviel Wissen sie
+			ich Sie darüber nachzudenken, wie oft Sie Wikipedia in diesem Jahr aufgerufen haben, wie viel Wissen sie
 			Ihnen geschenkt hat und – wenn möglich – 5&nbsp;€ zurückzugeben.
 		</p>
 	</KeenSliderSlide>
