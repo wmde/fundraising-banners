@@ -34,6 +34,7 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -43,7 +44,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller()
+		pageScroller: new WindowPageScroller(),
+		remainingImpressions
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
