@@ -22,15 +22,15 @@ const expectSlideShowStopsOnFormInteraction = async ( wrapper: VueWrapper<any> )
 	vi.restoreAllMocks();
 };
 
-const expectShowsSlideShowOnSmallSizes = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
-	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1300 } );
+const expectShowsSlideShowOnSmallSizes = async ( getWrapper: () => VueWrapper<any>, minWidthForLargeScreen: number ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: minWidthForLargeScreen } );
 	const wrapper = getWrapper();
 
 	expect( wrapper.find( '.wmde-banner-slider' ).exists() ).toBeTruthy();
 };
 
-const expectShowsMessageOnSmallSizes = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
-	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
+const expectShowsMessageOnLargeSizes = async ( getWrapper: () => VueWrapper<any>, minWidthForLargeScreen: number ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: minWidthForLargeScreen + 1 } );
 	const wrapper = getWrapper();
 
 	expect( wrapper.find( '.wmde-banner-message' ).exists() ).toBeTruthy();
@@ -71,9 +71,9 @@ export const bannerContentFeatures: Record<string, ( wrapper: VueWrapper<any> ) 
 	expectSlideShowStopsOnFormInteraction
 };
 
-export const bannerContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
+export const bannerContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any>, minWidthForLargeScreen: number ) => Promise<any>> = {
 	expectShowsSlideShowOnSmallSizes,
-	expectShowsMessageOnSmallSizes
+	expectShowsMessageOnLargeSizes
 };
 
 export const bannerContentAnimatedTextFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
