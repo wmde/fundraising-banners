@@ -3,11 +3,11 @@
 		<div>
 			<p>
                 <InfoIcon fill="#990a00"/>
-				An alle, die Wikipedia in Deutschland nutzen. Bitte verzeihen Sie die Störung. Es ist
-				ein bisschen unangenehm, daher kommen wir gleich zur Sache. An diesem Freitag sind Sie gefragt:
+				An alle, die Wikipedia in Deutschland nutzen. Bitte verzeihen Sie die Störung. Es ist ein bisschen
+				unangenehm, daher kommen wir gleich zur Sache. An diesem {{ currentDayName }}, den {{ currentDate }}, sind Sie gefragt:
 			</p>
 			<p>
-				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert, aber 99&nbsp;% der
+				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
 				Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong> Menschen spenden aus einem einfachen Grund – weil
 				Wikipedia nützlich ist. Schon der Preis einer Tasse Kaffee würde genügen.
@@ -27,6 +27,6 @@ import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
-const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>

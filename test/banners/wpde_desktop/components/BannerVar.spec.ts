@@ -1,17 +1,13 @@
 import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/wpde_desktop/components/BannerCtrl.vue';
+import Banner from '../../../../banners/wpde_desktop/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import {
-	bannerContentAnimatedTextFeatures,
-	bannerContentDisplaySwitchFeatures,
-	bannerContentFeatures
-} from '@test/features/BannerContent';
+import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -73,15 +69,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsMessageOnSmallSizes' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
-		} );
-
-		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
