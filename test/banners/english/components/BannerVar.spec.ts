@@ -34,7 +34,8 @@ describe( 'BannerVar.vue', () => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
-				useOfFundsContent
+				useOfFundsContent,
+				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -97,7 +98,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
