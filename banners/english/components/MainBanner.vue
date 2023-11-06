@@ -24,15 +24,18 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 
 interface Props {
 	bannerState: BannerStates;
+	minWidthForLargeScreen?: number;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults( defineProps<Props>(), {
+	minWidthForLargeScreen: 1300
+} );
 const emit = defineEmits( [ 'close', 'formInteraction' ] );
 
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 
-const onLargeScreen = useDisplaySwitch( 1300 );
+const onLargeScreen = useDisplaySwitch( props.minWidthForLargeScreen );
 
 const onFormInteraction = (): void => {
 	slideShowStopped.value = true;
