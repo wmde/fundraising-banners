@@ -7,6 +7,8 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 const expectSlideShowPlaysWhenBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
 
+	await vi.runOnlyPendingTimersAsync();
+
 	expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 };
 
