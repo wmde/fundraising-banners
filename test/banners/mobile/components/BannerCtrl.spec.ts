@@ -27,6 +27,7 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
@@ -64,6 +65,8 @@ describe( 'BannerCtrl.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	// skipped because the sentence is not part of the current test
