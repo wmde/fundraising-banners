@@ -2,22 +2,26 @@ import { BannerState } from '@src/components/BannerConductor/StateMachine/states
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Page } from '@src/page/Page';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { Tracker } from '@src/tracking/Tracker';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
 
 export class VisibleState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Visible;
 	private _page: Page;
 	private _impressionCount: ImpressionCount;
+	private _tracker: Tracker;
 
-	public constructor( page: Page, impressionCount: ImpressionCount ) {
+	public constructor( page: Page, impressionCount: ImpressionCount, tracker: Tracker ) {
 		super();
 		this._page = page;
 		this._impressionCount = impressionCount;
+		this._tracker = tracker;
 
 		this.canMoveToStates.push( BannerStates.Closed );
 	}
 
 	public enter(): Promise<any> {
-		// TODO Fire shown events here
+		this._tracker.trackEvent( new ShownEvent() );
 		this._impressionCount.incrementImpressionCounts();
 		return Promise.resolve();
 	}

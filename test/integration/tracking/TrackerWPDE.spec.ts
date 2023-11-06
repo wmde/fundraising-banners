@@ -3,6 +3,9 @@ import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
+import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 
 interface Window {
 	[ key: string ]: any;
@@ -25,6 +28,26 @@ describe( 'TrackerWPDE', function () {
 		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: {} } );
 
 		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', 'some-action', 'TestBanner05' );
+	} );
+
+	test.each( [
+		[ new CloseEvent( 'SoftClose', 'close' ), 'banner-closed-close' ],
+		[ new ShownEvent(), 'banner-shown' ],
+		[ new CustomAmountChangedEvent( 'increased' ), 'increased-amount' ],
+		[ new CustomAmountChangedEvent( 'decreased' ), 'decreased-amount' ],
+		[ new FormStepShownEvent( 'UpgradeToYearlyForm' ), 'form-step-shown-UpgradeToYearlyForm' ],
+		[ { eventName: 'some-action', feature: '', userChoice: '', customData: {} }, 'some-action' ],
+		[ { eventName: 'some-action', feature: '', userChoice: 'with-choice', customData: {} }, 'some-action-with-choice' ]
+	] )( 'converts events', ( event: TrackingEvent, expectedName: string ) => {
+		window.TestTracker = { trackEvent: vi.fn() };
+		const tracker = new TrackerWPDE(
+			'TestTracker',
+			'TestBanner05',
+			new Map<string, number>( [ [ event.eventName, 1 ] ] ) );
+
+		tracker.trackEvent( event );
+
+		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', expectedName, 'TestBanner05' );
 	} );
 
 	it( 'collects tracking events until the tracker becomes available', async () => {
