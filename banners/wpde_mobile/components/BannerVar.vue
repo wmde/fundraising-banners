@@ -109,6 +109,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
+	remainingImpressions: number;
 }
 
 const props = defineProps<Props>();
@@ -131,7 +132,11 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	contentState.value = ContentStates.SoftClosing;
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {

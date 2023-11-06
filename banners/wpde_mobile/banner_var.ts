@@ -36,6 +36,7 @@ const tracking = {
 const page = new PageWPDE( tracking );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
+const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -45,7 +46,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller()
+		pageScroller: new WindowPageScroller(),
+		remainingImpressions
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

@@ -49,7 +49,8 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				pageScroller
+				pageScroller,
+				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -89,7 +90,8 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
