@@ -48,6 +48,7 @@ enum SliderPlayingStates {
 
 interface Props {
 	interval?: number;
+	startDelay?: number;
 	withNavigation: boolean;
 	sliderOptions?: KeenSliderOptions;
 	play?: boolean;
@@ -56,10 +57,12 @@ interface Props {
 const props = withDefaults( defineProps<Props>(), {
 	sliderOptions: () => ( {} ),
 	interval: 5000,
+	startDelay: 0,
 	play: false
 } );
 
 const sliderPlayingState = ref<SliderPlayingStates>( SliderPlayingStates.PENDING );
+const startAnimationTimeout = ref<number>( 0 );
 const timer = ref<number>( 0 );
 
 const currentSlide = ref<number>( 0 );
@@ -77,12 +80,15 @@ const startAutoplay = (): void => {
 	if ( sliderPlayingState.value === SliderPlayingStates.PLAYING ) {
 		return;
 	}
-	timer.value = window.setInterval( slider.value.next, props.interval );
-	sliderPlayingState.value = SliderPlayingStates.PLAYING;
+	startAnimationTimeout.value = window.setTimeout( () => {
+		timer.value = window.setInterval( slider.value.next, props.interval );
+		sliderPlayingState.value = SliderPlayingStates.PLAYING;
+	}, props.startDelay );
 };
 
 const stopAutoplay = (): void => {
 	clearInterval( timer.value );
+	clearTimeout( startAnimationTimeout.value );
 	sliderPlayingState.value = SliderPlayingStates.STOPPED;
 };
 

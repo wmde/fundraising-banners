@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -18,10 +18,16 @@ import { bannerMainFeatures } from '@test/features/MainBanner';
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
+	} );
+
+	afterEach( () => {
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	const getWrapper = (): VueWrapper<any> => {

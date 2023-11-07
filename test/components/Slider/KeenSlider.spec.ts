@@ -11,6 +11,7 @@ describe( 'KeenSlider', () => {
 
 	afterEach( () => {
 		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	const getWrapper = (): VueWrapper<any> => {
@@ -47,9 +48,25 @@ describe( 'KeenSlider', () => {
 		const wrapper = getWrapper();
 
 		await wrapper.setProps( { play: true } );
-		await vi.advanceTimersByTimeAsync( 400 );
 
-		expect( wrapper.find( '.wmde-banner-slide:nth-child(2) .wmde-banner-slide--current' ).exists ).toBeTruthy();
+		await vi.advanceTimersByTimeAsync( 199 );
+		expect( wrapper.find( '.wmde-banner-slide:nth-child(1) .wmde-banner-slide--current' ).exists() ).toBeTruthy();
+
+		await vi.advanceTimersByTimeAsync( 2 );
+		expect( wrapper.find( '.wmde-banner-slide:nth-child(2) .wmde-banner-slide--current' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should start after a delay if one is passed', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { startDelay: 100 } );
+		await wrapper.setProps( { play: true } );
+
+		await vi.advanceTimersByTimeAsync( 99 );
+		expect( wrapper.find( '.wmde-banner-slider--pending' ).exists() ).toBeTruthy();
+
+		await vi.advanceTimersByTimeAsync( 2 );
+		expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should show a pagination dot for each exising slide', async () => {

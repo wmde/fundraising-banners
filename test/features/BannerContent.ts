@@ -7,19 +7,18 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 const expectSlideShowPlaysWhenBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
 
+	await vi.runOnlyPendingTimersAsync();
+
 	expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 };
 
 const expectSlideShowStopsOnFormInteraction = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	vi.useFakeTimers();
-
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
 	await wrapper.find( '.wmde-banner-form' ).trigger( 'click' );
-	await vi.runOnlyPendingTimers();
+
+	await vi.runAllTimersAsync();
 
 	expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
-
-	vi.restoreAllMocks();
 };
 
 const expectShowsSlideShowOnSmallSizes = async ( getWrapper: () => VueWrapper<any>, minWidthForLargeScreen: number ): Promise<any> => {

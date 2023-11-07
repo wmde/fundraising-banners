@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -24,6 +24,13 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
+	} );
+
+	afterEach( () => {
+		wrapper.unmount();
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
@@ -52,10 +59,6 @@ describe( 'BannerCtrl.vue', () => {
 
 		return wrapper;
 	};
-
-	afterEach( () => {
-		wrapper.unmount();
-	} );
 
 	describe( 'Main Banner', () => {
 		test.each( [

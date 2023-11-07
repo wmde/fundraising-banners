@@ -1,9 +1,11 @@
 import { VueWrapper } from '@vue/test-utils';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { expect } from 'vitest';
+import { expect, vi } from 'vitest';
 
 const expectSlideShowPlaysWhenMiniBannerBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
+
+	await vi.runOnlyPendingTimersAsync();
 
 	expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 };

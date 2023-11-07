@@ -26,15 +26,12 @@ const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): 
 };
 
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	vi.useFakeTimers();
-
 	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-	await vi.runAllTimers();
+
+	await vi.runAllTimersAsync();
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );
-
-	vi.restoreAllMocks();
 };
 
 const expectEmitsBannerContentChangedOnSoftClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {

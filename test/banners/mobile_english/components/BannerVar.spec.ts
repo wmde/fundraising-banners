@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, test, vi } from 'vitest';
+import { beforeEach, describe, it, vi, test, afterEach } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/mobile_english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -27,6 +27,7 @@ describe( 'BannerVar.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
@@ -53,6 +54,11 @@ describe( 'BannerVar.vue', () => {
 				}
 			}
 		} );
+	} );
+
+	afterEach( () => {
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {

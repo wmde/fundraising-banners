@@ -9,14 +9,11 @@ const expectSetsCookieImageOnSoftCloseClose = async ( wrapper: VueWrapper<any> )
 };
 
 const expectSetsCookieImageOnSoftCloseTimeOut = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	vi.useFakeTimers();
-
 	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-	await vi.runAllTimers();
+
+	await vi.runAllTimersAsync();
 
 	expect( wrapper.find( '.wmde-banner-set-cookie-image' ).exists() ).toBeTruthy();
-
-	vi.restoreAllMocks();
 };
 
 const expectDoesNotSetCookieImageOnSoftCloseMaybeLater = async ( wrapper: VueWrapper<any> ): Promise<any> => {

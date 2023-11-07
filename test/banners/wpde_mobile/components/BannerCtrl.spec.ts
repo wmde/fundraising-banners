@@ -27,11 +27,18 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
 		};
+	} );
+
+	afterEach( () => {
+		wrapper.unmount();
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
@@ -61,10 +68,6 @@ describe( 'BannerCtrl.vue', () => {
 
 		return wrapper;
 	};
-
-	afterEach( () => {
-		wrapper.unmount();
-	} );
 
 	describe( 'Content', () => {
 		test.each( [

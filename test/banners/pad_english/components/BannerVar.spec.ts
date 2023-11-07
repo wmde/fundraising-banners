@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/pad_english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -22,6 +22,7 @@ describe( 'BannerVar.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
+		vi.useFakeTimers();
 
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
@@ -49,6 +50,8 @@ describe( 'BannerVar.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
+		vi.restoreAllMocks();
+		vi.useRealTimers();
 	} );
 
 	describe( 'Main Banner', () => {
