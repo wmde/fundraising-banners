@@ -26,6 +26,7 @@ describe( 'PageOrg', function () {
 			getConfigItem: vitest.fn(),
 			track: vitest.fn(),
 			preventBannerDisplayForPeriod: vitest.fn(),
+			preventBannerDisplayForHours: vitest.fn(),
 			preventBannerDisplayUntilEndOfCampaign: vitest.fn(),
 			setBannerLoadedButHidden: vitest.fn()
 		};
@@ -138,6 +139,15 @@ describe( 'PageOrg', function () {
 		page.setCloseCookieIfNecessary( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'stores close cookie when user closes with maybe later', () => {
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.MaybeLater ) );
+
+		expect( mediaWiki.preventBannerDisplayForHours ).toHaveBeenCalledOnce();
+		expect( mediaWiki.preventBannerDisplayForHours ).toHaveBeenCalledWith( 6 );
 	} );
 
 	it( 'returns campaign parameters', () => {
