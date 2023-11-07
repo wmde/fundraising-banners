@@ -59,7 +59,7 @@ describe( 'KeenSlider', () => {
 	it( 'should start after a delay if one is passed', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.setProps( { delay: 100 } );
+		await wrapper.setProps( { startDelay: 100 } );
 		await wrapper.setProps( { play: true } );
 
 		await vi.advanceTimersByTimeAsync( 99 );
