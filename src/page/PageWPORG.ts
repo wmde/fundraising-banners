@@ -9,6 +9,7 @@ import { getCampaignParameterOverride } from '@environment/CampaignParameterOver
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { ChannelNameWPORG } from '@src/page/ChannelNameWPORG';
 
 export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -18,12 +19,22 @@ export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-dur
 const centralNoticeBannerContainerId = 'WMDE-Banner-Container';
 const campaignParametersId = 'wmde-campaign-parameters';
 
+const campaignDataMaxImpressionsMap: Record<ChannelNameWPORG, string> = {
+	desktop: 'maxImpressionsDesktop',
+	english: 'maxImpressionsEnglish',
+	mobile: 'maxImpressionsMobile',
+	// eslint-disable-next-line camelcase
+	mobile_english: 'maxImpressionsMobileEnglish',
+	pad: 'maxImpressionsPad'
+};
+
 class PageWPORG implements Page {
 	private _mediaWiki: MediaWiki;
 	private _skin: Skin;
 	private _sizeIssueChecker: SizeIssueChecker;
 
 	private _trackingParameters: TrackingParameters;
+	private _campaignData: DOMStringMap;
 
 	public constructor( mediaWiki: MediaWiki, skin: Skin, sizeIssueChecker: SizeIssueChecker ) {
 		this._sizeIssueChecker = sizeIssueChecker;
@@ -122,12 +133,20 @@ class PageWPORG implements Page {
 		return this;
 	}
 
-	public getCampaignParameters(): CampaignParameters {
-		const element = document.getElementById( campaignParametersId );
-		if ( !element ) {
-			throw new Error( 'Campaign data element not found' );
+	private getCampaignData(): DOMStringMap {
+		if ( !this._campaignData ) {
+			const element = document.getElementById( campaignParametersId );
+			if ( !element ) {
+				throw new Error( 'Campaign data element not found' );
+			}
+			this._campaignData = element.dataset;
 		}
-		const data = element.dataset;
+
+		return this._campaignData;
+	}
+
+	public getCampaignParameters(): CampaignParameters {
+		const data = this.getCampaignData();
 
 		const campaignParameters = {
 			campaignProjection: {
@@ -164,8 +183,14 @@ class PageWPORG implements Page {
 		return this._trackingParameters;
 	}
 
-	public getMaxBannerImpressions(): number {
-		return this._mediaWiki.getMaxBannerImpressions();
+	public getMaxBannerImpressions( channel: ChannelNameWPORG ): number {
+		const maxImpressions = this.getCampaignData()[ campaignDataMaxImpressionsMap[ channel ] ];
+
+		if ( !maxImpressions ) {
+			throw new Error( `Max impressions count for ${ channel } does not exist` );
+		}
+
+		return Number( maxImpressions );
 	}
 }
 

@@ -4,7 +4,6 @@ import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 
 export interface MediaWiki {
 	getConfigItem( name: string ): any;
-	getMaxBannerImpressions(): number;
 	isShowingContentPage: () => boolean;
 	isContentHiddenByLightbox: () => boolean;
 	isInArticleNamespace: () => boolean;

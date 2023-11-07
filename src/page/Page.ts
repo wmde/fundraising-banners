@@ -18,5 +18,4 @@ export interface Page {
 	setCloseCookieIfNecessary: ( closeEvent: TrackingEvent ) => Page;
 	getCampaignParameters: () => CampaignParameters;
 	getTracking: () => TrackingParameters;
-	getMaxBannerImpressions: () => number;
 }

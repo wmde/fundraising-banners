@@ -24,7 +24,6 @@ describe( 'PageWPORG', function () {
 				return false;
 			},
 			getConfigItem: vitest.fn(),
-			getMaxBannerImpressions: (): number => 0,
 			track: vitest.fn(),
 			preventBannerDisplayForPeriod: vitest.fn(),
 			preventBannerDisplayForHours: vitest.fn(),

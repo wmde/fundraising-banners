@@ -32,7 +32,7 @@ const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
+const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'english' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,

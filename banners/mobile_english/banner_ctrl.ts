@@ -34,7 +34,7 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
+const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile_english' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
