@@ -69,9 +69,9 @@ describe( 'BannerCtrl.vue', () => {
 
 		test.each( [
 			[ 'expectShowsSlideShowOnSmallSizes' ],
-			[ 'expectShowsMessageOnSmallSizes' ]
+			[ 'expectShowsMessageOnLargeSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper );
+			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1300 );
 		} );
 
 		test.skip.each( [
