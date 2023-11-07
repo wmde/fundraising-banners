@@ -1,4 +1,6 @@
 // This is the file where we import the theme-specific component styles
+$font: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
+
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'MainBanner' with (
@@ -24,6 +26,10 @@
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
-@use 'src/themes/Treedip/Message/Message';
-@use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/themes/Treedip/Message/Message' with (
+	$font: $font
+);
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$font: $font
+);
 @use 'src/themes/Treedip/SoftClose/SoftClose';
