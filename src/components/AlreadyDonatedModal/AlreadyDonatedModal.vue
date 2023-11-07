@@ -26,13 +26,18 @@
 <script setup lang="ts">
 
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import { inject, ref, watch } from 'vue';
+import { Tracker } from '@src/tracking/Tracker';
+import { AlreadyDonatedShownEvent } from '@src/tracking/events/AlreadyDonatedShownEvent';
 
 interface Props {
 	isVisible: boolean;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'hideAlreadyDonatedModal', 'maybeLater', 'goAway' ] );
+const tracker = inject<Tracker>( 'tracker' );
+const eventWasFired = ref<boolean>( false );
 
 const onHideClick = (): void => {
 	emit( 'hideAlreadyDonatedModal' );
@@ -45,5 +50,12 @@ const onMaybeLaterClick = (): void => {
 const onGoAwayClick = (): void => {
 	emit( 'goAway' );
 };
+
+watch( () => props.isVisible, ( isVisible: boolean ) => {
+	if ( !eventWasFired.value && isVisible ) {
+		tracker.trackEvent( new AlreadyDonatedShownEvent() );
+		eventWasFired.value = true;
+	}
+} );
 
 </script>
