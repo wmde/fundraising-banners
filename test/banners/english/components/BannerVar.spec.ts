@@ -73,7 +73,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsSlideShowOnSmallSizes' ],
 			[ 'expectShowsMessageOnLargeSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1300 );
+			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1800 );
 		} );
 	} );
 

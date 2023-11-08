@@ -10,7 +10,7 @@
             </template>
 
             <template #banner-slides="{ play }: any">
-                <KeenSlider :with-navigation="true" :play="play" :interval="5000">
+                <KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
 
                     <template #slides="{ currentSlide }: any">
                         <BannerSlides :currentSlide="currentSlide"/>
@@ -66,11 +66,11 @@ import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import BannerSlides from '../../english/content/BannerSlides.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../../english/content/BannerText.vue';
+import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
