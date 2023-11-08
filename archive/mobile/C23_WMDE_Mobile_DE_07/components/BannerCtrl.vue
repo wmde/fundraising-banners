@@ -32,11 +32,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #button>
-								<MainDonationFormButtonMultiStepAmount :max-amount="25"/>
-							</template>
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -92,8 +88,8 @@ import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
-	createSubmittableMainDonationFormWhenOverAmount
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormWhenOverAmount';
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
@@ -101,8 +97,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import MainDonationFormButtonMultiStepAmount
-	from '@src/components/DonationForm/Forms/MainDonationFormButtonMultiStepAmount.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -133,7 +127,7 @@ const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.V
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
 const stepControllers = [
-	createSubmittableMainDonationFormWhenOverAmount( formModel, FormStepNames.UpgradeToYearlyFormStep, 25 ),
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 

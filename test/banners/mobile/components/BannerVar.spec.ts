@@ -88,6 +88,7 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenAmountIsGreaterThanMaxAmount' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
@@ -139,8 +140,6 @@ describe( 'BannerVar.vue', () => {
 
 		test.each( [
 			[ 'expectShowsFullPageWhenPreselectIsClicked' ],
-			[ 'expectShowsFullPageInfoWhenNextIsClicked' ],
-			[ 'expectHidesFullPageInfoWhenPreselectIsClicked' ],
 			[ 'expectPreselectsAmountWhenPreselectIsClicked' ],
 			[ 'expectTrackingEventIsFiredWhenPreselectIsClicked' ]
 		] )( '%s', async ( testName: string ) => {

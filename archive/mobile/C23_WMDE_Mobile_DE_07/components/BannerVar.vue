@@ -17,6 +17,7 @@
 		</MiniBanner>
 
 		<FullPageBanner
+			:is-from-preselect-button="hasComeFromPreselectButton"
 			@showFundsModal="isFundsModalVisible = true"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
@@ -32,11 +33,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #button>
-								<MainDonationFormButtonMultiStepAmount :max-amount="25"/>
-							</template>
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -74,7 +71,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
+import FullPageBanner from './FullPageBannerVar.vue';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -92,8 +89,8 @@ import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
-	createSubmittableMainDonationFormWhenOverAmount
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormWhenOverAmount';
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
@@ -101,8 +98,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import MainDonationFormButtonMultiStepAmount
-	from '@src/components/DonationForm/Forms/MainDonationFormButtonMultiStepAmount.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -129,11 +124,12 @@ const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
+const hasComeFromPreselectButton = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
 const stepControllers = [
-	createSubmittableMainDonationFormWhenOverAmount( formModel, FormStepNames.UpgradeToYearlyFormStep, 25 ),
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
@@ -161,6 +157,7 @@ function onshowFullPageBanner(): void {
 
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
+	hasComeFromPreselectButton.value = true;
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );

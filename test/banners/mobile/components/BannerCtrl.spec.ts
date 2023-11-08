@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/mobile/components/BannerVar.vue';
+import Banner from '../../../../banners/mobile/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -23,7 +23,7 @@ let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
-describe( 'BannerVar.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
