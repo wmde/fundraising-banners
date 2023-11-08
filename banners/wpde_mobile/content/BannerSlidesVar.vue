@@ -6,19 +6,19 @@
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
 			An alle, die Wikipedia in Deutschland nutzen: Vielleicht kommen wir gerade ungelegen, aber dennoch:
-			Klicken Sie jetzt bitte nicht weg! Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten
-			wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.
+			Klicken Sie jetzt bitte nicht weg! Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir
+			Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Heute bitten wir Sie um Ihre Unterstützung. Insgesamt spenden 99% nichts – sie übergehen diesen
-			Aufruf. Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert.
+			Heute bitten wir Sie um Ihre Unterstützung. Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf.
+			Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
+			Doch schon mit einer Spende von 10&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			<span v-if="visitorsVsDonorsSentence !== ''" class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
 		</p>
 	</KeenSliderSlide>

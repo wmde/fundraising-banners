@@ -109,9 +109,9 @@ tracking = "wpde-01-231030-var"
 [wikipediade_mobile]
 name = "WPDE Mobile"
 icon = "mobile"
-campaign = "C23_WPDE_Mobile_00"
-description = "Nothing to see here"
-campaign_tracking = "wpde-mob00-230501"
+campaign = "C23_WPDE_Mobile_01"
+description = "Based on CRTL of WPDE_mob_01"
+campaign_tracking = "wpde-mob01-231030"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -119,8 +119,13 @@ preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wikipediade_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/banner_ctrl.ts"
-pagename = "B23_WPDE_Mobile_00_ctrl"
-tracking = "wpde-mob00-230501-ctrl"
+pagename = "B23_WPDE_Mobile_01_ctrl"
+tracking = "wpde-mob01-231030-ctrl"
+
+[wikipediade_mobile.banners.var]
+filename = "./banners/wpde_mobile/banner_var.ts"
+pagename = "B23_WPDE_Mobile_01_var"
+tracking = "wpde-mob01-231030-var"
 
 
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<SetCookieImage v-if="showSetCookieImage"/>
-		<MiniBanner
+		<MiniBannerVar
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 		>
@@ -9,12 +9,12 @@
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
+						<BannerSlidesVar :currentSlide="currentSlide"/>
 					</template>
 
 				</KeenSlider>
 			</template>
-		</MiniBanner>
+		</MiniBannerVar>
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
@@ -36,11 +36,7 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
-							</template>
-						</UpgradeToYearlyButtonForm>
+						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -71,7 +67,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBanner.vue';
+import MiniBannerVar from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -81,7 +77,7 @@ import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vu
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerSlidesVar from '../content/BannerSlidesVar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
@@ -96,7 +92,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 
 enum ContentStates {
