@@ -8,7 +8,7 @@
 
 		<header class="wmde-banner-mini-headline">
 			<div class="wmde-banner-mini-headline-background">
-				<span class="wmde-banner-mini-headline-content">Ist Ihnen Wikipedia 10&nbsp;€ wert?</span>
+				<span class="wmde-banner-mini-headline-content">Ist Ihnen Wikipedia 5&nbsp;€ wert?</span>
 			</div>
 		</header>
 
@@ -17,14 +17,9 @@
 			<slot name="progress"/>
 		</div>
 
-		<div class="wmde-banner-mini-button-group">
-			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
-				Jetzt 10 &euro; spenden
-			</button>
-			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
-				Anderen Betrag
-			</button>
-		</div>
+		<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
+			Jetzt spenden
+		</button>
 
 	</div>
 </template>
@@ -33,6 +28,6 @@
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'close' ] );
 
 </script>

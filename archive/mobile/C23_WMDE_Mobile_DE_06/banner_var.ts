@@ -23,7 +23,7 @@ import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 
 const localeFactory = new LocaleFactoryDe();
@@ -32,7 +32,6 @@ const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -42,8 +41,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller(),
-		remainingImpressions
+		pageScroller: new WindowPageScroller()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

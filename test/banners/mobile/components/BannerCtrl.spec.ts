@@ -1,13 +1,12 @@
-import { beforeEach, describe, vi, test, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/mobile/components/BannerCtrl.vue';
+import Banner from '../../../../banners/mobile/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
-import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
@@ -17,12 +16,14 @@ import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
+import { miniBannerPreselectFeatures } from '@test/features/MiniBannerPreselect';
+import { Tracker } from '@src/tracking/Tracker';
 
 let pageScroller: PageScroller;
+let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
-
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -32,6 +33,10 @@ describe( 'BannerCtrl.vue', () => {
 		pageScroller = {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
+		};
+
+		tracker = {
+			trackEvent: vi.fn()
 		};
 	} );
 
@@ -43,7 +48,8 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				pageScroller
+				pageScroller,
+				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -55,7 +61,7 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker
 				}
 			}
 		} );
@@ -69,12 +75,9 @@ describe( 'BannerCtrl.vue', () => {
 		vi.useRealTimers();
 	} );
 
-	// skipped because the sentence is not part of the current test
-	describe.skip( 'Content', () => {
+	describe( 'Content', () => {
 		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -101,7 +104,8 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
@@ -132,6 +136,15 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
+
+		test.each( [
+			[ 'expectShowsFullPageWhenPreselectIsClicked' ],
+			[ 'expectPreselectsAmountWhenPreselectIsClicked' ],
+			[ 'expectTrackingEventIsFiredWhenPreselectIsClicked' ]
+		] )( '%s', async ( testName: string ) => {
+			await miniBannerPreselectFeatures[ testName ]( getWrapper(), tracker );
+		} );
+
 	} );
 
 	describe( 'Full Page Banner', () => {

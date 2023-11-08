@@ -2,10 +2,10 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
-@use './MiniBanner' with (
+@use './MiniBannerVar' with (
 	$height: 288px
 );
-@use './FullPageBannerVar';
+@use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';
 @use 'src/themes/Mikings/Footer/SelectionInput';
 @use 'src/themes/Mikings/DonationForm/MultiStepDonation';

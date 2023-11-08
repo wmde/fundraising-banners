@@ -9,6 +9,20 @@ const expectShowsFullPageWhenPreselectIsClicked = async ( wrapper: VueWrapper<an
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
 };
 
+const expectShowsFullPageInfoWhenNextIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-full' ).classes() ).not.toContain( 'wmde-banner-full-from-preselect' );
+	expect( wrapper.find( '.wmde-banner-full-info' ).exists() ).toBeTruthy();
+};
+
+const expectHidesFullPageInfoWhenPreselectIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-full' ).classes() ).toContain( 'wmde-banner-full-from-preselect' );
+	expect( wrapper.find( '.wmde-banner-full-info' ).exists() ).toBeFalsy();
+};
+
 const expectPreselectsAmountWhenPreselectIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
 
@@ -24,6 +38,8 @@ const expectTrackingEventIsFiredWhenPreselectIsClicked = async ( wrapper: VueWra
 
 export const miniBannerPreselectFeatures: Record<string, ( wrapper: VueWrapper<any>, tracker: Tracker ) => Promise<any>> = {
 	expectShowsFullPageWhenPreselectIsClicked,
+	expectShowsFullPageInfoWhenNextIsClicked,
+	expectHidesFullPageInfoWhenPreselectIsClicked,
 	expectPreselectsAmountWhenPreselectIsClicked,
 	expectTrackingEventIsFiredWhenPreselectIsClicked
 };

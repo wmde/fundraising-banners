@@ -17,6 +17,7 @@
 		</MiniBanner>
 
 		<FullPageBanner
+			:is-from-preselect-button="hasComeFromPreselectButton"
 			@showFundsModal="isFundsModalVisible = true"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
@@ -70,8 +71,8 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import FullPageBanner from './FullPageBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -113,6 +114,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
+	remainingImpressions: number;
 }
 
 const props = defineProps<Props>();
@@ -122,6 +124,7 @@ const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
+const hasComeFromPreselectButton = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
@@ -135,7 +138,11 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	contentState.value = ContentStates.SoftClosing;
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
@@ -150,6 +157,7 @@ function onshowFullPageBanner(): void {
 
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
+	hasComeFromPreselectButton.value = true;
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );

@@ -5,7 +5,7 @@
 @use './MiniBanner' with (
 	$height: 288px
 );
-@use './FullPageBannerVar';
+@use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';
 @use 'src/themes/Mikings/Footer/SelectionInput';
 @use 'src/themes/Mikings/DonationForm/MultiStepDonation';

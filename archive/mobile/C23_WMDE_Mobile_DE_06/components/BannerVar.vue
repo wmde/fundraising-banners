@@ -71,7 +71,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBanner.vue';
+import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -113,7 +113,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	remainingImpressions: number;
 }
 
 const props = defineProps<Props>();
@@ -136,11 +135,7 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	contentState.value = ContentStates.SoftClosing;
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {

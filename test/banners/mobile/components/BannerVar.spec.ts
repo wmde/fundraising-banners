@@ -48,7 +48,8 @@ describe( 'BannerVar.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				pageScroller
+				pageScroller,
+				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -74,12 +75,9 @@ describe( 'BannerVar.vue', () => {
 		vi.useRealTimers();
 	} );
 
-	// skipped because the sentence is not part of the current test
-	describe.skip( 'Content', () => {
+	describe( 'Content', () => {
 		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -106,7 +104,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
@@ -140,6 +139,8 @@ describe( 'BannerVar.vue', () => {
 
 		test.each( [
 			[ 'expectShowsFullPageWhenPreselectIsClicked' ],
+			[ 'expectShowsFullPageInfoWhenNextIsClicked' ],
+			[ 'expectHidesFullPageInfoWhenPreselectIsClicked' ],
 			[ 'expectPreselectsAmountWhenPreselectIsClicked' ],
 			[ 'expectTrackingEventIsFiredWhenPreselectIsClicked' ]
 		] )( '%s', async ( testName: string ) => {

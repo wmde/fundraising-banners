@@ -10,9 +10,10 @@
 				Unabhängigkeit von Wikipedia zu unterstützen. Insgesamt spenden 99% nichts - sie übergehen
 				diesen Aufruf. Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits ein kleiner Beitrag
 				hilft uns weiter.
-				<AnimatedText :content="visitorsVsDonorsSentence"/> Die meisten Menschen spenden, weil sie Wikipedia
-				nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+				<span class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span>
+				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr
+				Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der seltenen Ausnahmen
+				zu sein, und geben Sie etwas zurück. Vielen Dank!
 			</p>
 		</div>
 	</div>
@@ -21,7 +22,6 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 const {
 	currentDayName,
