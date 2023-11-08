@@ -16,6 +16,8 @@ export class MediaWikiStub implements MediaWiki {
 	public preventBannerDisplayForPeriod(): void {
 	}
 
+	public preventBannerDisplayForHours(): void {
+	}
 	public preventBannerDisplayUntilEndOfCampaign(): void {
 	}
 

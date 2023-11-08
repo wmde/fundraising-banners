@@ -63,6 +63,13 @@ export class WindowMediaWiki implements MediaWiki {
 		this.hideBanner( 'donate', secondsToEndOfYear );
 	}
 
+	public preventBannerDisplayForHours( hours: number ): void {
+		const until = new Date();
+		until.setHours( until.getHours() + hours );
+		const secondsToHideBannerFor = Math.abs( ( until.getTime() - Date.now() ) / 1000 );
+		this.hideBanner( 'donate', secondsToHideBannerFor );
+	}
+
 	public setBannerLoadedButHidden(): void {
 		window.mw.centralNotice.setBannerLoadedButHidden();
 	}

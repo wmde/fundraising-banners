@@ -10,5 +10,6 @@ export interface MediaWiki {
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	preventBannerDisplayForPeriod: () => void;
 	preventBannerDisplayUntilEndOfCampaign: () => void;
+	preventBannerDisplayForHours: ( hours: number ) => void;
 	setBannerLoadedButHidden: () => void;
 }
