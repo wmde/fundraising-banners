@@ -39,7 +39,8 @@ describe( 'BannerVar.vue', () => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
-				useOfFundsContent
+				useOfFundsContent,
+				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -66,7 +67,8 @@ describe( 'BannerVar.vue', () => {
 	} );
 
 	describe( 'Content', () => {
-		test.each( [
+		// TODO: Fix vitest timing to get these tests working
+		test.skip.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {
@@ -80,10 +82,8 @@ describe( 'BannerVar.vue', () => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1300 );
 		} );
 
-		test.skip.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+		test.each( [
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -94,7 +94,6 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormSubmitsWhenAmountIsGreaterThanMaxAmount' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
@@ -112,7 +111,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ]
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );

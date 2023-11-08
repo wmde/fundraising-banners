@@ -31,7 +31,6 @@ const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'desktop' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -40,8 +39,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions
+		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
