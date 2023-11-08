@@ -9,7 +9,7 @@ import { JSDOM } from 'jsdom';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
-describe( 'PageOrg', function () {
+describe( 'PageWPORG', function () {
 	let mediaWiki: MediaWiki;
 
 	beforeEach( () => {

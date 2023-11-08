@@ -8,7 +8,7 @@ import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSe
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
-	centralNotice: any;
+	centralNotice: { setBannerLoadedButHidden: () => void };
 }
 
 interface MwWindow extends Window {

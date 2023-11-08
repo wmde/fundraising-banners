@@ -49,11 +49,21 @@ const expectEmitsBannerContentChangedOnSoftClose = async ( wrapper: VueWrapper<a
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 };
 
+const expectDoesNotShowSoftCloseOnFinalBannerImpression = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.setProps( { remainingImpressions: 0 } );
+	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
+};
+
 export const softCloseFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectShowsSoftCloseOnMiniBannerClose,
 	expectDoesNotShowSoftCloseOnFullBannerClose,
 	expectEmitsSoftCloseCloseEvent,
 	expectEmitsSoftCloseMaybeLaterEvent,
 	expectEmitsSoftCloseTimeOutEvent,
-	expectEmitsBannerContentChangedOnSoftClose
+	expectEmitsBannerContentChangedOnSoftClose,
+	expectDoesNotShowSoftCloseOnFinalBannerImpression
 };
