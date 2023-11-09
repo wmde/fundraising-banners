@@ -1,6 +1,7 @@
 @use '../variables/fonts';
 @use '../variables/breakpoints';
 
+$font: fonts.$content !default;
 $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 
 .wmde-banner {
@@ -8,7 +9,7 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 		height: 100%;
 		display: flex;
 		align-items: center;
-		font-family: fonts.$content;
+		font-family: $font;
 		line-height: 1.3em;
 		text-align: left;
 

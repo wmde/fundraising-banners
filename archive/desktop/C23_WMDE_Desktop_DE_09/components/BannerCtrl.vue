@@ -42,10 +42,7 @@
 			</template>
 
 			<template #footer>
-				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
-					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
-				/>
+				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
 			</template>
 
 		</MainBanner>
@@ -53,8 +50,8 @@
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
 		<FundsModal
@@ -62,17 +59,6 @@
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
 		/>
-
-		<AlreadyDonatedModal
-			:is-visible="isAlreadyDonatedModalVisible"
-			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
-		>
-			<template #already-donated-content>
-				<AlreadyDonatedContent/>
-			</template>
-		</AlreadyDonatedModal>
 	</div>
 </template>
 
@@ -85,8 +71,8 @@ import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
+import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -102,8 +88,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -125,7 +109,6 @@ const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
-const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [

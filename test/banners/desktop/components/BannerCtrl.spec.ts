@@ -67,8 +67,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Content', () => {
-		// TODO: Fix vitest timing to get these tests working
-		test.skip.each( [
+		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
 			[ 'expectSlideShowStopsOnFormInteraction' ]
 		] )( '%s', async ( testName: string ) => {

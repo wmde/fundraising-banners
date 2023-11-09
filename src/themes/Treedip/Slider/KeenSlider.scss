@@ -2,13 +2,14 @@
 @use '../variables/fonts';
 @use 'src/components/Slider/KeenSlider';
 
+$font: fonts.$content !default;
 $slider-padding: 16px 0 !default;
 
 .wmde-banner {
 	@include KeenSlider.layout;
 
 	&-slider-container {
-		font-family: fonts.$content;
+		font-family: $font;
 		font-size: 1.3em;
 		padding: $slider-padding;
 	}

@@ -1,6 +1,4 @@
 // This is the file where we import the theme-specific component styles
-$font: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
-
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'MainBanner' with (
@@ -26,13 +24,6 @@ $font: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
-@use 'src/themes/Treedip/Message/Message' with (
-	$font: $font
-);
-@use 'src/themes/Treedip/Slider/KeenSlider' with (
-	$font: $font
-);
+@use 'src/themes/Treedip/Message/Message';
+@use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-
-// This is to override the CTRL footer margin so the language items break similarly to the VAR footer
-@use 'C23_WMDE_Desktop_DE_10_ctrl';
