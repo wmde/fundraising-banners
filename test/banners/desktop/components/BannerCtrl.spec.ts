@@ -82,7 +82,9 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
