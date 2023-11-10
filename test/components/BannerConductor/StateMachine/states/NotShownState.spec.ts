@@ -9,7 +9,7 @@ import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 describe( 'NotShownState', function () {
 	it( 'tracks not shown event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( {} );
+		const trackingEvent = new NotShownEvent( { reason: BannerNotShownReasons.DisallowedNamespace } );
 		const state = new NotShownState( BannerNotShownReasons.DisallowedNamespace, new PageStub(), tracker, new ResizeHandlerStub(), 0 );
 
 		state.enter();

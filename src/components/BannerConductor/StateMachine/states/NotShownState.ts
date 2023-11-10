@@ -32,6 +32,10 @@ export class NotShownState extends BannerState {
 				viewportWidth: window.innerWidth,
 				viewportHeight: window.innerHeight
 			};
+		} else {
+			customEventData = {
+				reason: this._bannerNotShownReason
+			};
 		}
 		this._tracker.trackEvent( new NotShownEvent( customEventData ) );
 		this._page
