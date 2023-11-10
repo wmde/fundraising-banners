@@ -19,7 +19,6 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -83,7 +82,9 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -124,17 +125,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Already Donated Modal', () => {
-		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

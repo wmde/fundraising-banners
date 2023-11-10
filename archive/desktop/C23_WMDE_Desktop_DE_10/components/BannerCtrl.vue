@@ -67,7 +67,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import MainBanner from './MainBannerVar.vue';
+import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';

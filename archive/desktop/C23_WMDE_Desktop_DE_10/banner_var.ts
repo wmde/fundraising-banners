@@ -15,10 +15,10 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import eventMappings from './event_map';
+import eventMappings from './event_map_var';
 
 // Locale-specific imports
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
