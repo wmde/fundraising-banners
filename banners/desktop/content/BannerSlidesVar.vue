@@ -5,7 +5,7 @@
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie bescheiden, die Unabhängigkeit
+			heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit
 			von Wikipedia zu unterstützen.
 		</p>
 	</KeenSliderSlide>
