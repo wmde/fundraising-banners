@@ -1,4 +1,6 @@
 // This is the file where we import the theme-specific component styles
+$font: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
+
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'MainBanner' with (
@@ -20,10 +22,15 @@
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/Treedip/Footer/BannerFooter' with (
+@use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
-@use 'src/themes/Treedip/Message/Message';
-@use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/themes/Treedip/Message/Message' with (
+	$font: $font
+);
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$font: $font
+);
 @use 'src/themes/Treedip/SoftClose/SoftClose';
+@use 'src/themes/Treedip/AlreadyDonatedModal/AlreadyDonatedModal';
