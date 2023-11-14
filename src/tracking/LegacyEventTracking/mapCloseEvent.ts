@@ -8,6 +8,7 @@ const closeSourceToLegacyEventName = new Map<string, string>( [
 	[ LegacyCloseSources.AlreadyDonatedGoAway, 'banner-closed-already-donated' ],
 	[ LegacyCloseSources.AlreadyDonatedMaybeLater, 'banner-closed-already-donated-maybelater' ],
 	[ LegacyCloseSources.SoftCloseAlreadyDonated, 'banner-closed-soft-close-already-donated' ],
+	[ LegacyCloseSources.SoftCloseXButton, 'banner-closed-softclose-closebutton' ],
 	[ LegacyCloseSources.FullPageBanner, 'banner-closed-full' ],
 	[ LegacyCloseSources.MaybeLater, 'banner-closed-maybelater' ],
 	[ LegacyCloseSources.TimeOut, 'micro-banner-ignored' ]
@@ -36,6 +37,14 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 		if ( event.userChoice === CloseChoices.NoMoreBannersForCampaign ) {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.SoftCloseAlreadyDonated ), 0.1 );
 		}
+
+		if ( event.userChoice === CloseChoices.Close ) {
+			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.SoftCloseXButton ), 0.1 );
+		}
+	}
+
+	if ( event.feature === 'MainBanner' ) {
+		return new WMDELegacyBannerEvent( 'banner-closed-main-without-softclose', 0.1 );
 	}
 
 	if ( event.feature === 'FullPageBanner' ) {

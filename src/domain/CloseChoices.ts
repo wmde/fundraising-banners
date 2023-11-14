@@ -8,5 +8,5 @@ export enum CloseChoices {
 	/** user ignored soft close timer */
 	TimeOut = 'time-out',
 	/** user clicked a go away for campaign button */
-	NoMoreBannersForCampaign = 'no-more-banners'
+	NoMoreBannersForCampaign = 'no-more-banners',
 }

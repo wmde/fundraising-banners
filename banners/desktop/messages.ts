@@ -17,7 +17,7 @@ const messages: TranslationMessages = {
 	...FooterDe,
 	...MainDonationFormDe,
 	...AlreadyDonatedModal,
-	'already-donated-go-away-button': 'Fürs Erste reicht es'
+	'already-donated-go-away-button': 'Im Moment nicht'
 };
 
 export default messages;
