@@ -6,7 +6,6 @@ import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import AddressFormDe from '@src/components/DonationForm/Forms/messages/AddressForm.de';
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormDe,
@@ -15,9 +14,7 @@ const messages: TranslationMessages = {
 	...SoftCloseDe,
 	...AddressFormDe,
 	...FooterDe,
-	...MainDonationFormDe,
-	...AlreadyDonatedModal,
-	'already-donated-go-away-button': 'Fürs Erste reicht es'
+	...MainDonationFormDe
 };
 
 export default messages;
