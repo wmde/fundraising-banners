@@ -71,7 +71,7 @@ function onContentChanged(): void {
 	} );
 }
 
-async function closeHandler( closeEvent: TrackingEvent ): Promise<any> {
+async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
 }
 

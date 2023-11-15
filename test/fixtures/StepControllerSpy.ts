@@ -20,7 +20,7 @@ export class StepControllerSpy implements StepController {
 		return Promise.resolve( undefined );
 	}
 
-	public async callSubmit( trackingEvent: TrackingEvent ): Promise<void> {
+	public async callSubmit( trackingEvent: TrackingEvent<void> ): Promise<void> {
 		return this._navigation.submit( trackingEvent );
 	}
 

@@ -4,7 +4,7 @@ import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 
-export type TrackingEventConverterFactory = ( event: TrackingEvent ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
+export type TrackingEventConverterFactory = ( event: TrackingEvent<any> ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
 
 type EventNameMap = Map<string, TrackingEventConverterFactory>;
 
@@ -23,7 +23,7 @@ export class LegacyTrackerWPORG implements Tracker {
 		this._supportedTrackingEvents = supportedTrackingEvents;
 	}
 
-	public trackEvent( event: TrackingEvent ): void {
+	public trackEvent( event: TrackingEvent<void> ): void {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}
