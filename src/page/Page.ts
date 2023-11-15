@@ -15,7 +15,7 @@ export interface Page {
 	unsetAnimated: () => Page;
 	showBanner: () => Page;
 	preventImpressionCountForHiddenBanner: () => Page;
-	setCloseCookieIfNecessary: ( closeEvent: TrackingEvent ) => Page;
+	setCloseCookieIfNecessary: ( closeEvent: TrackingEvent<void> ) => Page;
 	getCampaignParameters: () => CampaignParameters;
 	getTracking: () => TrackingParameters;
 }

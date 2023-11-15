@@ -14,7 +14,10 @@ export type TrackingFeatureName = '' |
 	'UpgradeToYearlyForm' |
 	'AddressTypeForm';
 
-export interface TrackingEvent {
+/**
+ * @param T - Defines the type of the customData property
+ */
+export interface TrackingEvent<T> {
 	/**
 	 * What type of event this is
 	 *
@@ -42,5 +45,5 @@ export interface TrackingEvent {
 	 *
 	 * Example: Viewport data (banner height, screen width and height) for size issues
 	 */
-	customData: Record<string, string|number>;
+	customData: T;
 }

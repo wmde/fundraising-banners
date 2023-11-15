@@ -43,7 +43,7 @@ export class TrackerWPDE implements Tracker {
 		this.trackItemsInEventQueue();
 	}
 
-	public trackEvent( event: TrackingEvent ): void {
+	public trackEvent( event: TrackingEvent<void> ): void {
 		if ( !this._trackingRatesForEvents.has( event.eventName ) ) {
 			return;
 		}
@@ -87,7 +87,7 @@ export class TrackerWPDE implements Tracker {
 	 * @param {TrackingEvent} event
 	 * @private
 	 */
-	private getEventNameFromEvent( event: TrackingEvent ): string {
+	private getEventNameFromEvent( event: TrackingEvent<void> ): string {
 		switch ( event.eventName ) {
 			case CustomAmountChangedEvent.EVENT_NAME:
 				return event.userChoice + '-amount';

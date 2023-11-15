@@ -25,7 +25,7 @@ describe( 'TrackerWPDE', function () {
 			'TestBanner05',
 			new Map<string, number>( [ [ 'some-action', 1 ] ] ) );
 
-		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
 		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', 'some-action', 'TestBanner05' );
 	} );
@@ -38,7 +38,7 @@ describe( 'TrackerWPDE', function () {
 		[ new FormStepShownEvent( 'UpgradeToYearlyForm' ), 'form-step-shown-UpgradeToYearlyForm' ],
 		[ { eventName: 'some-action', feature: '', userChoice: '', customData: {} }, 'some-action' ],
 		[ { eventName: 'some-action', feature: '', userChoice: 'with-choice', customData: {} }, 'some-action-with-choice' ]
-	] )( 'converts events', ( event: TrackingEvent, expectedName: string ) => {
+	] )( 'converts events', ( event: TrackingEvent<void>, expectedName: string ) => {
 		window.TestTracker = { trackEvent: vi.fn() };
 		const tracker = new TrackerWPDE(
 			'TestTracker',
@@ -59,8 +59,8 @@ describe( 'TrackerWPDE', function () {
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
-		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: {} } );
-		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: undefined } );
+		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: undefined } );
 
 		window.TestTracker = { trackEvent: vi.fn() };
 
@@ -82,8 +82,8 @@ describe( 'TrackerWPDE', function () {
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
-		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: {} } );
-		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: undefined } );
+		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: undefined } );
 
 		await vi.runAllTimers();
 
@@ -99,7 +99,7 @@ describe( 'TrackerWPDE', function () {
 		[ new CustomAmountChangedEvent( 'decreased' ), CustomAmountChangedEvent.EVENT_NAME, 'decreased-amount' ],
 		[ new ClickAlreadyDonatedEvent(), ClickAlreadyDonatedEvent.EVENT_NAME, ClickAlreadyDonatedEvent.EVENT_NAME ]
 	] )( 'should generate event identifiers from tracking data, data set %#',
-		( trackingEvent: TrackingEvent, allowedAction: string, expectedId: string ) => {
+		( trackingEvent: TrackingEvent<void>, allowedAction: string, expectedId: string ) => {
 			window.TestTracker = { trackEvent: vi.fn() };
 			const tracker = new TrackerWPDE(
 				'TestTracker',
@@ -128,7 +128,7 @@ describe( 'TrackerWPDE', function () {
 				'TestBanner05',
 				new Map<string, number>( [ [ 'some-action', trackingRate ] ] ) );
 
-			tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: {} } );
+			tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
 			expect( window.TestTracker.trackEvent ).toHaveBeenCalledTimes( wasTracked ? 1 : 0 );
 
@@ -144,7 +144,7 @@ describe( 'TrackerWPDE', function () {
 			'TestBanner05',
 			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
 
-		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
 		expect( window.TestTracker.trackEvent ).toHaveBeenCalled();
 
@@ -160,7 +160,7 @@ describe( 'TrackerWPDE', function () {
 			'TestBanner05',
 			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
 
-		tracker.trackEvent( { eventName: 'unknown-event', feature: '', userChoice: '', customData: {} } );
+		tracker.trackEvent( { eventName: 'unknown-event', feature: '', userChoice: '', customData: undefined } );
 
 		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
 

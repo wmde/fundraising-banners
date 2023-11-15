@@ -48,7 +48,7 @@ export class StateFactory {
 		return new VisibleState( this._page, this._impressionCount, this._tracker );
 	}
 
-	public newClosedState( closeEvent: TrackingEvent ): BannerState {
+	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
 		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler );
 	}
 }

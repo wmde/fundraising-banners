@@ -73,7 +73,7 @@ const multistepCallbacks = {
 		currentStepIndex.value = pageIndex;
 		slider.value.moveToIdx( pageIndex );
 	},
-	async submit( eventData: TrackingEvent ): Promise<void> {
+	async submit( eventData: TrackingEvent<void> ): Promise<void> {
 		tracker.trackEvent( eventData );
 		await nextTick();
 		submitFormRef.value.submit();

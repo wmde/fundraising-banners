@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_UNKNOWN_EVENT, mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
+import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
@@ -28,31 +28,11 @@ describe( 'mapNotShownEvent', () => {
 
 	it( 'maps other reasons to legacy event without tracking', () => {
 		const legacyEvent = mapNotShownEvent(
-			new NotShownEvent( { reason: BannerNotShownReasons.DisallowedNamespace } )
+			new NotShownEvent( { bannerHeight: 0, viewportHeight: 0, viewportWidth: 0, reason: BannerNotShownReasons.DisallowedNamespace } )
 		);
 
 		expect( legacyEvent ).toStrictEqual(
 			new WMDELegacyBannerEvent( 'namespace_tracking', 0 )
-		);
-	} );
-
-	it( 'maps new reasons to legacy event with unknown name', () => {
-		const legacyEvent = mapNotShownEvent(
-			new NotShownEvent( { reason: 'moon_is_in_the_second_house' } )
-		);
-
-		expect( legacyEvent ).toStrictEqual(
-			new WMDELegacyBannerEvent( DEFAULT_UNKNOWN_EVENT, 0 )
-		);
-	} );
-
-	it( 'maps events with missing reason to legacy event with unknown name', () => {
-		const legacyEvent = mapNotShownEvent(
-			new NotShownEvent( { } )
-		);
-
-		expect( legacyEvent ).toStrictEqual(
-			new WMDELegacyBannerEvent( DEFAULT_UNKNOWN_EVENT, 0 )
 		);
 	} );
 

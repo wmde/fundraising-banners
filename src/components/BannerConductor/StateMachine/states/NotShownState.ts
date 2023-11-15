@@ -24,20 +24,12 @@ export class NotShownState extends BannerState {
 	}
 
 	public enter(): Promise<any> {
-		let customEventData: Record<string, string | number> = {};
-		if ( this._bannerNotShownReason === BannerNotShownReasons.SizeIssue ) {
-			customEventData = {
-				reason: this._bannerNotShownReason,
-				bannerHeight: this._bannerHeight,
-				viewportWidth: window.innerWidth,
-				viewportHeight: window.innerHeight
-			};
-		} else {
-			customEventData = {
-				reason: this._bannerNotShownReason
-			};
-		}
-		this._tracker.trackEvent( new NotShownEvent( customEventData ) );
+		this._tracker.trackEvent( new NotShownEvent( {
+			reason: this._bannerNotShownReason,
+			bannerHeight: this._bannerHeight,
+			viewportWidth: window.innerWidth,
+			viewportHeight: window.innerHeight
+		} ) );
 		this._page
 			.preventImpressionCountForHiddenBanner()
 			.removePageEventListeners();

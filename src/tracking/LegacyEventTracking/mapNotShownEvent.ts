@@ -2,6 +2,7 @@ import { BannerNotShownReasons, isNotShownReason } from '@src/page/BannerNotShow
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
+import { NotShownCustomData } from '@src/tracking/events/NotShownEvent';
 
 const notShownReasonToLegacyName = new Map<BannerNotShownReasons, string>( [
 	[ BannerNotShownReasons.SizeIssue, 'size_issue' ],
@@ -14,7 +15,7 @@ export const DEFAULT_UNKNOWN_EVENT = 'not-shown-for-unknown-reasons';
 /**
  * @deprecated Will be removed when the new tracking schema is implemented
  */
-export function mapNotShownEvent( notShownEvent: TrackingEvent ): WMDESizeIssueEvent|WMDELegacyBannerEvent {
+export function mapNotShownEvent( notShownEvent: TrackingEvent<NotShownCustomData> ): WMDESizeIssueEvent|WMDELegacyBannerEvent {
 	if ( notShownEvent.customData.reason === BannerNotShownReasons.SizeIssue ) {
 		return new WMDESizeIssueEvent(
 			notShownReasonToLegacyName.get( BannerNotShownReasons.SizeIssue ),

@@ -13,7 +13,7 @@ CtrlEventMap.set( BannerSubmitEvent.EVENT_NAME,
 );
 CtrlEventMap.set( UpgradeToYearlyEvent.EVENT_NAME,
 	( e: BannerSubmitEvent ): WMDELegacyBannerEvent => {
-		return new WMDELegacyBannerEvent( e.customData.optionSelected, 1 );
+		return new WMDELegacyBannerEvent( e.userChoice, 1 );
 	}
 );
 
