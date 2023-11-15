@@ -7,6 +7,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 const closeSourceToLegacyEventName = new Map<string, string>( [
 	[ LegacyCloseSources.AlreadyDonatedGoAway, 'banner-closed-already-donated' ],
 	[ LegacyCloseSources.AlreadyDonatedMaybeLater, 'banner-closed-already-donated-maybelater' ],
+	[ LegacyCloseSources.SoftCloseAlreadyDonated, 'banner-closed-soft-close-already-donated' ],
 	[ LegacyCloseSources.FullPageBanner, 'banner-closed-full' ],
 	[ LegacyCloseSources.MaybeLater, 'banner-closed-maybelater' ],
 	[ LegacyCloseSources.TimeOut, 'micro-banner-ignored' ]
@@ -30,6 +31,10 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 
 		if ( event.userChoice === CloseChoices.TimeOut ) {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.TimeOut ), 0.1 );
+		}
+
+		if ( event.userChoice === CloseChoices.NoMoreBannersForCampaign ) {
+			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.SoftCloseAlreadyDonated ), 0.1 );
 		}
 	}
 

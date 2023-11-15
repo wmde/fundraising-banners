@@ -1,0 +1,13 @@
+@use '@src/themes/Mikings/variables/colors';
+@use '@src/themes/Mikings/variables/breakpoints';
+
+.wmde-banner-soft-close-button-already-donated {
+	background: colors.$white;
+	border: 1px solid colors.$secondary;
+	color: colors.$secondary;
+	min-width: 190px;
+
+	@include breakpoints.phone-xs-up {
+		min-width: 190px;
+	}
+}
