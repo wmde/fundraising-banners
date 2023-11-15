@@ -113,7 +113,7 @@ class PageWPORG implements Page {
 		return this;
 	}
 
-	public setCloseCookieIfNecessary( closeEvent: TrackingEvent ): Page {
+	public setCloseCookieIfNecessary( closeEvent: TrackingEvent<void> ): Page {
 		switch ( closeEvent.userChoice ) {
 			case CloseChoices.Close:
 			case CloseChoices.TimeOut:

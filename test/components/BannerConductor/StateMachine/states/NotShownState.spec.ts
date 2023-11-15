@@ -8,8 +8,11 @@ import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 
 describe( 'NotShownState', function () {
 	it( 'tracks not shown event on enter', function () {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 100 } );
+		Object.defineProperty( window, 'innerHeight', { writable: true, configurable: true, value: 200 } );
+
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( {} );
+		const trackingEvent = new NotShownEvent( { bannerHeight: 0, viewportHeight: 200, viewportWidth: 100, reason: BannerNotShownReasons.DisallowedNamespace } );
 		const state = new NotShownState( BannerNotShownReasons.DisallowedNamespace, new PageStub(), tracker, new ResizeHandlerStub(), 0 );
 
 		state.enter();

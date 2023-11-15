@@ -7,12 +7,12 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class ClosedState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Closed;
-	private readonly _closeEvent: TrackingEvent;
+	private readonly _closeEvent: TrackingEvent<void>;
 	private _page: Page;
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
 
-	public constructor( closeEvent: TrackingEvent, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor( closeEvent: TrackingEvent<void>, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
 		super();
 		this._closeEvent = closeEvent;
 		this._page = page;
