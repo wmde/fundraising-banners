@@ -2,6 +2,7 @@
 
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
+@use 'FallbackBanner';
 @use 'MainBanner' with (
 	$banner-height: 357px,
 	$form-width: 300px
