@@ -25,6 +25,8 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		switch ( e.feature ) {
 			case 'UpgradeToYearlyForm':
 				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, createViewportInfo(), 1 );
+			case 'UpgradeToMonthlyForm':
+				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, createViewportInfo(), 1 );
 			default:
 				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
 		}

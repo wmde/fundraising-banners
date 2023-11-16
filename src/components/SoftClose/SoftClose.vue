@@ -45,7 +45,7 @@ interface Props {
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	secondsTotal: 35
+	secondsTotal: 15
 } );
 
 const timer = ref<number>( 0 );

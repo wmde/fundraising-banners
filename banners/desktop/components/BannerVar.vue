@@ -39,7 +39,17 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToMonthlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToMonthlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<UpgradeToMonthlyForm
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+							:suggestions="[ {
+								lowerRangeLimit: 11,
+								upperRangeLimit: 100,
+								suggestedAmount: Math.ceil( formModel.numericAmount.value / 10 )
+							} ]"
+						/>
 					</template>
 
 				</MultiStepDonation>
@@ -59,7 +69,6 @@
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
 		/>
 
 		<FundsModal
@@ -83,7 +92,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from './SoftCloseWithXButton.vue';
 import MainBanner from './MainBanner.vue';
@@ -98,8 +107,8 @@ import UpgradeToMonthlyForm from '@src/components/DonationForm/Forms/UpgradeToMo
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+	createSubmittableMainDonationFormUpgradeOptions
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormUpgradeOptions';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
@@ -139,28 +148,17 @@ const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 
-const shouldSuggestMonthly = computed( (): boolean => formModel.numericAmount.value >= 11 && formModel.numericAmount.value <= 100 );
-
 let stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToMonthlyFormStep ),
+	createSubmittableMainDonationFormUpgradeOptions(
+		formModel,
+		FormStepNames.UpgradeToYearlyFormStep,
+		FormStepNames.UpgradeToMonthlyFormStep,
+		11,
+		100
+	),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep ),
 	createSubmittableUpgradeToMonthly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
-
-watch( formModel.numericAmount, () => {
-	if ( shouldSuggestMonthly.value ) {
-		console.log("amount is bigger than 11")
-		stepControllers = [
-			createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToMonthlyFormStep ),
-			createSubmittableUpgradeToMonthly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
-		];
-	} else {
-		console.log("amount is yearly")
-		stepControllers = [
-			createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-			createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
-		];
-	}
-} );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

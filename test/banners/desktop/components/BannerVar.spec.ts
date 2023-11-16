@@ -14,7 +14,7 @@ import {
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToMonthlyOrYearly';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -95,12 +95,17 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectMainDonationFormGoesToUpgradeYearlyOnVeryLowAmounts' ],
+			[ 'expectMainDonationFormGoesToUpgradeYearlyOnHighAmounts' ],
+			[ 'expectMainDonationFormGoesToUpgradeMonthly' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
 			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToMonthlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToMonthlyFormSubmitsDontUpgrade' ],
+			[ 'expectUpgradeToMonthlyFormGoesToMainDonation' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

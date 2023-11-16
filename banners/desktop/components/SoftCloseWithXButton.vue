@@ -31,7 +31,7 @@
 			</div>
 		</div>
 
-		<ButtonClose @close="onXButtonClick"/>
+		<ButtonClose @close="onCloseClick"/>
 
 	</div>
 
@@ -52,7 +52,7 @@ const props = withDefaults( defineProps<Props>(), {
 const timer = ref<number>( 0 );
 const secondsRemaining = ref<number>( props.secondsTotal );
 
-const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose', 'maybeLater7Days' ] );
+const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose' ] );
 
 const onMaybeLaterClick = (): void => {
 	window.clearInterval( timer.value );
@@ -62,11 +62,6 @@ const onMaybeLaterClick = (): void => {
 const onCloseClick = (): void => {
 	window.clearInterval( timer.value );
 	emit( 'close' );
-};
-
-const onXButtonClick = (): void => {
-	window.clearInterval( timer.value );
-	emit( 'maybeLater7Days' );
 };
 
 onMounted( () => {

@@ -20,6 +20,10 @@ export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.AlreadyDonatedGoAway ), 0.1 );
 		}
 
+		if ( event.userChoice === CloseChoices.Close ) {
+			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.AlreadyDonatedMaybeLater ), 0.1 );
+		}
+
 		if ( event.userChoice === CloseChoices.MaybeLater ) {
 			return new WMDELegacyBannerEvent( closeSourceToLegacyEventName.get( LegacyCloseSources.AlreadyDonatedMaybeLater ), 0.1 );
 		}
