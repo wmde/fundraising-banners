@@ -1,0 +1,11 @@
+.wmde-banner {
+	&-fallback {
+		width: 100%;
+		background: #984acc;
+		height: 150px;
+
+		@media ( min-width: 400px ) {
+			height: 250px;
+		}
+	}
+}
