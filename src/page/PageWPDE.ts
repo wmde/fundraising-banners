@@ -81,9 +81,8 @@ class PageWPDE implements Page {
 	}
 
 	public getMaxBannerImpressions(): number {
-		// WPDE banners have a hardcoded limit of 10
-		// TODO: Change this to 7 when this ticket is completed https://phabricator.wikimedia.org/T349843
-		return 10;
+		// WPDE banners have a hardcoded limit of 7
+		return 7;
 	}
 }
 
