@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/english/components/BannerCtrl.vue';
+import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -22,7 +22,7 @@ import { bannerMainFeatures } from '@test/features/MainBanner';
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
