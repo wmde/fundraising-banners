@@ -32,7 +32,7 @@ describe( 'mapNotShownEvent', () => {
 		);
 
 		expect( legacyEvent ).toStrictEqual(
-			new WMDELegacyBannerEvent( 'namespace_tracking', 0 )
+			new WMDELegacyBannerEvent( 'untracked-not-shown-event', 0 )
 		);
 	} );
 
