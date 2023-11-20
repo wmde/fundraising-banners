@@ -1,6 +1,7 @@
 import { describe, expect, it, afterEach, beforeEach, vi } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 
 describe( 'SoftClose', function () {
 
@@ -75,5 +76,54 @@ describe( 'SoftClose', function () {
 		} );
 		vi.runAllTimers();
 		expect( wrapper.emitted( 'timeOutClose' ).length ).toBe( 1 );
+	} );
+
+	it( 'should not show the extra close icon', () => {
+		const wrapper = shallowMount( SoftClose, {
+			props: {
+				showCloseIcon: false
+			},
+			global: {
+				mocks: {
+					$translate: ( key: string ) => key
+				}
+			}
+		} );
+
+		expect( wrapper.classes() ).not.toContain( 'wmde-banner-soft-close-with-close-icon' );
+		expect( wrapper.findComponent( ButtonClose ).exists() ).toBeFalsy();
+	} );
+
+	it( 'should show the extra close icon', () => {
+		const wrapper = shallowMount( SoftClose, {
+			props: {
+				showCloseIcon: true
+			},
+			global: {
+				mocks: {
+					$translate: ( key: string ) => key
+				}
+			}
+		} );
+
+		expect( wrapper.classes() ).toContain( 'wmde-banner-soft-close-with-close-icon' );
+		expect( wrapper.findComponent( ButtonClose ).exists() ).toBeTruthy();
+	} );
+
+	it( 'should emit close event when user clicks close icon', function () {
+		const wrapper = mount( SoftClose, {
+			props: {
+				showCloseIcon: true
+			},
+			global: {
+				mocks: {
+					$translate: ( key: string ) => key
+				}
+			}
+		} );
+
+		wrapper.findComponent( ButtonClose ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'close' ).length ).toBe( 1 );
 	} );
 } );
