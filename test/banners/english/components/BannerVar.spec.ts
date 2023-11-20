@@ -110,7 +110,9 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ],
+			[ 'expectShowsCloseIcon' ],
+			[ 'expectCloseIconEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
