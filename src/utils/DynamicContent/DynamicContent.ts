@@ -3,6 +3,7 @@ import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProg
 export interface DynamicContent {
 	currentDayName: string;
 	currentDate: string;
+	currentDateAndTime: () => string;
 	daysLeftSentence: string;
 	campaignDaySentence: string;
 	visitorsVsDonorsSentence: string;

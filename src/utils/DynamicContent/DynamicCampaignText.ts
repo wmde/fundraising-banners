@@ -13,6 +13,7 @@ import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
 import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
+import { CurrentDateAndTime } from '@src/utils/DynamicContent/generators/CurrentDateAndTime';
 
 export default class DynamicCampaignText implements DynamicContent {
 	private readonly _date: Date;
@@ -24,6 +25,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _campaignTimeRange: TimeRange;
 	private _campaignProjection: CampaignProjection;
 	private _progressBarContent: ProgressBarContent;
+	private _currentDateAndTime: CurrentDateAndTime;
 
 	public constructor( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters, impressionCount: ImpressionCount ) {
 		this._date = date;
@@ -32,6 +34,7 @@ export default class DynamicCampaignText implements DynamicContent {
 		this._campaignParameters = campaignParameters;
 		this._impressionCount = impressionCount;
 		this._cache = new Map<string, string>();
+		this.currentDateAndTime = this.currentDateAndTime.bind( this );
 	}
 
 	private getCampaignTimeRange(): TimeRange {
@@ -62,6 +65,18 @@ export default class DynamicCampaignText implements DynamicContent {
 		return this.getCachedValue( 'currentDate', () => {
 			return new CurrentDate( this._date, this._translator, this._formatters.ordinal ).getText();
 		} );
+	}
+
+	/**
+	 * Current time returns time to the minute, and needs to be updated dynamically
+	 * This means we can't cache the return value, so instead manually cache the CurrentTime object
+	 */
+	public currentDateAndTime(): string {
+		if ( !this._currentDateAndTime ) {
+			this._currentDateAndTime = new CurrentDateAndTime( this._translator, this._formatters.ordinal, this._formatters.time );
+		}
+
+		return this._currentDateAndTime.getText( new Date() );
 	}
 
 	public get currentDayName(): string {

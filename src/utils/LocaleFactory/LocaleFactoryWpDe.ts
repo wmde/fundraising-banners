@@ -6,6 +6,7 @@ import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';
+import { TimeDe } from '@src/utils/DynamicContent/formatters/TimeDe';
 
 export class LocaleFactoryWpDe implements LocaleFactory {
 	private readonly _currencyFormatter: Currency;
@@ -22,7 +23,8 @@ export class LocaleFactoryWpDe implements LocaleFactory {
 		return {
 			currency: this._currencyFormatter,
 			ordinal: new OrdinalDe(),
-			integer: new IntegerDe()
+			integer: new IntegerDe(),
+			time: new TimeDe()
 		};
 	}
 
