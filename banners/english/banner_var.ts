@@ -4,7 +4,7 @@ import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
-import getBannerDelay from '@src/utils/getBannerDelay';
+import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
@@ -30,14 +30,15 @@ const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
+const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'english' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: getBannerDelay( 7500 ),
+		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {

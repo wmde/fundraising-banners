@@ -137,33 +137,29 @@ describe( 'TrackerWPDE', function () {
 
 	it( 'should always track in "devMode" and ignore tracking rate', () => {
 		window.TestTracker = { trackEvent: vi.fn() };
-		const windowLocationBackup = window.location;
-		window.location = { search: '....devMode...' };
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
+			new Map<string, number>( [ [ 'some-action', 0 ] ] ),
+			{ isInDevMode: true, runsInDevEnvironment: true }
+		);
 
 		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
 		expect( window.TestTracker.trackEvent ).toHaveBeenCalled();
-
-		window.location = windowLocationBackup;
 	} );
 
 	it( 'only tracks known events', () => {
 		window.TestTracker = { trackEvent: vi.fn() };
-		const windowLocationBackup = window.location;
-		window.location = { search: '....devMode...' };
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'some-action', 0 ] ] ) );
+			new Map<string, number>( [ [ 'some-action', 0 ] ] ),
+			{ isInDevMode: true, runsInDevEnvironment: true }
+		);
 
 		tracker.trackEvent( { eventName: 'unknown-event', feature: '', userChoice: '', customData: undefined } );
 
 		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
-
-		window.location = windowLocationBackup;
 	} );
 } );

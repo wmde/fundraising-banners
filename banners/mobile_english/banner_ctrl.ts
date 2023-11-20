@@ -4,7 +4,7 @@ import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerCtrl.vue';
-import getBannerDelay from '@src/utils/getBannerDelay';
+import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
@@ -31,7 +31,8 @@ const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
+const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
 const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile_english' ) - impressionCount.overallCountIncremented, 0 );
@@ -39,7 +40,7 @@ const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile_eng
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: getBannerDelay( 7500 ),
+		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
