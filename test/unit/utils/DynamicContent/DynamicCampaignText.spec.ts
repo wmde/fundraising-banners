@@ -45,7 +45,10 @@ const impressionCount: ImpressionCount = {
 	bannerCountIncremented: 43,
 	overallCount: 543,
 	overallCountIncremented: 544,
-	incrementImpressionCounts(): void {}
+	incrementImpressionCounts(): void {},
+	getRemainingImpressions( maxImpressions: number ): number {
+		return maxImpressions;
+	}
 };
 
 describe( 'DynamicCampaignText', () => {

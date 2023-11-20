@@ -33,9 +33,8 @@ const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const currencyFormatter = localeFactory.getCurrencyFormatter();
-const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile_english' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -46,7 +45,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile_english' ) )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

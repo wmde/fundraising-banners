@@ -9,4 +9,5 @@ export interface ImpressionCount {
 	// TODO research ways to make this reactive to not have to add 1 here manually
 	bannerCountIncremented: number;
 	incrementImpressionCounts: () => void;
+	getRemainingImpressions: ( maxImpressions: number ) => number;
 }

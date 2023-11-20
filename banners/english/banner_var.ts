@@ -31,9 +31,8 @@ const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
-const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'english' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -43,7 +42,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

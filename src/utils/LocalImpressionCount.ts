@@ -1,15 +1,18 @@
 import hasLocalStorage from './hasLocalStorage';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 
 export class LocalImpressionCount implements ImpressionCount {
 	private readonly _bannerName: string;
 	private _overallCount: number;
 	private _bannerCount: number;
+	private _runtimeEnvironment: RuntimeEnvironment|null;
 
-	public constructor( bannerName: string ) {
+	public constructor( bannerName: string, runtimeEnvironment: RuntimeEnvironment|null = null ) {
 		this._bannerName = bannerName;
 		this._overallCount = 0;
 		this._bannerCount = 0;
+		this._runtimeEnvironment = runtimeEnvironment;
 
 		if ( !hasLocalStorage() ) {
 			return;
@@ -70,5 +73,12 @@ export class LocalImpressionCount implements ImpressionCount {
 
 	public get overallCountIncremented(): number {
 		return this._overallCount + 1;
+	}
+
+	public getRemainingImpressions( maxImpressions: number ): number {
+		if ( this._runtimeEnvironment?.isInDevMode ) {
+			return maxImpressions;
+		}
+		return Math.max( 0, maxImpressions - this.overallCountIncremented );
 	}
 }

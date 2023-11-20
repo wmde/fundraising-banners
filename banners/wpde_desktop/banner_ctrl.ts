@@ -35,9 +35,8 @@ const tracking = {
 // This is channel specific and must be changed for wp.org banners
 const page = new PageWPDE( tracking );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
-const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap, runtimeEnvironment );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -47,7 +46,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions() )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
