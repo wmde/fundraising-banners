@@ -27,7 +27,7 @@ describe( 'SubmittableMainDonationFormWhenOverAmount', () => {
 		[ PaymentMethods.BANK_TRANSFER.value ],
 		[ PaymentMethods.CREDIT_CARD.value ],
 		[ PaymentMethods.DIRECT_DEBIT.value ]
-	] )( 'submits when payment method is Sofort', async ( paymentMethod: string ) => {
+	] )( 'goes to upgrade when payment method is not Sofort', async ( paymentMethod: string ) => {
 		formModel.paymentMethod.value = paymentMethod;
 		formModel.interval.value = Intervals.ONCE.value;
 		const donationForm = createSubmittableMainDonationFormWhenOverAmount( formModel, 'yearly', 100 );
@@ -38,7 +38,7 @@ describe( 'SubmittableMainDonationFormWhenOverAmount', () => {
 		expect( stepNavigation.goToStep ).toHaveBeenCalledWith( 'yearly' );
 	} );
 
-	it( 'goes to upgrade when payment method is not Sofort', async () => {
+	it( 'submits when payment method is Sofort', async () => {
 		formModel.paymentMethod.value = PaymentMethods.SOFORT.value;
 		formModel.interval.value = Intervals.ONCE.value;
 		const donationForm = createSubmittableMainDonationFormWhenOverAmount( formModel, 'yearly', 100 );
