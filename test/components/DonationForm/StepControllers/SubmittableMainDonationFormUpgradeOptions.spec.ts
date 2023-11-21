@@ -35,7 +35,7 @@ describe( 'SubmittableMainDonationFormUpgradeOptions', () => {
 		[ PaymentMethods.BANK_TRANSFER.value, '12', 'monthly' ],
 		[ PaymentMethods.CREDIT_CARD.value, '12', 'monthly' ],
 		[ PaymentMethods.DIRECT_DEBIT.value, '12', 'monthly' ]
-	] )( 'goes to correct step when payment method is not Sofort and amount is in upgrade range', async ( paymentMethod: string, selectedAmount: string, expectedPage: string ) => {
+	] )( 'goes to correct step when payment method is not Sofort', async ( paymentMethod: string, selectedAmount: string, expectedPage: string ) => {
 		formModel.paymentMethod.value = paymentMethod;
 		formModel.interval.value = Intervals.ONCE.value;
 		formModel.selectedAmount.value = selectedAmount;
