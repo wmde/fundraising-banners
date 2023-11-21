@@ -2,7 +2,7 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<InfoIcon fill="#990a00"/> <strong>An alle, die Wikipedia in Deutschland nutzen</strong>
+				<InfoIcon fill="#990a00"/> <strong>{{ currentDateTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
 			</p>
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
@@ -18,16 +18,22 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
+import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
+import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 
 const {
 	currentDayName,
 	currentDate,
+	getCurrentDateAndTime,
 	campaignDaySentence,
 	visitorsVsDonorsSentence
-}: DynamicContent = inject( 'dynamicCampaignText' );
+} = inject<DynamicContent>( 'dynamicCampaignText' );
+
+const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
+onMounted( startTimer );
+onUnmounted( stopTimer );
 
 </script>
