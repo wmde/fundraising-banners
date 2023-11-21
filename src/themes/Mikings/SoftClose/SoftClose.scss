@@ -68,5 +68,11 @@
 		&-countdown-bar-fill {
 			background-color: colors.$secondary;
 		}
+
+		&-with-close-icon {
+			.wmde-banner-soft-close-columns {
+				padding-right: 50px;
+			}
+		}
 	}
 }

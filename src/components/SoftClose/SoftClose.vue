@@ -1,5 +1,9 @@
 <template>
-	<div class="wmde-banner-soft-close" :style="{ '--wmde-banner-soft-close-seconds': secondsTotal + 's' }">
+	<div
+		class="wmde-banner-soft-close"
+		:class="{ 'wmde-banner-soft-close-with-close-icon': showCloseIcon }"
+		:style="{ '--wmde-banner-soft-close-seconds': secondsTotal + 's' }"
+	>
 		<div class="wmde-banner-soft-close-countdown-bar">
 			<div class="wmde-banner-soft-close-countdown-bar-fill"></div>
 		</div>
@@ -29,23 +33,29 @@
 				<div
 					class="wmde-banner-soft-close-countdown-text-wrapper"
 					v-html="$translate( 'soft-close-countdown-text', { seconds: secondsRemaining } )"
-				></div>
-		</div>
+				/>
 
-	</div>
+			</div>
+
+			<ButtonClose v-if="showCloseIcon" @close="onCloseClick"/>
+
+		</div>
 	</div>
 
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 
 interface Props {
-	secondsTotal?: number
+	secondsTotal?: number;
+	showCloseIcon?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	secondsTotal: 15
+	secondsTotal: 15,
+	showCloseIcon: false
 } );
 
 const timer = ref<number>( 0 );
