@@ -32,4 +32,7 @@ export enum LegacyCloseSources {
 
 	/** user pressed "maybe later" option on the already donated modal */
 	AlreadyDonatedMaybeLater = 'already-donated-maybe-later',
+
+	/** user pressed the 'x' close button on the softclose banner */
+	SoftCloseXButton = 'softclose-x-button',
 }

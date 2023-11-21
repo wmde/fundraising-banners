@@ -55,7 +55,6 @@
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
 		/>
 
 		<FundsModal
@@ -68,7 +67,7 @@
 			:is-visible="isAlreadyDonatedModalVisible"
 			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
 			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
+			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
 		>
 			<template #already-donated-content>
 				<AlreadyDonatedContent/>
@@ -81,7 +80,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import SoftClose from './SoftCloseWithXButton.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';

@@ -38,6 +38,20 @@
 						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
+					<template #[FormStepNames.UpgradeToMonthlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<UpgradeToMonthlyForm
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+							:suggestions="[ {
+								lowerRangeLimit: 11,
+								upperRangeLimit: 100,
+								suggestedAmount: Math.ceil( formModel.numericAmount.value / 10 )
+							} ]"
+						/>
+					</template>
+
 				</MultiStepDonation>
 			</template>
 
@@ -67,7 +81,7 @@
 			:is-visible="isAlreadyDonatedModalVisible"
 			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
 			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.MaybeLater )"
+			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
 		>
 			<template #already-donated-content>
 				<AlreadyDonatedContent/>
@@ -80,23 +94,27 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import SoftClose from './SoftCloseWithXButton.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
+import UpgradeToMonthlyForm from '@src/components/DonationForm/Forms/UpgradeToMonthlyForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+	createSubmittableMainDonationFormUpgradeOptions
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormUpgradeOptions';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import {
+	createSubmittableUpgradeToMonthly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToMonthly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -112,7 +130,8 @@ enum ContentStates {
 
 enum FormStepNames {
 	MainDonationFormStep = 'MainDonationForm',
-	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm',
+	UpgradeToMonthlyFormStep = 'UpgradeToMonthlyForm',
 }
 
 interface Props {
@@ -128,9 +147,17 @@ const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
-const stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
+
+let stepControllers = [
+	createSubmittableMainDonationFormUpgradeOptions(
+		formModel,
+		FormStepNames.UpgradeToYearlyFormStep,
+		FormStepNames.UpgradeToMonthlyFormStep,
+		11,
+		100
+	),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep ),
+	createSubmittableUpgradeToMonthly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
 watch( contentState, async () => {

@@ -15,12 +15,12 @@ import { CampaignParameters } from '@src/domain/CampaignParameters';
 export function getCampaignParameterOverride( campaignParameters: CampaignParameters ): CampaignParameters {
 	return {
 		...campaignParameters,
-		startDate: '2023-03-20',
+		startDate: '2023-10-30',
 		millionImpressionsPerDay: 10,
 		campaignProjection: {
 			...campaignParameters.campaignProjection,
 			donationCountBase: 100,
-			updatedAt: '2023-03-20'
+			updatedAt: '2023-10-30'
 		}
 	};
 }

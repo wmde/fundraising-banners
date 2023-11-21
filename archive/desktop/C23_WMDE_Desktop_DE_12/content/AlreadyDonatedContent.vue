@@ -7,7 +7,7 @@
 		</p>
         <p>
 			Falls Sie sich eine (weitere) Spende vorstellen können, dann klicken Sie "Vielleicht später". Falls
-			nicht, klicken Sie: "Im Moment nicht". In diesem Fall wird ein Cookie in Ihrem Browser gesetzt,
+			nicht, klicken Sie: "Fürs Erste reicht es". In diesem Fall wird ein Cookie in Ihrem Browser gesetzt,
 			der die Anzeige der Banner vorerst verhindert.
 		</p>
     </div>

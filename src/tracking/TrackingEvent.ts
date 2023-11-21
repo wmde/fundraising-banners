@@ -12,6 +12,7 @@ export type TrackingFeatureName = '' |
 	'MainDonationForm' |
 	'CustomAmountForm' |
 	'UpgradeToYearlyForm' |
+	'UpgradeToMonthlyForm' |
 	'AddressTypeForm';
 
 /**
