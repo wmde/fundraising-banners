@@ -52,6 +52,7 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
@@ -81,7 +82,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import SoftClose from './SoftCloseWithXButton.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
