@@ -24,8 +24,7 @@ const messages: TranslationMessages = {
 	'soft-close-prompt': 'Wikipedia später unterstützen?',
 	'use-of-funds-link': 'Was Ihre Spende bewirkt',
 	'payment-bank-transfer': 'Überweisung',
-	'payment-sofort': 'Klarna',
-	'soft-close-button-already-donated': 'Habe schon gespendet'
+	'payment-sofort': 'Klarna'
 };
 
 export default messages;

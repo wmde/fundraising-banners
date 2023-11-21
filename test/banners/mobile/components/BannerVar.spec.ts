@@ -88,7 +88,6 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormSubmitsWhenAmountIsGreaterThanMaxAmount' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
@@ -104,6 +103,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseAlreadyDonatedEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]

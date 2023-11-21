@@ -49,6 +49,7 @@ $height: 288px !default;
 			height: 25px;
 			text-align: center;
 			margin: 0 16px 16px;
+			white-space: nowrap;
 
 			&-background {
 				position: relative;
@@ -81,7 +82,6 @@ $height: 288px !default;
 				background: colors.$white;
 				padding: 0 5px;
 				z-index: 2;
-				white-space: nowrap;
 
 				@media ( min-width: 330px ) {
 					font-size: 16px;
@@ -108,6 +108,7 @@ $height: 288px !default;
 		&-button-preselect {
 			width: 50%;
 			height: 40px;
+			line-height: 40px;
 			border-radius: 20px;
 			font-weight: bold;
 			color: colors.$white;

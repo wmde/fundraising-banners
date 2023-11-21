@@ -10,16 +10,18 @@
 					<span class="wmde-banner-soft-close-prompt">{{ $translate( 'soft-close-prompt' ) }}</span>
 				</slot>
 				<div class="wmde-banner-soft-close-buttons">
-					<button
-						class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
-						@click="onMaybeLaterClick">
-						{{ $translate( 'soft-close-button-maybe-later' ) }}
-					</button>
-					<button
-						class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
-						@click="onCloseClick">
-						{{ $translate( 'soft-close-button-close' ) }}
-					</button>
+					<slot name="buttons" :timer="timer">
+						<button
+							class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+							@click="onMaybeLaterClick">
+							{{ $translate( 'soft-close-button-maybe-later' ) }}
+						</button>
+						<button
+							class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+							@click="onCloseClick">
+							{{ $translate( 'soft-close-button-close' ) }}
+						</button>
+					</slot>
 				</div>
 			</div>
 

@@ -34,6 +34,14 @@ const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): 
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.MaybeLater ) );
 };
 
+const expectEmitsSoftCloseAlreadyDonatedEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-soft-close-button-already-donated' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.NoMoreBannersForCampaign ) );
+};
+
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
 
@@ -63,6 +71,7 @@ export const softCloseFeatures: Record<string, ( wrapper: VueWrapper<any> ) => P
 	expectDoesNotShowSoftCloseOnFullBannerClose,
 	expectEmitsSoftCloseCloseEvent,
 	expectEmitsSoftCloseMaybeLaterEvent,
+	expectEmitsSoftCloseAlreadyDonatedEvent,
 	expectEmitsSoftCloseTimeOutEvent,
 	expectEmitsBannerContentChangedOnSoftClose,
 	expectDoesNotShowSoftCloseOnFinalBannerImpression

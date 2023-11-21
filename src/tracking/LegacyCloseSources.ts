@@ -15,6 +15,9 @@ export enum LegacyCloseSources {
 	/** user pressed "don't bother me again" option on the microbanner/softclosebanner */
 	SoftCloseBannerRejected = 'soft-close-banner-rejected',
 
+	/** user clicked already donated on the soft close */
+	SoftCloseAlreadyDonated = 'soft-close-already-donated',
+
 	/** when the softclosebanner countdown ends */
 	TimeOut = 'time-out-closed',
 
