@@ -34,7 +34,7 @@ export default class DynamicCampaignText implements DynamicContent {
 		this._campaignParameters = campaignParameters;
 		this._impressionCount = impressionCount;
 		this._cache = new Map<string, string>();
-		this.currentDateAndTime = this.currentDateAndTime.bind( this );
+		this.getCurrentDateAndTime = this.getCurrentDateAndTime.bind( this );
 	}
 
 	private getCampaignTimeRange(): TimeRange {
@@ -71,7 +71,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	 * Current time returns time to the minute, and needs to be updated dynamically
 	 * This means we can't cache the return value, so instead manually cache the CurrentTime object
 	 */
-	public currentDateAndTime(): string {
+	public getCurrentDateAndTime(): string {
 		if ( !this._currentDateAndTime ) {
 			this._currentDateAndTime = new CurrentDateAndTime( this._translator, this._formatters.ordinal, this._formatters.time );
 		}

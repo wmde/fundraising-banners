@@ -4,7 +4,7 @@ export function newDynamicContent(): DynamicContent {
 	return {
 		campaignDaySentence: '',
 		currentDate: '',
-		currentDateAndTime: () => '',
+		getCurrentDateAndTime: () => '',
 		currentDayName: '',
 		daysLeftSentence: 'daysLeftSentence',
 		donorsNeededSentence: '',
