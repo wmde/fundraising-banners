@@ -1,0 +1,18 @@
+@use '../../../components/FallbackBanner/SmallFooter';
+
+.wmde-banner-fallback {
+	@include SmallFooter.layout;
+
+	&-small-footer {
+		.wmde-banner-slider-pagination,
+		.wmde-banner-fallback-mini-footer {
+			height: 15px;
+		}
+
+		&-usage {
+			text-align: right;
+			margin-top: -15px;
+			font-size: 10px;
+		}
+	}
+}

@@ -1,0 +1,23 @@
+@use 'src/themes/Treedip/variables/globals';
+@use 'src/themes/Treedip/variables/colors';
+@use 'sass:color';
+
+.wmde-banner-fallback {
+	&-button {
+		width: 300px;
+		background: colors.$secondary;
+		color: colors.$white;
+		font-weight: bold;
+		line-height: 36px;
+		border: 0;
+		border-radius: 18px;
+		padding: 0 10px;
+		transition: background-color 500ms globals.$banner-easing;
+		cursor: pointer;
+
+		&:hover,
+		&:focus {
+			background: color.adjust( colors.$secondary, $lightness: -5% );
+		}
+	}
+}

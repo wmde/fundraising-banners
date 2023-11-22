@@ -5,6 +5,10 @@ export class ShownEvent implements TrackingEvent<void> {
 
 	public readonly eventName: string = ShownEvent.EVENT_NAME;
 	public readonly customData: void;
-	public readonly feature: TrackingFeatureName = 'Page';
+	public readonly feature: TrackingFeatureName;
 	public readonly userChoice: string = '';
+
+	public constructor( feature: TrackingFeatureName ) {
+		this.feature = feature;
+	}
 }

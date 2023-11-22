@@ -15,7 +15,7 @@ describe( 'VisibleState', function () {
 	it( 'sets banner size on resize', () => {
 		const page = new PageStub();
 		page.setSpace = vitest.fn( () => page );
-		const visibleState = new VisibleState( page, new ImpressionCountStub(), tracker );
+		const visibleState = new VisibleState( 'Page', page, new ImpressionCountStub(), tracker );
 
 		visibleState.onResize( 42 );
 
@@ -26,7 +26,7 @@ describe( 'VisibleState', function () {
 	it( 'sets banner size on content change', () => {
 		const page = new PageStub();
 		page.setSpace = vitest.fn( () => page );
-		const visibleState = new VisibleState( page, new ImpressionCountStub(), tracker );
+		const visibleState = new VisibleState( 'Page', page, new ImpressionCountStub(), tracker );
 
 		visibleState.onContentChanged( 42 );
 
@@ -35,8 +35,8 @@ describe( 'VisibleState', function () {
 	} );
 
 	it( 'fires shown event on enter', async () => {
-		const visibleState = new VisibleState( new PageStub(), new ImpressionCountStub(), tracker );
-		const shownEvent = new ShownEvent();
+		const visibleState = new VisibleState( 'Page', new PageStub(), new ImpressionCountStub(), tracker );
+		const shownEvent = new ShownEvent( 'Page' );
 
 		await visibleState.enter();
 
@@ -47,7 +47,7 @@ describe( 'VisibleState', function () {
 	it( 'increases banner impression count on enter', async () => {
 		const impressionCountStub = new ImpressionCountStub();
 		impressionCountStub.incrementImpressionCounts = vitest.fn();
-		const visibleState = new VisibleState( new PageStub(), impressionCountStub, tracker );
+		const visibleState = new VisibleState( 'Page', new PageStub(), impressionCountStub, tracker );
 
 		await visibleState.enter();
 

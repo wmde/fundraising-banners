@@ -32,7 +32,7 @@ describe( 'TrackerWPDE', function () {
 
 	test.each( [
 		[ new CloseEvent( 'SoftClose', 'close' ), 'banner-closed-close' ],
-		[ new ShownEvent(), 'banner-shown' ],
+		[ new ShownEvent( 'Page' ), 'banner-shown' ],
 		[ new CustomAmountChangedEvent( 'increased' ), 'increased-amount' ],
 		[ new CustomAmountChangedEvent( 'decreased' ), 'decreased-amount' ],
 		[ new FormStepShownEvent( 'UpgradeToYearlyForm' ), 'form-step-shown-UpgradeToYearlyForm' ],
