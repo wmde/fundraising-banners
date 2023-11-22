@@ -8,6 +8,7 @@ describe( 'ProgressBar.vue', () => {
 	const dynamicCampaignContent: DynamicContent = {
 		campaignDaySentence: '',
 		currentDate: '',
+		getCurrentDateAndTime: () => '',
 		currentDayName: '',
 		daysLeftSentence: 'daysLeftSentence',
 		donorsNeededSentence: '',

@@ -6,6 +6,7 @@ import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { UseOfFundsEnLoader } from '@environment/UseOfFundsEnLoader';
+import { TimeEn } from '@src/utils/DynamicContent/formatters/TimeEn';
 
 export class LocaleFactoryEn implements LocaleFactory {
 	private readonly _currencyFormatter: Currency;
@@ -22,7 +23,8 @@ export class LocaleFactoryEn implements LocaleFactory {
 		return {
 			currency: this._currencyFormatter,
 			ordinal: new OrdinalEn(),
-			integer: new IntegerEn()
+			integer: new IntegerEn(),
+			time: new TimeEn()
 		};
 	}
 

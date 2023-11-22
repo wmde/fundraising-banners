@@ -4,6 +4,6 @@ import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 
 export interface LocaleFactory {
 	getCurrencyFormatter(): Currency;
-	getFormatters(): Formatters
+	getFormatters(): Formatters;
 	getUseOfFundsLoader(): FundsContentLoader;
 }

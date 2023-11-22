@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import DynamicCampaignText from '@src/utils/DynamicContent/DynamicCampaignText';
 import { Translator } from '@src/Translator';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
@@ -8,10 +8,12 @@ import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { CampaignParameters } from '@src/domain/CampaignParameters';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
+import { TimeEn } from '@src/utils/DynamicContent/formatters/TimeEn';
 
 const translator = new Translator( {
 	'campaign-day-nth-day': 'campaign day {{days}}',
 	'date-month-11': 'current month {{day}}',
+	'date-month-time-11': 'current month {{day}} current time {{time}}',
 	'day-name-friday': 'current day name',
 	'prefix-days-left': 'only',
 	'suffix-days-left': 'left',
@@ -22,7 +24,7 @@ const translator = new Translator( {
 	'amount-total': 'Progress total',
 	'missing-amount': 'Progress missing'
 } );
-const formatters: Formatters = { currency: new CurrencyEn(), ordinal: new OrdinalEn(), integer: new IntegerEn() };
+const formatters: Formatters = { currency: new CurrencyEn(), ordinal: new OrdinalEn(), integer: new IntegerEn(), time: new TimeEn() };
 const campaignParameters: CampaignParameters = {
 	campaignProjection: {
 		averageAmountPerDonation: 20,
@@ -50,6 +52,7 @@ describe( 'DynamicCampaignText', () => {
 	let dynamicCampaignText: DynamicContent;
 
 	beforeEach( () => {
+		vi.useFakeTimers();
 		dynamicCampaignText = new DynamicCampaignText(
 			new Date( 2023, 10, 10, 12, 0, 0 ),
 			translator,
@@ -59,12 +62,23 @@ describe( 'DynamicCampaignText', () => {
 		);
 	} );
 
+	afterEach( () => {
+		vi.useRealTimers();
+	} );
+
 	it( 'Gets the campaign day sentence', () => {
 		expect( dynamicCampaignText.campaignDaySentence ).toBe( 'campaign day 8th' );
 	} );
 
 	it( 'Gets the current date', () => {
 		expect( dynamicCampaignText.currentDate ).toBe( 'current month 10th' );
+	} );
+
+	it( 'Gets the current time', () => {
+		vi.setSystemTime( new Date( 2023, 10, 10, 13, 42, 0 ) );
+		// In some test environments the output of Date.toLocaleString includes the code for a space,
+		// but in others it doesn't. To fix that we manually replace it in this test
+		expect( dynamicCampaignText.getCurrentDateAndTime().replace( '\u202f', ' ' ) ).toBe( 'current month 10th current time 1:42 pm' );
 	} );
 
 	it( 'Gets the current day name', () => {
