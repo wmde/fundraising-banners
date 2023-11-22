@@ -2,8 +2,9 @@ import { createVueApp } from '@src/createVueApp';
 
 import './styles/styles.scss';
 
-import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
+import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerVar.vue';
+import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -24,11 +25,12 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { createFallbackDonationLink } from '@src/createFallbackDonationLink';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
-const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 400 ) );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
@@ -41,10 +43,13 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) )
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
+		donationLink: createFallbackDonationLink( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
+	fallbackBanner: FallbackBanner,
+	minWidthForMainBanner: 800,
 	impressionCount
 } );
 

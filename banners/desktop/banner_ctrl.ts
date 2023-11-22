@@ -25,6 +25,7 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { createFallbackDonationLink } from '@src/createFallbackDonationLink';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -42,7 +43,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) )
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
+		donationLink: createFallbackDonationLink( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -64,7 +66,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { des: '1' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

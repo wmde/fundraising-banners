@@ -11,7 +11,7 @@ import { VisibleState } from '@src/components/BannerConductor/StateMachine/state
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -44,8 +44,8 @@ export class StateFactory {
 		return new ShowingState( this._page, this._bannerConfig.transitionDuration );
 	}
 
-	public newVisibleState(): BannerState {
-		return new VisibleState( this._page, this._impressionCount, this._tracker );
+	public newVisibleState( shownEventFeature: TrackingFeatureName ): BannerState {
+		return new VisibleState( shownEventFeature, this._page, this._impressionCount, this._tracker );
 	}
 
 	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {

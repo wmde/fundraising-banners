@@ -11,8 +11,12 @@ import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 import { AlreadyDonatedShownEvent } from '@src/tracking/events/AlreadyDonatedShownEvent';
+import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
+import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
+	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ CustomAmountChangedEvent.EVENT_NAME,
@@ -30,5 +34,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 			default:
 				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
 		}
-	} ]
+	} ],
+	[ FallbackBannerSubmitEvent.EVENT_NAME, ( e: FallbackBannerSubmitEvent ): WMDESizeIssueEvent => new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 ) ]
 ] );

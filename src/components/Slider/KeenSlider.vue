@@ -23,22 +23,22 @@
 			</a>
 		</div>
 
-		<div class="wmde-banner-slider-pagination">
-			<button
-				v-for="idx in slider?.slides.length" :key="idx"
-				:class="[ 'wmde-banner-slider-pagination-dot', { 'is-active': currentSlide === idx - 1 } ]"
-				@click="() => goToSlide( idx - 1 )"
-			/>
-		</div>
+		<KeenSliderNavigation
+			v-if="withPagination"
+			:current-slide="currentSlide"
+			:slide-count="slider?.slides.length"
+			@goToSlide="goToSlide"
+		/>
 	</div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
+import KeenSliderNavigation from '@src/components/Slider/KeenSliderNavigation.vue';
 
 enum SliderPlayingStates {
 	PENDING = 'wmde-banner-slider--pending',
@@ -49,7 +49,8 @@ enum SliderPlayingStates {
 interface Props {
 	interval?: number;
 	startDelay?: number;
-	withNavigation: boolean;
+	withNavigation?: boolean;
+	withPagination?: boolean;
 	sliderOptions?: KeenSliderOptions;
 	play?: boolean;
 }
@@ -58,9 +59,12 @@ const props = withDefaults( defineProps<Props>(), {
 	sliderOptions: () => ( {} ),
 	interval: 5000,
 	startDelay: 0,
+	withPagination: true,
+	withNavigation: true,
 	play: false
 } );
 
+const emit = defineEmits( [ 'slide-changed' ] );
 const sliderPlayingState = ref<SliderPlayingStates>( SliderPlayingStates.PENDING );
 const startAnimationTimeout = ref<number>( 0 );
 const timer = ref<number>( 0 );
@@ -73,6 +77,7 @@ const [ container, slider ] = useKeenSlider( {
 	loop: false,
 	slideChanged: ( s ) => {
 		currentSlide.value = s.track.details.rel;
+		emit( 'slide-changed', currentSlide.value, s.slides.length );
 	}
 } );
 
@@ -114,5 +119,9 @@ const goToSlide = ( idx: number ): void => {
 	stopAutoplay();
 	slider.value.moveToIdx( idx );
 };
+
+onMounted( () => {
+	emit( 'slide-changed', currentSlide.value, slider.value.slides.length );
+} );
 
 </script>

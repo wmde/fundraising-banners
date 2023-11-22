@@ -56,6 +56,17 @@ describe( 'KeenSlider', () => {
 		expect( wrapper.find( '.wmde-banner-slide:nth-child(2) .wmde-banner-slide--current' ).exists() ).toBeTruthy();
 	} );
 
+	it.todo( 'should emit when the slide changes', async () => {
+		const wrapper = getWrapper();
+		await wrapper.setProps( { play: true } );
+
+		await wrapper.find( '.wmde-banner-slider-navigation-next' ).trigger( 'click' );
+		await vi.advanceTimersByTimeAsync( 200 );
+
+		expect( wrapper.emitted( 'slide-changed' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'slide-changed' )[ 0 ][ 0 ] ).toBe( 1 );
+	} );
+
 	it( 'should start after a delay if one is passed', async () => {
 		const wrapper = getWrapper();
 
@@ -91,6 +102,18 @@ describe( 'KeenSlider', () => {
 
 		expect( wrapper.find( '.wmde-banner-slider-navigation-previous' ).exists() ).toBe( true );
 		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( true );
+	} );
+
+	it( 'should render pagination', async function () {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { withPagination: false } );
+
+		expect( wrapper.find( '.wmde-banner-slider-pagination' ).exists() ).toBeFalsy();
+
+		await wrapper.setProps( { withPagination: true } );
+
+		expect( wrapper.find( '.wmde-banner-slider-pagination' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when the slider is clicked', async () => {
