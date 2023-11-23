@@ -3,7 +3,10 @@
 		<header class="header">
 			<div class="header-left">
 				<h1>FUN Forge</h1>
-				<a class="header-link header-git" target="_blank" :href="`https://github.com/wmde/fundraising-banners/tree/${branchName}`">
+				<a
+					class="header-link header-git"
+					target="_blank"
+					:href="`https://github.com/wmde/fundraising-banners/tree/${branchName}`">
 					<IconGit /> {{ branchName }}
 				</a>
 			</div>
@@ -21,6 +24,7 @@
 					class="campaign current-branch"
 					:campaign="currentCampaign"
 					:compile-info="compileInfo[ currentCampaign.banners.ctrl.pageName ]"
+					:pull-request-url="campaignUrlMap[ currentCampaign.campaign ]"
 					:style="{ '--index': 0 }"
 					@doScreenshots="onDoScreenshots"
 				/>
@@ -30,6 +34,7 @@
 					class="campaign"
 					:campaign="campaign"
 					:compile-info="compileInfo[ campaign.banners.ctrl.pageName ]"
+					:pull-request-url="campaignUrlMap[ campaign.campaign ]"
 					:style="{ '--index': Number( index ) + 1 }"
 					@doScreenshots="onDoScreenshots"
 				/>
@@ -57,18 +62,40 @@ const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
 
 const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
-const currentCampaign = computed( (): Campaign => campaignList.value.find( ( c: Campaign ) => c.campaign === branchName.value ) );
-const filteredCampaignList = computed( (): Campaign[] => campaignList.value.filter( ( c: Campaign ) => c.campaign !== branchName.value ) );
+const currentCampaign = computed( (): Campaign =>
+	campaignList.value.find( ( c: Campaign ) => c.campaign === branchName.value ) );
+const filteredCampaignList = computed( (): Campaign[] =>
+	campaignList.value.filter( ( c: Campaign ) => c.campaign !== branchName.value ) );
 
-onMounted( () => {
-	fetch( '/compiled-banners/' )
-		.then( async res => {
-			if ( !res.ok ) {
-				return;
-			}
-			const fileList = await res.text();
-			compileInfo.value = parseCompileInfo( fileList );
+const campaignUrlMap = ref<Record<string, string>>( {} );
+
+const updateFileList = async (): Promise<void> => {
+	const fileList = await fetch( '/compiled-banners/' ).then( response => response.ok ? response.text() : '' );
+	if ( fileList ) {
+		compileInfo.value = parseCompileInfo( fileList );
+	}
+};
+
+const updatePullRequestInfo = async (): Promise<void> => {
+	const allPullRequests = await fetch( 'https://api.github.com/repos/wmde/fundraising-banners/pulls?state=all' )
+		.then( response => response.json() );
+
+	if ( allPullRequests ) {
+		campaignList.value.forEach( ( campaign: Campaign ) => {
+			const matchingPr = allPullRequests.find( ( pr: { title: string; html_url: string } ) =>
+				campaign.campaign === pr.title );
+			campaignUrlMap.value[ campaign.campaign ] =
+				matchingPr ? matchingPr.html_url : 'https://github.com/wmde/fundraising-banners/pulls';
 		} );
+	}
+};
+
+onMounted( async () => {
+	try {
+		await Promise.all( [ updateFileList(), updatePullRequestInfo() ] );
+	} catch ( error ) {
+		console.error( 'Error:', error.message );
+	}
 } );
 
 const onDoScreenshots = ( campaignName: string ): void => {

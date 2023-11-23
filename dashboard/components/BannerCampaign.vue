@@ -17,6 +17,24 @@
 				>
 					{{ campaign.campaign }}
 				</a>
+				<a v-if="pullRequestUrl==='https://github.com/wmde/fundraising-banners/pulls'"
+					class="banner-actions-icon"
+					data-tooltip="Go to PR overview"
+					:href="pullRequestUrl"
+					target="_blank"
+					title="Go to PR overview"
+				>
+					<IconPullRequest/>
+				</a>
+				<a v-else
+					class="banner-actions-icon"
+					data-tooltip="Go to GitHub PR"
+					:href="pullRequestUrl"
+					target="_blank"
+					title="Go to GitHub PR"
+				>
+					<IconPullRequest/>
+				</a>
 			</div>
 			<div class="campaign-title-icons">
 				<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
@@ -74,13 +92,16 @@ import IconInfo from './IconInfo.vue';
 import DevicePad from './DevicePad.vue';
 import { Campaign } from '../../webpack/campaign_config_types';
 import { CompileInfo } from '../util';
+import IconPullRequest from './IconPullRequest.vue';
 
 interface Props {
 	campaign: Campaign,
-	compileInfo?: CompileInfo
+	compileInfo?: CompileInfo,
+	pullRequestUrl: string
 }
 
 defineProps<Props>();
+
 defineEmits( [ 'doScreenshots' ] );
 
 </script>
