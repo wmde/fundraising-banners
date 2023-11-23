@@ -1,23 +1,24 @@
 <template>
-    <div class="wmde-banner-wrapper" :class="contentState">
-        <MainBanner
-            @close="onCloseMain"
-            :banner-state="bannerState"
-            v-if="contentState === ContentStates.Main"
-        >
-            <template #banner-text>
-                <BannerText/>
-            </template>
+	<div class="wmde-banner-wrapper" :class="contentState">
+		<MainBanner
+			@close="onCloseMain"
+			:banner-state="bannerState"
+			:min-width-for-large-screen="1800"
+			v-if="contentState === ContentStates.Main"
+		>
+			<template #banner-text>
+				<BannerText/>
+			</template>
 
-            <template #banner-slides="{ play }: any">
-                <KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
+			<template #banner-slides="{ play }: any">
+				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
 
-                    <template #slides="{ currentSlide }: any">
-                        <BannerSlides :currentSlide="currentSlide"/>
-                    </template>
+					<template #slides="{ currentSlide }: any">
+						<BannerSlides :currentSlide="currentSlide"/>
+					</template>
 
-                </KeenSlider>
-            </template>
+				</KeenSlider>
+			</template>
 
 			<template #progress>
 				<ProgressBar amount-to-show-on-right="TARGET"/>
@@ -27,36 +28,38 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent"
+							@previous="previous"/>
 					</template>
 
-					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+					<template
+						#[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent"
+							@previous="previous"/>
 					</template>
 
-                </MultiStepDonation>
-            </template>
-            <template #footer>
-                <BannerFooter
-                    @showFundsModal="isFundsModalVisible = true"
-                />
-            </template>
-        </MainBanner>
+				</MultiStepDonation>
+			</template>
+			<template #footer>
+				<BannerFooter
+					@showFundsModal="isFundsModalVisible = true"
+				/>
+			</template>
+		</MainBanner>
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
-        <FundsModal
-            :content="useOfFundsContent"
-            :is-funds-modal-visible="isFundsModalVisible"
-            @hideFundsModal="isFundsModalVisible = false"
-        />
-    </div>
+		<FundsModal
+			:content="useOfFundsContent"
+			:is-funds-modal-visible="isFundsModalVisible"
+			@hideFundsModal="isFundsModalVisible = false"
+		/>
+	</div>
 </template>
 
 <script setup lang="ts">

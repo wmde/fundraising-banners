@@ -45,7 +45,6 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
