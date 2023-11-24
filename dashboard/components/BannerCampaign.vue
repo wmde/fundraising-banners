@@ -18,7 +18,7 @@
 					{{ campaign.campaign }}
 				</a>
 				<a v-if="pullRequestUrl==='https://github.com/wmde/fundraising-banners/pulls'"
-					class="banner-actions-icon"
+					class="pr-icon"
 					data-tooltip="Go to PR overview"
 					:href="pullRequestUrl"
 					target="_blank"
@@ -27,7 +27,7 @@
 					<IconPullRequest/>
 				</a>
 				<a v-else
-					class="banner-actions-icon"
+					class="pr-icon"
 					data-tooltip="Go to GitHub PR"
 					:href="pullRequestUrl"
 					target="_blank"
@@ -97,7 +97,7 @@ import IconPullRequest from './IconPullRequest.vue';
 interface Props {
 	campaign: Campaign,
 	compileInfo?: CompileInfo,
-	pullRequestUrl: string
+	pullRequestUrl?: string
 }
 
 defineProps<Props>();
