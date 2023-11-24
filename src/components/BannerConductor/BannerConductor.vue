@@ -57,7 +57,7 @@ onMounted( async () => {
 		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason, bannerRef.value.offsetHeight ) );
 	} else {
 		await stateMachine.changeState( stateFactory.newShowingState() );
-		await stateMachine.changeState( stateFactory.newVisibleState() );
+		await stateMachine.changeState( stateFactory.newVisibleState( 'Page' ) );
 	}
 } );
 

@@ -28,5 +28,8 @@
 @use 'src/themes/Treedip/Message/Message';
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use './SoftCloseWithXButtonOverwrites';
 @use 'src/themes/Treedip/AlreadyDonatedModal/AlreadyDonatedModal';
+@use 'FallbackBanner';
+@use 'src/themes/Treedip/FallbackBanner/FallbackButton';
+@use 'src/themes/Treedip/FallbackBanner/LargeFooter';
+@use 'src/themes/Treedip/FallbackBanner/SmallFooter';

@@ -8,6 +8,7 @@ import AddressFormDe from '@src/components/DonationForm/Forms/messages/AddressFo
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
+import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormDe,
@@ -19,6 +20,7 @@ const messages: TranslationMessages = {
 	...FooterDe,
 	...MainDonationFormDe,
 	...AlreadyDonatedModal,
+	...FallbackBanner,
 	'already-donated-go-away-button': 'Im Moment nicht'
 };
 

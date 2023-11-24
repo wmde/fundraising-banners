@@ -10,11 +10,11 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures,
+	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToMonthlyOrYearly';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -89,23 +89,26 @@ describe( 'BannerVar.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
+
+		test.each( [
+			[ 'expectShowsLiveDateAndTimeInMessage' ],
+			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
+
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormGoesToUpgradeYearlyOnVeryLowAmounts' ],
-			[ 'expectMainDonationFormGoesToUpgradeYearlyOnHighAmounts' ],
-			[ 'expectMainDonationFormGoesToUpgradeMonthly' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
 			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToMonthlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToMonthlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToMonthlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

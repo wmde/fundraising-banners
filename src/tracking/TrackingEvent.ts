@@ -7,6 +7,7 @@ export type TrackingFeatureName = '' |
 	'MainBanner' |
 	'MiniBanner' |
 	'FullPageBanner' |
+	'FallbackBanner' |
 	'AlreadyDonatedModal' |
 
 	'MainDonationForm' |
@@ -18,7 +19,7 @@ export type TrackingFeatureName = '' |
 /**
  * @param T - Defines the type of the customData property
  */
-export interface TrackingEvent<T> {
+export interface TrackingEvent<T = void> {
 	/**
 	 * What type of event this is
 	 *

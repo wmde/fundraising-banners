@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p class="headline">
-			<InfoIcon fill="#990a00"/> <strong> An alle, die Wikipedia in Deutschland nutzen</strong>
+			<InfoIcon fill="#990a00"/> <strong>An alle, die Wikipedia in Deutschland nutzen</strong>
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am

@@ -9,6 +9,12 @@
 		background-color: colors.$white;
 	}
 
+	&--pending {
+		.wmde-banner-wrapper {
+			box-shadow: none;
+		}
+	}
+
 	&--closed {
 		.wmde-banner-wrapper {
 			display: none;
