@@ -26,13 +26,22 @@ export class LegacyTrackerWPORG implements Tracker {
 		this._runtimeEnvironment = runtimeEnvironment ?? new UrlRuntimeEnvironment( window.location );
 	}
 
+	private shouldTrackEvent( eventRate: number ): boolean {
+		// Never track 0 rated events, even in devMode
+		if ( eventRate === 0 ) {
+			return false;
+		}
+
+		return this._runtimeEnvironment.isInDevMode || Math.random() <= eventRate;
+	}
+
 	public trackEvent( event: TrackingEvent<void> ): void {
 		if ( !this._supportedTrackingEvents.has( event.eventName ) ) {
 			return;
 		}
 		const wpOrgEvent = this._supportedTrackingEvents.get( event.eventName )( event );
 		const eventData = wpOrgEvent.getEventData( this._bannerName );
-		if ( this._runtimeEnvironment.isInDevMode || Math.random() <= eventData.eventRate ) {
+		if ( this.shouldTrackEvent( eventData.eventRate ) ) {
 			this._mediaWiki.track( wpOrgEvent.eventType, eventData );
 		}
 	}
