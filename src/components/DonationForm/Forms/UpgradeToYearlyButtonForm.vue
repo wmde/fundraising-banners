@@ -2,11 +2,13 @@
     <form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
         <div class="wmde-banner-form-upgrade-title">
             <a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
-                <slot name="back"/>
+				<slot name="back">
+					<ChevronLeftIcon/>
+				</slot>
             </a>
             {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
         </div>
-        <div class="wmde-banner-form-upgrade-notice">{{ $translate( 'upgrade-to-yearly-copy' ) }}</div>
+        <div class="wmde-banner-form-upgrade-notice" v-html="$translate( 'upgrade-to-yearly-copy' )"/>
 
 		<div class="wmde-banner-form-upgrade-buttons">
 			<button
@@ -27,7 +29,9 @@
 				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
 			</button>
 
-			<a tabIndex="-1"
+			<a
+				v-if="showManualUpgradeOption"
+				tabIndex="-1"
 				href="#"
 				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
 				@click.prevent="onGoToChangeOfAmount"
@@ -46,12 +50,16 @@ import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 
 interface Props {
-	isCurrent: boolean
+	isCurrent: boolean;
+	showManualUpgradeOption?: boolean;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults( defineProps<Props>(), {
+	showManualUpgradeOption: true
+} );
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );

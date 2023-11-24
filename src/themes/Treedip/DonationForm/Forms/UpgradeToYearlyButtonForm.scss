@@ -1,5 +1,7 @@
 @use '../../variables/colors';
 
+$font-size: 12px !default;
+
 .wmde-banner {
 	&-sub-form.wmde-banner-form-upgrade {
 		justify-content: normal;
@@ -41,15 +43,17 @@
 
 		&-title {
 			font-weight: bold;
-			margin-bottom: 10px;
-			font-size: 12px;
+			font-size: $font-size;
+			margin-bottom: 6px;
 		}
 
 		&-notice {
-			font-size: 12px;
-			margin-bottom: 10px;
+			font-size: $font-size;
 			text-align: justify;
 			hyphens: auto;
+			p {
+				margin: 0 0 6px;
+			}
 		}
 
 		&-options {

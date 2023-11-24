@@ -1,7 +1,7 @@
 import { TranslationMessages } from '@src/Translator';
 
 const translations: TranslationMessages = {
-	'fallback-banner-button': 'Ja, ich möchte unterstützen.'
+	'fallback-banner-button': 'Jetzt spenden'
 };
 
 export default translations;
