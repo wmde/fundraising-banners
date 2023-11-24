@@ -63,7 +63,20 @@ describe( 'LegacyTrackerWPORG', function () {
 		Math.random = oldRandom;
 	} );
 
-	it( 'should always track in "devMode" and ignore tracking rate', () => {
+	it( 'should always track in "devMode" and ignore tracking rate when rate is > 0', () => {
+		const mediaWikiStub = new MediaWikiStub();
+		mediaWikiStub.track = vi.fn();
+		const runtimeEnvironmentStub = { isInDevMode: true, runsInDevEnvironment: true };
+		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', 0.1 ) );
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
+		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'someotherweirdbannername05', eventNameMap, runtimeEnvironmentStub );
+
+		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+
+		expect( mediaWikiStub.track ).toHaveBeenCalled();
+	} );
+
+	it( 'should never track when event tracking rate is 0', () => {
 		const mediaWikiStub = new MediaWikiStub();
 		mediaWikiStub.track = vi.fn();
 		const runtimeEnvironmentStub = { isInDevMode: true, runsInDevEnvironment: true };
@@ -73,7 +86,7 @@ describe( 'LegacyTrackerWPORG', function () {
 
 		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 
-		expect( mediaWikiStub.track ).toHaveBeenCalled();
+		expect( mediaWikiStub.track ).not.toHaveBeenCalled();
 	} );
 
 } );
