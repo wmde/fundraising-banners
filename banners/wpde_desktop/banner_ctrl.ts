@@ -4,7 +4,7 @@ import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerCtrl.vue';
-import getBannerDelay from '@src/utils/getBannerDelay';
+import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPDE from '@src/page/PageWPDE';
 import TranslationPlugin from '@src/TranslationPlugin';
@@ -34,19 +34,19 @@ const tracking = {
 
 // This is channel specific and must be changed for wp.org banners
 const page = new PageWPDE( tracking );
-const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
-const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
-const remainingImpressions = Math.max( page.getMaxBannerImpressions() - impressionCount.overallCountIncremented, 0 );
+const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap, runtimeEnvironment );
 
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: getBannerDelay( 0 ),
+		delay: runtimeEnvironment.getBannerDelay( 0 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions() )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

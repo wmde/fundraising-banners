@@ -3,6 +3,7 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { RuntimeEnvironment, UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 
 type TrackingRatesForEvents = Map<string, number>;
 
@@ -19,14 +20,16 @@ export class TrackerWPDE implements Tracker {
 	private _preInitialisationEventQueue: Function[];
 	private _trackerFindCounter: number;
 	private _tracker: any;
+	private _runtimeEnvironment: RuntimeEnvironment;
 
-	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents ) {
+	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents, runtimeEnvironment: RuntimeEnvironment | null = null ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._trackingRatesForEvents = trackingRatesForEvents;
 		this._tracker = null;
 		this._trackerFindCounter = 0;
 		this._preInitialisationEventQueue = [];
+		this._runtimeEnvironment = runtimeEnvironment ?? new UrlRuntimeEnvironment( window.location );
 
 		this.waitForTrackerToInit();
 	}
@@ -48,7 +51,7 @@ export class TrackerWPDE implements Tracker {
 			return;
 		}
 		const eventName = this.getEventNameFromEvent( event );
-		if ( this.isDevMode() || Math.random() <= this._trackingRatesForEvents.get( event.eventName ) ) {
+		if ( this._runtimeEnvironment.isInDevMode || Math.random() <= this._trackingRatesForEvents.get( event.eventName ) ) {
 			this.trackOrStore( ( tracker: any ): void => tracker.trackEvent( 'Banners', eventName, this._bannerName ) );
 		}
 	}
@@ -60,11 +63,6 @@ export class TrackerWPDE implements Tracker {
 
 	private trackerLibraryIsLoaded( trackerName: string ): boolean {
 		return typeof window[ trackerName ] !== 'undefined' && window[ trackerName ] !== null;
-	}
-
-	private isDevMode(): boolean {
-		const check = /devMode|devbanner/;
-		return check.test( window.location.search );
 	}
 
 	private trackOrStore( trackFn: Function ): void {

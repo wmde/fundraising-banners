@@ -57,4 +57,28 @@ describe( 'LocalImpressionCount', function () {
 			expect( localStorage.getItem( 'fundraising.overallCount' ) ).toBe( '8' );
 		} );
 	} );
+
+	describe( '#getRemainingImpressions()', function () {
+		it( 'should return the remaining impressions based on overallCount, never below 0', function () {
+			localStorage.setItem( 'fundraising.bannerCount', 'bannerName|1' );
+			localStorage.setItem( 'fundraising.overallCount', '7' );
+			const localImpressionCount = new LocalImpressionCount( 'bannerName' );
+
+			expect( localImpressionCount.getRemainingImpressions( 10 ) ).toBe( 2 );
+			expect( localImpressionCount.getRemainingImpressions( 9 ) ).toBe( 1 );
+			expect( localImpressionCount.getRemainingImpressions( 8 ) ).toBe( 0 );
+			expect( localImpressionCount.getRemainingImpressions( 7 ) ).toBe( 0 );
+		} );
+
+		it( 'should return the max impressions when in development mode', () => {
+			localStorage.setItem( 'fundraising.bannerCount', 'bannerName|1' );
+			localStorage.setItem( 'fundraising.overallCount', '7' );
+			const runtimeEnvironmentStub = { isInDevMode: true, runsInDevEnvironment: true };
+			const localImpressionCount = new LocalImpressionCount( 'bannerName', runtimeEnvironmentStub );
+
+			expect( localImpressionCount.getRemainingImpressions( 10 ) ).toBe( 10 );
+			expect( localImpressionCount.getRemainingImpressions( 9 ) ).toBe( 9 );
+			expect( localImpressionCount.getRemainingImpressions( 0 ) ).toBe( 0 );
+		} );
+	} );
 } );
