@@ -10,7 +10,7 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures,
+	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
@@ -89,6 +89,13 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
+
+		test.each( [
+			[ 'expectShowsLiveDateAndTimeInMessage' ],
+			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
@@ -98,9 +105,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
-			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
