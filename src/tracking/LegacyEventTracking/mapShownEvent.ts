@@ -9,5 +9,5 @@ export function mapShownEvent( shownEvent: ShownEvent ): WMDESizeIssueEvent|WMDE
 	}
 
 	// We don't track other "not shown" events, hence the trackingRate of 0
-	return new WMDELegacyBannerEvent( 'untracked-not-shown-event', 0 );
+	return new WMDELegacyBannerEvent( 'untracked-shown-event', 0 );
 }
