@@ -97,7 +97,7 @@ import IconPullRequest from './IconPullRequest.vue';
 interface Props {
 	campaign: Campaign,
 	compileInfo?: CompileInfo,
-	pullRequestUrl: string
+	pullRequestUrl?: string
 }
 
 defineProps<Props>();
