@@ -1,4 +1,4 @@
-import { describe, beforeEach, it, expect, vi, test } from 'vitest';
+import { describe, beforeEach, it, expect, vi, test, afterEach } from 'vitest';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
@@ -15,11 +15,27 @@ declare let window: Window;
 describe( 'TrackerWPDE', function () {
 
 	beforeEach( () => {
-		window.TestTracker = undefined;
+		window.TestTracker = { trackEvent: vi.fn(), trackContentImpression: vi.fn() };
+		vi.useFakeTimers();
 	} );
 
-	it( 'tracks events', () => {
-		window.TestTracker = { trackEvent: vi.fn() };
+	afterEach( () => {
+		vi.useRealTimers();
+	} );
+
+	it( 'tracks shown event using trackContentImpression', () => {
+		const event = new ShownEvent( 'Page' );
+		const tracker = new TrackerWPDE(
+			'TestTracker',
+			'TestBanner05',
+			new Map<string, number>( [ [ event.eventName, 1 ] ] ) );
+
+		tracker.trackEvent( event );
+
+		expect( window.TestTracker.trackContentImpression ).toBeCalledWith( 'Banners', 'TestBanner05' );
+	} );
+
+	it( 'tracks other events using trackEvent', () => {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
@@ -32,14 +48,12 @@ describe( 'TrackerWPDE', function () {
 
 	test.each( [
 		[ new CloseEvent( 'SoftClose', 'close' ), 'banner-closed-close' ],
-		[ new ShownEvent( 'Page' ), 'banner-shown' ],
 		[ new CustomAmountChangedEvent( 'increased' ), 'increased-amount' ],
 		[ new CustomAmountChangedEvent( 'decreased' ), 'decreased-amount' ],
 		[ new FormStepShownEvent( 'UpgradeToYearlyForm' ), 'form-step-shown-UpgradeToYearlyForm' ],
 		[ { eventName: 'some-action', feature: '', userChoice: '', customData: {} }, 'some-action' ],
 		[ { eventName: 'some-action', feature: '', userChoice: 'with-choice', customData: {} }, 'some-action-with-choice' ]
-	] )( 'converts events', ( event: TrackingEvent<void>, expectedName: string ) => {
-		window.TestTracker = { trackEvent: vi.fn() };
+	] )( 'converts events', ( event: TrackingEvent, expectedName: string ) => {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
@@ -51,7 +65,8 @@ describe( 'TrackerWPDE', function () {
 	} );
 
 	it( 'collects tracking events until the tracker becomes available', async () => {
-		vi.useFakeTimers();
+		const neverCalledTrackerSpy = { trackEvent: vi.fn(), trackContentImpression: vi.fn() };
+		window.TestTracker = undefined;
 
 		const tracker = new TrackerWPDE(
 			'TestTracker',
@@ -59,39 +74,41 @@ describe( 'TrackerWPDE', function () {
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
+		// Inject the neverCalledTrackerSpy into the tracker, so we can make sure it's not called until it finds the window tracker
+		Object.defineProperty( tracker, '_tracker', { writable: true, configurable: true, value: neverCalledTrackerSpy } );
+
 		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: undefined } );
 		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: undefined } );
 
+		await vi.runOnlyPendingTimersAsync();
+
+		expect( neverCalledTrackerSpy.trackEvent ).not.toHaveBeenCalled();
+
 		window.TestTracker = { trackEvent: vi.fn() };
 
-		await vi.runAllTimers();
+		await vi.runOnlyPendingTimersAsync();
 
+		expect( neverCalledTrackerSpy.trackEvent ).not.toHaveBeenCalled();
 		expect( window.TestTracker.trackEvent ).toHaveBeenCalledTimes( 2 );
-		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', 'action-1', 'TestBanner05' );
-		expect( window.TestTracker.trackEvent ).toBeCalledWith( 'Banners', 'action-2', 'TestBanner05' );
-
-		vi.restoreAllMocks();
 	} );
 
 	it( 'aborts trying to find the tracker when the retry times out', async () => {
-		vi.useFakeTimers();
-
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
 			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
 		);
 
+		Object.defineProperty( tracker, '_trackerFindCounter', { writable: true, configurable: true, value: 10 } );
+
 		tracker.trackEvent( { eventName: 'action-1', feature: '', userChoice: '', customData: undefined } );
 		tracker.trackEvent( { eventName: 'action-2', feature: '', userChoice: '', customData: undefined } );
 
-		await vi.runAllTimers();
-
 		window.TestTracker = { trackEvent: vi.fn() };
 
-		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
+		await vi.runAllTimersAsync();
 
-		vi.restoreAllMocks();
+		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
 	} );
 
 	test.each( [
@@ -100,7 +117,6 @@ describe( 'TrackerWPDE', function () {
 		[ new ClickAlreadyDonatedEvent(), ClickAlreadyDonatedEvent.EVENT_NAME, ClickAlreadyDonatedEvent.EVENT_NAME ]
 	] )( 'should generate event identifiers from tracking data, data set %#',
 		( trackingEvent: TrackingEvent<void>, allowedAction: string, expectedId: string ) => {
-			window.TestTracker = { trackEvent: vi.fn() };
 			const tracker = new TrackerWPDE(
 				'TestTracker',
 				'TestBanner05',
@@ -122,7 +138,6 @@ describe( 'TrackerWPDE', function () {
 		( randomValue: number, trackingRate: number, wasTracked: boolean ) => {
 			const oldRandom = Math.random;
 			Math.random = vi.fn( () => randomValue );
-			window.TestTracker = { trackEvent: vi.fn() };
 			const tracker = new TrackerWPDE(
 				'TestTracker',
 				'TestBanner05',
@@ -136,7 +151,19 @@ describe( 'TrackerWPDE', function () {
 		} );
 
 	it( 'should always track in "devMode" and ignore tracking rate', () => {
-		window.TestTracker = { trackEvent: vi.fn() };
+		const tracker = new TrackerWPDE(
+			'TestTracker',
+			'TestBanner05',
+			new Map<string, number>( [ [ 'some-action', 0.1 ] ] ),
+			{ isInDevMode: true, runsInDevEnvironment: true }
+		);
+
+		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
+
+		expect( window.TestTracker.trackEvent ).toHaveBeenCalled();
+	} );
+
+	it( 'should never track events with 0 tracking rate even when in "devMode"', () => {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
@@ -146,15 +173,14 @@ describe( 'TrackerWPDE', function () {
 
 		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
-		expect( window.TestTracker.trackEvent ).toHaveBeenCalled();
+		expect( window.TestTracker.trackEvent ).not.toHaveBeenCalled();
 	} );
 
 	it( 'only tracks known events', () => {
-		window.TestTracker = { trackEvent: vi.fn() };
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'some-action', 0 ] ] ),
+			new Map<string, number>( [ [ 'some-action', 1 ] ] ),
 			{ isInDevMode: true, runsInDevEnvironment: true }
 		);
 
