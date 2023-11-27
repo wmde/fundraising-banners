@@ -1,7 +1,7 @@
 <template>
 
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
-		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
+		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen</p>
 		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</KeenSliderSlide>
 
@@ -16,8 +16,8 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Die durchschnittliche Spende beträgt
-			22,25&nbsp;€, doch bereits 10&nbsp;€ helfen uns weiter.
+			Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Die durchschnittliche Spende
+			beträgt 22,25&nbsp;€, doch bereits ein kleiner Beitrag hilft uns weiter.
 		</p>
 	</KeenSliderSlide>
 
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
@@ -52,9 +52,15 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	currentDate,
 	goalDonationSum,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
+
+const currentDate = computed( () => {
+	return new Intl.DateTimeFormat( 'de-DE', {
+		day: '2-digit',
+		month: 'long'
+	} ).format( new Date() );
+} );
 
 </script>

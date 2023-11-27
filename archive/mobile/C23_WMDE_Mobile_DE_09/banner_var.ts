@@ -4,7 +4,7 @@ import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
-import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import getBannerDelay from '@src/utils/getBannerDelay';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
@@ -19,7 +19,7 @@ import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 
 // Locale-specific imports
-import messages from './messages_var';
+import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
@@ -30,20 +30,20 @@ const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
-const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
-const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
-const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
+const impressionCount = new LocalImpressionCount( page.getTracking().keyword );
+const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings );
+const remainingImpressions = Math.max( page.getMaxBannerImpressions( 'mobile' ) - impressionCount.overallCountIncremented, 0 );
 
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 7500 ),
+		delay: getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) )
+		remainingImpressions
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

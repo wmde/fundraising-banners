@@ -9,9 +9,11 @@
 		<p>
 			<strong>Hi,</strong>
 		</p>
-		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie bescheiden, die Unabhängigkeit
-			von Wikipedia zu unterstützen.</p>
+		<p>
+			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicke jetzt bitte nicht weg! Am heutigen
+			{{ currentDayName }}, den {{ currentDate }}, bitten wir dich bescheiden, die Unabhängigkeit von
+			Wikipedia zu unterstützen.
+		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -30,8 +32,8 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 4">
 		<p>
-			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden
-			Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Hat Wikipedia dir in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheide dich, eine
+			der seltenen Ausnahmen zu sein, und gib etwas zurück. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 

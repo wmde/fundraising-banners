@@ -14,10 +14,10 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { miniBannerPreselectFeatures } from '@test/features/MiniBannerPreselect';
 import { Tracker } from '@src/tracking/Tracker';
+import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -78,7 +78,9 @@ describe( 'BannerCtrl.vue', () => {
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
@@ -103,6 +105,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseAlreadyDonatedEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
