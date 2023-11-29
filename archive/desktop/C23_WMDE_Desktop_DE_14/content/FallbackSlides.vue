@@ -1,18 +1,18 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			Unser Spendenziel: 9,7 Millionen €
+			Lorem ipsum dolor:
 		</p>
 		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			Hat Wikipedia Ihnen Wissen im Wert einer Tasse Kaffee geschenkt?
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos est eum expedita incidunt.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Dann entscheiden Sie sich, etwas zurückzugeben. Danke!
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos est eum expedita incidunt.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">

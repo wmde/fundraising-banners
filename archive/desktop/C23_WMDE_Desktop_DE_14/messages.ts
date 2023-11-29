@@ -21,8 +21,7 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...AlreadyDonatedModal,
 	...FallbackBanner,
-	'already-donated-go-away-button': 'Im Moment nicht',
-	'soft-close-prompt': 'Dürfen wir später nochmal fragen?'
+	'already-donated-go-away-button': 'Im Moment nicht'
 };
 
 export default messages;

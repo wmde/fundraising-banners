@@ -24,7 +24,7 @@ describe( 'mapShownEvent', () => {
 		const legacyEvent = mapShownEvent( new ShownEvent( 'Page' ) );
 
 		expect( legacyEvent ).toStrictEqual(
-			new WMDELegacyBannerEvent( 'untracked-not-shown-event', 0 )
+			new WMDELegacyBannerEvent( 'untracked-shown-event', 0 )
 		);
 	} );
 } );
