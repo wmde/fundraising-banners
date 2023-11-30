@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, test, expect, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/mobile/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -15,9 +15,9 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
-import { miniBannerPreselectFeatures } from '@test/features/MiniBannerPreselect';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -49,7 +49,8 @@ describe( 'BannerVar.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				remainingImpressions: 10,
+				donationURL: 'https://spenden.wikimedia.de'
 			},
 			global: {
 				mocks: {
@@ -140,12 +141,15 @@ describe( 'BannerVar.vue', () => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
 
-		test.each( [
-			[ 'expectShowsFullPageWhenPreselectIsClicked' ],
-			[ 'expectPreselectsAmountWhenPreselectIsClicked' ],
-			[ 'expectTrackingEventIsFiredWhenPreselectIsClicked' ]
-		] )( '%s', async ( testName: string ) => {
-			await miniBannerPreselectFeatures[ testName ]( getWrapper(), tracker );
+		test( 'sends users directly to the donation form page with 10 euros preselected', async () => {
+			const location = { href: '' };
+			Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
+			const localWrapper = getWrapper();
+
+			await localWrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
+
+			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitEvent( 'MiniBanner', 'donate-10-euro' ) );
+			expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );
 		} );
 
 	} );
