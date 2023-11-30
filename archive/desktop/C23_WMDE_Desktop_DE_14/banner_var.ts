@@ -25,7 +25,7 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { createFallbackDonationLink } from '@src/createFallbackDonationLink';
+import { createDonationURL } from '@src/createDonationURL';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -44,7 +44,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createFallbackDonationLink( page.getTracking(), impressionCount )
+		donationLink: createDonationURL( page.getTracking(), impressionCount, true )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

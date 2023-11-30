@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="wmde-banner-mini-button-group">
-			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
+			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'submit10Euro' )">
 				Jetzt 10 &euro; spenden
 			</button>
 			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
@@ -33,6 +33,6 @@
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'submit10Euro', 'close' ] );
 
 </script>

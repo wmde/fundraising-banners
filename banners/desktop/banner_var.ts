@@ -25,10 +25,10 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { createFallbackDonationLink } from '@src/createFallbackDonationLink';
 import { LinearDailyDonorAverage } from '@src/utils/DynamicContent/LinearDailyDonorAverage';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { visitorsVsDailyDonorsSentence } from './visitorsVsDailyDonorsSentence';
+import { createDonationURL } from '@src/createDonationURL';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -50,7 +50,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createFallbackDonationLink( page.getTracking(), impressionCount )
+		donationLink: createDonationURL( page.getTracking(), impressionCount, true )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

@@ -3,7 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@submit10Euro="submit10Euro"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -115,6 +115,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -132,6 +133,7 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 	remainingImpressions: number;
+	donationURL: string;
 }
 
 const props = defineProps<Props>();
@@ -176,11 +178,9 @@ function onshowFullPageBanner(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
-function onshowFullPageBannerPreselected(): void {
-	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+function submit10Euro(): void {
+	tracker.trackEvent( new BannerSubmitEvent( 'MiniBanner', 'donate-10-euro' ) );
+	window.location.href = props.donationURL;
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
