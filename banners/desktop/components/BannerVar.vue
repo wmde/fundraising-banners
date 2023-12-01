@@ -14,7 +14,7 @@
 			</template>
 
 			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
+				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide"/>

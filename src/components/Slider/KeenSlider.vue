@@ -12,13 +12,13 @@
 
 			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-previous" @click.prevent="goToPreviousSlide">
 				<slot name="left-icon" class="wmde-banner-slider-icon-left">
-					<ChevronLeftIcon/>
+					<ChevronLeftIcon :fill="navigationColor"/>
 				</slot>
 			</a>
 
 			<a v-if="withNavigation" href="#" class="wmde-banner-slider-navigation-next" @click.prevent="goToNextSlide">
 				<slot name="right-icon" class="wmde-banner-slider-icon-left">
-					<ChevronRightIcon/>
+					<ChevronRightIcon :fill="navigationColor"/>
 				</slot>
 			</a>
 		</div>
@@ -53,6 +53,7 @@ interface Props {
 	withPagination?: boolean;
 	sliderOptions?: KeenSliderOptions;
 	play?: boolean;
+	navigationColor?: string;
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -61,7 +62,8 @@ const props = withDefaults( defineProps<Props>(), {
 	startDelay: 0,
 	withPagination: true,
 	withNavigation: true,
-	play: false
+	play: false,
+	navigationColor: '#202122'
 } );
 
 const emit = defineEmits( [ 'slide-changed' ] );
