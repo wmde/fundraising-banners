@@ -4,6 +4,7 @@ import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChang
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { RuntimeEnvironment, UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
 
 type TrackingRatesForEvents = Map<string, number>;
 
@@ -12,6 +13,11 @@ interface Window {
 }
 declare let window: Window;
 
+interface PageTracker {
+	trackEvent( category: string, eventName: string, bannerName: string ): void;
+	trackContentImpression( category: string, bannerName: string ): void;
+}
+
 export class TrackerWPDE implements Tracker {
 
 	private readonly _trackerName: string;
@@ -19,13 +25,15 @@ export class TrackerWPDE implements Tracker {
 	private readonly _trackingRatesForEvents: TrackingRatesForEvents;
 	private _preInitialisationEventQueue: Function[];
 	private _trackerFindCounter: number;
-	private _tracker: any;
+	private _hasFoundTracker: boolean;
+	private _tracker: PageTracker;
 	private _runtimeEnvironment: RuntimeEnvironment;
 
 	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents, runtimeEnvironment: RuntimeEnvironment | null = null ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._trackingRatesForEvents = trackingRatesForEvents;
+		this._hasFoundTracker = false;
 		this._tracker = null;
 		this._trackerFindCounter = 0;
 		this._preInitialisationEventQueue = [];
@@ -43,22 +51,40 @@ export class TrackerWPDE implements Tracker {
 			return;
 		}
 		this._tracker = window[ this._trackerName ];
+		this._hasFoundTracker = true;
 		this.trackItemsInEventQueue();
 	}
 
-	public trackEvent( event: TrackingEvent<void> ): void {
+	public trackEvent( event: TrackingEvent ): void {
 		if ( !this._trackingRatesForEvents.has( event.eventName ) ) {
 			return;
 		}
-		const eventName = this.getEventNameFromEvent( event );
-		if ( this._runtimeEnvironment.isInDevMode || Math.random() <= this._trackingRatesForEvents.get( event.eventName ) ) {
-			this.trackOrStore( ( tracker: any ): void => tracker.trackEvent( 'Banners', eventName, this._bannerName ) );
+
+		if ( !this.shouldTrackEvent( event.eventName ) ) {
+			return;
 		}
+
+		if ( event.eventName === ShownEvent.EVENT_NAME ) {
+			this.trackOrStore( ( tracker: PageTracker ): void => tracker.trackContentImpression( 'Banners', this._bannerName ) );
+		} else {
+			this.trackOrStore( ( tracker: PageTracker ): void => tracker.trackEvent( 'Banners', this.convertEventNameForTracker( event ), this._bannerName ) );
+		}
+	}
+
+	private shouldTrackEvent( eventName: string ): boolean {
+		const eventRate = this._trackingRatesForEvents.get( eventName );
+
+		// Never track 0 rated events, even in devMode
+		if ( eventRate === 0 ) {
+			return false;
+		}
+
+		return this._runtimeEnvironment.isInDevMode || Math.random() <= eventRate;
 	}
 
 	private trackItemsInEventQueue(): void {
 		this._preInitialisationEventQueue.forEach( trackFn => trackFn( this._tracker ) );
-		this._preInitialisationEventQueue = [];
+		this._preInitialisationEventQueue.splice( 0, this._preInitialisationEventQueue.length );
 	}
 
 	private trackerLibraryIsLoaded( trackerName: string ): boolean {
@@ -66,7 +92,7 @@ export class TrackerWPDE implements Tracker {
 	}
 
 	private trackOrStore( trackFn: Function ): void {
-		if ( this._tracker === null ) {
+		if ( !this._hasFoundTracker ) {
 			this._preInitialisationEventQueue.push( trackFn );
 			return;
 		}
@@ -85,7 +111,7 @@ export class TrackerWPDE implements Tracker {
 	 * @param {TrackingEvent} event
 	 * @private
 	 */
-	private getEventNameFromEvent( event: TrackingEvent<void> ): string {
+	private convertEventNameForTracker( event: TrackingEvent<void> ): string {
 		switch ( event.eventName ) {
 			case CustomAmountChangedEvent.EVENT_NAME:
 				return event.userChoice + '-amount';
