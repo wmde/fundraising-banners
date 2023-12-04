@@ -1,21 +1,18 @@
 import { ref, Ref } from 'vue';
 
 type ReturnType = {
-	currentDateTime: Ref<string>;
+	currentTime: Ref<string>;
 	startTimer: () => void;
 	stopTimer: () => void;
 }
 
-/**
- * @deprecated
- */
-export function useCurrentDateAndTime( getCurrentDateAndTime: () => string ): ReturnType {
+export function useCurrentTime( getCurrentTime: () => string ): ReturnType {
 	const timer = ref<number>( 0 );
-	const currentDateTime = ref<string>( getCurrentDateAndTime() );
+	const currentTime = ref<string>( getCurrentTime() );
 
 	const startTimer = (): void => {
 		timer.value = window.setInterval( () => {
-			currentDateTime.value = getCurrentDateAndTime();
+			currentTime.value = getCurrentTime();
 		}, 1000 );
 	};
 
@@ -24,7 +21,7 @@ export function useCurrentDateAndTime( getCurrentDateAndTime: () => string ): Re
 	};
 
 	return {
-		currentDateTime,
+		currentTime,
 		startTimer,
 		stopTimer
 	};
