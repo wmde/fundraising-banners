@@ -45,7 +45,7 @@ const expectEmitsSoftCloseAlreadyDonatedEvent = async ( wrapper: VueWrapper<any>
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
 
-	await vi.runOnlyPendingTimersAsync();
+	await vi.runAllTimersAsync();
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );

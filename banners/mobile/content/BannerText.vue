@@ -18,10 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject, watch } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
+
+interface Props {
+	playLiveText: boolean;
+}
+
+const props = defineProps<Props>();
 
 const {
 	currentDayName,
@@ -30,7 +36,13 @@ const {
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
-onMounted( startTimer );
-onUnmounted( stopTimer );
+
+watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
+	if ( shouldPlay ) {
+		startTimer();
+	} else {
+		stopTimer();
+	}
+} );
 
 </script>

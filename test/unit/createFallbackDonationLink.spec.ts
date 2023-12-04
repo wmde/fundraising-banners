@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { ImpressionCountStub } from '@test/fixtures/ImpressionCountStub';
 import { createDonationURL } from '@src/createDonationURL';
 
-describe( 'createFallbackDonationLink', () => {
-	it( 'should create fallback donation link', () => {
+describe( 'createDonationURL', () => {
+	it( 'should create donation URL with tracking information', () => {
 		const extraParameters = { locale: 'de_DE', ast: '1' };
 		const ctrlLink = createDonationURL( { campaign: 'C1', keyword: 'banner-ctrl' }, new ImpressionCountStub(), true, extraParameters );
 		const varLink = createDonationURL( { campaign: 'C1', keyword: 'banner-var' }, new ImpressionCountStub(), true, extraParameters );
