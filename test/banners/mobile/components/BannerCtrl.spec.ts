@@ -17,7 +17,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { miniBannerPreselectFeatures } from '@test/features/MiniBannerPreselect';
 import { Tracker } from '@src/tracking/Tracker';
-import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -83,6 +83,13 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
+			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

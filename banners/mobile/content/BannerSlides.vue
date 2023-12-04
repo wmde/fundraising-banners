@@ -39,17 +39,18 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject, onMounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 
 interface Props {
+	playLiveText: boolean;
 	currentSlide: number
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const {
 	currentDayName,
@@ -59,7 +60,13 @@ const {
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
+
+watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
+	if ( !shouldPlay ) {
+		stopTimer();
+	}
+} );
+
 onMounted( startTimer );
-onUnmounted( stopTimer );
 
 </script>
