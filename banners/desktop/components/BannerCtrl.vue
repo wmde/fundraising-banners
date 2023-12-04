@@ -35,7 +35,7 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<UpgradeToYearlyButtonForm :page-index="pageIndex" :show-manual-upgrade-option="false" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -90,7 +90,7 @@ import BannerSlides from '../content/BannerSlides.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {

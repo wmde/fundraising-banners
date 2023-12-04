@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C23_WMDE_Desktop_DE_17"
-description = "based on ctrl of test 15, variant has a donor heart"
-campaign_tracking = "17-ba-231203"
+campaign = "C23_WMDE_Desktop_DE_18"
+description = "based on var of test 15, variant uses a different copy"
+campaign_tracking = "18-ba-231206"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -17,13 +17,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
-pagename = "B23_WMDE_Desktop_DE_17_ctrl"
-tracking = "org-17-231203-ctrl"
+pagename = "B23_WMDE_Desktop_DE_18_ctrl"
+tracking = "org-18-231206-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
-pagename = "B23_WMDE_Desktop_DE_17_var"
-tracking = "org-17-231203-var"
+pagename = "B23_WMDE_Desktop_DE_18_var"
+tracking = "org-18-231206-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
@@ -87,9 +87,9 @@ orientation = [ "portrait", "landscape"]
 [wikipediade]
 name = "WPDE Desktop"
 icon = "desktop"
-campaign = "C23_WPDE_Desktop_02"
-description = "Based on CTRL of 01. Banners have live text and already donated, VAR has bubble form"
-campaign_tracking = "wpde-02-231206"
+campaign = "C23_WPDE_Desktop_01"
+description = "VAR has translated WMF copy"
+campaign_tracking = "wpde-01-231030"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -97,13 +97,13 @@ preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wikipediade.banners.ctrl]
 filename = "./banners/wpde_desktop/banner_ctrl.ts"
-pagename = "B23_WPDE_Desktop_02_ctrl"
-tracking = "wpde-02-231206-ctrl"
+pagename = "B23_WPDE_Desktop_01_ctrl"
+tracking = "wpde-01-231030-ctrl"
 
 [wikipediade.banners.var]
 filename = "./banners/wpde_desktop/banner_var.ts"
-pagename = "B23_WPDE_Desktop_02_var"
-tracking = "wpde-02-231206-var"
+pagename = "B23_WPDE_Desktop_01_var"
+tracking = "wpde-01-231030-var"
 
 
 [wikipediade_mobile]

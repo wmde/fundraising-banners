@@ -19,7 +19,9 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
+@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
