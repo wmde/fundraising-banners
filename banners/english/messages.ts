@@ -7,6 +7,7 @@ import AddressFormEn from '@src/components/DonationForm/Forms/messages/AddressFo
 import FooterEn from '@src/components/Footer/messages/Footer.en';
 import MainDonationFormEn from '@src/components/DonationForm/Forms/messages/MainDonationForm.en';
 import AlreadyDonatedModalEn from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.en';
+import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.en';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormEn,
@@ -16,7 +17,8 @@ const messages: TranslationMessages = {
 	...AddressFormEn,
 	...FooterEn,
 	...MainDonationFormEn,
-	...AlreadyDonatedModalEn
+	...AlreadyDonatedModalEn,
+	...FallbackBanner
 };
 
 export default messages;

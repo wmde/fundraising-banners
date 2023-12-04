@@ -2,6 +2,7 @@
     <div class="wmde-banner-wrapper" :class="contentState">
         <MainBanner
             @close="onCloseMain"
+			@form-interaction="$emit( 'bannerContentChanged' )"
             :banner-state="bannerState"
             v-if="contentState === ContentStates.Main"
         >

@@ -132,9 +132,9 @@ tracking = "wpde-mob01-231030-var"
 [english]
 name = "English Desktop"
 icon = "desktop"
-campaign = "C23_WMDE_Desktop_EN_03"
-description = "VAR has the WMF text"
-campaign_tracking = "en03-ba-231120"
+campaign = "C23_WMDE_Desktop_EN_04"
+description = "Based on CTRL of 03, VAR has a modified version of the form radio button styles from Desktop 07"
+campaign_tracking = "en04-ba-231205"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -142,13 +142,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN"
 
 [english.banners.ctrl]
 filename = "./banners/english/banner_ctrl.ts"
-pagename = "B23_WMDE_Desktop_EN_03_ctrl"
-tracking = "org-en03-231120-ctrl"
+pagename = "B23_WMDE_Desktop_EN_04_ctrl"
+tracking = "org-en04-231205-ctrl"
 
 [english.banners.var]
 filename = "./banners/english/banner_var.ts"
-pagename = "B23_WMDE_Desktop_EN_03_var"
-tracking = "org-en03-231120-var"
+pagename = "B23_WMDE_Desktop_EN_04_var"
+tracking = "org-en04-231205-var"
 
 [english.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]

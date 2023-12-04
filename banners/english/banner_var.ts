@@ -1,9 +1,10 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.scss';
+import './styles/styles.scss';
 
-import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
+import Banner from './components/BannerCtrl.vue';
+import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -25,11 +26,12 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import eventMappings from './event_map';
+import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
-const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 800 ) );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 400 ) );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
@@ -42,10 +44,13 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) )
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
+	fallbackBanner: FallbackBanner,
+	minWidthForMainBanner: 800,
 	impressionCount
 } );
 
