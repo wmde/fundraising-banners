@@ -9,6 +9,7 @@ describe( 'ProgressBar.vue', () => {
 		campaignDaySentence: '',
 		currentDate: '',
 		getCurrentDateAndTime: () => '',
+		getCurrentTime: () => '',
 		currentDayName: '',
 		daysLeftSentence: 'daysLeftSentence',
 		donorsNeededSentence: '',

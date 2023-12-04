@@ -3,6 +3,9 @@ import { Translator } from '@src/Translator';
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 import { Time } from '@src/utils/DynamicContent/formatters/Time';
 
+/**
+ * @deprecated
+ */
 export class CurrentDateAndTime implements TextGenerator<Date> {
 	private readonly _translator: Translator;
 	private _ordinalFormatter: Ordinal;

@@ -77,11 +77,18 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.currentDate ).toBe( 'current month 10th' );
 	} );
 
-	it( 'Gets the current time', () => {
+	it( 'Gets the current date and time', () => {
 		vi.setSystemTime( new Date( 2023, 10, 10, 13, 42, 0 ) );
 		// In some test environments the output of Date.toLocaleString includes the code for a space,
 		// but in others it doesn't. To fix that we manually replace it in this test
 		expect( dynamicCampaignText.getCurrentDateAndTime().replace( '\u202f', ' ' ) ).toBe( 'current month 10th current time 1:42 pm' );
+	} );
+
+	it( 'Gets the current time', () => {
+		vi.setSystemTime( new Date( 2023, 10, 10, 13, 42, 0 ) );
+		// In some test environments the output of Date.toLocaleString includes the code for a space,
+		// but in others it doesn't. To fix that we manually replace it in this test
+		expect( dynamicCampaignText.getCurrentTime().replace( '\u202f', ' ' ) ).toBe( '1:42 pm' );
 	} );
 
 	it( 'Gets the current day name', () => {
