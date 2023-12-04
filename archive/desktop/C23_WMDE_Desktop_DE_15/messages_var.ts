@@ -9,7 +9,6 @@ import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
-import DonorHeart from '@src/components/DonorHeart/messages/DonorHeart.de';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormDe,
@@ -22,9 +21,13 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...AlreadyDonatedModal,
 	...FallbackBanner,
-	...DonorHeart,
 	'already-donated-go-away-button': 'Im Moment nicht',
-	'soft-close-prompt': 'Dürfen wir später nochmal fragen?'
+	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
+	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
+		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
+		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
+	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
+	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich'
 };
 
 export default messages;

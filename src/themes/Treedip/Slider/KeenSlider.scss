@@ -1,8 +1,11 @@
 @use '../variables/colors';
 @use '../variables/fonts';
+@use '../variables/breakpoints';
 @use 'src/components/Slider/KeenSlider';
 
 $font: fonts.$content !default;
+$font-size: 1.3em !default;
+$line-height: 1.5 !default;
 $slider-padding: 16px 0 !default;
 
 .wmde-banner {
@@ -10,8 +13,14 @@ $slider-padding: 16px 0 !default;
 
 	&-slider-container {
 		font-family: $font;
-		font-size: 1.3em;
+		font-size: 1.8vw;
 		padding: $slider-padding;
+		line-height: 1.2;
+
+		@include breakpoints.small-up {
+			font-size: $font-size;
+			line-height: $line-height;
+		}
 	}
 
 	&-slide {

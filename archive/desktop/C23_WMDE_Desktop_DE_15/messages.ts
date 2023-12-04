@@ -9,7 +9,6 @@ import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
-import DonorHeart from '@src/components/DonorHeart/messages/DonorHeart.de';
 
 const messages: TranslationMessages = {
 	...CustomAmountFormDe,
@@ -22,7 +21,6 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...AlreadyDonatedModal,
 	...FallbackBanner,
-	...DonorHeart,
 	'already-donated-go-away-button': 'Im Moment nicht',
 	'soft-close-prompt': 'Dürfen wir später nochmal fragen?'
 };

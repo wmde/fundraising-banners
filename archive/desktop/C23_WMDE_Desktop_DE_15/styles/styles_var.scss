@@ -19,20 +19,19 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
+@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
 @use 'src/themes/Treedip/Message/Message';
-@use '../../../src/themes/Treedip/Slider/KeenSlider' with (
-	$slider-padding: 60px 0 16px
-);
+@use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
 @use 'src/themes/Treedip/AlreadyDonatedModal/AlreadyDonatedModal';
 @use 'FallbackBanner';
 @use 'src/themes/Treedip/FallbackBanner/FallbackButton';
 @use 'src/themes/Treedip/FallbackBanner/LargeFooter';
 @use 'src/themes/Treedip/FallbackBanner/SmallFooter';
-@use 'src/themes/Treedip/DonorHeart/DonorHeart';

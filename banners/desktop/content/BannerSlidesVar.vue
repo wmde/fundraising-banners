@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			<InfoIcon fill="#990a00"/> <strong>{{ currentDateTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
+			<InfoIcon fill="#990a00"/> <strong>{{ currentDateTime }} - Aus Deutschland benötigen wir heute {{ averageDailyDonors }} Spenden</strong>
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
@@ -11,7 +11,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			{{ campaignDaySentence }} <AnimatedText :content="visitorsVsDonorsSentence"/>
+			{{ campaignDaySentence }} <AnimatedText :content="visitorsVsDailyDonorsSentence"/>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -35,6 +35,7 @@ import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
+import { DailyDonorStatsValues } from '@src/utils/DynamicContent/DailyDonorAverage';
 
 interface Props {
 	currentSlide: number
@@ -46,9 +47,11 @@ const {
 	currentDayName,
 	currentDate,
 	getCurrentDateAndTime,
-	campaignDaySentence,
-	visitorsVsDonorsSentence
+	campaignDaySentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
+
+const { averageDailyDonors } = inject<DailyDonorStatsValues>( 'dailyDonorAverage' );
+const visitorsVsDailyDonorsSentence = inject<string>( 'visitorsVsDailyDonorsSentence' );
 
 const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );

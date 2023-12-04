@@ -1,6 +1,6 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p>
+		<p class="headline">
 			<InfoIcon fill="#990a00"/> <strong>{{ currentDateTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
 		</p>
 		<p>
