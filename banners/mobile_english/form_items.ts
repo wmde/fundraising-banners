@@ -12,12 +12,9 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			Intervals.MONTHLY,
 			Intervals.YEARLY
 		)
-		.setAmounts( 5, 15, 25, 50, 100 )
+		.setAmounts( 10, 15, 25, 50, 100 )
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
-			PaymentMethods.CREDIT_CARD,
-			PaymentMethods.DIRECT_DEBIT,
-			PaymentMethods.BANK_TRANSFER,
-			PaymentMethods.SOFORT
+			PaymentMethods.CREDIT_CARD
 		).getItems();
 }

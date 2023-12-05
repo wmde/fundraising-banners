@@ -3,12 +3,13 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
+			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -37,7 +38,25 @@
 							@submit="submit"
 							@previous="previous"
 							custom-amount-placeholder-key="custom-amount-placeholder-short"
-						/>
+						>
+
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<VisaLogo/>
+									<MastercardLogo/>
+									<AmexLogo/>
+								</span>
+							</template>
+
+							<template #sms-icon>
+								<SmsIcon/>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 				</MultiStepDonation>
@@ -80,6 +99,10 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import {
@@ -88,6 +111,9 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import SmsIcon from '@src/components/Icons/SmsIcon.vue';
+import { useFormModel } from '@src/components/composables/useFormModel';
+const formModel = useFormModel();
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -133,6 +159,13 @@ function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+}
+
+function onshowFullPageBannerPreselected(): void {
+	slideShowStopped.value = true;
+	formModel.selectedAmount.value = '10';
+	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
