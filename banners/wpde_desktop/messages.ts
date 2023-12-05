@@ -16,7 +16,10 @@ const messages: TranslationMessages = {
 	...AddressFormDe,
 	...FooterDe,
 	...MainDonationFormDe,
-	...AlreadyDonatedModal
+	...AlreadyDonatedModal,
+	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
+		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
+		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>'
 };
 
 export default messages;

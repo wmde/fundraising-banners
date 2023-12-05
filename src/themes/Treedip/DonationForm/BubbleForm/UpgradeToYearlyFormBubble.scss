@@ -61,7 +61,9 @@ $custom-link-color: #3366cc;
 			flex-grow: 0;
 		}
 
-		&-custom {
+		&-custom,
+		&-custom:link,
+		&-custom:visited {
 			color: $custom-link-color;
 			font-size: 12px;
 			text-align: left;
