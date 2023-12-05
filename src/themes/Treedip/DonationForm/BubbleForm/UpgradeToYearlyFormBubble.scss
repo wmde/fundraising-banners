@@ -1,9 +1,6 @@
 @use '../../variables/colors';
 @use '../../../../components/DonationForm/Forms/UpgradeToYearlyForm';
 
-$custom-link-padding: 0 4px 4px !default;
-$custom-link-text-align: left !default;
-
 $background-color: #e9e9e9;
 $background-color-error: #fff4f4;
 $custom-link-color: #3366cc;
@@ -37,14 +34,13 @@ $custom-link-color: #3366cc;
 		}
 
 		.wmde-banner-select-group {
+			margin: 0;
 			line-height: 1.5;
 		}
 
 		.wmde-banner-select-group-option {
 			margin-bottom: 8px;
-			label {
-				height: auto;
-			}
+			padding: 0;
 		}
 
 		&-back {
@@ -66,13 +62,12 @@ $custom-link-color: #3366cc;
 		}
 
 		&-custom {
-			background: $background-color;
 			color: $custom-link-color;
 			font-size: 12px;
-			text-align: $custom-link-text-align;
+			text-align: left;
 			margin-bottom: 8px;
 			font-weight: bold;
-			padding: $custom-link-padding;
+			padding: 0;
 			border-radius: 0 0 4px 4px;
 
 			&--with-error {
