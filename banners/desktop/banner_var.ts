@@ -28,7 +28,7 @@ import { createFormActions } from '@src/createFormActions';
 import { LinearDailyDonorAverage } from '@src/utils/DynamicContent/LinearDailyDonorAverage';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { visitorsVsDailyDonorsSentence } from './visitorsVsDailyDonorsSentence';
-import { createDonationURL } from '@src/createDonationURL';
+import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -50,7 +50,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createDonationURL( page.getTracking(), impressionCount, true )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

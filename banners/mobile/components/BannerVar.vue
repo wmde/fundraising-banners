@@ -3,7 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@submit10Euro="submit10Euro"
+			@submit-10-euro="submit10Euro"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">

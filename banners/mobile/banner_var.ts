@@ -45,7 +45,7 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
-		donationURL: createDonationURL( page.getTracking(), impressionCount, false, { amount: '1000' } )
+		donationURL: createDonationURL( page.getTracking(), impressionCount, { amount: '1000' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

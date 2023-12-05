@@ -11,17 +11,11 @@ const DONATE_LINK_URL = 'https://spenden.wikimedia.de';
  * For creating the target URL for the banner donation form, see `createFormActions.ts` instead.
  * @param {TrackingParameters} tracking
  * @param {ImpressionCount} impressionCount
- * @param {boolean} comesFromFallbackBanner  the component that contains this link is the fallback banner for banner size issues
  * @param {Record<string, string>} extraUrlParameters
  */
-export function createDonationURL(
-	tracking: TrackingParameters,
-	impressionCount: ImpressionCount,
-	comesFromFallbackBanner: boolean,
-	extraUrlParameters: Record<string, string> = {} ): string {
-	const piwikKeyword = comesFromFallbackBanner ? tracking.keyword.replace( /(ctrl|var)/g, 'mini' ) : tracking.keyword;
+export function createDonationURL( tracking: TrackingParameters, impressionCount: ImpressionCount, extraUrlParameters: Record<string, string> = {} ): string {
 	const urlParameters = new URLSearchParams( {
-		piwik_kwd: piwikKeyword,
+		piwik_kwd: tracking.keyword,
 		piwik_campaign: tracking.campaign,
 		impCount: String( impressionCount.overallCountIncremented ),
 		bImpCount: String( impressionCount.bannerCountIncremented ),
