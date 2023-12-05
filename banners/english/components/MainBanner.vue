@@ -1,6 +1,8 @@
 <template>
 	<div class="wmde-banner-main">
-		<ButtonClose @close="$emit( 'close' )"/>
+		<slot name="close-button">
+			<ButtonClose @close="$emit( 'close' )"/>
+		</slot>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
 				<slot name="banner-text" v-if="onLargeScreen"/>
