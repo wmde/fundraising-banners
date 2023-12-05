@@ -19,12 +19,13 @@ import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 
 // Locale-specific imports
-import messages from './messages_var';
+import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { createDonationURL } from '@src/createDonationURL';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -43,7 +44,8 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) )
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
+		donationURL: createDonationURL( page.getTracking(), impressionCount, { amount: '1000' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

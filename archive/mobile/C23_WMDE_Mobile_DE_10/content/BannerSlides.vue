@@ -10,8 +10,8 @@
 			<strong>Hi,</strong>
 		</p>
 		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen {{ currentDayName }}, den {{ currentDateTime }}, bitten wir Sie bescheiden,
-			die Unabhängigkeit von Wikipedia zu unterstützen.</p>
+			heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie bescheiden, die Unabhängigkeit
+			von Wikipedia zu unterstützen.</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -39,34 +39,22 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, watch } from 'vue';
+import { inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 
 interface Props {
-	playLiveText: boolean;
 	currentSlide: number
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime,
+	currentDate,
 	goalDonationSum,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
-
-const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
-
-watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
-	if ( !shouldPlay ) {
-		stopTimer();
-	}
-} );
-
-onMounted( startTimer );
 
 </script>

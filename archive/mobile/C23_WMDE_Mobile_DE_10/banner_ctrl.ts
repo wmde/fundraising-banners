@@ -2,9 +2,8 @@ import { createVueApp } from '@src/createVueApp';
 
 import './styles/styles.scss';
 
-import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerVar.vue';
-import FallbackBanner from './components/FallbackBanner.vue';
+import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
+import Banner from './components/BannerCtrl.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -15,6 +14,7 @@ import TranslationPlugin from '@src/TranslationPlugin';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
+import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 
@@ -25,12 +25,11 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
-const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 400 ) );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker() );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
@@ -43,13 +42,11 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
+		pageScroller: new WindowPageScroller(),
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	fallbackBanner: FallbackBanner,
-	minWidthForMainBanner: 800,
 	impressionCount
 } );
 
@@ -61,12 +58,11 @@ app.use( DynamicTextPlugin, {
 	impressionCount,
 	translator
 } );
-
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { des: '1' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

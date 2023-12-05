@@ -20,7 +20,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
-			case 'MiniBanner':
 			case 'UpgradeToYearlyForm':
 				return new WMDESizeIssueEvent( `submit-${e.userChoice}`, createViewportInfo(), 1 );
 			default:

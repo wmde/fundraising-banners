@@ -3,13 +3,13 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@submit-10-euro="submit10Euro"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -21,7 +21,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #progress>
@@ -88,7 +88,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBannerVar.vue';
+import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -96,9 +96,9 @@ import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsClo
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerTextVar.vue';
+import BannerText from '../content/BannerText.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -115,6 +115,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -132,6 +133,7 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 	remainingImpressions: number;
+	donationURL: string;
 }
 
 const props = defineProps<Props>();
@@ -176,11 +178,9 @@ function onshowFullPageBanner(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
-function onshowFullPageBannerPreselected(): void {
-	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+function submit10Euro(): void {
+	tracker.trackEvent( new BannerSubmitEvent( 'MiniBanner', 'donate-10-euro' ) );
+	window.location.href = props.donationURL;
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
