@@ -13,6 +13,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
 	[ MobileMiniBannerExpandedEvent.EVENT_NAME,
-		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
+		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
 	[ BannerSubmitEvent.EVENT_NAME, (): WMDESizeIssueEvent => new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 ) ]
 ] );

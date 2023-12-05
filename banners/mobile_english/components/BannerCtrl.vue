@@ -21,7 +21,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #progress>
@@ -158,7 +158,7 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
 }
 
 function onshowFullPageBannerPreselected(): void {

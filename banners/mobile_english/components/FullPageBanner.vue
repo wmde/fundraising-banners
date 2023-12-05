@@ -7,7 +7,7 @@
 		<div class="wmde-banner-full-content">
 
 			<header class="wmde-banner-headline">
-				<span class="wmde-banner-headline-content">the wikimedia fundraising campaign</span>
+				<span class="wmde-banner-headline-content">Is Wikipedia worth €10 to you?</span>
 			</header>
 
 			<div class="wmde-banner-full-info">

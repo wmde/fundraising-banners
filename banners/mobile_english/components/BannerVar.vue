@@ -21,7 +21,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #progress>
@@ -106,8 +106,8 @@ import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import {
-	createSubmittableMainDonationFormSinglePage
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePage';
+	createSubmittableMainDonationFormSinglePageAnonymous
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePageAnonymous';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -137,7 +137,7 @@ const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const stepControllers = [ createSubmittableMainDonationFormSinglePage() ];
+const stepControllers = [ createSubmittableMainDonationFormSinglePageAnonymous( formModel ) ];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -158,7 +158,7 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
 }
 
 function onshowFullPageBannerPreselected(): void {
