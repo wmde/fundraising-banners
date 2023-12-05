@@ -8,7 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures,
+	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
@@ -20,6 +20,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { setCookieImageFeatures } from '@test/features/SetCookieImage';
+import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -90,6 +91,13 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
 		} );
+
+		test.each( [
+			[ 'expectShowsLiveTimeInMessage' ],
+			[ 'expectShowsLiveTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
@@ -123,7 +131,10 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
 			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
-			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ]
+			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
+			[ 'expectSetCookieImageOnAlreadyDonatedMaybeLater' ],
+			[ 'expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners' ],
+			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
@@ -135,6 +146,17 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectShowsAlreadyDonatedModal' ],
+			[ 'expectHidesAlreadyDonatedModal' ],
+			[ 'expectFiresMaybeLaterEvent' ],
+			[ 'expectFiresGoAwayEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

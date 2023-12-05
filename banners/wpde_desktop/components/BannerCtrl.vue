@@ -1,6 +1,8 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<SetCookieImage v-if="showSetCookieImage"/>
+		<SetAlreadyDonatedCookieImage v-if="showAlreadyDonatedCookieImage"/>
+		<SetMaybeLaterCookieImage v-if="showMaybeLaterCookieImage"/>
 		<MainBanner
 			@close="onCloseMain"
 			@form-interaction="$emit( 'bannerContentChanged' )"
@@ -52,8 +54,12 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
+				<FooterAlreadyDonated
+					@showFundsModal="isFundsModalVisible = true"
+					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+				/>
 			</template>
+
 		</MainBanner>
 
 		<FundsModal
@@ -68,6 +74,17 @@
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
+
+		<AlreadyDonatedModal
+			:is-visible="isAlreadyDonatedModalVisible"
+			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
+			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
+			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
+		>
+			<template #already-donated-content>
+				<AlreadyDonatedContent/>
+			</template>
+		</AlreadyDonatedModal>
 	</div>
 </template>
 
@@ -79,9 +96,9 @@ import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
+import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
@@ -101,6 +118,10 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
+import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
+import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -123,7 +144,10 @@ const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
+const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const showSetCookieImage = ref<boolean>( false );
+const showAlreadyDonatedCookieImage = ref<boolean>( false );
+const showMaybeLaterCookieImage = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -146,8 +170,20 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	if ( userChoice !== CloseChoices.MaybeLater ) {
-		showSetCookieImage.value = true;
+
+	switch ( userChoice ) {
+		case CloseChoices.MaybeLater:
+			showMaybeLaterCookieImage.value = true;
+			break;
+		case CloseChoices.Close:
+		case CloseChoices.Hide:
+		case CloseChoices.TimeOut:
+			showSetCookieImage.value = true;
+			break;
+		case CloseChoices.NoMoreBannersForCampaign:
+			showAlreadyDonatedCookieImage.value = true;
+			break;
+
 	}
 }
 

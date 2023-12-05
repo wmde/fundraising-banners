@@ -5,8 +5,8 @@
 			<strong> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
-			Bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur
-			Sache. An diesem {{ currentDayName }} sind Sie gefragt: {{ campaignDaySentence }}</p>
+			An diesem {{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} sind Sie gefragt: {{ campaignDaySentence }}
+		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
@@ -35,9 +35,10 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject } from 'vue';
+import { inject, onMounted, onUnmounted } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
+import { useCurrentTime } from '@src/components/composables/useCurrentTime';
 
 interface Props {
 	currentSlide: number
@@ -47,7 +48,14 @@ defineProps<Props>();
 
 const {
 	currentDayName,
+	currentDate,
+	getCurrentTime,
 	campaignDaySentence,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
+
+const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+onMounted( startTimer );
+onUnmounted( stopTimer );
+
 </script>
