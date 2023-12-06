@@ -12,4 +12,12 @@ describe( 'createFallbackDonationURL', () => {
 		expect( ctrlLink ).toStrictEqual( expected );
 		expect( varLink ).toStrictEqual( expected );
 	} );
+
+	it( 'leave the original tracking information intact', () => {
+		const extraParameters = { locale: 'de_DE', ast: '1' };
+		const tracking = { campaign: 'C1', keyword: 'banner-ctrl' };
+		createFallbackDonationURL( tracking, new ImpressionCountStub(), extraParameters );
+
+		expect( tracking.keyword ).toStrictEqual( 'banner-ctrl' );
+	} );
 } );
