@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="wmde-banner-mini-button-group">
-				<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
+				<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselectedAmount' )">
 					Donate €10
 				</button>
 				<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
@@ -28,7 +28,6 @@
 				<div><PayPalLogo/></div>
 				<div><VisaLogo/></div>
 				<div><MastercardLogo/></div>
-				<div><AmexLogo/></div>
 				<div><SmsIcon/></div>
 			</div>
 
@@ -41,10 +40,9 @@
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close' ] );
 
 </script>

@@ -6,6 +6,7 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { beforeEach } from 'vitest';
 import { resetFormModel } from '@test/resetFormModel';
+import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 
 const formModel = useFormModel();
 
@@ -25,8 +26,15 @@ describe( 'SubmittableMainDonationFormSinglePageAnonymous', () => {
 		expect( stepNavigation.submit ).toHaveBeenCalledWith( new BannerSubmitEvent( 'MainDonationForm' ) );
 	} );
 
-	it.skip( 'Leads directly to the page of the external service provider on submit', () => {
+	it( 'Sets the address type to anonymous on submit', async () => {
+		const stepNavigation = { goToStep: vi.fn(), submit: vi.fn() };
+		const controller = createSubmittableMainDonationFormSinglePageAnonymous( formModel );
 
+		expect( formModel.addressType.value ).toEqual( '' );
+
+		await controller.submit( stepNavigation, {} );
+
+		expect( formModel.addressType.value ).toEqual( AddressTypes.ANONYMOUS.value );
 	} );
 
 	it( 'Rejects go to page', async () => {

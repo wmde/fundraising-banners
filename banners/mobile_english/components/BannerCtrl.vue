@@ -3,7 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@show-full-page-banner-preselected-amount="onShowFullPageBannerPreselectedAmount"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -48,7 +48,6 @@
 								<span class="wmde-banner-select-group-label with-logos credit-cards">
 									<VisaLogo/>
 									<MastercardLogo/>
-									<AmexLogo/>
 								</span>
 							</template>
 
@@ -101,7 +100,6 @@ import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
@@ -161,7 +159,7 @@ function onshowFullPageBanner(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
 }
 
-function onshowFullPageBannerPreselected(): void {
+function onShowFullPageBannerPreselectedAmount(): void {
 	slideShowStopped.value = true;
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
