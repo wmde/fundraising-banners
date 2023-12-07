@@ -1,0 +1,38 @@
+.wmde-banner {
+	&-close {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+		height: 34px;
+		width: 34px;
+		border: 0;
+		background: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		svg path {
+			fill: var( --color-primary );
+		}
+	}
+
+	&-full {
+		.wmde-banner-close {
+			width: auto;
+			font-size: 14px;
+			font-weight: bold;
+			color: var( --color-grey-dark );
+			transition: color 500ms ease-in-out;
+
+			&:hover,
+			&:focus {
+				color: var( --color-black );
+			}
+
+			svg {
+				margin-left: 10px;
+			}
+		}
+	}
+}

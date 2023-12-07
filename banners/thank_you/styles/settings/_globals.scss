@@ -1,0 +1,4 @@
+/* This is the easing function that most of the banner transitions use */
+$banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 ) !default;
+
+$banner-bg-gradient: linear-gradient( 135deg, rgba( 246, 246, 246 ) 0%, rgba( 246, 246, 246 ) 50%, rgba( 251, 251, 251 ) 50%, rgba( 251, 251, 251 ) 100% );

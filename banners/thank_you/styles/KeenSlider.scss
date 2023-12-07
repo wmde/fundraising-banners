@@ -1,0 +1,66 @@
+@use 'settings/fonts';
+@use 'settings/breakpoints';
+@use '@src/components/Slider/KeenSlider';
+
+.wmde-banner {
+	@include KeenSlider.layout;
+
+	&-slider-container {
+		font-family: fonts.$ui;
+		font-size: 24px;
+		padding: 16px 0;
+		line-height: 1.2;
+
+		@include breakpoints.small-up {
+			font-size: 1.3em;
+			line-height: 1.5;
+		}
+	}
+
+	&-slide {
+		cursor: grab;
+
+		&--current {
+			.wmde-banner-slider-text-animated-highlight {
+				background-position: 0 0;
+			}
+		}
+
+		&-content {
+			text-align: center;
+			padding: 0 30px;
+
+			p {
+				margin: 0 0 1em;
+			}
+
+			p:last-child {
+				margin: 0;
+			}
+		}
+	}
+
+	&-slider-pagination {
+		&-dot {
+			background: var( --color-grey );
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 3px solid var( --color-white );
+
+			&:focus {
+				outline: 0;
+			}
+		}
+		.is-active {
+			background: var( --color-white );
+			border: 3px solid var( --color-primary );
+		}
+	}
+
+	&-navigation-wrapper {
+		margin-bottom: 16px;
+	}
+}

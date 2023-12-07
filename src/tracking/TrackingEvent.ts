@@ -14,7 +14,9 @@ export type TrackingFeatureName = '' |
 	'CustomAmountForm' |
 	'UpgradeToYearlyForm' |
 	'UpgradeToMonthlyForm' |
-	'AddressTypeForm';
+	'AddressTypeForm' |
+
+	'ThankYouBanner';
 
 /**
  * @param T - Defines the type of the customData property
