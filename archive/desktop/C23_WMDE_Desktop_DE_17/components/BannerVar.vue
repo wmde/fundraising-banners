@@ -1,9 +1,9 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
-			@form-interaction="$emit( 'bannerContentChanged' )"
-			v-if="contentState === ContentStates.Main"
-			:bannerState="bannerState"
+				@form-interaction="$emit( 'bannerContentChanged' )"
+				v-if="contentState === ContentStates.Main"
+				:bannerState="bannerState"
 		>
 			<template #close-button>
 				<ButtonClose @close="onCloseMain"/>
@@ -14,7 +14,7 @@
 			</template>
 
 			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
+				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide"/>
@@ -35,7 +35,7 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" :show-manual-upgrade-option="false" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -43,33 +43,33 @@
 
 			<template #footer>
 				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
-					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+						@showFundsModal="isFundsModalVisible = true"
+						@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
 				/>
 			</template>
 
 		</MainBanner>
 
 		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
+				v-if="contentState === ContentStates.SoftClosing"
+				:show-close-icon="true"
+				@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+				@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+				@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+				@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
 		/>
 
 		<FundsModal
-			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
+				:content="useOfFundsContent"
+				:is-funds-modal-visible="isFundsModalVisible"
+				@hideFundsModal="isFundsModalVisible = false"
 		/>
 
 		<AlreadyDonatedModal
-			:is-visible="isAlreadyDonatedModalVisible"
-			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
+				:is-visible="isAlreadyDonatedModalVisible"
+				@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
+				@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
+				@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
 		>
 			<template #already-donated-content>
 				<AlreadyDonatedContent/>
@@ -90,7 +90,7 @@ import BannerSlides from '../content/BannerSlides.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
+import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {

@@ -10,6 +10,9 @@ import { createDonationURL } from '@src/createDonationURL';
  * @param {Record<string, string>} extraUrlParameters
  */
 export function createFallbackDonationURL( tracking: TrackingParameters, impressionCount: ImpressionCount, extraUrlParameters: Record<string, string> = {} ): string {
-	tracking.keyword = tracking.keyword.replace( /(ctrl|var)/g, 'mini' );
-	return createDonationURL( tracking, impressionCount, extraUrlParameters );
+	const fallbackTracking: TrackingParameters = {
+		keyword: tracking.keyword.replace( /(ctrl|var)/g, 'mini' ),
+		campaign: tracking.campaign
+	};
+	return createDonationURL( fallbackTracking, impressionCount, extraUrlParameters );
 }
