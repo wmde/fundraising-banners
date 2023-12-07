@@ -1,0 +1,56 @@
+@use 'Treeedip-blueColors' as colorsBlue;
+
+.wmde-banner .wmde-banner-main {
+	.wmde-banner {
+		// Content from MainBanner.scss
+		&-message {
+			padding: 3px 15px;
+			color: colorsBlue.$white;
+			background-color: colorsBlue.$primary;
+			border: none;
+			border-radius: 9px;
+			margin-bottom: 15px;
+		}
+
+		&-column-left {
+			border: none;
+		}
+
+		// default
+		&-text-animated-highlight {
+			background-image: colorsBlue.$animated-highlight-gradient;
+		}
+
+		// ProgressBar/ProgressBar
+		&-progress-bar {
+			margin: 0;
+		}
+
+		// Slider/KeenSlider
+		&-slider-container {
+			background-color: colorsBlue.$primary;
+			color: colorsBlue.$white;
+			border-radius: 9px;
+			margin-bottom: 15px;
+		}
+
+		&-slide {
+
+			&-content {
+				padding: 15px 30px;
+			}
+		}
+
+		&-slider-pagination {
+			&-dot {
+				background: colorsBlue.$gray-light;
+				border: 3px solid colorsBlue.$primary;
+			}
+
+			.is-active {
+				background: colorsBlue.$primary;
+				border: 3px solid colorsBlue.$white;
+			}
+		}
+	}
+}

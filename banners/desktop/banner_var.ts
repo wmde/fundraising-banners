@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -27,7 +27,6 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
-const date = new Date();
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -35,7 +34,6 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
-const campaignParameters = page.getCampaignParameters();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -57,8 +55,8 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
-	campaignParameters,
-	date,
+	campaignParameters: page.getCampaignParameters(),
+	date: new Date(),
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
 	translator
@@ -68,7 +66,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { des: '1' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );
