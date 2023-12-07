@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState">
+	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
 		<MainBanner
 				@form-interaction="$emit( 'bannerContentChanged' )"
 				v-if="contentState === ContentStates.Main"
@@ -85,8 +85,8 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
@@ -106,6 +106,7 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
+import colors from '../styles/colors_var';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
