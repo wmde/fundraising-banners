@@ -1,9 +1,10 @@
 @use '../../../../components/DonationForm/SubComponents/SelectCustomAmount';
 @use '../../variables/colors';
 
-$background-color: #ffffff;
+$height: 23px !default;
+
+$background-color: transparent;
 $active-color: #3366cc;
-$border-radius: 40px;
 $border-radio: 1px solid #ffffff;
 $box-shadow: 0 0 0 1px #3366cc;
 
@@ -39,7 +40,7 @@ $box-shadow: 0 0 0 1px #3366cc;
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				border: 2px solid $active-color;
+				border: 1px solid $active-color;
 			}
 
 			.wmde-banner-select-custom-amount-input {
@@ -49,11 +50,10 @@ $box-shadow: 0 0 0 1px #3366cc;
 		}
 
 		&-input-container {
-			height: 23px;
+			height: $height;
 			background-color: colors.$white;
 			border-radius: 8px;
-			border: 2px solid #b7b7b7;
-			min-width: 110px;
+			border: 1px solid #b7b7b7;
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
 			&::before {
@@ -69,7 +69,7 @@ $box-shadow: 0 0 0 1px #3366cc;
 		}
 
 		&-euro-symbol {
-			height: 19px;
+			height: $height - 2px;
 			width: 10px;
 			line-height: 21px;
 			text-align: center;
@@ -84,9 +84,8 @@ $box-shadow: 0 0 0 1px #3366cc;
 			font-size: 0.9em;
 			font-weight: normal;
 			border: 0 none;
-			border-radius: $border-radius;
 			text-align: left;
-			height: 19px;
+			height: $height - 2px;
 
 			&:focus,
 			&:active {

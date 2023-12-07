@@ -21,7 +21,7 @@ const expectFiresMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): Promise<a
 	await wrapper.find( '.wmde-banner-already-donated-button-maybe-later' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonatedModal', CloseChoices.MaybeLater ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonatedModal', CloseChoices.Close ) );
 };
 
 const expectFiresGoAwayEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {

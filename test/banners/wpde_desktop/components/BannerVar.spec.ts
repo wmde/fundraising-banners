@@ -7,7 +7,11 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import { bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
+import {
+	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
+	bannerContentDisplaySwitchFeatures,
+	bannerContentFeatures
+} from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -16,11 +20,12 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { setCookieImageFeatures } from '@test/features/SetCookieImage';
+import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -77,6 +82,22 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1300 );
 		} );
+
+		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectShowsLiveTimeInMessage' ],
+			[ 'expectShowsLiveTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
@@ -110,7 +131,10 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
 			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
-			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ]
+			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
+			[ 'expectSetCookieImageOnAlreadyDonatedMaybeLater' ],
+			[ 'expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners' ],
+			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
@@ -122,6 +146,17 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectShowsAlreadyDonatedModal' ],
+			[ 'expectHidesAlreadyDonatedModal' ],
+			[ 'expectFiresMaybeLaterEvent' ],
+			[ 'expectFiresGoAwayEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

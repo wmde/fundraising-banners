@@ -25,13 +25,7 @@ $font-weight: normal;
 
 		&-container {
 			line-height: inherit;
-			background-color: $background-color;
-			border-radius: $border-radius;
-			padding: 4px 0;
-
-			&--with-error {
-				background-color: $background-color-error;
-			}
+			padding: 0;
 		}
 
 		&-error-message {
@@ -52,11 +46,6 @@ $font-weight: normal;
 	&-select-group-container.select-amount {
 		.wmde-banner-select-group-option {
 			width: $amount-option-width;
-
-			&:nth-child( 5 ),
-			&:nth-child( 6 ) {
-				margin-bottom: 0;
-			}
 		}
 		margin-top: 0;
 	}
@@ -64,22 +53,12 @@ $font-weight: normal;
 	&-select-group-container.select-interval {
 		.wmde-banner-select-group-option {
 			width: $interval-option-width;
-
-			&:nth-child( 3 ),
-			&:nth-child( 4 ) {
-				margin-bottom: 0;
-			}
 		}
 	}
 
 	&-select-group-container.select-payment-method {
 		.wmde-banner-select-group-option {
 			width: $payment-option-width;
-
-			&:nth-child( 3 ),
-			&:nth-child( 4 ) {
-				margin-bottom: 0;
-			}
 		}
 	}
 }

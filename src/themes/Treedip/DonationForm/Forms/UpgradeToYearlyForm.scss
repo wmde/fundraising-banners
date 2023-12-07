@@ -52,7 +52,9 @@ $custom-link-text-align: left !default;
 			flex-grow: 0;
 		}
 
-		&-custom {
+		&-custom,
+		&-custom:link,
+		&-custom:visited {
 			color: colors.$secondary;
 			font-size: 12px;
 			text-align: $custom-link-text-align;

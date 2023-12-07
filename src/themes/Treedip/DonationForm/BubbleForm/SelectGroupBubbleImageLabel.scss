@@ -1,0 +1,29 @@
+@use '@src/themes/Treedip/variables/colors';
+@use '@src/themes/Treedip/variables/breakpoints';
+
+.wmde-banner {
+	&-select-group-label {
+		&.with-logos {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+		.paypal-logo {
+			max-width: 90px;
+		}
+
+		.mastercard-logo {
+			height: 26px;
+		}
+
+		.visa-logo {
+			height: 16px;
+		}
+
+		.bank-transfer-logo {
+			height: 40px;
+		}
+	}
+}

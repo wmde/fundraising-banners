@@ -5,7 +5,7 @@
 		</a>
 		<div class="wmde-banner-form-upgrade-notice">
 			<p><strong>{{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}</strong></p>
-			<p>{{ $translate( 'upgrade-to-yearly-copy' ) }}</p>
+			<p v-html="$translate( 'upgrade-to-yearly-copy' )"></p>
 		</div>
 
 		<div class="wmde-banner-form-upgrade-options">
