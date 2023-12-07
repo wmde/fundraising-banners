@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/mobile/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -17,7 +17,6 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
-import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -87,8 +86,8 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
-			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+			[ 'expectShowsLiveTimeInMiniBanner' ],
+			[ 'expectShowsLiveTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
@@ -100,8 +99,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
@@ -147,18 +145,6 @@ describe( 'BannerVar.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
-
-		test( 'sends users directly to the donation form page with 10 euros preselected', async () => {
-			const location = { href: '' };
-			Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
-			const localWrapper = getWrapper();
-
-			await localWrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
-
-			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitEvent( 'MiniBanner', 'donate-10-euro' ) );
-			expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );
-		} );
-
 	} );
 
 	describe( 'Full Page Banner', () => {

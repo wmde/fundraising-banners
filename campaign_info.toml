@@ -35,7 +35,7 @@ name = "Mobile"
 icon = "mobile"
 campaign = "C23_WMDE_Mobile_DE_12"
 description = "based on ctrl 10, Var redirects users to the donation page with the amount button"
-campaign_tracking = "mob-de-12-ba-231207"
+campaign_tracking = "mob-de-12-ba-231208"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
@@ -45,12 +45,12 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 [mobile.banners.ctrl]
 filename = "./banners/mobile/banner_ctrl.ts"
 pagename = "B23_WMDE_Mobile_DE_12_ctrl"
-tracking = "org-mob12-231207-ctrl"
+tracking = "org-mob12-231208-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/banner_var.ts"
 pagename = "B23_WMDE_Mobile_DE_12_var"
-tracking = "org-mob12-231207-var"
+tracking = "org-mob12-231208-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]

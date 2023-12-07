@@ -6,7 +6,7 @@
 			</p>
 			<p>
 				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ currentDateTime }}, bitten wir Sie bescheiden, die Unabhängigkeit von
+				{{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} bitten wir Sie bescheiden, die Unabhängigkeit von
 				Wikipedia zu unterstützen. Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Die
 				durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 10&nbsp;€ helfen uns weiter.
 				<AnimatedText :content="visitorsVsDonorsSentence"/> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat
@@ -21,7 +21,7 @@
 import { inject, watch } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
+import { useCurrentTime } from '@src/components/composables/useCurrentTime';
 
 interface Props {
 	playLiveText: boolean;
@@ -31,11 +31,12 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime,
+	getCurrentTime,
+	currentDate,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
+const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	if ( shouldPlay ) {
