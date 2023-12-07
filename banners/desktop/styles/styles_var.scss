@@ -1,13 +1,12 @@
 // This is the file where we import the theme-specific component styles
 
-@use 'Treeedip-blueColors' as colorsBlue;
+@use 'Treeedip-greenColors' as colorsGreen;
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'MainBanner' with (
 	$banner-height: 357px,
 	$form-width: 300px
 );
-@use 'Treedip-blueOverrides';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
@@ -15,7 +14,7 @@
 	$progress-bar-margin: 0 15px
 );
 @use 'src/themes/Treedip/DonationForm/DonationForm' with (
-	$background-color: colorsBlue.$secondary,
+	$background-color: colorsGreen.$secondary,
 );
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
@@ -37,3 +36,4 @@
 @use 'src/themes/Treedip/FallbackBanner/FallbackButton';
 @use 'src/themes/Treedip/FallbackBanner/LargeFooter';
 @use 'src/themes/Treedip/FallbackBanner/SmallFooter';
+@use 'Treedip-greenOverrides';

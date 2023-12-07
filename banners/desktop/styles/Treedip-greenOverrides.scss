@@ -1,0 +1,96 @@
+@use 'Treeedip-greenColors' as colorsGreen;
+
+.wmde-banner .wmde-banner-main {
+	.wmde-banner {
+		// Content from MainBanner.scss
+		&-message {
+			padding: 3px 15px;
+			color: colorsGreen.$white;
+			background-color: colorsGreen.$primary;
+			border: none;
+			border-radius: 9px;
+			margin-bottom: 15px;
+		}
+
+		&-column-left {
+			border: none;
+		}
+
+		// default
+		&-text-animated-highlight {
+			background-image: colorsGreen.$animated-highlight-gradient;
+		}
+
+		// ProgressBar/ProgressBar
+		&-progress-bar {
+			margin: 0;
+
+			&-fill-wrapper {
+				background: colorsGreen.$white;
+				border: 3px solid colorsGreen.$secondary;
+			}
+
+			&-fill {
+				background: colorsGreen.$secondary;
+				color: colorsGreen.$white;
+			}
+		}
+
+		// DonationForm/SubComponents/SelectGroupRadios
+		&-select-group {
+			&-input:checked + .wmde-banner-select-group-label::before {
+				border: 6px solid colorsGreen.$secondary;
+				box-shadow: none;
+			}
+		}
+
+		// Slider/KeenSlider
+		&-slider-container {
+			background-color: colorsGreen.$primary;
+			color: colorsGreen.$white;
+			border-radius: 9px;
+			margin-bottom: 15px;
+		}
+
+		&-slide {
+
+			&-content {
+				padding: 15px 30px;
+			}
+		}
+
+		&-slider-pagination {
+			&-dot {
+				background: colorsGreen.$gray-light;
+				border: 3px solid colorsGreen.$primary;
+			}
+
+			.is-active {
+				background: colorsGreen.$primary;
+				border: 3px solid colorsGreen.$white;
+			}
+		}
+	}
+}
+
+// SoftClose/SoftClose
+.wmde-banner-soft-close {
+	&-prompt {
+		color: colorsGreen.$white;
+	}
+
+	&-button {
+		background-color: colorsGreen.$secondary;
+	}
+
+	&-countdown-bar-fill {
+		background-color: colorsGreen.$secondary;
+	}
+}
+
+// AlreadyDonatedModal/AlreadyDonatedModal
+.wmde-banner-already-donated {
+	&-button {
+		background-color: colorsGreen.$secondary;
+	}
+}
