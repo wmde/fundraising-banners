@@ -1,0 +1,38 @@
+@use 'settings/breakpoints';
+
+.wmde-banner {
+	&-stats-box {
+		background: var( --color-off-white );
+		border-radius: 6px;
+		padding: 12px;
+		margin: 0 0 24px;
+
+		@include breakpoints.x-small-up {
+			float: right;
+			max-width: 184px;
+			margin: 0 0 10px 10px;
+		}
+
+		&-row {
+			display: flex;
+
+			&:not( :last-child ) {
+				margin-bottom: 12px;
+			}
+		}
+
+		&-icon {
+			flex: 0 0 auto;
+		}
+
+		&-text {
+			flex: 1 1 auto;
+			padding-left: 12px;
+			font-size: 12px;
+
+			strong {
+				font-size: 16px;
+			}
+		}
+	}
+}

@@ -24,7 +24,7 @@ Each year, create two new pages on meta.wikipedia.org, one for English and one f
 * https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE
 * https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN
 
-To use different pages, change the setting `use_of_funds_source` in the file [`campaigns_info.toml`](../campaign_info.toml).
+To use different pages, change the setting `use_of_funds_source` in the file [`campaigns_info.toml`](../campaign_info_main.toml).
 
 ## Initializing the loader class in the entry points
 

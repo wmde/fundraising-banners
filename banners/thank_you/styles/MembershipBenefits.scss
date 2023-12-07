@@ -1,0 +1,27 @@
+.wmde-banner {
+	&-benefits {
+		list-style-type: none;
+		list-style-image: none;
+		padding: 0;
+		margin: 0 0 20px;
+
+		li {
+			margin-bottom: 10px;
+			position: relative;
+			padding-left: 24px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		svg {
+			position: absolute;
+			top: 5px;
+			left: 0;
+
+			path {
+				stroke: var( --color-primary );
+			}
+		}
+	}
+}

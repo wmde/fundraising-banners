@@ -1,0 +1,51 @@
+<template>
+	<div class="wmde-banner-mini">
+		<ButtonClose @close="$emit( 'close' )"/>
+		<div class="wmde-banner-mini-inner" @click.prevent="$emit( 'showModal' )">
+			<button class="wmde-banner-info-button"><InfoIcon/></button>
+
+			<div class="wmde-banner-mini-text" v-if="showComponentForLargeScreen">
+
+				<slot name="text"/>
+
+				<div class="wmde-banner-mini-text-columns">
+					<div class="wmde-banner-mini-text-progress">
+						<slot name="progress"/>
+					</div>
+					<div class="wmde-banner-mini-text-button">
+						<button class="wmde-banner-button">
+							{{ $translate( 'open-modal' ) }}
+						</button>
+					</div>
+				</div>
+
+			</div>
+			<div class="wmde-banner-mini-slider" v-else>
+
+				<slot name="slides"/>
+
+				<button class="wmde-banner-button">
+					{{ $translate( 'open-modal' ) }}
+				</button>
+			</div>
+
+			<div class="wmde-banner-firework wmde-banner-firework-lefter"></div>
+			<div class="wmde-banner-firework wmde-banner-firework-left"></div>
+			<div class="wmde-banner-firework wmde-banner-firework-center"></div>
+			<div class="wmde-banner-firework wmde-banner-firework-right"></div>
+			<div class="wmde-banner-firework wmde-banner-firework-righter"></div>
+		</div>
+	</div>
+</template>
+
+<script setup lang="ts">
+
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
+
+defineEmits( [ 'close', 'showModal' ] );
+
+const showComponentForLargeScreen = useDisplaySwitch( 750 );
+
+</script>
