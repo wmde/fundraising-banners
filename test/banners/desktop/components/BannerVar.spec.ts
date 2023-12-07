@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/desktop/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -10,6 +10,7 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
+	bannerContentAnimatedTextFeatures,
 	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
@@ -19,7 +20,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
-import { donorHeartFeatures, testDonorHeartValues } from '@test/features/DonorHeart';
+import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -53,9 +54,7 @@ describe( 'BannerVar.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub(),
-					dailyDonorAverage: testDonorHeartValues,
-					visitorsVsDailyDonorsSentence: 'Visitors vs Daily Donors Sentence'
+					tracker: new TrackerStub()
 				}
 			}
 		} );
@@ -85,34 +84,19 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
 			[ 'expectShowsLiveDateAndTimeInMessage' ],
 			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
-		} );
-
-		it( 'shows the visitorsVsDailyDonorsSentence in the message', () => {
-			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
-			const wrapper = getWrapper();
-
-			expect( wrapper.find( '.wmde-banner-message .wmde-banner-text-animated-highlight' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.wmde-banner-message .wmde-banner-text-animated-highlight' ).text() ).toStrictEqual( 'Visitors vs Daily Donors Sentence' );
-		} );
-
-		it( 'shows the visitorsVsDailyDonorsSentence in the slideshow', () => {
-			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1300 } );
-			const wrapper = getWrapper();
-
-			expect( wrapper.find( '.wmde-banner-slider .wmde-banner-text-animated-highlight' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.wmde-banner-slider .wmde-banner-text-animated-highlight' ).text() ).toStrictEqual( 'Visitors vs Daily Donors Sentence' );
-		} );
-	} );
-
-	describe( 'Donor Heart', () => {
-		test.each( [
-			[ 'expectShowsDonorHeart' ]
-		] )( '%s', async ( testName: string ) => {
-			await donorHeartFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -148,6 +132,17 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectShowsAlreadyDonatedModal' ],
+			[ 'expectHidesAlreadyDonatedModal' ],
+			[ 'expectFiresMaybeLaterEvent' ],
+			[ 'expectFiresGoAwayEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

@@ -1,9 +1,9 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
-				@form-interaction="$emit( 'bannerContentChanged' )"
-				v-if="contentState === ContentStates.Main"
-				:bannerState="bannerState"
+			@form-interaction="$emit( 'bannerContentChanged' )"
+			v-if="contentState === ContentStates.Main"
+			:bannerState="bannerState"
 		>
 			<template #close-button>
 				<ButtonClose @close="onCloseMain"/>
@@ -14,7 +14,7 @@
 			</template>
 
 			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
+				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide"/>
@@ -43,33 +43,33 @@
 
 			<template #footer>
 				<FooterAlreadyDonated
-						@showFundsModal="isFundsModalVisible = true"
-						@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+					@showFundsModal="isFundsModalVisible = true"
+					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
 				/>
 			</template>
 
 		</MainBanner>
 
 		<SoftClose
-				v-if="contentState === ContentStates.SoftClosing"
-				:show-close-icon="true"
-				@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-				@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-				@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-				@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
 		/>
 
 		<FundsModal
-				:content="useOfFundsContent"
-				:is-funds-modal-visible="isFundsModalVisible"
-				@hideFundsModal="isFundsModalVisible = false"
+			:content="useOfFundsContent"
+			:is-funds-modal-visible="isFundsModalVisible"
+			@hideFundsModal="isFundsModalVisible = false"
 		/>
 
 		<AlreadyDonatedModal
-				:is-visible="isAlreadyDonatedModalVisible"
-				@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-				@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-				@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
+			:is-visible="isAlreadyDonatedModalVisible"
+			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
+			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
+			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
 		>
 			<template #already-donated-content>
 				<AlreadyDonatedContent/>

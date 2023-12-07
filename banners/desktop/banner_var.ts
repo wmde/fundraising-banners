@@ -17,20 +17,16 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
+import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
 // Locale-specific imports
-import messages from './messages_var';
+import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import { LinearDailyDonorAverage } from '@src/utils/DynamicContent/LinearDailyDonorAverage';
-import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
-import { visitorsVsDailyDonorsSentence } from './visitorsVsDailyDonorsSentence';
-import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
-const date = new Date();
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -38,8 +34,6 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
-const campaignParameters = page.getCampaignParameters();
-const dailyDonorAverage = new LinearDailyDonorAverage( 6260, new IntegerDe() ).getDonorStatsForTime( date );
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -61,8 +55,8 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
-	campaignParameters,
-	date,
+	campaignParameters: page.getCampaignParameters(),
+	date: new Date(),
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
 	translator
@@ -72,9 +66,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { des: '1' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
-app.provide( 'dailyDonorAverage', dailyDonorAverage );
-app.provide( 'visitorsVsDailyDonorsSentence', visitorsVsDailyDonorsSentence( campaignParameters.millionImpressionsPerDay, dailyDonorAverage.currentDonorsSoFar ) );
 
 app.mount( page.getBannerContainer() );
