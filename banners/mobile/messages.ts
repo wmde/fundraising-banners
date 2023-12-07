@@ -27,7 +27,13 @@ const messages: TranslationMessages = {
 	'use-of-funds-link': 'Was Ihre Spende bewirkt',
 	'payment-bank-transfer': 'Überweisung',
 	'payment-sofort': 'Klarna',
-	'soft-close-button-already-donated': 'Habe schon gespendet'
+	'soft-close-button-already-donated': 'Habe schon gespendet',
+
+	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
+		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
+		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
+	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
+	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich'
 };
 
 export default messages;

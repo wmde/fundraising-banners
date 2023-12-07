@@ -36,7 +36,12 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<UpgradeToYearlyButtonForm
+							:show-manual-upgrade-option = false
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous">
 							<template #back>
 								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
