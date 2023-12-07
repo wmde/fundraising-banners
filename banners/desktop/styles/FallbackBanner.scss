@@ -1,7 +1,4 @@
-@use 'src/themes/Treedip/variables/globals';
-@use 'src/themes/Treedip/variables/colors';
 @use 'src/themes/Treedip/variables/fonts';
-@use 'sass:color';
 
 $breakpoint: 800px;
 
@@ -11,7 +8,7 @@ $breakpoint: 800px;
 		height: 150px;
 		display: flex;
 		flex-direction: column;
-		background: colors.$white;
+		background: var( --color-white );
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
 		@media ( min-width: $breakpoint ) {
@@ -29,7 +26,7 @@ $breakpoint: 800px;
 
 		&-small {
 			align-items: center;
-			border: 4px solid colors.$primary;
+			border: 4px solid var( --color-primary );
 			border-radius: 4px;
 			padding: 8px;
 
@@ -64,14 +61,14 @@ $breakpoint: 800px;
 		}
 
 		&-usage-link {
-			color: colors.$gray;
+			color: var( --color-gray );
 		}
 
 		&-message {
 			flex: 1 1 auto;
 			display: flex;
 			flex-direction: column;
-			border: 4px solid colors.$primary;
+			border: 4px solid var( --color-primary );
 			border-radius: 4px;
 			padding: 8px 0;
 		}
@@ -98,6 +95,20 @@ $breakpoint: 800px;
 			}
 		}
 
+		.wmde-banner-message {
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			padding: 8px 0;
+			color: var( --color-black );
+			background-color: var( --color-white );
+			margin: 15px;
+
+			p {
+				margin-bottom: 0;
+			}
+		}
+
 		.wmde-banner-slider-container {
 			padding: 0 0 8px;
 		}
@@ -116,15 +127,6 @@ $breakpoint: 800px;
 
 		.wmde-banner-slider-pagination-dot {
 			cursor: default;
-		}
-
-		.wmde-banner-message {
-			flex: 1 1 auto;
-			margin-bottom: 15px;
-
-			p {
-				margin-bottom: 0;
-			}
 		}
 	}
 

@@ -41,5 +41,4 @@
 @use 'src/themes/Fijitiv/ProgressBar/ProgressBar' as FallbackProgressBar with (
 	$progress-bar-margin: 0 15px
 );
-@use 'src/themes/Fijitiv/ProgressBar/transitions';
 @use 'src/themes/Fijitiv/Slider/KeenSlider' as FallbackSlider;

@@ -1,0 +1,52 @@
+@use '../../variables/breakpoints';
+
+.wmde-banner {
+	&-select-group {
+		&-option label {
+			padding: 3px 10px 0 25px;
+			cursor: pointer;
+			height: 25px;
+
+			@include breakpoints.medium-up {
+				height: 29px;
+			}
+
+			@include breakpoints.large-up {
+				height: 25px;
+			}
+		}
+
+		&-label {
+			color: var( --color-black );
+			border: 0 none;
+			font-size: 0.95em;
+
+			/* This creates the "radio button" shape */
+			&::before {
+				height: 16px;
+				width: 16px;
+				margin-top: -6px;
+				background: var( --color-white );
+				border-radius: 50%;
+				border: 1px solid #bbbbbb;
+			}
+		}
+
+		&-input {
+			display: none;
+
+			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
+			&:checked + .wmde-banner-select-group-label {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+
+			/* This creates the "selected radio button" shape */
+			&:checked + .wmde-banner-select-group-label::before {
+				border: 6px solid var( --color-primary );
+				box-shadow: none;
+			}
+		}
+	}
+}

@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-fallback">
+	<div class="wmde-banner-fallback" :style="colors">
 		<ButtonClose @close="onClose"/>
 
 		<div class="wmde-banner-fallback-small" v-if="!onLargeScreen">
@@ -67,6 +67,7 @@ import SmallFooter from '@src/components/FallbackBanner/SmallFooter.vue';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
+import colors from '../styles/fallback_colors';
 
 interface Props {
 	bannerState: BannerStates;

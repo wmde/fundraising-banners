@@ -1,0 +1,41 @@
+@use 'src/components/FallbackBanner/LargeFooter';
+
+.wmde-banner-fallback {
+	@include LargeFooter.layout;
+
+	&-large-footer {
+		height: 54px;
+		padding: 10px 0 0;
+
+		&-left {
+			font-size: 12px;
+			padding-left: 10px;
+		}
+
+		&-right {
+			position: relative;
+
+			&::before {
+				position: absolute;
+				content: '';
+				top: -10px;
+				left: 50%;
+				margin-left: -6px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 6px 6px 0;
+				border-color: var( --color-primary ) transparent transparent transparent;
+			}
+		}
+
+		&-usage-link {
+			color: var( --color-gray );
+		}
+
+		.wmde-banner-selection-input-text,
+		.wmde-banner-selection-input-input {
+			font-weight: normal;
+		}
+	}
+}
