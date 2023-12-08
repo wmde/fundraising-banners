@@ -161,7 +161,8 @@ class PageWPORG implements Page {
 			millionImpressionsPerDay: Number( data.millionImpressionsPerDay ),
 			startDate: data.startDate,
 			endDate: data.endDate,
-			numberOfMembers: Number( data.numberOfMembers )
+			numberOfMembers: Number( data.numberOfMembers ),
+			isLateProgress: Boolean( data.isLateProgress )
 		};
 
 		return getCampaignParameterOverride( campaignParameters );

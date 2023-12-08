@@ -1,29 +1,32 @@
 import { mount } from '@vue/test-utils';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 describe( 'ProgressBar.vue', () => {
+	let dynamicCampaignContent: DynamicContent;
 
-	const dynamicCampaignContent: DynamicContent = {
-		campaignDaySentence: '',
-		currentDate: '',
-		getCurrentDateAndTime: () => '',
-		getCurrentTime: () => '',
-		currentDayName: '',
-		daysLeftSentence: 'daysLeftSentence',
-		donorsNeededSentence: '',
-		goalDonationSum: '',
-		overallImpressionCount: 0,
-		progressBarContent: {
-			percentageTowardsTarget: 42,
-			donationTarget: 'donationTarget',
-			amountDonated: 'amountDonated',
-			amountNeeded: 'amountNeeded'
-		},
-		visitorsVsDonorsSentence: ''
-
-	};
+	beforeEach( () => {
+		dynamicCampaignContent = {
+			campaignDaySentence: '',
+			currentDate: '',
+			getCurrentDateAndTime: (): string => '',
+			getCurrentTime: (): string => '',
+			currentDayName: '',
+			daysLeftSentence: 'daysLeftSentence',
+			donorsNeededSentence: '',
+			goalDonationSum: '',
+			overallImpressionCount: 0,
+			progressBarContent: {
+				percentageTowardsTarget: 42,
+				donationTarget: 'donationTarget',
+				amountDonated: 'amountDonated',
+				amountNeeded: 'amountNeeded',
+				isLateProgress: false
+			},
+			visitorsVsDonorsSentence: ''
+		};
+	} );
 
 	it( 'should add the donation progress percentage as a css variable', () => {
 		const wrapper = mount( ProgressBar, {
@@ -37,9 +40,9 @@ describe( 'ProgressBar.vue', () => {
 	} );
 
 	it( 'should show the amount donated on left when not late progress', () => {
+		dynamicCampaignContent.progressBarContent.isLateProgress = false;
 		const wrapper = mount( ProgressBar, {
 			props: {
-				isLateProgress: false,
 				amountToShowOnRight: 'TARGET'
 			},
 			global: {
@@ -51,9 +54,9 @@ describe( 'ProgressBar.vue', () => {
 	} );
 
 	it( 'should show the days left sentence on left when late progress', () => {
+		dynamicCampaignContent.progressBarContent.isLateProgress = true;
 		const wrapper = mount( ProgressBar, {
 			props: {
-				isLateProgress: true,
 				amountToShowOnRight: 'TARGET'
 			},
 			global: {
@@ -98,9 +101,9 @@ describe( 'ProgressBar.vue', () => {
 	} );
 
 	it( 'should set late progress as a class', () => {
+		dynamicCampaignContent.progressBarContent.isLateProgress = true;
 		const wrapper = mount( ProgressBar, {
 			props: {
-				isLateProgress: true,
 				amountToShowOnRight: 'MISSING'
 			},
 			global: {

@@ -38,7 +38,8 @@ const campaignParameters: CampaignParameters = {
 	endDate: '2023-12-31',
 	millionImpressionsPerDay: 42,
 	numberOfMembers: 200,
-	startDate: '2023-11-03'
+	startDate: '2023-11-03',
+	isLateProgress: false
 };
 const impressionCount: ImpressionCount = {
 	bannerCount: 42,

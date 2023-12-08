@@ -157,7 +157,8 @@ export default class DynamicCampaignText implements DynamicContent {
 				projection.projectedDonationSum(),
 				projection.projectedRemainingDonationSum(),
 				this._translator,
-				this._formatters.currency
+				this._formatters.currency,
+				this._campaignParameters.isLateProgress
 			);
 		}
 		return this._progressBarContent;

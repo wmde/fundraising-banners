@@ -15,7 +15,8 @@ export function newDynamicContent(): DynamicContent {
 			percentageTowardsTarget: 42,
 			donationTarget: 'donationTarget',
 			amountDonated: 'amountDonated',
-			amountNeeded: 'amountNeeded'
+			amountNeeded: 'amountNeeded',
+			isLateProgress: false
 		},
 		visitorsVsDonorsSentence: ''
 	};

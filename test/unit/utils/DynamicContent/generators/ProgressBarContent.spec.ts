@@ -10,7 +10,8 @@ describe( 'ProgressBarContent', function () {
 		3_000_000,
 		6_000_000,
 		new Translator( {} ),
-		new CurrencyEn()
+		new CurrencyEn(),
+		false
 	);
 
 	it( 'should return percentage towards target', function () {

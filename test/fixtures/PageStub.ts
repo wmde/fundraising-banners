@@ -67,7 +67,8 @@ export class PageStub implements Page {
 			endDate: '',
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
-			startDate: ''
+			startDate: '',
+			isLateProgress: false
 		};
 	}
 

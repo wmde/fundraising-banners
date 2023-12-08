@@ -32,4 +32,5 @@ export interface CampaignParameters {
      */
     endDate: string,
     numberOfMembers: number,
+    isLateProgress: boolean
 }

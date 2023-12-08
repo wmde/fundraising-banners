@@ -3,4 +3,5 @@ export interface DynamicProgressBarContent {
 	donationTarget: string;
 	amountDonated: string;
 	amountNeeded: string;
+	isLateProgress: boolean;
 }

@@ -17,7 +17,8 @@ describe( 'getCampaignParameterOverride (prod version)', () => {
 			endDate: '',
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
-			startDate: ''
+			startDate: '',
+			isLateProgress: false
 		};
 
 		const modifiedParams = getCampaignParameterOverride( params );

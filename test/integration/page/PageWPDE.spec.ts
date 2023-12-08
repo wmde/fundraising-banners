@@ -19,7 +19,8 @@ describe( 'PageWPDE', function () {
 			endDate: '2023-12-31',
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
-			startDate: '2023-11-01'
+			startDate: '2023-11-01',
+			isLateProgress: false
 		};
 		const page = new PageWPDE( tracking );
 
