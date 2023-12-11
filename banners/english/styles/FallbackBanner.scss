@@ -43,6 +43,15 @@ $breakpoint: 800px;
 				height: 25px;
 			}
 
+			.wmde-banner-progress-bar--late-progress {
+				height: 50px;
+				margin-top: -10px;
+
+				.wmde-banner-progress-bar-text-left {
+					margin-top: 25px;
+				}
+			}
+
 			.wmde-banner-progress-bar-fill {
 				line-height: 20px;
 			}
@@ -120,7 +129,6 @@ $breakpoint: 800px;
 
 		.wmde-banner-message {
 			flex: 1 1 auto;
-			margin-bottom: 15px;
 
 			p {
 				margin-bottom: 0;
