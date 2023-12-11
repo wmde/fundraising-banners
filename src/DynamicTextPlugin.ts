@@ -6,11 +6,12 @@ import { ImpressionCount } from '@src/utils/ImpressionCount';
 import DynamicCampaignText from '@src/utils/DynamicContent/DynamicCampaignText';
 
 interface DynamicCampaignTextOptions {
-    date: Date,
-    translator: Translator,
-    formatters: Formatters,
-    campaignParameters: CampaignParameters,
-    impressionCount: ImpressionCount
+    date: Date;
+    translator: Translator;
+    formatters: Formatters;
+    campaignParameters: CampaignParameters;
+    impressionCount: ImpressionCount;
+	urgencyMessageDaysLeft?: number;
 }
 
 export default {
@@ -20,7 +21,8 @@ export default {
 			options.translator,
 			options.formatters,
 			options.campaignParameters,
-			options.impressionCount
+			options.impressionCount,
+			options.urgencyMessageDaysLeft
 		) );
 	}
 };

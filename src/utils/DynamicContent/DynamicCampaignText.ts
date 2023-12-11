@@ -22,6 +22,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _formatters: Formatters;
 	private _campaignParameters: CampaignParameters;
 	private _impressionCount: ImpressionCount;
+	private readonly _urgencyMessageDaysLeft: number;
 	private _cache: Map<string, string>;
 	private _campaignTimeRange: TimeRange;
 	private _campaignProjection: CampaignProjection;
@@ -29,12 +30,20 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _currentDateAndTime: CurrentDateAndTime;
 	private _currentTime: CurrentTime;
 
-	public constructor( date: Date, translator: Translator, formatters: Formatters, campaignParameters: CampaignParameters, impressionCount: ImpressionCount ) {
+	public constructor(
+		date: Date,
+		translator: Translator,
+		formatters: Formatters,
+		campaignParameters: CampaignParameters,
+		impressionCount: ImpressionCount,
+		urgencyMessageDaysLeft: number = 10
+	) {
 		this._date = date;
 		this._translator = translator;
 		this._formatters = formatters;
 		this._campaignParameters = campaignParameters;
 		this._impressionCount = impressionCount;
+		this._urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 		this._cache = new Map<string, string>();
 		this.getCurrentDateAndTime = this.getCurrentDateAndTime.bind( this );
 		this.getCurrentTime = this.getCurrentTime.bind( this );
@@ -60,7 +69,12 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public get campaignDaySentence(): string {
 		return this.getCachedValue( 'campaignDaySentence', () => {
-			return new CampaignDaySentence( this.getCampaignTimeRange(), this._translator, this._formatters.ordinal ).getText();
+			return new CampaignDaySentence(
+				this.getCampaignTimeRange(),
+				this._translator,
+				this._formatters.ordinal,
+				this._urgencyMessageDaysLeft
+			).getText();
 		} );
 	}
 

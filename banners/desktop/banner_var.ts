@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -59,7 +59,8 @@ app.use( DynamicTextPlugin, {
 	date: new Date(),
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
-	translator
+	translator,
+	urgencyMessageDaysLeft: 45
 } );
 
 const currencyFormatter = localeFactory.getCurrencyFormatter();
