@@ -39,7 +39,18 @@ $progress-bar-margin: 0 !default;
 			}
 		}
 
+		&-wrapper {
+			display: flex;
+		}
+
+		&-target {
+			flex: 0 0 auto;
+			display: none;
+			padding-left: 10px;
+		}
+
 		&-fill-wrapper {
+			flex: 1 1 auto;
 			position: relative;
 			background: var( --color-white );
 			border: 3px solid var( --color-primary );
@@ -55,30 +66,24 @@ $progress-bar-margin: 0 !default;
 			color: var( --color-white );
 			text-align: right;
 			padding-right: 16px;
-			line-height: 26px;
+			line-height: 24px;
 		}
 
 		&--late-progress {
-			height: 60px;
-			margin-top: 0;
-
-			@include breakpoints.large-up {
-				margin-top: -30px;
-			}
-
-			.wmde-banner-progress-bar-text {
-				position: static;
-			}
 			.wmde-banner-progress-bar-text-left {
-				margin-top: 30px;
-				color: var( --color-white );
-
 				@include breakpoints.extra-small-up {
 					visibility: visible;
 				}
 			}
+			.wmde-banner-progress-bar-text-right {
+				visibility: hidden;
+			}
 			.wmde-banner-progress-bar-fill {
 				min-width: 100px;
+			}
+			.wmde-banner-progress-bar-target {
+				flex: 0 0 auto;
+				display: block;
 			}
 		}
 	}

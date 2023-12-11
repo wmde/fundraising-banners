@@ -18,4 +18,10 @@
 			background: var( --color-secondary-hover );
 		}
 	}
+
+	&-small {
+		.wmde-banner-fallback-button {
+			margin-bottom: 8px;
+		}
+	}
 }

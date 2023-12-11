@@ -20,6 +20,7 @@ describe( 'ProgressBar.vue', () => {
 			progressBarContent: {
 				percentageTowardsTarget: 42,
 				donationTarget: 'donationTarget',
+				donationTargetAmount: 'donationTargetAmount',
 				amountDonated: 'amountDonated',
 				amountNeeded: 'amountNeeded',
 				isLateProgress: false

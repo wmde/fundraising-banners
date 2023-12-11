@@ -35,7 +35,7 @@ $form-width: 300px !default;
 		margin-bottom: 0;
 		overflow-y: hidden;
 		margin-right: 30px;
-		padding: 0 0 10px;
+		padding: 0;
 		border: none;
 	}
 
@@ -45,6 +45,6 @@ $form-width: 300px !default;
 		display: flex;
 		flex-direction: column;
 		width: $form-width;
-		padding: 10px 0;
+		padding: 10px 0 0;
 	}
 }

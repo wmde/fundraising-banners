@@ -22,6 +22,10 @@ describe( 'ProgressBarContent', function () {
 		expect( progressBarContent.donationTarget ).toBe( 'amount-total €9.0M' );
 	} );
 
+	it( 'should return donation target amount', function () {
+		expect( progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
+	} );
+
 	it( 'should return formatted amount donated', function () {
 		expect( progressBarContent.amountDonated ).toBe( '€3.0M' );
 	} );

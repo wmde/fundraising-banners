@@ -40,6 +40,10 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 		].join( ' ' );
 	}
 
+	public get donationTargetAmount(): string {
+		return this._currencyFormatter.millions( this._donationTarget );
+	}
+
 	public get amountDonated(): string {
 		return this._currencyFormatter.millions( this._donationSum );
 	}
