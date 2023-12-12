@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			<InfoIcon fill="#990a00"/> <strong>{{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
+			<InfoIcon fill="#990a00"/> <strong>{{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland nutzen. Die Zeit wird knapp!</strong>
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
