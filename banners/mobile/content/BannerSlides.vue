@@ -3,6 +3,7 @@
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
 		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
 		<ProgressBar amount-to-show-on-right="TARGET"/>
+		<p>Die Zeit wird knapp!</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">
@@ -23,6 +24,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
+			{{ campaignDaySentence }}
 			<AnimatedText :content="visitorsVsDonorsSentence"/>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
@@ -57,7 +59,8 @@ const {
 	currentDate,
 	getCurrentTime,
 	goalDonationSum,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	campaignDaySentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );

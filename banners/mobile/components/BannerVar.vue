@@ -32,23 +32,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-								</span>
-							</template>
-
-							<template #sms-icon>
-								<SmsIcon/>
-							</template>
-
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -57,8 +41,7 @@
 							:page-index="pageIndex"
 							@submit="submit"
 							:is-current="isCurrent"
-							@previous="previous"
-						>
+							@previous="previous">
 							<template #back>
 								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
@@ -75,6 +58,7 @@
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
@@ -111,7 +95,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBannerVar.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -137,10 +121,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

@@ -16,7 +16,7 @@
 		&-columns {
 			padding: 8px 8px 0;
 			flex-wrap: nowrap;
-			justify-content: center;
+			justify-content: space-between;
 
 			@include breakpoints.phone-l-up {
 				padding: 8px 27px 0;
@@ -71,7 +71,11 @@
 
 		&-with-close-icon {
 			.wmde-banner-soft-close-columns {
-				padding-right: 50px;
+				padding-right: 14px;
+
+				.wmde-banner-close {
+					display: flex;
+				}
 			}
 		}
 	}
