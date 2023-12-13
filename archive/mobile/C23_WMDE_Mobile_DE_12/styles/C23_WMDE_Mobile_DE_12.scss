@@ -1,0 +1,39 @@
+@use '@src/themes/Mikings/variables/colors';
+
+.wmde-banner {
+	&-select-group-option.payment-ppl,
+	&-select-group-option.payment-mcp,
+	&-sms-box {
+		flex: 0 0 100%;
+		width: 100%;
+	}
+
+	.wmde-banner-sms-box-label {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		height: 30px;
+		font-size: inherit;
+		margin-top: 4px;
+
+		> svg {
+			margin: 5px;
+		}
+	}
+
+	.wmde-banner-sms-box > label {
+		display: flex;
+		justify-content: center;
+	}
+
+	.wmde-banner-sms-box-notice {
+		display: block;
+		font-size: 9pt;
+		line-height: 12pt;
+		margin-right: 0;
+		width: 100%;
+		padding: 0 0 15px;
+		color: colors.$gray;
+	}
+}
