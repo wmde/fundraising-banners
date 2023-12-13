@@ -12,11 +12,11 @@ import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import eventMappings from './event_map';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
+import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { Locales } from '@src/domain/Locales';
 
 // Channel specific form setup

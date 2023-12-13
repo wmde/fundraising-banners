@@ -3,13 +3,12 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected-amount="onShowFullPageBannerPreselectedAmount"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
 				</KeenSlider>
@@ -21,7 +20,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
+				<BannerText/>
 			</template>
 
 			<template #progress>
@@ -48,6 +47,7 @@
 								<span class="wmde-banner-select-group-label with-logos credit-cards">
 									<VisaLogo/>
 									<MastercardLogo/>
+									<AmexLogo/>
 								</span>
 							</template>
 
@@ -86,7 +86,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBanner.vue';
+import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -100,6 +100,7 @@ import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
@@ -110,8 +111,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
-import { useFormModel } from '@src/components/composables/useFormModel';
-const formModel = useFormModel();
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -156,14 +155,7 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
-}
-
-function onShowFullPageBannerPreselectedAmount(): void {
-	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
