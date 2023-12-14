@@ -14,8 +14,10 @@ export function newDynamicContent(): DynamicContent {
 		progressBarContent: {
 			percentageTowardsTarget: 42,
 			donationTarget: 'donationTarget',
+			donationTargetAmount: 'donationTargetAmount',
 			amountDonated: 'amountDonated',
-			amountNeeded: 'amountNeeded'
+			amountNeeded: 'amountNeeded',
+			isLateProgress: false
 		},
 		visitorsVsDonorsSentence: ''
 	};

@@ -22,12 +22,7 @@ const messages: TranslationMessages = {
 	...AlreadyDonatedModal,
 	...FallbackBanner,
 	'already-donated-go-away-button': 'Im Moment nicht',
-	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
-	'upgrade-to-yearly-copy': `<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns besonders und ermöglichen langfristige Weiterentwicklungen.</p>
-		<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>`,
-	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
-	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
-	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.'
+	'soft-close-prompt': 'Dürfen wir später nochmal fragen?'
 };
 
 export default messages;

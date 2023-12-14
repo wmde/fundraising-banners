@@ -21,6 +21,7 @@ export function getCampaignParameterOverride( campaignParameters: CampaignParame
 			...campaignParameters.campaignProjection,
 			donationCountBase: 100,
 			updatedAt: '2023-10-30'
-		}
+		},
+		isLateProgress: true
 	};
 }

@@ -10,11 +10,16 @@
 				{{ rightText }}
 			</div>
 		</div>
-		<div class="wmde-banner-progress-bar-fill-wrapper">
-			<div class="wmde-banner-progress-bar-fill">
-			<span class="wmde-banner-progress-bar-fill-text">
-					{{ progressBarContent.amountDonated }}
-				</span>
+		<div class="wmde-banner-progress-bar-wrapper">
+			<div class="wmde-banner-progress-bar-fill-wrapper">
+				<div class="wmde-banner-progress-bar-fill">
+				<span class="wmde-banner-progress-bar-fill-text">
+						{{ progressBarContent.amountDonated }}
+					</span>
+				</div>
+			</div>
+			<div class="wmde-banner-progress-bar-target">
+				{{ progressBarContent.donationTargetAmount }}
 			</div>
 		</div>
 	</div>

@@ -17,9 +17,7 @@
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
-	$font-size: 14px
-);
+@use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyForm';
 @use 'src/themes/Svingle/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Svingle/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px

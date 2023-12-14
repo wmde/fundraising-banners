@@ -30,6 +30,24 @@ $breakpoint: 800px;
 			border-radius: 4px;
 			padding: 8px;
 
+			.wmde-banner-progress-bar {
+				height: 25px;
+				line-height: 25px;
+			}
+
+			.wmde-banner-progress-bar-text,
+			.wmde-banner-progress-bar-fill-wrapper {
+				height: 25px;
+			}
+
+			.wmde-banner-progress-bar-fill {
+				line-height: 20px;
+			}
+
+			.wmde-banner-fallback-button {
+				margin: 0 0 8px;
+			}
+
 			.wmde-banner-selection-input-text,
 			.wmde-banner-selection-input-input {
 				font-family: fonts.$content;
@@ -93,7 +111,6 @@ $breakpoint: 800px;
 
 		.wmde-banner-slider-container {
 			padding: 0 0 8px;
-			margin: 0;
 		}
 
 		.wmde-banner-slide-content {

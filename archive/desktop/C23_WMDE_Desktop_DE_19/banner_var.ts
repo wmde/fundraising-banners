@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -59,8 +59,7 @@ app.use( DynamicTextPlugin, {
 	date: new Date(),
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
-	translator,
-	urgencyMessageDaysLeft: 45
+	translator
 } );
 
 const currencyFormatter = localeFactory.getCurrencyFormatter();

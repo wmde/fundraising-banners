@@ -10,7 +10,8 @@ describe( 'ProgressBarContent', function () {
 		3_000_000,
 		6_000_000,
 		new Translator( {} ),
-		new CurrencyEn()
+		new CurrencyEn(),
+		false
 	);
 
 	it( 'should return percentage towards target', function () {
@@ -19,6 +20,10 @@ describe( 'ProgressBarContent', function () {
 
 	it( 'should return donation target sentence', function () {
 		expect( progressBarContent.donationTarget ).toBe( 'amount-total €9.0M' );
+	} );
+
+	it( 'should return donation target amount', function () {
+		expect( progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
 	} );
 
 	it( 'should return formatted amount donated', function () {

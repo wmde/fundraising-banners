@@ -38,7 +38,8 @@ const campaignParameters: CampaignParameters = {
 	endDate: '2023-12-31',
 	millionImpressionsPerDay: 42,
 	numberOfMembers: 200,
-	startDate: '2023-11-03'
+	startDate: '2023-11-03',
+	isLateProgress: false
 };
 const impressionCount: ImpressionCount = {
 	bannerCount: 42,
@@ -118,6 +119,7 @@ describe( 'DynamicCampaignText', () => {
 	it( 'Gets the progress bar content', () => {
 		expect( dynamicCampaignText.progressBarContent.percentageTowardsTarget ).toBeCloseTo( 1.523 );
 		expect( dynamicCampaignText.progressBarContent.donationTarget ).toBe( 'Progress total €9.0M' );
+		expect( dynamicCampaignText.progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
 		expect( dynamicCampaignText.progressBarContent.amountDonated ).toBe( '€0.1M' );
 		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing €8.9M' );
 	} );
