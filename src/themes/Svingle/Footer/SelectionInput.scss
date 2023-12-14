@@ -1,0 +1,36 @@
+@use '../variables/fonts';
+@use 'src/components/Footer/SelectionInput';
+
+.wmde-banner {
+	@include SelectionInput.layout;
+
+	&-selection-input {
+		margin-left: 5px;
+
+		&-text,
+		&-input {
+			font-weight: bold;
+			font-size: 12px;
+		}
+		&-input {
+			font-family: fonts.$ui;
+			outline: 0;
+			background: transparent;
+			color: transparent;
+		}
+
+		&.focused {
+			.wmde-banner-selection-input-text {
+				color: transparent;
+			}
+			.wmde-banner-selection-input-input {
+				color: var( --color-black );
+
+				&::selection {
+					background: var( --color-primary );
+					color: var( --color-white );
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,30 @@
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
+$font: fonts.$content !default;
+$font-sizes: ( breakpoints.$extra-small: 18px ) !default;
+
+.wmde-banner {
+	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		font-family: $font;
+		line-height: 1.3em;
+		text-align: left;
+
+		@each $width, $font-size in $font-sizes {
+			@media ( min-width: $width ) {
+				font-size: $font-size;
+			}
+		}
+
+		p {
+			margin: 0 0 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

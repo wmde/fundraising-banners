@@ -1,0 +1,26 @@
+@use '../../variables/globals';
+@use '../../variables/fonts';
+@use 'src/components/DonationForm/Forms/MainDonationForm';
+
+$padding: 0 !default;
+
+.wmde-banner {
+	@include MainDonationForm.layout;
+
+	&-sub-form-donation {
+		padding: $padding;
+
+		.wmde-banner-form-field-group {
+			padding: 0 0 10px;
+
+			&-legend {
+				display: none;
+				visibility: hidden;
+				font-family: fonts.$ui;
+				font-size: 12px;
+				line-height: 13px;
+				color: var( --color-black-light );
+			}
+		}
+	}
+}

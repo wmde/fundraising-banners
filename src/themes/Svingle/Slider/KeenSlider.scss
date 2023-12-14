@@ -1,0 +1,75 @@
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+@use 'src/components/Slider/KeenSlider';
+
+$font: fonts.$content !default;
+$font-size: 1.3em !default;
+$line-height: 1.5 !default;
+$slider-padding: 16px 0 !default;
+
+.wmde-banner {
+	@include KeenSlider.layout;
+
+	&-slider-container {
+		font-family: $font;
+		font-size: 1.8vw;
+		padding: $slider-padding;
+		line-height: 1.2;
+		background-color: var( --color-secondary );
+		color: var( --color-white );
+		border-radius: 9px;
+		margin-bottom: 15px;
+
+		@include breakpoints.small-up {
+			font-size: $font-size;
+			line-height: $line-height;
+		}
+	}
+
+	&-slide {
+		cursor: grab;
+
+		&--current {
+			.wmde-banner-slider-text-animated-highlight {
+				background-position: 0 0;
+			}
+		}
+
+		&-content {
+			text-align: center;
+			padding: 15px 30px;
+
+			p {
+				margin: 0 0 1em;
+			}
+
+			p:last-child {
+				margin: 0;
+			}
+		}
+	}
+
+	&-slider-pagination {
+		&-dot {
+			background: var( --color-gray-light );
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 3px solid var( --color-secondary );
+
+			&:focus {
+				outline: 0;
+			}
+		}
+		.is-active {
+			background: var( --color-secondary );
+			border: 3px solid var( --color-white );
+		}
+	}
+
+	.headline {
+		font-weight: bold;
+	}
+}

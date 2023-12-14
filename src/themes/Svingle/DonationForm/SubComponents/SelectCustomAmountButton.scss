@@ -1,0 +1,71 @@
+@use '../../variables/globals';
+@use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
+
+$font-size: 12px !default;
+$height: 36px !default;
+$border-color: var( --color-secondary ) !default;
+$padding: 0 4px 8px !default;
+
+.wmde-banner {
+	@include SelectCustomAmount.layout;
+
+	&-select-custom-amount {
+		position: relative;
+		padding: $padding;
+
+		&-input-container {
+			width: 100%;
+			line-height: 2em;
+			height: $height;
+			margin: 0;
+			border: 1px solid $border-color;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		&-input {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 0.4em;
+			line-height: #{ $height - 2px };
+			font-size: $font-size;
+			text-align: center;
+			outline: 0;
+			background: transparent;
+			border: 0;
+			font-weight: bold;
+		}
+
+		&-euro-symbol {
+			display: block;
+			position: absolute;
+			width: 15px;
+			height: 30px;
+			top: 50%;
+			right: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				background: var( --color-secondary );
+				border-color: var( --color-gray-medium );
+			}
+			.wmde-banner-select-custom-amount-input,
+			.wmde-banner-select-custom-amount-euro-symbol {
+				color: var( --color-white );
+			}
+		}
+	}
+
+	&-input-container + .wmde-banner-select-custom-amount-euro-symbol {
+		position: absolute;
+		top: 0;
+		right: 1em;
+		border-color: transparent;
+		background: transparent;
+	}
+}

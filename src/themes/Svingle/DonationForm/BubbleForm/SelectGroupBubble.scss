@@ -1,0 +1,63 @@
+@use '../../../../components/DonationForm/SubComponents/SelectGroup';
+
+/**
+ These are for defining the column widths of the individual select groups
+ Use 50% for 2 columns, use 25% for 4 columns
+ */
+$amount-option-width: 25% !default;
+$interval-option-width: 50% !default;
+$payment-option-width: 50% !default;
+
+$background-color: #e9e9e9;
+$background-color-error: #fff4f4;
+$border-radius: 4px;
+$line-height: 18px;
+$font-weight: normal;
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		font-size: 0.9em;
+		font-weight: $font-weight;
+		line-height: $line-height;
+
+		&-container {
+			line-height: inherit;
+			padding: 0;
+		}
+
+		&-error-message {
+			height: 16px;
+			line-height: 16px;
+			color: var( --color-error );
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 0.2em;
+			font-size: 0.8em;
+		}
+
+		.wmde-banner-disabled {
+			opacity: 0.3;
+		}
+	}
+
+	&-select-group-container.select-amount {
+		.wmde-banner-select-group-option {
+			width: $amount-option-width;
+		}
+		margin-top: 0;
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option {
+			width: $interval-option-width;
+		}
+	}
+
+	&-select-group-container.select-payment-method {
+		.wmde-banner-select-group-option {
+			width: $payment-option-width;
+		}
+	}
+}

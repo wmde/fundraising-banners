@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p class="headline">
-			<InfoIcon fill="#990a00"/> <strong>{{ currentDateTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
+		<p>
+			<InfoIcon fill="#668E0A"/> <strong>{{ currentDateTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
@@ -11,8 +11,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			{{ campaignDaySentence }} Insgesamt spenden 99% unserer Leserinnen und Leser nichts – sie übergehen diesen
-			Aufruf. <AnimatedText :content="visitorsVsDonorsSentence"/>
+			{{ campaignDaySentence }} <AnimatedText :content="visitorsVsDonorsSentence"/>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -34,8 +33,8 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
-import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
+import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 
 interface Props {
 	currentSlide: number
