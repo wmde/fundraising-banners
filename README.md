@@ -60,6 +60,17 @@ tracking pixels inside the banner.
 1. Duplicate an existing folder with banner entry points, e.g. `banners/desktop`.
 2. Create a new campaign and its banner configuration in `campaign_info.toml`.
 
+## Developing and building "thank you" banners
+
+The "thank you" banners have a special configuration file, `campaign_info.thank_you.toml`.
+Edit this file for the necessary campaign and tracking parameters.
+
+To use this file instead of the standard `campaign_info.toml` file, run `npm run thankyou` instead of `npm run dev`.
+This environment does *not* use `nodemon` to watch for changes in `campaign_info.thank_you.toml`.
+If you change that file or one of the webpack configuration files, you need to restart the server.
+
+To build the "thank you" banners, run `npm run build:thankyou` instead of `npm run build`.
+
 ### Creating A/B tests
 
 TODO: Rewrite this section for different types of tests (text changes,
