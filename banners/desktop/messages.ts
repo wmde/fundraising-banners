@@ -27,7 +27,9 @@ const messages: TranslationMessages = {
 		<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>`,
 	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
 	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
-	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.'
+	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
+	'double-progress-close': 'Das wird knapp.',
+	'missing-amount': 'Uns fehlen noch'
 };
 
 export default messages;
