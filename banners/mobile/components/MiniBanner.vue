@@ -26,6 +26,10 @@
 			</button>
 		</div>
 
+		<div class="wmde-banner-mini-payment-icons">
+			<!-- Just a placeholder to reserve space for same banner height -->
+		</div>
+
 	</div>
 </template>
 

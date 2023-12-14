@@ -86,8 +86,8 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
-			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+			[ 'expectShowsLiveTimeInMiniBanner' ],
+			[ 'expectShowsLiveTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
@@ -99,8 +99,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

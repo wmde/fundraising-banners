@@ -18,19 +18,12 @@
 		</div>
 
 		<div class="wmde-banner-mini-button-group">
-			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
+			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'submit10Euro' )">
 				Jetzt 10 &euro; spenden
 			</button>
 			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
 				Anderen Betrag
 			</button>
-		</div>
-
-		<div class="wmde-banner-mini-payment-icons">
-			<div><PayPalLogo/></div>
-			<div><VisaLogo/></div>
-			<div><MastercardLogo/></div>
-			<div><SmsIcon/></div>
 		</div>
 
 	</div>
@@ -39,11 +32,7 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
-import PayPalLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/PayPalLogo.vue';
-import VisaLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/VisaLogo.vue';
-import MastercardLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/MastercardLogo.vue';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'submit10Euro', 'close' ] );
 
 </script>

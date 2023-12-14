@@ -3,7 +3,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@submit-10-euro="submit10Euro"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -32,33 +32,11 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-								</span>
-							</template>
-
-							<template #sms-icon>
-								<SmsIcon/>
-							</template>
-
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm
-							:show-manual-upgrade-option = false
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-						>
+						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
 								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
@@ -110,7 +88,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBannerVar.vue';
+import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -137,10 +115,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
+import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -158,6 +133,7 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 	remainingImpressions: number;
+	donationURL: string;
 }
 
 const props = defineProps<Props>();
@@ -202,11 +178,9 @@ function onshowFullPageBanner(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
-function onshowFullPageBannerPreselected(): void {
-	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+function submit10Euro(): void {
+	tracker.trackEvent( new BannerSubmitEvent( 'MiniBanner', 'donate-10-euro' ) );
+	window.location.href = props.donationURL;
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {

@@ -6,11 +6,11 @@
 			</p>
 			<p>
 				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} bitten wir Sie bescheiden, die Unabhängigkeit von
+				{{ currentDayName }}, den {{ currentDateTime }}, bitten wir Sie bescheiden, die Unabhängigkeit von
 				Wikipedia zu unterstützen. Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Die
 				durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 10&nbsp;€ helfen uns weiter.
 				<AnimatedText :content="visitorsVsDonorsSentence"/> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat
-				Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich,
+				Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheide Sie sich,
 				eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
 			</p>
 		</div>
@@ -21,7 +21,7 @@
 import { inject, watch } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
+import { useCurrentDateAndTime } from '@src/components/composables/useCurrentDateAndTime';
 
 interface Props {
 	playLiveText: boolean;
@@ -31,12 +31,11 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentTime,
-	currentDate,
+	getCurrentDateAndTime,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { currentDateTime, startTimer, stopTimer } = useCurrentDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	if ( shouldPlay ) {
