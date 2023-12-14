@@ -84,7 +84,7 @@ class PageWPORG implements Page {
 	}
 
 	public setSpace( space: number ): Page {
-		document.body.style.setProperty( bannerHeightCssVariable, `${space}px` );
+		document.body.style.setProperty( bannerHeightCssVariable, `${ space }px` );
 		return this;
 	}
 
@@ -99,7 +99,7 @@ class PageWPORG implements Page {
 	}
 
 	public setTransitionDuration( duration: number ): Page {
-		document.body.style.setProperty( bannerTransitionDurationCssVariable, `${duration}ms` );
+		document.body.style.setProperty( bannerTransitionDurationCssVariable, `${ duration }ms` );
 		return this;
 	}
 
@@ -192,6 +192,29 @@ class PageWPORG implements Page {
 		}
 
 		return Number( maxImpressions );
+	}
+
+	/**
+	 * When a modal is open we set the body to fixed in order to hide the scroll bar
+	 * and stop it interfering with the modal's scrollbar.
+	 *
+	 * We also set the top style so the page doesn't jump.
+	 */
+	public setModalOpened(): void {
+		const scrollY = window.scrollY;
+		document.body.style.position = 'fixed';
+		document.body.style.top = `-${ scrollY }px`;
+	}
+
+	/**
+	 * Remove the body position fixed and jump the window to where the user was before
+	 * they opened the modal.
+	 */
+	public setModalClosed(): void {
+		const scrollY = document.body.style.top;
+		document.body.style.position = '';
+		document.body.style.top = '';
+		window.scrollTo( 0, parseInt( scrollY || '0' ) * -1 );
 	}
 }
 

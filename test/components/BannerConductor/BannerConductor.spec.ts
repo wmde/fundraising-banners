@@ -36,7 +36,9 @@ describe( 'BannerConductor.vue', () => {
 			},
 			emits: [
 				'bannerClosed',
-				'bannerContentChanged'
+				'bannerContentChanged',
+				'onModalOpened',
+				'onModalClosed'
 			],
 			methods: {
 				onClose() {
@@ -47,6 +49,8 @@ describe( 'BannerConductor.vue', () => {
 				Hello, world!
 				<button class="emit-banner-closed" @click="onClose"></button>
 				<button class="emit-banner-content-changed" @click="$emit( 'bannerContentChanged' )"></button>
+				<button class="emit-banner-modal-open" @click="$emit( 'onModalOpened' )"></button>
+				<button class="emit-banner-modal-closed" @click="$emit( 'onModalClosed' )"></button>
 			</div>`
 		} );
 		const wrapper = mount( BannerConductor, {
@@ -204,5 +208,25 @@ describe( 'BannerConductor.vue', () => {
 		] );
 
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+	} );
+
+	it( 'tells the page that a modal was opened', async () => {
+		const page = new PageStub();
+		page.setModalOpened = vi.fn();
+		const wrapper = await getShownBannerWrapper( page );
+
+		await wrapper.find( '.emit-banner-modal-open' ).trigger( 'click' );
+
+		expect( page.setModalOpened ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'tells the page that a modal was closed', async () => {
+		const page = new PageStub();
+		page.setModalOpened = vi.fn();
+		const wrapper = await getShownBannerWrapper( page );
+
+		await wrapper.find( '.emit-banner-modal-open' ).trigger( 'click' );
+
+		expect( page.setModalOpened ).toHaveBeenCalledOnce();
 	} );
 } );

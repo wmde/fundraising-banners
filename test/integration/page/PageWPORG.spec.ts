@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vitest } from 'vitest';
+import { beforeEach, describe, expect, it, vi, vitest } from 'vitest';
 import PageWPORG, { bannerAppId } from '@src/page/PageWPORG';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
@@ -185,5 +185,30 @@ describe( 'PageWPORG', function () {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
 		expect( () => page.getTracking() ).toThrow( 'Banner container element not found' );
+	} );
+
+	it( 'Sets the body to fixed when a modal is opened', () => {
+		Object.defineProperty( window, 'scrollY', { writable: true, configurable: true, value: 42 } );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setModalOpened();
+
+		expect( document.body.style.getPropertyValue( 'position' ) ).toStrictEqual( 'fixed' );
+		expect( document.body.style.getPropertyValue( 'top' ) ).toStrictEqual( '-42px' );
+	} );
+
+	it( 'Removes the fixed from the body when a modal is closed', () => {
+		document.body.style.position = 'fixed';
+		document.body.style.top = '-42px';
+		const scrollTo = vi.fn();
+		Object.defineProperty( window, 'scrollTo', { writable: true, configurable: true, value: scrollTo } );
+		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
+
+		page.setModalClosed();
+
+		expect( document.body.style.getPropertyValue( 'position' ) ).toStrictEqual( '' );
+		expect( document.body.style.getPropertyValue( 'top' ) ).toStrictEqual( '' );
+		expect( scrollTo ).toHaveBeenCalledOnce();
+		expect( scrollTo ).toHaveBeenCalledWith( 0, 42 );
 	} );
 } );

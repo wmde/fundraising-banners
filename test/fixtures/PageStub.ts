@@ -83,4 +83,10 @@ export class PageStub implements Page {
 		return 10;
 	}
 
+	public setModalOpened(): void {
+	}
+
+	public setModalClosed(): void {
+	}
+
 }
