@@ -58,7 +58,7 @@ describe( 'BannerCtrl.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker

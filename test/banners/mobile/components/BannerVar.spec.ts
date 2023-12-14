@@ -15,6 +15,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
+import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 
@@ -58,7 +59,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker
@@ -153,6 +154,14 @@ describe( 'BannerVar.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
-	} );
 
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+		] )( '%s', async ( testName: string ) => {
+			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+	} );
 } );
