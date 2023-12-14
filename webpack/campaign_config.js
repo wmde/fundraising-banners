@@ -1,4 +1,6 @@
 const path = require( 'path' );
+const { parse } = require( 'toml' );
+const { readFileSync } = require( 'fs' );
 
 function CampaignConfig( config ) {
 	this.config = config;
@@ -109,6 +111,11 @@ CampaignConfig.prototype.getCampaignTrackingForEntryPoint = function ( entryPoin
 		throw new Error( 'No tracking data found for entry point ' + entryPointPath );
 	}
 	return trackingData;
+};
+
+CampaignConfig.readFromFile = function ( fileName ) {
+	// eslint-disable-next-line security/detect-non-literal-fs-filename
+	return new CampaignConfig( parse( readFileSync( fileName, 'utf8' ) ) );
 };
 
 module.exports = CampaignConfig;
