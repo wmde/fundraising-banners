@@ -65,9 +65,12 @@ $padding-mobile: 16px;
 			display: table;
 		}
 		h2 {
+			margin-right: 32px;
+
 			@include breakpoints.small-up {
 				display: table-cell;
 				width: 30%;
+				margin-right: 0;
 			}
 		}
 		div {
