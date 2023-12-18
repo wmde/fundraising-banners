@@ -18,4 +18,6 @@ export interface Page {
 	setCloseCookieIfNecessary: ( closeEvent: TrackingEvent<void> ) => Page;
 	getCampaignParameters: () => CampaignParameters;
 	getTracking: () => TrackingParameters;
+	setModalOpened: () => void;
+	setModalClosed: () => void;
 }

@@ -10,6 +10,8 @@
 			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
 			@banner-content-changed="onContentChanged"
+			@on-modal-opened="page.setModalOpened"
+			@on-modal-closed="page.setModalClosed"
 		/>
 	</div>
 </template>

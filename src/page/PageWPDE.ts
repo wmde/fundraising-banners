@@ -84,6 +84,12 @@ class PageWPDE implements Page {
 		// WPDE banners have a hardcoded limit of 7
 		return 7;
 	}
+
+	public setModalOpened(): void {
+	}
+
+	public setModalClosed(): void {
+	}
 }
 
 export default PageWPDE;
