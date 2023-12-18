@@ -118,18 +118,19 @@ import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBa
 import { useFormModel } from '@src/components/composables/useFormModel';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import {
-	createSubmittableMainDonationFormAnonymous
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormAnonymous';
-import {
-	createSubmittableUpgradeToYearlyAnonymous
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearlyAnonymous';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MainDonationFormPaymentMethodLabeledButton
 	from '@src/components/DonationForm/Forms/MainDonationFormPaymentMethodLabeledButton.vue';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -160,9 +161,11 @@ const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.V
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
 const stepControllers = [
-	createSubmittableMainDonationFormAnonymous( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearlyAnonymous( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+
+useAnonymousAddressTypeSetter();
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

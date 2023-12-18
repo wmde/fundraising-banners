@@ -104,6 +104,15 @@ describe( 'BannerVar.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
+
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+		] )( '%s', async ( testName: string ) => {
+			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
 	} );
 
 	describe( 'Soft Close', () => {
@@ -153,15 +162,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
-		} );
-
-		test.each( [
-			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
-		] )( '%s', async ( testName: string ) => {
-			await formActionSwitchFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );
