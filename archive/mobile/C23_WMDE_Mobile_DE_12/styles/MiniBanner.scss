@@ -9,7 +9,7 @@ $height: 288px !default;
 		display: flex;
 		flex-direction: column;
 		min-height: $height;
-		padding: 16px 0;
+		padding: 16px 0 14px;
 		position: relative;
 		border: 2px solid colors.$primary;
 		background: colors.$white;
@@ -45,10 +45,17 @@ $height: 288px !default;
 			}
 		}
 
+		&-payment-icons {
+			width: 100%;
+			height: 24px;
+			padding: 8px 0;
+			text-align: center;
+		}
+
 		&-headline {
 			height: 25px;
 			text-align: center;
-			margin: 0 16px 16px;
+			margin: 0 16px 12px;
 
 			&-background {
 				position: relative;

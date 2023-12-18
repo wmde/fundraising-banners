@@ -16,7 +16,7 @@
 		&-columns {
 			padding: 8px 8px 0;
 			flex-wrap: nowrap;
-			justify-content: center;
+			justify-content: space-between;
 
 			@include breakpoints.phone-l-up {
 				padding: 8px 27px 0;
@@ -55,6 +55,17 @@
 			@include breakpoints.phone-xs-up {
 				min-width: 150px;
 			}
+
+			&-already-donated {
+				background: colors.$white;
+				border: 1px solid colors.$secondary;
+				color: colors.$secondary;
+				min-width: 190px;
+
+				@include breakpoints.phone-xs-up {
+					min-width: 190px;
+				}
+			}
 		}
 
 		&-countdown-text {
@@ -71,7 +82,11 @@
 
 		&-with-close-icon {
 			.wmde-banner-soft-close-columns {
-				padding-right: 50px;
+				padding-right: 14px;
+
+				.wmde-banner-close {
+					display: flex;
+				}
 			}
 		}
 	}

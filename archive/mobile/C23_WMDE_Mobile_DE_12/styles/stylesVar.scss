@@ -2,7 +2,7 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
-@use './MiniBanner' with (
+@use './MiniBannerVar' with (
 	$height: 288px
 );
 @use './FullPageBanner';
@@ -12,7 +12,10 @@
 @use 'src/themes/Mikings/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroupImageLabel';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Mikings/Slider/Slider';
 @use 'src/themes/Mikings/SoftClose/SoftClose';
 @use 'src/themes/Mikings/ProgressBar/ProgressBar';
+@use './C23_WMDE_Mobile_DE_09';
+@use './C23_WMDE_Mobile_DE_12';
