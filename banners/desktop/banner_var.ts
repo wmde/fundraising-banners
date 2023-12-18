@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -40,13 +40,14 @@ const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, e
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 7500 ),
-		transitionDuration: 1000
+		delay: runtimeEnvironment.getBannerDelay( 0 ),
+		transitionDuration: 0
 	},
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
+		fullBannerDelay: 7500
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

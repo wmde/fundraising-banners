@@ -4,13 +4,13 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 
 const expectShowsSoftClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeTruthy();
 };
 
 const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -18,7 +18,7 @@ const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promi
 };
 
 const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -26,7 +26,7 @@ const expectEmitsSoftCloseMaybeLaterEvent = async ( wrapper: VueWrapper<any> ): 
 };
 
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	await vi.runAllTimersAsync();
 
@@ -35,14 +35,14 @@ const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Pro
 };
 
 const expectEmitsBannerContentChangedOnSoftClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 };
 
 const expectDoesNotShowSoftCloseOnFinalBannerImpression = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { remainingImpressions: 0 } );
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -50,13 +50,13 @@ const expectDoesNotShowSoftCloseOnFinalBannerImpression = async ( wrapper: VueWr
 };
 
 const expectShowsCloseIcon = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	expect( wrapper.find( '.wmde-banner-soft-close .wmde-banner-close' ).exists() ).toBeTruthy();
 };
 
 const expectCloseIconEmitsCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
 	await wrapper.find( '.wmde-banner-soft-close .wmde-banner-close' ).trigger( 'click' );
 

@@ -1,16 +1,16 @@
 // This is the file where we import the theme-specific component styles
 
 @use 'src/components/BannerConductor/banner-transition';
-@use 'Banner';
-@use 'MainBannerVar' with (
+@use 'BannerVar';
+@use 'MainBanner' with (
 	$banner-height: 357px,
 	$form-width: 300px
 );
+@use 'EarlyBanner';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Svingle/defaults';
 @use 'src/themes/Svingle/ButtonClose/ButtonClose';
 @use 'src/themes/Svingle/ProgressBar/ProgressBar';
-@use 'src/themes/Svingle/ProgressBar/DoubleProgressBar';
 @use 'src/themes/Svingle/DonationForm/DonationForm';
 @use 'src/themes/Svingle/DonationForm/MultiStepDonation';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroup';
@@ -27,9 +27,7 @@
 );
 @use 'src/themes/Svingle/Footer/SelectionInput';
 @use 'src/themes/Svingle/Message/Message';
-@use 'src/themes/Svingle/Slider/KeenSlider' with (
-	$margin-bottom: 5px
-);
+@use 'src/themes/Svingle/Slider/KeenSlider';
 @use 'src/themes/Svingle/SoftClose/SoftClose';
 @use 'src/themes/Svingle/AlreadyDonatedModal/AlreadyDonatedModal';
 
