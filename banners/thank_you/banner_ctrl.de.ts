@@ -16,12 +16,10 @@ import Banner from './components/BannerCtrl.de.vue';
 import messages from './messages.de';
 import eventMappings from '../thank_you/event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
-import DynamicTextPlugin from '@src/DynamicTextPlugin';
-import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { TrackingMembershipFormActions } from './MembershipFormActions';
 import { createSubscribeURL } from './createSubscribeURL';
-
-const localeFactory = new LocaleFactoryDe();
+import { createThankYouSettings } from './settings';
+import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -37,7 +35,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		progressBarFillPercentage: 80,
+		settings: createThankYouSettings( new IntegerDe() ),
 		subscribeURL: createSubscribeURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
@@ -46,13 +44,6 @@ const app = createVueApp( BannerConductor, {
 } );
 
 app.use( TranslationPlugin, translator );
-app.use( DynamicTextPlugin, {
-	campaignParameters: page.getCampaignParameters(),
-	date: new Date(),
-	formatters: localeFactory.getFormatters(),
-	impressionCount,
-	translator
-} );
 app.provide( 'tracker', tracker );
 app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount ) );
 

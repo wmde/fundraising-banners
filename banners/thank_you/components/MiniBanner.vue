@@ -21,15 +21,11 @@
 
 			</div>
 			<div class="wmde-banner-mini-slider" v-else>
-
 				<slot name="slides"/>
-
-				<button class="wmde-banner-button">
-					{{ $translate( 'open-modal' ) }}
-				</button>
+				<button class="wmde-banner-button" v-html="$translate( 'open-modal' )"/>
 			</div>
 
-			<template v-if="progressbarFillPercentage === 100">
+			<template v-if="showFireworks">
 				<div class="wmde-banner-firework wmde-banner-firework-lefter"></div>
 				<div class="wmde-banner-firework wmde-banner-firework-left"></div>
 				<div class="wmde-banner-firework wmde-banner-firework-center"></div>
@@ -47,7 +43,7 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 
 interface Props {
-	progressbarFillPercentage: number;
+	showFireworks: boolean;
 }
 
 defineProps<Props>();

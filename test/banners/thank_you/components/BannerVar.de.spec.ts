@@ -3,6 +3,12 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import BannerCtrl from '../../../../banners/thank_you/components/BannerVar.de.vue';
+import MiniBannerTextWin from '../../../../banners/thank_you/content/win/MiniBannerText.de.vue';
+import MiniBannerSlidesWin from '../../../../banners/thank_you/content/win/MiniBannerSlides.de.vue';
+import FullPageBannerTextWin from '../../../../banners/thank_you/content/win/FullPageBannerText.de.vue';
+import MiniBannerTextLose from '../../../../banners/thank_you/content/lose/MiniBannerText.de.vue';
+import MiniBannerSlidesLose from '../../../../banners/thank_you/content/lose/MiniBannerSlides.de.vue';
+import FullPageBannerTextLose from '../../../../banners/thank_you/content/lose/FullPageBannerText.de.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
@@ -15,11 +21,14 @@ const formActions: MembershipFormActions = {
 describe( 'BannerVar.de.vue', () => {
 	let tracker: Tracker;
 
-	const getWrapper = (): VueWrapper<any> => {
+	const getWrapper = ( progressBarPercentage: number = 80 ): VueWrapper<any> => {
 		tracker = { trackEvent: vi.fn() };
 		return mount( BannerCtrl, {
 			props: {
-				progressBarFillPercentage: 80,
+				settings: {
+					numberOfDonors: '42',
+					progressBarPercentage
+				},
 				subscribeURL: 'SUBSCRIBE URL'
 			},
 			global: {
@@ -41,6 +50,50 @@ describe( 'BannerVar.de.vue', () => {
 
 		expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 		expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
+	} );
+
+	it( 'shows text win content', () => {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
+		const wrapper = getWrapper( 100 );
+
+		expect( wrapper.findComponent( MiniBannerTextWin ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( MiniBannerTextLose ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeFalsy();
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 5 );
+	} );
+
+	it( 'shows slider win content', () => {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
+		const wrapper = getWrapper( 100 );
+
+		expect( wrapper.findComponent( MiniBannerSlidesWin ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( MiniBannerSlidesLose ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeFalsy();
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 5 );
+	} );
+
+	it( 'shows text lose content', () => {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
+		const wrapper = getWrapper( 99 );
+
+		expect( wrapper.findComponent( MiniBannerTextWin ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( MiniBannerTextLose ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeTruthy();
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
+	} );
+
+	it( 'shows slider lose content', () => {
+		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
+		const wrapper = getWrapper( 99 );
+
+		expect( wrapper.findComponent( MiniBannerSlidesWin ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeFalsy();
+		expect( wrapper.findComponent( MiniBannerSlidesLose ).exists() ).toBeTruthy();
+		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeTruthy();
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
 	} );
 
 	it( 'emits modal shown event', () => {

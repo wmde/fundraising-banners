@@ -7,7 +7,7 @@ describe( 'MiniBanner.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( MiniBanner, {
 			props: {
-				progressbarFillPercentage: 42
+				showFireworks: true
 			},
 			global: {
 				mocks: {
@@ -31,6 +31,22 @@ describe( 'MiniBanner.vue', () => {
 
 		expect( wrapper.find( '.wmde-banner-mini-text' ).exists() ).toBeTruthy();
 		expect( wrapper.find( '.wmde-banner-mini-slider' ).exists() ).toBeFalsy();
+	} );
+
+	it( 'shows fireworks', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { showFireworks: true } );
+
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 5 );
+	} );
+
+	it( 'hides fireworks', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.setProps( { showFireworks: false } );
+
+		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
 	} );
 
 	it( 'emits showModal events from slider content', () => {

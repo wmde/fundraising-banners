@@ -1,28 +1,34 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
 		<MiniBanner
-			:progressbar-fill-percentage="progressBarFillPercentage"
+			:show-fireworks="showSuccessContent"
 			@close="onClose"
 			@show-modal="onShowModal"
 		>
 
 			<template #text>
-				<MiniBannerText/>
+				<MiniBannerTextWin v-if="showSuccessContent" :number-of-donors="settings.numberOfDonors"/>
+				<MiniBannerTextLose v-else :number-of-donors="settings.numberOfDonors"/>
 			</template>
 
 			<template #progress>
-				<ProgressBar :fill-percentage="progressBarFillPercentage"/>
+				<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
 			</template>
 
 			<template #slides="{ play }: any">
 				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
 
 					<template #slides="{ currentSlide }: any">
-						<MiniBannerSlides :currentSlide="currentSlide">
+						<MiniBannerSlidesWin v-if="showSuccessContent" :currentSlide="currentSlide" :number-of-donors="settings.numberOfDonors">
 							<template #progress>
-								<ProgressBar :fill-percentage="progressBarFillPercentage"/>
+								<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
 							</template>
-						</MiniBannerSlides>
+						</MiniBannerSlidesWin>
+						<MiniBannerSlidesLose v-else :currentSlide="currentSlide" :number-of-donors="settings.numberOfDonors">
+							<template #progress>
+								<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
+							</template>
+						</MiniBannerSlidesLose>
 					</template>
 
 				</KeenSlider>
@@ -32,7 +38,10 @@
 
 		<FullPageBanner @close="contentState = ContentStates.Mini">
 
-			<template #text><FullPageBannerText/></template>
+			<template #text>
+				<FullPageBannerTextWin v-if="showSuccessContent"/>
+				<FullPageBannerTextLose v-else/>
+			</template>
 
 			<template #benefits><MembershipBenefits/></template>
 
@@ -67,9 +76,12 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import MiniBanner from './MiniBanner.vue';
 import FullPageBanner from './FullPageBanner.vue';
 import colors from '../styles/settings/colors';
-import MiniBannerText from '../content/MiniBannerText.en.vue';
-import MiniBannerSlides from '../content/MiniBannerSlides.en.vue';
-import FullPageBannerText from '../content/FullPageBannerText.en.vue';
+import MiniBannerTextWin from '../content/win/MiniBannerText.en.vue';
+import MiniBannerSlidesWin from '../content/win/MiniBannerSlides.en.vue';
+import FullPageBannerTextWin from '../content/win/FullPageBannerText.en.vue';
+import MiniBannerTextLose from '../content/lose/MiniBannerText.en.vue';
+import MiniBannerSlidesLose from '../content/lose/MiniBannerSlides.en.vue';
+import FullPageBannerTextLose from '../content/lose/FullPageBannerText.en.vue';
 import MembershipBenefits from '../content/MembershipBenefits.en.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ProgressBar from './ProgressBar.vue';
@@ -77,6 +89,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import MembershipFormButton from './MembershipButton.vue';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
+import { ThankYouSettings } from '../settings';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -84,7 +97,7 @@ enum ContentStates {
 }
 
 interface Props {
-	progressBarFillPercentage: number;
+	settings: ThankYouSettings;
 	subscribeURL: string;
 }
 
@@ -92,6 +105,7 @@ const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed' ] );
 const tracker = inject<Tracker>( 'tracker' );
 const contentState = ref<ContentStates>( ContentStates.Mini );
+const showSuccessContent = props.settings.progressBarPercentage === 100;
 
 const onClose = (): void => {
 	emit( 'bannerClosed', new CloseEvent( 'MainBanner', CloseChoices.Close ) );

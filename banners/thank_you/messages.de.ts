@@ -6,7 +6,7 @@ const messages: TranslationMessages = {
 	'call-to-action-more-info': 'Weitere Informationen auf unserer Webseite',
 	'call-to-action-button-amount-per-month': 'Mit {{amount}} € im Monat fördern',
 	'call-to-action-button-different-amount': 'Mit anderem Betrag fördern',
-	'open-modal': 'Dankestext lesen',
+	'open-modal': 'Lesen Sie unsere Dankesbotschaft',
 	'close-modal': 'Dankestext schließen',
 	'progress-bar-inner-text-win': 'Geschafft!',
 	'progress-bar-inner-text-lose': 'Dennoch: Spendenziel nicht erreicht',
