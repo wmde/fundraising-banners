@@ -34,7 +34,7 @@ describe( 'FundsContent.vue', () => {
 
 		const intro = wrapper.find( '.use-of-funds-section-intro h2' );
 
-		expect( intro.text() ).toBe( '' );
+		expect( intro.text() ).toBe( '?' );
 		expect( wrapper.find( '.use-of-funds-provisional' ).exists() ).toBe( false );
 
 		const content = getContent();
@@ -42,7 +42,7 @@ describe( 'FundsContent.vue', () => {
 		await wrapper.setProps( { content: content } );
 		const provisional = wrapper.find( '.use-of-funds-provisional' );
 
-		expect( intro.text() ).toBe( '*' );
+		expect( intro.text() ).toBe( '?*' );
 		expect( provisional.exists() ).toBe( true );
 		expect( provisional.text() ).toBe( 'This is provisional' );
 	} );
