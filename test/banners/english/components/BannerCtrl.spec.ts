@@ -9,7 +9,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures,
+	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
@@ -18,6 +18,7 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { bannerMainFeatures } from '@test/features/MainBanner';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -34,7 +35,7 @@ describe( 'BannerCtrl.vue', () => {
 		vi.useRealTimers();
 	} );
 
-	const getWrapper = (): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
@@ -47,7 +48,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: newDynamicContent(),
+					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -85,6 +86,13 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectShowsLiveTimeInMessage' ],
+			[ 'expectShowsLiveTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

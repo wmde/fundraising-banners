@@ -2,10 +2,8 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<strong>
-					<InfoIcon fill="#990a00"/>
-					{{ currentDate }}, {{ currentTime }}: &#8220;Wikipedia is not for sale.&#8221; - A personal appeal from Wikipedia founder Jimmy Wales.
-				</strong>
+				<InfoIcon fill="#990a00"/>
+				<strong> &#8220;Wikipedia is not for sale.&#8221; - A personal appeal from Wikipedia founder Jimmy Wales.</strong>
 			</p>
 			<p>
 				Please don't ignore this 1-minute read. This {{ currentDayName }}, {{ currentDate }}, I ask you to
@@ -31,15 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
 
-const { currentDayName, currentDate, getCurrentTime }: DynamicContent = inject( 'dynamicCampaignText' );
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
-onMounted( startTimer );
-onUnmounted( stopTimer );
+const { currentDayName, currentDate }: DynamicContent = inject( 'dynamicCampaignText' );
 
 </script>

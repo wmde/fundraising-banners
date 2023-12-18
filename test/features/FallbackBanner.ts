@@ -83,6 +83,25 @@ const showsTheAnimatedHighlightInLargeBanner = async ( getWrapperAtWidth: ( widt
 	expect( wrapper.find( '.wmde-banner-message .wmde-banner-text-animated-highlight' ).exists() ).toBeTruthy();
 };
 
+const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
+	const dynamicContent = newDynamicContent();
+	dynamicContent.getCurrentTime = vi.fn().mockReturnValueOnce( 'Initial Date and Time' )
+		.mockReturnValueOnce( 'Second Date and Time' )
+		.mockReturnValueOnce( 'Third Date and Time' );
+
+	const wrapper = getWrapperAtWidth( 800, dynamicContent );
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Date and Time' );
+
+	await vi.advanceTimersByTimeAsync( 1000 );
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Date and Time' );
+
+	await vi.advanceTimersByTimeAsync( 1000 );
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Date and Time' );
+};
+
 const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
 	const location = { href: '' };
 	Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
@@ -119,7 +138,8 @@ export const fallbackBannerFeatures: Record<string, ( getWrapperAtWidth: ( width
 };
 
 export const dynamicContentFeatures: Record<string, ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent ) => VueWrapper<any> ) => Promise<any>> = {
-	showsTheAnimatedHighlightInLargeBanner
+	showsTheAnimatedHighlightInLargeBanner,
+	showsLiveTimeInLargeBanner
 };
 
 export const submitFeatures: Record<string, ( getWrapperAtWidth: (
