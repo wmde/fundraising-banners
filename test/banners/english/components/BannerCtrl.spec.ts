@@ -14,7 +14,7 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { bannerMainFeatures } from '@test/features/MainBanner';
@@ -37,6 +37,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		return mount( Banner, {
+			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
@@ -101,9 +102,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {

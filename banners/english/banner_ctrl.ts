@@ -45,7 +45,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
