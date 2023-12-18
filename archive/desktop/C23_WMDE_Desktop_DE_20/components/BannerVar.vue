@@ -31,11 +31,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #button>
-								<MainDonationFormPaymentMethodLabeledButton/>
-							</template>
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -89,14 +85,20 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -105,15 +107,6 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue'
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import colors from '../styles/colors';
-import MainDonationFormPaymentMethodLabeledButton
-	from '@src/components/DonationForm/Forms/MainDonationFormPaymentMethodLabeledButton.vue';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -138,13 +131,10 @@ const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
-
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
-
-useAnonymousAddressTypeSetter();
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
