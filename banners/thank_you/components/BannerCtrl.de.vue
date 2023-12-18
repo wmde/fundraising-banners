@@ -1,6 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
 		<MiniBanner
+			:progressbar-fill-percentage="progressBarFillPercentage"
 			@close="onClose"
 			@show-modal="onShowModal"
 		>

@@ -29,11 +29,13 @@
 				</button>
 			</div>
 
-			<div class="wmde-banner-firework wmde-banner-firework-lefter"></div>
-			<div class="wmde-banner-firework wmde-banner-firework-left"></div>
-			<div class="wmde-banner-firework wmde-banner-firework-center"></div>
-			<div class="wmde-banner-firework wmde-banner-firework-right"></div>
-			<div class="wmde-banner-firework wmde-banner-firework-righter"></div>
+			<template v-if="progressbarFillPercentage === 100">
+				<div class="wmde-banner-firework wmde-banner-firework-lefter"></div>
+				<div class="wmde-banner-firework wmde-banner-firework-left"></div>
+				<div class="wmde-banner-firework wmde-banner-firework-center"></div>
+				<div class="wmde-banner-firework wmde-banner-firework-right"></div>
+				<div class="wmde-banner-firework wmde-banner-firework-righter"></div>
+			</template>
 		</div>
 	</div>
 </template>
@@ -44,6 +46,11 @@ import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 
+interface Props {
+	progressbarFillPercentage: number;
+}
+
+defineProps<Props>();
 defineEmits( [ 'close', 'showModal' ] );
 
 const showComponentForLargeScreen = useDisplaySwitch( 750 );
