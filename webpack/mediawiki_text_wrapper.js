@@ -56,7 +56,7 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 					const templateContext = {
 						banner: compiledSource.replace( /\/\*! For license information please see.*?\*\/\s*/, '' ),
 						campaignConfig: bannerConfig || {},
-						useOfFundsTransclude: '{{' + bannerConfig.use_of_funds_source + '}}',
+						useOfFundsTransclude: bannerConfig.use_of_funds_source ? '{{' + bannerConfig.use_of_funds_source + '}}' : '',
 						buildDate,
 						// BannerValues come from webpack.production config
 						...self.context
