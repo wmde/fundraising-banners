@@ -36,7 +36,7 @@
 
 		</MiniBanner>
 
-		<FullPageBanner @close="contentState = ContentStates.Mini">
+		<FullPageBanner @close="onHideModal">
 
 			<template #text>
 				<FullPageBannerTextWin v-if="showSuccessContent"/>
@@ -110,7 +110,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'modalOpened', 'modalClosed' ] );
 const tracker = inject<Tracker>( 'tracker' );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const showSuccessContent = props.settings.progressBarPercentage === 100;
@@ -121,7 +121,13 @@ const onClose = (): void => {
 
 const onShowModal = (): void => {
 	tracker.trackEvent( new ThankYouModalShownEvent() );
+	emit( 'modalOpened' );
 	contentState.value = ContentStates.Full;
+};
+
+const onHideModal = (): void => {
+	emit( 'modalClosed' );
+	contentState.value = ContentStates.Mini;
 };
 
 const onSubmit = ( url: string, userChoice: string ): void => {

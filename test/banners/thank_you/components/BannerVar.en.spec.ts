@@ -96,13 +96,22 @@ describe( 'BannerVar.en.vue', () => {
 		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
 	} );
 
-	it( 'emits modal shown event', () => {
+	it( 'emits modal shown events', () => {
 		const wrapper = getWrapper();
 
 		wrapper.find( '.wmde-banner-button' ).trigger( 'click' );
 
 		expect( tracker.trackEvent ).toHaveBeenCalledOnce();
 		expect( tracker.trackEvent ).toHaveBeenCalledWith( new ThankYouModalShownEvent() );
+		expect( wrapper.emitted( 'modalOpened' ).length ).toStrictEqual( 1 );
+	} );
+
+	it( 'emits modal hidden events', () => {
+		const wrapper = getWrapper();
+
+		wrapper.find( '.wmde-banner-full .wmde-banner-close' ).trigger( 'click' );
+
+		expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );
 	} );
 
 	it( 'sets progress bar fill percentage on slider', () => {
