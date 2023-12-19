@@ -53,7 +53,7 @@ describe( 'MiniBanner.vue', () => {
 		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-mini-inner' ).trigger( 'click' );
+		wrapper.find( '.wmde-banner-info-button' ).trigger( 'click' );
 		wrapper.find( '.wmde-banner-button' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'showModal' ).length ).toStrictEqual( 2 );
@@ -63,7 +63,7 @@ describe( 'MiniBanner.vue', () => {
 		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-mini-inner' ).trigger( 'click' );
+		wrapper.find( '.wmde-banner-info-button' ).trigger( 'click' );
 		wrapper.find( '.wmde-banner-button' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'showModal' ).length ).toStrictEqual( 2 );

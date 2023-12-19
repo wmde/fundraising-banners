@@ -1,8 +1,8 @@
 <template>
 	<div class="wmde-banner-mini">
 		<ButtonClose @close="$emit( 'close' )"/>
-		<div class="wmde-banner-mini-inner" @click.prevent="$emit( 'showModal' )">
-			<button class="wmde-banner-info-button"><InfoIcon/></button>
+		<div class="wmde-banner-mini-inner">
+			<button class="wmde-banner-info-button" @click.prevent="$emit( 'showModal' )"><InfoIcon/></button>
 
 			<div class="wmde-banner-mini-text" v-if="showComponentForLargeScreen">
 
@@ -13,7 +13,7 @@
 						<slot name="progress"/>
 					</div>
 					<div class="wmde-banner-mini-text-button">
-						<button class="wmde-banner-button">
+						<button class="wmde-banner-button" @click.prevent="$emit( 'showModal' )">
 							{{ $translate( 'open-modal' ) }}
 						</button>
 					</div>
@@ -22,7 +22,9 @@
 			</div>
 			<div class="wmde-banner-mini-slider" v-else>
 				<slot name="slides"/>
-				<button class="wmde-banner-button" v-html="$translate( 'open-modal' )"/>
+				<button class="wmde-banner-button" @click.prevent="$emit( 'showModal' )">
+					{{ $translate( 'open-modal' ) }}
+				</button>
 			</div>
 
 			<template v-if="showFireworks">
