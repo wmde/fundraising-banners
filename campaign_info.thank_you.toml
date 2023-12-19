@@ -5,7 +5,7 @@
 # Thank You Campaign
 [thank_you]
 name = "Desktop"
-campaign = "C23_WMDE_Thank_You_DE_00"
+campaign = "C23_WMDE_Desktop_DE_ty"
 icon = "desktop"
 campaign_tracking = "ty01-240101"
 description = "Thank you banner"
@@ -15,12 +15,12 @@ wrapper_template = "wikipedia_org"
 
 [thank_you.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B23_WMDE_Thank_You_Desktop_DE_ctrl"
+pagename = "B23_WMDE_Desktop_DE_ty_ctrl"
 tracking = "org-ty-240101-ctrl"
 
 [thank_you.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B23_WMDE_Thank_You_Desktop_DE_var"
+pagename = "B23_WMDE_Desktop_DE_ty_var"
 tracking = "org-ty-240101-var"
 
 [thank_you.test_matrix]
@@ -30,7 +30,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 
 [thank_you_en]
 name = "English Desktop"
-campaign = "C23_WMDE_Thank_You_Desktop_EN_00"
+campaign = "C23_WMDE_Desktop_EN_ty"
 icon = "desktop"
 campaign_tracking = "ty01-240101"
 description = "Thank you banner"
@@ -40,12 +40,12 @@ wrapper_template = "wikipedia_org"
 
 [thank_you_en.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.en.ts"
-pagename = "B23_WMDE_Thank_You_Desktop_EN_ctrl"
+pagename = "B23_WMDE_Desktop_EN_ty_ctrl"
 tracking = "org-ty-240101-en-ctrl"
 
 [thank_you_en.banners.var]
 filename = "./banners/thank_you/banner_var.en.ts"
-pagename = "B23_WMDE_Thank_You_Desktop_EN_var"
+pagename = "B23_WMDE_Desktop_EN_ty_var"
 tracking = "org-ty-240101-en-var"
 
 [thank_you_en.test_matrix]
@@ -55,7 +55,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 # Thank you campaign mobile wp.org
 [thank_you_mobile]
 name = "Mobile"
-campaign = "C23_WMDE_Thank_You_Mobile_DE_00"
+campaign = "C23_WMDE_Mobile_DE_ty"
 icon = "mobile"
 campaign_tracking = "ty01-mob-240101"
 description = "Thank you banner"
@@ -65,12 +65,12 @@ wrapper_template = "wikipedia_org"
 
 [thank_you_mobile.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B23_WMDE_Thank_You_Mobile_DE_ctrl"
+pagename = "B23_WMDE_Mobile_DE_ty_ctrl"
 tracking = "org-mob-ty-240101-ctrl"
 
 [thank_you_mobile.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B23_WMDE_Thank_You_Mobile_DE_var"
+pagename = "B23_WMDE_Mobile_DE_ty_var"
 tracking = "org-mob-ty-240101-var"
 
 [thank_you_mobile.test_matrix]
@@ -80,7 +80,7 @@ orientation = [ "portrait", "landscape"]
 # English Thank you campaign mobile wp.org
 [thank_you_mobile_en]
 name = "English Mobile"
-campaign = "C23_WMDE_Thank_You_Mobile_EN_00"
+campaign = "C23_WMDE_Mobile_EN_ty"
 icon = "mobile"
 campaign_tracking = "ty01-mob-en-240101"
 description = "Thank you banner"
@@ -90,12 +90,12 @@ wrapper_template = "wikipedia_org"
 
 [thank_you_mobile_en.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.en.ts"
-pagename = "B23_WMDE_Thank_You_Mobile_EN_ctrl"
+pagename = "B23_WMDE_Mobile_EN_ty_ctrl"
 tracking = "org-mob-ty-240101-en-ctrl"
 
 [thank_you_mobile_en.banners.var]
 filename = "./banners/thank_you/banner_var.en.ts"
-pagename = "B23_WMDE_Thank_You_Mobile_EN_var"
+pagename = "B23_WMDE_Mobile_EN_ty_var"
 tracking = "org-mob-ty-240101-en-var"
 
 [thank_you_mobile_en.test_matrix]
@@ -105,7 +105,7 @@ orientation = [ "portrait", "landscape"]
 # Thank you campaign ipad wp.org
 [thank_you_ipad]
 name = "iPad"
-campaign = "C23_WMDE_Thank_You_iPad_00"
+campaign = "C23_WMDE_ipad_DE_ty"
 icon = "pad"
 campaign_tracking = "ty01-ipad-240101"
 description = "Thank you banner"
@@ -115,12 +115,12 @@ wrapper_template = "wikipedia_org"
 
 [thank_you_ipad.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B23_WMDE_Thank_You_iPad_ctrl"
+pagename = "B23_WMDE_ipad_DE_ty_ctrl"
 tracking = "org-ipad-ty-240101-ctrl"
 
 [thank_you_ipad.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B23_WMDE_Thank_You_iPad_var"
+pagename = "B23_WMDE_ipad_DE_ty_var"
 tracking = "org-ipad-ty-240101-var"
 
 [thank_you_ipad.test_matrix]
@@ -130,7 +130,7 @@ orientation = [ "portrait", "landscape"]
 # Thank you campaign wp.de
 [thank_you_wpde]
 campaign = "WPDE Desktop"
-name = "C23_WPDE_Thank_You_Desktop_00"
+name = "C23_WPDE_Desktop_DE_ty"
 icon = "desktop"
 campaign_tracking = "ty01-wpde-240101"
 description = "Thank you banner"
@@ -141,17 +141,17 @@ wrap_in_wikitext = false
 
 [thank_you_wpde.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.wpde.ts"
-pagename = "B23_WPDE_Thank_You_Desktop_ctrl"
+pagename = "B23_WPDE_Desktop_DE_ty_ctrl"
 tracking = "de-wpde-ty-240101-ctrl"
 
 [thank_you_wpde.banners.var]
 filename = "./banners/thank_you/banner_var.wpde.ts"
-pagename = "B23_WPDE_Thank_You_Desktop_var"
+pagename = "B23_WPDE_Desktop_DE_ty_var"
 tracking = "de-wpde-ty-240101-var"
 
 [thank_you_wpde_mobile]
 campaign = "WPDE Mobile"
-name = "C23_WPDE_Thank_You_Mobile_00"
+name = "C23_WPDE_Mobile_DE_ty"
 icon = "mobile"
 campaign_tracking = "ty01-wpde-mob-240101"
 description = "Thank you banner"
@@ -162,10 +162,10 @@ wrap_in_wikitext = false
 
 [thank_you_wpde_mobile.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.wpde.ts"
-pagename = "B23_WPDE_Thank_You_Mobile_ctrl"
+pagename = "B23_WPDE_Mobile_DE_ty_ctrl"
 tracking = "de-wpde-mob-ty-240101-ctrl"
 
 [thank_you_wpde_mobile.banners.var]
 filename = "./banners/thank_you/banner_var.wpde.ts"
-pagename = "B23_WPDE_Thank_You_Mobile_var"
+pagename = "B23_WPDE_Mobile_DE_ty_var"
 tracking = "de-wpde-mob-ty-240101-var"
