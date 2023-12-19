@@ -1,16 +1,14 @@
 import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
-
-const NUMBER_OF_DONORS = 345_123;
-const PROGRESS_BAR_PERCENTAGE = 100;
+import { ThankYouCampaignParameters } from '@src/domain/CampaignParameters';
 
 export interface ThankYouSettings {
 	numberOfDonors: string;
 	progressBarPercentage: number;
 }
 
-export function createThankYouSettings( formatter: Integer ): ThankYouSettings {
+export function createThankYouSettings( formatter: Integer, campaignParameters: ThankYouCampaignParameters ): ThankYouSettings {
 	return {
-		numberOfDonors: formatter.format( NUMBER_OF_DONORS ),
-		progressBarPercentage: PROGRESS_BAR_PERCENTAGE
+		numberOfDonors: formatter.format( campaignParameters.numberOfDonors ),
+		progressBarPercentage: campaignParameters.progressBarPercentage
 	};
 }

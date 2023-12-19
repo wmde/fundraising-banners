@@ -35,7 +35,7 @@ const app = createVueApp( BannerConductor, {
 		transitionDuration: 1000
 	},
 	bannerProps: {
-		settings: createThankYouSettings( new IntegerEn() ),
+		settings: createThankYouSettings( new IntegerEn(), page.getCampaignParameters().thankYouCampaign ),
 		subscribeURL: createSubscribeURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),

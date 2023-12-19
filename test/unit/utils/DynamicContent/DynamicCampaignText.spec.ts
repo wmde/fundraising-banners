@@ -39,7 +39,11 @@ const campaignParameters: CampaignParameters = {
 	millionImpressionsPerDay: 42,
 	numberOfMembers: 200,
 	startDate: '2023-11-03',
-	isLateProgress: false
+	isLateProgress: false,
+	thankYouCampaign: {
+		progressBarPercentage: 80,
+		numberOfDonors: 42
+	}
 };
 const impressionCount: ImpressionCount = {
 	bannerCount: 42,

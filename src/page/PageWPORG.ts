@@ -162,7 +162,11 @@ class PageWPORG implements Page {
 			startDate: data.startDate,
 			endDate: data.endDate,
 			numberOfMembers: Number( data.numberOfMembers ),
-			isLateProgress: Boolean( data.isLateProgress )
+			isLateProgress: Boolean( data.isLateProgress ),
+			thankYouCampaign: {
+				numberOfDonors: Number( data.tyNumberOfDonors ),
+				progressBarPercentage: Number( data.tyProgressBarPercentage )
+			}
 		};
 
 		return getCampaignParameterOverride( campaignParameters );
