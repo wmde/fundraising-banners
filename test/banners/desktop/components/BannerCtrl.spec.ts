@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/desktop/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -6,7 +6,6 @@ import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
@@ -21,14 +20,17 @@ import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
+	let tracker: TrackerSpy;
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		tracker = new TrackerSpy();
 		vi.useFakeTimers();
 	} );
 
@@ -55,7 +57,7 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker
 				}
 			}
 		} );
@@ -143,6 +145,60 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectFiresGoAwayEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Minimised Banner', () => {
+		it( 'minimises banner', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+
+			expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--minimised' );
+		} );
+
+		it( 'tracks minimised event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+
+			expect( tracker.hasTrackedEvent( 'banner-minimised' ) );
+		} );
+
+		it( 'maximises banner when icon is clicked', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-minimised-maximise' ).trigger( 'click' );
+
+			expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--main' );
+		} );
+
+		it( 'maximises banner when button is clicked', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-minimised-submit-button' ).trigger( 'click' );
+
+			expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--main' );
+		} );
+
+		it( 'tracks maximised event', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-minimised-maximise' ).trigger( 'click' );
+
+			expect( tracker.hasTrackedEvent( 'banner-maximised' ) );
+		} );
+
+		it( 'shows use of funds from minimised banner', async () => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );
+			await wrapper.find( '.wmde-banner-minimised .wmde-banner-footer-usage-link' ).trigger( 'click' );
+
+			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
 		} );
 	} );
 

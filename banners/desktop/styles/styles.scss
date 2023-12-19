@@ -6,6 +6,7 @@
 	$banner-height: 357px,
 	$form-width: 300px
 );
+@use 'MinimisedBanner';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Svingle/defaults';
 @use 'src/themes/Svingle/ButtonClose/ButtonClose';
@@ -16,7 +17,9 @@
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroupRadios';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
-@use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm' with (
+	$padding: 20px 0 0
+);
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px
 );
