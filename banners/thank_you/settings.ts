@@ -1,7 +1,7 @@
 import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
 
 const NUMBER_OF_DONORS = 345_123;
-const PROGRESS_BAR_PERCENTAGE = 80;
+const PROGRESS_BAR_PERCENTAGE = 100;
 
 export interface ThankYouSettings {
 	numberOfDonors: string;

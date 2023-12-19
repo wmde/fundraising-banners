@@ -1,14 +1,23 @@
 @use 'settings/globals';
+@use 'settings/breakpoints';
 
 .wmde-banner {
 	&-progress-bar {
-		font-size: 16px;
+		font-size: 12px;
 		border: 3px solid var( --color-primary );
 		border-radius: 15px;
 		position: relative;
 		height: 36px;
 		line-height: 30px;
 		margin: 0;
+
+		@include breakpoints.x-small-up {
+			font-size: 16px;
+		}
+
+		@include breakpoints.small-up {
+			font-size: 16px;
+		}
 
 		&-fill {
 			width: 10%;

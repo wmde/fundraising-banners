@@ -8,8 +8,8 @@ const messages: TranslationMessages = {
 	'call-to-action-button-different-amount': 'Mit anderem Betrag fördern',
 	'open-modal': 'Lesen Sie unsere Dankesbotschaft',
 	'close-modal': 'Dankestext schließen',
-	'progress-bar-inner-text-win': 'Geschafft!',
-	'progress-bar-inner-text-lose': 'Dennoch: Spendenziel nicht erreicht',
+	'progress-bar-inner-text-win': 'Geschafft! 🎉 🥳',
+	'progress-bar-inner-text-lose': 'Nicht geschafft 😭',
 	'image-copyright-holder': 'Annika Möller für Wikimedia Deutschland',
 	'subscribe-title': 'Benötigen Sie weitere Informationen zur Mitgliedschaft?',
 	'subscribe-text': 'Tragen Sie einfach Ihre E-Mail-Adresse ein',
@@ -20,8 +20,8 @@ const messages: TranslationMessages = {
 	'subscribe-form-error': 'Bitte geben Sie eine gültige E-Mail-Adresse an.',
 	'stats-people-amount': '102.000',
 	'stats-people-text': 'Fördermitglied bereits',
-	'stats-average-amount': '55&nbsp;€',
-	'stats-average-text': 'durchschnittlicher Jahresbeitrag',
+	'stats-average-amount': '5&nbsp;€',
+	'stats-average-text': 'durchschnittlicher Monatsbeitrag',
 	'stats-contribution-amount': '2&nbsp;€',
 	'stats-contribution-text': 'Mindestbeitrag nur 2&nbsp;€/Monat'
 };

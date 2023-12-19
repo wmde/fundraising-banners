@@ -10,6 +10,8 @@
 		not perfect, but it's solid as a rock.
 	</p>
 
+	<StatsBox/>
+
 	<p>
 		In times like these, Wikipedia is so valuable because it's a place where people of vastly different viewpoints
 		still hold conversations -- frequently controversial ones, but ones that stay within the rules.
@@ -44,4 +46,5 @@
 
 <script setup lang="ts">
 import ImageWithCopyright from '../ImageWithCopyright.vue';
+import StatsBox from '../StatsBox.vue';
 </script>

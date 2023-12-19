@@ -7,14 +7,9 @@
 
 	&-slider-container {
 		font-family: fonts.$ui;
-		font-size: 24px;
+		font-size: 18px;
 		padding: 16px 0;
 		line-height: 1.2;
-
-		@include breakpoints.small-up {
-			font-size: 1.3em;
-			line-height: 1.5;
-		}
 	}
 
 	&-slide {
