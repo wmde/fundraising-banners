@@ -49,7 +49,6 @@
 								<span class="wmde-banner-select-group-label with-logos credit-cards">
 									<VisaLogo/>
 									<MastercardLogo/>
-									<AmexLogo/>
 								</span>
 							</template>
 
@@ -116,7 +115,6 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import AmexLogo from '@src/components/PaymentLogos/AmexLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
