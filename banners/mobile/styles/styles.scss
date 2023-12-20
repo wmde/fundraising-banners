@@ -3,7 +3,7 @@
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (
-	$height: 288px
+	$height: 364px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';
