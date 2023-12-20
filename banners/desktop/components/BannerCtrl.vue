@@ -24,7 +24,7 @@
 			</template>
 
 			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<ProgressBar/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -103,7 +103,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
+import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import colors from '../styles/colors';
