@@ -26,12 +26,25 @@
 			</button>
 		</div>
 
+		<div class="wmde-banner-mini-payment-icons">
+			<div><PayPalLogo/></div>
+			<div><VisaLogo/></div>
+			<div><MastercardLogo/></div>
+			<div><SepaLogo/></div>
+			<div><SmsIcon/></div>
+		</div>
+
 	</div>
 </template>
 
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import SmsIcon from '@src/components/Icons/SmsIcon.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import SepaLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/SepaLogo.vue';
 
 defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
 

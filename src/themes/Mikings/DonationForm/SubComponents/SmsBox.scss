@@ -9,16 +9,24 @@
 		width: 33.3333%;
 		padding: 0 4px 8px;
 
-		label {
+		&-label {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
 			border: 1px solid colors.$radio-border-color;
 			border-radius: 2px;
 			background: colors.$radio-background;
 			height: colors.$form-radio-height;
-			line-height: colors.$form-radio-height;
 			font-size: colors.$radio-font-size;
 			text-align: center;
 			width: 100%;
-			align-content: center;
+
+			&:hover,
+			&:focus {
+				border-color: colors.$radio-border-color-hover;
+				background: colors.$radio-background-hover;
+			}
 		}
 
 		&-notice {
@@ -33,6 +41,12 @@
 				color: colors.$black;
 				text-decoration: none;
 			}
+		}
+
+		.sms-icon {
+			width: 26px;
+			margin-right: 10px;
+			margin-top: 5px;
 		}
 	}
 }
