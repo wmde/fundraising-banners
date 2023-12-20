@@ -10,6 +10,7 @@ export function newDynamicContent(): DynamicContent {
 		daysLeftSentence: 'daysLeftSentence',
 		donorsNeededSentence: '',
 		goalDonationSum: '',
+		remainingDonationSum: '',
 		overallImpressionCount: 0,
 		progressBarContent: {
 			percentageTowardsTarget: 42,
