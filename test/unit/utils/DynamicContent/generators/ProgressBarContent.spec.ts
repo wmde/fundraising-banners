@@ -31,6 +31,6 @@ describe( 'ProgressBarContent', function () {
 	} );
 
 	it( 'should return amount needed sentence', function () {
-		expect( progressBarContent.amountNeeded ).toBe( 'missing-amount €6.0M' );
+		expect( progressBarContent.amountNeeded ).toBe( 'amount-missing' );
 	} );
 } );

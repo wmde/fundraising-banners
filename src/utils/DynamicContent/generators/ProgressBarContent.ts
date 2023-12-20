@@ -49,10 +49,9 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 	}
 
 	public get amountNeeded(): string {
-		return [
-			this._translator.translate( 'missing-amount' ),
-			this._currencyFormatter.millions( this._remainingDonationSum )
-		].join( ' ' );
+		return this._translator.translate( 'amount-missing', {
+			amount: this._currencyFormatter.millions( this._remainingDonationSum )
+		} );
 	}
 
 	public get isLateProgress(): boolean {

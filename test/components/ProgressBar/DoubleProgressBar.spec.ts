@@ -16,6 +16,7 @@ describe( 'DoubleProgressBar.vue', () => {
 			daysLeftSentence: 'daysLeftSentence',
 			donorsNeededSentence: '',
 			goalDonationSum: '',
+			remainingDonationSum: '',
 			overallImpressionCount: 0,
 			progressBarContent: {
 				percentageTowardsTarget: 42,
