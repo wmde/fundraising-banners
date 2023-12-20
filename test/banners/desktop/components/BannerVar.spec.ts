@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '../../../../banners/desktop/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
@@ -15,14 +15,12 @@ import {
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
-import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
-import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -54,10 +52,8 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: {
-						donateWithAddressAction: 'https://example.com/with-address',
-						donateAnonymouslyAction: 'https://example.com/without-address'
-					},
+					currentCampaignTimePercentage: 42,
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub()
@@ -104,14 +100,17 @@ describe( 'BannerVar.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
+	} );
 
+	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
-			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
+			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
+			[ 'expectMainDonationFormGoesToUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
-			await formActionSwitchFeatures[ testName ]( getWrapper() );
+			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -145,22 +144,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectFiresGoAwayEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Main Donation Form Button Variable Payment Type', ()=> {
-		test.each( [
-			[ PaymentMethods.PAYPAL, 'submit-label-paypal' ],
-			[ PaymentMethods.BANK_TRANSFER, 'submit-label-bank-transfer' ],
-			[ PaymentMethods.CREDIT_CARD, 'submit-label-credit-card' ],
-			[ PaymentMethods.DIRECT_DEBIT, 'submit-label' ]
-		] )( 'should set the button label according to payment type', async (
-			paymentType: FormItem, expectedButtonLabel: string ) => {
-			formModel.paymentMethod.value = paymentType.value;
-			await flushPromises();
-
-			const wrapper = getWrapper();
-			expect( wrapper.find( '.wmde-banner-form-button' ).text() ).toBe( expectedButtonLabel );
 		} );
 	} );
 

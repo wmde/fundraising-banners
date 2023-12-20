@@ -1,11 +1,13 @@
 export default {
 	// "Primary" accent color, mostly for borders and progress bar fill
 	'--color-primary': '#990a00',
-	'--color-primary-light': '#dbb0ad',
+	'--color-primary-light': '#ffe8e8',
+	'--color-primary-bright': '#fb4848',
 
 	// "Secondary" color, for backgrounds
 	'--color-secondary': '#2a4b8d',
 	'--color-secondary-light': '#4465a7',
+	'--color-secondary-lighter': '#dff1ff',
 
 	'--color-error': '#990000',
 
