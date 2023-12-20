@@ -16,12 +16,6 @@ export function getCampaignParameterOverride( campaignParameters: CampaignParame
 	return {
 		...campaignParameters,
 		startDate: '2023-10-30',
-		millionImpressionsPerDay: 10,
-		campaignProjection: {
-			...campaignParameters.campaignProjection,
-			donationCountBase: 100,
-			updatedAt: '2023-10-30'
-		},
 		isLateProgress: true
 	};
 }
