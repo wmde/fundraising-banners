@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C23_WMDE_Desktop_DE_24"
-description = "based on VAR of test 22, VAR has different copy"
-campaign_tracking = "24-ba-231224"
+campaign = "C23_WMDE_Desktop_DE_25"
+description = "based on VAR of test 24, VAR has minimse banner"
+campaign_tracking = "25-ba-231227"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -17,13 +17,13 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.ts"
-pagename = "B23_WMDE_Desktop_DE_24_ctrl"
-tracking = "org-24-231224-ctrl"
+pagename = "B23_WMDE_Desktop_DE_25_ctrl"
+tracking = "org-25-231227-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.ts"
-pagename = "B23_WMDE_Desktop_DE_24_var"
-tracking = "org-24-231224-var"
+pagename = "B23_WMDE_Desktop_DE_25_var"
+tracking = "org-25-231227-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
