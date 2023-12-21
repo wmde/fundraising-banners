@@ -25,7 +25,7 @@ import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal'
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerVar.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
