@@ -1,8 +1,8 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			<InfoIcon fill="#990a00"/> {{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland
-			nutzen. Die Zeit wird knapp! Noch fehlen {{ remainingDonationSum }}.
+			<InfoIcon fill="#990a00"/> <strong>{{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland
+			nutzen. Die Zeit wird knapp! Noch fehlen {{ remainingDonationSum }} Euro.</strong>
 		</p>
 		<p>
 			Verzeihen Sie die Störung, aber es ist dringend. {{ campaignDaySentence }}
