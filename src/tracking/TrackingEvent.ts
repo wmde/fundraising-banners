@@ -8,6 +8,7 @@ export type TrackingFeatureName = '' |
 	'MiniBanner' |
 	'FullPageBanner' |
 	'FallbackBanner' |
+	'MinimisedBanner' |
 	'EarlyBanner' |
 	'AlreadyDonatedModal' |
 
