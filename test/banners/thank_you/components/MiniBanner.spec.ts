@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import MiniBanner from '../../../../banners/thank_you/components/MiniBanner.vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 describe( 'MiniBanner.vue', () => {
 
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( MiniBanner, {
 			props: {
+				bannerState: BannerStates.Pending,
 				showFireworks: true
 			},
 			global: {

@@ -4,7 +4,7 @@
 		<slot name="progress"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p><strong>{{ numberOfDonors }} Menschen</strong> haben gespendet und Wikipedia ihre Wertschätzung erwiesen.</p>
+		<p><strong>Rund {{ numberOfDonors }} Menschen</strong> haben gespendet und Wikipedia ihre Wertschätzung erwiesen.</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<HeartIcon/>

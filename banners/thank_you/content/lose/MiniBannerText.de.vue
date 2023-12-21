@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-mini-text">
 		<p>
-			<strong>{{ numberOfDonors }} Menschen</strong> haben gespendet und Wikipedia ihre Wertschätzung erwiesen.<br>
+			<strong>Rund {{ numberOfDonors }} Menschen</strong> haben gespendet und Wikipedia ihre Wertschätzung erwiesen.<br>
 			<strong>Ihnen danken wir von ganzem Herzen!</strong>
 		</p>
 	</div>

@@ -10,12 +10,13 @@ import Banner from './components/BannerCtrl.de.vue';
 import messages from './messages.de';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackingMembershipFormActions } from './MembershipFormActions';
-import { createSubscribeURL } from './createSubscribeURL';
+import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import PageWPDE from '@src/page/PageWPDE';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from '../wpde_desktop/event_map';
 import { createThankYouSettings } from './settings';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
+import { Locales } from '@src/domain/Locales';
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
 // using the campaign configuration ( campaign_info.toml ) for the correct values
@@ -38,7 +39,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerDe(), page.getCampaignParameters().thankYouCampaign ),
-		subscribeURL: createSubscribeURL( page.getTracking(), impressionCount )
+		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, Locales.DE ),
+		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, Locales.DE )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -47,6 +49,6 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
-app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.DE ) );
 
 app.mount( page.getBannerContainer() );

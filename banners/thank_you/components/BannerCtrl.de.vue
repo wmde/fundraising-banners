@@ -2,6 +2,7 @@
 	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
 		<MiniBanner
 			:show-fireworks="showSuccessContent"
+			:banner-state="bannerState"
 			@close="onClose"
 			@show-modal="onShowModal"
 		>
@@ -50,19 +51,21 @@
 					:label="$translate( 'call-to-action-button-amount-per-month', { amount: 2 } )"
 					:extra-url-parameters="{
 						interval: '1',
-						fee: '200'
+						fee: '200',
+						type: 'sustaining'
 					}"
 					@submit="submitWithAmount"
 				/>
 				<MembershipFormButton
-					class="hollow"
 					:label="$translate( 'call-to-action-button-different-amount' )"
+					:extra-url-parameters="{ type: 'sustaining' }"
 					@submit="submitWithoutAmount"
 				/>
 			</template>
 
 			<template #subscribe>
-				<a :href="subscribeURL" @click.prevent="onSubscribe">{{ $translate( 'call-to-action-more-info' ) }}</a>
+				<a :href="subscribeURL" @click.prevent="onSubscribe">{{ $translate( 'call-to-action-more-info' ) }}</a><br>
+				<a :href="useOfFundsURL" @click.prevent="onUseOfFunds">{{ $translate( 'use-of-funds' ) }}</a>
 			</template>
 
 		</FullPageBanner>
@@ -90,6 +93,7 @@ import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShown
 import MembershipFormButton from './MembershipButton.vue';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { ThankYouSettings } from '../settings';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -97,8 +101,10 @@ enum ContentStates {
 }
 
 interface Props {
+	bannerState: BannerStates;
 	settings: ThankYouSettings;
 	subscribeURL: string;
+	useOfFundsURL: string;
 }
 
 const props = defineProps<Props>();
@@ -137,6 +143,10 @@ const submitWithoutAmount = ( url: string ): void => {
 
 const onSubscribe = (): void => {
 	onSubmit( props.subscribeURL, 'subscribe' );
+};
+
+const onUseOfFunds = (): void => {
+	onSubmit( props.useOfFundsURL, 'use-of-funds' );
 };
 
 </script>

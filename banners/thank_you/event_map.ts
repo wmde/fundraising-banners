@@ -6,8 +6,11 @@ import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShown
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';
+import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
+import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
+	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[
 		BannerSubmitEvent.EVENT_NAME,

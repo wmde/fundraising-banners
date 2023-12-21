@@ -13,6 +13,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { MembershipFormActions } from '../../../../banners/thank_you/MembershipFormActions';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 const formActions: MembershipFormActions = {
 	create: ( extraUrlParameters: Record<string, string> ) => `URL [ ${ extraUrlParameters?.interval }, ${ extraUrlParameters?.fee } ]`
@@ -25,11 +26,13 @@ describe( 'BannerVar.de.vue', () => {
 		tracker = { trackEvent: vi.fn() };
 		return mount( BannerCtrl, {
 			props: {
+				bannerState: BannerStates.Pending,
 				settings: {
 					numberOfDonors: '42',
 					progressBarPercentage
 				},
-				subscribeURL: 'SUBSCRIBE URL'
+				subscribeURL: 'SUBSCRIBE URL',
+				useOfFundsURL: 'USE OF FUNDS'
 			},
 			global: {
 				mocks: {
@@ -165,10 +168,22 @@ describe( 'BannerVar.de.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-subscribe a' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-full-subscribe a:first-child' ).trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'SUBSCRIBE URL' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'subscribe' ) );
+	} );
+
+	it( 'tracks and redirects when use of funds link is clicked', async () => {
+		const location = { href: '' };
+		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
+		const wrapper = getWrapper();
+
+		await wrapper.find( '.wmde-banner-full-subscribe a:last-child' ).trigger( 'click' );
+
+		expect( location.href ).toStrictEqual( 'USE OF FUNDS' );
+		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
+		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'use-of-funds' ) );
 	} );
 } );

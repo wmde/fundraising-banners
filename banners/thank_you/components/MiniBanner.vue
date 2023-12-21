@@ -20,8 +20,9 @@
 				</div>
 
 			</div>
+
 			<div class="wmde-banner-mini-slider" v-else>
-				<slot name="slides"/>
+				<slot name="slides" :play="slideshowShouldPlay"/>
 				<button class="wmde-banner-button" @click.prevent="$emit( 'showModal' )">
 					{{ $translate( 'open-modal' ) }}
 				</button>
@@ -43,13 +44,19 @@
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import { computed, ref } from 'vue';
 
 interface Props {
 	showFireworks: boolean;
+	bannerState: BannerStates;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 defineEmits( [ 'close', 'showModal' ] );
+
+const slideShowStopped = ref<boolean>( false );
+const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 
 const showComponentForLargeScreen = useDisplaySwitch( 750 );
 

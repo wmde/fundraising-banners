@@ -17,13 +17,14 @@ import messages from './messages.en';
 import eventMappings from '../thank_you/event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackingMembershipFormActions } from './MembershipFormActions';
-import { createSubscribeURL } from './createSubscribeURL';
+import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import { createThankYouSettings } from './settings';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
+import { Locales } from '@src/domain/Locales';
 
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
-const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 400 ) );
+const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 0 ) );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
@@ -36,7 +37,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerEn(), page.getCampaignParameters().thankYouCampaign ),
-		subscribeURL: createSubscribeURL( page.getTracking(), impressionCount )
+		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, Locales.EN ),
+		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, Locales.EN )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -45,6 +47,6 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
-app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount ) );
+app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.EN ) );
 
 app.mount( page.getBannerContainer() );

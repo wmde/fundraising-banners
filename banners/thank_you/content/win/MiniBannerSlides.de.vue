@@ -1,10 +1,10 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p><strong>Danke!</strong></p>
+		<p><strong>Lesen Sie unsere Dankesbotschaft</strong></p>
 		<slot name="progress"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p><strong>{{ numberOfDonors }} tolle Menschen</strong> haben in den letzten Wochen gespendet und Wikipedia ihre Wertschätzung erwiesen.</p>
+		<p><strong>Rund {{ numberOfDonors }} Menschen</strong> haben in den letzten Wochen gespendet und Wikipedia ihre Wertschätzung erwiesen.</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<HeartIcon/>

@@ -1,15 +1,13 @@
 import { TranslationMessages } from '@src/Translator';
-import DynamicCampaignTextDe from '@src/utils/DynamicContent/messages/DynamicCampaignText.de';
 
 const messages: TranslationMessages = {
-	...DynamicCampaignTextDe,
 	'call-to-action-more-info': 'Weitere Informationen auf unserer Webseite',
 	'call-to-action-button-amount-per-month': 'Mit {{amount}} € im Monat fördern',
 	'call-to-action-button-different-amount': 'Mit anderem Betrag fördern',
-	'open-modal': 'Lesen Sie unsere Dankesbotschaft',
+	'open-modal': 'Jetzt Dankesbotschaft lesen',
 	'close-modal': 'Dankestext schließen',
-	'progress-bar-inner-text-win': 'Geschafft! 🎉 🥳',
-	'progress-bar-inner-text-lose': 'Nicht geschafft 😭',
+	'progress-bar-inner-text-win': 'Spendenziel erreicht!',
+	'progress-bar-inner-text-lose': 'Nicht geschafft',
 	'image-copyright-holder': 'Annika Möller für Wikimedia Deutschland',
 	'subscribe-title': 'Benötigen Sie weitere Informationen zur Mitgliedschaft?',
 	'subscribe-text': 'Tragen Sie einfach Ihre E-Mail-Adresse ein',
@@ -18,12 +16,13 @@ const messages: TranslationMessages = {
 	'subscribe-button': 'Senden',
 	'subscribe-placeholder': 'E-Mail-Adresse',
 	'subscribe-form-error': 'Bitte geben Sie eine gültige E-Mail-Adresse an.',
-	'stats-people-amount': '102.000',
-	'stats-people-text': 'Fördermitglied bereits',
+	'stats-people-amount': '109.000',
+	'stats-people-text': 'Mitglieder bereits',
 	'stats-average-amount': '5&nbsp;€',
 	'stats-average-text': 'durchschnittlicher Monatsbeitrag',
 	'stats-contribution-amount': '2&nbsp;€',
-	'stats-contribution-text': 'Mindestbeitrag nur 2&nbsp;€/Monat'
+	'stats-contribution-text': 'Mindestbeitrag im Monat',
+	'use-of-funds': 'Was Ihre Spende bewirkt'
 };
 
 export default messages;

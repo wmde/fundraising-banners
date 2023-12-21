@@ -17,7 +17,7 @@
 	<StatsBox/>
 
 	<p>
-		n times like these, Wikipedia is so valuable because it's a place where people of vastly different viewpoints
+		In times like these, Wikipedia is so valuable because it's a place where people of vastly different viewpoints
 		still hold conversations -- frequently controversial ones, but ones that stay within the rules. Participants
 		debate content, sources and wording in an open and transparent way. At times all that can be tedious, not to
 		mention exhausting. But it's that very process that allows the creation of verified, neutral and trustworthy

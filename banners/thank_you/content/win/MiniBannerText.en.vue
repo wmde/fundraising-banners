@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-mini-text">
 		<p>
-			<strong>{{ numberOfDonors }} amazing people</strong> showed their appreciation for Wikipedia by donating in the last few weeks.<br>
+			<strong>Around {{ numberOfDonors }} people</strong> showed their appreciation for Wikipedia by donating in the last few weeks.<br>
 			<strong>We thank you all from the bottom of our hearts!</strong>
 		</p>
 	</div>
