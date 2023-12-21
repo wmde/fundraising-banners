@@ -2,8 +2,8 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<InfoIcon fill="#990a00"/> {{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland
-				nutzen. Die Zeit wird knapp! Noch fehlen {{ remainingDonationSum }}.
+				<strong><InfoIcon fill="#990a00"/> {{ currentDate }}, {{ currentTime }} - An alle, die Wikipedia in Deutschland
+				nutzen. Die Zeit wird knapp! Noch fehlen {{ remainingDonationSum }} Euro.</strong>
 			</p>
 			<p>
 				Verzeihen Sie die Störung, aber es ist dringend. {{ campaignDaySentence }} Daher bitten wir Sie am
