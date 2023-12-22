@@ -17,6 +17,7 @@ export interface DynamicContent {
 	visitorsVsDonorsSentence: string;
 	donorsNeededSentence: string;
 	goalDonationSum: string;
+	remainingDonationSum: string;
 	overallImpressionCount: number;
 	progressBarContent: DynamicProgressBarContent;
 }

@@ -18,7 +18,7 @@ const Translations: TranslationMessages = {
 	'day-name-christmas-eve': 'Christmas Day',
 	'day-name-christmas-day': 'Christmas Day',
 	'day-name-2nd-christmas-day': 'Christmas Day',
-	'amount-missing': 'Still missing',
+	'amount-missing': 'Still missing {{amount}}',
 	'amount-total': 'Donation target:',
 	'campaign-day-before-campaign': 'Today we ask for your support.',
 	'campaign-day-first-day': 'Today our fundraising campaign starts.',

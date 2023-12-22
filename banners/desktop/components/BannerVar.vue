@@ -85,8 +85,8 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
@@ -107,6 +107,7 @@ import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import colors from '../styles/colors';
+import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -135,6 +136,8 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+
+useAnonymousAddressTypeSetter();
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

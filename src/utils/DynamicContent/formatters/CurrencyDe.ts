@@ -8,15 +8,17 @@ export class CurrencyDe implements Currency {
 	private readonly _customAmountInputFormatter: NumberFormatter;
 	private readonly _millionsFormatter: NumberFormatter;
 	private readonly _millionsNumericFormatter: NumberFormatter;
+	private readonly _euroAmountWithThousandSeparatorFormatter: ( amount: number ) => string;
 
 	public constructor() {
 		this._euroAmountFormatter = formatter( { round: 2, suffix: ' €', decimal: ',', integerSeparator: '', padRight: 2 } );
 		this._customAmountInputFormatter = formatter( { round: 2, decimal: ',', integerSeparator: '', padRight: 2 } );
 		this._millionsFormatter = formatter( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
 		this._millionsNumericFormatter = formatter( { round: 1, decimal: ',', padRight: 1 } );
-
+		this._euroAmountWithThousandSeparatorFormatter = formatter( { truncate: 0, integerSeparator: '.', suffix: ' Euro' } );
 	}
 
+	// TODO: investigate if we need rounding behaviour or can do 'truncate':0 instead of replace( ',00', '' )
 	public euroAmount( amount: number ): string {
 		return this._euroAmountFormatter( amount ).replace( ',00', '' );
 	}
@@ -31,5 +33,9 @@ export class CurrencyDe implements Currency {
 
 	public millionsNumeric( amount: number ): string {
 		return this._millionsNumericFormatter( amount / 1_000_000 );
+	}
+
+	public euroAmountWithThousandSeparator( amount: number ): string {
+		return this._euroAmountWithThousandSeparatorFormatter( amount );
 	}
 }

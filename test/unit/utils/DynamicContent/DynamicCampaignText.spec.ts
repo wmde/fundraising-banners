@@ -22,7 +22,7 @@ const translator = new Translator( {
 	'remaining-donors-needed-sentence': '{{donorsNeeded}}',
 	'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}',
 	'amount-total': 'Progress total',
-	'missing-amount': 'Progress missing'
+	'amount-missing': 'Progress missing {{amount}}'
 } );
 const formatters: Formatters = { currency: new CurrencyEn(), ordinal: new OrdinalEn(), integer: new IntegerEn(), time: new TimeEn() };
 const campaignParameters: CampaignParameters = {
@@ -112,6 +112,10 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.overallImpressionCount ).toBe( 544 );
 	} );
 
+	it( 'Gets the current donation sum', () => {
+		expect( dynamicCampaignText.remainingDonationSum ).toBe( '8,900,000 euro' );
+	} );
+
 	it( 'Gets the visitors vs donors sentence', () => {
 		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-7,305' );
 	} );
@@ -121,6 +125,6 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.progressBarContent.donationTarget ).toBe( 'Progress total €9.0M' );
 		expect( dynamicCampaignText.progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
 		expect( dynamicCampaignText.progressBarContent.amountDonated ).toBe( '€0.1M' );
-		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing €8.9M' );
+		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 8,900,000 euro' );
 	} );
 } );

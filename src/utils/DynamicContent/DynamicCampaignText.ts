@@ -147,6 +147,12 @@ export default class DynamicCampaignText implements DynamicContent {
 		} );
 	}
 
+	public get remainingDonationSum(): string {
+		return this.getCachedValue( 'currentDonationSum', () => {
+			return this._formatters.currency.euroAmountWithThousandSeparator( this.getCampaignProjection().projectedRemainingDonationSum() );
+		} );
+	}
+
 	public get overallImpressionCount(): number {
 		return this._impressionCount.overallCountIncremented;
 	}
