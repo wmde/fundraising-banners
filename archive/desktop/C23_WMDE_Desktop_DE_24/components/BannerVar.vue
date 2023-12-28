@@ -6,10 +6,7 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<div class="wmde-banner-minimised-button-group">
-					<button class="wmde-banner-minimised-minimise" @click.prevent="onMinimiseBanner">Banner verkleinern <ChevronDownIcon fill="#2a4b8d"/></button>
-					<ButtonClose @close="() => onCloseMain( 'MainBanner', CloseChoices.Close )"/>
-				</div>
+				<ButtonClose @close="onCloseMain"/>
 			</template>
 
 			<template #banner-text>
@@ -53,17 +50,6 @@
 
 		</MainBanner>
 
-		<MinimisedBanner
-			v-if="contentState === ContentStates.Minimised"
-			@maximise="() => onMaximiseBanner( 'maximise' )"
-			@maximise-cta="() => onMaximiseBanner( 'cta' )"
-			@close="() => onCloseMain( 'MinimisedBanner', CloseChoices.Close )"
-		>
-			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
-			</template>
-		</MinimisedBanner>
-
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			:show-close-icon="true"
@@ -94,13 +80,13 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
@@ -121,17 +107,10 @@ import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import colors from '../styles/colors';
-import { Tracker } from '@src/tracking/Tracker';
-import ChevronDownIcon from '@src/components/Icons/ChevronDownIcon.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import MinimisedBanner from './MinimisedBanner.vue';
-import { BannerMinimisedEvent } from '../events/BannerMinimisedEvent';
-import { BannerMaximisedEvent } from '../events/BannerMaximisedEvent';
 import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
-	Minimised = 'wmde-banner-wrapper--minimised',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
@@ -149,7 +128,6 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
-const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
 const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -165,26 +143,16 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-function onCloseMain( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+function onCloseMain(): void {
 	if ( props.remainingImpressions > 0 ) {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
-		onClose( feature, userChoice );
+		onClose( 'MainBanner', CloseChoices.Close );
 	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-}
-
-function onMinimiseBanner(): void {
-	contentState.value = ContentStates.Minimised;
-	tracker.trackEvent( new BannerMinimisedEvent() );
-}
-
-function onMaximiseBanner( userChoice: string ): void {
-	contentState.value = ContentStates.Main;
-	tracker.trackEvent( new BannerMaximisedEvent( userChoice ) );
 }
 
 </script>

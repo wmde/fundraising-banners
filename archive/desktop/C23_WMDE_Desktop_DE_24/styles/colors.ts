@@ -1,7 +1,6 @@
 export default {
 	// "Primary" accent color, mostly for borders and progress bar fill
 	'--color-primary': '#990a00',
-	'--color-primary-hover': '#7d0a00',
 	'--color-primary-light': '#ffe8e8',
 	'--color-primary-bright': '#fb4848',
 
