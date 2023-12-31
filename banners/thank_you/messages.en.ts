@@ -17,7 +17,7 @@ const messages: TranslationMessages = {
 	'subscribe-button': 'Send',
 	'subscribe-placeholder': 'E-Mail Address',
 	'subscribe-form-error': 'Please enter a valid email address.',
-	'stats-people-amount': '109.000',
+	'stats-people-amount': '109.500',
 	'stats-people-text': 'members',
 	'stats-average-amount': '€5',
 	'stats-average-text': 'average monthly membership fee',
