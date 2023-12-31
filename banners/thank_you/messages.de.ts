@@ -17,7 +17,7 @@ const messages: TranslationMessages = {
 	'subscribe-placeholder': 'E-Mail-Adresse',
 	'subscribe-form-error': 'Bitte geben Sie eine gültige E-Mail-Adresse an.',
 	'stats-people-amount': '109.000',
-	'stats-people-text': 'Mitglieder bereits',
+	'stats-people-text': 'Mitglieder',
 	'stats-average-amount': '5&nbsp;€',
 	'stats-average-text': 'durchschnittlicher Monatsbeitrag',
 	'stats-contribution-amount': '2&nbsp;€',
