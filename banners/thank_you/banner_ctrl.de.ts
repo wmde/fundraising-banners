@@ -33,7 +33,7 @@ const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
 		delay: 0,
-		transitionDuration: 1000
+		transitionDuration: 0
 	},
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerDe(), page.getCampaignParameters().thankYouCampaign ),
