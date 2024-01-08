@@ -43,7 +43,13 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<UpgradeToYearlyButtonForm
+							:page-index="pageIndex"
+							:is-current="isCurrent"
+							:show-manual-upgrade-option="false"
+							@submit="submit"
+							@previous="previous"
+						/>
 					</template>
 
                 </MultiStepDonation>
@@ -78,10 +84,10 @@ import { ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -99,6 +105,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -127,6 +134,8 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+
+useAnonymousAddressTypeSetter();
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

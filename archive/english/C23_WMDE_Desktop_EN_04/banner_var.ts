@@ -1,9 +1,9 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -23,7 +23,7 @@ import messages from './messages';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
@@ -45,7 +45,7 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

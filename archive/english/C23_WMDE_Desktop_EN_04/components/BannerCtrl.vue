@@ -1,7 +1,7 @@
 <template>
     <div class="wmde-banner-wrapper" :class="contentState">
         <MainBanner
-			@close="onCloseMain"
+            @close="onCloseMain"
 			@form-interaction="$emit( 'bannerContentChanged' )"
             :banner-state="bannerState"
             v-if="contentState === ContentStates.Main"
@@ -28,28 +28,11 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-								</span>
-							</template>
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm
-							:page-index="pageIndex"
-							:is-current="isCurrent"
-							:show-manual-upgrade-option="false"
-							@submit="submit"
-							@previous="previous"
-						/>
+						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
                 </MultiStepDonation>
@@ -84,10 +67,10 @@ import { ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
+import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -102,9 +85,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

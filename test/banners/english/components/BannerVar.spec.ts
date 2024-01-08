@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/english/components/BannerCtrl.vue';
+import Banner from '../../../../banners/english/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -19,11 +19,12 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -50,7 +51,7 @@ describe( 'BannerCtrl.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub()
@@ -106,6 +107,15 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+		] )( '%s', async ( testName: string ) => {
+			await formActionSwitchFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
