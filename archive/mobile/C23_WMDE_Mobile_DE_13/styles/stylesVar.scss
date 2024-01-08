@@ -3,7 +3,7 @@
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (
-	$height: 336px
+	$height: 288px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';
@@ -13,9 +13,6 @@
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectCustomAmount';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
-@use 'src/themes/Mikings/Slider/Slider' with (
-	$pagination-padding: 10px,
-	$pagination-height: 40px
-);
+@use 'src/themes/Mikings/Slider/Slider';
 @use 'src/themes/Mikings/SoftClose/SoftClose';
 @use 'src/themes/Mikings/ProgressBar/ProgressBar';

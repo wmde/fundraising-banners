@@ -15,7 +15,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
-import { miniBannerPreselectFeatures } from '@test/features/MiniBannerPreselect';
+import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 
@@ -49,7 +49,8 @@ describe( 'BannerCtrl.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				remainingImpressions: 10,
+				donationURL: 'https://spenden.wikimedia.de'
 			},
 			global: {
 				mocks: {
@@ -103,6 +104,15 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
+
+		test.each( [
+			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
+			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+		] )( '%s', async ( testName: string ) => {
+			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
 	} );
 
 	describe( 'Soft Close', () => {
@@ -145,15 +155,6 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
-
-		test.each( [
-			[ 'expectShowsFullPageWhenPreselectIsClicked' ],
-			[ 'expectPreselectsAmountWhenPreselectIsClicked' ],
-			[ 'expectTrackingEventIsFiredWhenPreselectIsClicked' ]
-		] )( '%s', async ( testName: string ) => {
-			await miniBannerPreselectFeatures[ testName ]( getWrapper(), tracker );
-		} );
-
 	} );
 
 	describe( 'Full Page Banner', () => {
@@ -163,5 +164,4 @@ describe( 'BannerCtrl.vue', () => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
-
 } );

@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.scss';
+import './styles/stylesVar.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -23,7 +23,7 @@ import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 
 const localeFactory = new LocaleFactoryDe();

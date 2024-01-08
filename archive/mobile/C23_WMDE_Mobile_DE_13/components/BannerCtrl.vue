@@ -32,32 +32,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
-							</template>
-
-							<template #label-payment-bez>
-								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-								</span>
-							</template>
-
-							<template #sms-icon>
-								<SmsIcon/>
-							</template>
-
-							<template #button>
-								<MainDonationFormPaymentMethodLabeledButton/>
-							</template>
-
-						</MainDonationForm>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -66,8 +41,7 @@
 							:page-index="pageIndex"
 							@submit="submit"
 							:is-current="isCurrent"
-							@previous="previous"
-						>
+							@previous="previous">
 							<template #back>
 								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
@@ -121,7 +95,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -129,32 +103,24 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import { CloseChoices } from '@src/domain/CloseChoices';
-import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import MainDonationFormPaymentMethodLabeledButton
-	from '@src/components/DonationForm/Forms/MainDonationFormPaymentMethodLabeledButton.vue';
 import {
 	createSubmittableMainDonationForm
 } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -188,8 +154,6 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
-
-useAnonymousAddressTypeSetter();
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

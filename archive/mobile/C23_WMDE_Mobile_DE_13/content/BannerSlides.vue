@@ -8,11 +8,11 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<strong>Hi,</strong><br>
-			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen {{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} bitten wir Sie bescheiden,
-			die Unabhängigkeit von Wikipedia zu unterstützen.
+			<strong>Hi,</strong>
 		</p>
+		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
+			heutigen {{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} bitten wir Sie bescheiden,
+			die Unabhängigkeit von Wikipedia zu unterstützen.</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
