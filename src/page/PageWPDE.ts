@@ -61,8 +61,12 @@ class PageWPDE implements Page {
 		return this;
 	}
 
-	public getReasonToNotShowBanner(): BannerNotShownReasons | null { return null; }
+	public getReasonToNotShowBanner(): BannerNotShownReasons | null {
+		return null;
+	}
+
 	public preventImpressionCountForHiddenBanner: () => Page;
+
 	public setCloseCookieIfNecessary(): Page {
 		// our WPDE banner server does not have the "close cookie" feature
 		return this;
