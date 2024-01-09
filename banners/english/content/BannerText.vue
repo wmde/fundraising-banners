@@ -4,7 +4,8 @@
 			<p>
 				<strong>
 					<InfoIcon fill="#990a00"/>
-					{{ currentDate }}, {{ currentTime }}: &#8220;Wikipedia is not for sale.&#8221; - A personal appeal from Wikipedia founder Jimmy Wales.
+					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia is not for
+					sale.&#8221; - A personal appeal from Wikipedia founder Jimmy Wales.
 				</strong>
 			</p>
 			<p>
@@ -35,10 +36,10 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
+import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
-const { currentDayName, currentDate, getCurrentTime }: DynamicContent = inject( 'dynamicCampaignText' );
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
 

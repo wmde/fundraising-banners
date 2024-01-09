@@ -5,7 +5,8 @@
 			<strong> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
-			An diesem {{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} sind Sie gefragt: {{ campaignDaySentence }}
+			An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} sind
+			Sie gefragt: {{ campaignDaySentence }}
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
@@ -38,7 +39,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
+import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
 	currentSlide: number
@@ -48,13 +49,12 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	currentDate,
-	getCurrentTime,
+	getCurrentDateAndTime,
 	campaignDaySentence,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
 

@@ -42,20 +42,7 @@ const Translations: TranslationMessages = {
 	'date-month-9': '{{day}} September',
 	'date-month-10': '{{day}} Oktober',
 	'date-month-11': '{{day}} November',
-	'date-month-12': '{{day}} Dezember',
-
-	'date-month-time-1': '{{day}} Januar, {{time}}',
-	'date-month-time-2': '{{day}} Februar, {{time}}',
-	'date-month-time-3': '{{day}} März, {{time}}',
-	'date-month-time-4': '{{day}} April, {{time}}',
-	'date-month-time-5': '{{day}} Mai, {{time}}',
-	'date-month-time-6': '{{day}} Juni, {{time}}',
-	'date-month-time-7': '{{day}} Juli, {{time}}',
-	'date-month-time-8': '{{day}} August, {{time}}',
-	'date-month-time-9': '{{day}} September, {{time}}',
-	'date-month-time-10': '{{day}} Oktober, {{time}}',
-	'date-month-time-11': '{{day}} November, {{time}}',
-	'date-month-time-12': '{{day}} Dezember, {{time}}'
+	'date-month-12': '{{day}} Dezember'
 };
 
 export default Translations;

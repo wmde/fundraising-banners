@@ -1,4 +1,5 @@
 import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
+import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 
 /**
  * Properties in this interface are for items that are generated once and are then static after
@@ -7,11 +8,7 @@ import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProg
 export interface DynamicContent {
 	currentDayName: string;
 	currentDate: string;
-	/**
-	 * @deprecated
-	 */
-	getCurrentDateAndTime: () => string;
-	getCurrentTime: () => string;
+	getCurrentDateAndTime: () => DateAndTime;
 	daysLeftSentence: string;
 	campaignDaySentence: string;
 	visitorsVsDonorsSentence: string;

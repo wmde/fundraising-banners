@@ -2,7 +2,8 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-                <InfoIcon fill="#990a00"/> An diesem {{ currentDayName }}, den {{ currentDate }}, um {{ currentTime }} sind Sie gefragt:
+                <InfoIcon fill="#990a00"/> An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um
+				{{ liveDateAndTime.currentTime }} sind Sie gefragt:
 			</p>
 			<p>
 				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
@@ -24,18 +25,17 @@
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
+import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 const {
 	currentDayName,
-	currentDate,
-	getCurrentTime,
+	getCurrentDateAndTime,
 	campaignDaySentence,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
 

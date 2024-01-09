@@ -17,6 +17,8 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
+import { bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -24,7 +26,6 @@ const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
 
-	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
 		vi.useFakeTimers();
@@ -33,8 +34,10 @@ describe( 'BannerCtrl.vue', () => {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
 		};
+	} );
 
-		wrapper = mount( Banner, {
+	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
@@ -47,7 +50,7 @@ describe( 'BannerCtrl.vue', () => {
 				},
 				provide: {
 					translator: { translate: translator },
-					dynamicCampaignText: newDynamicContent(),
+					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
@@ -55,16 +58,25 @@ describe( 'BannerCtrl.vue', () => {
 				}
 			}
 		} );
-	} );
+	};
 
 	afterEach( () => {
 		vi.restoreAllMocks();
 		vi.useRealTimers();
 	} );
 
+	describe( 'Content', () => {
+		test.each( [
+			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
+			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
+	} );
+
 	describe( 'Donation Form Happy Paths', () => {
 		it( 'Submits the main donation form', () => {
-			expectMainDonationFormSubmits( wrapper, Intervals.ONCE, PaymentMethods.PAYPAL );
+			expectMainDonationFormSubmits( getWrapper(), Intervals.ONCE, PaymentMethods.PAYPAL );
 		} );
 	} );
 
@@ -78,7 +90,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( wrapper );
+			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -87,14 +99,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFunds' ],
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( wrapper );
+			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
 			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsScrollFeatures[ testName ]( wrapper, pageScroller );
+			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );
 	} );
 
@@ -105,7 +117,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
-			await miniBannerFeatures[ testName ]( wrapper );
+			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -113,7 +125,7 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await fullPageBannerFeatures[ testName ]( wrapper );
+			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect, beforeEach } from 'vitest';
 import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 
 describe( 'DoubleProgressBar.vue', () => {
 	let dynamicCampaignContent: DynamicContent;
@@ -10,8 +11,9 @@ describe( 'DoubleProgressBar.vue', () => {
 		dynamicCampaignContent = {
 			campaignDaySentence: '',
 			currentDate: '',
-			getCurrentDateAndTime: (): string => '',
-			getCurrentTime: (): string => '',
+			getCurrentDateAndTime(): DateAndTime {
+				return { currentDate: '', currentTime: '' };
+			},
 			currentDayName: '',
 			daysLeftSentence: 'daysLeftSentence',
 			donorsNeededSentence: '',
