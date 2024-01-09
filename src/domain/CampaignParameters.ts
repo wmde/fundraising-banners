@@ -14,6 +14,11 @@ export interface CampaignProjectionParameters {
     averageAmountPerDonation: number
 }
 
+export interface ThankYouCampaignParameters {
+    numberOfDonors: number;
+    progressBarPercentage: number;
+}
+
 /**
  * Campaign parameters is a value object with string and number primitives used to pass values from
  * the "environment" of the banner (i.e. wikipedia.org or wikipedia.de) to the dynamic text rendering.
@@ -32,5 +37,7 @@ export interface CampaignParameters {
      */
     endDate: string,
     numberOfMembers: number,
-    isLateProgress: boolean
+    isLateProgress: boolean,
+
+    thankYouCampaign: ThankYouCampaignParameters
 }

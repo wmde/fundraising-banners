@@ -20,14 +20,15 @@ const getBranch = () => new Promise( ( resolve ) => {
 	} );
 } );
 
-const readCampaignFile = () => fs.readFile( 'campaign_info.toml', 'utf8' )
+// eslint-disable-next-line security/detect-non-literal-fs-filename
+const readCampaignFile = ( fileName ) => fs.readFile( fileName, 'utf8' )
 	.then( contents => toml.parse( contents ) );
 
-module.exports = () => Promise.all( [
+module.exports = ( env ) => Promise.all( [
 	getBranch(),
-	readCampaignFile()
+	readCampaignFile( env.campaign_info ?? 'campaign_info.toml' )
 ] ).then( ( [ currentBranch, campaignConfig ] ) => merge(
-	CommonConfig,
+	CommonConfig( env ),
 	{
 		mode: 'development',
 		entry: {

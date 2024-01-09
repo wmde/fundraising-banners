@@ -20,7 +20,11 @@ describe( 'PageWPDE', function () {
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
 			startDate: '2023-11-01',
-			isLateProgress: false
+			isLateProgress: false,
+			thankYouCampaign: {
+				progressBarPercentage: 80,
+				numberOfDonors: 42
+			}
 		};
 		const page = new PageWPDE( tracking );
 

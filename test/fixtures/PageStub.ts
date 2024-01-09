@@ -68,7 +68,11 @@ export class PageStub implements Page {
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
 			startDate: '',
-			isLateProgress: false
+			isLateProgress: false,
+			thankYouCampaign: {
+				progressBarPercentage: 0,
+				numberOfDonors: 0
+			}
 		};
 	}
 

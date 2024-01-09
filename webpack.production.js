@@ -1,6 +1,5 @@
 const fs = require( 'fs' );
 const rimraf = require( 'rimraf' );
-const toml = require( 'toml' );
 const { mergeWithCustomize, customizeObject } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
@@ -8,7 +7,6 @@ const LoadVueOnWpde = require( './webpack/load_vue_on_wpde' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const path = require( 'path' );
-const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 function readWrapperTemplate( name ) {
 	// eslint-disable-next-line security/detect-non-literal-fs-filename
@@ -18,6 +16,7 @@ function readWrapperTemplate( name ) {
 module.exports = ( env ) => {
 	let entrypointRules = {};
 	let customizationRules = { customizeObject: () => undefined };
+	const campaigns = CampaignConfig.readFromFile( env.campaign_info ?? 'campaign_info.toml' );
 	if ( env.banner ) {
 		const bannerName = env.banner;
 		const singleEntry = campaigns.getEntryPoints()[ bannerName ];
@@ -32,7 +31,7 @@ module.exports = ( env ) => {
 		} );
 	}
 	return mergeWithCustomize( customizationRules )(
-		CommonConfig,
+		CommonConfig( env ),
 		{
 			devtool: false,
 			mode: 'production',
