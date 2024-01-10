@@ -3,7 +3,7 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
-import { RuntimeEnvironment, UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 
 export type TrackingEventConverterFactory = ( event: TrackingEvent<any> ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
 
@@ -19,11 +19,11 @@ export class LegacyTrackerWPORG implements Tracker {
 	private readonly _supportedTrackingEvents: EventNameMap;
 	private readonly _runtimeEnvironment: RuntimeEnvironment;
 
-	public constructor( mediaWiki: MediaWiki, bannerName: string, supportedTrackingEvents: EventNameMap, runtimeEnvironment: RuntimeEnvironment | null = null ) {
+	public constructor( mediaWiki: MediaWiki, bannerName: string, supportedTrackingEvents: EventNameMap, runtimeEnvironment: RuntimeEnvironment ) {
 		this._mediaWiki = mediaWiki;
 		this._bannerName = bannerName;
 		this._supportedTrackingEvents = supportedTrackingEvents;
-		this._runtimeEnvironment = runtimeEnvironment ?? new UrlRuntimeEnvironment( window.location );
+		this._runtimeEnvironment = runtimeEnvironment;
 	}
 
 	private shouldTrackEvent( eventRate: number ): boolean {

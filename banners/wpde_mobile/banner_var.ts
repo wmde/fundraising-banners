@@ -36,7 +36,7 @@ const tracking = {
 const page = new PageWPDE( tracking );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
-const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap );
+const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap, runtimeEnvironment );
 
 const app = createVueApp( BannerConductor, {
 	page,
