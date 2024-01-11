@@ -15,7 +15,7 @@ describe( 'FundsContent.vue', () => {
 				international: { intro: '', linkName: '', linkUrl: '' },
 				mixed: { text: '' }
 			},
-			intro: { headline: 'headline', dynamicHeadline: { published: 'Published headline?', provisional: 'Provisional headline?*' }, text: '' },
+			intro: { dynamicHeadline: { published: 'Published headline?', provisional: 'Provisional headline?*' }, text: '' },
 			orgchart: {
 				headline: '',
 				imageUrl: '',
