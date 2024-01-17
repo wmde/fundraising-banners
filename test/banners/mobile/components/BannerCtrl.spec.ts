@@ -87,8 +87,8 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveTimeInMiniBanner' ],
-			[ 'expectShowsLiveTimeInFullPageBanner' ]
+			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
+			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );

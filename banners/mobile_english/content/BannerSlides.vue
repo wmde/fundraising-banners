@@ -9,7 +9,8 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			This {{ currentDayName }}, {{ currentDate }}, at {{ currentTime }} I ask you to reflect on the number of times you visited
+			This {{ currentDayName }}, {{ liveDateAndTime.currentDate }}, at {{ liveDateAndTime.currentTime }} I ask you
+			to reflect on the number of times you visited
 			Wikipedia in the past year, the value you got from it, and whether you're able to give €10 back.
 		</p>
 	</KeenSliderSlide>
@@ -34,7 +35,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, watch } from 'vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
+import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
 	playLiveText: boolean;
@@ -45,12 +46,11 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	currentDate,
-	getCurrentTime,
+	getCurrentDateAndTime,
 	goalDonationSum
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	if ( !shouldPlay ) {

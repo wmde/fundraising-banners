@@ -44,7 +44,7 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import SepaLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/SepaLogo.vue';
+import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 
 defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
 

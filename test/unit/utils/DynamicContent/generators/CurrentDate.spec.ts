@@ -21,8 +21,8 @@ describe( 'CurrentDate', () => {
 		[ 10, 2, 'Spune 2sth' ],
 		[ 11, 8, 'Sektober 8sth' ]
 	] )( 'returns the proper month name and date', ( month: number, day: number, expected: string ) => {
-		const currentDate = new CurrentDate( new Date( 2023, month - 1, day, 12, 0, 0 ), translator, staticOrdinal );
+		const currentDate = new CurrentDate( translator, staticOrdinal );
 
-		expect( currentDate.getText() ).toEqual( expected );
+		expect( currentDate.getText( new Date( 2023, month - 1, day, 12, 0, 0 ) ) ).toEqual( expected );
 	} );
 } );

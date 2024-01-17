@@ -2,20 +2,18 @@ import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerato
 import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 import { Translator } from '@src/Translator';
 
-export class CurrentDate implements TextGenerator {
-	private _date: Date;
+export class CurrentDate implements TextGenerator<Date> {
 	private readonly _translator: Translator;
 	private _ordinalFormatter: Ordinal;
 
-	public constructor( date: Date, translator: Translator, ordinalFormatter: Ordinal ) {
-		this._date = date;
+	public constructor( translator: Translator, ordinalFormatter: Ordinal ) {
 		this._translator = translator;
 		this._ordinalFormatter = ordinalFormatter;
 	}
 
-	public getText(): string {
-		return this._translator.translate( 'date-month-' + ( this._date.getMonth() + 1 ), {
-			day: this._ordinalFormatter.getFormatted( this._date.getDate() )
+	public getText( date: Date ): string {
+		return this._translator.translate( 'date-month-' + ( date.getMonth() + 1 ), {
+			day: this._ordinalFormatter.getFormatted( date.getDate() )
 		} );
 	}
 }

@@ -28,7 +28,9 @@ describe( 'TrackerWPDE', function () {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ event.eventName, 1 ] ] ) );
+			new Map<string, number>( [ [ event.eventName, 1 ] ] ),
+			{ isInDevMode: false, runsInDevEnvironment: false }
+		);
 
 		tracker.trackEvent( event );
 
@@ -39,7 +41,9 @@ describe( 'TrackerWPDE', function () {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'some-action', 1 ] ] ) );
+			new Map<string, number>( [ [ 'some-action', 1 ] ] ),
+			{ isInDevMode: false, runsInDevEnvironment: false }
+		);
 
 		tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 
@@ -57,7 +61,9 @@ describe( 'TrackerWPDE', function () {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ event.eventName, 1 ] ] ) );
+			new Map<string, number>( [ [ event.eventName, 1 ] ] ),
+			{ isInDevMode: false, runsInDevEnvironment: false }
+		);
 
 		tracker.trackEvent( event );
 
@@ -71,7 +77,8 @@ describe( 'TrackerWPDE', function () {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
+			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] ),
+			{ isInDevMode: false, runsInDevEnvironment: false }
 		);
 
 		// Inject the neverCalledTrackerSpy into the tracker, so we can make sure it's not called until it finds the window tracker
@@ -96,7 +103,8 @@ describe( 'TrackerWPDE', function () {
 		const tracker = new TrackerWPDE(
 			'TestTracker',
 			'TestBanner05',
-			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] )
+			new Map<string, number>( [ [ 'action-1', 1 ], [ 'action-2', 1 ] ] ),
+			{ isInDevMode: false, runsInDevEnvironment: false }
 		);
 
 		Object.defineProperty( tracker, '_trackerFindCounter', { writable: true, configurable: true, value: 10 } );
@@ -120,7 +128,8 @@ describe( 'TrackerWPDE', function () {
 			const tracker = new TrackerWPDE(
 				'TestTracker',
 				'TestBanner05',
-				new Map<string, number>( [ [ allowedAction, 1 ] ] )
+				new Map<string, number>( [ [ allowedAction, 1 ] ] ),
+				{ isInDevMode: false, runsInDevEnvironment: false }
 			);
 
 			tracker.trackEvent( trackingEvent );
@@ -141,7 +150,9 @@ describe( 'TrackerWPDE', function () {
 			const tracker = new TrackerWPDE(
 				'TestTracker',
 				'TestBanner05',
-				new Map<string, number>( [ [ 'some-action', trackingRate ] ] ) );
+				new Map<string, number>( [ [ 'some-action', trackingRate ] ] ),
+				{ isInDevMode: false, runsInDevEnvironment: false }
+			);
 
 			tracker.trackEvent( { eventName: 'some-action', feature: '', userChoice: '', customData: undefined } );
 

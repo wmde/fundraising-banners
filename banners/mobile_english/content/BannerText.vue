@@ -5,7 +5,8 @@
 				&#8220;Wikipedia is not for sale.&#8221; – A personal appeal from Wikipedia-Founder Jimmy Wales
 			</p>
 			<p>
-				Please don't ignore this 1-minute read. This {{ currentDayName }}, {{ currentDate }}, at {{ currentTime }} I ask you to
+				Please don't ignore this 1-minute read. This {{ currentDayName }}, {{ liveDateAndTime.currentDate }},
+				at {{ liveDateAndTime.currentTime }} I ask you to
 				reflect on the number of times you visited Wikipedia in the past year, the value you got from it,
 				and whether you're able to give €10 back. If you can, please join the 1% of readers who give. <span
 				class="wmde-banner-text-animated-highlight">If everyone reading this right now gave just €10, we'd
@@ -22,7 +23,7 @@
 <script setup lang="ts">
 import { inject, watch } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { useCurrentTime } from '@src/components/composables/useCurrentTime';
+import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
 	playLiveText: boolean
@@ -32,11 +33,10 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentTime,
-	currentDate
+	getCurrentDateAndTime
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
-const { currentTime, startTimer, stopTimer } = useCurrentTime( getCurrentTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	if ( shouldPlay ) {

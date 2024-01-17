@@ -3,7 +3,7 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
-import { RuntimeEnvironment, UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 
 type TrackingRatesForEvents = Map<string, number>;
@@ -29,7 +29,7 @@ export class TrackerWPDE implements Tracker {
 	private _tracker: PageTracker;
 	private _runtimeEnvironment: RuntimeEnvironment;
 
-	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents, runtimeEnvironment: RuntimeEnvironment | null = null ) {
+	public constructor( trackerName: string, bannerName: string, trackingRatesForEvents: TrackingRatesForEvents, runtimeEnvironment: RuntimeEnvironment ) {
 		this._trackerName = trackerName;
 		this._bannerName = bannerName;
 		this._trackingRatesForEvents = trackingRatesForEvents;
@@ -37,7 +37,7 @@ export class TrackerWPDE implements Tracker {
 		this._tracker = null;
 		this._trackerFindCounter = 0;
 		this._preInitialisationEventQueue = [];
-		this._runtimeEnvironment = runtimeEnvironment ?? new UrlRuntimeEnvironment( window.location );
+		this._runtimeEnvironment = runtimeEnvironment;
 
 		this.waitForTrackerToInit();
 	}

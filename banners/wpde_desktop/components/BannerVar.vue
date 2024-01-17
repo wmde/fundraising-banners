@@ -145,7 +145,7 @@ import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/Set
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import SepaLogo from '../../../archive/mobile/C23_WMDE_Mobile_DE_03/components/PaymentLogos/SepaLogo.vue';
+import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import BankTransferLogo from '@src/components/PaymentLogos/BankTransferLogo.vue';
 import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
 

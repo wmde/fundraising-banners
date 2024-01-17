@@ -85,21 +85,24 @@ const showsTheAnimatedHighlightInLargeBanner = async ( getWrapperAtWidth: ( widt
 
 const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
 	const dynamicContent = newDynamicContent();
-	dynamicContent.getCurrentTime = vi.fn().mockReturnValueOnce( 'Initial Date and Time' )
-		.mockReturnValueOnce( 'Second Date and Time' )
-		.mockReturnValueOnce( 'Third Date and Time' );
+	dynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
+		.mockReturnValueOnce( { currentDate: 'Third Date', currentTime: 'Third Time' } );
 
 	const wrapper = getWrapperAtWidth( 800, dynamicContent );
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Date and Time' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Date' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Time' );
 
 	await vi.advanceTimersByTimeAsync( 1000 );
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Date and Time' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Date' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Time' );
 
 	await vi.advanceTimersByTimeAsync( 1000 );
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Date and Time' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Date' );
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Time' );
 };
 
 const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
