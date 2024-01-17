@@ -1,11 +1,13 @@
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 
 export function newDynamicContent(): DynamicContent {
 	return {
 		campaignDaySentence: '',
 		currentDate: '',
-		getCurrentDateAndTime: () => '',
-		getCurrentTime: () => '',
+		getCurrentDateAndTime(): DateAndTime {
+			return { currentDate: '', currentTime: '' };
+		},
 		currentDayName: '',
 		daysLeftSentence: 'daysLeftSentence',
 		donorsNeededSentence: '',

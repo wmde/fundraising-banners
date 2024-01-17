@@ -1,18 +1,19 @@
 import { ref, Ref } from 'vue';
+import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 
 type ReturnType = {
-	currentTime: Ref<string>;
+	liveDateAndTime: Ref<DateAndTime>;
 	startTimer: () => void;
 	stopTimer: () => void;
 }
 
-export function useCurrentTime( getCurrentTime: () => string ): ReturnType {
+export function useLiveDateAndTime( getCurrentDateAndTime: () => DateAndTime ): ReturnType {
 	const timer = ref<number>( 0 );
-	const currentTime = ref<string>( getCurrentTime() );
+	const liveDateAndTime = ref<DateAndTime>( getCurrentDateAndTime() );
 
 	const startTimer = (): void => {
 		timer.value = window.setInterval( () => {
-			currentTime.value = getCurrentTime();
+			liveDateAndTime.value = getCurrentDateAndTime();
 		}, 1000 );
 	};
 
@@ -21,7 +22,7 @@ export function useCurrentTime( getCurrentTime: () => string ): ReturnType {
 	};
 
 	return {
-		currentTime,
+		liveDateAndTime,
 		startTimer,
 		stopTimer
 	};

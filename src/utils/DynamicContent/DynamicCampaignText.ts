@@ -13,8 +13,8 @@ import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
 import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
-import { CurrentDateAndTime } from '@src/utils/DynamicContent/generators/CurrentDateAndTime';
 import { CurrentTime } from '@src/utils/DynamicContent/generators/CurrentTime';
+import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 
 export default class DynamicCampaignText implements DynamicContent {
 	private readonly _date: Date;
@@ -27,7 +27,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _campaignTimeRange: TimeRange;
 	private _campaignProjection: CampaignProjection;
 	private _progressBarContent: ProgressBarContent;
-	private _currentDateAndTime: CurrentDateAndTime;
+	private _currentDate: CurrentDate;
 	private _currentTime: CurrentTime;
 
 	public constructor(
@@ -46,7 +46,6 @@ export default class DynamicCampaignText implements DynamicContent {
 		this._urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 		this._cache = new Map<string, string>();
 		this.getCurrentDateAndTime = this.getCurrentDateAndTime.bind( this );
-		this.getCurrentTime = this.getCurrentTime.bind( this );
 	}
 
 	private getCampaignTimeRange(): TimeRange {
@@ -80,29 +79,29 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public get currentDate(): string {
 		return this.getCachedValue( 'currentDate', () => {
-			return new CurrentDate( this._date, this._translator, this._formatters.ordinal ).getText();
+			return new CurrentDate( this._translator, this._formatters.ordinal ).getText( this._date );
 		} );
 	}
 
 	/**
-	 * Current time returns time to the minute, and needs to be updated dynamically
-	 * This means we can't cache the return value, so instead manually cache the CurrentTime object
-	 * @deprecated
+	 * Returns the date and time to the minute, and needs to be updated dynamically.
+	 * This means we can't cache the return value, so instead manually cache the required objects
 	 */
-	public getCurrentDateAndTime(): string {
-		if ( !this._currentDateAndTime ) {
-			this._currentDateAndTime = new CurrentDateAndTime( this._translator, this._formatters.ordinal, this._formatters.time );
+	public getCurrentDateAndTime(): DateAndTime {
+		if ( !this._currentDate ) {
+			this._currentDate = new CurrentDate( this._translator, this._formatters.ordinal );
 		}
 
-		return this._currentDateAndTime.getText( new Date() );
-	}
-
-	public getCurrentTime(): string {
 		if ( !this._currentTime ) {
 			this._currentTime = new CurrentTime( this._formatters.time );
 		}
 
-		return this._currentTime.getText( new Date() );
+		const date = new Date();
+
+		return {
+			currentDate: this._currentDate.getText( date ),
+			currentTime: this._currentTime.getText( date )
+		};
 	}
 
 	public get currentDayName(): string {
