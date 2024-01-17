@@ -6,9 +6,9 @@ export class LocalImpressionCount implements ImpressionCount {
 	private readonly _bannerName: string;
 	private _overallCount: number;
 	private _bannerCount: number;
-	private _runtimeEnvironment: RuntimeEnvironment|null;
+	private _runtimeEnvironment: RuntimeEnvironment;
 
-	public constructor( bannerName: string, runtimeEnvironment: RuntimeEnvironment|null = null ) {
+	public constructor( bannerName: string, runtimeEnvironment: RuntimeEnvironment ) {
 		this._bannerName = bannerName;
 		this._overallCount = 0;
 		this._bannerCount = 0;
@@ -76,7 +76,7 @@ export class LocalImpressionCount implements ImpressionCount {
 	}
 
 	public getRemainingImpressions( maxImpressions: number ): number {
-		if ( this._runtimeEnvironment?.isInDevMode ) {
+		if ( this._runtimeEnvironment.isInDevMode ) {
 			return maxImpressions;
 		}
 		return Math.max( 0, maxImpressions - this.overallCountIncremented );

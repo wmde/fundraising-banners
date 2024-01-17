@@ -9,11 +9,12 @@ describe( 'LegacyTrackerWPORG', function () {
 	it( 'tracks events', () => {
 		const mediaWikiStub = new MediaWikiStub();
 		mediaWikiStub.track = vi.fn();
+		const runtimeEnvironmentStub = { isInDevMode: false, runsInDevEnvironment: false };
 		const legacyWMDEBannerEvent = new WMDELegacyBannerEvent( 'eventName', 1 );
 		const trackingEventConverterFactory = vi.fn( () => legacyWMDEBannerEvent );
 		const clickAlreadyDonatedEvent = new ClickAlreadyDonatedEvent();
 		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverterFactory ] ] );
-		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap );
+		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap, runtimeEnvironmentStub );
 
 		tracker.trackEvent( clickAlreadyDonatedEvent );
 
@@ -33,8 +34,9 @@ describe( 'LegacyTrackerWPORG', function () {
 	it( 'drops events that are not in the list of allowed events', () => {
 		const mediaWikiStub = new MediaWikiStub();
 		mediaWikiStub.track = vi.fn();
+		const runtimeEnvironmentStub = { isInDevMode: false, runsInDevEnvironment: false };
 		const emptyEventMap = new Map<string, TrackingEventConverterFactory>();
-		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', emptyEventMap );
+		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', emptyEventMap, runtimeEnvironmentStub );
 
 		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 
@@ -52,9 +54,10 @@ describe( 'LegacyTrackerWPORG', function () {
 		Math.random = vi.fn( () => randomValue );
 		const mediaWikiStub = new MediaWikiStub();
 		mediaWikiStub.track = vi.fn();
+		const runtimeEnvironmentStub = { isInDevMode: false, runsInDevEnvironment: false };
 		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', trackingRate ) );
 		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
-		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap );
+		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap, runtimeEnvironmentStub );
 
 		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 
