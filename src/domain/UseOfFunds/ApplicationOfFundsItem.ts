@@ -1,6 +1,6 @@
 export interface ApplicationOfFundsItem {
-	id: string;
 	title: string;
 	percentage: number;
+	colour: string;
 	text: string;
 }

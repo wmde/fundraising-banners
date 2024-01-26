@@ -4,10 +4,10 @@ import { shallowMount } from '@vue/test-utils';
 import { ApplicationOfFundsItem } from '@src/domain/UseOfFunds/ApplicationOfFundsItem';
 
 const applicationOfFundsData: ApplicationOfFundsItem[] = [
-	{ id: 'one', percentage: 10, text: 'text 01', title: 'title 01' },
-	{ id: 'two', percentage: 98, text: 'text 02', title: 'title 02' },
-	{ id: 'three', percentage: 43, text: 'text 03', title: 'title 03' },
-	{ id: 'four', percentage: 12, text: 'text 04', title: 'title 04' }
+	{ percentage: 10, colour: 'red', text: 'text 01', title: 'title 01' },
+	{ percentage: 98, colour: 'blue', text: 'text 02', title: 'title 02' },
+	{ percentage: 43, colour: 'green', text: 'text 03', title: 'title 03' },
+	{ percentage: 12, colour: 'orange', text: 'text 04', title: 'title 04' }
 ];
 
 describe( 'FundsDistributionAccordion.vue', () => {
@@ -18,10 +18,10 @@ describe( 'FundsDistributionAccordion.vue', () => {
 			}
 		} );
 
-		const item01 = wrapper.find( '.funds-distribution-accordion-item-one' );
-		const item02 = wrapper.find( '.funds-distribution-accordion-item-two' );
-		const item03 = wrapper.find( '.funds-distribution-accordion-item-three' );
-		const item04 = wrapper.find( '.funds-distribution-accordion-item-four' );
+		const item01 = wrapper.find( '.funds-distribution-accordion-item:nth-child(1)' );
+		const item02 = wrapper.find( '.funds-distribution-accordion-item:nth-child(2)' );
+		const item03 = wrapper.find( '.funds-distribution-accordion-item:nth-child(3)' );
+		const item04 = wrapper.find( '.funds-distribution-accordion-item:nth-child(4)' );
 
 		await item01.find( 'button' ).trigger( 'click' );
 		await item01.find( 'button' ).trigger( 'click' );
