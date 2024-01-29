@@ -52,7 +52,7 @@
     "handlebars": "^4.7.8",
     "jsdom": "^24.0.0",
     "nodemon": "^3.0.2",
-    "npm-check-updates": "^16.14.12",
+    "npm-check-updates": "^16.14.14",
     "npm-run-all": "^4.1.5",
     "rimraf": "^5.0.5",
     "sass": "^1.70.0",
