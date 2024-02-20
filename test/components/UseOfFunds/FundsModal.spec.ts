@@ -13,7 +13,7 @@ const content: UseOfFundsContent = {
 		international: { intro: '', linkName: '', linkUrl: '' },
 		mixed: { text: '' }
 	},
-	intro: { headline: '', dynamicHeadline: { published: '', provisional: '' }, text: '' },
+	intro: { dynamicHeadline: { published: '', provisional: '' }, text: '' },
 	orgchart: { headline: '', imageUrl: '', paragraphs: [] },
 	provisional: ''
 };
