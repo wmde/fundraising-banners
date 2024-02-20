@@ -4,7 +4,10 @@ import { Company } from '@src/domain/UseOfFunds/Company';
 
 export interface UseOfFundsContent {
 	intro: {
-		headline: string;
+		dynamicHeadline: {
+			published: string;
+			provisional: string;
+		}
 		text: string;
 	}
 

@@ -15,7 +15,7 @@ describe( 'FundsContent.vue', () => {
 				international: { intro: '', linkName: '', linkUrl: '' },
 				mixed: { text: '' }
 			},
-			intro: { headline: '', text: '' },
+			intro: { dynamicHeadline: { published: 'Published headline?', provisional: 'Provisional headline?*' }, text: '' },
 			orgchart: {
 				headline: '',
 				imageUrl: '',
@@ -32,9 +32,7 @@ describe( 'FundsContent.vue', () => {
 			}
 		} );
 
-		const intro = wrapper.find( '.use-of-funds-section-intro h2' );
-
-		expect( intro.text() ).toBe( '' );
+		expect( wrapper.find( '.use-of-funds-section-intro h2' ).text() ).toBe( 'Published headline?' );
 		expect( wrapper.find( '.use-of-funds-provisional' ).exists() ).toBe( false );
 
 		const content = getContent();
@@ -42,7 +40,7 @@ describe( 'FundsContent.vue', () => {
 		await wrapper.setProps( { content: content } );
 		const provisional = wrapper.find( '.use-of-funds-provisional' );
 
-		expect( intro.text() ).toBe( '*' );
+		expect( wrapper.find( '.use-of-funds-section-intro h2' ).text() ).toBe( 'Provisional headline?*' );
 		expect( provisional.exists() ).toBe( true );
 		expect( provisional.text() ).toBe( 'This is provisional' );
 	} );
