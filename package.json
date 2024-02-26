@@ -43,7 +43,7 @@
     "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
     "css-loader": "^6.10.0",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-wikimedia": "^0.26.0",
     "eslint-plugin-jsdoc": "^48.1.0",
     "eslint-plugin-unicorn": "^51.0.1",
