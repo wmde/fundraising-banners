@@ -47,7 +47,7 @@
     "eslint-config-wikimedia": "^0.26.0",
     "eslint-plugin-jsdoc": "^48.2.1",
     "eslint-plugin-unicorn": "^51.0.1",
-    "eslint-plugin-vue": "^9.23.0",
+    "eslint-plugin-vue": "^9.24.0",
     "eslint-plugin-yml": "^1.13.1",
     "handlebars": "^4.7.8",
     "jsdom": "^24.0.0",
