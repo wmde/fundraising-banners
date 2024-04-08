@@ -3,12 +3,20 @@
 		"coverage/*"
 	],
 	"extends": [
+		"stylelint-config-recommended",
+		"@stylistic/stylelint-config",
 		"stylelint-config-standard-scss",
-		"stylelint-config-standard-vue/scss",
-		"stylelint-config-wikimedia"
+		"stylelint-config-standard-vue/scss"
 	],
 	"rules": {
-		"max-line-length": 180,
+		"@stylistic/indentation": "tab",
+		"@stylistic/function-whitespace-after": "always",
+		"@stylistic/function-parentheses-space-inside": "always",
+		"@stylistic/max-line-length": 180,
+		"@stylistic/media-feature-parentheses-space-inside": "always",
+		"@stylistic/selector-attribute-brackets-space-inside": "always",
+		"@stylistic/selector-pseudo-class-parentheses-space-inside": "always",
+		"@stylistic/string-quotes": "single",
 		"selector-max-id": 2,
 		"function-url-quotes": "always",
 		"color-hex-length": "long",
@@ -23,6 +31,7 @@
 		"function-no-unknown": null,
 		"media-feature-range-notation": "prefix",
 		"function-disallowed-list": null,
+		"font-family-name-quotes": "always-unless-keyword",
 		"at-rule-no-unknown": [
 			true,
 			{
