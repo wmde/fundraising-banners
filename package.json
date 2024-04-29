@@ -60,7 +60,7 @@
     "sass-loader": "^14.2.1",
     "string-replace-loader": "^3.1.0",
     "style-loader": "^4.0.0",
-    "stylelint": "^16.3.1",
+    "stylelint": "^16.4.0",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-config-standard-vue": "^1.0.0",
     "stylelint-webpack-plugin": "^5.0.0",
