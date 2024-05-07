@@ -10,6 +10,7 @@ const DONATE_ANONYMOUSLY_URL = 'https://spenden.wikimedia.de/donation/add';
  * This function is used to create the form action (target URL) explicitly for the donation form submit on the banner.
  *
  * For creating a generic link (incl. tracking information) to the fundraising donation page, see `createDonationURL.ts`
+ *
  * @param {TrackingParameters} tracking
  * @param {ImpressionCount} impressionCount
  * @param {Record<string, string>} extraUrlParameters

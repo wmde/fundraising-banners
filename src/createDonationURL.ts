@@ -9,6 +9,7 @@ const DONATE_LINK_URL = 'https://spenden.wikimedia.de';
  * to the fundraising donation page and a URL with tracking information is needed for that.
  *
  * For creating the target URL for the banner donation form, see `createFormActions.ts` instead.
+ *
  * @param {TrackingParameters} tracking
  * @param {ImpressionCount} impressionCount
  * @param {Record<string, string>} extraUrlParameters
