@@ -85,7 +85,7 @@ $padding-mobile: 16px;
 	&-benefits-list {
 		background: #f4f4f4;
 		padding: $padding-mobile;
-		margin: 0 (-$padding-mobile) 0 (-$padding-mobile);
+		margin: 0 (-$padding-mobile);
 		flex: 1 1 auto;
 
 		@include breakpoints.large-up {
