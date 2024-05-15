@@ -1,21 +1,23 @@
 <template>
-	<table class="company-budgets">
-		<tr v-for="company in companies" :class="'company-budgets-row-' + company.name.toLowerCase()" :key="company.name">
-			<td class="company-budgets-col-company">{{ company.name }} </td>
-			<td class="company-budgets-col-graph">
+	<ul class="company-budgets">
+		<li
+			class="company-budgets-row"
+			v-for="company in companies"
+			:key="company.name"
+			:class="`company-budgets-row-${ company.name.toLowerCase() }`"
+		>
+			<span class="company-budgets-col-company">{{ company.name }}</span>
+			<span class="company-budgets-col-graph">
 				<span class="company-budgets-budget-line" :style="{ width: ( company.budget / highestBudget * 100 ) + '%' }">&#xa0;</span>
-			</td>
-			<td class="company-budgets-col-budget-number">
-				<span class="company-budgets-number">{{ company.budgetString }}</span>
-				<span class="company-budgets-inline-citation">
-					<CompanyCitation :company="company" :citation-label="citationLabel" />
-				</span>
-			</td>
-			<td class="company-budgets-col-citation">
-				<CompanyCitation :company="company" :citation-label="citationLabel" />
-			</td>
-		</tr>
-	</table>
+			</span>
+			<span class="company-budgets-col-number">
+				{{ company.budgetString }}
+			</span>
+			<span class="company-budgets-col-citation">
+				<CompanyCitation :company="company" :citation-label="citationLabel"/>
+			</span>
+		</li>
+	</ul>
 </template>
 
 <script setup lang="ts">
