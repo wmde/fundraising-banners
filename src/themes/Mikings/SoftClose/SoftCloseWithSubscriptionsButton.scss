@@ -1,9 +1,10 @@
-@import '../../../themes/gohan/SoftClose/SoftClose.pcss';
+@use '../variables/colors';
+@use 'SoftClose';
 
 .wmde-banner {
 	.wmde-banner-subscription-form-link {
 		border: 0 none;
-		background-color: $color-secondary;
+		background-color: colors.$secondary;
 		border-radius: 18px;
 		font-size: 14px;
 		line-height: 40px;
@@ -11,7 +12,7 @@
 		font-weight: bold;
 		text-align: center;
 		margin: 0 4px 8px;
-		color: $color-white;
+		color: colors.$white;
 		text-decoration: none;
 	}
 }

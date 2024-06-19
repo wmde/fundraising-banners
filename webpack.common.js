@@ -1,5 +1,4 @@
 const path = require( 'path' );
-const webpack = require( 'webpack' );
 const { VueLoaderPlugin } = require( 'vue-loader' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
@@ -69,6 +68,7 @@ module.exports = ( env ) => {
 		resolve: {
 			extensions: [ '.ts', '.js', '.json' ],
 			alias: {
+				'@banners': path.resolve( __dirname, 'banners' ),
 				'@src': path.resolve( __dirname, 'src' )
 			},
 			fallback: {
@@ -77,10 +77,7 @@ module.exports = ( env ) => {
 			}
 		},
 		plugins: [
-			new VueLoaderPlugin(),
-			new webpack.ProvidePlugin( {
-				jQuery: 'jquery'
-			} )
+			new VueLoaderPlugin()
 		]
 	};
 };

@@ -14,7 +14,7 @@ import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import Banner from './components/BannerVar.de.vue';
 import messages from './messages.de';
-import eventMappings from '../thank_you/event_map';
+import eventMappings from './event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { TrackingMembershipFormActions } from './MembershipFormActions';
 import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';

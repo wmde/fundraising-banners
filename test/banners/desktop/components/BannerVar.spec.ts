@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '../../../../banners/desktop/components/BannerVar.vue';
+import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_00/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -21,7 +21,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
-import { BannerMaximisedEvent } from '../../../../banners/desktop/events/BannerMaximisedEvent';
+import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 
 const formModel = useFormModel();

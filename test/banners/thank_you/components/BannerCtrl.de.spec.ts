@@ -2,17 +2,17 @@ import { describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import BannerCtrl from '../../../../banners/thank_you/components/BannerCtrl.de.vue';
-import MiniBannerTextWin from '../../../../banners/thank_you/content/win/MiniBannerText.de.vue';
-import MiniBannerSlidesWin from '../../../../banners/thank_you/content/win/MiniBannerSlides.de.vue';
-import FullPageBannerTextWin from '../../../../banners/thank_you/content/win/FullPageBannerText.de.vue';
-import MiniBannerTextLose from '../../../../banners/thank_you/content/lose/MiniBannerText.de.vue';
-import MiniBannerSlidesLose from '../../../../banners/thank_you/content/lose/MiniBannerSlides.de.vue';
-import FullPageBannerTextLose from '../../../../banners/thank_you/content/lose/FullPageBannerText.de.vue';
+import BannerCtrl from '@banners/thank_you/components/BannerCtrl.de.vue';
+import MiniBannerTextWin from '@banners/thank_you/content/win/MiniBannerText.de.vue';
+import MiniBannerSlidesWin from '@banners/thank_you/content/win/MiniBannerSlides.de.vue';
+import FullPageBannerTextWin from '@banners/thank_you/content/win/FullPageBannerText.de.vue';
+import MiniBannerTextLose from '@banners/thank_you/content/lose/MiniBannerText.de.vue';
+import MiniBannerSlidesLose from '@banners/thank_you/content/lose/MiniBannerSlides.de.vue';
+import FullPageBannerTextLose from '@banners/thank_you/content/lose/FullPageBannerText.de.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
-import { MembershipFormActions } from '../../../../banners/thank_you/MembershipFormActions';
+import { MembershipFormActions } from '@banners/thank_you/MembershipFormActions';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 const formActions: MembershipFormActions = {

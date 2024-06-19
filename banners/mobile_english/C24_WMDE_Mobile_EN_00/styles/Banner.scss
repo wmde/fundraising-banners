@@ -1,7 +1,7 @@
-@use 'src/themes/Yperala/variables/globals';
-@use 'src/themes/Yperala/variables/breakpoints';
-@use 'src/themes/Yperala/variables/colors';
-@use 'src/themes/Yperala/variables/fonts';
+@use '@src/themes/Yperala/variables/globals';
+@use '@src/themes/Yperala/variables/breakpoints';
+@use '@src/themes/Yperala/variables/colors';
+@use '@src/themes/Yperala/variables/fonts';
 
 @keyframes hide-mini {
 	0% {
