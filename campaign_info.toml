@@ -35,7 +35,7 @@ name = "Mobile"
 icon = "mobile"
 campaign = "C24_WMDE_Mobile_DE_01"
 description = "Based on C23_WMDE_Mobile_DE_14 ctrl"
-campaign_tracking = "mob-de-01-ba-010724"
+campaign_tracking = "mob-de-01-ba-240701"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
@@ -45,12 +45,12 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 [mobile.banners.ctrl]
 filename = "./banners/mobile/C24_WMDE_Mobile_DE_01/banner_ctrl.ts"
 pagename = "B24_WMDE_Mobile_DE_01_ctrl"
-tracking = "org-mob01-010724-ctrl"
+tracking = "org-mob01-240701-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/C24_WMDE_Mobile_DE_01/banner_var.ts"
 pagename = "B24_WMDE_Mobile_DE_01_var"
-tracking = "org-mob01-010724-var"
+tracking = "org-mob01-240701-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]

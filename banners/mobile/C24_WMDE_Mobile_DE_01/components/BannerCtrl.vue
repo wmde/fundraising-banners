@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			@close="onClose( 'MiniBanner', CloseChoices.Hide )"
+			@close="onClose( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>

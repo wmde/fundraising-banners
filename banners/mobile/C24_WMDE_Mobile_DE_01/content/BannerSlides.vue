@@ -1,29 +1,29 @@
 <template>
 
-	<KeenSliderSlide :is-current="currentSlide === 1">
+	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
 			<strong>Hi,</strong><br>
 			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie bescheiden,
+			heutigen {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie,
 			die Unabhängigkeit von Wikipedia zu unterstützen.
+		</p>
+	</KeenSliderSlide>
+
+	<KeenSliderSlide :is-current="currentSlide === 1">
+		<p>
+			<AnimatedText :content="'Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.'"/>
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			<AnimatedText :content="'Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht – sie übergehen diesen Aufruf.'"/>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-		</p>
-	</KeenSliderSlide>
-
-	<KeenSliderSlide :is-current="currentSlide === 3">
-		<p>
-			Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
+			Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
 			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :is-current="currentSlide === 4">
+	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>

@@ -7,11 +7,10 @@
 			<p>
 				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 				{{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} bitten
-				wir Sie bescheiden, die Unabhängigkeit von
-				Wikipedia zu unterstützen.
-				Millionen Menschen nutzen Wikipedia, aber 99 % spenden nicht – sie übergehen diesen Aufruf.
+				wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+				<AnimatedText :content="'Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.'"/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-				Die durchschnittliche Spende beträgt 22,25&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter.
+				Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 				<strong>Vielen Dank!</strong>
@@ -24,6 +23,7 @@
 import { inject, watch } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 interface Props {
 	playLiveText: boolean;
