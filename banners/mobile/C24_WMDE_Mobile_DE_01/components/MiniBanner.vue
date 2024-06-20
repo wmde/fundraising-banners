@@ -14,7 +14,6 @@
 
 		<div class="wmde-banner-mini-slideshow">
 			<slot name="banner-slides"/>
-			<slot name="progress"/>
 		</div>
 
 		<div class="wmde-banner-mini-button-group">
