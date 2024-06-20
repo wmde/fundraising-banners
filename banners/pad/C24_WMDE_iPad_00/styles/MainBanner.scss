@@ -1,6 +1,6 @@
-@use 'src/themes/Treedip/variables/colors';
-@use 'src/themes/Treedip/variables/fonts';
-@use 'src/themes/Treedip/variables/breakpoints';
+@use '@src/themes/Treedip/variables/colors';
+@use '@src/themes/Treedip/variables/fonts';
+@use '@src/themes/Treedip/variables/breakpoints';
 
 $banner-height: 353px !default;
 $form-width: 256px !default;

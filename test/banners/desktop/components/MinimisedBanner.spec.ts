@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import MinimisedBanner from '../../../../banners/desktop/components/MinimisedBanner.vue';
+import MinimisedBanner from '@banners/desktop/C24_WMDE_Desktop_DE_00/components/MinimisedBanner.vue';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 
 describe( 'MinimisedBanner.vue', () => {

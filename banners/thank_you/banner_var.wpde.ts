@@ -13,7 +13,7 @@ import { TrackingMembershipFormActions } from './MembershipFormActions';
 import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import PageWPDE from '@src/page/PageWPDE';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
-import eventMap from '../wpde_desktop/event_map';
+import eventMap from './event_map.wpde';
 import { createThankYouSettings } from './settings';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';

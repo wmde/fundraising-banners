@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
-import MembershipButton from '../../../../banners/thank_you/components/MembershipButton.vue';
-import { MembershipFormActions } from '../../../../banners/thank_you/MembershipFormActions';
+import MembershipButton from '@banners/thank_you/components/MembershipButton.vue';
+import { MembershipFormActions } from '@banners/thank_you/MembershipFormActions';
 
 const formActions: MembershipFormActions = {
 	create: ( extraUrlParameters: Record<string, string> ) => `URL ${ extraUrlParameters.nananana }`
