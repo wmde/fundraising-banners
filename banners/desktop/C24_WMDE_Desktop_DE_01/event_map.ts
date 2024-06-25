@@ -14,8 +14,6 @@ import { AlreadyDonatedShownEvent } from '@src/tracking/events/AlreadyDonatedSho
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
-import { BannerMinimisedEvent } from './events/BannerMinimisedEvent';
-import { BannerMaximisedEvent } from './events/BannerMaximisedEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -37,7 +35,5 @@ export default new Map<string, TrackingEventConverterFactory>( [
 				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
 		}
 	} ],
-	[ FallbackBannerSubmitEvent.EVENT_NAME, ( e: FallbackBannerSubmitEvent ): WMDESizeIssueEvent => new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 ) ],
-	[ BannerMinimisedEvent.EVENT_NAME, ( e: BannerMinimisedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
-	[ BannerMaximisedEvent.EVENT_NAME, ( e: BannerMaximisedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( `${e.eventName}-${e.userChoice}`, 1 ) ]
+	[ FallbackBannerSubmitEvent.EVENT_NAME, ( e: FallbackBannerSubmitEvent ): WMDESizeIssueEvent => new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 ) ]
 ] );

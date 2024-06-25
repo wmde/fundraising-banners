@@ -9,7 +9,6 @@
 );
 @use 'src/themes/Svingle/defaults';
 @use 'src/themes/Svingle/ButtonClose/ButtonClose';
-@use 'src/themes/Svingle/ProgressBar/ProgressBar';
 @use 'src/themes/Svingle/ProgressBar/DoubleProgressBar';
 @use 'src/themes/Svingle/DonationForm/DonationForm';
 @use 'src/themes/Svingle/DonationForm/MultiStepDonation';
@@ -22,16 +21,12 @@
 	$font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/Svingle/Footer/FooterAlreadyDonated' with (
-	$right-column-width: 300px
-);
+@use 'src/themes/Svingle/Footer/BannerFooter';
 @use 'src/themes/Svingle/Footer/SelectionInput';
 @use 'src/themes/Svingle/Message/Message';
 @use 'src/themes/Svingle/Slider/KeenSlider' with (
 	$margin-bottom: 5px
 );
-@use 'src/themes/Svingle/SoftClose/SoftClose';
-@use 'src/themes/Svingle/AlreadyDonatedModal/AlreadyDonatedModal';
 
 /**
  * Fallback banner with "Fijitiv" theme
