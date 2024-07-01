@@ -32,7 +32,7 @@
     "format-number": "^3.0.0",
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
     "keen-slider": "^6.8.6",
-    "vue": "^3.4.30"
+    "vue": "^3.4.31"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.3",
@@ -68,10 +68,10 @@
     "toml": "^3.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.2",
+    "typescript": "^5.5.3",
     "vitest": "^1.6.0",
     "vue-loader": "^17.4.2",
-    "vue-tsc": "^2.0.22",
+    "vue-tsc": "^2.0.24",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0",
