@@ -1,13 +1,12 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_00/components/BannerCtrl.vue';
+import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_02/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
 	bannerContentAnimatedTextFeatures,
@@ -20,7 +19,6 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 
 const formModel = useFormModel();
@@ -68,7 +66,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -90,9 +88,7 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -119,24 +115,11 @@ describe( 'BannerCtrl.vue', () => {
 
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
+			[ 'expectMainDonationFormSubmitsWithAddressForPayPal' ],
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -148,16 +131,4 @@ describe( 'BannerCtrl.vue', () => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
-
-	describe( 'Already Donated', () => {
-		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
 } );

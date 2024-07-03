@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject } from 'vue';
+import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
@@ -46,6 +46,8 @@ const {
 	getCurrentDateAndTime
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
-const { liveDateAndTime } = useLiveDateAndTime( getCurrentDateAndTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
+onMounted( startTimer );
+onUnmounted( stopTimer );
 
 </script>
