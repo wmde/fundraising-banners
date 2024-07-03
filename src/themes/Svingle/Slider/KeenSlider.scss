@@ -48,6 +48,32 @@ $margin-bottom: 15px !default;
 				margin: 0;
 			}
 		}
+
+		&-title {
+			max-height: 62px;
+			margin-bottom: 4px !important;
+			text-align: center;
+			font-size: 25px;
+			font-weight: bold;
+			font-family:
+				system-ui,
+				-apple-system,
+				BlinkMacSystemFont,
+				'Segoe UI',
+				'Roboto',
+				'Oxygen-Sans',
+				'Ubuntu',
+				'Cantarell',
+				'Lato',
+				'Helvetica Neue',
+				'Helvetica',
+				'Arial',
+				sans-serif;
+		}
+
+		&-date {
+			text-align: center;
+		}
 	}
 
 	&-slider-pagination {
