@@ -26,5 +26,17 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 				margin-bottom: 0;
 			}
 		}
+
+		&-title {
+			max-height: 62px;
+			margin-bottom: 4px !important;
+			text-align: center;
+			font-size: 1.4em;
+			font-weight: bold;
+		}
+
+		&-date {
+			text-align: center;
+		}
 	}
 }
