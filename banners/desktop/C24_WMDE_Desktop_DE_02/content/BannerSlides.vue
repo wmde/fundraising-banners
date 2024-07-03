@@ -1,7 +1,8 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in
+			<InfoIcon fill="#990000"/>
+			<strong>&nbsp;{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in
 			Deutschland nutzen</strong>
 		</p>
 		<p>
@@ -30,10 +31,11 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject } from 'vue';
+import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 interface Props {
 	currentSlide: number
@@ -46,6 +48,8 @@ const {
 	getCurrentDateAndTime
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
-const { liveDateAndTime } = useLiveDateAndTime( getCurrentDateAndTime );
+const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
+onMounted( startTimer );
+onUnmounted( stopTimer );
 
 </script>
