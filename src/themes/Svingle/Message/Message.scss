@@ -26,5 +26,8 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 				margin-bottom: 0;
 			}
 		}
+		&-title {
+			// style for bigger headline will sit here
+		}
 	}
 }
