@@ -11,7 +11,7 @@ Accepted
 
 ## Context
 
-The following 2 sections describe the status quo until Febrary 2024, see
+The following 2 sections describe the status quo until February 2024, see
 the section [Decision](#decision) for the changes we make to the status quo
 
 ### File Structure
@@ -138,12 +138,16 @@ Instead of the structure `banner/CHANNELNAME`, we have
 `banner/CHANNELNAME/CAMPAIGN_NAME`. We can have several banners in
 parallel feature branches.
 
-We no longer have an "archive" commit. We can try to adhere to a
-two-commit structure but are also more flexible to do smaller commits.
+We no longer have an "archive" commit, but in order to help make reviews easier
+we keep the 3 commit structure:
 
-When creating a new test, we duplicate the folder from the "parent" banner
-(i.e. a previous banner this banner is based on). We after adapting both
-banners this is still the first "setup" commit.
+1. `Prepare campaign for [CAMPAIGN_NAME]`: When creating a new test, we first
+   update the `campaign_info.toml`, and duplicate the folder from the "parent" banner
+   (i.e. a previous banner this banner is based on).
+2. `Prepare CTRL for [CAMPAIGN_NAME]`: In this commit we prepare the control banner
+   using the winner of the previous test as it's base. This will allow reviewers to
+   view a diff of the changes made to create the base from the previous test.
+3. `Implement VAR for [CAMPAIGN_NAME]`: We then implement the variant banner.
 
 We can now merge banner feature branches in any order, without conflicts
 in the banner code. The only conflict that can occur is in
@@ -156,5 +160,3 @@ We duplicate banner tests in a similar structure as the banners, so we'll have
 To get back the uncluttered quick access that the previous, less-nested
 structure gave us, we will use Editor/IDE features like "Scopes" in the file
 tree of PHPStorm.
-
-
