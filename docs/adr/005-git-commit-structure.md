@@ -143,20 +143,48 @@ we keep the 3 commit structure:
 
 1. `Prepare campaign for [CAMPAIGN_NAME]`: When creating a new test, we first
    update the `campaign_info.toml`, and duplicate the folder from the "parent" banner
-   (i.e. a previous banner this banner is based on).
+   (i.e. a previous banner this banner is based on). Also change the tests
+   in `tests/banners/CHANNELNAME` to point to the new banner (see comment
+   below).
 2. `Prepare CTRL for [CAMPAIGN_NAME]`: In this commit we prepare the control banner
    using the winner of the previous test as it's base. This will allow reviewers to
    view a diff of the changes made to create the base from the previous test.
 3. `Implement VAR for [CAMPAIGN_NAME]`: We then implement the variant banner.
 
-We can now merge banner feature branches in any order, without conflicts
-in the banner code. The only conflict that can occur is in
-`campaign_info.toml`, but we'll resolve that conflict with the following
-rule: Always merge the version that has the higher test number.
-
-We duplicate banner tests in a similar structure as the banners, so we'll have
-`tests/banners/CHANNELNAME/CAMPAIGN_NAME` folders.
+Until we write code for the test runner configuration that excludes
+non-current banner tests (i.e. campaign names not listed in `campaign_info.toml`),
+we will **not** duplicate the tests like we do with the banners, but adapt the test in 
+`tests/banners/CHANNELNAME`to test the banners in the new campaign
+directory. In the future, we want to duplicate the banners as well, but
+need some changes to the test setup first. See https://phabricator.wikimedia.org/T369276
 
 To get back the uncluttered quick access that the previous, less-nested
 structure gave us, we will use Editor/IDE features like "Scopes" in the file
 tree of PHPStorm.
+
+With the new structure, we can merge banner feature branches in any order, without conflicts
+in the banner code. The only conflict that can occur is in
+`campaign_info.toml` and in the test code. We'll resolve that conflict with the following
+rule: *Always merge the version where the campaign name has the higher test number.*
+
+### Examples for the new merge strategy
+Base situation: Both `C24_WMDE_Desktop_DE_14` and `C24_WMDE_Desktop_DE_15` were
+branched off `main`, which contains `C24_WMDE_Desktop_DE_13`.
+
+If you merge in two branches in the order `C24_WMDE_Desktop_DE_14`,
+`C24_WMDE_Desktop_DE_15`, you rebase `C24_WMDE_Desktop_DE_15` to `main`
+after merging `C24_WMDE_Desktop_DE_14`. You will get conflicts in
+`campaign_info.yaml` and tests during the rebase and must choose to *keep*
+changes from `C24_WMDE_Desktop_DE_15`. Be mindful when merging
+`campaign_info.toml`, to avoid overriding test configurations in other
+channels. Example: After `C24_WMDE_Desktop_DE_14` was merged,
+`C24_WMDE_Mobile_DE_05` was also merged. In this case, you need to *keep*
+the changes to the mobile channel in `campaign_info.toml` but *override*
+the changes to the desktop channel.
+
+If someone accidentally merged `C24_WMDE_Desktop_DE_15` first, rebase
+`C24_WMDE_Desktop_DE_14` on `main`. You will get conflicts in
+`campaign_info.yaml` and tests during the rebase and must *drop* the
+changes to those files.
+
+
