@@ -29,7 +29,7 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 
 		&-title {
 			max-height: 62px;
-			margin-bottom: 4px !important;
+			margin: 0 0 4px;
 			text-align: center;
 			font-size: 1.4em;
 			font-weight: bold;
@@ -37,6 +37,7 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 
 		&-date {
 			text-align: center;
+			padding-bottom: 15px;
 		}
 	}
 }

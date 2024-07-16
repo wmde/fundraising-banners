@@ -1,14 +1,14 @@
 <template>
 	<div class="wmde-banner-message">
 		<div>
-			<p class="wmde-banner-message-title">
+			<div class="wmde-banner-message-title">
 				<InfoIcon fill="#990000" width="21.5" height="21.5" type="italic"/>
 				<strong>&nbsp;Kostenlos, aber nicht kostenfrei</strong>
-			</p>
-			<p class="wmde-banner-message-date">
+			</div>
+			<div class="wmde-banner-message-date">
 				<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia
 				in Deutschland nutzen</strong>
-			</p>
+			</div>
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 				{{ currentDayName }} bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
