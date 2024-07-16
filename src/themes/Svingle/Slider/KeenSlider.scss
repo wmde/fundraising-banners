@@ -51,7 +51,7 @@ $margin-bottom: 15px !default;
 
 		&-title {
 			max-height: 62px;
-			margin-bottom: 4px !important;
+			margin: 0 0 4px;
 			text-align: center;
 			font-size: 25px;
 			font-weight: bold;
@@ -73,6 +73,7 @@ $margin-bottom: 15px !default;
 
 		&-date {
 			text-align: center;
+			padding-bottom: 15px;
 		}
 	}
 
