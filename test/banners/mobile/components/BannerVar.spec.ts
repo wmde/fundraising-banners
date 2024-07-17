@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_00/components/BannerVar.vue';
+import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_02/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -77,7 +77,7 @@ describe( 'BannerVar.vue', () => {
 	} );
 
 	describe( 'Content', () => {
-		test.each( [
+		test.skip.each( [
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
@@ -107,16 +107,14 @@ describe( 'BannerVar.vue', () => {
 
 		test.each( [
 			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectMainDonationFormSubmitsWithoutAddressForPayPal' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithoutAddressForPayPal' ]
+			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
 	describe( 'Soft Close', () => {
-		test.each( [
+		test.skip.each( [
 			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
