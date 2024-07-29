@@ -48,6 +48,19 @@ $margin-bottom: 15px !default;
 				margin: 0;
 			}
 		}
+
+		&-title {
+			max-height: 62px;
+			margin: 0 0 4px;
+			text-align: center;
+			font-size: 1.4em;
+			font-weight: bold;
+		}
+
+		&-date {
+			text-align: center;
+			padding-bottom: 15px;
+		}
 	}
 
 	&-slider-pagination {
