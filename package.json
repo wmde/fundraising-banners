@@ -47,7 +47,7 @@
     "css-loader": "^7.1.2",
     "eslint": "^8.57.0",
     "eslint-config-wikimedia": "^0.28.2",
-    "eslint-plugin-jsdoc": "^48.8.3",
+    "eslint-plugin-jsdoc": "^48.10.1",
     "eslint-plugin-unicorn": "^54.0.0",
     "eslint-plugin-vue": "^9.27.0",
     "eslint-plugin-yml": "^1.14.0",
