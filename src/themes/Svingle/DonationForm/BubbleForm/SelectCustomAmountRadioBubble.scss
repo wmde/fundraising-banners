@@ -1,6 +1,6 @@
 @use '../../../../components/DonationForm/SubComponents/SelectCustomAmount';
 
-$height: 23px !default;
+$height: 28px;
 
 $background-color: transparent;
 $active-color: #3366cc;
@@ -51,7 +51,7 @@ $box-shadow: 0 0 0 1px #3366cc;
 		&-input-container {
 			height: $height;
 			background-color: var( --color-white );
-			border-radius: 8px;
+			border-radius: 30px;
 			border: 1px solid #b7b7b7;
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
@@ -80,8 +80,8 @@ $box-shadow: 0 0 0 1px #3366cc;
 			color: var( --color-black );
 			background-color: $background-color;
 			padding: 0 20px;
-			font-size: 0.9em;
-			font-weight: normal;
+			font-size: 1em;
+			font-weight: bold;
 			border: 0 none;
 			text-align: left;
 			height: $height - 2px;
