@@ -2,6 +2,9 @@
 
 $banner-height: 357px !default;
 $form-width: 300px !default;
+$padding-top: 10px !default;
+$padding-right: 0 !default;
+$margin-right: 30px !default;
 
 .wmde-banner {
 	&-main {
@@ -33,7 +36,7 @@ $form-width: 300px !default;
 		flex: 1 1 auto;
 		margin-bottom: 0;
 		overflow-y: hidden;
-		margin-right: 30px;
+		margin-right: $margin-right;
 		padding: 0;
 		border: none;
 	}
@@ -44,6 +47,6 @@ $form-width: 300px !default;
 		display: flex;
 		flex-direction: column;
 		width: $form-width;
-		padding: 10px 0 0;
+		padding: $padding-top $padding-right 0 0;
 	}
 }
