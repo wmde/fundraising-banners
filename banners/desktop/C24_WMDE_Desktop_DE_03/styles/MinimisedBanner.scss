@@ -1,0 +1,111 @@
+@use 'src/themes/Treedip/variables/globals';
+
+.wmde-banner {
+	&-minimised {
+		padding: 12px 24px 0;
+
+		&-content {
+			display: flex;
+
+			&-message {
+				flex: 1 1 auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding: 11px 15px 11px 34px;
+				color: var( --color-white );
+				background-color: var( --color-secondary );
+				border: none;
+				border-radius: 9px;
+				font-size: 14px;
+
+				svg {
+					float: left;
+					margin: 10px 0 0 -22px;
+				}
+			}
+
+			&-button {
+				flex: 0 0 auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: end;
+				padding-left: 30px;
+			}
+		}
+
+		&-title {
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		&-submit-button {
+			width: 300px;
+			background: var( --color-primary );
+			color: var( --color-white );
+			font-weight: bold;
+			line-height: 36px;
+			border: 0;
+			border-radius: 18px;
+			padding: 0 10px;
+			transition: background-color 500ms globals.$banner-easing;
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				background: var( --color-primary-hover );
+			}
+		}
+
+		&-button-group {
+			position: absolute;
+			z-index: 2;
+			top: 12px;
+			right: 12px;
+			height: 26px;
+			border: 2px solid var( --color-secondary );
+			border-radius: 13px;
+			padding: 0 10px;
+			display: flex;
+			align-items: center;
+
+			.wmde-banner-close {
+				height: 16px;
+				width: 16px;
+				position: static;
+
+				svg path {
+					fill: var( --color-secondary );
+				}
+			}
+		}
+
+		&-minimise,
+		&-maximise {
+			background: none;
+			border: none;
+			cursor: pointer;
+			color: var( --color-secondary );
+			padding-right: 8px;
+			margin-right: 8px;
+			border-right: 1px solid #bfbfbf;
+			font-size: 14px;
+			font-weight: bold;
+
+			svg {
+				width: 20px;
+
+				path {
+					fill: var( --color-secondary );
+				}
+			}
+		}
+
+		&-minimise {
+			svg {
+				transform: rotate( 180deg );
+				margin-left: 3px;
+			}
+		}
+	}
+}

@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_02"
-description = "Based on CTRL of C24_WMDE_Desktop_DE_01"
-campaign_tracking = "02-ba-240722"
+campaign = "C24_WMDE_Desktop_DE_03"
+description = "Based on CTRL of C24_WMDE_Desktop_DE_02"
+campaign_tracking = "03-ba-240808"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -16,14 +16,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_02/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_02_ctrl"
-tracking = "org-02-240722-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_03/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_03_ctrl"
+tracking = "org-03-240808-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_02/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_02_var"
-tracking = "org-02-240722-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_03/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_03_var"
+tracking = "org-03-240808-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
