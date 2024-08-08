@@ -43,10 +43,10 @@ $font-weight: normal;
 	}
 
 	&-select-group-container.select-amount {
+		margin-top: 0;
 		.wmde-banner-select-group-option {
 			width: $amount-option-width;
 		}
-		margin-top: 0;
 	}
 
 	&-select-group-container.select-interval {
