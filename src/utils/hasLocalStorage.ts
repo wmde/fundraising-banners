@@ -14,7 +14,7 @@ export default function hasLocalStorage(): boolean {
 		window.localStorage.setItem( 'mDQcDkrbb2', 'mDQcDkrbb2' );
 		window.localStorage.removeItem( 'mDQcDkrbb2' );
 		localStorageActive = true;
-	} catch ( e ) {
+	} catch {
 		localStorageActive = false;
 	}
 

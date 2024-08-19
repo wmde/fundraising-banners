@@ -119,7 +119,7 @@ top-most component, e.g. `banners/desktop/components/MainBanner.vue`:
 
 ```
 <style>
-@use "../styles/styles.scss";
+@use "../styles/styles";
 </style
 ```
 
