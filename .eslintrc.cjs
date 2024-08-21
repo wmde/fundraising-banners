@@ -19,6 +19,9 @@ module.exports = {
 	'globals': {
 		mw: false
 	},
+	'plugins': [
+		'@stylistic/ts'
+	],
 	'rules': {
 		// TODO: Turn this rule back on when this is merged https://github.com/vuejs/eslint-plugin-vue/pull/2268
 		'vue/no-setup-props-destructure': [ 'off' ],
@@ -53,7 +56,7 @@ module.exports = {
 		'no-shadow': 'off',
 		'@typescript-eslint/no-shadow': [ 'error' ],
 
-		'@typescript-eslint/type-annotation-spacing': 'error',
+		'@stylistic/ts/type-annotation-spacing': 'error',
 		'@typescript-eslint/explicit-function-return-type': 'off',
 		'@typescript-eslint/explicit-member-accessibility': 'off',
 

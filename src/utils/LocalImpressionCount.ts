@@ -38,7 +38,7 @@ export class LocalImpressionCount implements ImpressionCount {
 	private getItem( name: string, defaultValue: string ): string {
 		try {
 			return window.localStorage.getItem( name ) || defaultValue;
-		} catch ( e ) {
+		} catch {
 			return defaultValue;
 		}
 	}
@@ -54,7 +54,7 @@ export class LocalImpressionCount implements ImpressionCount {
 		try {
 			window.localStorage.setItem( 'fundraising.overallCount', this._overallCount.toFixed( 0 ) );
 			window.localStorage.setItem( 'fundraising.bannerCount', this._bannerName + '|' + this._bannerCount );
-		} catch ( e ) {
+		} catch {
 			// Don't throw localStorage exceptions
 		}
 	}

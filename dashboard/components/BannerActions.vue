@@ -140,7 +140,7 @@ function onCopyBannerToClipBoard( e: Event ): void {
 				}, 2000 );
 				return;
 			} catch ( error ) {
-				alert( 'Failed to copy banner code using navigator.clipboard:' );
+				alert( 'Failed to copy banner code using navigator.clipboard: ' + error );
 			}
 		}
 	} );
