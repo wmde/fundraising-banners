@@ -42,22 +42,30 @@ files that you can insert 1:1 in CentralNotice.
 ## Configuring campaigns, banners and tracking
 
 The file `campaign_info.toml` contains the metadata for all banners and
-campaigns. Webpack uses it to determine the unique file names of the
+campaigns. The information is organized into *channels*. A "channel" is a
+combination of Website (wikipedia.org or wikipedia.de), platform (desktop,
+mobile, ipad) and language (German, English).
+
+Webpack uses `campaign_info.toml` to determine the unique file names of the
 output and the input files, the so-called *[entry
-points](https://webpack.js.org/configuration/entry-context/)*. Entry
-points are the local files (configured with the setting `filename`) which
-Webpack will compile to pure JavaScript code ( or JavaScript code wrapped
-in wikitext for banners on wikipdia.org). The CentralNotice banner names
-(which Webpack will also for the `devbanner` parameter in the preview)
-come from the `pagename` setting.
+points](https://webpack.js.org/configuration/entry-context/)*. Entry points are
+the local files (configured with the setting `filename`) which Webpack will
+compile to pure JavaScript code ( or JavaScript code wrapped in wikitext for
+banners on wikipdia.org). The CentralNotice banner names (which Webpack will
+also for the `devbanner` parameter in the preview) come from the `pagename`
+setting.
 
 Webpack uses the `campaign_tracking` and `tracking` parameters in
 `campaign_info.toml` to create the tracking information inside the banner
 code. Webpack passes the tracking information to the form fields and event
 tracking pixels inside the banner.
 
+The [Banner Screenshots](https://github.com/wmde/banner-screenshots) software
+uses the `.test_matrix` subsection of each channel to determine which browser
+platforms and resolutions to test each banner on.
+
 ## Creating new campaigns
-1. Duplicate an existing folder with banner entry points, e.g. `banners/desktop`.
+1. Duplicate an existing folder with banner entry points, e.g. `banners/desktop/C24_WMDE_Desktop_DE_02`.
 2. Create a new campaign and its banner configuration in `campaign_info.toml`.
 
 ## Developing and building "thank you" banners
@@ -78,12 +86,9 @@ style changes, different behavior)
 
 ## Directory structure
 
-- `archive/`: Archived banners
-- `banners/`: Contains subdirectories for each campaign (sometimes also called
-	a *channel*). Subfolder names *should* match the campaign names
-	(top-level configuration sections in `campaign_info.toml`), but are
-	not required to match.
-  - `desktop/`: contains the entry points and the banner components for
+- `banners/`: Contains subdirectories for each channel and the campaigns in each channel. Subfolder names *should* match the channel names
+	(top-level configuration sections in `campaign_info.toml`) and campaigns names, but are
+	not required to match.  Example: `banners/desktop/C24_WPDE_Desktop_01`: contains the entry points and the banner components for
 	the desktop campaign.
 - `dashboard/`: Dashboard UI that displays the overview of the
   banners in development mode.
@@ -94,6 +99,8 @@ style changes, different behavior)
 - `test/`: Unit and component tests
   - `unit`: Unit tests for small library functions.
   - `components`: Unit tests for components
+  - `features`: Collections of banner feature tests. They are not standalone, but a library for the tests in `test/banner`
+  - `banner`: Banner feature tests for each banner. File structure follows the pattern `test/banner/CHANNELNAME/CAMPAIGN_NAME`
 - `themes/`: Theme style files
   - `theme1/`: Theme folder for one theme, containing files for components.
      The directory structure inside the theme folder should replicate the 
