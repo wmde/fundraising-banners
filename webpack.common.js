@@ -61,7 +61,22 @@ module.exports = ( env ) => {
 				},
 				{
 					test: /\.(scss|css)$/,
-					use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+					use: [
+						'style-loader',
+						'css-loader',
+						{
+							loader: 'sass-loader',
+							options: {
+								sassOptions: {
+									// This option allows us to specify a project-relative path in our SCSS files
+									// see https://sass-lang.com/documentation/at-rules/import/#load-paths
+									loadPaths: [
+										path.resolve( __dirname )
+									]
+								}
+							}
+						}
+					]
 				}
 			]
 		},
