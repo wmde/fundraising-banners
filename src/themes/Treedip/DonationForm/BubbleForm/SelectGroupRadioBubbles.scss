@@ -1,15 +1,9 @@
-@use '../../variables/colors';
 @use '../../variables/breakpoints';
 
 $height: 23px !default;
 
 $margin-left: -6px;
 $border-radius: 8px;
-$border-radio: 1px solid #ffffff;
-$border-color-bubble: #b7b7b7;
-$border-color-radio: #848282;
-$active-color: #3366cc;
-$box-shadow: 0 0 0 1px $active-color;
 $font-size: 1.01em;
 $padding: 0 0 0 3px;
 
@@ -27,18 +21,18 @@ $padding: 0 0 0 3px;
 				padding: 0 10px 0 25px;
 				cursor: pointer;
 				height: $height;
-				background: colors.$white;
-				border: 1px solid $border-color-bubble;
+				background: var( --select-group-bubble-background );
+				border: 1px solid var( --select-group-bubble-border );
 				border-radius: $border-radius;
 			}
 
 			&.active label {
-				border: 2px solid $active-color;
+				border: 2px solid var( --select-group-bubble-border-active );
 			}
 		}
 
 		&-label {
-			color: colors.$black;
+			color: var( --select-group-bubble-color );
 			border: 0 none;
 			font-size: $font-size;
 			margin-left: $margin-left;
@@ -49,9 +43,9 @@ $padding: 0 0 0 3px;
 				height: 10px;
 				width: 10px;
 				margin: -5px 0 0 8px;
-				background: colors.$white;
+				background: var( --select-group-bubble-radio-background );
 				border-radius: 50%;
-				border: 2px solid $border-color-radio;
+				border: 2px solid var( --select-group-bubble-radio-border );
 			}
 		}
 
@@ -67,9 +61,9 @@ $padding: 0 0 0 3px;
 
 			/* This creates the "selected radio button" shape */
 			&:checked + .wmde-banner-select-group-label::before {
-				border: $border-radio;
-				box-shadow: $box-shadow;
-				background-color: $active-color;
+				border: 1px solid var( --select-group-bubble-radio-border-checked );
+				box-shadow: 0 0 0 1px var( --select-group-bubble-radio-background-checked );
+				background-color: var( --select-group-bubble-radio-background-checked );
 			}
 		}
 	}

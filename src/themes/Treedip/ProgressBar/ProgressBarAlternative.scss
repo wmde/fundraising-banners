@@ -1,5 +1,4 @@
 @use '../variables/fonts';
-@use '../variables/colors';
 @use '../variables/breakpoints';
 @use 'transitions';
 @use 'src/components/ProgressBar/ProgressBar';
@@ -31,7 +30,7 @@ $progress-bar-margin: 0 !default;
 
 			&-left {
 				visibility: hidden;
-				color: colors.$white;
+				color: var( --progress-bar-fill-color );
 				padding-left: 10px;
 			}
 
@@ -53,8 +52,8 @@ $progress-bar-margin: 0 !default;
 		&-fill-wrapper {
 			flex: 1 1 auto;
 			position: relative;
-			background: colors.$white;
-			border: 3px solid colors.$primary;
+			background: var( --progress-bar-wrapper-background );
+			border: 3px solid var( --progress-bar-wrapper-border );
 			height: $progress-bar-height;
 			border-radius: 15px;
 		}
@@ -62,9 +61,9 @@ $progress-bar-margin: 0 !default;
 		&-fill {
 			min-width: 80px;
 			max-width: 100%;
-			background: colors.$primary;
+			background: var( --progress-bar-fill-background );
 			border-radius: 15px;
-			color: colors.$white;
+			color: var( --progress-bar-fill-color );
 			text-align: right;
 			padding-right: 16px;
 			line-height: 24px;

@@ -1,5 +1,3 @@
-@use 'src/themes/Treedip/variables/colors';
-
 $banner-height: 357px !default;
 $form-width: 300px !default;
 
@@ -30,7 +28,7 @@ $form-width: 300px !default;
 		overflow-y: hidden;
 		margin-right: 30px;
 		padding: 0 0 10px;
-		border: 5px solid colors.$primary;
+		border: 5px solid var( --message-border );
 		border-radius: 9px;
 	}
 

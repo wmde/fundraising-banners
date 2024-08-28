@@ -1,12 +1,6 @@
 @use '../../../../components/DonationForm/SubComponents/SelectCustomAmount';
-@use '../../variables/colors';
 
 $height: 23px !default;
-
-$background-color: transparent;
-$active-color: #3366cc;
-$border-radio: 1px solid #ffffff;
-$box-shadow: 0 0 0 1px #3366cc;
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
@@ -31,16 +25,16 @@ $box-shadow: 0 0 0 1px #3366cc;
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
 			&:checked + .wmde-banner-select-custom-amount-input-container::before {
-				border: $border-radio;
-				box-shadow: $box-shadow;
-				background-color: $active-color;
+				border: 1px solid var( --select-group-bubble-radio-border-checked );
+				box-shadow: 0 0 0 1px var( --select-group-bubble-radio-background-checked );
+				background-color: var( --select-group-bubble-radio-background-checked );
 			}
 		}
 
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				border: 1px solid $active-color;
+				border: 1px solid var( --select-group-bubble-border-active );
 			}
 
 			.wmde-banner-select-custom-amount-input {
@@ -51,9 +45,9 @@ $box-shadow: 0 0 0 1px #3366cc;
 
 		&-input-container {
 			height: $height;
-			background-color: colors.$white;
+			background-color: var( --select-group-bubble-background );
 			border-radius: 8px;
-			border: 1px solid #b7b7b7;
+			border: 1px solid var( --select-group-bubble-border );
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
 			&::before {
@@ -62,7 +56,7 @@ $box-shadow: 0 0 0 1px #3366cc;
 				top: 50%;
 				left: 0;
 				margin: -5px 0 0 4px;
-				background: colors.$white;
+				background: var( --select-group-bubble-radio-background );
 				border-radius: 50%;
 				border: 2px solid #848282;
 			}
@@ -78,8 +72,8 @@ $box-shadow: 0 0 0 1px #3366cc;
 		}
 
 		&-input {
-			color: colors.$black;
-			background-color: $background-color;
+			color: var( --select-group-bubble-color );
+			background-color: transparent;
 			padding: 0 20px;
 			font-size: 0.9em;
 			font-weight: normal;
@@ -89,7 +83,7 @@ $box-shadow: 0 0 0 1px #3366cc;
 
 			&:focus,
 			&:active {
-				border: 1px solid colors.$secondary;
+				border: 1px solid var( --select-group-bubble-border-active );
 			}
 		}
 	}

@@ -1,10 +1,8 @@
-@use '../../variables/colors';
 @use '../../variables/globals';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
 $font-size: 12px !default;
 $height: 36px !default;
-$border-color: #9aa0a7 !default;
 $padding: 0 4px 8px !default;
 
 .wmde-banner {
@@ -19,7 +17,7 @@ $padding: 0 4px 8px !default;
 			line-height: 2em;
 			height: $height;
 			margin: 0;
-			border: 1px solid $border-color;
+			border: 1px solid var( --select-group-button-border );
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
@@ -52,12 +50,12 @@ $padding: 0 4px 8px !default;
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				background: colors.$secondary;
-				border-color: colors.$gray-medium;
+				background: var( --select-group-button-background-checked );
+				border-color: var( --select-group-button-border-checked );
 			}
 			.wmde-banner-select-custom-amount-input,
 			.wmde-banner-select-custom-amount-euro-symbol {
-				color: colors.$white;
+				color: var( --select-group-button-color-checked );
 			}
 		}
 	}

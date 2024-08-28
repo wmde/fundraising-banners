@@ -1,4 +1,11 @@
 // This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/swatches/vector-2022' with (
+	$slider: true,
+	$progress-bar: true,
+	$select-group-bubble: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+);
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
@@ -27,6 +34,7 @@
 	$height: 34px
 );
 @use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
+@use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel_dark';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
 	$padding: 14px 0 0

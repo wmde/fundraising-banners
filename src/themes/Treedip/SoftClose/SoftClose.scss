@@ -1,15 +1,12 @@
 @use 'src/components/SoftClose/SoftClose';
-@use '../variables/colors';
 @use '../variables/breakpoints';
 @use '../variables/fonts';
-
-$background-color: colors.$primary !default;
 
 .wmde-banner {
 	@include SoftClose.layout;
 
 	&-soft-close {
-		background: colors.$white;
+		background: var( --soft-close-background );
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
 		&-columns {
@@ -46,8 +43,8 @@ $background-color: colors.$primary !default;
 		&-button {
 			border: 0 none;
 			min-width: 150px;
-			color: colors.$white;
-			background-color: $background-color;
+			color: var( --soft-close-button-color );
+			background-color: var( --soft-close-button-background );
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 32px;
@@ -73,7 +70,7 @@ $background-color: colors.$primary !default;
 		}
 
 		&-countdown-bar-fill {
-			background-color: colors.$primary;
+			background-color: var( --soft-close-bar-background );
 		}
 
 		&-with-close-icon {

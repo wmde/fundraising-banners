@@ -1,5 +1,4 @@
 @use '../../variables/fonts';
-@use '../../variables/colors';
 @use 'src/components/DonationForm/Forms/AddressTypeForm';
 
 .wmde-banner {
@@ -49,7 +48,7 @@
 
 		&-error {
 			line-height: 16px;
-			color: colors.$error;
+			color: var( --color-error );
 			font-weight: bold;
 			text-align: center;
 			margin-bottom: 0.2em;

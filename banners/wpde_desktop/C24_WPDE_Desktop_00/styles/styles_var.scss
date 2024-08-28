@@ -1,4 +1,11 @@
 // This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/swatches/default' with (
+	$slider: true,
+	$progress-bar: true,
+	$select-group: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+);
 @use '@src/themes/Treedip/variables/breakpoints';
 @use '@src/components/BannerConductor/banner-transition';
 @use 'Banner';
