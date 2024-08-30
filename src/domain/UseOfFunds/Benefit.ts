@@ -1,4 +1,4 @@
 export interface Benefit {
-	icon: string;
+	icon: 'hand' | 'smartphone' | 'world' | 'megaphone' | 'twentyfourseven';
 	text: string;
 }

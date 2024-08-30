@@ -1,7 +1,5 @@
-@use 'variables/colors';
-
 .funds-distribution-accordion {
-	border-bottom: 1px solid colors.$light-grey;
+	border-bottom: 1px solid var( --accordion-item-border );
 	margin-bottom: 16px;
 
 	&-item {
@@ -17,7 +15,7 @@
 			font-weight: bold;
 			line-height: 36px;
 			cursor: pointer;
-			border-top: 1px solid colors.$light-grey;
+			border-top: 1px solid var( --accordion-item-border );
 		}
 
 		&-chevron {
@@ -25,6 +23,10 @@
 			float: right;
 			margin-top: 14px;
 			opacity: 0.5;
+
+			path {
+				fill: var( --accordion-item-border ) !important; // stylelint-disable-line
+			}
 		}
 
 		&-text {
