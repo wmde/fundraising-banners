@@ -132,23 +132,23 @@ tracking = "wpde-mob00-190624-var"
 [english]
 name = "English Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_EN_00"
+campaign = "C24_WMDE_Desktop_EN_01"
 description = "Based on C23_WMDE_Desktop_EN_05"
-campaign_tracking = "en00-ba-190624"
+campaign_tracking = "en01-ba-090324"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_EN"
 
 [english.banners.ctrl]
-filename = "./banners/english/C24_WMDE_Desktop_EN_00/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_EN_00_ctrl"
-tracking = "org-en00-190624-ctrl"
+filename = "./banners/english/C24_WMDE_Desktop_EN_01/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_EN_01_ctrl"
+tracking = "org-en01-090324-ctrl"
 
 [english.banners.var]
-filename = "./banners/english/C24_WMDE_Desktop_EN_00/banner_var.ts"
-pagename = "B24_WMDE_Desktop_EN_00_var"
-tracking = "org-en00-190624-var"
+filename = "./banners/english/C24_WMDE_Desktop_EN_01/banner_var.ts"
+pagename = "B24_WMDE_Desktop_EN_01_var"
+tracking = "org-en01-090324-var"
 
 [english.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
