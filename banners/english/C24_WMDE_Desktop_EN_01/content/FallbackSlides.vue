@@ -3,7 +3,6 @@
 		<p>
 			Our donation target: €9.7 million
 		</p>
-		<ProgressBar amount-to-show-on-right="TARGET"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
@@ -22,7 +21,6 @@
 
 <script setup lang="ts">
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import FallbackBank from '@src/components/FallbackBanner/FallbackBank.vue';
 
 interface Props {

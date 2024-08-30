@@ -31,7 +31,6 @@
 		<div class="wmde-banner-fallback-large" v-if="onLargeScreen">
 			<div class="wmde-banner-fallback-message">
 				<FallbackText/>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</div>
 
 			<LargeFooter @useOfFundsButtonClicked="isFundsModalVisible = true" @submitButtonClicked="onSubmit"/>
@@ -61,7 +60,6 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import FallbackText from '../content/FallbackText.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import FallbackButton from '@src/components/FallbackBanner/FallbackButton.vue';
 import SmallFooter from '@src/components/FallbackBanner/SmallFooter.vue';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
