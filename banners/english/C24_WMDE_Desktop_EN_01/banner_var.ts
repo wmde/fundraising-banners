@@ -67,7 +67,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN, ap: '1' } ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );
