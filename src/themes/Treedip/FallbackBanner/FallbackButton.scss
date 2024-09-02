@@ -1,12 +1,10 @@
 @use 'src/themes/Treedip/variables/globals';
-@use 'src/themes/Treedip/variables/colors';
-@use 'sass:color';
 
 .wmde-banner-fallback {
 	&-button {
 		width: 300px;
-		background: colors.$secondary;
-		color: colors.$white;
+		background: var( --fallback-button-background );
+		color: var( --fallback-button-color );
 		font-weight: bold;
 		line-height: 36px;
 		border: 0;
@@ -17,7 +15,7 @@
 
 		&:hover,
 		&:focus {
-			background: color.adjust( colors.$secondary, $lightness: -5% );
+			background: var( --fallback-button-background-hover );
 		}
 	}
 }

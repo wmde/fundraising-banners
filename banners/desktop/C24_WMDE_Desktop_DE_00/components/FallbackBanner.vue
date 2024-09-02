@@ -15,11 +15,11 @@
 				</template>
 
 				<template #left-icon>
-					<ChevronLeftIcon :fill="'#990a00'"/>
+					<ChevronLeftIcon/>
 				</template>
 
 				<template #right-icon>
-					<ChevronRightIcon :fill="'#990a00'"/>
+					<ChevronRightIcon/>
 				</template>
 			</KeenSlider>
 

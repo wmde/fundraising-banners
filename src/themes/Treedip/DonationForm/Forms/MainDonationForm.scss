@@ -1,6 +1,5 @@
 @use '../../variables/globals';
 @use '../../variables/fonts';
-@use '../../variables/colors';
 @use 'src/components/DonationForm/Forms/MainDonationForm';
 
 $padding: 0 !default;
@@ -20,7 +19,7 @@ $padding: 0 !default;
 				font-family: fonts.$ui;
 				font-size: 12px;
 				line-height: 13px;
-				color: colors.$black-light;
+				color: var( --main-color );
 			}
 		}
 	}

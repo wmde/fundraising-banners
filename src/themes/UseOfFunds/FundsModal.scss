@@ -73,7 +73,6 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: #ffffff;
 		overflow-y: scroll;
 		z-index: 1;
 	}
@@ -85,7 +84,7 @@
 		top: 10px;
 		right: 16px;
 		padding: 4px;
-		background: #ffffff;
+		background: var( --close-button-background );
 		border-radius: 20px;
 		z-index: 2;
 

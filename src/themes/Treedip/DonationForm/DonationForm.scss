@@ -1,9 +1,7 @@
 @use '../variables/globals';
 @use '../variables/fonts';
-@use '../variables/colors';
 
 $button-font-size: 14px !default;
-$background-color: colors.$secondary !default;
 $border-radius: 18px !default;
 $height: 35px !default;
 
@@ -21,8 +19,8 @@ $height: 35px !default;
 
 		&-button {
 			min-width: 240px;
-			color: colors.$white;
-			background-color: $background-color;
+			color: var( --button-color );
+			background-color: var( --button-background );
 			border-radius: $border-radius;
 			font-size: $button-font-size;
 			line-height: 35px;
@@ -33,7 +31,7 @@ $height: 35px !default;
 			padding: 0;
 
 			&:hover {
-				background-color: $background-color;
+				background-color: var( --button-background );
 			}
 		}
 	}

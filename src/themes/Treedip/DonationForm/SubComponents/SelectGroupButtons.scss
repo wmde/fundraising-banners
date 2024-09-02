@@ -1,10 +1,5 @@
-@use 'sass:color';
-@use '../../variables/colors';
-
 $font-size: 12px !default;
 $height: 30px !default;
-$border-color: #9aa0a7 !default;
-$background-color: #f8f9fa !default;
 $padding: 0 4px 8px !default;
 
 .wmde-banner {
@@ -23,8 +18,8 @@ $padding: 0 4px 8px !default;
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			background: $background-color;
-			border: 1px solid $border-color;
+			background: var( grey200 );
+			border: 1px solid var( --select-group-button-border );
 			border-radius: 2px;
 			height: $height;
 			cursor: pointer;
@@ -35,14 +30,14 @@ $padding: 0 4px 8px !default;
 
 			&:hover,
 			&:focus {
-				background: color.adjust( $background-color, $lightness: -5% );
+				background: var( --select-group-button-background-focused );
 			}
 		}
 
 		&-input:checked + .wmde-banner-select-group-label {
-			background: colors.$secondary;
-			border-color: colors.$gray-medium;
-			color: colors.$white;
+			background: var( --select-group-button-background-checked );
+			border-color: var( --select-group-button-border-checked );
+			color: var( --select-group-button-color-checked );
 		}
 	}
 }

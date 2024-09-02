@@ -1,5 +1,4 @@
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
-@use '../../variables/colors';
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
@@ -28,7 +27,7 @@
 
 			/* This style must be in sync with the "radio button shape" style of SelectGroup */
 			&:checked + .wmde-banner-select-custom-amount-input-container::before {
-				border: 6px solid colors.$primary;
+				border: 6px solid var( --select-custom-amount-radio-border-checked );
 				box-shadow: none;
 			}
 		}
@@ -36,7 +35,7 @@
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				border: 1px solid colors.$secondary;
+				border: 1px solid var( --select-custom-amount-border-checked );
 			}
 
 			.wmde-banner-select-custom-amount-input {
@@ -47,7 +46,7 @@
 		}
 
 		&-input-container {
-			border: 1px solid colors.$gray-light;
+			border: 1px solid var( --select-custom-amount-border );
 			min-width: 110px;
 			margin: -2px 0 0;
 			line-height: 25px;
@@ -58,9 +57,9 @@
 				height: 16px;
 				width: 16px;
 				margin-top: -6px;
-				background: colors.$white;
+				background: var( --select-custom-amount-radio-background );
 				border-radius: 50%;
-				border: 1px solid #bbbbbb;
+				border: 1px solid var( --select-custom-amount-radio-border );
 			}
 		}
 
@@ -84,7 +83,7 @@
 
 			&:focus,
 			&:active {
-				border: 1px solid colors.$secondary;
+				border: 1px solid var( --select-custom-amount-border-checked );
 			}
 		}
 	}

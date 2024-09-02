@@ -1,4 +1,3 @@
-@use '../variables/colors';
 @use '../variables/fonts';
 @use '../variables/breakpoints';
 @use 'src/components/Slider/KeenSlider';
@@ -48,21 +47,21 @@ $slider-padding: 16px 0 !default;
 
 	&-slider-pagination {
 		&-dot {
-			background: colors.$gray-light;
+			background: var( --slider-pagination-background );
 			width: 15px;
 			height: 15px;
 			margin: 0 4px;
 			border-radius: 50%;
 			cursor: pointer;
-			border: 3px solid colors.$white;
+			border: 3px solid var( --slider-pagination-border );
 
 			&:focus {
 				outline: 0;
 			}
 		}
 		.is-active {
-			background: colors.$white;
-			border: 3px solid colors.$primary;
+			background: var( --slider-pagination-background-active );
+			border: 3px solid var( --slider-pagination-border-active );
 		}
 	}
 

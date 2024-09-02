@@ -1,4 +1,3 @@
-@use '@src/themes/Treedip/variables/colors';
 @use '@src/themes/Treedip/variables/fonts';
 @use '@src/themes/Treedip/variables/breakpoints';
 
@@ -37,7 +36,7 @@ $form-width: 256px !default;
 				top: 50%;
 				left: 20px;
 				right: 20px;
-				background: colors.$primary;
+				background: var( --main-title-line-background );
 				z-index: 98;
 
 				@include breakpoints.medium-up {
@@ -52,7 +51,7 @@ $form-width: 256px !default;
 				z-index: 99;
 				padding: 0 10px;
 				line-height: 24px;
-				background: colors.$white;
+				background: var( --main-background );
 			}
 		}
 	}
@@ -65,7 +64,7 @@ $form-width: 256px !default;
 		overflow-y: hidden;
 		margin-right: 20px;
 
-		border: 5px solid colors.$primary;
+		border: 5px solid var( --message-border );
 		border-radius: 9px;
 		padding: 20px 0;
 	}

@@ -1,4 +1,3 @@
-@use '../../variables/colors';
 @use 'src/components/DonationForm/SubComponents/SelectGroup';
 
 /**
@@ -8,8 +7,6 @@
 $amount-option-width: 25% !default;
 $interval-option-width: 50% !default;
 $payment-option-width: 50% !default;
-$background-color: colors.$white !default;
-$background-color-error: colors.$white !default;
 $border-radius: 0 !default;
 $padding: 0 !default;
 $height: auto !default;
@@ -26,21 +23,17 @@ $font-weight: bold !default;
 
 		&-container {
 			line-height: inherit;
-			background-color: $background-color;
+			background-color: var( --select-group-background );
 			border-radius: $border-radius;
 			padding: $padding;
 			height: $height;
 			margin-right: 15px;
-
-			&--with-error {
-				background-color: $background-color-error;
-			}
 		}
 
 		&-error-message {
 			height: 16px;
 			line-height: 16px;
-			color: colors.$error;
+			color: var( --color-error );
 			font-weight: bold;
 			text-align: center;
 			margin-bottom: 0.2em;
