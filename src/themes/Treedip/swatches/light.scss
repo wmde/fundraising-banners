@@ -29,6 +29,9 @@ $blue700: #2a4b8d;
 	--main-color: #{$grey700};
 	--main-title-line-background: #{$red600};
 	--main-border-bottom: #{$grey200};
+	--main-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+	--message-background: #{$white};
 	--message-border: #{$red600};
 
 	--color-error: #{$red600};
@@ -84,12 +87,15 @@ $blue700: #2a4b8d;
 	@if $select-group-bubble {
 		--select-group-bubble-color: #{$black};
 		--select-group-bubble-background: #{$white};
+		--select-group-bubble-background-active: #{$white};
 		--select-group-bubble-border: #{$grey300};
 		--select-group-bubble-border-active: #{$blue700};
+
 		--select-group-bubble-radio-background: #{$white};
 		--select-group-bubble-radio-border: #{$grey500};
-		--select-group-bubble-radio-background-checked: #{$blue700};
-		--select-group-bubble-radio-border-checked: #{$white};
+		--select-group-bubble-radio-background-checked: #{$white};
+		--select-group-bubble-radio-border-checked: #{$blue700};
+		--select-group-bubble-radio-checkmark: #{$blue700};
 	}
 
 	@if $select-group-button {
@@ -124,8 +130,8 @@ $blue700: #2a4b8d;
 		--fallback-button-background: #{$blue700};
 		--fallback-button-color: #{$white};
 		--fallback-button-background-hover: #{$blue600};
+		--fallback-message-background: #{$white};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey500};
-		--fallback-footer-border: #{$grey500};
 	}
 }

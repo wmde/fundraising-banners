@@ -28,6 +28,7 @@ $form-width: 300px !default;
 		overflow-y: hidden;
 		margin-right: 30px;
 		padding: 0 0 10px;
+		background: var( --message-background );
 		border: 5px solid var( --message-border );
 		border-radius: 9px;
 	}

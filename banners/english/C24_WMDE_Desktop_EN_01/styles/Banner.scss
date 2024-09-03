@@ -4,7 +4,7 @@
 	&-wrapper {
 		font-size: 14px;
 		font-family: fonts.$ui;
-		border-bottom: 1px solid var( --main-border-bottom );
+		box-shadow: var( --main-box-shadow );
 		background-color: var( --main-background );
 		color: var( --main-color );
 	}
