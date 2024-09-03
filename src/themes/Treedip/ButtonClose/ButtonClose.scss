@@ -1,5 +1,4 @@
 @use 'src/components/ButtonClose/ButtonClose';
-@use '../variables/colors';
 
 $top: 12px !default;
 $right: 12px !default;
@@ -30,7 +29,7 @@ $height: 30px !default;
 		&:focus {
 			cursor: pointer;
 			path {
-				fill: colors.$gray-medium;
+				fill: var( --button-close-fill );
 			}
 		}
 	}

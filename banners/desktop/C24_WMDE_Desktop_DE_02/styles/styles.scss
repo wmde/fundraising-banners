@@ -2,6 +2,7 @@
 
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
+@use 'src/themes/UseOfFunds/swatches/default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'MainBanner' with (
 	$banner-height: 357px,

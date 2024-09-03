@@ -1,4 +1,3 @@
-@use '../../variables/colors';
 @use 'src/components/DonationForm/Forms/UpgradeToYearlyForm';
 
 $custom-link-padding: 0 0 0 25px !default;
@@ -55,7 +54,7 @@ $custom-link-text-align: left !default;
 		&-custom,
 		&-custom:link,
 		&-custom:visited {
-			color: colors.$secondary;
+			color: var( --upgrade-to-yearly-link-color );
 			font-size: 12px;
 			text-align: $custom-link-text-align;
 			margin-bottom: 8px;
@@ -64,7 +63,7 @@ $custom-link-text-align: left !default;
 		}
 
 		&-custom:visited {
-			color: colors.$secondary;
+			color: var( --upgrade-to-yearly-link-color );
 		}
 
 		&-button {

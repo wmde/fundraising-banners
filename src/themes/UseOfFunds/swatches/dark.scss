@@ -1,0 +1,22 @@
+$white: #ffffff;
+$black: #ffffff;
+
+$grey400: #979797;
+$grey600: #525257;
+$grey700: #393a3d;
+$grey800: #202122;
+
+@mixin swatch() {
+	--background-color: #{$grey800};
+	--color: #{$white};
+
+	--close-button-background: #{$grey800};
+
+	--accordion-item-border: #{$grey400};
+	--accordion-item-chevron: #{$grey400};
+
+	--benefits-list-background: #{$grey700};
+	--benefits-list-icon: #{$black};
+
+	--comparison-background: #{$grey600};
+}

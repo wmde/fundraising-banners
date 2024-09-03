@@ -1,7 +1,3 @@
-@use 'variables/colors';
-
-$animated-highlight-gradient: colors.$animated-highlight-gradient !default;
-
 .wmde-banner {
 	* {
 		box-sizing: border-box;
@@ -20,7 +16,8 @@ $animated-highlight-gradient: colors.$animated-highlight-gradient !default;
 	&-text-animated-highlight {
 		padding: 0 5px;
 
-		background: $animated-highlight-gradient;
+		color: var( --animated-highlight-color );
+		background: var( --animated-highlight-gradient );
 
 		background-size: 201% 100%;
 		background-position: 100% 0;

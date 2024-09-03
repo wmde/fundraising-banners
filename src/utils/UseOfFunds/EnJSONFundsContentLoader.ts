@@ -5,6 +5,6 @@ import * as useOfFundsContent from 'fundraising-frontend-content/i18n/en_GB/data
 export class EnJSONFundsContentLoader implements FundsContentLoader {
 
 	public getContent(): UseOfFundsContent {
-		return useOfFundsContent;
+		return useOfFundsContent as UseOfFundsContent;
 	}
 }

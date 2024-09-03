@@ -1,12 +1,11 @@
-@use 'src/themes/Treedip/variables/fonts';
-@use 'src/themes/Treedip/variables/colors';
+@use 'src/themes/Svingle/variables/fonts';
 
 .wmde-banner {
 	&-wrapper {
 		font-size: 14px;
 		font-family: fonts.$ui;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		background-color: colors.$white;
+		background-color: var( --color-white );
 	}
 
 	&--pending {

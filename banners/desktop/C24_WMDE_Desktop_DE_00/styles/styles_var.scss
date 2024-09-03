@@ -7,6 +7,7 @@
 	$form-width: 300px
 );
 @use 'MinimisedBanner';
+@use 'src/themes/UseOfFunds/swatches/default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Svingle/defaults';
 @use 'src/themes/Svingle/ButtonClose/ButtonClose';

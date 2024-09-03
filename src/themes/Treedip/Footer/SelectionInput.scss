@@ -1,5 +1,4 @@
 @use '../variables/fonts';
-@use '../variables/colors';
 @use 'src/components/Footer/SelectionInput';
 
 .wmde-banner {
@@ -25,11 +24,11 @@
 				color: transparent;
 			}
 			.wmde-banner-selection-input-input {
-				color: colors.$black;
+				color: var( --input-selection-color );
 
 				&::selection {
-					background: colors.$primary;
-					color: colors.$white;
+					background: var( --input-selection-selected-background );
+					color: var( --input-selection-selected-color );
 				}
 			}
 		}

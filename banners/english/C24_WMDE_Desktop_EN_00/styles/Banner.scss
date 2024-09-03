@@ -1,12 +1,12 @@
 @use 'src/themes/Treedip/variables/fonts';
-@use 'src/themes/Treedip/variables/colors';
 
 .wmde-banner {
 	&-wrapper {
 		font-size: 14px;
 		font-family: fonts.$ui;
-		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		background-color: colors.$white;
+		border-bottom: 1px solid var( --main-border-bottom );
+		background-color: var( --main-background );
+		color: var( --main-color );
 	}
 
 	&--closed {

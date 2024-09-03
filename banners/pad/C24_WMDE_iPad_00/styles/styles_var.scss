@@ -1,10 +1,18 @@
 // This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/swatches/default' with (
+	$slider: true,
+	$progress-bar: true,
+	$select-group-button: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+);
 @use '@src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'MainBannerVar' with (
 	$banner-height: 378px,
 	$form-width: 35%
 );
+@use 'src/themes/UseOfFunds/swatches/default' as uof-default;
 @use '@src/themes/UseOfFunds/UseOfFunds';
 @use '@src/themes/Treedip/defaults';
 @use '@src/themes/Treedip/ButtonClose/ButtonClose';

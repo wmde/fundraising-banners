@@ -20,10 +20,10 @@
 					<ul class="use-of-funds-icon-list">
 						<li
 							v-for="benefit in content.benefitsList.benefits"
-							:class="'use-of-funds-icon-list-item-' + benefit.icon"
 							:key=benefit.text
 						>
-							{{ benefit.text }}
+							<BenefitsIcon :icon="benefit.icon"/>
+							<span>{{ benefit.text }}</span>
 						</li>
 					</ul>
 				</div>
@@ -65,6 +65,7 @@
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FundsDistributionAccordion from '@src/components/UseOfFunds/FundsDistributionAccordion.vue';
 import CompanyBudgets from '@src/components/UseOfFunds/CompanyBudgets.vue';
+import BenefitsIcon from '@src/components/UseOfFunds/BenefitsIcon.vue';
 
 interface Props {
 	content: UseOfFundsContent;

@@ -1,0 +1,5 @@
+@use 'light';
+
+.use-of-funds {
+	@include light.swatch;
+}

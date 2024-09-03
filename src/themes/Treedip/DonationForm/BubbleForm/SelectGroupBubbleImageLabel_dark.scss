@@ -1,0 +1,26 @@
+@use '@src/themes/Treedip/variables/breakpoints';
+
+@mixin force-svg-white {
+	svg path,
+	svg rect {
+		fill: #FFFFFF !important; // stylelint-disable-line
+
+		&.highlight-transparent {
+			fill: transparent !important; // stylelint-disable-line
+		}
+
+		&.highlight {
+			fill: #FFFFFF !important; // stylelint-disable-line
+		}
+	}
+}
+
+.skin-theme-clientpref-night .wmde-banner-select-group-label {
+	@include force-svg-white;
+}
+
+.skin-theme-clientpref-os .wmde-banner-select-group-label {
+	@media ( prefers-color-scheme: dark ) {
+		@include force-svg-white;
+	}
+}

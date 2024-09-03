@@ -1,5 +1,4 @@
 @use '../variables/globals';
-@use '../variables/colors';
 @use '../variables/fonts';
 @use 'src/components/AlreadyDonatedModal/AlreadyDonatedModal';
 .wmde-banner {
@@ -20,7 +19,7 @@
 			position: relative;
 			max-width: 800px;
 			margin: 0 10px;
-			background: colors.$white;
+			background: var( --main-background );
 			border-radius: 6px;
 			padding: 30px 30px 20px;
 			transition: transform 300ms globals.$banner-easing;
@@ -35,8 +34,8 @@
 			display: inline-block;
 			border: 0 none;
 			min-width: 220px;
-			color: colors.$white;
-			background-color: colors.$primary;
+			color: var( --already-donated-button-color );
+			background-color: var( --already-donated-button-background );
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 32px;

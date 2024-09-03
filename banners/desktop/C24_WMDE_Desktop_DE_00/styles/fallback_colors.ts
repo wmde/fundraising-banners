@@ -15,6 +15,8 @@ export default {
 	'--color-gray-light': '#dddddd',
 	'--color-gray-blue': '#bfd3e3',
 
+	'--slider-chevron': '#747474',
+
 	'--animated-highlight-gradient': `linear-gradient(
 		270deg,
 		rgba( 255, 255, 255, 0 ) 0%,

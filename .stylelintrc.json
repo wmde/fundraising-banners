@@ -32,6 +32,7 @@
 		"media-feature-range-notation": "prefix",
 		"function-disallowed-list": null,
 		"font-family-name-quotes": "always-unless-keyword",
+		"custom-property-empty-line-before": null,
 		"at-rule-no-unknown": [
 			true,
 			{
@@ -39,6 +40,7 @@
 					"use",
 					"forward",
 					"mixin",
+					"if",
 					"include",
 					"function",
 					"extend",

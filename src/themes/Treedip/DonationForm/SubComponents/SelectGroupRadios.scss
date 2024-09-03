@@ -1,4 +1,3 @@
-@use '../../variables/colors';
 @use '../../variables/breakpoints';
 
 .wmde-banner {
@@ -18,7 +17,7 @@
 		}
 
 		&-label {
-			color: colors.$black;
+			color: var( --select-group-radio-label-color );
 			border: 0 none;
 			font-size: 0.95em;
 
@@ -27,9 +26,9 @@
 				height: 16px;
 				width: 16px;
 				margin-top: -6px;
-				background: colors.$white;
+				background: var( --select-group-radio-label-background );
 				border-radius: 50%;
-				border: 1px solid #bbbbbb;
+				border: 1px solid var( --select-group-radio-label-border );
 			}
 		}
 
@@ -45,7 +44,7 @@
 
 			/* This creates the "selected radio button" shape */
 			&:checked + .wmde-banner-select-group-label::before {
-				border: 6px solid colors.$primary;
+				border: 6px solid var( --select-group-radio-border-checked );
 				box-shadow: none;
 			}
 		}

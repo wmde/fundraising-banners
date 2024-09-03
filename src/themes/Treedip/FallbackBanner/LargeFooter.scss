@@ -1,4 +1,3 @@
-@use 'src/themes/Treedip/variables/colors';
 @use 'src/components/FallbackBanner/LargeFooter';
 
 .wmde-banner-fallback {
@@ -26,12 +25,12 @@
 				height: 0;
 				border-style: solid;
 				border-width: 6px 6px 0;
-				border-color: colors.$primary transparent transparent transparent;
+				border-color: var( --fallback-footer-border ) transparent transparent transparent;
 			}
 		}
 
 		&-usage-link {
-			color: colors.$gray;
+			color: var( --fallback-uof-link );
 		}
 
 		.wmde-banner-selection-input-text,
