@@ -3,6 +3,8 @@
 @use '@src/themes/Mikings/variables/breakpoints';
 
 .wmde-banner {
+	--slider-chevron: #{colors.$black-light}; // Temporary fix until mobile banners use swatches
+
 	&-full {
 		border: 2px solid colors.$primary;
 		background: colors.$white;

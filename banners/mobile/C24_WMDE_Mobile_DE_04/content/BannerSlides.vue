@@ -1,8 +1,8 @@
 <template>
 
 	<KeenSliderSlide :is-current="currentSlide === 0">
+		<p><strong>Hi,</strong></p>
 		<p>
-			<strong>Hi,</strong><br>
 			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 			heutigen {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie,
 			die Unabhängigkeit von Wikipedia zu unterstützen.
