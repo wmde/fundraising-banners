@@ -3,7 +3,6 @@
 
 $font-size: 12px !default;
 $height: 36px !default;
-$border-color: var( --color-secondary ) !default;
 $padding: 0 4px 8px !default;
 
 .wmde-banner {
@@ -18,7 +17,7 @@ $padding: 0 4px 8px !default;
 			line-height: 2em;
 			height: $height;
 			margin: 0;
-			border: 1px solid $border-color;
+			border: 1px solid var( --select-group-button-border );
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
@@ -51,12 +50,12 @@ $padding: 0 4px 8px !default;
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				background: var( --color-secondary );
-				border-color: var( --color-gray-medium );
+				background: var( --select-group-button-background-checked );
+				border-color: var( --select-group-button-border-checked );
 			}
 			.wmde-banner-select-custom-amount-input,
 			.wmde-banner-select-custom-amount-euro-symbol {
-				color: var( --color-white );
+				color: var( --select-group-button-color-checked );
 			}
 		}
 	}

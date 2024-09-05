@@ -4,8 +4,9 @@
 	&-wrapper {
 		font-size: 14px;
 		font-family: fonts.$ui;
-		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		background-color: var( --color-white );
+		box-shadow: var( --main-box-shadow );
+		background-color: var( --main-background );
+		color: var( --main-color );
 	}
 
 	&--pending {

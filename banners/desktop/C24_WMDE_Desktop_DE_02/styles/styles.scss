@@ -1,5 +1,10 @@
 // This is the file where we import the theme-specific component styles
-
+@use 'src/themes/Svingle/swatches/default' with (
+	$slider: true,
+	$select-group-bubble: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+);
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
 @use 'src/themes/UseOfFunds/swatches/default' as uof-default;
@@ -18,7 +23,7 @@
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+@use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/Forms/CustomAmountForm';

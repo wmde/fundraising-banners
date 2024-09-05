@@ -1,0 +1,75 @@
+@use 'dark';
+@use 'light';
+
+$slider: false !default;
+$progress-bar: false !default;
+$select-group: false !default;
+$select-group-bubble: false !default;
+$select-group-button: false !default;
+$upgrade-to-yearly: false !default;
+$already-donated: false !default;
+$soft-close: false !default;
+$fallback-banner: false !default;
+$minimised-banner: false !default;
+
+.skin-theme-clientpref-day .wmde-banner {
+	@include light.swatch(
+		$slider,
+		$progress-bar,
+		$select-group,
+		$select-group-bubble,
+		$select-group-button,
+		$upgrade-to-yearly,
+		$already-donated,
+		$soft-close,
+		$fallback-banner,
+		$minimised-banner
+	);
+}
+
+.skin-theme-clientpref-night .wmde-banner {
+	@include dark.swatch(
+		$slider,
+		$progress-bar,
+		$select-group,
+		$select-group-bubble,
+		$select-group-button,
+		$upgrade-to-yearly,
+		$already-donated,
+		$soft-close,
+		$fallback-banner,
+		$minimised-banner
+	);
+}
+
+.skin-theme-clientpref-os .wmde-banner {
+	@media ( prefers-color-scheme: dark ) {
+		@include dark.swatch(
+			$slider,
+			$progress-bar,
+			$select-group,
+			$select-group-bubble,
+			$select-group-button,
+			$upgrade-to-yearly,
+			$already-donated,
+			$soft-close,
+			$fallback-banner,
+			$minimised-banner
+		);
+	}
+
+	@media ( prefers-color-scheme: light ) {
+		@include light.swatch(
+			$slider,
+			$progress-bar,
+			$select-group,
+			$select-group-bubble,
+			$select-group-button,
+			$upgrade-to-yearly,
+			$already-donated,
+			$soft-close,
+			$fallback-banner,
+			$minimised-banner
+		);
+	}
+}

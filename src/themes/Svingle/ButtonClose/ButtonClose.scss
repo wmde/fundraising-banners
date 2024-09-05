@@ -29,7 +29,7 @@ $height: 30px !default;
 		&:focus {
 			cursor: pointer;
 			path {
-				fill: var( --color-gray-medium );
+				fill: var( --button-close-fill );
 			}
 		}
 	}

@@ -7,7 +7,6 @@
 $amount-option-width: 25% !default;
 $interval-option-width: 50% !default;
 $payment-option-width: 50% !default;
-$background-color: var( --color-white ) !default;
 $background-color-error: var( --color-white ) !default;
 $border-radius: 0 !default;
 $padding: 0 !default;
@@ -25,15 +24,11 @@ $font-weight: bold !default;
 
 		&-container {
 			line-height: inherit;
-			background-color: $background-color;
+			background-color: var( --select-group-background );
 			border-radius: $border-radius;
 			padding: $padding;
 			height: $height;
 			margin-right: 15px;
-
-			&--with-error {
-				background-color: $background-color-error;
-			}
 		}
 
 		&-error-message {

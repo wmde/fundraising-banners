@@ -24,11 +24,11 @@
 				color: transparent;
 			}
 			.wmde-banner-selection-input-input {
-				color: var( --color-black );
+				color: var( --input-selection-color );
 
 				&::selection {
-					background: var( --color-primary );
-					color: var( --color-white );
+					background: var( --input-selection-selected-background );
+					color: var( --input-selection-selected-color );
 				}
 			}
 		}

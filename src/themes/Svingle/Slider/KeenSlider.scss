@@ -16,8 +16,8 @@ $margin-bottom: 15px !default;
 		font-size: 1.8vw;
 		padding: $slider-padding;
 		line-height: 1.2;
-		background-color: var( --color-secondary );
-		color: var( --color-white );
+		background-color: var( --slider-background );
+		color: var( --slider-color );
 		border-radius: 9px;
 		margin-bottom: $margin-bottom;
 
@@ -65,21 +65,21 @@ $margin-bottom: 15px !default;
 
 	&-slider-pagination {
 		&-dot {
-			background: var( --color-gray-light );
+			background: var( --slider-pagination-background );
 			width: 15px;
 			height: 15px;
 			margin: 0 4px;
 			border-radius: 50%;
 			cursor: pointer;
-			border: 3px solid var( --color-secondary );
+			border: 3px solid var( --slider-pagination-border );
 
 			&:focus {
 				outline: 0;
 			}
 		}
 		.is-active {
-			background: var( --color-secondary );
-			border: 3px solid var( --color-white );
+			background: var( --slider-pagination-background-active );
+			border: 3px solid var( --slider-pagination-border-active );
 		}
 	}
 

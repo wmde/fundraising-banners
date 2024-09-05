@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			v-if="contentState === ContentStates.Main"
@@ -74,7 +74,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import colors from '../styles/colors';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 
 enum ContentStates {

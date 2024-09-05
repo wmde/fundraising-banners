@@ -30,7 +30,7 @@ $progress-bar-margin: 0 !default;
 
 			&-left {
 				visibility: hidden;
-				color: var( --color-white );
+				color: var( --progress-bar-fill-color );
 				padding-left: 10px;
 			}
 
@@ -52,8 +52,8 @@ $progress-bar-margin: 0 !default;
 		&-fill-wrapper {
 			flex: 1 1 auto;
 			position: relative;
-			background: var( --color-white );
-			border: 3px solid var( --color-primary );
+			background: var( --progress-bar-wrapper-background );
+			border: 3px var( --progress-bar-wrapper-border );
 			height: $progress-bar-height;
 			border-radius: 15px;
 		}
@@ -61,9 +61,9 @@ $progress-bar-margin: 0 !default;
 		&-fill {
 			min-width: 80px;
 			max-width: 100%;
-			background: var( --color-primary );
+			background: var( --progress-bar-fill-background );
 			border-radius: 15px;
-			color: var( --color-white );
+			color: var( --progress-bar-fill-color );
 			text-align: right;
 			padding-right: 16px;
 			line-height: 24px;

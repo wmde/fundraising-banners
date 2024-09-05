@@ -3,8 +3,8 @@
 .wmde-banner-fallback {
 	&-button {
 		width: 300px;
-		background: var( --color-secondary );
-		color: var( --color-white );
+		background: var( --fallback-button-background );
+		color: var( --fallback-button-color );
 		font-weight: bold;
 		line-height: 36px;
 		border: 0;
@@ -15,7 +15,7 @@
 
 		&:hover,
 		&:focus {
-			background: var( --color-secondary-hover );
+			background: var( --fallback-button-background-hover );
 		}
 	}
 
