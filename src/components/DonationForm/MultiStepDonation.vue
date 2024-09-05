@@ -18,24 +18,26 @@
 
 <script setup lang="ts">
 
-import { inject, nextTick, onMounted, ref, useSlots } from 'vue';
+import { computed, inject, nextTick, onMounted, ref, useSlots } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
-import { FormActions } from '@src/domain/FormActions';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
-import { useFormAction } from '@src/components/composables/useFormAction';
 import { StepController } from '@src/components/DonationForm/StepController';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { useFormAction } from '@src/components/composables/useFormAction';
+import { FormActions } from '@src/domain/FormActions';
 
 interface Props {
 	showErrorScrollLink?: boolean;
 	stepControllers: StepController[];
-	pageScroller?: PageScroller
+	pageScroller?: PageScroller;
+	formActionOverride?: string;
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	showErrorScrollLink: false
+	showErrorScrollLink: false,
+	formActionOverride: ''
 } );
 const emit = defineEmits( [ 'formInteraction' ] );
 
@@ -47,7 +49,10 @@ usedSlotNames.forEach( ( slotName: string, index: number ): void => {
 } );
 const tracker = inject<Tracker>( 'tracker' );
 const currentStepIndex = ref<number>( 0 );
-const { formAction } = useFormAction( inject<FormActions>( 'formActions' ) );
+const defaultFormAction = useFormAction( inject<FormActions>( 'formActions' ) );
+const formAction = computed( (): string => {
+	return props.formActionOverride ? props.formActionOverride : defaultFormAction.formAction.value;
+} );
 const submitFormRef = ref<HTMLFormElement>( null );
 
 const [ container, slider ] = useKeenSlider( {
