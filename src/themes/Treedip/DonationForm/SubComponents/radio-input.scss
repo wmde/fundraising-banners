@@ -1,0 +1,46 @@
+@use 'sass:math';
+
+$size: 16px;
+
+@mixin styles( $left: 0 ) {
+	appearance: none;
+	position: absolute;
+	top: 50%;
+	margin-top: -( math.div( $size, 2 ) );
+	width: $size;
+	height: $size;
+	border-radius: 50%;
+	display: block;
+	box-sizing: border-box;
+	cursor: pointer;
+	transition: background 150ms ease-out;
+	margin-right: 10px;
+	left: $left;
+	background: var( --select-group-radio-background );
+	border: 1px solid var( --select-group-radio-border );
+
+	&::before {
+		position: absolute;
+		top: 50%;
+		margin-top: -( math.div( $size, 2 ) );
+		width: $size;
+		height: $size;
+		border-radius: 50%;
+		content: '';
+		display: flex;
+		left: 50%;
+		margin-left: -( math.div( $size, 2 ) );
+		background-color: var( --select-group-radio-checkmark );
+		transform: scale( 0 );
+		transition: transform 150ms ease-out;
+	}
+
+	&:checked {
+		border-color: var( --select-group-radio-border-checked );
+		background-color: var( --select-group-radio-background-checked );
+
+		&::before {
+			transform: scale( 0.33 );
+		}
+	}
+}
