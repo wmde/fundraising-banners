@@ -18,7 +18,7 @@ export interface FormModel {
 	customAmount: Ref<string>;
 
 	/**
-	 * Parsed amount from either amount or custom amount.
+	 * Parsed amount from either amount or custom amount, as a floating point number representing Euros and cents.
 	 * Our watchers make sure that only one of them is set.
 	 * German-formatted amounts will be converted,
 	 * non-numeric chars will be filtered for maximum resilience (@see parseFloatFromFormattedString)
