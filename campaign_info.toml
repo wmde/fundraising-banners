@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_04"
-description = "Based on C24_WMDE_Desktop_DE_03_ctrl, var: leads to different fundraising donation form (different address completion)"
-campaign_tracking = "04-ba-240826"
+campaign = "C24_WMDE_Desktop_DE_05"
+description = "Based on C24_WMDE_Desktop_DE_04_var, var: with an amount <= €10 leads to the default donation form (ap=0), with an amount > €10 leads to the variant donation form (ap=1)"
+campaign_tracking = "05-ba-240913"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
@@ -16,14 +16,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_04/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_04_ctrl"
-tracking = "org-04-240826-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_05/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_05_ctrl"
+tracking = "org-05-240913-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_04/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_04_var"
-tracking = "org-04-240826-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_05/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_05_var"
+tracking = "org-05-240913-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
