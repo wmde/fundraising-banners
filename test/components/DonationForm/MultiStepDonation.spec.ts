@@ -155,4 +155,20 @@ describe( 'MultistepDonation.vue', () => {
 		expect( wrapper.find( '#form2' ).classes() ).toHaveLength( 0 );
 		expect( wrapper.find( '#form3' ).classes() ).toHaveLength( 0 );
 	} );
+
+	it( 'should render the default form URL', () => {
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
+
+		expect( wrapper.find( '.wmde-banner-submit-form' ).attributes( 'action' ) )
+			.toContain( 'example.com/withAddress' );
+	} );
+
+	it( 'should render the URL override', async () => {
+		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
+
+		await wrapper.setProps( { formActionOverride: 'https://example.com/withBellsAndWhistles' } );
+
+		expect( wrapper.find( '.wmde-banner-submit-form' ).attributes( 'action' ) )
+			.toContain( 'https://example.com/withBellsAndWhistles' );
+	} );
 } );
