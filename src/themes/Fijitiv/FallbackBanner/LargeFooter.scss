@@ -25,12 +25,12 @@
 				height: 0;
 				border-style: solid;
 				border-width: 6px 6px 0;
-				border-color: var( --color-primary ) transparent transparent transparent;
+				border-color: var( --fallback-message-border ) transparent transparent transparent;
 			}
 		}
 
 		&-usage-link {
-			color: var( --color-gray );
+			color: var( --fallback-uof-link );
 		}
 
 		.wmde-banner-selection-input-text,

@@ -13,6 +13,7 @@ $grey800: #1f1f1f;
 
 $red100: #ff8888;
 $red600: #990a00;
+$red700: #7d0a00;
 
 $blue600: #4465a7;
 $blue700: #2a4b8d;
@@ -28,6 +29,7 @@ $blue800: #20303f;
 	$already-donated: false,
 	$soft-close: false,
 	$fallback-banner: false,
+	$minimised-banner: false,
 ) {
 	--main-background: #{$grey800};
 	--main-color: #{$white};
@@ -36,6 +38,7 @@ $blue800: #20303f;
 	--main-box-shadow: none;
 
 	--message-background: #{$grey700};
+	--message-color: #{$white};
 	--message-border: #{$red600};
 
 	--color-error: #{$red100};
@@ -51,15 +54,18 @@ $blue800: #20303f;
 	--animated-highlight-color: #{$white};
 	/* stylelint-disable */
 	--animated-highlight-gradient: linear-gradient(
-		270deg,
-		rgba( 255, 255, 255, 0 ) 0%,
-		rgba( 255, 255, 255, 0 ) 50%,
-		rgba( 42, 75, 141 ) 50%,
-		rgba( 42, 75, 141 ) 100%
+			270deg,
+			rgba( 255, 255, 255, 0 ) 0%,
+			rgba( 255, 255, 255, 0 ) 50%,
+			rgba( 42, 75, 141 ) 50%,
+			rgba( 42, 75, 141 ) 100%
 	);
 	/* stylelint-enable */
 
 	@if $slider {
+		--slider-background: #{$blue700};
+		--slider-color: #{$white};
+
 		--slider-pagination-background: #{$grey800};
 		--slider-pagination-border: #{$white};
 		--slider-pagination-background-active: #{$red600};
@@ -79,15 +85,16 @@ $blue800: #20303f;
 		--select-group-radio-label-color: #{$black};
 		--select-group-radio-label-background: #{$grey200};
 		--select-group-radio-label-border: #{$grey200};
+
+		--select-group-radio-background: #{$white};
+		--select-group-radio-border: #{$grey600};
+		--select-group-radio-checkmark: #{$blue700};
+		--select-group-radio-background-checked: #{$blue700};
 		--select-group-radio-border-checked: #{$red600};
 
+		--select-custom-amount-color: #{$grey150};
 		--select-custom-amount-border: #{$grey150};
-		--select-custom-amount-color: #{$white};
 		--select-custom-amount-border-checked: #{$blue700};
-
-		--select-custom-amount-radio-background: #{$white};
-		--select-custom-amount-radio-border: #{$grey200};
-		--select-custom-amount-radio-border-checked: #{$blue700};
 	}
 
 	@if $select-group-bubble {
@@ -99,9 +106,9 @@ $blue800: #20303f;
 
 		--select-group-bubble-radio-background: #{$white};
 		--select-group-bubble-radio-border: #{$grey600};
+		--select-group-bubble-radio-checkmark: #{$blue700};
 		--select-group-bubble-radio-background-checked: #{$blue700};
 		--select-group-bubble-radio-border-checked: #{$white};
-		--select-group-bubble-radio-checkmark: #{$blue700};
 	}
 
 	@if $select-group-button {
@@ -137,7 +144,21 @@ $blue800: #20303f;
 		--fallback-button-color: #{$white};
 		--fallback-button-background-hover: #{$blue600};
 		--fallback-message-background: #{$grey700};
+		--fallback-message-color: #{$white};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey200};
+	}
+
+	@if $minimised-banner {
+		--minimised-color: #{$white};
+		--minimised-background: #{$blue700};
+		--minimised-button-background: #{$red600};
+		--minimised-button-color: #{$white};
+		--minimised-button-background-hover: #{$red700};
+		--minimised-buttongroup-border: #{$blue700};
+		--button-close-fill: #{$blue700};
+		--minimised-control-color: #{$blue700};
+		--minimised-control-border: #{$grey300};
+		--minimised-control-fill: #{$blue700};
 	}
 }

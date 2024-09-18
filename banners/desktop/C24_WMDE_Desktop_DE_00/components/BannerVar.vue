@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
 			@form-interaction="$emit( 'bannerContentChanged' )"
 			v-if="contentState === ContentStates.Main"
@@ -120,7 +120,6 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
-import colors from '../styles/colors';
 import { Tracker } from '@src/tracking/Tracker';
 import ChevronDownIcon from '@src/components/Icons/ChevronDownIcon.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';

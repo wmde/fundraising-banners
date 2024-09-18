@@ -47,15 +47,6 @@
 			box-sizing: border-box;
 			display: inline-block;
 			white-space: nowrap;
-
-			/* This positions the "radio button" shape */
-			&::before {
-				box-sizing: border-box;
-				top: 50%;
-				left: 0;
-				content: '';
-				position: absolute;
-			}
 		}
 
 		&-input {

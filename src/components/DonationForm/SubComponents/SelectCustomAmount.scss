@@ -21,16 +21,6 @@ to keep the styles in sync
 			position: relative;
 			box-sizing: border-box;
 			width: 100%;
-
-			/* This positions the "radio button" shape */
-			&::before {
-				top: 45%;
-				left: -25px;
-				margin-top: -6px;
-				box-sizing: border-box;
-				content: '';
-				position: absolute;
-			}
 		}
 
 		&-euro-symbol {

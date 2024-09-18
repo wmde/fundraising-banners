@@ -7,12 +7,15 @@ $font-size: 12px !default;
 
 	.previous {
 		display: block;
-		color: var( --color-black );
+		color: var( --upgrade-to-yearly-back-color );
 		margin-bottom: 10px;
 		height: 18px;
 		svg {
 			float: left;
 			margin: 1px 8px 1px 0;
+			path {
+				fill: var( --upgrade-to-yearly-back-color );
+			}
 		}
 	}
 

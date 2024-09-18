@@ -54,7 +54,7 @@ $custom-link-text-align: left !default;
 		&-custom,
 		&-custom:link,
 		&-custom:visited {
-			color: var( --color-secondary );
+			color: var( --upgrade-to-yearly-link-color );
 			font-size: 12px;
 			text-align: $custom-link-text-align;
 			margin-bottom: 8px;
@@ -63,7 +63,7 @@ $custom-link-text-align: left !default;
 		}
 
 		&-custom:visited {
-			color: var( --color-secondary );
+			color: var( --upgrade-to-yearly-link-color );
 		}
 
 		&-button {

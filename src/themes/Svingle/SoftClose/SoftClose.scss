@@ -8,7 +8,7 @@ $background-color: var( --color-primary ) !default;
 	@include SoftClose.layout;
 
 	&-soft-close {
-		background: var( --color-white );
+		background: var( --soft-close-background );
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
 		&-columns {
@@ -45,8 +45,8 @@ $background-color: var( --color-primary ) !default;
 		&-button {
 			border: 0 none;
 			min-width: 150px;
-			color: var( --color-white );
-			background-color: $background-color;
+			color: var( --soft-close-button-color );
+			background-color: var( --soft-close-button-background );
 			border-radius: 18px;
 			font-size: 14px;
 			line-height: 32px;
@@ -72,7 +72,7 @@ $background-color: var( --color-primary ) !default;
 		}
 
 		&-countdown-bar-fill {
-			background-color: var( --color-primary );
+			background-color: var( --soft-close-bar-background );
 		}
 
 		&-with-close-icon {

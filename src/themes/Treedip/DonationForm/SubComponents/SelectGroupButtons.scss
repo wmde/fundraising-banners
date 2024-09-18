@@ -18,7 +18,7 @@ $padding: 0 4px 8px !default;
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			background: var( grey200 );
+			background: var( --select-group-button-background );
 			border: 1px solid var( --select-group-button-border );
 			border-radius: 2px;
 			height: $height;

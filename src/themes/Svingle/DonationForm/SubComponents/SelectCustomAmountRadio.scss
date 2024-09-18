@@ -1,4 +1,5 @@
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
+@use 'radio-input';
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
@@ -18,24 +19,13 @@
 		width: 50%;
 
 		&-radio {
-			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
-			&:checked + .wmde-banner-select-custom-amount-input-container {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
-			}
-
-			/* This style must be in sync with the "radio button shape" style of SelectGroup */
-			&:checked + .wmde-banner-select-custom-amount-input-container::before {
-				border: 6px solid var( --color-primary );
-				box-shadow: none;
-			}
+			@include radio-input.styles;
 		}
 
 		&.value-entered,
 		&.focused {
 			.wmde-banner-select-custom-amount-input-container {
-				border: 1px solid var( --color-secondary );
+				border: 1px solid var( --select-custom-amount-border-checked );
 			}
 
 			.wmde-banner-select-custom-amount-input {
@@ -46,21 +36,11 @@
 		}
 
 		&-input-container {
-			border: 1px solid var( --color-gray-light );
+			border: 1px solid var( --select-custom-amount-border );
 			min-width: 110px;
 			margin: -2px 0 0;
 			line-height: 25px;
 			height: 26px;
-
-			/* This style must be in sync with the "radio button shape" style of SelectGroup */
-			&::before {
-				height: 16px;
-				width: 16px;
-				margin-top: -6px;
-				background: var( --color-white );
-				border-radius: 50%;
-				border: 1px solid #bbbbbb;
-			}
 		}
 
 		&-euro-symbol {
@@ -72,7 +52,7 @@
 		}
 
 		&-input {
-			color: var( --color-black );
+			color: var( --select-custom-amount-color );
 			background-color: transparent;
 			padding: 0 1em;
 			height: 25px;
@@ -83,7 +63,7 @@
 
 			&:focus,
 			&:active {
-				border: 1px solid var( --color-secondary );
+				border: 1px solid var( --select-custom-amount-border-checked );
 			}
 		}
 	}

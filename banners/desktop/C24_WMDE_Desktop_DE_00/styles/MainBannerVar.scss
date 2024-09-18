@@ -17,8 +17,8 @@ $form-width: 300px !default;
 
 	&-message {
 		padding: 3px 15px;
-		color: var( --color-white );
-		background-color: var( --color-secondary );
+		color: var( --message-color );
+		background-color: var( --message-background );
 		border: none;
 		border-radius: 9px;
 		margin-bottom: 5px;

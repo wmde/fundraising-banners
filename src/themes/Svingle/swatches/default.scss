@@ -1,0 +1,27 @@
+@use 'light';
+
+$slider: false !default;
+$progress-bar: false !default;
+$select-group: false !default;
+$select-group-bubble: false !default;
+$select-group-button: false !default;
+$upgrade-to-yearly: false !default;
+$already-donated: false !default;
+$soft-close: false !default;
+$fallback-banner: false !default;
+$minimised-banner: false !default;
+
+.wmde-banner {
+	@include light.swatch(
+		$slider,
+		$progress-bar,
+		$select-group,
+		$select-group-bubble,
+		$select-group-button,
+		$upgrade-to-yearly,
+		$already-donated,
+		$soft-close,
+		$fallback-banner,
+		$minimised-banner
+	);
+}
