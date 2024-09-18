@@ -1,4 +1,5 @@
 @use '../../variables/breakpoints';
+@use 'radio-input';
 
 $height: 23px !default;
 
@@ -6,6 +7,7 @@ $margin-left: -6px;
 $border-radius: 8px;
 $font-size: 1.01em;
 $padding: 0 0 0 3px;
+$check-size: 10px;
 
 .wmde-banner {
 	&-select-group {
@@ -27,6 +29,7 @@ $padding: 0 0 0 3px;
 			}
 
 			&.active label {
+				background: var( --select-group-bubble-background-active );
 				border: 2px solid var( --select-group-bubble-border-active );
 			}
 		}
@@ -37,34 +40,10 @@ $padding: 0 0 0 3px;
 			font-size: $font-size;
 			margin-left: $margin-left;
 			padding: $padding;
-
-			/* This creates the "radio button" shape */
-			&::before {
-				height: 10px;
-				width: 10px;
-				margin: -5px 0 0 8px;
-				background: var( --select-group-bubble-radio-background );
-				border-radius: 50%;
-				border: 2px solid var( --select-group-bubble-radio-border );
-			}
 		}
 
 		&-input {
-			display: none;
-
-			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
-			&:checked + .wmde-banner-select-group-label {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
-			}
-
-			/* This creates the "selected radio button" shape */
-			&:checked + .wmde-banner-select-group-label::before {
-				border: 1px solid var( --select-group-bubble-radio-border-checked );
-				box-shadow: 0 0 0 1px var( --select-group-bubble-radio-background-checked );
-				background-color: var( --select-group-bubble-radio-background-checked );
-			}
+			@include radio-input.styles;
 		}
 	}
 }

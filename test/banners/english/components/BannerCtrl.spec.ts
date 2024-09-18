@@ -1,12 +1,11 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/english/C24_WMDE_Desktop_EN_00/components/BannerCtrl.vue';
+import Banner from '@banners/english/C24_WMDE_Desktop_EN_01/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
 	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
@@ -61,7 +60,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -109,21 +108,6 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ],
-			[ 'expectShowsCloseIcon' ],
-			[ 'expectCloseIconEmitsCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
 	describe( 'Use of Funds', () => {
 		test.each( [
 			[ 'expectShowsUseOfFunds' ],
@@ -132,5 +116,4 @@ describe( 'BannerCtrl.vue', () => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
-
 } );
