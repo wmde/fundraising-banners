@@ -1,4 +1,4 @@
-import { readdir, access } from 'fs/promises';
+import { readdir, access, readFile } from 'fs/promises';
 import * as path from 'path';
 import { globIterate } from 'glob';
 
@@ -126,9 +126,28 @@ async function buildStyleFiles( prefix: string ): Promise<void> {
 	}
 }
 
+async function linkStyleFilesWithBanners( prefix: string ): Promise<void> {
+	const usePattern = /@use '@?(src\/themes\/[^'"]+)'/g;
+	for ( const banner of Array.from( banners.values() ) ) {
+		// We could optimize here for CTRL and VAR banners that use the same style file
+		const styleFile = await banner.getStylePath( prefix );
+		// eslint-disable-next-line security/detect-non-literal-fs-filename
+		const styleContent = await readFile( styleFile, 'utf8' );
+		let result;
+		while ( ( result = usePattern.exec( styleContent ) ) ) {
+			const styleFileWithSuffix = result[ 1 ] + '.scss';
+			if ( styleFiles.has( styleFileWithSuffix ) ) {
+				banner.styleFiles.push( styleFiles.get( styleFileWithSuffix ) );
+			} else {
+				console.warn( `Banner ${banner.campaign.name} (${banner.variant}) tries to include ${styleFileWithSuffix} ` );
+			}
+		}
+	}
+}
+
 ( async (): Promise<void> =>{
 	await buildChannels( 'banners' );
-	// console.log( Array.from( channels ) );
 	await buildStyleFiles( 'src/themes' );
-	console.log(styleFiles)
+	await linkStyleFilesWithBanners( 'banners' );
+	console.log( banners );
 } )();
