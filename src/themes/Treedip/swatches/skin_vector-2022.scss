@@ -1,5 +1,5 @@
-@use 'dark';
-@use 'light';
+@use 'color_dark';
+@use 'color_light';
 
 $slider: false !default;
 $progress-bar: false !default;
@@ -10,10 +10,9 @@ $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
 $fallback-banner: false !default;
-$minimised-banner: false !default;
 
 .skin-theme-clientpref-day .wmde-banner {
-	@include light.swatch(
+	@include color_light.swatch(
 		$slider,
 		$progress-bar,
 		$select-group,
@@ -22,13 +21,12 @@ $minimised-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner,
-		$minimised-banner
+		$fallback-banner
 	);
 }
 
 .skin-theme-clientpref-night .wmde-banner {
-	@include dark.swatch(
+	@include color_dark.swatch(
 		$slider,
 		$progress-bar,
 		$select-group,
@@ -37,14 +35,13 @@ $minimised-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner,
-		$minimised-banner
+		$fallback-banner
 	);
 }
 
 .skin-theme-clientpref-os .wmde-banner {
 	@media ( prefers-color-scheme: dark ) {
-		@include dark.swatch(
+		@include color_dark.swatch(
 			$slider,
 			$progress-bar,
 			$select-group,
@@ -53,13 +50,12 @@ $minimised-banner: false !default;
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
-			$fallback-banner,
-			$minimised-banner
+			$fallback-banner
 		);
 	}
 
 	@media ( prefers-color-scheme: light ) {
-		@include light.swatch(
+		@include color_light.swatch(
 			$slider,
 			$progress-bar,
 			$select-group,
@@ -68,8 +64,7 @@ $minimised-banner: false !default;
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
-			$fallback-banner,
-			$minimised-banner
+			$fallback-banner
 		);
 	}
 }

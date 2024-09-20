@@ -11,6 +11,7 @@ export interface Campaign {
 	icon: string,
 	tracking: string,
 	previewUrlDev: string,
+	previewUrlDevDark: string,
 	previewUrlProd: string,
 	wrapperTemplate: string,
 	banners: Record<string, Banner>

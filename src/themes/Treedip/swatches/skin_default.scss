@@ -1,4 +1,4 @@
-@use 'light';
+@use 'color_light';
 
 $slider: false !default;
 $progress-bar: false !default;
@@ -9,10 +9,9 @@ $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
 $fallback-banner: false !default;
-$minimised-banner: false !default;
 
 .wmde-banner {
-	@include light.swatch(
+	@include color_light.swatch(
 		$slider,
 		$progress-bar,
 		$select-group,
@@ -21,7 +20,6 @@ $minimised-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner,
-		$minimised-banner
+		$fallback-banner
 	);
 }

@@ -12,6 +12,15 @@
 		<div class="banner-actions-links">
 			<a
 				class="banner-actions-icon"
+				data-tooltip="Preview in dark mode"
+				:href="campaign.previewUrlDevDark.replace('{{banner}}', bannerPageName)"
+				target="_blank"
+				title="Preview in dark mode"
+			>
+				<IconDarkMode/>
+			</a>
+			<a
+				class="banner-actions-icon"
 				data-tooltip="Preview in Production"
 				:href="campaign.previewUrlProd.replace('{{banner}}', bannerPageName)"
 				target="_blank"
@@ -64,6 +73,7 @@ import { relevantTime } from '../relevant_time';
 import { CompileInfo } from '../util';
 import LoadingSpinner from './BuildingAnimation.vue';
 import CopyingAnimation from './CopyingAnimation.vue';
+import IconDarkMode from './IconDarkMode.vue';
 
 interface Props {
 	banner: Banner;

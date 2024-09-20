@@ -1,0 +1,5 @@
+@use 'color_light';
+
+.use-of-funds {
+	@include color_light.swatch;
+}
