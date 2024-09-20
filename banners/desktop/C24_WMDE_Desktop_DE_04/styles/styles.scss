@@ -1,5 +1,5 @@
 // This is the file where we import the theme-specific component styles
-@use 'src/themes/Svingle/swatches/default' with (
+@use '../../../../src/themes/Svingle/swatches/skin_default' with (
 	$slider: true,
 	$select-group: true,
 	$upgrade-to-yearly: true,
@@ -7,7 +7,7 @@
 );
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
-@use 'src/themes/UseOfFunds/swatches/default' as uof-default;
+@use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'MainBanner' with (
 	$banner-height: 357px,
