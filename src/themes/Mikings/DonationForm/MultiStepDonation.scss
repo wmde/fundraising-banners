@@ -1,5 +1,4 @@
 @use '../../../components/DonationForm/MultiStepDonation';
-@use '../variables/colors';
 
 .wmde-banner {
 	@include MultiStepDonation.layout;
@@ -27,12 +26,12 @@
 			line-height: 60px;
 			border-radius: 30px;
 			font-weight: bold;
-			color: colors.$white;
-			background: colors.$secondary;
+			color: var( --donation-form-button-color );
+			background: var( --donation-form-button-background );
 
 			&:hover,
 			&:focus {
-				background: colors.$secondary-hover;
+				background: var( --donation-form-button-background-hover );
 			}
 		}
 
@@ -40,7 +39,7 @@
 			display: block;
 			padding: 5px 0;
 			width: 100%;
-			color: colors.$error;
+			color: var( --color-error );
 			text-align: center;
 			font-size: 14px;
 			font-weight: bold;

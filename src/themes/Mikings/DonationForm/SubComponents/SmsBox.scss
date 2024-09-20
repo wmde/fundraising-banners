@@ -1,4 +1,4 @@
-@use '../../variables/colors';
+@use '../../variables/select_group';
 @use 'src/components/DonationForm/SubComponents/SmsBox';
 
 .wmde-banner {
@@ -14,18 +14,18 @@
 			justify-content: center;
 			align-content: center;
 			align-items: center;
-			border: 1px solid colors.$radio-border-color;
+			border: 1px solid var( --select-group-option-border );
 			border-radius: 2px;
-			background: colors.$radio-background;
-			height: colors.$form-radio-height;
-			font-size: colors.$radio-font-size;
+			background: var( --select-group-option-background );
+			height: select_group.$form-radio-height;
+			font-size: select_group.$radio-font-size;
 			text-align: center;
 			width: 100%;
 
 			&:hover,
 			&:focus {
-				border-color: colors.$radio-border-color-hover;
-				background: colors.$radio-background-hover;
+				border-color: var( --select-group-option-border );
+				background: var( --select-group-option-background-hover );
 			}
 		}
 
@@ -34,11 +34,11 @@
 		}
 
 		a {
-			color: colors.$black;
+			color: var( --select-group-option-color );
 
 			&:hover,
 			&:focus {
-				color: colors.$black;
+				color: var( --select-group-option-color );
 				text-decoration: none;
 			}
 		}

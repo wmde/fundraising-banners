@@ -1,13 +1,10 @@
-@use '@src/themes/Mikings/variables/colors';
 @use '@src/themes/Mikings/variables/globals';
 @use '@src/themes/Mikings/variables/breakpoints';
 
 .wmde-banner {
-	--slider-chevron: #{colors.$black-light}; // Temporary fix until mobile banners use swatches
-
 	&-full {
-		border: 2px solid colors.$primary;
-		background: colors.$white;
+		border: 2px solid var( --full-border );
+		background: var( --full-background );
 		position: fixed;
 		top: 0;
 		z-index: 1000;
@@ -31,7 +28,7 @@
 			height: 35px;
 			width: 35px;
 			padding: 5px;
-			background: colors.$white;
+			background: var( --full-background );
 			z-index: 99;
 			border: none;
 			border-radius: 50%;
@@ -51,8 +48,8 @@
 
 		&-call-to-action {
 			position: relative;
-			color: colors.$white;
-			background: colors.$primary;
+			color: var( --full-cta-color );
+			background: var( --full-cta-background );
 			font-weight: bold;
 			height: 31px;
 			line-height: 31px;
@@ -76,7 +73,7 @@
 				height: 0;
 				border-style: solid;
 				border-width: 4px 4px 0;
-				border-color: colors.$primary transparent transparent transparent;
+				border-color: var( --full-cta-background ) transparent transparent transparent;
 			}
 		}
 
@@ -90,7 +87,7 @@
 			margin-bottom: 16px;
 
 			a {
-				color: colors.$gray;
+				color: var( --full-smallprint-color );
 
 				&:hover,
 				&:focus {

@@ -1,4 +1,3 @@
-@use '@src/themes/Mikings/variables/colors';
 @use '@src/themes/Mikings/variables/breakpoints';
 
 .wmde-banner {
@@ -32,14 +31,14 @@
 	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
 		svg path,
 		svg rect {
-			fill: colors.$white !important; // stylelint-disable-line
+			fill: var( --select-group-image-label-fill ) !important; // stylelint-disable-line
 
 			&.highlight-transparent {
 				fill: transparent !important; // stylelint-disable-line
 			}
 
 			&.highlight {
-				fill: colors.$secondary !important; // stylelint-disable-line
+				fill: var( --select-group-image-label-fill-highlight ) !important; // stylelint-disable-line
 			}
 		}
 	}

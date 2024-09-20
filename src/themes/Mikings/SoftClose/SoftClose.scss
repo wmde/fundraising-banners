@@ -1,5 +1,4 @@
 @use 'src/components/SoftClose/SoftClose';
-@use '../variables/colors';
 @use '../variables/fonts';
 @use '../variables/breakpoints';
 
@@ -7,8 +6,8 @@
 	@include SoftClose.layout;
 
 	&-soft-close {
-		background: colors.$white;
-		border: 2px solid colors.$primary;
+		background: var( --soft-close-background );
+		border: 2px solid var( --soft-close-border );
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 		text-align: center;
 		font-weight: bold;
@@ -42,8 +41,8 @@
 
 		&-button {
 			border: 0 none;
-			color: colors.$white;
-			background-color: colors.$secondary;
+			color: var( --soft-close-button-color );
+			background-color: var( --soft-close-button-background );
 			border-radius: 18px;
 			font-size: 14px;
 			height: 40px;
@@ -57,9 +56,9 @@
 			}
 
 			&-already-donated {
-				background: colors.$white;
-				border: 1px solid colors.$secondary;
-				color: colors.$secondary;
+				background: var( --soft-close-donated-button-background );
+				border: 1px solid var( --soft-close-donated-button-border );
+				color: var( --soft-close-donated-button-color );
 				min-width: 190px;
 
 				@include breakpoints.phone-xs-up {
@@ -77,7 +76,7 @@
 		}
 
 		&-countdown-bar-fill {
-			background-color: colors.$secondary;
+			background-color: var( --soft-close-countdown-fill );
 		}
 
 		&-with-close-icon {
