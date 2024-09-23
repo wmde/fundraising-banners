@@ -41,13 +41,13 @@ class Campaign {
 	) {
 	}
 
-	public async bannersHaveMatchingStyleFiles( prefix: string ): Promise<boolean> {
+	public get bannersHaveMatchingStyleFiles(): boolean {
 		if ( this.banners.length < 1 ) {
 			throw new Error( `Campaign ${this.name} has no banners!` );
 		}
-		const ctrlPath = await this.banners[ 0 ].getStylePath( prefix );
+		const ctrlPath = this.banners[ 0 ].styleFilePath;
 		for ( let i = 1; i < this.banners.length; i++ ) {
-			if ( await this.banners[ i ].getStylePath( prefix ) !== ctrlPath ) {
+			if ( this.banners[ i ].styleFilePath !== ctrlPath ) {
 				return false;
 			}
 		}
@@ -60,26 +60,10 @@ class Banner {
 	public constructor(
 		public readonly id: number,
 		public readonly variant: BannerVariant,
-		public readonly campaign: Campaign
+		public readonly campaign: Campaign,
+		public readonly styleFilePath: string
 	) {}
 
-	/**
-	 * getStylePath
-	 */
-	public async getStylePath( prefix: string ): Promise<string> {
-		const ctrlPath = path.join( prefix, this.campaign.channel.name, this.campaign.name, 'styles/styles.scss' );
-		const varPath = path.join( prefix, this.campaign.channel.name, this.campaign.name, 'styles/styles_var.scss' );
-		const tryPaths = this.variant === 'ctrl' ? [ ctrlPath ] : [ varPath, ctrlPath ];
-		for ( const stylePath of tryPaths ) {
-			try {
-				await access( stylePath );
-				return stylePath;
-			} catch {
-				// just continue, no need to hanndle errors
-			}
-		}
-		throw new Error( `File ${ctrlPath} not found - does the banner have a style file?` );
-	}
 }
 
 // Report classes
@@ -128,7 +112,7 @@ class DataModelBuilder {
 		this.datamodel = new DataModel();
 		await this.buildChannels( bannerDirectory );
 		await this.buildStyleFiles( themeDirectory );
-		await this.linkStyleFilesWithBanners( bannerDirectory );
+		await this.linkStyleFilesWithBanners();
 		return this.datamodel;
 	}
 
@@ -154,14 +138,32 @@ class DataModelBuilder {
 			// We could skip the 00 campaign here
 
 			const campaign = new Campaign( this.datamodel.getNextCamapignId(), campaignName, channel );
-			const ctrlBanner = new Banner( this.datamodel.getNextBannerId(), 'ctrl', campaign );
-			const varBanner = new Banner( this.datamodel.getNextBannerId(), 'var', campaign );
+			const ctrlPath = await this.getStylePath( prefix, channel.name, campaignName, 'ctrl' );
+			const varPath = await this.getStylePath( prefix, channel.name, campaignName, 'var' );
+			const ctrlBanner = new Banner( this.datamodel.getNextBannerId(), 'ctrl', campaign, ctrlPath );
+			const varBanner = new Banner( this.datamodel.getNextBannerId(), 'var', campaign, varPath );
 			campaign.banners.push( ctrlBanner, varBanner );
 			this.datamodel.campaigns.set( campaign.id, campaign );
 			this.datamodel.banners.set( ctrlBanner.id, ctrlBanner );
 			this.datamodel.banners.set( varBanner.id, varBanner );
 			channel.campaigns.push( campaign );
 		}
+	}
+
+	private async getStylePath( prefix: string, channelName: string, campaignName: string, variant: BannerVariant ): Promise<string> {
+		const ctrlPath = path.join( prefix, channelName, campaignName, 'styles/styles.scss' );
+		const varPath1 = path.join( prefix, channelName, campaignName, 'styles/styles_var.scss' );
+		const varPath2 = path.join( prefix, channelName, campaignName, 'styles/stylesVar.scss' );
+		const tryPaths = variant === 'ctrl' ? [ ctrlPath ] : [ varPath1, varPath2, ctrlPath ];
+		for ( const stylePath of tryPaths ) {
+			try {
+				await access( stylePath );
+				return stylePath;
+			} catch {
+				// just continue, no need to handle errors
+			}
+		}
+		throw new Error( `File ${ctrlPath} not found - does the banner have a style file?` );
 	}
 
 	private async buildStyleFiles( themeDirectory: string ): Promise<void> {
@@ -188,16 +190,16 @@ class DataModelBuilder {
 		}
 	}
 
-	private async linkStyleFilesWithBanners( prefix: string ): Promise<void> {
+	private async linkStyleFilesWithBanners(): Promise<void> {
 		const usePattern = /@use '@?(src\/themes\/[^'"]+)'/g;
 		for ( const banner of Array.from( this.datamodel.banners.values() ) ) {
 			// Reuse CTRL files for VAR banners that don't have a separate style file
-			if ( banner.variant === 'var' && banner.campaign.bannersHaveMatchingStyleFiles( prefix ) ) {
+			if ( banner.variant === 'var' && banner.campaign.bannersHaveMatchingStyleFiles ) {
 				const ctrlFiles = banner.campaign.banners[ 0 ].styleFiles;
 				banner.styleFiles.splice( 0, 0, ...ctrlFiles );
 				continue;
 			}
-			const styleFile = await banner.getStylePath( prefix );
+			const styleFile = banner.styleFilePath;
 			// eslint-disable-next-line security/detect-non-literal-fs-filename
 			const styleContent = await readFile( styleFile, 'utf8' );
 			let result;
@@ -219,7 +221,7 @@ class DataModelBuilder {
 interface StyleCountPerThemeRenderer {
 	renderHeader(): void;
 	renderChannel( channelName: string ): void;
-	renderCampaign( campaignName: string ): void;
+	renderCampaign( campaignName: string, bannersHaveMatchingStyleFiles: boolean ): void;
 	renderBannerFileCounts( counts: BannerFileCounts ): void;
 	renderFooter(): void;
 }
@@ -227,6 +229,7 @@ interface StyleCountPerThemeRenderer {
 class ConsoleStyleCountPerThemeRenderer implements StyleCountPerThemeRenderer {
 
 	private currentCampaignName = '';
+	private currentCampaignHasMatchingStyleFiles = false;
 	private fileCountBuffer: BannerFileCounts[] = [];
 
 	public constructor(
@@ -237,9 +240,10 @@ class ConsoleStyleCountPerThemeRenderer implements StyleCountPerThemeRenderer {
 	public renderChannel( channelName: string ): void {
 		console.log( channelName );
 	}
-	public renderCampaign( campaignName: string ): void {
+	public renderCampaign( campaignName: string, bannersHaveMatchingStyleFiles: boolean ): void {
 		this.outputBuffer();
 		this.currentCampaignName = campaignName;
+		this.currentCampaignHasMatchingStyleFiles = bannersHaveMatchingStyleFiles;
 	}
 	public renderBannerFileCounts( counts: BannerFileCounts ): void {
 		this.fileCountBuffer.push( counts );
@@ -249,18 +253,27 @@ class ConsoleStyleCountPerThemeRenderer implements StyleCountPerThemeRenderer {
 	}
 
 	private outputBuffer(): void {
+		const fileCountBuffer = this.fileCountBuffer;
+		let countLine: string;
+		this.fileCountBuffer = [];
 		if ( !this.currentCampaignName ) {
 			return;
 		}
-		const countLine = this.fileCountBuffer.map( ( fileCount ) => {
-			const themes = Array.from( fileCount.themes )
-				.filter( ( [ theme ] ) => !this.specialThemeNamesToIgnore.includes( theme.name ) )
-				.map( ( [ theme, count ] ) => `${theme.name}: ${count}` )
-				.join( ', ' );
-			return `(${fileCount.banner.variant}: ${themes})`;
-		} );
-		console.log( `    ${this.currentCampaignName} ${countLine.join( ', ' )}` );
-		this.fileCountBuffer = [];
+		if ( this.currentCampaignHasMatchingStyleFiles ) {
+			countLine = `(${this.renderThemeCounts( Array.from( fileCountBuffer[ 0 ].themes ) )})`;
+		} else {
+			countLine = fileCountBuffer.map( ( fileCount ) => {
+				const themes = this.renderThemeCounts( Array.from( fileCount.themes ) );
+				return `(${fileCount.banner.variant.toUpperCase()}: ${themes})`;
+			} ).join( ' / ' );
+		}
+		console.log( `    ${this.currentCampaignName} ${countLine}` );
+	}
+
+	private renderThemeCounts( themes: Array<[Theme, number]> ): string {
+		return themes.filter( ( [ theme ] ) => !this.specialThemeNamesToIgnore.includes( theme.name ) )
+			.map( ( [ theme, count ] ) => `${theme.name}: ${count}` )
+			.join( ', ' );
 	}
 }
 
@@ -272,7 +285,8 @@ class StyleCountsPerThemeReport {
 		for ( const channel of Array.from( datamodel.channels.values() ) ) {
 			this.renderer.renderChannel( channel.name );
 			for ( const campaign of channel.campaigns ) {
-				this.renderer.renderCampaign( campaign.name );
+				// TODO get rid of the prefix
+				this.renderer.renderCampaign( campaign.name, campaign.bannersHaveMatchingStyleFiles );
 				for ( const banner of campaign.banners ) {
 					this.renderer.renderBannerFileCounts( this.getStyleCountsPerTheme( banner ) );
 				}
