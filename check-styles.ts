@@ -167,16 +167,21 @@ class DataModelBuilder {
 	private async buildStyleFiles( themeDirectory: string ): Promise<void> {
 		const styleFileIterator = globIterate( `${themeDirectory}/**/*.scss` );
 		const themeDirectoryDepth = themeDirectory.split( path.sep ).length;
-		let currentTheme = new Theme( 0, '' );
+		const themeByName = new Map<string, Theme>();
+		let currentTheme: Theme;
 		let fileCounter = 1;
 		for await ( const fn of styleFileIterator ) {
 			const splitPath = fn.split( path.sep );
 			splitPath.splice( 0, themeDirectoryDepth );
 			const themeName = splitPath.shift();
 			const themeRelativeFilePath = splitPath.join( path.sep );
-			if ( themeName !== currentTheme.name ) {
+			if ( themeByName.has( themeName ) ) {
+				currentTheme = themeByName.get( themeName );
+			} else {
+
 				currentTheme = new Theme( this.datamodel.getNextThemeId(), themeName );
 				this.datamodel.themes.set( currentTheme.id, currentTheme );
+				themeByName.set( themeName, currentTheme );
 			}
 			const styleFile = new StyleFile( fileCounter++, themeRelativeFilePath, currentTheme );
 			this.datamodel.styleFiles.set( fn, styleFile );
@@ -221,18 +226,41 @@ interface StyleCountPerThemeRenderer {
 
 class ConsoleStyleCountPerThemeRenderer implements StyleCountPerThemeRenderer {
 
+	private currentCampaignName = '';
+	private fileCountBuffer: BannerFileCounts[] = [];
+
+	public constructor(
+		private readonly specialThemeNamesToIgnore: string[] = [ 'UseOfFunds', 'Fijitiv' ]
+	) {}
+
 	public renderHeader(): void {}
 	public renderChannel( channelName: string ): void {
 		console.log( channelName );
 	}
 	public renderCampaign( campaignName: string ): void {
-		console.log( campaignName );
+		this.outputBuffer();
+		this.currentCampaignName = campaignName;
 	}
 	public renderBannerFileCounts( counts: BannerFileCounts ): void {
-		// TODO
+		this.fileCountBuffer.push( counts );
 	}
 	public renderFooter(): void {
-		// TODO
+		this.outputBuffer();
+	}
+
+	private outputBuffer(): void {
+		if ( !this.currentCampaignName ) {
+			return;
+		}
+		const countLine = this.fileCountBuffer.map( ( fileCount ) => {
+			const themes = Array.from( fileCount.themes )
+				.filter( ( [ theme ] ) => !this.specialThemeNamesToIgnore.includes( theme.name ) )
+				.map( ( [ theme, count ] ) => `${theme.name}: ${count}` )
+				.join( ', ' );
+			return `(${fileCount.banner.variant}: ${themes})`;
+		} );
+		console.log( `    ${this.currentCampaignName} ${countLine.join( ', ' )}` );
+		this.fileCountBuffer = [];
 	}
 }
 
