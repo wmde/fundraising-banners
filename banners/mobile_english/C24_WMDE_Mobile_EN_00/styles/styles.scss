@@ -1,5 +1,10 @@
+@use 'src/themes/Yperala/swatches/skin_default' with (
+	$progress-bar: true,
+	$select-group-image-label: true,
+	$soft-close: true
+);
 @use '@src/components/BannerConductor/banner-transition';
-@use '../../../../src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use '@src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use '@src/themes/UseOfFunds/UseOfFunds';
 @use '@src/themes/Yperala/defaults';
 @use 'Banner';

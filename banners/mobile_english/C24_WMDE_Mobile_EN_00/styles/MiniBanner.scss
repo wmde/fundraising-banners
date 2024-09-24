@@ -1,8 +1,6 @@
 @use '@src/themes/Yperala/variables/globals';
-@use '@src/themes/Yperala/variables/colors';
 @use '@src/themes/Yperala/variables/breakpoints';
 @use '@src/themes/Treedip/variables/fonts';
-@use 'sass:color';
 
 $height-small: 328px !default;
 $height-large: 288px !default;
@@ -22,16 +20,10 @@ $height-large: 288px !default;
 			cursor: pointer;
 			text-align: center;
 			box-sizing: border-box;
-
-			/* display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			align-items: center; */
-
 			margin: 0 auto;
-			background: colors.$primary-lighter;
-			border: 8px solid colors.$primary;
-			box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+			background: var( --mini-background );
+			border: 8px solid var( --mini-border );
+			box-shadow: var( --mini-box-shadow );
 			border-radius: 15px;
 			width: 98%;
 		}
@@ -46,6 +38,11 @@ $height-large: 288px !default;
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
+			&-button {
+				background: none;
+				border: 0;
+			}
 
 			svg {
 				height: 20px;
@@ -67,12 +64,15 @@ $height-large: 288px !default;
 		&-button-preselect {
 			width: 50%;
 			height: 40px;
+			border: 0;
 			border-radius: 20px;
 			font-weight: bold;
-			color: colors.$white;
+			color: var( --mini-button-color );
 			margin: 0 16px;
 			font-size: 14px;
 			white-space: nowrap;
+			transition: background-color 200ms ease-in-out;
+			cursor: pointer;
 
 			@media ( min-width: 370px ) {
 				font-size: 16px;
@@ -80,20 +80,20 @@ $height-large: 288px !default;
 		}
 
 		&-button-preselect {
-			background: colors.$secondary;
+			background: var( --mini-button-alt-background );
 
 			&:hover,
 			&:focus {
-				background: colors.$secondary;
+				background: var( --mini-button-alt-background-hover );
 			}
 		}
 
 		&-button {
-			background: #da9000;
+			background: var( --mini-button-background );
 
 			&:hover,
 			&:focus {
-				background: color.adjust( #da9000, $lightness: -5% );
+				background: var( --mini-button-background-hover );
 			}
 		}
 

@@ -1,7 +1,6 @@
 @use 'src/components/DonationForm/SubComponents/SelectGroup';
 @use '../../variables/globals';
 @use '../../variables/breakpoints';
-@use '../../variables/colors';
 
 .wmde-banner {
 	@include SelectGroup.layout;
@@ -19,8 +18,8 @@
 			line-height: 60px;
 			padding: 0 2px;
 			margin-bottom: 10px;
-			color: colors.$black-light;
-			background-color: colors.$gray-medium-bright;
+			color: var( --select-group-option-color );
+			background-color: var( --select-group-option-background );
 			border-radius: globals.$form-element-border-radius;
 
 			@include breakpoints.phone-s-up {
@@ -29,14 +28,12 @@
 		}
 
 		&-input:checked + .wmde-banner-select-group-label {
-			background-color: colors.$primary;
-			color: colors.$white;
-			border-color: colors.$gray-medium;
+			background-color: var( --select-group-option-background-active );
+			color: var( --select-group-option-color-active );
 		}
 
 		&-error-message {
 			line-height: 16px;
-			color: colors.$black;
 			font-weight: bold;
 			text-align: left;
 			margin-bottom: 0.2em;
@@ -59,15 +56,14 @@
 			}
 
 			.wmde-banner-select-group-error-message {
-				color: colors.$error;
+				color: var( --color-error );
 			}
 		}
 	}
 
 	&-disabled {
 		.wmde-banner-select-group-label {
-			color: colors.$secondary-light;
-			border-color: colors.$secondary-light;
+			color: var( --select-group-option-color-disabled );
 		}
 	}
 
