@@ -24,7 +24,7 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :form-action-override="formAction" :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
@@ -63,7 +63,7 @@ import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vu
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import { useFormAction } from '@src/components/composables/useAmountBasedFormAction';
+import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
 } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
@@ -76,8 +76,6 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import colors from '../styles/colors';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import { FormActions } from '@src/domain/FormActions';
-import { useFormModel } from '@src/components/composables/useFormModel';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -104,7 +102,6 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
-const { formAction } = useFormAction( inject<FormActions>( 'formActions' ), 10, { smallAmount: 'ap=0', largeAmount: 'ap=1' } );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
