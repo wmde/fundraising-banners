@@ -38,7 +38,7 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
+				<SmallPrintFooter @showFundsModal="isFundsModalVisible = true" :faqPageLink="faqPageLink"/>
 			</template>
 
 		</MainBanner>
@@ -75,7 +75,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import colors from '../styles/colors';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import SmallPrintFooter from '@src/components/Footer/SmallPrintFooter.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -90,6 +90,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	remainingImpressions: number;
+	faqPageLink: string;
 }
 
 defineProps<Props>();

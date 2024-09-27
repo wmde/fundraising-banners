@@ -1,0 +1,62 @@
+@use 'src/components/Footer/SmallPrintFooter';
+@use '../variables/breakpoints';
+
+$right-column-width: 300px !default;
+$left-column-margin: 0 30px 0 0 !default;
+
+.wmde-banner {
+	@include SmallPrintFooter.layout;
+
+	&-footer {
+		font-size: 12px;
+		line-height: 20px;
+		color: var( --footer-color );
+		padding: 0;
+		margin-top: 0;
+
+		&-bank {
+			padding: 5px 10px 5px 0;
+			text-align: right;
+			&-item {
+				padding-left: 0.5em;
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-usage {
+			padding: 5px 0;
+			margin: $left-column-margin;
+			text-align: left;
+			&-link,
+			&-link:visited {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+		}
+
+		.link-separator {
+			margin-left: 3px;
+			margin-right: 3px;
+		}
+
+		.second-row-items {
+			display: none;
+
+			@include breakpoints.large-up {
+				display: flex;
+			}
+		}
+
+		&-faq-link-item {
+			display: none;
+
+			@include breakpoints.bigger-medium-up {
+				display: flex;
+			}
+		}
+	}
+}
