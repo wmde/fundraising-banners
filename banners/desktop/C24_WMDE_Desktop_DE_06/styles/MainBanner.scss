@@ -1,14 +1,11 @@
-@use 'src/themes/Mikings/variables/colors';
-
 $banner-height: 357px !default;
 $form-width: 300px !default;
 
 .wmde-banner {
-	/*
-		Temporary fix until desktop banners use swatches.
-		Mobile theme color is used because`Svingle` theme does not have `_colors.scss` file
-	 */
-	--slider-chevron: #{colors.$black-light};
+
+	.previous {
+		--slider-chevron: var( --previous-button-fill );
+	}
 
 	&-main {
 		min-height: $banner-height;
