@@ -1,7 +1,6 @@
 @use 'src/components/DonationForm/SubComponents/SmsBox';
 @use '../../variables/globals';
 @use '../../variables/breakpoints';
-@use '../../variables/colors';
 
 .wmde-banner {
 	@include SmsBox.layout;
@@ -17,8 +16,8 @@
 			font-family: inherit;
 			font-size: 18px;
 			font-weight: bold;
-			color: colors.$black-light;
-			background-color: colors.$gray-medium-bright;
+			color: var( --select-group-option-color );
+			background-color: var( --select-group-option-background );
 			border-radius: globals.$form-element-border-radius;
 			margin-bottom: 6px;
 			padding: 0 2px;
@@ -36,7 +35,7 @@
 			margin-right: 0;
 			width: 100%;
 			padding: 0 0 15px;
-			color: colors.$secondary-dark;
+			color: var( --select-group-sms-notice-color );
 		}
 
 		.sms-icon {

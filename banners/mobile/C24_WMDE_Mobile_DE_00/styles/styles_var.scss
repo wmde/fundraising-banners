@@ -1,5 +1,11 @@
+@use 'src/themes/Mikings/swatches/skin_default' with (
+	$upgrade-to-yearly-button-form: true,
+	$select-group-image-label: true,
+	$progress-bar: true,
+	$soft-close: true
+);
 @use 'src/components/BannerConductor/banner-transition';
-@use '../../../../src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';

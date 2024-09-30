@@ -1,5 +1,4 @@
 @use 'src/components/ProgressBar/ProgressBar';
-@use '../variables/colors';
 @use '../variables/fonts';
 @use 'transitions';
 
@@ -35,16 +34,16 @@
 			height: 18px;
 			line-height: 18px;
 			width: 100%;
-			border: 2px solid colors.$primary;
+			border: 2px solid var( --progress-bar-border );
 			border-radius: 13px;
 		}
 
 		&-fill {
 			transition: width 3000ms;
-			background: colors.$primary;
+			background: var( --progress-bar-background );
 			border-radius: 11px;
 			text-align: right;
-			color: colors.$white;
+			color: var( --progress-bar-color );
 			font-size: 12px;
 			font-weight: bold;
 			padding-right: 12px;

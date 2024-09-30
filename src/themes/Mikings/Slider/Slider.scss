@@ -1,5 +1,4 @@
 @use 'src/components/Slider/KeenSlider';
-@use '../variables/colors';
 @use '../variables/fonts';
 
 $pagination-padding: 25px 0 !default;
@@ -46,7 +45,7 @@ $pagination-height: 60px !default;
 			border: 0;
 			width: 10px;
 			height: 10px;
-			background: colors.$gray-medium;
+			background: var( --slider-pagination-background );
 			border-radius: 50%;
 			margin: 0 5px;
 			padding: 5px;
@@ -57,7 +56,7 @@ $pagination-height: 60px !default;
 			}
 
 			&.is-active {
-				background: colors.$gray;
+				background: var( --slider-pagination-background-active );
 			}
 		}
 	}

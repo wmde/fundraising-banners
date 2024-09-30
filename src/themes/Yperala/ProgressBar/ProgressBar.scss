@@ -1,6 +1,5 @@
 @use 'src/components/ProgressBar/ProgressBar';
 @use '../variables/globals';
-@use '../variables/colors';
 @use 'transitions';
 
 .wmde-banner {
@@ -29,19 +28,19 @@
 		}
 
 		&-fill-wrapper {
-			border: 2px solid colors.$primary;
+			border: 2px solid var( --progress-bar-border );
 			border-radius: 8px;
 			height: 32px;
 			line-height: 28px;
 		}
 
 		&-fill {
-			background: colors.$primary;
+			background: var( --progress-bar-background );
 			min-width: 5em;
 			height: 100%;
 			border-radius: 5px 16px 16px 5px;
 			transition: width 3000ms globals.$banner-easing;
-			color: colors.$white;
+			color: var( --progress-bar-color );
 			text-align: right;
 			padding-right: 16px;
 		}

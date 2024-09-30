@@ -1,4 +1,4 @@
-@use '../../variables/colors';
+@use '../../variables/select_group';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
 .wmde-banner {
@@ -17,26 +17,26 @@
 
 		&-input-container {
 			display: block;
-			border: 1px solid colors.$radio-border-color;
+			border: 1px solid var( --select-group-option-border );
 			border-radius: 2px;
-			background: colors.$radio-background;
-			height: colors.$form-radio-height;
+			background: var( --select-group-option-background );
+			height: select_group.$form-radio-height;
 			position: relative;
 		}
 
 		&-input {
 			display: block;
-			height: colors.$form-radio-height;
+			height: select_group.$form-radio-height;
 			background: transparent;
 			border: 0;
 			width: 100%;
-			font-size: colors.$radio-font-size;
+			font-size: select_group.$radio-font-size;
 			text-align: center;
 			outline: 0;
 
 			&::placeholder {
 				opacity: 1;
-				color: colors.$black;
+				color: var( --select-group-option-color );
 			}
 		}
 
@@ -44,7 +44,7 @@
 			position: absolute;
 			top: 0;
 			right: 0;
-			line-height: colors.$form-radio-height;
+			line-height: select_group.$form-radio-height;
 			width: 18px;
 			z-index: 10;
 		}
@@ -52,9 +52,9 @@
 
 	.wmde-banner-select-custom-amount-input-container:hover,
 	.wmde-banner-select-custom-amount-input-container:focus {
-		color: colors.$black;
-		border-color: colors.$radio-border-color-hover;
-		background: colors.$radio-background-hover;
+		color: var( --select-group-option-color );
+		border-color: var( --select-group-option-border );
+		background: var( --select-group-option-background-hover );
 	}
 
 	.wmde-banner-select-custom-amount:hover .wmde-banner-select-custom-amount-input::placeholder,
@@ -64,18 +64,17 @@
 	}
 
 	&-select-custom-amount.focused .wmde-banner-select-custom-amount-input-container {
-		color: colors.$black;
-		border-color: colors.$radio-border-color-active;
-		background: colors.$radio-background-active;
+		color: var( --select-group-option-color );
+		border-color: var( --select-group-option-border-active );
+		background: var( --select-group-option-background-active );
 	}
 
 	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-input {
-		color: colors.$radio-color-checked;
+		color: var( --select-group-option-color-checked );
 	}
 
 	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-input-container {
-		color: colors.$radio-color-checked;
-		border-color: colors.$radio-border-color-checked;
-		background: colors.$radio-background-checked;
+		border-color: var( --select-group-option-border-checked );
+		background: var( --select-group-option-background-checked );
 	}
 }

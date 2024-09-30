@@ -1,5 +1,4 @@
 @use '@src/themes/Yperala/variables/breakpoints';
-@use '@src/themes/Yperala/variables/colors';
 
 .wmde-banner {
 	&-full {
@@ -8,13 +7,13 @@
 		z-index: 1000;
 		height: 100%;
 		width: 100%;
-		background: colors.$primary-lighter;
-		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		background: var( --full-background );
+		box-shadow: var( --full-box-shadow );
 		text-align: center;
 		display: block;
 		margin: 0 auto;
 		border-radius: 15px;
-		border: 8px solid colors.$primary;
+		border: 8px solid var( --full-border );
 
 		&-content {
 			padding: 5px 5px 15px;
@@ -33,7 +32,8 @@
 			width: 36px;
 			padding: 5px;
 			border-radius: 50%;
-			background: colors.$primary-lighter;
+			background: var( --full-close-background );
+			border: 0;
 		}
 
 		&-info {

@@ -1,0 +1,146 @@
+@use 'sass:color';
+
+$error: #dd3333;
+
+$white: #ffffff;
+$black: #000000;
+
+$grey800: #202122;
+$grey700: #54595d;
+$grey400: #a2a9b1;
+
+$blue10: #f8f9fa;
+$blue20: #eaecf0;
+$blue30: #c8ccd1;
+$blue400: #5d9fd0;
+$blue500: #648196;
+$blue600: #386d94;
+
+$orange600: #da9000;
+$orange700: #bd7d00;
+
+$green600: #6e9e00;
+$green500: color.adjust( $green600, $lightness: -5% );
+
+@mixin swatch(
+	$address-type-button-form: false,
+	$upgrade-to-yearly-button-form: false,
+	$select-group-image-label: false,
+	$progress-bar: false,
+	$soft-close: false,
+	$subscription-form: false
+) {
+	--main-background: #{$white};
+	--main-color: #{$grey800};
+	--color-error: #{$error};
+
+	--mini-background: #{$white};
+	--mini-border: #{$blue600};
+
+	--mini-close-background: #{$white};
+
+	--mini-headline-line: #{$blue600};
+	--mini-headline-background: #{$white};
+	--mini-headline-color: #{$black};
+
+	--mini-button-color: #{$white};
+	--mini-button-background: #{$orange600};
+	--mini-button-background-hover: #{$orange700};
+	--mini-button-alt-background: #{$green600};
+	--mini-button-alt-background-hover: #{$green500};
+
+	--mini-smallprint-color: #{$grey700};
+
+	--full-background: #{$white};
+	--full-border: #{$blue600};
+
+	--full-cta-background: #{$blue600};
+	--full-cta-color: #{$white};
+
+	--full-smallprint-color: #{$grey700};
+
+	--slider-pagination-background: #{$grey400};
+	--slider-pagination-background-active: #{$grey700};
+	--slider-chevron: #{$grey800};
+
+	--donation-form-button-color: #{$white};
+	--donation-form-button-background: #{$orange600};
+	--donation-form-button-background-hover: #{$orange700};
+
+	--select-group-option-notice: #{$grey700};
+
+	--select-group-option-border: #{$blue30};
+	--select-group-option-background: #{$blue10};
+	--select-group-option-color: #{$black};
+
+	--select-group-option-background-hover: #{$blue20};
+
+	--select-group-option-border-active: #{$blue600};
+	--select-group-option-background-active: #{$blue10};
+
+	--select-group-option-border-checked: #{$blue600};
+	--select-group-option-background-checked: #{$blue400};
+	--select-group-option-color-checked: #{$white};
+
+	--footer-color: #{$black};
+	--selection-input-color: #{$black};
+	--selection-input-selection-color: #{$white};
+	--selection-input-selection-background: #{$blue600};
+
+	--animated-highlight-color: #{$grey800};
+	/* stylelint-disable */
+	--animated-highlight-gradient: linear-gradient(
+			270deg,
+			rgba( 255, 255, 255, 0 ) 0%,
+			rgba( 255, 255, 255, 0 ) 50%,
+			rgba( 255, 222, 103 ) 50%,
+			rgba( 255, 222, 103 ) 100%
+	);
+	/* stylelint-enable */
+
+	@if $address-type-button-form {
+		--address-type-button-form-notice-color: #{$grey700};
+	}
+
+	@if $upgrade-to-yearly-button-form {
+		--upgrade-to-yearly-button-previous-color: #{$black};
+	}
+
+	@if $select-group-image-label {
+		--select-group-image-label-fill: #{$white};
+		--select-group-image-label-fill-highlight: #{$blue600};
+	}
+
+	@if $progress-bar {
+		--progress-bar-border: #{$blue600};
+		--progress-bar-background: #{$blue600};
+		--progress-bar-color: #{$white};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$white};
+		--soft-close-border: #{$blue600};
+
+		--soft-close-button-background: #{$orange600};
+		--soft-close-button-color: #{$white};
+
+		--soft-close-donated-button-background: #{$white};
+		--soft-close-donated-button-color: #{$orange600};
+		--soft-close-donated-button-border: #{$orange600};
+
+		--soft-close-countdown-fill: #{$orange600};
+	}
+
+	@if $subscription-form {
+		--sub-form-link-color: #{$orange600};
+		--sub-form-modal-background: #{$white};
+		--sub-form-input-border: #{$grey400};
+		--sub-form-checkbox-color: #{$grey800};
+
+		--sub-form-submit-color: #{$white};
+		--sub-form-submit-background: #{$orange600};
+		--sub-form-submit-background-hover: #{$orange700};
+
+		--sub-form-submit-privacy-color: #{$grey400};
+	}
+}
