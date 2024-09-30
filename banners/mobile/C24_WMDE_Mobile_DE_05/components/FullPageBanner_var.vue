@@ -13,6 +13,8 @@
 
 			<slot name="donation-form"/>
 
+			<ThankYouBox/>
+
 			<div class="wmde-banner-full-small-print">
 				<span>
 					<a
@@ -33,6 +35,7 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import ThankYouBox from '@src/components/ThankYouBox/ThankYouBox.vue';
 
 defineEmits( [ 'close', 'showFundsModal' ] );
 

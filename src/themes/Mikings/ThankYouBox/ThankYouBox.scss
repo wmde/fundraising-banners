@@ -1,0 +1,17 @@
+@use 'src/components/ThankYouBox/ThankYouBox';
+
+.wmde-banner {
+	@include ThankYouBox.layout;
+
+	.thank-you-container {
+		font-weight: bold;
+		background: var( --thank-you-box-background );
+		color: var( --thank-you-box-color );
+		border-radius: 10px;
+		text-align: center;
+
+		.heart-icon {
+			padding-right: 8px;
+		}
+	}
+}
