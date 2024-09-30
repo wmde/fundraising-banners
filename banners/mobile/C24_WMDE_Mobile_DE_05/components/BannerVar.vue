@@ -25,7 +25,7 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :form-action-override="formAction" :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
+import FullPageBanner from './FullPageBanner_var.vue';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -97,8 +97,6 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/Forms/MainDonationFormButton.vue';
-import { useFormAction } from '@src/components/composables/useAmountBasedFormAction';
-import { FormActions } from '@src/domain/FormActions';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -131,7 +129,6 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
-const { formAction } = useFormAction( inject<FormActions>( 'formActions' ), 10, { smallAmount: 'ap=0', largeAmount: 'ap=1' } );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
