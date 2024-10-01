@@ -28,7 +28,12 @@
 		<div v-if="!isValidOrUnset( addressTypeValidity )" class="wmde-banner-form-address-type-error">{{ $translate( 'address-type-error-message' ) }}</div>
 
 		<div class="wmde-banner-form-button-container wmde-banner-form-address-type-button">
-			<button tabIndex="-1" class="wmde-banner-form-button t-submit-address-type" type="submit">
+			<button
+				tabIndex="-1"
+				class="wmde-banner-form-button t-submit-address-type"
+				type="submit"
+				:title="$translate('submit-button-explanation')"
+			>
 				{{ buttonText }}
 			</button>
 		</div>

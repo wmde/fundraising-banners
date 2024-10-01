@@ -9,7 +9,9 @@ const Translations: TranslationMessages = {
 	'upgrade-to-yearly-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
 	'upgrade-to-yearly-button': 'Weiter, um Spende abzuschließen',
 	'upgrade-to-yearly-error': 'Bitte wählen Sie eine der Optionen aus.',
-	'back-button': 'Zurück'
+	'back-button': 'Zurück',
+	'redirecting-to-donation-page-explanation': 'Weiterleitung nach spenden.wikimedia.de oder zum Zahlungsdienstleister',
+	'move-to-next-banner-page-explanation': 'nächste Formularseite öffnen'
 };
 
 export default Translations;

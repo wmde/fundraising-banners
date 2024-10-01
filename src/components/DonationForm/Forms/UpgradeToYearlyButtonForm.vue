@@ -16,6 +16,7 @@
 				tabIndex="-1"
 				class="wmde-banner-form-button t-annual-upgrade-no"
 				:value="Intervals.ONCE.value"
+				:title="$translate('redirecting-to-donation-page-explanation')"
 			>
 				{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
 			</button>
@@ -25,6 +26,7 @@
 				tabIndex="-1"
 				class="wmde-banner-form-button t-annual-upgrade-yes"
 				:value="Intervals.YEARLY.value"
+				:title="$translate('redirecting-to-donation-page-explanation')"
 			>
 				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
 			</button>

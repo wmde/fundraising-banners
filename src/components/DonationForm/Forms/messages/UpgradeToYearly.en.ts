@@ -9,7 +9,8 @@ const Translations: TranslationMessages = {
 	'upgrade-to-yearly-link': 'Yes, I\'ll donate yearly, but for a different amount.',
 	'upgrade-to-yearly-button': 'Proceed with the donation',
 	'upgrade-to-yearly-error': 'Please choose one of the above options.',
-	'back-button': 'Back'
+	'back-button': 'Back',
+	'redirecting-to-donation-page-explanation': 'Redirecting to spenden.wikimedia.de'
 };
 
 export default Translations;
