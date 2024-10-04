@@ -8,7 +8,11 @@
 				</button>
 			</div>
 			<div class="banner-modal-content">
-				<FundsContent :content="content" @hide-funds-modal="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.callToAction } )"/>
+				<FundsContent :content="content" @hide-funds-modal="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.callToAction } )">
+					<template #infographic>
+						<slot name="infographic"/>
+					</template>
+				</FundsContent>
 			</div>
 		</div>
 	</div>
