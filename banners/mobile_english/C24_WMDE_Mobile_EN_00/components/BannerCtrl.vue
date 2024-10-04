@@ -77,7 +77,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="onHideFundsModal"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingEN/>
+			</template>
+		</FundsModal>
 	</div>
 </template>
 
@@ -111,6 +115,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 const formModel = useFormModel();
 
 enum ContentStates {
