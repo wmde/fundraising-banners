@@ -41,7 +41,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingEN/>
+			</template>
+		</FundsModal>
 
 	</div>
 </template>
@@ -67,6 +71,7 @@ import SmallFooter from '@src/components/FallbackBanner/SmallFooter.vue';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
+import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 
 interface Props {
 	bannerState: BannerStates;
