@@ -10,6 +10,7 @@
 			"@banners/*": [ "banners/*" ],
 			"@src/*": [ "src/*" ],
 			"@test/*": [ "test/*" ],
+			"@check-styles": [ "check-styles/*" ],
 			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]
 		},
 		"lib": [
