@@ -35,11 +35,28 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
+							</template>
+
+							<template #label-payment-bez>
+								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<VisaLogo/>
+									<MastercardLogo/>
+								</span>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<UpgradeToYearlyButtonForm :page-index="pageIndex" :showManualUpgradeOption="false" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
 								<ChevronLeftIcon/>
 							</template>
@@ -59,7 +76,25 @@
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+		>
+			<template #buttons="{ timer }: any">
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
+					{{ $translate( 'soft-close-button-maybe-later' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
+					{{ $translate( 'soft-close-button-close' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.AlreadyDonated )">
+					{{ $translate( 'soft-close-button-already-donated' ) }}
+				</button>
+			</template>
+		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -99,6 +134,10 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
@@ -137,6 +176,11 @@ function onFormInteraction(): void {
 	nextTick( () => {
 		emit( 'bannerContentChanged' );
 	} );
+}
+
+function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	window.clearInterval( timer );
+	onClose( feature, userChoice );
 }
 
 function onCloseMain(): void {

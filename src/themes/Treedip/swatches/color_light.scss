@@ -162,6 +162,9 @@ $blue700: #2a4b8d;
 		--soft-close-button-background: #{$red600};
 		--soft-close-button-color: #{$white};
 		--soft-close-bar-background: #{$red600};
+		--soft-close-donated-button-background: #{$red600};
+		--soft-close-donated-button-border: #{$red600};
+		--soft-close-donated-button-color: #{$white};
 	}
 
 	@if $fallback-banner {
