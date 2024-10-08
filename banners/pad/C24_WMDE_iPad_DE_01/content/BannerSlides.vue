@@ -8,12 +8,17 @@
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p>{{ campaignDaySentence }} Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia wird
-			durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert.</p>
+		<p>
+			{{ campaignDaySentence }}
+			Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia wird
+			durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert.
+		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
-		<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich
-			entwickeln. <span v-if="visitorsVsDonorsSentence !== ''" class="wmde-banner-text-animated-highlight">{{ visitorsVsDonorsSentence }}</span></p>
+		<p>
+			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich
+			entwickeln. <AnimatedText :content="visitorsVsDonorsSentence"/>
+		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem
@@ -27,6 +32,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject } from 'vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
+import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 interface Props {
 	currentSlide: number

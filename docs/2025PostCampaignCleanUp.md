@@ -21,3 +21,13 @@ using this best practice. See https://stackoverflow.com/questions/3730019/why-no
 ### Files to look at:
 ../src/utils/FormModel/FormModel.ts
 ../src/components/composables/useAmountBasedFormAction.ts
+
+
+## Create parameters for 2025 campaign and adapt dev banner
+
+1. Create the page - https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/Campaign_Parameters_2025
+   - When creating the page, copy the values from 2024. Kai will adapt it when needed.
+
+2. Change the dev banner to point to the above given new parameter page - 
+https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B22_WMDE_local_prototype
+    - Change the start date and end date in this file as needed - src/environment/dev/CampaignParameterOverride.ts
