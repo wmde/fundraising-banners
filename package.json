@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.4",
-    "@stylistic/eslint-plugin-js": "^2.8.0",
+    "@stylistic/eslint-plugin-js": "^2.9.0",
     "@stylistic/eslint-plugin-jsx": "^2.9.0",
     "@stylistic/eslint-plugin-ts": "^2.8.0",
     "@stylistic/stylelint-config": "^2.0.0",
