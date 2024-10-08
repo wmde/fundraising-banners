@@ -39,15 +39,32 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
+							</template>
+
+							<template #label-payment-bez>
+								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
+							</template>
+
+							<template #label-payment-ueb>
+								<span class="wmde-banner-select-group-label with-logos bank-transfer"><BankTransferLogo/>&nbsp;Überweisung</span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<VisaLogo/>
+									<MastercardLogo/>
+								</span>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
-					</template>
-
-					<template #[FormStepNames.CustomAmountFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<CustomAmountForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 				</MultiStepDonation>
@@ -101,7 +118,6 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
-import CustomAmountForm from '@src/components/DonationForm/Forms/CustomAmountForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
@@ -112,7 +128,6 @@ import {
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import { createSubmittableCustomAmount } from '@src/components/DonationForm/StepControllers/SubmittableCustomAmount';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -121,6 +136,11 @@ import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vu
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
+import BankTransferLogo from '@src/components/PaymentLogos/BankTransferLogo.vue';
 import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
 
 enum ContentStates {
@@ -129,7 +149,6 @@ enum ContentStates {
 }
 
 enum FormStepNames {
-	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
 }
@@ -152,8 +171,7 @@ const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.CustomAmountFormStep, FormStepNames.MainDonationFormStep ),
-	createSubmittableCustomAmount( formModel, FormStepNames.UpgradeToYearlyFormStep )
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
 watch( contentState, async () => {
