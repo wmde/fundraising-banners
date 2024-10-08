@@ -13,7 +13,7 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyLink';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -107,8 +107,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
-			[ 'expectCustomAmountFormSubmits' ]
+			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
