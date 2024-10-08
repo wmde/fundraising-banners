@@ -1,0 +1,14 @@
+@mixin layout() {
+	.thank-you-container {
+		height: 60px;
+		line-height: 60px;
+
+		margin-bottom: 16px;
+		margin-left: 16px;
+		margin-right: 16px;
+
+		.heart-icon {
+			padding-right: 8px;
+		}
+	}
+}

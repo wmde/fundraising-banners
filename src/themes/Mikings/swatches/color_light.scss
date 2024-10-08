@@ -22,6 +22,9 @@ $orange700: #bd7d00;
 $green600: #6e9e00;
 $green500: color.adjust( $green600, $lightness: -5% );
 
+$purple10: #ebe2fc;
+$purple100: #6b4ba1;
+
 @mixin swatch(
 	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
@@ -97,6 +100,9 @@ $green500: color.adjust( $green600, $lightness: -5% );
 			rgba( 255, 222, 103 ) 100%
 	);
 	/* stylelint-enable */
+
+	--thank-you-box-background: #{$purple10};
+	--thank-you-box-color: #{$purple100};
 
 	@if $address-type-button-form {
 		--address-type-button-form-notice-color: #{$grey700};
