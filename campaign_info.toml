@@ -93,7 +93,9 @@ icon = "desktop"
 campaign = "C24_WPDE_Desktop_01"
 description = "Based on C23_WPDE_Desktop_02"
 campaign_tracking = "wpde-01-241028"
-preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+preview_link = "/wpde-offline?devbanner={{banner}}"
+# Until the banner server is live, we use the offline preview link
+#preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
