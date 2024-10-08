@@ -1,0 +1,383 @@
+/* stylelint-disable */
+html {
+	max-width: 100vw;
+	overflow-x: hidden;
+
+	--color-white: #ffffff;
+	--color-grey-50: #f3f3f3;
+	--color-grey-100: #f8f9fa;
+	--color-grey-300: #818181;
+	--color-grey-400: #575757;
+	--color-grey-700: #212121;
+
+	--color-primary: #3366cc;
+	--color-primary-lighter: #447ff5;
+	--color-primary-lightest: #a7d7f9;
+	--color-primary-light-grey: #a2a9b1;
+}
+
+body {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 100vh;
+	margin:0;
+	padding:0;
+	background-color: var( --color-white );
+	font: 14px sans-serif;
+	flex-direction: column;
+}
+
+.sr-only {
+	position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}
+
+#main {
+	flex-direction: column;
+	flex: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 100vh;
+}
+
+#mainbox {
+	flex: 1 0 auto;
+	align-content: center;
+	justify-content: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	padding:0;
+	margin: 1em 0;
+}
+
+#main h3 {
+	padding:0;
+	margin: 0.7em 0;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.suggest_link {
+	background-color: var( --color-white );
+	color: #333333;
+	font-size: 13px;
+	position: relative;
+}
+.suggest_link img {
+	width: 16px;
+	height: 16px;
+	border: 0 none;
+	margin-right: 0.8em;
+}
+.suggest_link .exact-match {
+	font-weight: bold;
+}
+.search_result {
+	box-sizing: border-box;
+	width: 100%;
+	display: inline-block;
+	min-height: 25px;
+	line-height: 25px;
+	font-size: 15px;
+	padding: 10px 20px 10px 10px;
+}
+.suggest_link_over .search_result {
+	color: var( --color-grey-400 );
+	background-color: var( --color-grey-50 );
+}
+#search_suggest {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	text-align: left;
+	background-color: var( --color-white );
+	border: 1px solid var( --color-primary-light-grey );
+	border-top: none;
+	display: none;
+	max-width: 560px;
+	box-sizing: border-box;
+	z-index: 5;
+}
+
+@media (max-width: 600px) {
+	#search_suggest {
+		width: calc(100% - 42px);
+	}
+}
+
+#mainbox {
+	margin: 0 auto;
+	text-align: center;
+	width: 40em;
+	padding: 4em 1.5em 4em 1.5em;
+}
+
+@media (max-width: 600px) {
+	#mainbox {
+		box-sizing: border-box;
+		width:100%;
+	}
+}
+
+#maincontent {
+	text-align: left;
+	margin: 30px 0 0 0;
+}
+
+.search-form {
+	margin:0;
+	padding:0;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+#form {
+	margin:0;
+	padding:0;
+}
+
+.search-form input {
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	background-color: var( --color-white );
+	border: 1px solid var( --color-primary-light-grey );
+	border-right: none;
+	height: 45px;
+	width: 100%;
+	padding: 8px 8px 8px 8px;
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-appearance: textfield;
+	-webkit-tap-highlight-color: var( --color-primary );
+	outline: var( --color-primary );
+}
+
+@media (max-width: 330px) {
+	.search-form input {
+		max-width: 200px;
+	}
+}
+
+.search-form input:active, .search-form input:focus {
+	border: 2px solid var( --color-primary );
+	border-right: none;
+}
+
+.button-ooui-like {
+	height: 45px;
+	background-color: var( --color-primary );
+	border: none;
+	color: var( --color-white );
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1.6;
+	vertical-align: middle;
+	display: inline-block;
+	zoom: 1;
+	white-space: nowrap;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+	box-sizing: border-box;
+	position: relative;
+	min-height: 19px;
+	min-width: 16px;
+	border-radius: 0 2px 2px 0;
+	font-weight: 700;
+	text-decoration: none;
+	transition: background .1s ease,color .1s ease,border-color .1s ease,box-shadow .1s ease,-webkit-box-shadow .1s ease,-moz-box-shadow .1s ease;
+	width: 90px;
+}
+
+.button-ooui-like:hover {
+	background: var( --color-primary-lighter );
+	border-color: var( --color-primary-lighter );
+}
+
+.search-icon {
+	background-image: url(wmde_search_icon.svg);
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	width: 100%;
+	background-size: 25px auto;
+	background-position: center;
+}
+
+.page-footer {
+	background: var( --color-grey-100 );
+	border-top: 1px solid var( --color-primary-lightest );
+	font-size: 14px;
+	line-height: 16px;
+	color: var( --color-grey-700 );
+	bottom: 0;
+	max-width: 100vw;
+}
+
+.page-footer-columns {
+	margin: auto;
+	max-width: 1170px;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (min-width: 600px) {
+	.page-footer-columns {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
+
+.page-footer-column {
+	max-width: 400px;
+	padding: 20px;
+}
+
+.page-footer h2,
+.page-footer p {
+	font-size: 14px;
+	margin: 0 0 10px;
+}
+
+.bank-info {
+	min-width: 260px;
+}
+
+.bank-info ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 10px;
+}
+
+.selection-input {
+	display: inline-block;
+	position: relative;
+	margin-left: 5px;
+}
+
+.selection-input-field,
+.selection-input-text {
+	font-size: 14px;
+}
+
+.selection-input-iban .selection-input-field,
+.selection-input-iban .selection-input-text {
+	font-weight: bold;
+}
+
+.selection-input-field {
+	font-family: sans-serif;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	z-index: 2;
+	background: transparent;
+	color: transparent;
+}
+
+.selection-input.active {
+	.selection-input-text {
+		color: transparent;
+	}
+	.selection-input-field {
+		color: var( --color-grey-700 );
+	}
+}
+
+.privacy-link {
+	color: var( --color-grey-700 );
+}
+
+.privacy-link:hover,
+.privacy-link:focus {
+	color: var( --color-primary );
+	text-decoration: underline;
+}
+
+.button {
+	color: var( --color-white );
+	box-sizing: border-box;
+	display: flex;
+	width: 194px;
+	background: var( --color-primary );
+	height: 28px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	transition: background 200ms ease-in-out, color 200ms ease-in-out, border 200ms ease-in-out;
+}
+
+.button:hover,
+.button:focus {
+	background: var( --color-primary-lighter );
+}
+
+.button:visited,
+.button:active {
+	color: var( --color-white );
+}
+
+.button.button-hollow {
+	background: transparent;
+	border: 2px solid var( --color-primary );
+	color: var( --color-primary );
+}
+
+.button.button-hollow:hover,
+.button.button-hollow:focus {
+	background: transparent;
+	border: 2px solid var( --color-primary-lighter );
+	color: var( --color-primary-lighter );
+}
+
+.wikipedia-logo img {
+	height: 250px;
+}
+
+@media (max-width: 600px) {
+	.wikipedia-logo img {
+		height: 200px;
+	}
+	#mainbox {
+		padding: 1em 1.5em 4em 1.5em;
+	}
+}
+
+/* iPad landscape selector to ensure input field is always on screen */
+@media (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+	.wikipedia-logo img {
+		height: 200px;
+	}
+	#mainbox {
+		padding: 0 1.5em 4em 1.5em;
+	}
+	#maincontent {
+		margin: 10px 0 0 0;
+	}
+}
+/* stylelint-enable */
