@@ -33,7 +33,7 @@ describe( 'FooterAlreadyDonated.vue', () => {
 
 		wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'showAlreadyDonatedModal' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'clickedAlreadyDonatedLink' ).length ).toBe( 1 );
 	} );
 
 	describe( 'event tracking', function () {

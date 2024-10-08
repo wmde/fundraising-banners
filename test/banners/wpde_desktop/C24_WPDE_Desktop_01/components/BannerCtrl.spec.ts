@@ -13,7 +13,7 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -56,7 +56,9 @@ describe( 'BannerCtrl.vue', () => {
 					formItems,
 					tracker: new TrackerStub()
 				}
-			}
+			},
+			// Needed for isVisible checks, see https://test-utils.vuejs.org/api/#isVisible
+			attachTo: document.body
 		} );
 	};
 
@@ -106,9 +108,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
-			[ 'expectCustomAmountFormSubmits' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
@@ -132,8 +132,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
 			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
 			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
-			[ 'expectSetCookieImageOnAlreadyDonatedMaybeLater' ],
-			[ 'expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners' ],
+			[ 'expectSetCookieImageOnAlreadyDonatedLink' ],
 			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper() );
@@ -151,10 +150,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Already Donated', () => {
 		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
+			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );

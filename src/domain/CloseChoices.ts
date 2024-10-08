@@ -9,4 +9,6 @@ export enum CloseChoices {
 	TimeOut = 'time-out',
 	/** user clicked a go away for campaign button */
 	NoMoreBannersForCampaign = 'no-more-banners',
+	/** user clicked on the already donated link */
+	AlreadyDonated = 'already-donated',
 }

@@ -6,7 +6,7 @@
 				{{ liveDateAndTime.currentTime }} sind Sie gefragt:
 			</p>
 			<p>
-				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
+				{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich 22,49&nbsp;€ finanziert, aber 99&nbsp;% der
 				Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong> Menschen spenden aus einem einfachen Grund – weil
 				Wikipedia nützlich ist. Schon der Preis einer Tasse Kaffee würde genügen.

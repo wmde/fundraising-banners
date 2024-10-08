@@ -38,10 +38,10 @@ import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonat
 
 const tracker = inject<Tracker>( 'tracker' );
 
-const emit = defineEmits( [ 'showAlreadyDonatedModal', 'showFundsModal' ] );
+const emit = defineEmits( [ 'clickedAlreadyDonatedLink', 'showFundsModal' ] );
 
 const onClickAlreadyDonated = (): void => {
 	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
-	emit( 'showAlreadyDonatedModal' );
+	emit( 'clickedAlreadyDonatedLink' );
 };
 </script>

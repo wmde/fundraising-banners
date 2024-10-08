@@ -10,7 +10,7 @@
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
-		<p>Wikipedia wird durch Spenden von durchschnittlich 22,25&nbsp;€ finanziert, aber 99&nbsp;% der
+		<p>Wikipedia wird durch Spenden von durchschnittlich 22,49&nbsp;€ finanziert, aber 99&nbsp;% der
 			Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong></p>
 	</KeenSliderSlide>
