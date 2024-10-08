@@ -1,0 +1,18 @@
+@use '@src/themes/Treedip/variables/globals';
+@use '@src/themes/Treedip/variables/fonts';
+
+.wmde-banner {
+	&-wrapper {
+		font-size: 14px;
+		font-family: fonts.$ui;
+		border-bottom: 1px solid var( --main-border-bottom );
+		background-color: var( --main-background );
+		color: var( --main-color );
+	}
+
+	&--closed {
+		.wmde-banner-wrapper {
+			display: none;
+		}
+	}
+}
