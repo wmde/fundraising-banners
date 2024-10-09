@@ -7,6 +7,17 @@ import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
+export type TransactionFee = {
+	fixedFee: number;
+	percentage: number;
+};
+
+// TODO: Ask PM about the real values
+export const TRANSACTION_FEES = new Map<string, TransactionFee>( [
+	[ 'PPL', { fixedFee: 0.35, percentage: 0.03 } ],
+	[ 'MCP', { fixedFee: 0.50, percentage: 0.025 } ]
+] );
+
 const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
@@ -20,6 +31,8 @@ const paymentMethodValidity = ref<Validity>( Validity.Unset );
 
 const addressType = ref<string>( '' );
 const addressTypeValidity = ref<Validity>( Validity.Unset );
+
+const hasTransactionFee = ref<boolean>( false );
 
 const disabledIntervals = computed( (): string[] => {
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
@@ -42,6 +55,18 @@ const disabledAddressTypes = computed( (): string[] => {
 		return [ AddressTypes.ANONYMOUS.value ];
 	}
 	return [];
+} );
+
+const transactionFee = computed( () => {
+	const fee = TRANSACTION_FEES.get( paymentMethod.value );
+	if ( fee === undefined ) {
+		return 0;
+	}
+	return fee.fixedFee + numericAmount.value * fee.percentage;
+} );
+
+const totalNumericAmount = computed( () => {
+	return numericAmount.value + ( hasTransactionFee.value ? transactionFee.value : 0 );
 } );
 
 watch( interval, ( newInterval: string ) => {
@@ -87,6 +112,7 @@ export function useFormModel(): FormModel {
 		selectedAmount,
 		customAmount,
 		numericAmount,
+		totalNumericAmount,
 		amountValidity,
 
 		paymentMethod,
@@ -95,6 +121,9 @@ export function useFormModel(): FormModel {
 		addressType,
 
 		addressTypeValidity,
-		disabledAddressTypes
+		disabledAddressTypes,
+
+		hasTransactionFee,
+		transactionFee
 	};
 }

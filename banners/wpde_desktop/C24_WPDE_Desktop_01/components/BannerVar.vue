@@ -39,7 +39,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationFormTransactionFees :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
@@ -60,7 +60,7 @@
 								</span>
 							</template>
 
-						</MainDonationForm>
+						</MainDonationFormTransactionFees>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -116,7 +116,7 @@ import BannerSlides from '../content/BannerSlides.vue';
 import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationFormTransactionFees from '@src/components/DonationForm/Forms/MainDonationFormTransactionFees.vue';
 import UpgradeToYearlyForm from '@src/components/DonationForm/Forms/UpgradeToYearlyForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
