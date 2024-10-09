@@ -1,0 +1,17 @@
+@mixin layout {
+	.wmde-banner-form-transaction-fee {
+		display: inline-block;
+		cursor: pointer;
+		position: relative;
+		padding: 0 0 10px 24px;
+
+		input[ type='checkbox' ] {
+			display: block;
+			float: left;
+			height: 16px;
+			margin: 0 0 0 -24px;
+			transition: background 0.15s ease-out;
+			width: 16px;
+		}
+	}
+}

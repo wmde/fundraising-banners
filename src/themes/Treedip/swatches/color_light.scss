@@ -21,10 +21,11 @@ $blue700: #2a4b8d;
 	$select-group-bubble: false,
 	$select-group-button: false,
 	$select-group-image-label: false,
+	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false,
+	$fallback-banner: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -44,6 +45,8 @@ $blue700: #2a4b8d;
 	--input-selection-color: #{$black};
 	--input-selection-selected-background: #{$red600};
 	--input-selection-selected-color: #{$white};
+	--input-checkbox-border: #{$grey500};
+	--input-checkbox-checked-background: #{$blue600};
 
 	--animated-highlight-color: #{$grey700};
 	/* stylelint-disable */
