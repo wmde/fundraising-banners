@@ -16,7 +16,6 @@ describe( 'useFormModel', () => {
 	beforeEach( () => resetFormModel( model ) );
 
 	it( 'should clear the address type when payment method is set to Direct debit and address type was NO', async function () {
-
 		model.addressType.value = AddressTypes.ANONYMOUS.value;
 		model.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
 
@@ -25,7 +24,6 @@ describe( 'useFormModel', () => {
 	} );
 
 	it( 'should NOT change the address type when payment method is set to Bank transfer and address type was NO', async function () {
-
 		model.addressType.value = AddressTypes.ANONYMOUS.value;
 		model.paymentMethod.value = PaymentMethods.BANK_TRANSFER.value;
 
@@ -170,5 +168,32 @@ describe( 'useFormModel', () => {
 		await nextTick();
 
 		expect( model.amountValidity.value ).toBe( expectedValidity );
+	} );
+
+	it( 'should calculate the fee but leave the total amount unchanged when hasTransactionFee is false', () => {
+		model.customAmount.value = '50';
+		model.paymentMethod.value = 'PPL';
+		model.hasTransactionFee.value = false;
+
+		expect( model.totalNumericAmount.value ).toBe( 50 );
+		expect( model.transactionFee.value ).toBe( 1.85 );
+	} );
+
+	it( 'should add the transaction fee to the amount when there is a transaction fee', () => {
+		model.customAmount.value = '100';
+		model.paymentMethod.value = 'PPL';
+		model.hasTransactionFee.value = true;
+
+		expect( model.totalNumericAmount.value ).toBe( 103.35 );
+		expect( model.transactionFee.value ).toBe( 3.35 );
+	} );
+
+	it( 'should leave the amount unchanged when there is no fee for the selected payment method', () => {
+		model.customAmount.value = '100';
+		model.paymentMethod.value = 'SUB';
+		model.hasTransactionFee.value = true;
+
+		expect( model.totalNumericAmount.value ).toBe( 100 );
+		expect( model.transactionFee.value ).toBe( 0 );
 	} );
 } );

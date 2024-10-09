@@ -20,10 +20,11 @@ $blue700: #2a4b8d;
 	$select-group: false,
 	$select-group-bubble: false,
 	$select-group-button: false,
+	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false,
+	$fallback-banner: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -135,5 +136,10 @@ $blue700: #2a4b8d;
 		--fallback-message-background: #{$white};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey500};
+	}
+
+	@if $transaction-fees {
+		--transaction-fees-checkbox-border: #{$grey500};
+		--transaction-fees-checkbox-checked: #{$blue600};
 	}
 }
