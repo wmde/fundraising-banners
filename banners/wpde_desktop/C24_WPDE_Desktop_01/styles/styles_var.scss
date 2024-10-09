@@ -7,6 +7,7 @@
 	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
+	$transaction-fees: true,
 );
 @use '@src/themes/Treedip/variables/breakpoints';
 @use '@src/components/BannerConductor/banner-transition';
@@ -33,6 +34,7 @@
 );
 @use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
 @use '@src/themes/Treedip/DonationForm/SubComponents/SmsBox';
+@use '@src/themes/Treedip/DonationForm/SubComponents/TransactionFees';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
 	$padding: 0
 );
