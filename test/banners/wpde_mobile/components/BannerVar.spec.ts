@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, vi, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/wpde_mobile/C24_WPDE_Mobile_00/components/BannerVar.vue';
+import Banner from '@banners/wpde_mobile/C24_WPDE_Mobile_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
