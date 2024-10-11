@@ -15,10 +15,14 @@
 		<div class="wmde-banner-mini-banner-slideshow">
 			<slot name="banner-slides"/>
 		</div>
-
-		<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
-			Jetzt spenden
-		</button>
+		<div class="wmde-banner-mini-button-group">
+			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
+				Jetzt 5 &euro; spenden
+			</button>
+			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
+				Anderen Betrag
+			</button>
+		</div>
 
 	</div>
 </template>
@@ -27,6 +31,6 @@
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 
-defineEmits( [ 'showFullPageBanner', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
 
 </script>

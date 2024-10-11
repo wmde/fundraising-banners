@@ -4,6 +4,7 @@
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
+			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -56,7 +57,25 @@
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+		>
+			<template #buttons="{ timer }: any">
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
+					{{ $translate( 'soft-close-button-maybe-later' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
+					{{ $translate( 'soft-close-button-close' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.NoMoreBannersForCampaign )">
+					{{ $translate( 'soft-close-button-already-donated' ) }}
+				</button>
+			</template>
+		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -158,6 +177,13 @@ function onshowFullPageBanner(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
+function onshowFullPageBannerPreselected(): void {
+	slideShowStopped.value = true;
+	formModel.selectedAmount.value = '5';
+	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+}
+
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
 	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
 		'.wmde-banner-form' :
@@ -166,4 +192,8 @@ const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void =
 	isFundsModalVisible.value = false;
 };
 
+function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	window.clearInterval( timer );
+	onClose( feature, userChoice );
+}
 </script>
