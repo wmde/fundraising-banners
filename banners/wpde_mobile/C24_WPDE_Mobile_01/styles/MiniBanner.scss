@@ -24,14 +24,14 @@ $height: 267px !default;
 			z-index: 2;
 
 			&-button {
+				border: none;
 				margin-top: auto;
 				float: right;
 				height: 16px;
 				line-height: 16px;
 				width: 16px;
-				background: transparent;
+				background: var( --mini-close-background );
 				z-index: 2;
-				border: 0;
 
 				svg {
 					height: 16px;
@@ -80,6 +80,7 @@ $height: 267px !default;
 				background: var( --mini-headline-background );
 				padding: 0 5px;
 				z-index: 2;
+				white-space: nowrap;
 
 				@media ( min-width: 330px ) {
 					font-size: 16px;
@@ -97,20 +98,43 @@ $height: 267px !default;
 			flex: 1 1 auto;
 		}
 
-		&-button {
-			width: auto;
+		&-button-group {
+			display: flex;
+			justify-content: center;
+		}
+
+		&-button,
+		&-button-preselect {
+			width: 50%;
 			height: 40px;
-			line-height: 40px;
+			border: none;
 			border-radius: 20px;
 			font-weight: bold;
-			background: var( --mini-button-background );
 			color: var( --mini-button-color );
 			margin: 0 16px;
-			border: 0;
+			font-size: 14px;
+			white-space: nowrap;
+
+			@media ( min-width: 370px ) {
+				font-size: 16px;
+			}
+		}
+
+		&-button {
+			background: var( --mini-button-background );
 
 			&:hover,
 			&:focus {
 				background: var( --mini-button-background-hover );
+			}
+		}
+
+		&-button-preselect {
+			background: var( --mini-button-alt-background );
+
+			&:hover,
+			&:focus {
+				background: var( --mini-button-alt-background-hover );
 			}
 		}
 

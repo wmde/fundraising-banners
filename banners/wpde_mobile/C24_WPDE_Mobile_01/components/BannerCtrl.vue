@@ -1,9 +1,11 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
+		<SetAlreadyDonatedCookieImage v-if="showSetAlreadyDonatedCookieImage"/>
 		<SetCookieImage v-if="showSetCookieImage"/>
 		<MiniBanner
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
+			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -36,7 +38,7 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<UpgradeToYearlyButtonForm :show-manual-upgrade-option="false" :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #back>
 								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
 							</template>
@@ -54,9 +56,27 @@
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.Hide )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+		>
+			<template #buttons="{ timer }: any">
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Hide )">
+					{{ $translate( 'soft-close-button-maybe-later' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
+					{{ $translate( 'soft-close-button-close' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.AlreadyDonated )">
+					{{ $translate( 'soft-close-button-already-donated' ) }}
+				</button>
+			</template>
+		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -98,6 +118,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
+import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -124,6 +145,7 @@ const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const showSetCookieImage = ref<boolean>( false );
+const showSetAlreadyDonatedCookieImage = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
@@ -146,9 +168,17 @@ function onCloseMiniBanner(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-
-	if ( userChoice !== CloseChoices.MaybeLater ) {
-		showSetCookieImage.value = true;
+	switch ( userChoice ) {
+		case CloseChoices.MaybeLater:
+		case CloseChoices.Hide:
+			// don't set a cookie
+			break;
+		case CloseChoices.AlreadyDonated:
+			showSetAlreadyDonatedCookieImage.value = true;
+			break;
+		default:
+			showSetCookieImage.value = true;
+			break;
 	}
 }
 
@@ -156,6 +186,13 @@ function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+}
+
+function onshowFullPageBannerPreselected(): void {
+	slideShowStopped.value = true;
+	formModel.selectedAmount.value = '5';
+	contentState.value = ContentStates.FullPage;
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
@@ -166,4 +203,8 @@ const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void =
 	isFundsModalVisible.value = false;
 };
 
+function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	window.clearInterval( timer );
+	onClose( feature, userChoice );
+}
 </script>

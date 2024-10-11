@@ -21,7 +21,13 @@ const messages: TranslationMessages = {
 		'Sie eine Bestätigung per E-Mail.',
 	'address-type-notice-none': 'Sie verzichten sowohl auf eine Spendenquittung als auch auf eine Bestätigung ' +
 		'per E-Mail. Sie erhalten von uns keine Information, wenn Wikipedia wieder Hilfe braucht.',
-	'soft-close-prompt': 'Wikipedia später unterstützen?'
+	'soft-close-prompt': 'Wikipedia später unterstützen?',
+	'soft-close-button-already-donated': 'Habe schon gespendet',
+	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen.' +
+		' Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.</p>' +
+		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
+	'payment-sofort': 'Sofort',
+	'payment-bank-transfer': 'Überweisung'
 };
 
 export default messages;

@@ -1,6 +1,7 @@
 import { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 
+// This test does not make sense
 const expectSetsCookieImageOnSoftCloseClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-full-close' ).trigger( 'click' );
