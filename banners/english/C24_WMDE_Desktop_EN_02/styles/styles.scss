@@ -4,6 +4,7 @@
 	$select-group-bubble: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
+	$select-group-image-label: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
