@@ -42,7 +42,7 @@ $progress-bar-margin: 0 !default;
 		&-fill-wrapper {
 			position: relative;
 			background: var( --progress-bar-wrapper-background );
-			border: 3px var( --progress-bar-wrapper-border );
+			border: 3px var( --progress-bar-wrapper-border ) solid;
 			height: $progress-bar-height;
 			border-radius: 15px;
 		}
