@@ -1,0 +1,124 @@
+@use '@src/themes/Yperala/variables/globals';
+@use '@src/themes/Yperala/variables/breakpoints';
+@use '@src/themes/Treedip/variables/fonts';
+
+$height-small: 328px !default;
+$height-large: 288px !default;
+
+.wmde-banner {
+	&-mini {
+		padding: 5px 0;
+		min-height: $height-small;
+		display: flex;
+
+		@include breakpoints.phone-m-up {
+			min-height: $height-large;
+		}
+
+		&-content {
+			position: relative;
+			cursor: pointer;
+			text-align: center;
+			box-sizing: border-box;
+			margin: 0 auto;
+			background: var( --mini-background );
+			border: 8px solid var( --mini-border );
+			box-shadow: var( --mini-box-shadow );
+			border-radius: 15px;
+			width: 98%;
+		}
+
+		&-close {
+			position: absolute;
+			top: 2px;
+			right: -2px;
+			z-index: 2;
+			height: 30px;
+			width: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&-button {
+				background: none;
+				border: 0;
+			}
+
+			svg {
+				height: 20px;
+				width: 20px;
+			}
+		}
+
+		&-banner-slideshow {
+			width: 100%;
+			flex: 1 0 auto;
+		}
+
+		&-button-group {
+			display: flex;
+			justify-content: center;
+		}
+
+		&-button,
+		&-button-preselect {
+			width: 50%;
+			height: 40px;
+			border: 0;
+			border-radius: 20px;
+			font-weight: bold;
+			color: var( --mini-button-color );
+			margin: 0 16px;
+			font-size: 14px;
+			white-space: nowrap;
+			transition: background-color 200ms ease-in-out;
+			cursor: pointer;
+
+			@media ( min-width: 370px ) {
+				font-size: 16px;
+			}
+		}
+
+		&-button-preselect {
+			background: var( --mini-button-alt-background );
+
+			&:hover,
+			&:focus {
+				background: var( --mini-button-alt-background-hover );
+			}
+		}
+
+		&-button {
+			background: var( --mini-button-background );
+
+			&:hover,
+			&:focus {
+				background: var( --mini-button-background-hover );
+			}
+		}
+
+		.wmde-banner-progress-bar-text {
+			visibility: hidden;
+		}
+
+		&-payment-icons {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			height: 45px;
+			padding: 10px 0;
+			text-align: center;
+
+			svg {
+				display: inline-block;
+				height: 18px;
+				width: auto;
+				margin: 0 5px;
+			}
+
+			.sms-icon {
+				height: 24px;
+			}
+		}
+	}
+}
