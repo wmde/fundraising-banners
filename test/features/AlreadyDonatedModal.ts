@@ -32,9 +32,17 @@ const expectFiresGoAwayEvent = async ( wrapper: VueWrapper<any> ): Promise<any> 
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign ) );
 };
 
+const expectFiresMaybeLaterEventOnLinkClick = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonated', CloseChoices.AlreadyDonated ) );
+};
+
 export const alreadyDonatedModalFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectShowsAlreadyDonatedModal,
 	expectHidesAlreadyDonatedModal,
 	expectFiresMaybeLaterEvent,
-	expectFiresGoAwayEvent
+	expectFiresGoAwayEvent,
+	expectFiresMaybeLaterEventOnLinkClick
 };
