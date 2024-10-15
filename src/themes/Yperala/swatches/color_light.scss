@@ -9,6 +9,7 @@ $green400: #6e9e00;
 $green500: #598000;
 
 $error: #990000;
+$link: #3366cc;
 
 $white: #ffffff;
 $black: #000000;
@@ -32,6 +33,7 @@ $orange700: #b47200;
 ) {
 	--main-color: #{$grey800};
 	--color-error: #{$error};
+	--color-link: #{$link};
 
 	--headline-line: #{$grey600};
 	--headline-background: #{$blue10};
