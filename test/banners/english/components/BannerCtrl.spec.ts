@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/english/C24_WMDE_Desktop_EN_02/components/BannerCtrl.vue';
+import Banner from '@banners/english/C24_WMDE_Desktop_EN_02b/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -18,6 +18,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -60,7 +61,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -114,6 +115,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );

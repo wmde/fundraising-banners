@@ -50,11 +50,12 @@
 
                 </MultiStepDonation>
             </template>
-            <template #footer>
-                <BannerFooter
-                    @showFundsModal="isFundsModalVisible = true"
-                />
-            </template>
+			<template #footer>
+				<FooterAlreadyDonated
+					@showFundsModal="isFundsModalVisible = true"
+					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+				/>
+			</template>
         </MainBanner>
 
         <FundsModal
@@ -77,7 +78,7 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText_var.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm

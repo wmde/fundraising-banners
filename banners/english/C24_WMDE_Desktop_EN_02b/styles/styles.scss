@@ -42,7 +42,7 @@
 );
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/Treedip/Footer/BannerFooter' with (
+@use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
@@ -51,7 +51,6 @@
 );
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use 'src/themes/Treedip/AlreadyDonatedModal/AlreadyDonatedModal';
 @use 'FallbackBanner';
 @use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
 @use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
