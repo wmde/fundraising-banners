@@ -2,7 +2,8 @@
 	$progress-bar: true,
 	$select-group-image-label: true,
 	$soft-close: true,
-	$sms-icon: true
+	$sms-icon: true,
+	$upgrade-to-yearly: true
 );
 @use '@src/components/BannerConductor/banner-transition';
 @use '@src/themes/UseOfFunds/swatches/skin_minerva' as uof-minerva;
@@ -14,6 +15,7 @@
 @use '@src/themes/Yperala/Slider/Slider';
 @use '@src/themes/Yperala/ProgressBar/ProgressBar';
 @use '@src/themes/Yperala/DonationForm/MultiStepDonation';
+@use '@src/themes/Yperala/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectGroup';
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectGroupImageLabel';
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectCustomAmount';

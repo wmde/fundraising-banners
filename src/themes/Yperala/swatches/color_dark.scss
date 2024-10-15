@@ -27,7 +27,8 @@ $orange700: #b47200;
 	$progress-bar: false,
 	$select-group-image-label: false,
 	$soft-close: false,
-	$sms-icon: false
+	$sms-icon: false,
+	$upgrade-to-yearly: false
 ) {
 	--main-color: #{$grey150};
 	--color-error: #{$error};
@@ -50,6 +51,7 @@ $orange700: #b47200;
 	--slider-pagination-border: #{$grey150};
 	--slider-pagination-background-active: #{$red400};
 	--slider-pagination-border-active: #{$red400};
+	--slider-chevron: #{$grey150};
 
 	--full-background: #{$grey800};
 	--full-border: #{$red400};
@@ -143,5 +145,10 @@ $orange700: #b47200;
 	@if $sms-icon {
 		--sms-icon-primary-fill: #{$white};
 		--sms-icon-text-fill: #{$grey800};
+	}
+
+	@if $upgrade-to-yearly {
+		--upgrade-to-yearly-link-color: #{$red400};
+		--upgrade-to-yearly-back-color: #{$white};
 	}
 }
