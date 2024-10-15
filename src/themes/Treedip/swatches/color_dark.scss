@@ -24,6 +24,7 @@ $blue800: #20303f;
 	$select-group: false,
 	$select-group-bubble: false,
 	$select-group-button: false,
+	$select-group-image-label: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -111,6 +112,40 @@ $blue800: #20303f;
 		--select-group-button-border-checked: #{$grey600};
 		--select-group-button-background-checked: #{$blue700};
 		--select-group-button-color-checked: #{$white};
+	}
+
+	@if $select-group-image-label {
+		--paypal-primary-fill: #{white};
+		--paypal-secondary-fill: #{white};
+		--paypal-overlap-fill: transparent;
+		--paypal-primary-fill-active: #{$white};
+		--paypal-secondary-fill-active: #{$white};
+		--paypal-overlap-fill-active: transparent;
+
+		--visa-fill: #{$white};
+		--visa-fill-active: #{$white};
+
+		--mastercard-primary-fill: #{$white};
+		--mastercard-secondary-fill: #{$white};
+		--mastercard-overlap-fill: transparent;
+		--mastercard-text-fill: #{$white};
+		--mastercard-primary-fill-active: #{$white};
+		--mastercard-secondary-fill-active: #{$white};
+		--mastercard-overlap-fill-active: transparent;
+		--mastercard-text-fill-active: #{$white};
+
+		--sepa-primary-fill: #{$white};
+		--sepa-secondary-fill: #{$white};
+		--sepa-primary-fill-active: #{$white};
+		--sepa-secondary-fill-active: #{$white};
+
+		--bank-transfer-fill: #{$white};
+		--bank-transfer-fill-active: #{$white};
+
+		--amex-primary-fill: #{$white};
+		--amex-text-fill: transparent;
+		--amex-primary-fill-active: #{$white};
+		--amex-text-fill-active: transparent;
 	}
 
 	@if $upgrade-to-yearly {
