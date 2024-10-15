@@ -29,13 +29,14 @@
 
 		&-fill-wrapper {
 			border: 2px solid var( --progress-bar-border );
+			background: var( --progress-bar-background );
 			border-radius: 8px;
 			height: 32px;
 			line-height: 28px;
 		}
 
 		&-fill {
-			background: var( --progress-bar-background );
+			background: var( --progress-bar-fill-background );
 			min-width: 5em;
 			height: 100%;
 			border-radius: 5px 16px 16px 5px;

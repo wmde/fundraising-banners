@@ -37,17 +37,17 @@
 						733.1ZM282.4,774.3L282.4,691.9L264.4,691.9L264.4,702.2C258.4,694.5 249.8,690.2 238.6,690.2C215.4,690.2 197.4,
 						708.2 197.4,733.1C197.4,758 215.4,776 238.6,776C250.6,776 259.2,771.7 264.4,764L264.4,774.3L282.4,774.3ZM215.5,
 						733.1C215.5,718.5 224.9,706.5 240.4,706.5C255,706.5 265.3,717.7 265.3,733.1C265.3,747.7 255,759.7 240.4,759.7C224.9,758.8 215.5,747.6 215.5,733.1Z"
-						style="fill-rule: nonzero;"/>
+						style="fill: var( --mastercard-text-fill );fill-rule: nonzero;"/>
 					<g>
-						<rect class="highlight-transparent" id="rect19" x="364" y="66.1" width="270.4" height="485.8" style="fill: rgba( 255, 90, 0, 1 );"/>
+						<rect class="highlight-transparent" id="rect19" x="364" y="66.1" width="270.4" height="485.8" style="fill: var( --mastercard-overlap-fill );"/>
 						<path id="XMLID_330_"
 							d="M382,309C382,210.3 428.4,122.7 499.6,66.1C447.2,24.9 381.1,0 309,0C138.2,0 0,138.2 0,309C0,479.8 138.2,
 							618 309,618C381.1,618 447.2,593.1 499.6,551.9C428.3,496.1 382,407.7 382,309Z"
-							style="fill: rgba( 235, 0, 27, 1 );fill-rule: nonzero;"/>
+							style="fill: var( --mastercard-primary-fill );fill-rule: nonzero;"/>
 						<path id="path22"
 							d="M999.2,309C999.2,479.8 861,618 690.2,618C618.1,618 552,593.1 499.6,551.9C571.7,495.2 617.2,407.7 617.2,
 							309C617.2,210.3 570.8,122.7 499.6,66.1C551.9,24.9 618,0 690.1,0C861,0 999.2,139.1 999.2,309Z"
-							style="fill: rgba( 247, 158, 27, 1 );fill-rule: nonzero;"/>
+							style="fill: var( --mastercard-secondary-fill );fill-rule: nonzero;"/>
 					</g>
 				</g>
 			</g>

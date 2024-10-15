@@ -16,6 +16,8 @@ $grey100: #e0e5e9;
 $grey150: #d9d9d9;
 $grey400: #7d8389;
 $grey450: #808080;
+$grey600: #434343;
+$grey700: #333333;
 $grey800: #222222;
 
 $orange600: #da9000;
@@ -27,14 +29,14 @@ $orange700: #b47200;
 	$soft-close: false,
 	$sms-icon: false
 ) {
-	--main-color: #{$grey800};
+	--main-color: #{$grey150};
 	--color-error: #{$error};
 
 	--headline-line: #{$red100};
-	--headline-background: #{$blue10};
+	--headline-background: #{$grey800};
 	--headline-color: #{$red100};
 
-	--mini-background: #{$blue10};
+	--mini-background: #{$grey800};
 	--mini-border: #{$red400};
 	--mini-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 
@@ -44,35 +46,35 @@ $orange700: #b47200;
 	--mini-button-alt-background: #{$green400};
 	--mini-button-alt-background-hover: #{$green500};
 
-	--slider-pagination-background: #{$grey400};
-	--slider-pagination-border: #{$blue10};
-	--slider-pagination-background-active: #{$white};
+	--slider-pagination-background: #{$grey800};
+	--slider-pagination-border: #{$grey150};
+	--slider-pagination-background-active: #{$red400};
 	--slider-pagination-border-active: #{$red400};
 
-	--full-background: #{$blue10};
+	--full-background: #{$grey800};
 	--full-border: #{$red400};
 	--full-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 
-	--full-close-background: #{$blue10};
+	--full-close-background: #{$grey800};
 
-	--animated-highlight-color: #{$grey800};
+	--animated-highlight-color: #{$grey150};
 	/* stylelint-disable */
 	--animated-highlight-gradient: linear-gradient(
-		270deg,
-		rgba( 255, 255, 255, 0 ) 0%,
-		rgba( 255, 255, 255, 0 ) 50%,
-		rgba( 255, 222, 103 ) 50%,
-		rgba( 255, 222, 103 ) 100%
+			270deg,
+			rgba( 255, 255, 255, 0 ) 0%,
+			rgba( 255, 255, 255, 0 ) 50%,
+			rgba( 42, 75, 141 ) 50%,
+			rgba( 42, 75, 141 ) 100%
 	);
 	/* stylelint-enable */
 
-	--field-group-border: #{$red-transparent100};
+	--field-group-border: #{$grey700};
 	--donation-form-button-color: #{$white};
 	--donation-form-button-background: #{$green400};
 	--donation-form-button-background-hover: #{$green500};
 
-	--select-group-option-background: #{$grey100};
-	--select-group-option-color: #{$grey800};
+	--select-group-option-background: #{$grey600};
+	--select-group-option-color: #{$grey150};
 	--select-group-option-color-disabled: #{$grey150};
 	--select-group-sms-notice-color: #{$grey400};
 
@@ -88,41 +90,41 @@ $orange700: #b47200;
 
 	@if $progress-bar {
 		--progress-bar-border: #{$red400};
-		--progress-bar-background: #{$blue10};
+		--progress-bar-background: #{$grey800};
 		--progress-bar-fill-background: #{$red400};
 		--progress-bar-color: #{$white};
 	}
 
 	@if $select-group-image-label {
-		--paypal-primary-fill: #003087;
-		--paypal-secondary-fill: #0070e0;
-		--paypal-overlap-fill: #001c64;
+		--paypal-primary-fill: #{white};
+		--paypal-secondary-fill: #{white};
+		--paypal-overlap-fill: transparent;
 		--paypal-primary-fill-active: #{$white};
 		--paypal-secondary-fill-active: #{$white};
 		--paypal-overlap-fill-active: transparent;
 
-		--visa-fill: #1434cb;
+		--visa-fill: #{$white};
 		--visa-fill-active: #{$white};
 
-		--mastercard-primary-fill: #eb001b;
-		--mastercard-secondary-fill: #f79e1b;
-		--mastercard-overlap-fill: #ff5a00;
-		--mastercard-text-fill: #2f292b;
+		--mastercard-primary-fill: #{$white};
+		--mastercard-secondary-fill: #{$white};
+		--mastercard-overlap-fill: transparent;
+		--mastercard-text-fill: #{$white};
 		--mastercard-primary-fill-active: #{$white};
 		--mastercard-secondary-fill-active: #{$white};
 		--mastercard-overlap-fill-active: transparent;
 		--mastercard-text-fill-active: #{$white};
 
-		--sepa-primary-fill: #0366a6;
-		--sepa-secondary-fill: #a2aab5;
+		--sepa-primary-fill: #{$white};
+		--sepa-secondary-fill: #{$white};
 		--sepa-primary-fill-active: #{$white};
 		--sepa-secondary-fill-active: #{$white};
 
-		--bank-transfer-fill: #{$grey800};
+		--bank-transfer-fill: #{$white};
 		--bank-transfer-fill-active: #{$white};
 
-		--amex-primary-fill: #006fcf;
-		--amex-text-fill: #{$white};
+		--amex-primary-fill: #{$white};
+		--amex-text-fill: transparent;
 		--amex-primary-fill-active: #{$white};
 		--amex-text-fill-active: transparent;
 	}
@@ -139,7 +141,7 @@ $orange700: #b47200;
 	}
 
 	@if $sms-icon {
-		--sms-icon-primary-fill: #328be5;
-		--sms-icon-text-fill: #{$white};
+		--sms-icon-primary-fill: #{$white};
+		--sms-icon-text-fill: #{$grey800};
 	}
 }
