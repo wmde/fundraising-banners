@@ -21,11 +21,7 @@
 			border-radius: globals.$form-element-border-radius;
 			margin-bottom: 6px;
 			padding: 0 2px;
-			height: 60px;
-
-			@include breakpoints.phone-s-up {
-				font-size: 24px;
-			}
+			height: 46px;
 		}
 
 		&-notice {

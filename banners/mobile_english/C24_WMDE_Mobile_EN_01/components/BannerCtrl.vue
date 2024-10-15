@@ -28,10 +28,10 @@
 				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
-			<template #donation-form>
-				<MultiStepDonation :step-controllers="stepControllers" :page-scroller="pageScroller">
+			<template #donation-form="{ formInteraction }: any">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
 
-					<template #form-page-1="{ pageIndex, submit, previous, isCurrent }: any">
+					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, previous, isCurrent }: any">
 						<MainDonationForm
 							:page-index="pageIndex"
 							:is-current="isCurrent"
@@ -58,11 +58,25 @@
 						</MainDonationForm>
 					</template>
 
+					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
+						<UpgradeToYearlyButtonForm
+							:show-manual-upgrade-option = false
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+						>
+							<template #back>
+								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+							</template>
+						</UpgradeToYearlyButtonForm>
+					</template>
+
 				</MultiStepDonation>
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true" />
+				<BannerFooter @showFundsModal="() => onShowUseOfFunds( 'Footer' )" />
 			</template>
 		</FullPageBanner>
 
@@ -71,7 +85,25 @@
 			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
 			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+		>
+			<template #buttons="{ timer }: any">
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
+					{{ $translate( 'soft-close-button-maybe-later' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
+					{{ $translate( 'soft-close-button-close' ) }}
+				</button>
+				<button
+					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
+					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.NoMoreBannersForCampaign )">
+					{{ $translate( 'soft-close-button-already-donated' ) }}
+				</button>
+			</template>
+		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -103,20 +135,27 @@ import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
-import {
-	createSubmittableMainDonationFormSinglePage
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationFormSinglePage';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 const formModel = useFormModel();
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
 	FullPage = 'wmde-banner-wrapper--full-page',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
+}
+
+enum FormStepNames {
+	MainDonationFormStep = 'MainDonationForm',
+	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
 }
 
 interface Props {
@@ -135,7 +174,10 @@ const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const stepControllers = [ createSubmittableMainDonationFormSinglePage() ];
+const stepControllers = [
+	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
+	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
+];
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -166,6 +208,11 @@ function onShowFullPageBannerPreselectedAmount(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
+const onShowUseOfFunds = ( feature: TrackingFeatureName ): void => {
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+	isFundsModalVisible.value = true;
+};
+
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
 	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
 		'.wmde-banner-form' :
@@ -173,5 +220,10 @@ const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void =
 	);
 	isFundsModalVisible.value = false;
 };
+
+function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	window.clearInterval( timer );
+	onClose( feature, userChoice );
+}
 
 </script>

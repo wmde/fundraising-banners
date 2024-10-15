@@ -1,6 +1,6 @@
 $red100: #dbb0ad;
-$red400: #990a00;
-$red500: #6c0000;
+$red400: #e60f00;
+$red500: #b70d00;
 $red-transparent100: rgba( 219, 176, 173, 0.3 );
 
 $blue10: #f8f9fa; /* offwhite */
@@ -8,17 +8,20 @@ $blue10: #f8f9fa; /* offwhite */
 $green400: #6e9e00;
 $green500: #598000;
 
-$error: #990000;
+$error: #ff5252;
+$link: #88a3e8;
 
 $white: #ffffff;
 $black: #000000;
 $grey100: #e0e5e9;
 $grey150: #d9d9d9;
-$grey400: #7d8389;
+$grey400: #9f9f9f;
 $grey450: #808080;
 $grey600: #434343;
 $grey700: #333333;
 $grey800: #222222;
+
+$blue-grey400: #7d8389;
 
 $orange600: #da9000;
 $orange700: #b47200;
@@ -27,18 +30,23 @@ $orange700: #b47200;
 	$progress-bar: false,
 	$select-group-image-label: false,
 	$soft-close: false,
-	$sms-icon: false
+	$sms-icon: false,
+	$upgrade-to-yearly: false
 ) {
 	--main-color: #{$grey150};
 	--color-error: #{$error};
+	--color-link: #{$link};
 
-	--headline-line: #{$red100};
+	--headline-line: #{$grey400};
 	--headline-background: #{$grey800};
-	--headline-color: #{$red100};
+	--headline-color: #{$grey400};
+
+	--close-circle-background-fill: #{$red400};
+	--close-circle-x-fill: #{$white};
 
 	--mini-background: #{$grey800};
 	--mini-border: #{$red400};
-	--mini-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+	--mini-box-shadow: none;
 
 	--mini-button-color: #{$white};
 	--mini-button-background: #{$orange600};
@@ -50,10 +58,11 @@ $orange700: #b47200;
 	--slider-pagination-border: #{$grey150};
 	--slider-pagination-background-active: #{$red400};
 	--slider-pagination-border-active: #{$red400};
+	--slider-chevron: #{$grey150};
 
 	--full-background: #{$grey800};
 	--full-border: #{$red400};
-	--full-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+	--full-box-shadow: none;
 
 	--full-close-background: #{$grey800};
 
@@ -76,7 +85,7 @@ $orange700: #b47200;
 	--select-group-option-background: #{$grey600};
 	--select-group-option-color: #{$grey150};
 	--select-group-option-color-disabled: #{$grey150};
-	--select-group-sms-notice-color: #{$grey400};
+	--select-group-sms-notice-color: #{$blue-grey400};
 
 	--select-group-option-background-active: #{$red400};
 	--select-group-option-color-active: #{$white};
@@ -130,8 +139,8 @@ $orange700: #b47200;
 	}
 
 	@if $soft-close {
-		--soft-close-background: #{$white};
-		--soft-close-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		--soft-close-background: #{$grey800};
+		--soft-close-box-shadow: none;
 
 		--soft-close-button-background: #{$red400};
 		--soft-close-button-color: #{$white};
@@ -143,5 +152,10 @@ $orange700: #b47200;
 	@if $sms-icon {
 		--sms-icon-primary-fill: #{$white};
 		--sms-icon-text-fill: #{$grey800};
+	}
+
+	@if $upgrade-to-yearly {
+		--upgrade-to-yearly-link-color: #{$red400};
+		--upgrade-to-yearly-back-color: #{$white};
 	}
 }

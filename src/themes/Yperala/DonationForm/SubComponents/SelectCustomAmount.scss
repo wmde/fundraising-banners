@@ -22,11 +22,11 @@
 
 		&-input-container {
 			border-radius: globals.$form-element-border-radius;
-			min-height: 54px;
+			min-height: 30px;
 			display: block;
 			background-color: var( --select-group-option-background );
-			padding: 15px 2px;
-			height: 60px;
+			padding: 8px 2px;
+			height: 46px;
 			outline: 0;
 			cursor: pointer;
 		}
@@ -41,10 +41,6 @@
 			outline: 0;
 			font-size: 18px;
 			background: transparent;
-
-			@include breakpoints.phone-s-up {
-				font-size: 24px;
-			}
 		}
 
 		&-euro-symbol {

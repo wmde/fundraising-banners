@@ -1,0 +1,92 @@
+@use '../../variables/breakpoints';
+
+$font-size: 18px !default;
+
+.wmde-banner {
+	&-sub-form.wmde-banner-form-upgrade {
+		padding: 20px 0;
+	}
+
+	.previous {
+		display: block;
+		color: var( --upgrade-to-yearly-back-color );
+		margin-bottom: 20px;
+		height: 18px;
+		svg {
+			float: left;
+			margin: 4px 12px 1px 0;
+			path {
+				fill: var( --upgrade-to-yearly-back-color );
+			}
+		}
+	}
+
+	&-form-upgrade {
+		.wmde-banner-select-group-container {
+			justify-content: center;
+		}
+		.wmde-banner-select-group-label {
+			white-space: normal;
+
+			&::before {
+				top: 8px;
+			}
+		}
+
+		.wmde-banner-select-group {
+			line-height: 1.5;
+		}
+
+		.wmde-banner-select-group-option {
+			margin-bottom: 8px;
+			label {
+				height: auto;
+			}
+		}
+
+		.wmde-banner-form-button {
+			font-size: 14px;
+
+			@include breakpoints.phone-s-up {
+				font-size: 18px;
+			}
+		}
+
+		&-title {
+			font-weight: bold;
+			font-size: $font-size;
+			margin-bottom: 20px;
+			text-align: left;
+		}
+
+		&-notice {
+			font-size: $font-size;
+			text-align: left;
+			hyphens: auto;
+			margin-bottom: 60px;
+		}
+
+		&-options {
+			flex-grow: 0;
+		}
+
+		&-buttons {
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			.wmde-banner-form-button {
+				margin-bottom: 20px;
+			}
+		}
+
+		&-custom {
+			display: block;
+			font-weight: bold;
+			text-align: left;
+			font-size: 12px;
+			padding: 0 10px;
+		}
+	}
+}

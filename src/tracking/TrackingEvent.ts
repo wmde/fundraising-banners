@@ -18,6 +18,8 @@ export type TrackingFeatureName = '' |
 	'UpgradeToMonthlyForm' |
 	'AddressTypeForm' |
 
+	'Footer' |
+
 	'ThankYouBanner';
 
 /**

@@ -8,7 +8,7 @@
 			</div>
 
 			<header class="wmde-banner-headline">
-				<span class="wmde-banner-headline-content">Is Wikipedia worth €10 to you?</span>
+				Is Wikipedia worth €10 to you?
 			</header>
 
 			<div class="wmde-banner-mini-slideshow">

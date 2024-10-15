@@ -14,9 +14,11 @@ $white: #ffffff;
 $black: #000000;
 $grey100: #e0e5e9;
 $grey150: #d9d9d9;
-$grey400: #7d8389;
 $grey450: #808080;
+$grey600: #595959;
 $grey800: #222222;
+
+$blue-grey400: #7d8389;
 
 $orange600: #da9000;
 $orange700: #b47200;
@@ -25,14 +27,18 @@ $orange700: #b47200;
 	$progress-bar: false,
 	$select-group-image-label: false,
 	$soft-close: false,
-	$sms-icon: false
+	$sms-icon: false,
+	$upgrade-to-yearly: false
 ) {
 	--main-color: #{$grey800};
 	--color-error: #{$error};
 
-	--headline-line: #{$red100};
+	--headline-line: #{$grey600};
 	--headline-background: #{$blue10};
-	--headline-color: #{$red100};
+	--headline-color: #{$grey600};
+
+	--close-circle-background-fill: #{$red400};
+	--close-circle-x-fill: #{$white};
 
 	--mini-background: #{$blue10};
 	--mini-border: #{$red400};
@@ -44,10 +50,11 @@ $orange700: #b47200;
 	--mini-button-alt-background: #{$green400};
 	--mini-button-alt-background-hover: #{$green500};
 
-	--slider-pagination-background: #{$grey400};
+	--slider-pagination-background: #{$blue-grey400};
 	--slider-pagination-border: #{$blue10};
 	--slider-pagination-background-active: #{$white};
 	--slider-pagination-border-active: #{$red400};
+	--slider-chevron: #{$red400};
 
 	--full-background: #{$blue10};
 	--full-border: #{$red400};
@@ -74,7 +81,7 @@ $orange700: #b47200;
 	--select-group-option-background: #{$grey100};
 	--select-group-option-color: #{$grey800};
 	--select-group-option-color-disabled: #{$grey150};
-	--select-group-sms-notice-color: #{$grey400};
+	--select-group-sms-notice-color: #{$blue-grey400};
 
 	--select-group-option-background-active: #{$red400};
 	--select-group-option-color-active: #{$white};
@@ -141,5 +148,10 @@ $orange700: #b47200;
 	@if $sms-icon {
 		--sms-icon-primary-fill: #328be5;
 		--sms-icon-text-fill: #{$white};
+	}
+
+	@if $upgrade-to-yearly {
+		--upgrade-to-yearly-link-color: #{$red400};
+		--upgrade-to-yearly-back-color: #{$red400};
 	}
 }
