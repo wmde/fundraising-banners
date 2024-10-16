@@ -1,5 +1,5 @@
 <template>
-	<div :class="[ 'banner-modal', { 'is-visible': isFundsModalVisible } ]">
+	<div :class="[ 'banner-modal funds-modal', { 'is-visible': isFundsModalVisible } ]">
 		<div class="banner-modal-background" @click="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.close } )"></div>
 		<div class="banner-modal-container">
 			<div class="banner-modal-close">
