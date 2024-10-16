@@ -1,15 +1,15 @@
 @use 'color_dark';
 @use 'color_light';
 
-.skin-theme-clientpref-day .use-of-funds {
+.skin-theme-clientpref-day .funds-modal {
 	@include color_light.swatch;
 }
 
-.skin-theme-clientpref-night .use-of-funds {
+.skin-theme-clientpref-night .funds-modal {
 	@include color_dark.swatch;
 }
 
-.skin-theme-clientpref-os .use-of-funds {
+.skin-theme-clientpref-os .funds-modal {
 	@media ( prefers-color-scheme: dark ) {
 		@include color_dark.swatch;
 	}
