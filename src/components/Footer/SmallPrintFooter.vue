@@ -1,18 +1,16 @@
 <template>
 	<div class="wmde-banner-footer">
 		<div v-if="showFundsLink" class="wmde-banner-footer-usage">
-			<div class="first-row-items">
-				<div class="wmde-banner-footer-item">
-					<a
-						id="application-of-funds-link"
-						class="wmde-banner-footer-usage-link t-use-of-funds-link"
-						@click.prevent="$emit( 'showFundsModal' )"
-						:title="$translate( 'use-of-funds-link-description' )"
-					>
-						{{ $translate( 'use-of-funds-link' ) }}
-					</a>
-				</div>
-				<div class="wmde-banner-footer-item wmde-banner-footer-faq-link-item">
+			<p class="first-row-items">
+				<a
+					id="application-of-funds-link"
+					class="wmde-banner-footer-usage-link t-use-of-funds-link"
+					@click.prevent="$emit( 'showFundsModal' )"
+					:title="$translate( 'use-of-funds-link-description' )"
+				>
+					{{ $translate( 'use-of-funds-link' ) }}
+				</a>
+				<span class="wmde-banner-footer-faq-link-item">
 					<span class="link-separator"> | </span>
 					<a
 						id="faq-page-link"
@@ -23,18 +21,14 @@
 					>
 						{{ $translate( 'faq-page-link' ) }}
 					</a>
-				</div>
-				<div class="wmde-banner-footer-item bold text-explanation">
-					<span class="link-separator "> | </span>
-					Eine Dauerspende ist jederzeit formlos kündbar. Sie gehen kein Risiko ein.
-				</div>
-			</div>
-			<div class="second-row-items">
-				<div class="wmde-banner-footer-item">
-					<span>Wikimedia Deutschland ist der gemeinnützige Verein hinter Wikipedia. Jede Spende ist steuerlich
-						absetzbar. Auf Wunsch erhalten Sie von uns eine Spendenquittung.</span>
-				</div>
-			</div>
+				</span>
+				<span class="link-separator "> | </span>
+				Eine Dauerspende ist jederzeit formlos kündbar. Sie gehen kein Risiko ein.
+			</p>
+			<p class="second-row-items">
+				Wikimedia Deutschland ist der gemeinnützige Verein hinter Wikipedia. Jede Spende ist steuerlich
+					absetzbar. Auf Wunsch erhalten Sie von uns eine Spendenquittung.
+			</p>
 		</div>
 
 		<div class="wmde-banner-footer-bank">
