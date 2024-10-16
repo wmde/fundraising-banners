@@ -15,6 +15,8 @@ $left-column-margin: 0 30px 0 0 !default;
 		margin-top: 0;
 
 		&-bank {
+			flex: 0 0 $right-column-width;
+			width: $right-column-width;
 			padding: 5px 10px 5px 0;
 			text-align: right;
 			&-item {
@@ -43,11 +45,16 @@ $left-column-margin: 0 30px 0 0 !default;
 			margin-right: 3px;
 		}
 
+		.first-row-items,
+		.second-row-items {
+			margin: 0;
+		}
+
 		.second-row-items {
 			display: none;
 
 			@include breakpoints.large-up {
-				display: flex;
+				display: block;
 			}
 		}
 
@@ -55,7 +62,7 @@ $left-column-margin: 0 30px 0 0 !default;
 			display: none;
 
 			@include breakpoints.bigger-medium-up {
-				display: flex;
+				display: inline;
 			}
 		}
 	}
