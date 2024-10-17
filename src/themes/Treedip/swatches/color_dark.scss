@@ -24,6 +24,7 @@ $blue800: #20303f;
 	$select-group: false,
 	$select-group-bubble: false,
 	$select-group-button: false,
+	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -139,5 +140,10 @@ $blue800: #20303f;
 		--fallback-message-background: #{$grey700};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey200};
+	}
+
+	@if $transaction-fees {
+		--transaction-fees-checkbox-border: #{$grey200};
+		--transaction-fees-checkbox-checked: #{$blue700};
 	}
 }
