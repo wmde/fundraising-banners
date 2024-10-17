@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="use-of-funds-orgchart-image">
-				<img :src="content.orgchart.imageUrl"  :alt="content.orgchart.headline"/>
+				<slot name="infographic"/>
 			</div>
 		</div>
 		<div class="banner_model-section use-of-funds-section-call-to-action">

@@ -47,7 +47,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingDE/>
+			</template>
+		</FundsModal>
 	</div>
 </template>
 
@@ -78,6 +82,7 @@ import colors from '../styles/colors';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import { FormActions } from '@src/domain/FormActions';
 import { useFormModel } from '@src/components/composables/useFormModel';
+import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

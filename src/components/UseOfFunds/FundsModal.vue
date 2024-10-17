@@ -1,14 +1,18 @@
 <template>
-	<div :class="[ 'banner-modal', { 'is-visible': isFundsModalVisible } ]">
+	<div :class="[ 'banner-modal funds-modal', { 'is-visible': isFundsModalVisible } ]">
 		<div class="banner-modal-background" @click="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.close } )"></div>
 		<div class="banner-modal-container">
 			<div class="banner-modal-close">
 				<button class="banner-modal-close-link" @click="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.close } )">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Icon_close.svg"  alt="Close Icon"/>
+					<IconClose/>
 				</button>
 			</div>
 			<div class="banner-modal-content">
-				<FundsContent :content="content" @hide-funds-modal="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.callToAction } )"/>
+				<FundsContent :content="content" @hide-funds-modal="$emit( 'hideFundsModal', { source: UseOfFundsCloseSources.callToAction } )">
+					<template #infographic>
+						<slot name="infographic"/>
+					</template>
+				</FundsContent>
 			</div>
 		</div>
 	</div>
@@ -19,6 +23,7 @@
 import FundsContent from '@src/components/UseOfFunds/FundsContent.vue';
 import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import IconClose from '@src/components/UseOfFunds/Icons/IconClose.vue';
 
 interface Props {
 	isFundsModalVisible: boolean,
