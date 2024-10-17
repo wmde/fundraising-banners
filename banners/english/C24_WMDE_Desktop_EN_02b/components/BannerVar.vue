@@ -20,6 +20,10 @@
                 </KeenSlider>
             </template>
 
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</template>
+
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
@@ -92,6 +96,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
