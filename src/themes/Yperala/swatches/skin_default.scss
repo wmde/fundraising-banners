@@ -3,11 +3,15 @@
 $progress-bar: false !default;
 $select-group-image-label: false !default;
 $soft-close: false !default;
+$sms-icon: false !default;
+$upgrade-to-yearly: false !default;
 
 .wmde-banner {
 	@include color_light.swatch(
 		$progress-bar,
 		$select-group-image-label,
-		$soft-close
+		$soft-close,
+		$sms-icon,
+		$upgrade-to-yearly
 	);
 }

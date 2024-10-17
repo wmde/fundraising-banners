@@ -35,17 +35,35 @@
 	}
 
 	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
-		svg path,
-		svg rect {
-			fill: var( --select-group-option-icon-fill-active ) !important; // stylelint-disable-line
+		.paypal-logo {
+			--paypal-primary-fill: var( --paypal-primary-fill-active );
+			--paypal-secondary-fill: var( --paypal-secondary-fill-active );
+			--paypal-overlap-fill: var( --paypal-overlap-fill-active );
+		}
 
-			&.highlight-transparent {
-				fill: transparent !important; // stylelint-disable-line
-			}
+		.visa-logo {
+			--visa-fill: var( --visa-fill-active );
+		}
 
-			&.highlight {
-				fill: var( --select-group-option-icon-fill-active-highlight ) !important; // stylelint-disable-line
-			}
+		.mastercard-logo {
+			--mastercard-primary-fill: var( --mastercard-primary-fill-active );
+			--mastercard-secondary-fill: var( --mastercard-secondary-fill-active );
+			--mastercard-overlap-fill: var( --mastercard-overlap-fill-active );
+			--mastercard-text-fill: var( --mastercard-text-fill-active );
+		}
+
+		.sepa-logo {
+			--sepa-primary-fill: var( --sepa-primary-fill-active );
+			--sepa-secondary-fill: var( --sepa-secondary-fill-active );
+		}
+
+		.bank-transfer-logo {
+			--bank-transfer-fill: var( --bank-transfer-fill-active );
+		}
+
+		.amex-logo {
+			--amex-primary-fill: var( --amex-primary-fill-active );
+			--amex-text-fill: var( --amex-text-fill-active );
 		}
 	}
 }
