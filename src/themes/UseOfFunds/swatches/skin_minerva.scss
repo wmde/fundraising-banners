@@ -1,0 +1,20 @@
+@use 'color_dark';
+@use 'color_light';
+
+.skin-theme-clientpref-day .use-of-funds {
+	@include color_light.swatch;
+}
+
+.skin-theme-clientpref-night .use-of-funds {
+	@include color_dark.swatch;
+}
+
+.skin-theme-clientpref-os .use-of-funds {
+	@media ( prefers-color-scheme: dark ) {
+		@include color_dark.swatch;
+	}
+
+	@media ( prefers-color-scheme: light ) {
+		@include color_light.swatch;
+	}
+}

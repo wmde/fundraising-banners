@@ -1,10 +1,11 @@
-@use 'src/themes/Yperala/swatches/skin_default' with (
+@use 'src/themes/Yperala/swatches/skin_minerva' with (
 	$progress-bar: true,
 	$select-group-image-label: true,
-	$soft-close: true
+	$soft-close: true,
+	$sms-icon: true
 );
 @use '@src/components/BannerConductor/banner-transition';
-@use '@src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use '@src/themes/UseOfFunds/swatches/skin_minerva' as uof-minerva;
 @use '@src/themes/UseOfFunds/UseOfFunds';
 @use '@src/themes/Yperala/defaults';
 @use 'Banner';
