@@ -5,6 +5,7 @@
 	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
+	$progress-bar: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
