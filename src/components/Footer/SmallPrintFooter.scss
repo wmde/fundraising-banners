@@ -1,0 +1,31 @@
+@mixin layout {
+	&-footer {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+
+		.first-row-items,
+		.second-row-items {
+			display: flex;
+			flex-direction: row;
+		}
+
+		&-usage {
+			padding: 10px 0;
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		&-bank {
+			display: flex;
+			flex-direction: column;
+
+			.iban,
+			.bic {
+				white-space: nowrap;
+			}
+		}
+	}
+}

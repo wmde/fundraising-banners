@@ -1,6 +1,7 @@
 $extra-small: 600px !default;
 $small: 1024px !default;
 $medium: 1090px !default;
+$bigger-medium: 1150px !default;
 $large: 1300px !default;
 $extra-large: 1580px !default;
 
@@ -29,6 +30,12 @@ MIXIN USAGE:
 
 @mixin medium-up {
 	@media ( min-width: $medium ) {
+		@content;
+	}
+}
+
+@mixin bigger-medium-up {
+	@media ( min-width: $bigger-medium ) {
 		@content;
 	}
 }

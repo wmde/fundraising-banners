@@ -6,6 +6,7 @@ $grey150: #dddddd;
 $grey200: #bbbbbb;
 $grey300: #b7b7b7;
 $grey500: #808080;
+$grey550: #72777d;
 $grey600: #747474;
 $grey700: #202122;
 
@@ -41,8 +42,10 @@ $blue700: #2a4b8d;
 	--button-close-fill: #{$grey600};
 	--button-background: #{$red600};
 	--button-color: #{$white};
+	--previous-button-fill: #{$grey700};
 
 	--footer-color: #{$black};
+	--footer-smallprint-color: #{$grey550};
 	--input-selection-color: #{$black};
 	--input-selection-selected-background: #{$red600};
 	--input-selection-selected-color: #{$white};
