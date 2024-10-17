@@ -92,7 +92,7 @@ module.exports = ( env ) => Promise.all( [
 					changeOrigin: true
 				},
 				{
-					context: [ '/wiki', '/w', '/static' ],
+					context: [ '/wiki', '/w/', '/static' ],
 					target: 'https://de.wikipedia.org',
 					changeOrigin: true
 				}

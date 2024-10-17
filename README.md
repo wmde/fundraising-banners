@@ -160,3 +160,4 @@ remove the right `@use` statements for the component theme files to
   * [B22_WMDE_local_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B22_WMDE_local_prototype) on CentralNotice
   * [dev-mode-wpde](https://github.com/wmde/wikipedia.de-banners/blob/master/dev-mode-wpde.js) on the [`wmde/wikipedia.de-banners` repository](https://github.com/wmde/wikipedia.de-banners) on GitHub.
 
+For offline previewing of banners for wikipedia.de (when the banner server is not available), you can use the URL http://localhost:8084/wpde-offline?devbanner=YOUR_BANNER_NAME (replacing the placeholder by copy-pasting from `campaign_info.toml`). In the future, we might add an "offline mode" that's integrated into the dashboard and works without proxying.
