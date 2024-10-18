@@ -74,7 +74,11 @@
             :content="useOfFundsContent"
             :is-funds-modal-visible="isFundsModalVisible"
             @hideFundsModal="isFundsModalVisible = false"
-        />
+		>
+			<template #infographic>
+				<WMDEFundsForwardingEN/>
+			</template>
+		</FundsModal>
     </div>
 </template>
 
@@ -106,6 +110,7 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
