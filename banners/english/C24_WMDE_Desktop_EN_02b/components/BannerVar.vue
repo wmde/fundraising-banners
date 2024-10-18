@@ -62,6 +62,14 @@
 			</template>
         </MainBanner>
 
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+		/>
+
         <FundsModal
             :content="useOfFundsContent"
             :is-funds-modal-visible="isFundsModalVisible"
@@ -97,6 +105,7 @@ import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -115,7 +124,7 @@ interface Props {
 	remainingImpressions: number;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
@@ -131,7 +140,11 @@ watch( contentState, async () => {
 } );
 
 function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
