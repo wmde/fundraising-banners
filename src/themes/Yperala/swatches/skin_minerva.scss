@@ -5,13 +5,15 @@ $progress-bar: false !default;
 $select-group-image-label: false !default;
 $soft-close: false !default;
 $sms-icon: false !default;
+$upgrade-to-yearly: false !default;
 
 .skin-theme-clientpref-night .wmde-banner {
 	@include color_dark.swatch(
 		$progress-bar,
 		$select-group-image-label,
 		$soft-close,
-		$sms-icon
+		$sms-icon,
+		$upgrade-to-yearly
 	);
 }
 
@@ -20,7 +22,8 @@ $sms-icon: false !default;
 		$progress-bar,
 		$select-group-image-label,
 		$soft-close,
-		$sms-icon
+		$sms-icon,
+		$upgrade-to-yearly
 	);
 }
 
@@ -30,7 +33,8 @@ $sms-icon: false !default;
 			$progress-bar,
 			$select-group-image-label,
 			$soft-close,
-			$sms-icon
+			$sms-icon,
+			$upgrade-to-yearly
 		);
 	}
 
@@ -39,7 +43,8 @@ $sms-icon: false !default;
 			$progress-bar,
 			$select-group-image-label,
 			$soft-close,
-			$sms-icon
+			$sms-icon,
+			$upgrade-to-yearly
 		);
 	}
 }
