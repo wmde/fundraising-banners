@@ -12,4 +12,5 @@ export function resetFormModel( formModel: FormModel ): void {
 	formModel.paymentMethodValidity.value = Validity.Unset;
 	formModel.addressType.value = '';
 	formModel.addressTypeValidity.value = Validity.Unset;
+	formModel.hasTransactionFee.value = false;
 }
