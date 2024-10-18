@@ -57,11 +57,15 @@
             </template>
         </MainBanner>
 
-        <FundsModal
-            :content="useOfFundsContent"
-            :is-funds-modal-visible="isFundsModalVisible"
-            @hideFundsModal="isFundsModalVisible = false"
-        />
+		<FundsModal
+			:content="useOfFundsContent"
+			:is-funds-modal-visible="isFundsModalVisible"
+			@hideFundsModal="isFundsModalVisible = false"
+		>
+			<template #infographic>
+				<WMDEFundsForwardingEN/>
+			</template>
+		</FundsModal>
     </div>
 </template>
 
@@ -91,6 +95,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

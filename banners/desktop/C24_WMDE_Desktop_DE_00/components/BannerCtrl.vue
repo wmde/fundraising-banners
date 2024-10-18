@@ -63,7 +63,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingDE/>
+			</template>
+		</FundsModal>
 
 		<AlreadyDonatedModal
 			:is-visible="isAlreadyDonatedModalVisible"
@@ -107,6 +111,7 @@ import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
 import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
+import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

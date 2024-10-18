@@ -112,7 +112,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="onHideFundsModal"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingDE/>
+			</template>
+		</FundsModal>
 	</div>
 </template>
 
@@ -155,6 +159,7 @@ import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import SmsIcon from '@src/components/Icons/SmsIcon.vue';
+import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

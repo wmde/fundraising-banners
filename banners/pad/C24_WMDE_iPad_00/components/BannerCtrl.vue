@@ -65,7 +65,11 @@
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
 			@hideFundsModal="isFundsModalVisible = false"
-		/>
+		>
+			<template #infographic>
+				<WMDEFundsForwardingDE/>
+			</template>
+		</FundsModal>
 
 	</div>
 </template>
@@ -96,6 +100,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
