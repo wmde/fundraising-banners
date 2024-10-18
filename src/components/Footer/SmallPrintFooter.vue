@@ -49,7 +49,7 @@
 					/>
 				</label>
 				<label class="wmde-banner-footer-bank-item bic">BIC:
-					<SelectionInput :value="'BFSWDE33BER'"/>
+					<SelectionInput :value="'BFSWDE33XXX'"/>
 				</label>
 			</div>
 		</div>

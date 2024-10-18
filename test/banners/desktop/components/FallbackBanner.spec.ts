@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import FallbackBanner from '@banners/desktop/C24_WMDE_Desktop_DE_03/components/FallbackBanner.vue';
+import FallbackBanner from '@banners/desktop/C24_WMDE_Desktop_DE_07/components/FallbackBanner.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
