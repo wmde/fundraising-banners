@@ -6,6 +6,7 @@
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 	$progress-bar: true,
+	$soft-close: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
