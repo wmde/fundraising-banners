@@ -5,7 +5,7 @@
 				<SelectionInput :value="'Wikimedia e. V.'"/>
 			</label>
 			<label class="wmde-banner-footer-bank-item bic">BIC:
-				<SelectionInput :value="'BFSWDE33BER'"/>
+				<SelectionInput :value="'BFSWDE33XXX'"/>
 			</label>
 			<label class="wmde-banner-footer-bank-item iban">IBAN:
 				<SelectionInput :value="'DE09 3702 0500 0003 2873 00'" :focusedValue="'DE09370205000003287300'"/>
