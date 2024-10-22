@@ -85,7 +85,13 @@ module.exports = ( env ) => {
 					}
 					callback();
 				}
-			]
+			],
+			performance: {
+				// Size limit in Bytes for the generated JS files
+				maxAssetSize: 310_000,
+				// Size limit in Bytes for the combined code of entry points
+				maxEntrypointSize: 310_000
+			}
 		},
 		entrypointRules
 	);

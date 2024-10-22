@@ -21,3 +21,12 @@ using this best practice. See https://stackoverflow.com/questions/3730019/why-no
 ### Files to look at:
 ../src/utils/FormModel/FormModel.ts
 ../src/components/composables/useAmountBasedFormAction.ts
+
+## Try lowering the maximum asset and entry point size
+
+Some features (SVG payment icons, fallback banners, slider) make the size of the compiled banner bigger, which triggers
+a Webpack warning. The current "solution" was to set the limit to 310KB (from 250KB) to avoid the warning, but a better
+solution would be to remove features. When that can be done, please check with lower limits.
+
+### Files to look at:
+../webpack/webpack.production.js
