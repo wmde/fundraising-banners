@@ -24,8 +24,12 @@
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
+			</template>
+
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller" :submit-callback="onSubmit">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
@@ -102,6 +106,9 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/Forms/MainDonationFormButton.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -118,6 +125,7 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 	remainingImpressions: number;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -141,7 +149,15 @@ watch( contentState, async () => {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem( feature, userChoice );
 }
+
+const onSubmit = (): void => {
+	const closeChoice = props.localCloseTracker.getItem();
+	if ( closeChoice !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+};
 
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;

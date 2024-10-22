@@ -13,7 +13,7 @@ const messages: TranslationMessages = {
 	// custom messages here
 	'use-of-funds-link': 'Was Ihre Spende bewirkt',
 	'payment-bank-transfer': 'Überweisung',
-	'payment-sofort': 'Klarna',
+	'payment-sofort': 'Sofort',
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',

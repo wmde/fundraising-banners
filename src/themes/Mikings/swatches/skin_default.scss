@@ -6,6 +6,7 @@ $select-group-image-label: false !default;
 $progress-bar: false !default;
 $soft-close: false !default;
 $subscription-form: false !default;
+$thank-you-box: false !default;
 
 .wmde-banner {
 	@include color_light.swatch(
@@ -14,6 +15,7 @@ $subscription-form: false !default;
 		$select-group-image-label,
 		$progress-bar,
 		$soft-close,
-		$subscription-form
+		$subscription-form,
+		$thank-you-box
 	);
 }

@@ -18,6 +18,7 @@ import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -49,7 +50,11 @@ describe( 'BannerCtrl.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				remainingImpressions: 10,
+				localCloseTracker: {
+					getItem: () => '',
+					setItem: () => {}
+				}
 			},
 			global: {
 				mocks: {
@@ -76,7 +81,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Content', () => {
-		test.skip.each( [
+		test.each( [
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
@@ -124,6 +129,16 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close Submit Tracking (No Soft Close)', () => {
+		test.each( [
+			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
