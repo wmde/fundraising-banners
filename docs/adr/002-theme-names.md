@@ -57,11 +57,11 @@ Example theme names:
 Example imports:
 
 ```scss
-@import '~theme/waubble/Icons/CloseIcon'
-@import '~theme/waubble/DonationForm/DonationForm'
-@import '~theme/waubble/DonationForm/SelectGroup'
-@import '~theme/waubble/Footer/Footer'
-@import '~theme/waubble/Footer/SelectionInput'
+@use '~theme/waubble/Icons/CloseIcon'
+@use '~theme/waubble/DonationForm/DonationForm'
+@use '~theme/waubble/DonationForm/SelectGroup'
+@use '~theme/waubble/Footer/Footer'
+@use '~theme/waubble/Footer/SelectionInput'
 ```
 
 ### Option B: Alliterated Animals
@@ -83,11 +83,11 @@ Example theme names:
 Example imports:
 
 ```scss
-@import '~theme/accomodating-alligator/Icons/CloseIcon'
-@import '~theme/accomodating-alligator/DonationForm/DonationForm'
-@import '~theme/accomodating-alligator/DonationForm/SelectGroup'
-@import '~theme/accomodating-alligator/Footer/Footer'
-@import '~theme/accomodating-alligator/Footer/SelectionInput'
+@use '~theme/accomodating-alligator/Icons/CloseIcon'
+@use '~theme/accomodating-alligator/DonationForm/DonationForm'
+@use '~theme/accomodating-alligator/DonationForm/SelectGroup'
+@use '~theme/accomodating-alligator/Footer/Footer'
+@use '~theme/accomodating-alligator/Footer/SelectionInput'
 ```
 
 With the current list of adjectives and animals, we have a theoretical
