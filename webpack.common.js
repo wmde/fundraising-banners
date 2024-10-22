@@ -21,8 +21,10 @@ module.exports = ( env ) => {
 						appendTsSuffixTo: [ /\.vue$/ ]
 					}
 				},
+				// This is a "special" rule for all wikipedia.de banner entry points. It should be in sync with the rules for `.ts` files.
+				// It replaces tracking parameter placeholders with tracking parameters read from the campaign configuration.
 				{
-					test: /(wpde_desktop|wpde_mobile)\/banner(_ctrl|_var)\.ts/,
+					test: /(wpde_desktop|wpde_mobile)\/\w+\/banner(_ctrl|_var)\.ts/,
 					use: [
 						{
 							loader: 'ts-loader',
