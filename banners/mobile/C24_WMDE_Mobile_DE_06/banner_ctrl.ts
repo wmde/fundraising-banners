@@ -25,6 +25,7 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -43,7 +44,8 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) )
+		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
+		localCloseTracker: new LocalStorageCloseTracker()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

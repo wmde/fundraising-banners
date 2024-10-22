@@ -7,8 +7,8 @@
 			<p>
 				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 				{{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} bitten
-				wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
-				<AnimatedText :content="'Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.'"/>
+				wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen. {{ campaignDaySentence }}
+				<AnimatedText :content="visitorsVsDonorsSentence"/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 				Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
@@ -33,7 +33,9 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime
+	getCurrentDateAndTime,
+	visitorsVsDonorsSentence,
+	campaignDaySentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
