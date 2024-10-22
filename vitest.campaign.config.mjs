@@ -4,7 +4,7 @@ import { getFilterForInactiveCampaigns } from './test/filterInactiveCampaigns.mj
 import defaultConfig from './vitest.config.mjs';
 
 // Set to 'warn' to print a warning, set to 'error' to throw an error, or 'ignore' to do nothing
-const CAMPAIGN_WITHOUT_TEST_HANDLING = 'warn';
+const CAMPAIGN_WITHOUT_TEST_HANDLING = 'error';
 
 const { inactiveCampaignGlobs, campaignsWithoutTests } = getFilterForInactiveCampaigns( 'test/banners/*/*', 'campaign_info.toml' );
 
