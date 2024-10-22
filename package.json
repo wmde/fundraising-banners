@@ -11,6 +11,7 @@
     "build": "npm-run-all -s check-content-version build:banners",
     "build:banners": "webpack --config webpack.production.js",
     "build:thankyou": "webpack --config webpack.production.js --env campaign_info=campaign_info.thank_you.toml",
+    "build:channel": "node webpack/build_channel.js",
     "start": "npm run dev",
     "dev": "nodemon",
     "thankyou": "webpack serve --host 0.0.0.0 --env campaign_info=campaign_info.thank_you.toml",

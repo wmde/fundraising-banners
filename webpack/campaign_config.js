@@ -113,6 +113,20 @@ CampaignConfig.prototype.getCampaignTrackingForEntryPoint = function ( entryPoin
 	return trackingData;
 };
 
+CampaignConfig.prototype.getBannerNamesForChannel = function ( channelName ) {
+	if ( !this.config[ channelName ] ) {
+		const availableChannels = Object.keys( this.config ).join( ', ' );
+		throw new Error( `Could not find a channel for ${channelName}. Available channels are: ${availableChannels}` );
+	}
+	return Object.keys( this.config[ channelName ].banners ).map( function ( bannerVariantName ) {
+		return this.config[ channelName ].banners[ bannerVariantName ].pagename;
+	}.bind( this ) );
+};
+
+CampaignConfig.prototype.getChannelNames = function () {
+	return Object.keys( this.config );
+};
+
 CampaignConfig.readFromFile = function ( fileName ) {
 	// eslint-disable-next-line security/detect-non-literal-fs-filename
 	return new CampaignConfig( parse( readFileSync( fileName, 'utf8' ) ) );
