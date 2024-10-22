@@ -1,9 +1,9 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -19,7 +19,7 @@ import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 
 // Locale-specific imports
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup

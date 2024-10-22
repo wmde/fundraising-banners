@@ -39,7 +39,7 @@ const expectEmitsSoftCloseAlreadyDonatedEvent = async ( wrapper: VueWrapper<any>
 	await wrapper.find( '.wmde-banner-soft-close-button-already-donated' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.NoMoreBannersForCampaign ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.AlreadyDonated ) );
 };
 
 const expectEmitsSoftCloseTimeOutEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {

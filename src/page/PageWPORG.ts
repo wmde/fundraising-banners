@@ -125,6 +125,9 @@ class PageWPORG implements Page {
 			case CloseChoices.MaybeLater:
 				this._mediaWiki.preventBannerDisplayForHours( 6 );
 				break;
+			case CloseChoices.AlreadyDonated:
+				this._mediaWiki.preventBannerDisplayForHours( 4 * 7 * 24 );
+				break;
 			case CloseChoices.Hide:
 				// Don't add cookie
 				break;
