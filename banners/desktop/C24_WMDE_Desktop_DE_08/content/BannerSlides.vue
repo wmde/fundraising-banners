@@ -10,13 +10,14 @@
 		</div>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-			{{ currentDayName }} bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+			{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen
-			diesen Aufruf."/> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			{{campaignDaySentence}}
+			<AnimatedText :content="visitorsVsDonorsSentence"/>
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -48,7 +49,10 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime
+	getCurrentDateAndTime,
+	currentDate,
+	campaignDaySentence,
+	visitorsVsDonorsSentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

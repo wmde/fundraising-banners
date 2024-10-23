@@ -50,8 +50,8 @@ $progress-bar-margin: 0 !default;
 
 			&-fill-wrapper {
 				position: relative;
-				background: var( --color-white );
-				border: 3px solid var( --color-primary );
+				background: var( --fallback-progressbar-background );
+				border: 3px solid var( --fallback-progressbar-fill );
 				height: $progress-bar-height;
 				border-radius: 15px;
 			}
@@ -59,9 +59,9 @@ $progress-bar-margin: 0 !default;
 			&-fill {
 				min-width: 80px;
 				max-width: 100%;
-				background: var( --color-primary );
+				background: var( --fallback-progressbar-fill );
 				border-radius: 15px;
-				color: var( --color-white );
+				color: var( --fallback-progressbar-color );
 				text-align: right;
 				padding-right: 16px;
 				line-height: 26px;

@@ -28,7 +28,11 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					@form-interaction="formInteraction"
+					:submit-callback="onSubmit"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
@@ -50,6 +54,15 @@
 
 		</MainBanner>
 
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
+		/>
+
 		<FundsModal
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
@@ -64,7 +77,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
@@ -88,9 +101,14 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -102,10 +120,13 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	remainingImpressions: number;
+	localCloseTracker: LocalCloseTracker;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+
+const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -119,12 +140,25 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
+const onSubmit = (): void => {
+	// special callback function: asking for previous close choices
+	const closeChoice = props.localCloseTracker.getItem();
+	if ( closeChoice !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+};
+
 function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>
