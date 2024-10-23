@@ -26,6 +26,7 @@
     "lint:js": "eslint --ext .js,.vue,.ts,.cjs --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:ts": "vue-tsc --noEmit",
     "lint:css": "stylelint '**/*.{scss,vue}'",
+    "lint:test-imports": "node test/find_mismatched_imports.mjs",
     "ci": "npm-run-all lint test",
     "check-content-version": "ts-node check-content-version.ts",
     "coverage": "vitest run --coverage",
