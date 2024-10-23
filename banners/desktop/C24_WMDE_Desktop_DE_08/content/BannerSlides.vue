@@ -1,10 +1,13 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p>
-			<InfoIcon fill="#990000"/>
-			<strong>&nbsp;{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in
-			Deutschland nutzen</strong>
-		</p>
+		<div class="wmde-banner-message-title">
+			<InfoIcon fill="#990000" width="21.5" height="21.5" type="italic"/>
+			<strong>&nbsp;Wikipedia ist unverkäuflich</strong>
+		</div>
+		<div class="wmde-banner-message-date">
+			<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in
+				Deutschland nutzen</strong>
+		</div>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 			{{ currentDayName }} bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
