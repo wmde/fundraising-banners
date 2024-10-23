@@ -33,11 +33,13 @@ interface Props {
 	stepControllers: StepController[];
 	pageScroller?: PageScroller;
 	formActionOverride?: string;
+	submitCallback?: () => void;
 }
 
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false,
-	formActionOverride: ''
+	formActionOverride: '',
+	submitCallback: () => {}
 } );
 const emit = defineEmits( [ 'formInteraction' ] );
 
@@ -80,6 +82,7 @@ const multistepCallbacks = {
 	},
 	async submit( eventData: TrackingEvent<void> ): Promise<void> {
 		tracker.trackEvent( eventData );
+		props.submitCallback();
 		await nextTick();
 		submitFormRef.value.submit();
 	}

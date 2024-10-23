@@ -14,8 +14,6 @@ const expectDoesNotShowSoftClose = async ( wrapper: VueWrapper<any> ): Promise<a
 
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
-
-	// TODO: "stores a flag in the user's browser." ?
 };
 
 const expectEmitsSoftCloseCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {

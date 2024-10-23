@@ -106,6 +106,23 @@ describe( 'MultistepDonation.vue', () => {
 		expect( submitForm.element.submit ).toHaveBeenCalledOnce();
 	} );
 
+	it( 'should call the submit callback when submit navigation is invoked', async function () {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
+		let callbackWasCalled = false;
+		await wrapper.setProps( { submitCallback: () => {
+			callbackWasCalled = true;
+		} } );
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = vi.fn();
+
+		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+		await stepController.callSubmit( { customData: undefined, eventName: 'mushroom', feature: 'MainDonationForm', userChoice: 'badchoice' } );
+
+		expect( callbackWasCalled ).toBeTruthy();
+	} );
+
 	it( 'should track event data when submit navigation is invoked', async function () {
 		const stepController = new StepControllerSpy();
 		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );

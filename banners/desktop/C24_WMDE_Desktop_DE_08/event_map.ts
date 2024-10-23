@@ -14,6 +14,7 @@ import { AlreadyDonatedShownEvent } from '@src/tracking/events/AlreadyDonatedSho
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -35,5 +36,12 @@ export default new Map<string, TrackingEventConverterFactory>( [
 				return new WMDESizeIssueEvent( `submit`, createViewportInfo(), 1 );
 		}
 	} ],
-	[ FallbackBannerSubmitEvent.EVENT_NAME, ( e: FallbackBannerSubmitEvent ): WMDESizeIssueEvent => new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 ) ]
+	[ FallbackBannerSubmitEvent.EVENT_NAME,
+		( e: FallbackBannerSubmitEvent ): WMDESizeIssueEvent =>
+			new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 )
+	],
+	[ BannerSubmitOnReturnEvent.EVENT_NAME,
+		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent =>
+			new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
+	]
 ] );
