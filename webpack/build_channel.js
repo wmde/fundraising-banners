@@ -12,13 +12,22 @@ if ( process.argv.length < 3 ) {
 	process.exit( 1 );
 }
 
-const channel = process.argv[ 2 ];
+let channel, statusMessage;
+const channelOrCampaign = process.argv[ 2 ];
 const campaignConfig = CampaignConfig.readFromFile( 'campaign_info.toml' );
 const channelNames = campaignConfig.getChannelNames();
+const campaignsAndChannels = campaignConfig.getCampaignsAndChannels();
 
-if ( channelNames.indexOf( channel ) === -1 ) {
-	console.log( `Channel '${channel}' not found in campaign config` );
+if ( channelNames.indexOf( channelOrCampaign ) > -1 ) {
+	channel = channelOrCampaign;
+	statusMessage = `Compiling banners for channel '${channel}' ...`;
+} else if ( campaignsAndChannels[ channelOrCampaign ] ) {
+	channel = campaignsAndChannels[ channelOrCampaign ];
+	statusMessage = `Compiling banners for campaign '${channelOrCampaign}' ...`;
+} else {
+	console.log( `Neither campaign nor channel with name '${channelOrCampaign}' found in campaign config` );
 	console.log( `Available channels are: ${channelNames.join( ', ' )}` );
+	console.log( `Available campaigns are: ${Object.keys( campaignsAndChannels ).join( ', ' )}` );
 	process.exit( 1 );
 }
 
@@ -27,7 +36,7 @@ rimraf.sync( [ 'dist/*.js', 'dist/*.wikitext', 'dist/*.map' ], { glob: true } );
 
 const config = newProductionConfiguration( { channel } );
 
-console.log( `Compiling banners for channel '${channel}' ...` );
+console.log( statusMessage );
 webpack( config, ( err, stats ) => {
 	console.log( stats.toString( {
 		chunks: false,

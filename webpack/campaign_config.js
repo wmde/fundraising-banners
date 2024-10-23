@@ -127,6 +127,13 @@ CampaignConfig.prototype.getChannelNames = function () {
 	return Object.keys( this.config );
 };
 
+CampaignConfig.prototype.getCampaignsAndChannels = function () {
+	return Object.entries( this.config ).reduce( ( acc, [ channelName, campaignConfig ] ) => {
+		acc[ campaignConfig.campaign ] = channelName;
+		return acc;
+	}, {} );
+};
+
 CampaignConfig.readFromFile = function ( fileName ) {
 	// eslint-disable-next-line security/detect-non-literal-fs-filename
 	return new CampaignConfig( parse( readFileSync( fileName, 'utf8' ) ) );
