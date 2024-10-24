@@ -73,7 +73,7 @@ $blue800: #20303f;
 
 	@if $progress-bar {
 		--progress-bar-wrapper-border: #{$red600};
-		--progress-bar-wrapper-background: #{$white};
+		--progress-bar-wrapper-background: #{$grey700};
 		--progress-bar-fill-background: #{$red600};
 		--progress-bar-fill-color: #{$white};
 	}
@@ -162,7 +162,7 @@ $blue800: #20303f;
 	}
 
 	@if $soft-close {
-		--soft-close-background: #{$white};
+		--soft-close-background: #{$grey700};
 		--soft-close-button-background: #{$red600};
 		--soft-close-button-color: #{$white};
 		--soft-close-bar-background: #{$red600};
