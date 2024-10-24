@@ -1,5 +1,5 @@
 # NOTE: The "pagename" value must start with an uppercase "B" and should be followed by the year (YY) and WMDE.
-# Example: "B18WMDE_"
+# Example: "B24_WMDE_"
 # See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
 
 # A Campaign with global settings
@@ -87,7 +87,7 @@ orientation = [ "portrait", "landscape"]
 
 
 
-[wikipediade]
+[wpde_desktop]
 name = "WPDE Desktop"
 icon = "desktop"
 campaign = "C24_WPDE_Desktop_00"
@@ -99,18 +99,18 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
-[wikipediade.banners.ctrl]
+[wpde_desktop.banners.ctrl]
 filename = "./banners/wpde_desktop/C24_WPDE_Desktop_00/banner_ctrl.ts"
 pagename = "B24_WPDE_Desktop_00_ctrl"
 tracking = "wpde-00-240619-ctrl"
 
-[wikipediade.banners.var]
+[wpde_desktop.banners.var]
 filename = "./banners/wpde_desktop/C24_WPDE_Desktop_00/banner_var.ts"
 pagename = "B24_WPDE_Desktop_00_var"
 tracking = "wpde-00-240619-var"
 
 
-[wikipediade_mobile]
+[wpde_mobile]
 name = "WPDE Mobile"
 icon = "mobile"
 campaign = "C24_WPDE_Mobile_00"
@@ -122,12 +122,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
-[wikipediade_mobile.banners.ctrl]
+[wpde_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/C24_WPDE_Mobile_00/banner_ctrl.ts"
 pagename = "B24_WPDE_Mobile_00_ctrl"
 tracking = "wpde-mob00-240619-ctrl"
 
-[wikipediade_mobile.banners.var]
+[wpde_mobile.banners.var]
 filename = "./banners/wpde_mobile/C24_WPDE_Mobile_00/banner_var.ts"
 pagename = "B24_WPDE_Mobile_00_var"
 tracking = "wpde-mob00-240619-var"
