@@ -2,10 +2,14 @@ import { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
-export const submitMainDonationForm = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
+export const setMainDonationFormValues = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
 	await wrapper.find( `.${interval.className} .wmde-banner-select-group-input` ).setValue();
 	await wrapper.find( `.amount-${amount} .wmde-banner-select-group-input` ).setValue();
 	await wrapper.find( `.${payment.className} .wmde-banner-select-group-input` ).setValue();
+};
+
+export const submitMainDonationForm = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
+	await setMainDonationFormValues( wrapper, interval, amount, payment );
 	await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
 };
 

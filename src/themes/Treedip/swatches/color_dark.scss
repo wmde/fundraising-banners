@@ -25,6 +25,7 @@ $blue800: #20303f;
 	$select-group-bubble: false,
 	$select-group-button: false,
 	$select-group-image-label: false,
+	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -48,6 +49,8 @@ $blue800: #20303f;
 	--input-selection-color: #{$grey100};
 	--input-selection-selected-background: #{$red600};
 	--input-selection-selected-color: #{$white};
+	--input-checkbox-border: #{$grey200};
+	--input-checkbox-checked-background: #{$blue700};
 
 	--animated-highlight-color: #{$white};
 	/* stylelint-disable */
