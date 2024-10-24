@@ -20,6 +20,10 @@ It will display a selection of banners to preview in their respective channel (G
 
 While the preview is running, you should be able to see changes immediately via hot reload.
 
+If you want to work on the "thank you" banners, run
+
+    npm run thankyou
+
 ## Check the sources
 
 To verify the code is correct and up to our coding standards. These tests will also run in CI.
@@ -30,9 +34,28 @@ To verify the code is correct and up to our coding standards. These tests will a
 
 ## Building the assets
 
-To build a minified version of the banner into the `dist` directory run
+All build commands will clear out the `dist/` directory.
+
+### Building all the banners
+To build minified versions of all the banners into the `dist` directory run
 
     npm run build
+
+### Building a set of banners for a specific channel or campaign 
+To build the assets for a specific channel, run
+
+    npm run build:channel CHANNEL_NAME
+
+`CHANNEL_NAME` is the name of the channel in `campaign_info.toml`, e.g. `desktop`, `mobile`, `pad`, `english`, etc.
+
+You can also use the campaign name (from the `campaign` key in the TOML file) as the argument to build a specific campaign.
+
+    npm run build:campaign CAMPAIGN_NAME
+
+### Building the "Thank You" banners
+If you want to build the "thank you" banners for all the channels, run
+
+    npm run build:thankyou
 
 ## Using the compiled JavaScript on CentralNotice
 

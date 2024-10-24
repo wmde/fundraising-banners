@@ -17,6 +17,8 @@ module.exports = ( env ) => {
 	let entrypointRules = {};
 	let customizationRules = { customizeObject: () => undefined };
 	const campaigns = CampaignConfig.readFromFile( env.campaign_info ?? 'campaign_info.toml' );
+
+	// Compile a specific banner, usually requested by the API
 	if ( env.banner ) {
 		const bannerName = env.banner;
 		const singleEntry = campaigns.getEntryPoints()[ bannerName ];
@@ -30,6 +32,22 @@ module.exports = ( env ) => {
 			entry: 'replace'
 		} );
 	}
+	// compile specific channel, usually requested on the CLI
+	if ( env.channel ) {
+		const channel = env.channel;
+		const bannerNames = campaigns.getBannerNamesForChannel( channel );
+		const configuredEntryPonts = campaigns.getEntryPoints();
+		entrypointRules = {
+			entry: bannerNames.reduce( ( entries, bannerName ) => {
+				entries[ bannerName ] = configuredEntryPonts[ bannerName ];
+				return entries;
+			}, {} )
+		};
+		customizationRules.customizeObject = customizeObject( {
+			entry: 'replace'
+		} );
+	}
+
 	return mergeWithCustomize( customizationRules )(
 		CommonConfig( env ),
 		{
