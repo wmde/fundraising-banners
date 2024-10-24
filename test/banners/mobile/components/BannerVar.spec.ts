@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_06/components/BannerCtrl.vue';
+import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_06/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -24,7 +24,7 @@ let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -118,7 +118,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Soft Close', () => {
-		test.skip.each( [
+		test.each( [
 			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
@@ -134,7 +134,9 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Soft Close Submit Tracking', () => {
 		test.each( [
-			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectStoresMaybeLateCloseChoice' ],
+			[ 'expectStoresCloseCloseChoice' ],
+			[ 'expectStoresAlreadyDonatedCloseChoice' ],
 			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
 			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {

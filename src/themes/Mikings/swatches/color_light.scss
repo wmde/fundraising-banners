@@ -31,7 +31,8 @@ $purple100: #6b4ba1;
 	$select-group-image-label: false,
 	$progress-bar: false,
 	$soft-close: false,
-	$subscription-form: false
+	$subscription-form: false,
+	$thank-you-box: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey800};
@@ -101,9 +102,6 @@ $purple100: #6b4ba1;
 	);
 	/* stylelint-enable */
 
-	--thank-you-box-background: #{$purple10};
-	--thank-you-box-color: #{$purple100};
-
 	@if $address-type-button-form {
 		--address-type-button-form-notice-color: #{$grey700};
 	}
@@ -148,5 +146,10 @@ $purple100: #6b4ba1;
 		--sub-form-submit-background-hover: #{$orange700};
 
 		--sub-form-submit-privacy-color: #{$grey400};
+	}
+
+	@if $thank-you-box {
+		--thank-you-box-background: #{$purple10};
+		--thank-you-box-color: #{$purple100};
 	}
 }

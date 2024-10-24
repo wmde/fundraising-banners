@@ -33,11 +33,14 @@ interface Props {
 	stepControllers: StepController[];
 	pageScroller?: PageScroller;
 	formActionOverride?: string;
+	// This is to allow the banner to trigger side effects when the form is submitted
+	submitCallback?: () => void;
 }
 
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false,
-	formActionOverride: ''
+	formActionOverride: '',
+	submitCallback: () => {}
 } );
 const emit = defineEmits( [ 'formInteraction' ] );
 
@@ -80,6 +83,7 @@ const multistepCallbacks = {
 	},
 	async submit( eventData: TrackingEvent<void> ): Promise<void> {
 		tracker.trackEvent( eventData );
+		props.submitCallback();
 		await nextTick();
 		submitFormRef.value.submit();
 	}
