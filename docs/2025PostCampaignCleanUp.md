@@ -30,3 +30,13 @@ solution would be to remove features. When that can be done, please check with l
 
 ### Files to look at:
 ../webpack/webpack.production.js
+
+
+## Remove: AlreadyDonatedModal is probably no longer used after HK24
+
+Since `C24_WMDE_Desktop_EN_02b` (https://github.com/wmde/fundraising-banners/pull/582)
+the AlreadyDonated feature does not open a modal anymore but closes the banner directly.
+
+### Files to look at:
+src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue
+css styling + tracking events (close events of the buttons)
