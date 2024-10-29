@@ -1,0 +1,53 @@
+// This is the file where we import the theme-specific component styles
+@use '../../../../src/themes/Svingle/swatches/skin_default' with (
+	$slider: true,
+	$select-group: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+	$progress-bar: true,
+	$soft-close: true,
+);
+@use 'src/components/BannerConductor/banner-transition';
+@use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use 'Banner';
+@use 'src/themes/UseOfFunds/UseOfFunds';
+@use 'MainBanner' with (
+	$banner-height: 357px,
+	$form-width: 300px
+);
+@use 'src/themes/Svingle/defaults';
+@use 'src/themes/Svingle/ButtonClose/ButtonClose';
+@use 'src/themes/Svingle/ProgressBar/ProgressBar';
+@use 'src/themes/Svingle/DonationForm/DonationForm';
+@use 'src/themes/Svingle/DonationForm/MultiStepDonation';
+@use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroupRadios';
+@use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio';
+@use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
+@use 'src/themes/Svingle/DonationForm/Forms/CustomAmountForm';
+@use 'src/themes/Svingle/Footer/FooterAlreadyDonated';
+@use 'src/themes/Svingle/Footer/SelectionInput';
+@use 'src/themes/Svingle/Message/Message';
+@use 'src/themes/Svingle/SoftClose/SoftClose';
+@use 'src/themes/Svingle/Slider/KeenSlider' with (
+	$margin-bottom: 5px
+);
+
+/**
+ * Fallback banner with "Fijitiv" theme
+ * All selectors in Fijitiv theme are prefixed with the ".wmde-banner-fallback" class selector,
+  so they override the "default" styles with the same selector
+ */
+@use 'FallbackBanner';
+@use 'src/themes/Fijitiv/animated-highlight';
+@use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
+@use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
+@use 'src/themes/Fijitiv/FallbackBanner/SmallFooter';
+@use 'src/themes/Fijitiv/ProgressBar/ProgressBar' as FallbackProgressBar with (
+	$progress-bar-margin: 0 15px
+);
+@use 'src/themes/Fijitiv/Slider/KeenSlider' as FallbackSlider;

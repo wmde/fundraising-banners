@@ -14,6 +14,7 @@ $red600: #990a00;
 $red700: #7d0a00;
 
 $blue600: #4465a7;
+$blue650: #3366cc;
 $blue700: #2a4b8d;
 
 @mixin swatch(
@@ -146,6 +147,17 @@ $blue700: #2a4b8d;
 		--fallback-message-color: #{$grey700};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey500};
+
+		--fallback-progressbar-background: #{$white};
+		--fallback-progressbar-fill: #{$red600};
+		--fallback-progressbar-color: #{$white};
+
+		--fallback-slider-container-background: #{$white};
+		--fallback-slider-container-color: #{$black};
+		--fallback-slider-pagination-background: #{$grey600};
+		--fallback-slider-pagination-isactive-background: #{$white};
+		--fallback-slider-pagination-border: #{$white};
+		--fallback-slider-pagination-isactive-border: #{$red600};
 	}
 
 	@if $minimised-banner {

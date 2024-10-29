@@ -6,10 +6,7 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<div class="wmde-banner-minimised-button-group">
-					<button class="wmde-banner-minimised-minimise" @click.prevent="onMinimiseBanner">Banner verkleinern <ChevronDownIcon fill="#2a4b8d"/></button>
-					<ButtonClose @close="() => onCloseMain( 'MainBanner', CloseChoices.Close )"/>
-				</div>
+				<ButtonClose @close="onCloseMain"/>
 			</template>
 
 			<template #banner-text>
@@ -27,11 +24,15 @@
 			</template>
 
 			<template #progress>
-				<ProgressBar/>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					@form-interaction="formInteraction"
+					:submit-callback="onSubmit"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
@@ -47,22 +48,11 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="isFundsModalVisible = true"
-					@clickedAlreadyDonatedLink="isAlreadyDonatedModalVisible = true"
+					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
 
 		</MainBanner>
-
-		<MinimisedBanner
-			v-if="contentState === ContentStates.Minimised"
-			@maximise="() => onMaximiseBanner( 'maximise' )"
-			@maximise-cta="() => onMaximiseBanner( 'cta' )"
-			@close="() => onCloseMain( 'MinimisedBanner', CloseChoices.Close )"
-		>
-			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
-			</template>
-		</MinimisedBanner>
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
@@ -82,17 +72,6 @@
 				<WMDEFundsForwardingDE/>
 			</template>
 		</FundsModal>
-
-		<AlreadyDonatedModal
-			:is-visible="isAlreadyDonatedModalVisible"
-			@hideAlreadyDonatedModal="isAlreadyDonatedModalVisible = false"
-			@goAway="() => onClose( 'AlreadyDonatedModal', CloseChoices.NoMoreBannersForCampaign )"
-			@maybeLater="() => onClose( 'AlreadyDonatedModal', CloseChoices.Close )"
-		>
-			<template #already-donated-content>
-				<AlreadyDonatedContent/>
-			</template>
-		</AlreadyDonatedModal>
 	</div>
 </template>
 
@@ -100,12 +79,10 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import AlreadyDonatedContent from '../content/AlreadyDonatedContent.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
@@ -121,22 +98,17 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue';
-import { Tracker } from '@src/tracking/Tracker';
-import ChevronDownIcon from '@src/components/Icons/ChevronDownIcon.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import MinimisedBanner from './MinimisedBanner.vue';
-import { BannerMinimisedEvent } from '../events/BannerMinimisedEvent';
-import { BannerMaximisedEvent } from '../events/BannerMaximisedEvent';
-import { useAnonymousAddressTypeSetter } from '@src/components/composables/useAnonymousAddressTypeSetter';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
-	Minimised = 'wmde-banner-wrapper--minimised',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
+	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -148,14 +120,15 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	remainingImpressions: number;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
+
 const isFundsModalVisible = ref<boolean>( false );
-const isAlreadyDonatedModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -163,32 +136,29 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
-useAnonymousAddressTypeSetter();
-
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-function onCloseMain( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+const onSubmit = (): void => {
+	// special callback function: asking for previous close choices
+	const closeChoice = props.localCloseTracker.getItem();
+	if ( closeChoice !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+};
+
+function onCloseMain(): void {
 	if ( props.remainingImpressions > 0 ) {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
-		onClose( feature, userChoice );
+		onClose( 'MainBanner', CloseChoices.Close );
 	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-}
-
-function onMinimiseBanner(): void {
-	contentState.value = ContentStates.Minimised;
-	tracker.trackEvent( new BannerMinimisedEvent() );
-}
-
-function onMaximiseBanner( userChoice: string ): void {
-	contentState.value = ContentStates.Main;
-	tracker.trackEvent( new BannerMaximisedEvent( userChoice ) );
+	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>

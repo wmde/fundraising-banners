@@ -77,7 +77,7 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="isFundsModalVisible = true"
-					@showAlreadyDonatedModal="isAlreadyDonatedModalVisible = true"
+					@clickedAlreadyDonatedLink="isAlreadyDonatedModalVisible = true"
 				/>
 			</template>
 
