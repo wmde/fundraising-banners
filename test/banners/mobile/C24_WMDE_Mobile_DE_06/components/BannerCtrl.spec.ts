@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_05/components/BannerCtrl.vue';
+import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_06/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -18,6 +18,7 @@ import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -50,7 +51,10 @@ describe( 'BannerCtrl.vue', () => {
 				useOfFundsContent,
 				pageScroller,
 				remainingImpressions: 10,
-				donationURL: 'https://spenden.wikimedia.de'
+				localCloseTracker: {
+					getItem: () => '',
+					setItem: () => {}
+				}
 			},
 			global: {
 				mocks: {
@@ -77,7 +81,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Content', () => {
-		test.skip.each( [
+		test.each( [
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
@@ -125,6 +129,16 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close Submit Tracking (No Soft Close)', () => {
+		test.each( [
+			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 

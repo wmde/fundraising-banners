@@ -33,6 +33,7 @@ interface Props {
 	stepControllers: StepController[];
 	pageScroller?: PageScroller;
 	formActionOverride?: string;
+	// This is to allow the banner to trigger side effects when the form is submitted
 	submitCallback?: () => void;
 }
 
