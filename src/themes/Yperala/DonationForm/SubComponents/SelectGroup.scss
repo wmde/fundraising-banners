@@ -14,17 +14,13 @@
 			font-family: inherit;
 			font-size: 18px;
 			font-weight: bold;
-			height: 60px;
-			line-height: 60px;
+			height: 46px;
+			line-height: 46px;
 			padding: 0 2px;
 			margin-bottom: 10px;
 			color: var( --select-group-option-color );
 			background-color: var( --select-group-option-background );
 			border-radius: globals.$form-element-border-radius;
-
-			@include breakpoints.phone-s-up {
-				font-size: 24px;
-			}
 		}
 
 		&-input:checked + .wmde-banner-select-group-label {
@@ -35,7 +31,7 @@
 		&-error-message {
 			line-height: 16px;
 			font-weight: bold;
-			text-align: left;
+			text-align: center;
 			margin-bottom: 0.2em;
 			font-size: 0.8em;
 		}
@@ -60,13 +56,8 @@
 	.wmde-banner-select-group-container.select-interval .wmde-banner-select-group {
 		flex-wrap: wrap;
 		.wmde-banner-select-group-option {
-			flex: 1 1 100%;
-			width: 100%;
-
-			@include breakpoints.phone-l-up {
-				width: 31%;
-				flex: 0 1 31%;
-			}
+			width: 31%;
+			flex: 0 1 31%;
 		}
 	}
 
@@ -89,13 +80,8 @@
 			line-height: 70px;
 		}
 		.wmde-banner-select-group-option {
-			flex: 1 1 100%;
-			width: 100%;
-
-			@include breakpoints.phone-l-up {
-				width: 49%;
-				flex: 0 1 49%;
-			}
+			width: 49%;
+			flex: 0 1 49%;
 
 			&.payment-sub {
 				flex: 1 1 100%;

@@ -10,12 +10,12 @@
 		box-shadow: var( --soft-close-box-shadow );
 
 		&-columns {
-			padding: 8px;
+			padding: 8px 8px 0;
 			flex-wrap: nowrap;
 			justify-content: center;
 
 			@include breakpoints.phone-l-up {
-				padding: 8px 27px;
+				padding: 8px 27px 0;
 				justify-content: space-between;
 			}
 		}
@@ -29,14 +29,16 @@
 			line-height: 32px;
 			height: 32px;
 			margin-right: 20px;
-			font-size: 18px;
+			font-size: 16px;
 			font-family: fonts.$content;
 			white-space: nowrap;
+
+			@include breakpoints.phone-l-up {
+				font-size: 18px;
+			}
 		}
 
 		&-buttons {
-			display: flex;
-			align-items: center;
 			text-align: center;
 		}
 
@@ -51,7 +53,7 @@
 			height: 32px;
 			font-weight: bold;
 			text-align: center;
-			margin: 0 4px;
+			margin: 0 4px 8px;
 			transition: background-color 200ms ease-in-out;
 
 			&:hover,
@@ -61,14 +63,7 @@
 		}
 
 		&-countdown-text {
-			line-height: 32px;
-			font-size: 14px;
-			text-align: right;
-
-			@include breakpoints.phone-l-up {
-				display: flex;
-				align-items: center;
-			}
+			display: none;
 		}
 
 		&-countdown-bar {
