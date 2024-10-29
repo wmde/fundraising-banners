@@ -5,6 +5,6 @@ export class ClickAlreadyDonatedEvent implements TrackingEvent<void> {
 
 	public readonly eventName = ClickAlreadyDonatedEvent.EVENT_NAME;
 	public readonly customData: void;
-	public readonly feature: TrackingFeatureName = 'AlreadyDonatedModal';
+	public readonly feature: TrackingFeatureName = 'AlreadyDonated';
 	public readonly userChoice: string = '';
 }

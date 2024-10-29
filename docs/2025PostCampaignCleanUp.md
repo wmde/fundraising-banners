@@ -30,3 +30,20 @@ solution would be to remove features. When that can be done, please check with l
 
 ### Files to look at:
 ../webpack/webpack.production.js
+
+## Move "close cookie" setting for WPDE banners into `PageWPDE.setCloseCookieIfNecessary`
+
+Currently, we're setting close cookies inside the WPDE banners by doing `switch` statements inside the different "close"
+handlers of the banner components, including and excluding images with `src` pointing to specific banner server routes. 
+This leads to code duplication and inconsistencies across banners. And a proliferation of components that are wrappers 
+around API calls. Instead of using components, we should create an abstraction class, e.g. `BannerServerCookieSetter` that manipulates
+the DOM to insert/delete the image with the right URL. The class should have methods for the different URLs that the
+banner server supports (see all routes that inherit from [
+`AbstractCookieController.php`](https://github.com/wmde/banner-server/blob/main/src/Controller/AbstractCookieController.php)).
+Then we remove the custom components and the code that toggles them and move the `switch` statement to
+`PageWPDE.setCloseCookieIfNecessary`. `PageWPDE` should get an instance of `BannerServerCookieSetter` as a dependency
+and call its different methods inside the `setCloseCookieIfNecessary` method.
+
+## Files to look at
+../src/page/PageWPDE.ts
+../banners/*/components/*.vue

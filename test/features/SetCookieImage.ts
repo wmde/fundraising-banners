@@ -35,6 +35,12 @@ const expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners = async ( 
 	expect( wrapper.find( '.wmde-banner-set-cookie-image-already-donated' ).exists() ).toBeTruthy();
 };
 
+const expectSetCookieImageOnAlreadyDonatedLink = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-set-cookie-image-already-donated' ).exists() ).toBeTruthy();
+};
+
 const expectSetsMaybeLaterCookieOnSoftCloseMaybeLater = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
@@ -48,5 +54,6 @@ export const setCookieImageFeatures: Record<string, ( wrapper: VueWrapper<any> )
 	expectDoesNotSetCookieImageOnSoftCloseMaybeLater,
 	expectSetCookieImageOnAlreadyDonatedMaybeLater,
 	expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners,
+	expectSetCookieImageOnAlreadyDonatedLink,
 	expectSetsMaybeLaterCookieOnSoftCloseMaybeLater
 };

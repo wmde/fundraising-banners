@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/wpde_desktop/C24_WPDE_Desktop_00/components/BannerCtrl.vue';
+import Banner from '@banners/wpde_desktop/C24_WPDE_Desktop_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -13,7 +13,8 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearly_CustomAmount';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -23,9 +24,9 @@ import { setCookieImageFeatures } from '@test/features/SetCookieImage';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 
 const formModel = useFormModel();
-const translator = ( key: string ): string => key;
+const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -56,7 +57,9 @@ describe( 'BannerCtrl.vue', () => {
 					formItems,
 					tracker: new TrackerStub()
 				}
-			}
+			},
+			// Needed for isVisible checks, see https://test-utils.vuejs.org/api/#isVisible
+			attachTo: document.body
 		} );
 	};
 
@@ -106,11 +109,19 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToCustomAmount' ],
-			[ 'expectCustomAmountFormSubmits' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Donation Form Transaction Fees Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
+			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
+			[ 'expectUpsellFormHasTransactionFee' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -132,8 +143,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
 			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
 			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
-			[ 'expectSetCookieImageOnAlreadyDonatedMaybeLater' ],
-			[ 'expectSetAlreadyDonatedCookieImageOnAlreadyDonatedNoMoreBanners' ],
+			[ 'expectSetCookieImageOnAlreadyDonatedLink' ],
 			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper() );
@@ -151,10 +161,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Already Donated', () => {
 		test.each( [
-			[ 'expectShowsAlreadyDonatedModal' ],
-			[ 'expectHidesAlreadyDonatedModal' ],
-			[ 'expectFiresMaybeLaterEvent' ],
-			[ 'expectFiresGoAwayEvent' ]
+			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
