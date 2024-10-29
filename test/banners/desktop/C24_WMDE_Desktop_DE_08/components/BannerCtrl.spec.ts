@@ -8,7 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures,
+	bannerContentAnimatedTextFeatures, bannerContentAverageDonationFeatures,
 	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
@@ -110,6 +110,13 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectShowsAverageDonationInMessage' ],
+			[ 'expectShowsAverageDonationInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAverageDonationFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

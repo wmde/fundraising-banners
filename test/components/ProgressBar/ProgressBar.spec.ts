@@ -28,7 +28,8 @@ describe( 'ProgressBar.vue', () => {
 				amountNeeded: 'amountNeeded',
 				isLateProgress: false
 			},
-			visitorsVsDonorsSentence: ''
+			visitorsVsDonorsSentence: '',
+			averageDonation: ''
 		};
 	} );
 

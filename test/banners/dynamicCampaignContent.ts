@@ -22,6 +22,7 @@ export function newDynamicContent(): DynamicContent {
 			amountNeeded: 'amountNeeded',
 			isLateProgress: false
 		},
-		visitorsVsDonorsSentence: ''
+		visitorsVsDonorsSentence: '',
+		averageDonation: ''
 	};
 }

@@ -18,7 +18,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
+			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
 			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
@@ -45,7 +45,8 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime
+	getCurrentDateAndTime,
+	averageDonation
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

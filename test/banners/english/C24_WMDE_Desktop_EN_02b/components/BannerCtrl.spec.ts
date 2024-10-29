@@ -8,7 +8,8 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
+	bannerContentAnimatedTextFeatures,
+	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';

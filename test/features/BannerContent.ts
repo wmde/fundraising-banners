@@ -111,6 +111,26 @@ const expectShowsLiveDateAndTimeInSlideshow = async ( getWrapper: ( dynamicConte
 	expect( wrapper.find( '.wmde-banner-slider' ).text() ).toContain( 'Third Time' );
 };
 
+const expectShowsAverageDonationInMessage = async ( getWrapper: ( dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
+	const dynamicContent = newDynamicContent();
+	dynamicContent.averageDonation = '== Average Donation ==';
+
+	const wrapper = getWrapper( dynamicContent );
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( '== Average Donation ==' );
+};
+
+const expectShowsAverageDonationInSlideshow = async ( getWrapper: ( dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1300 } );
+	const dynamicContent = newDynamicContent();
+	dynamicContent.averageDonation = '== Average Donation ==';
+
+	const wrapper = getWrapper( dynamicContent );
+
+	expect( wrapper.find( '.wmde-banner-slider' ).text() ).toContain( '== Average Donation ==' );
+};
+
 const expectShowsLiveDateAndTimeInMiniBanner = async ( getWrapper: ( dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
 	const dynamicContent = newDynamicContent();
 	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
@@ -169,6 +189,11 @@ export const bannerContentFeatures: Record<string, ( wrapper: VueWrapper<any> ) 
 export const bannerContentDisplaySwitchFeatures: Record<string, ( getWrapper: () => VueWrapper<any>, minWidthForLargeScreen: number ) => Promise<any>> = {
 	expectShowsSlideShowOnSmallSizes,
 	expectShowsMessageOnLargeSizes
+};
+
+export const bannerContentAverageDonationFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
+	expectShowsAverageDonationInMessage,
+	expectShowsAverageDonationInSlideshow
 };
 
 export const bannerContentAnimatedTextFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
