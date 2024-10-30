@@ -87,7 +87,7 @@ orientation = [ "portrait", "landscape"]
 
 
 
-[wikipediade]
+[wpde_desktop]
 name = "WPDE Desktop"
 icon = "desktop"
 campaign = "C24_WPDE_Desktop_01"
@@ -101,18 +101,18 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
-[wikipediade.banners.ctrl]
+[wpde_desktop.banners.ctrl]
 filename = "./banners/wpde_desktop/C24_WPDE_Desktop_01/banner_ctrl.ts"
 pagename = "B24_WPDE_Desktop_01_ctrl"
 tracking = "wpde-01-241028-ctrl"
 
-[wikipediade.banners.var]
+[wpde_desktop.banners.var]
 filename = "./banners/wpde_desktop/C24_WPDE_Desktop_01/banner_var.ts"
 pagename = "B24_WPDE_Desktop_01_var"
 tracking = "wpde-01-241028-var"
 
 
-[wikipediade_mobile]
+[wpde_mobile]
 name = "WPDE Mobile"
 icon = "mobile"
 campaign = "C24_WPDE_Mobile_01"
@@ -124,12 +124,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
-[wikipediade_mobile.banners.ctrl]
+[wpde_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/C24_WPDE_Mobile_01/banner_ctrl.ts"
 pagename = "B24_WPDE_Mobile_01_ctrl"
 tracking = "wpde-mob01-241028-ctrl"
 
-[wikipediade_mobile.banners.var]
+[wpde_mobile.banners.var]
 filename = "./banners/wpde_mobile/C24_WPDE_Mobile_01/banner_var.ts"
 pagename = "B24_WPDE_Mobile_01_var"
 tracking = "wpde-mob01-241028-var"
@@ -139,7 +139,7 @@ tracking = "wpde-mob01-241028-var"
 [english]
 name = "English Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_EN_02"
+campaign = "C24_WMDE_Desktop_EN_02b"
 description = "Based on ctrl desktop EN 01"
 campaign_tracking = "en02-ba-241015"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
