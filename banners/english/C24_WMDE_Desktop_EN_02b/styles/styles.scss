@@ -1,10 +1,12 @@
 // This is the file where we import the theme-specific component styles
-@use '../../../../src/themes/Treedip/swatches/skin_vector-2022' with (
+@use 'src/themes/Treedip/swatches/skin_vector-2022' with (
 	$slider: true,
-	$progress-bar: true,
 	$select-group-bubble: true,
+	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
+	$progress-bar: true,
+	$soft-close: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
@@ -13,7 +15,7 @@
 	$banner-height: 355px,
 	$form-width: 300px
 );
-@use '../../../../src/themes/UseOfFunds/swatches/skin_vector-2022' as uof-vector-2022;
+@use 'src/themes/UseOfFunds/swatches/skin_vector-2022' as uof-vector-2022;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose' with (
@@ -41,7 +43,7 @@
 );
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
-@use 'src/themes/Treedip/Footer/BannerFooter' with (
+@use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
 );
 @use 'src/themes/Treedip/Footer/SelectionInput';
@@ -50,7 +52,6 @@
 );
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use 'src/themes/Treedip/AlreadyDonatedModal/AlreadyDonatedModal';
 @use 'FallbackBanner';
 @use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
 @use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
