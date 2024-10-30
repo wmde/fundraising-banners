@@ -11,7 +11,7 @@
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -23,7 +23,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #progress>
