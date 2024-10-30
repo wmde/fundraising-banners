@@ -15,7 +15,7 @@
 				{{campaignDaySentence}}
 				<AnimatedText :content="visitorsVsDonorsSentence"/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-				Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter.
+				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 				Vielen Dank!
@@ -36,7 +36,8 @@ const {
 	getCurrentDateAndTime,
 	currentDate,
 	campaignDaySentence,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	averageDonation
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

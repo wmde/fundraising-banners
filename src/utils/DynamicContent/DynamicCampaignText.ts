@@ -182,4 +182,8 @@ export default class DynamicCampaignText implements DynamicContent {
 		}
 		return this._progressBarContent;
 	}
+
+	public get averageDonation(): string {
+		return this._formatters.currency.euroAmount( this._campaignParameters.campaignProjection.averageAmountPerDonation );
+	}
 }

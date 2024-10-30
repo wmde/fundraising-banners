@@ -19,8 +19,8 @@ but actually it was `Euros and Cents`. We are used to the amount being `Cents` f
 using this best practice. See https://stackoverflow.com/questions/3730019/why-not-use-double-or-float-to-represent-currency
 
 ### Files to look at:
-../src/utils/FormModel/FormModel.ts
-../src/components/composables/useAmountBasedFormAction.ts
+- `../src/utils/FormModel/FormModel.ts`
+- `../src/components/composables/useAmountBasedFormAction.ts`
 
 
 ## Create parameters for 2025 campaign and adapt dev banner
@@ -39,7 +39,15 @@ a Webpack warning. The current "solution" was to set the limit to 310KB (from 25
 solution would be to remove features. When that can be done, please check with lower limits.
 
 ### Files to look at:
-../webpack/webpack.production.js
+- `../webpack/webpack.production.js`
+
+## Average Donation
+This value is in the dynamic content and was previously only used for calculating part of the projection. It's now exposed to the banner content so we should decide if we need to move it out of the campaignProjection part of the CampaignParameters and inject it into the CampaignProjection class separately.
+
+### Files to look at
+- `src/page/PageWPORG.ts`
+- `src/utils/DynamicContent/CampaignProjection.ts`
+- `src/utils/DynamicContent/DynamicCampaignText.ts`
 
 ## UpgradeToYearly form
 

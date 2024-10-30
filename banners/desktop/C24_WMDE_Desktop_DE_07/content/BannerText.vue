@@ -11,7 +11,7 @@
 				{{ currentDayName }} bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
 				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen
 				diesen Aufruf."/> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die
-				durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
+				durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
 				Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der
 				seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
 			</p>
@@ -28,7 +28,8 @@ import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 const {
 	currentDayName,
-	getCurrentDateAndTime
+	getCurrentDateAndTime,
+	averageDonation
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
