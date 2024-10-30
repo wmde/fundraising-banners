@@ -2,8 +2,8 @@ import { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 
 const expectSetsCookieImageOnSoftCloseClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
-	await wrapper.find( '.wmde-banner-full-close' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 	expect( wrapper.find( '.wmde-banner-set-cookie-image' ).exists() ).toBeTruthy();
 };
@@ -12,7 +12,8 @@ const expectSetsCookieImageOnSoftCloseTimeOut = async ( wrapper: VueWrapper<any>
 	vi.useFakeTimers();
 
 	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
-	await vi.runAllTimers();
+
+	await vi.runAllTimersAsync();
 
 	expect( wrapper.find( '.wmde-banner-set-cookie-image' ).exists() ).toBeTruthy();
 

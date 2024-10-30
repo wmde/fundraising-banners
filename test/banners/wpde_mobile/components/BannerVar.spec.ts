@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, vi, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/wpde_mobile/C24_WPDE_Mobile_00/components/BannerVar.vue';
+import Banner from '@banners/wpde_mobile/C24_WPDE_Mobile_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -76,8 +76,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
@@ -88,7 +87,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
@@ -100,8 +98,7 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Set Cookie Image', () => {
 		test.each( [
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
-			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
-			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ]
+			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
