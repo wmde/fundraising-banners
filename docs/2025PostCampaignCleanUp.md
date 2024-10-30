@@ -22,6 +22,16 @@ using this best practice. See https://stackoverflow.com/questions/3730019/why-no
 ../src/utils/FormModel/FormModel.ts
 ../src/components/composables/useAmountBasedFormAction.ts
 
+
+## Create parameters for 2025 campaign and adapt dev banner
+
+1. Create the page - https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/Campaign_Parameters_2025
+   - When creating the page, copy the values from 2024. Kai will adapt it when needed.
+
+2. Change the dev banner to point to the above given new parameter page - 
+https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B22_WMDE_local_prototype
+    - Change the start date and end date in this file as needed - src/environment/dev/CampaignParameterOverride.ts
+
 ## Try lowering the maximum asset and entry point size
 
 Some features (SVG payment icons, fallback banners, slider) make the size of the compiled banner bigger, which triggers
@@ -30,6 +40,24 @@ solution would be to remove features. When that can be done, please check with l
 
 ### Files to look at:
 ../webpack/webpack.production.js
+
+## UpgradeToYearly form
+
+- The "2 radio button + 1 button" form was dropped a while ago. The 2nd form page is supposed to have two buttons only.
+- Right now our way of handling this is:
+```vue
+<UpgradeToYearlyButtonForm :page-index="pageIndex" :showManualUpgradeOption="false" @submit="submit" :is-current="isCurrent" @previous="previous">
+	<template #back>
+		<ChevronLeftIcon/>
+	</template>
+<UpgradeToYearlyButtonForm>
+```
+The prop `:showManualUpgradeOption="false"` does not show the third, link option.
+- How do we take care of this form in future? Because our UpgradeToYearly for will always have two buttons only.
+
+### Files to look at:
+src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue
+ 
 
 ## Move "close cookie" setting for WPDE banners into `PageWPDE.setCloseCookieIfNecessary`
 

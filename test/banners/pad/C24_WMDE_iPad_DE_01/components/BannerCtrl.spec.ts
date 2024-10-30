@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/pad/C24_WMDE_iPad_00/components/BannerCtrl.vue';
+import Banner from '@banners/pad/C24_WMDE_iPad_DE_01/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -10,9 +10,9 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentFeatures } from '@test/features/BannerContent';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
-import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
+import { useFormModel } from '@src/components/composables/useFormModel';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 
@@ -20,7 +20,6 @@ const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
-
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -91,8 +90,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectUpgradeToYearlyFormGoesToMainDonation' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

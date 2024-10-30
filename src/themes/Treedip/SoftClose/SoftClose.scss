@@ -52,6 +52,13 @@
 			font-weight: bold;
 			text-align: center;
 			margin: 0 4px;
+
+			&-already-donated {
+				background: var( --soft-close-donated-button-background );
+				border: 1px solid var( --soft-close-donated-button-border );
+				color: var( --soft-close-donated-button-color );
+				min-width: 190px;
+			}
 		}
 
 		&-countdown-text {
