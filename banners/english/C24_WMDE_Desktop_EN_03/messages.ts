@@ -21,7 +21,8 @@ const messages: TranslationMessages = {
 	...FallbackBanner,
 	'upgrade-to-yearly-copy': '<p>Every year we are dependent on the support of people like you. Yearly donations ' +
 		'help sustainably and enable long term development.</p>' +
-		'<p>No risks attached, you can tell us to stop at any time.</p>'
+		'<p>No risks attached, you can tell us to stop at any time.</p>',
+	'cover-transaction-costs': 'I\'ll generously add {{transactionCosts}} to cover the transaction fees so you can keep 100% of my donation.'
 };
 
 export default messages;

@@ -25,7 +25,7 @@ import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 // Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import eventMappings from './event_map';
+import eventMappings from './event_map_var';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 
 const localeFactory = new LocaleFactoryEn();
