@@ -4,28 +4,26 @@
 			<p>
 				<strong>
 					<InfoIcon fill="#990a00"/>
-					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia is not for
-					sale.&#8221; - A personal appeal from Wikipedia founder Jimmy Wales.
+					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still
+					can't be sold.&#8221; - An important update for readers in Germany.
 				</strong>
 			</p>
 			<p>
-				Please don't ignore this 1-minute read. This {{ currentDayName }}, {{ currentDate }}, I ask you to
-				reflect on the number of times you visited Wikipedia in the past year, the value you got from it,
-				and whether you're able to give €5 back. If you can, please join the 1% of readers who
-				give. <AnimatedText content="If everyone reading this right now gave just €5, we'd hit our goal in a couple of hours."/>
+				Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
+				message will be up for only a few hours.
+				We ask you to reflect on the number of times you visited
+				Wikipedia in the past year and if you're able to give €5 back.
+				<AnimatedText content="If everyone reading this gave just €5, we'd hit our goal in a few hours."/>
 			</p>
-
 			<p>
-				It's hard to know what to trust online these days. Disinformation and scammers are everywhere.
-				Wikipedia is different. It's not perfect, but it's not here to make a profit or to push a particular
-				perspective. It's written by everyone, together. Wikipedia is something we all share, like a library
-				or a public park. We are passionate about our model because we want everyone to have equal access to
-				quality information - something that is becoming harder and harder to find online.
+				In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online
+				information, powering everything from your personal searches to emerging AI technologies. Your gift
+				strengthens the knowledge of today and tomorrow.
 			</p>
-
 			<p>
-				If Wikipedia has given you €5 worth of knowledge this year, please give back. There are no small
-				contributions: every edit counts, every donation counts. Thank you.
+				Just 1&nbsp;% of our readers donate, so if you have
+				given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate today. If
+				you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank you.
 			</p>
 		</div>
 	</div>

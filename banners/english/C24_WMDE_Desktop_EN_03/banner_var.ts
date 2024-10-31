@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -67,7 +67,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN, ap: '0' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN, afo: '1' } ) );
 app.provide( 'tracker', tracker );
 
 app.mount( page.getBannerContainer() );

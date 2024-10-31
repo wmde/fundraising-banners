@@ -118,7 +118,6 @@ enum ContentStates {
 }
 
 enum FormStepNames {
-	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
 }

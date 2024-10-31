@@ -89,10 +89,10 @@ import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlides_var.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText_var.vue';
+import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -118,7 +118,6 @@ enum ContentStates {
 }
 
 enum FormStepNames {
-	CustomAmountFormStep = 'CustomAmountForm',
 	MainDonationFormStep = 'MainDonationForm',
 	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
 }
