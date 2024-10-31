@@ -8,6 +8,7 @@ $black: #000000;
 $grey800: #202122;
 $grey700: #54595d;
 $grey400: #a2a9b1;
+$grey100: #eaecf0;
 
 $blue10: #f8f9fa;
 $blue20: #eaecf0;
@@ -40,6 +41,7 @@ $purple100: #6b4ba1;
 
 	--mini-background: #{$white};
 	--mini-border: #{$blue600};
+	--mini-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
 	--mini-close-background: #{$white};
 
@@ -57,6 +59,7 @@ $purple100: #6b4ba1;
 
 	--full-background: #{$white};
 	--full-border: #{$blue600};
+	--full-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
 	--full-cta-background: #{$blue600};
 	--full-cta-color: #{$white};
@@ -101,6 +104,12 @@ $purple100: #6b4ba1;
 			rgba( 255, 222, 103 ) 100%
 	);
 	/* stylelint-enable */
+
+	--minimise-background: #{$grey100};
+	--minimise-fill: #{$blue600};
+	--maximise-fill: #{$blue600};
+	--minimise-color: #{$blue600};
+	--minimise-link-color: #{$green600};
 
 	@if $address-type-button-form {
 		--address-type-button-form-notice-color: #{$grey700};
