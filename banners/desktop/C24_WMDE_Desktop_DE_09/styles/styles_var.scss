@@ -15,7 +15,9 @@
 	$banner-height: 357px,
 	$form-width: 300px
 );
-@use 'src/themes/Svingle/defaults';
+@use 'src/themes/Svingle/defaults' with (
+	$animated-text-padding-offset: true
+);
 @use 'src/themes/Svingle/ButtonClose/ButtonClose';
 @use 'src/themes/Svingle/ProgressBar/ProgressBar';
 @use 'src/themes/Svingle/DonationForm/DonationForm';
