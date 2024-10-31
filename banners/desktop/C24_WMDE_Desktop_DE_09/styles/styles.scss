@@ -5,6 +5,7 @@
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 	$progress-bar: true,
+	$soft-close: true,
 );
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
@@ -31,6 +32,7 @@
 @use 'src/themes/Svingle/Footer/FooterAlreadyDonated';
 @use 'src/themes/Svingle/Footer/SelectionInput';
 @use 'src/themes/Svingle/Message/Message';
+@use 'src/themes/Svingle/SoftClose/SoftClose';
 @use 'src/themes/Svingle/Slider/KeenSlider' with (
 	$margin-bottom: 5px
 );

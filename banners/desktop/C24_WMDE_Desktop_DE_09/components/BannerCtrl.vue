@@ -54,6 +54,15 @@
 
 		</MainBanner>
 
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
+		/>
+
 		<FundsModal
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
@@ -92,12 +101,14 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -138,12 +149,15 @@ const onSubmit = (): void => {
 };
 
 function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>

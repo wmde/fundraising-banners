@@ -8,7 +8,7 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures, bannerContentAverageDonationFeatures,
+	bannerContentAnimatedTextFeatures,
 	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
@@ -28,7 +28,7 @@ const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 let tracker: Tracker;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -77,7 +77,7 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -111,13 +111,6 @@ describe( 'BannerCtrl.vue', () => {
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
-
-		test.each( [
-			[ 'expectShowsAverageDonationInMessage' ],
-			[ 'expectShowsAverageDonationInSlideshow' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAverageDonationFeatures[ testName ]( getWrapper );
-		} );
 	} );
 
 	describe( 'Donation Form Happy Paths', () => {
@@ -143,7 +136,13 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Soft Close', () => {
 		test.each( [
-			[ 'expectDoesNotShowSoftClose' ]
+			[ 'expectShowsSoftClose' ],
+			[ 'expectEmitsSoftCloseCloseEvent' ],
+			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseTimeOutEvent' ],
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectShowsCloseIcon' ],
+			[ 'expectCloseIconEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
 		} );
@@ -151,8 +150,8 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Soft Close Submit Tracking', () => {
 		test.each( [
-			// this ctrl banner does not have the softclose feature
-			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ]
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
