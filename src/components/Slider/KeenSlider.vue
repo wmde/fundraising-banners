@@ -34,11 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { inject, onMounted, ref, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSliderNavigation from '@src/components/Slider/KeenSliderNavigation.vue';
+import { Timer } from '@src/utils/Timer';
 
 enum SliderPlayingStates {
 	PENDING = 'wmde-banner-slider--pending',
@@ -69,7 +70,8 @@ const props = withDefaults( defineProps<Props>(), {
 const emit = defineEmits( [ 'slide-changed' ] );
 const sliderPlayingState = ref<SliderPlayingStates>( SliderPlayingStates.PENDING );
 const startAnimationTimeout = ref<number>( 0 );
-const timer = ref<number>( 0 );
+const timer = inject<Timer>( 'timer' );
+const timerId = ref<number>( 0 );
 
 const currentSlide = ref<number>( 0 );
 
@@ -87,15 +89,15 @@ const startAutoplay = (): void => {
 	if ( sliderPlayingState.value === SliderPlayingStates.PLAYING ) {
 		return;
 	}
-	startAnimationTimeout.value = window.setTimeout( () => {
-		timer.value = window.setInterval( slider.value.next, props.interval );
+	startAnimationTimeout.value = timer.setTimeout( () => {
+		timerId.value = timer.setInterval( slider.value.next, props.interval );
 		sliderPlayingState.value = SliderPlayingStates.PLAYING;
 	}, props.startDelay );
 };
 
 const stopAutoplay = (): void => {
-	clearInterval( timer.value );
-	clearTimeout( startAnimationTimeout.value );
+	timer.clearInterval( timerId.value );
+	timer.clearTimeout( startAnimationTimeout.value );
 	sliderPlayingState.value = SliderPlayingStates.STOPPED;
 };
 

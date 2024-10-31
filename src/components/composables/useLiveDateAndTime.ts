@@ -1,5 +1,6 @@
-import { ref, Ref } from 'vue';
+import { inject, ref, Ref } from 'vue';
 import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
+import { Timer } from '@src/utils/Timer';
 
 type ReturnType = {
 	liveDateAndTime: Ref<DateAndTime>;
@@ -8,17 +9,18 @@ type ReturnType = {
 }
 
 export function useLiveDateAndTime( getCurrentDateAndTime: () => DateAndTime ): ReturnType {
-	const timer = ref<number>( 0 );
+	const timer = inject<Timer>( 'timer' );
+	const timerId = ref<number>( 0 );
 	const liveDateAndTime = ref<DateAndTime>( getCurrentDateAndTime() );
 
 	const startTimer = (): void => {
-		timer.value = window.setInterval( () => {
+		timerId.value = timer.setInterval( () => {
 			liveDateAndTime.value = getCurrentDateAndTime();
 		}, 1000 );
 	};
 
 	const stopTimer = (): void => {
-		window.clearInterval( timer.value );
+		timer.clearInterval( timerId.value );
 	};
 
 	return {

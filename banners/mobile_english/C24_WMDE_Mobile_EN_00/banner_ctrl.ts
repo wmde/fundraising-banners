@@ -26,6 +26,7 @@ import { createFormActions } from '@src/createFormActions';
 // Content for EN banners
 import messages from './messages';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
+import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -65,5 +66,6 @@ app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
 app.provide( 'tracker', tracker );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

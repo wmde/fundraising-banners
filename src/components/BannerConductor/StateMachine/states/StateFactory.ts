@@ -12,6 +12,7 @@ import { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import { Timer } from '@src/utils/Timer';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -19,13 +20,15 @@ export class StateFactory {
 	private readonly _tracker: Tracker;
 	private readonly _resizeHandler: ResizeHandler;
 	private readonly _impressionCount: ImpressionCount;
+	private readonly _timer: Timer;
 
-	public constructor( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ) {
+	public constructor( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount, timer: Timer ) {
 		this._bannerConfig = bannerConfig;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._impressionCount = impressionCount;
+		this._timer = timer;
 	}
 
 	public newInitialState(): BannerState {
@@ -33,15 +36,15 @@ export class StateFactory {
 	}
 
 	public newPendingState( bannerHeight: number ): BannerState {
-		return new PendingState( this._page, bannerHeight, this._bannerConfig.delay );
+		return new PendingState( this._page, bannerHeight, this._bannerConfig.delay, this._timer );
 	}
 
 	public newNotShownState( bannerNotShownReason: BannerNotShownReasons, bannerHeight: number ): BannerState {
-		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler, bannerHeight );
+		return new NotShownState( bannerNotShownReason, this._page, this._tracker, this._resizeHandler, bannerHeight, this._timer );
 	}
 
 	public newShowingState(): BannerState {
-		return new ShowingState( this._page, this._bannerConfig.transitionDuration );
+		return new ShowingState( this._page, this._bannerConfig.transitionDuration, this._timer );
 	}
 
 	public newVisibleState( shownEventFeature: TrackingFeatureName ): BannerState {
@@ -49,16 +52,24 @@ export class StateFactory {
 	}
 
 	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
-		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler );
+		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler, this._timer );
 	}
 }
 
-export function newStateFactory( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount ): StateFactory {
+export function newStateFactory(
+	bannerConfig: BannerConfig,
+	page: Page,
+	tracker: Tracker,
+	resizeHandler: ResizeHandler,
+	impressionCount: ImpressionCount,
+	timer: Timer
+): StateFactory {
 	return new StateFactory(
 		bannerConfig,
 		page,
 		tracker,
 		resizeHandler,
-		impressionCount
+		impressionCount,
+		timer
 	);
 }

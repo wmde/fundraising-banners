@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, vi, test } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/wpde_mobile/C24_WPDE_Mobile_01/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -17,6 +17,8 @@ import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { setCookieImageFeatures } from '@test/features/SetCookieImageMobile';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { Timer } from '@src/utils/Timer';
 
 let pageScroller: PageScroller;
 const formModel = useFormModel();
@@ -27,7 +29,6 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
@@ -37,11 +38,9 @@ describe( 'BannerCtrl.vue', () => {
 
 	afterEach( () => {
 		wrapper.unmount();
-		vi.restoreAllMocks();
-		vi.useRealTimers();
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -62,7 +61,8 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker: new TrackerStub(),
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
@@ -91,7 +91,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
@@ -100,7 +100,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectSetsCookieImageOnSoftCloseClose' ],
 			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ]
 		] )( '%s', async ( testName: string ) => {
-			await setCookieImageFeatures[ testName ]( getWrapper() );
+			await setCookieImageFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

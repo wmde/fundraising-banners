@@ -5,12 +5,20 @@ import { PageStub } from '@test/fixtures/PageStub';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
 import { CloseChoices } from '@src/domain/CloseChoices';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'ClosedState', function () {
 	it( 'tracks close event on enter', function () {
 		const tracker = { trackEvent: vitest.fn() };
 		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
-		const state = new ClosedState( closeEvent, new PageStub(), tracker, new ResizeHandlerStub() );
+		const state = new ClosedState(
+			closeEvent,
+			new PageStub(),
+			tracker,
+			new ResizeHandlerStub(),
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -21,7 +29,13 @@ describe( 'ClosedState', function () {
 		const page = new PageStub();
 		page.setSpace = vitest.fn( () => page );
 		page.unsetAnimated = vitest.fn( () => page );
-		const state = new ClosedState( new CloseEvent( 'MainBanner', CloseChoices.Close ), page, new TrackerStub(), new ResizeHandlerStub() );
+		const state = new ClosedState(
+			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			page,
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -33,7 +47,13 @@ describe( 'ClosedState', function () {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vitest.fn( () => page );
 		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
-		const state = new ClosedState( closeEvent, page, new TrackerStub(), new ResizeHandlerStub() );
+		const state = new ClosedState(
+			closeEvent,
+			page,
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -46,7 +66,13 @@ describe( 'ClosedState', function () {
 		const resizeHandler = new ResizeHandlerStub();
 		page.removePageEventListeners = vitest.fn( () => page );
 		resizeHandler.onClose = vitest.fn();
-		const state = new ClosedState( new CloseEvent( 'MainBanner', CloseChoices.Close ), page, new TrackerStub(), resizeHandler );
+		const state = new ClosedState(
+			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			page,
+			new TrackerStub(),
+			resizeHandler,
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -54,12 +80,28 @@ describe( 'ClosedState', function () {
 		expect( resizeHandler.onClose ).toHaveBeenCalledOnce();
 	} );
 
+	it( 'stops the timers', function () {
+		const timer = new TimerSpy();
+		const state = new ClosedState(
+			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			new PageStub(),
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			timer
+		);
+
+		state.enter();
+
+		expect( timer.clearAllCalls ).toStrictEqual( 1 );
+	} );
+
 	it( 'throws error on exit', function () {
 		const state = new ClosedState(
 			new CloseEvent( 'MainBanner', CloseChoices.Close ),
 			new PageStub(),
 			new TrackerStub(),
-			new ResizeHandlerStub()
+			new ResizeHandlerStub(),
+			new TimerStub()
 		);
 
 		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );

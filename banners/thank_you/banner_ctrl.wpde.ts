@@ -17,6 +17,7 @@ import eventMap from './event_map.wpde';
 import { createThankYouSettings } from './settings';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';
+import { WindowTimer } from '@src/utils/Timer';
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
 // using the campaign configuration ( campaign_info.toml ) for the correct values
@@ -50,5 +51,6 @@ const app = createVueApp( BannerConductor, {
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
 app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.DE ) );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

@@ -14,6 +14,7 @@ import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShown
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { MembershipFormActions } from '@banners/thank_you/MembershipFormActions';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formActions: MembershipFormActions = {
 	create: ( extraUrlParameters: Record<string, string> ) => `URL [ ${ extraUrlParameters?.interval }, ${ extraUrlParameters?.fee } ]`
@@ -40,7 +41,8 @@ describe( 'BannerCtrl.en.vue', () => {
 				},
 				provide: {
 					tracker: tracker,
-					formActions
+					formActions,
+					timer: new TimerStub()
 				}
 			}
 		} );

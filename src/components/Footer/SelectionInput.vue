@@ -16,7 +16,8 @@
 
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
+import { Timer } from '@src/utils/Timer';
 
 interface Props {
 	value: string;
@@ -27,9 +28,10 @@ defineProps<Props>();
 
 const inputRef = ref<HTMLInputElement>( null );
 const focused = ref<boolean>( false );
+const timer = inject<Timer>( 'timer' );
 
 const handleFocus = (): void => {
-	setTimeout( () => inputRef.value.setSelectionRange( 0, 9999 ), 1 );
+	timer.setTimeout( () => inputRef.value.setSelectionRange( 0, 9999 ), 1 );
 	focused.value = true;
 };
 

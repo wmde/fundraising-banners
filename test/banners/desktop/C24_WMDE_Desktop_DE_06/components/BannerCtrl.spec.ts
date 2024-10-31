@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_06/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -8,18 +8,15 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import {
-	bannerContentAnimatedTextFeatures,
-	bannerContentDateAndTimeFeatures,
-	bannerContentDisplaySwitchFeatures,
-	bannerContentFeatures
-} from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { Timer } from '@src/utils/Timer';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -28,15 +25,9 @@ describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 	} );
 
-	afterEach( () => {
-		vi.restoreAllMocks();
-		vi.useRealTimers();
-	} );
-
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -58,7 +49,8 @@ describe( 'BannerCtrl.vue', () => {
 					},
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker: new TrackerStub(),
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );

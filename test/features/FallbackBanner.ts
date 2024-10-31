@@ -8,6 +8,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
+import { Timer } from '@src/utils/Timer';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 const showsTheSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
@@ -36,7 +38,6 @@ const playsTheSlideshowWhenBecomesVisible = async ( getWrapperAtWidth: ( width: 
 	const wrapper = getWrapperAtWidth( 799 );
 
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
-	await vi.runOnlyPendingTimersAsync();
 
 	expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
 };
@@ -83,23 +84,29 @@ const showsTheAnimatedHighlightInLargeBanner = async ( getWrapperAtWidth: ( widt
 	expect( wrapper.find( '.wmde-banner-message .wmde-banner-text-animated-highlight' ).exists() ).toBeTruthy();
 };
 
-const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
+const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: (
+	width: number,
+	dynamicContent: DynamicContent,
+	tracker: Tracker,
+	timer: Timer
+) => VueWrapper<any> ): Promise<any> => {
 	const dynamicContent = newDynamicContent();
 	dynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
 		.mockReturnValueOnce( { currentDate: 'Third Date', currentTime: 'Third Time' } );
 
-	const wrapper = getWrapperAtWidth( 800, dynamicContent );
+	const timer = new TimerSpy();
+	const wrapper = getWrapperAtWidth( 800, dynamicContent, null, timer );
 
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Date' );
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Time' );
 
-	await vi.advanceTimersByTimeAsync( 1000 );
+	await timer.advanceInterval();
 
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Date' );
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Time' );
 
-	await vi.advanceTimersByTimeAsync( 1000 );
+	await timer.advanceInterval();
 
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Date' );
 	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Time' );

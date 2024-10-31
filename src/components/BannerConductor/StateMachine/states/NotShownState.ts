@@ -5,6 +5,7 @@ import { Page } from '@src/page/Page';
 import { Tracker } from '@src/tracking/Tracker';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
+import { Timer } from '@src/utils/Timer';
 
 export class NotShownState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.NotShown;
@@ -13,14 +14,23 @@ export class NotShownState extends BannerState {
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
 	private _bannerHeight: number;
+	private _timer: Timer;
 
-	public constructor( bannerNotShownReason: BannerNotShownReasons, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, bannerHeight: number ) {
+	public constructor(
+		bannerNotShownReason: BannerNotShownReasons,
+		page: Page,
+		tracker: Tracker,
+		resizeHandler: ResizeHandler,
+		bannerHeight: number,
+		timer: Timer
+	) {
 		super();
 		this._bannerNotShownReason = bannerNotShownReason;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._bannerHeight = bannerHeight;
+		this._timer = timer;
 	}
 
 	public enter(): Promise<any> {
@@ -34,6 +44,7 @@ export class NotShownState extends BannerState {
 			.preventImpressionCountForHiddenBanner()
 			.removePageEventListeners();
 		this._resizeHandler.onClose();
+		this._timer.clearAll();
 		return Promise.resolve( true );
 	}
 

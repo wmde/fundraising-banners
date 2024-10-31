@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/english/C24_WMDE_Desktop_EN_03/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -7,12 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import {
-	bannerContentAnimatedTextFeatures,
-	bannerContentDateAndTimeFeatures,
-	bannerContentDisplaySwitchFeatures,
-	bannerContentFeatures
-} from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -21,6 +16,8 @@ import { bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
+import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -29,15 +26,9 @@ describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 	} );
 
-	afterEach( () => {
-		vi.restoreAllMocks();
-		vi.useRealTimers();
-	} );
-
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -55,7 +46,8 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker: new TrackerStub(),
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
@@ -120,7 +112,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

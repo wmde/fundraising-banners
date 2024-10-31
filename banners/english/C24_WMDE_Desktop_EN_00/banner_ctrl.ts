@@ -27,6 +27,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
+import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -69,5 +70,6 @@ app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
 app.provide( 'tracker', tracker );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

@@ -26,6 +26,7 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -67,5 +68,6 @@ app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { afo: '1', ap: '0' } ) );
 app.provide( 'tracker', tracker );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

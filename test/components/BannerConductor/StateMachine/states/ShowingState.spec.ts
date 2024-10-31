@@ -2,6 +2,8 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
 import { Page } from '@src/page/Page';
 import { PageStub } from '@test/fixtures/PageStub';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'ShowingState', function () {
 	let page: Page;
@@ -15,7 +17,7 @@ describe( 'ShowingState', function () {
 	} );
 
 	it( 'shows banner on enter', async () => {
-		const showingState = new ShowingState( page, 1 );
+		const showingState = new ShowingState( page, 1, new TimerStub() );
 
 		await showingState.enter();
 
@@ -26,26 +28,29 @@ describe( 'ShowingState', function () {
 	} );
 
 	it( 'starts transitionDuration timeout on enter', async () => {
-		const setTimeoutSpy = vitest.spyOn( window, 'setTimeout' );
-		const showingState = new ShowingState( page, 1 );
+		const timerSpy = new TimerSpy();
+
+		const showingState = new ShowingState( page, 1, timerSpy );
 
 		await showingState.enter();
 
-		expect( setTimeoutSpy ).toHaveBeenCalledOnce();
-		expect( setTimeoutSpy ).toHaveBeenCalledWith( expect.any( Function ), 1 );
+		expect( timerSpy.setTimeoutCalls.length ).toStrictEqual( 1 );
+		expect( timerSpy.setTimeoutCalls[ 0 ] ).toStrictEqual( 1 );
 	} );
 
 	it( 'stops delay timeout on exit', async () => {
-		const clearTimeoutSpy = vitest.spyOn( window, 'clearTimeout' );
-		const showingState = new ShowingState( page, 1 );
+		const timerSpy = new TimerSpy();
+		const showingState = new ShowingState( page, 1, timerSpy );
 
+		await showingState.enter();
 		await showingState.exit();
 
-		expect( clearTimeoutSpy ).toHaveBeenCalledOnce();
+		expect( timerSpy.clearTimeoutIds.length ).toStrictEqual( 1 );
+		expect( timerSpy.clearTimeoutIds[ 0 ] ).toStrictEqual( 0 );
 	} );
 
 	it( 'sets banner size on resize', () => {
-		const showingState = new ShowingState( page, 1 );
+		const showingState = new ShowingState( page, 1, new TimerStub() );
 
 		showingState.onResize( 42 );
 
@@ -54,7 +59,7 @@ describe( 'ShowingState', function () {
 	} );
 
 	it( 'sets banner size on content changed', () => {
-		const showingState = new ShowingState( page, 1 );
+		const showingState = new ShowingState( page, 1, new TimerStub() );
 
 		showingState.onContentChanged( 42 );
 
