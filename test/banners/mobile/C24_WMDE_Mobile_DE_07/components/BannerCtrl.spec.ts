@@ -118,7 +118,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	describe( 'Soft Close', () => {
-		test.skip.each( [
+		test.each( [
 			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
 			[ 'expectEmitsSoftCloseCloseEvent' ],
@@ -132,9 +132,11 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close Submit Tracking (No Soft Close)', () => {
+	describe( 'Soft Close Submit Tracking', () => {
 		test.each( [
-			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectStoresMaybeLateCloseChoice' ],
+			[ 'expectStoresCloseCloseChoice' ],
+			[ 'expectStoresAlreadyDonatedCloseChoice' ],
 			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
 			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {

@@ -3,12 +3,14 @@ import { TranslationMessages } from '@src/Translator';
 import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/UpgradeToYearly.de';
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
+import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
 	...FooterDe,
 	...MainDonationFormDe,
 	...UpgradeToYearlyDe,
+	...SoftCloseDe,
 
 	// custom messages here
 	'use-of-funds-link': 'Was Ihre Spende bewirkt',
@@ -19,7 +21,10 @@ const messages: TranslationMessages = {
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
 	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
-	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.'
+	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
+	'soft-close-prompt': 'Wikipedia später unterstützen?',
+	'soft-close-button-already-donated': 'Habe schon gespendet',
+	'amount-total': ''
 };
 
 export default messages;
