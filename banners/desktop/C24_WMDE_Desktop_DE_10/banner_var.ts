@@ -25,7 +25,7 @@ import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 
 // Channel specific form setup
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 
 const date = new Date();
