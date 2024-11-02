@@ -27,7 +27,8 @@ const messages: TranslationMessages = {
 	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
 	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
 	'double-progress-close': 'Das wird knapp.',
-	'missing-amount': 'Uns fehlen noch'
+	'missing-amount': 'Uns fehlen noch',
+	'custom-amount-placeholder': 'Wahlbetrag'
 };
 
 export default messages;

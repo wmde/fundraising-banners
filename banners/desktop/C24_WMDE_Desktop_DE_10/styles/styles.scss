@@ -21,8 +21,12 @@
 @use 'src/themes/Svingle/DonationForm/DonationForm';
 @use 'src/themes/Svingle/DonationForm/MultiStepDonation';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroup';
-@use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroupRadios';
-@use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio';
+@use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroupRadios' with (
+	$font-size: 14px
+);
+@use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio' with (
+	$font-size: 14px
+);
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
