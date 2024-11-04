@@ -1,17 +1,14 @@
 <template>
 	<div class="wmde-banner-minimised">
+		<div class="wmde-banner-minimised-close">
+			<button class="wmde-banner-minimised-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
+				<CloseIconMobile/>
+			</button>
+		</div>
 		<div class="wmde-banner-minimised-inner">
-			<div class="wmde-banner-mini-close">
-				<button class="wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
-					<CloseIconMobile/>
-				</button>
-			</div>
-
-			<header class="wmde-banner-minimised-headline">
-				Ist Ihnen Wikipedia 5&nbsp;€ wert?
-			</header>
 			<div class="wmde-banner-minimised-link">
-				Ja, ich möchte <button @click="$emit( 'showFullPageBanner' )">jetzt freies wissen unterstützen <HeartIcon/></button>
+				<InfoIcon/> Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+				<span class="wmde-banner-minimised-highlighted-text">Dann geben Sie jetzt etwas zurück.</span>
 			</div>
 		</div>
 		<div class="wmde-banner-minimised-maximise">
@@ -26,9 +23,9 @@
 
 <script setup lang="ts">
 
-import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import MaximiseIcon from '@src/components/Icons/MaximiseIcon.vue';
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 defineEmits( [ 'showFullPageBanner', 'close', 'maximise' ] );
 

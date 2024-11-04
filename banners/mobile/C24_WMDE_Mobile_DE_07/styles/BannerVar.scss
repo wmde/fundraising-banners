@@ -90,6 +90,9 @@ body.wmde-show-banner {
 		}
 
 		&--soft-closing {
+			.wmde-banner-minimised {
+				display: none;
+			}
 			.wmde-banner-mini {
 				display: none;
 			}

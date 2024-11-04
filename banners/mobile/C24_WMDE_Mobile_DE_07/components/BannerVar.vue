@@ -18,7 +18,7 @@
 		</MiniBanner>
 
 		<MinimisedBanner
-			@close="onCloseMiniBanner"
+			@close="onCloseMinimisedBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@maximise="onMaximise"
 		/>
@@ -191,6 +191,14 @@ function onCloseMiniBanner(): void {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
 		onClose( 'MainBanner', CloseChoices.Close );
+	}
+}
+
+function onCloseMinimisedBanner(): void {
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MinimisedBanner', CloseChoices.Hide );
 	}
 }
 

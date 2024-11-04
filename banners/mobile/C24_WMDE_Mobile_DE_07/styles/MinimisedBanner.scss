@@ -2,6 +2,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 .wmde-banner {
 	&-minimised {
+
 		height: 82px;
 
 		&-inner {
@@ -19,25 +20,47 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 		&-headline,
 		&-link {
 			padding: 0 16px;
+			margin-right: 26px;
 		}
 
 		&-headline {
 			font-weight: bold;
 		}
 
-		&-link {
-			--thank-you-box-color: var( --minimise-link-color );
+		&-highlighted-text {
+			background: var( --minimise-text-highlight-background );
+			font-weight: bold;
+		}
 
-			button {
-				color: var( --minimise-link-color );
-				background: 0;
+		&-close {
+			position: absolute;
+			height: 36px;
+			width: 36px;
+			top: 2px;
+			right: 6px;
+			text-align: center;
+			background: var( --mini-close-background );
+			padding: 10px;
+			z-index: 2;
+
+			&-button {
 				border: none;
-				cursor: pointer;
-			}
+				margin-top: auto;
+				float: right;
+				height: 16px;
+				line-height: 16px;
+				width: 16px;
+				background: var( --mini-close-background );
+				z-index: 2;
 
-			svg {
-				position: relative;
-				top: 3px;
+				svg {
+					height: 16px;
+					width: 16px;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
 			}
 		}
 
