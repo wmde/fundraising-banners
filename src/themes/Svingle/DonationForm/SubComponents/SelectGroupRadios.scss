@@ -1,3 +1,5 @@
+$font-size: 0.95em !default;
+
 @use '../../variables/breakpoints';
 @use 'radio-input';
 
@@ -21,11 +23,11 @@
 		&-label {
 			color: var( --select-group-radio-label-color );
 			border: 0 none;
-			font-size: 0.95em;
+			font-size: $font-size;
 		}
 
 		&-input {
-			@include radio-input.styles;
+			@include radio-input.styles( $left:0, $size: 18px );
 		}
 	}
 }

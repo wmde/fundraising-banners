@@ -1,8 +1,6 @@
 @use 'sass:math';
 
-$size: 16px;
-
-@mixin styles( $left: 0 ) {
+@mixin styles( $left: 0, $size: 16px ) {
 	appearance: none;
 	position: absolute;
 	top: 50%;
