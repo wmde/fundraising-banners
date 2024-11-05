@@ -19,8 +19,8 @@ but actually it was `Euros and Cents`. We are used to the amount being `Cents` f
 using this best practice. See https://stackoverflow.com/questions/3730019/why-not-use-double-or-float-to-represent-currency
 
 ### Files to look at:
-- `../src/utils/FormModel/FormModel.ts`
-- `../src/components/composables/useAmountBasedFormAction.ts`
+- `src/utils/FormModel/FormModel.ts`
+- `src/components/composables/useAmountBasedFormAction.ts`
 
 
 ## Create parameters for 2025 campaign and adapt dev banner
@@ -39,7 +39,7 @@ a Webpack warning. The current "solution" was to set the limit to 310KB (from 25
 solution would be to remove features. When that can be done, please check with lower limits.
 
 ### Files to look at:
-- `../webpack/webpack.production.js`
+- `webpack/webpack.production.js`
 
 ## Average Donation
 This value is in the dynamic content and was previously only used for calculating part of the projection. It's now exposed to the banner content so we should decide if we need to move it out of the campaignProjection part of the CampaignParameters and inject it into the CampaignProjection class separately.
@@ -64,7 +64,7 @@ The prop `:showManualUpgradeOption="false"` does not show the third, link option
 - How do we take care of this form in future? Because our UpgradeToYearly for will always have two buttons only.
 
 ### Files to look at:
-src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue
+- `src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue`
  
 
 ## Move "close cookie" setting for WPDE banners into `PageWPDE.setCloseCookieIfNecessary`
@@ -81,8 +81,8 @@ Then we remove the custom components and the code that toggles them and move the
 and call its different methods inside the `setCloseCookieIfNecessary` method.
 
 ## Files to look at
-../src/page/PageWPDE.ts
-../banners/*/components/*.vue
+- `src/page/PageWPDE.ts`
+- `banners/*/components/*.vue`
 
 
 ## Remove: AlreadyDonatedModal is probably no longer used after HK24
@@ -91,5 +91,16 @@ Since `C24_WMDE_Desktop_EN_02b` (https://github.com/wmde/fundraising-banners/pul
 the AlreadyDonated feature does not open a modal anymore but closes the banner directly.
 
 ### Files to look at:
-src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue
-css styling + tracking events (close events of the buttons)
+- `src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue`
+- css styling + tracking events (close events of the buttons)
+
+
+## Move translations for "transaction fee" into "MainDonationForm" messages
+
+If the "transaction fee" feature moves into other banners, we should move the translation key `cover-transaction-costs` 
+into the `MainDonationForm` messages.
+
+### Files to look at:
+
+- `src/components/DonationForm/Forms/messages/MainDonationForm.*.ts`
+- `banners/*/*/messages.ts`

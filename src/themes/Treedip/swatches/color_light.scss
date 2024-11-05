@@ -21,7 +21,6 @@ $blue700: #2a4b8d;
 	$select-group-bubble: false,
 	$select-group-button: false,
 	$select-group-image-label: false,
-	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -149,7 +148,7 @@ $blue700: #2a4b8d;
 
 	@if $upgrade-to-yearly {
 		--upgrade-to-yearly-link-color: #{$blue700};
-		--upgrade-to-yearly-back-color: #{$blue700};
+		--upgrade-to-yearly-back-color: #{$grey600};
 	}
 
 	@if $already-donated {

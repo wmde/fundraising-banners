@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/wpde_desktop/C24_WPDE_Desktop_01/components/BannerVar.vue';
+import Banner from '@banners/english/C24_WMDE_Desktop_EN_03/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -8,25 +8,24 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures,
+	bannerContentAnimatedTextFeatures,
+	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
-import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
-import { setCookieImageFeatures } from '@test/features/SetCookieImage';
+import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 
 const formModel = useFormModel();
-const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
+const translator = ( key: string ): string => key;
 
-describe( 'BannerVar.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -40,6 +39,7 @@ describe( 'BannerVar.vue', () => {
 
 	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
 		return mount( Banner, {
+			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
@@ -57,9 +57,7 @@ describe( 'BannerVar.vue', () => {
 					formItems,
 					tracker: new TrackerStub()
 				}
-			},
-			// Needed for isVisible checks, see https://test-utils.vuejs.org/api/#isVisible
-			attachTo: document.body
+			}
 		} );
 	};
 
@@ -87,9 +85,7 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
@@ -115,16 +111,6 @@ describe( 'BannerVar.vue', () => {
 		} );
 	} );
 
-	describe( 'Donation Form Transaction Fees', () => {
-		test.each( [
-			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
-			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
-			[ 'expectUpsellFormHasTransactionFee' ]
-		] )( '%s', async ( testName: string ) => {
-			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
 	describe( 'Soft Close', () => {
 		test.each( [
 			[ 'expectShowsSoftClose' ],
@@ -135,18 +121,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Set Cookie Image', () => {
-		test.each( [
-			[ 'expectSetsCookieImageOnSoftCloseClose' ],
-			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
-			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
-			[ 'expectSetCookieImageOnAlreadyDonatedLink' ],
-			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
-		] )( '%s', async ( testName: string ) => {
-			await setCookieImageFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -166,5 +140,4 @@ describe( 'BannerVar.vue', () => {
 			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
 		} );
 	} );
-
 } );

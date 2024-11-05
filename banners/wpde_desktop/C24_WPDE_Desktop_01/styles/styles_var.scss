@@ -8,7 +8,6 @@
 	$upgrade-to-yearly: true,
 	$soft-close: true,
 	$fallback-banner: true,
-	$transaction-fees: true,
 );
 @use '@src/themes/Treedip/variables/breakpoints';
 @use '@src/components/BannerConductor/banner-transition';
