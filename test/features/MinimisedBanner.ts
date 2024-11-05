@@ -20,14 +20,6 @@ const expectOpensFullPageFromMiniBanner = async ( wrapper: VueWrapper<any> ): Pr
 	expect( wrapper.classes() ).toContain( 'wmde-banner-opened-from-mini' );
 };
 
-const expectOpensFullPageFromMinimisedBanner = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-mini-minimise-button' ).trigger( 'click' );
-	await wrapper.find( '.wmde-banner-minimised-link button' ).trigger( 'click' );
-
-	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
-	expect( wrapper.classes() ).toContain( 'wmde-banner-opened-from-minimised' );
-};
-
 const expectTracksMinimiseAndMaximise = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-minimise-button' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-minimised-maximise-button' ).trigger( 'click' );
@@ -40,6 +32,5 @@ const expectTracksMinimiseAndMaximise = async ( wrapper: VueWrapper<any>, tracke
 export const minimisedBannerFeatures: Record<string, ( wrapper: VueWrapper<any>, tracker: Tracker ) => Promise<any>> = {
 	expectMinimisesAndMaximises,
 	expectOpensFullPageFromMiniBanner,
-	expectOpensFullPageFromMinimisedBanner,
 	expectTracksMinimiseAndMaximise
 };

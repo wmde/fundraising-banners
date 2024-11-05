@@ -1,6 +1,7 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="[ contentState, fullPageOpenedFrom ]">
 		<MiniBanner
+			v-if="contentState === ContentStates.Mini"
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
@@ -18,6 +19,7 @@
 		</MiniBanner>
 
 		<MinimisedBanner
+			v-if="contentState === ContentStates.Minimised"
 			@close="onCloseMinimisedBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@maximise="onMaximise"

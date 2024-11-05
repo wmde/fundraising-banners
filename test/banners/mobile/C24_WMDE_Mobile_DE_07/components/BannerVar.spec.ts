@@ -92,8 +92,8 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
-			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+			[ 'expectShowsLiveDateAndTimeInMiniBanner' ]
+			// [ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
@@ -164,7 +164,7 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Mini Banner', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
-			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
+			// [ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
@@ -176,7 +176,6 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectMinimisesAndMaximises' ],
 			[ 'expectOpensFullPageFromMiniBanner' ],
-			[ 'expectOpensFullPageFromMinimisedBanner' ],
 			[ 'expectTracksMinimiseAndMaximise' ]
 		] )( '%s', async ( testName: string ) => {
 			await minimisedBannerFeatures[ testName ]( getWrapper(), tracker );

@@ -6,7 +6,7 @@
 			</button>
 		</div>
 		<div class="wmde-banner-minimised-inner">
-			<div class="wmde-banner-minimised-link">
+			<div class="wmde-banner-minimised-content">
 				<InfoIcon/> Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				<span class="wmde-banner-minimised-highlighted-text">Dann geben Sie jetzt etwas zurück.</span>
 			</div>

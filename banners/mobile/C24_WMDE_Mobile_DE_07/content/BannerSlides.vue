@@ -24,7 +24,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Die durchschnittliche Spende beträgt 22,49&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
+			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
 			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, watch } from 'vue';
+import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
@@ -58,7 +58,8 @@ const {
 	getCurrentDateAndTime,
 	goalDonationSum,
 	visitorsVsDonorsSentence,
-	campaignDaySentence
+	campaignDaySentence,
+	averageDonation
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
@@ -69,5 +70,6 @@ watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	}
 } );
 onMounted( startTimer );
+onUnmounted( stopTimer );
 
 </script>
