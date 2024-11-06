@@ -12,7 +12,7 @@
 		<p>
 			{{ campaignDaySentence }}
 			Insgesamt spenden 99&nbsp;% nichts – sie übergehen diesen Aufruf. Wikipedia wird
-			durch Spenden von durchschnittlich 22,49&nbsp;€ finanziert.
+			durch Spenden von durchschnittlich {{ averageDonation }} finanziert.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -47,7 +47,8 @@ const {
 	currentDayName,
 	currentDate,
 	campaignDaySentence,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	averageDonation
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

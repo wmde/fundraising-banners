@@ -9,7 +9,7 @@
 				{{ currentDayName }}, den {{ currentDate }} um {{ liveDateAndTime.currentTime }} Uhr, bitten wir Sie
 				bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen. Heute bitten wir Sie um Ihre Unterstützung.
 				Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia wird durch Spenden von
-				durchschnittlich 22,49&nbsp;€ finanziert. Doch schon mit einer Spende von 15&nbsp;€ kann Wikipedia sich auch
+				durchschnittlich {{ averageDonation }} finanziert. Doch schon mit einer Spende von 15&nbsp;€ kann Wikipedia sich auch
 				in Zukunft erfolgreich entwickeln. <AnimatedText :content="visitorsVsDonorsSentence"/> Die meisten
 				Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert
 				einer Tasse Kaffee geschenkt? Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück.
@@ -35,7 +35,8 @@ const {
 	getCurrentDateAndTime,
 	currentDayName,
 	currentDate,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	averageDonation
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
