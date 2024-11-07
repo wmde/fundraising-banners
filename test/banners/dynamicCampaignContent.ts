@@ -10,6 +10,7 @@ export function newDynamicContent(): DynamicContent {
 		},
 		currentDayName: '',
 		daysLeftSentence: 'daysLeftSentence',
+		daysPassedSentence: 'daysPassedSentence',
 		donorsNeededSentence: '',
 		goalDonationSum: '',
 		remainingDonationSum: '',

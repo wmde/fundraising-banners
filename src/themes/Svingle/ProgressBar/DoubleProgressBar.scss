@@ -1,5 +1,4 @@
 @use 'src/components/ProgressBar/DoubleProgressBar';
-@use '../variables/globals';
 @use 'transitionsDouble';
 
 .wmde-banner {
@@ -10,7 +9,6 @@
 			margin: 0;
 			font-weight: bold;
 			font-size: 12px;
-			color: var( --color-white );
 
 			&-amount,
 			&-time {
@@ -21,19 +19,25 @@
 
 				&-fill,
 				&-difference {
+					color: var( --double-progress-color );
 					height: 100%;
 					padding: 0 10px;
 				}
 
 				&-fill {
 					display: flex;
-					justify-content: space-between;
+					justify-content: right;
 				}
+			}
+
+			&-right-text {
+				float: right;
+				color: var( --double-progress-right-text-color );
 			}
 
 			&-amount {
 				margin-bottom: 5px;
-				background: var( --color-primary-light );
+				background: var( --double-progress-time-background );
 
 				&-fill,
 				&-difference {
@@ -41,24 +45,30 @@
 				}
 
 				&-fill {
-					background: var( --color-primary );
+					background: var( --double-progress-time-fill-background );
 					z-index: 2;
 				}
 
 				&-difference {
-					color: var( --color-white );
-					background: var( --color-primary-bright );
+					background: var( --double-progress-difference-background );
 					z-index: 1;
 					text-align: right;
 				}
 			}
 
 			&-time {
-				background: var( --color-secondary-lighter );
+				background: var( --double-progress-amount-background );
 
 				&-fill {
 					border-radius: 12px;
-					background: var( --color-secondary );
+					background: var( --double-progress-amount-fill-background );
+				}
+			}
+
+			&.is-late-progress {
+				.wmde-banner-double-progress-amount-fill,
+				.wmde-banner-double-progress-time-fill {
+					justify-content: space-between;
 				}
 			}
 		}

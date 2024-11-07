@@ -15,6 +15,7 @@ import { ProgressBarContent } from '@src/utils/DynamicContent/generators/Progres
 import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
 import { CurrentTime } from '@src/utils/DynamicContent/generators/CurrentTime';
 import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
+import { DaysPassedSentence } from '@src/utils/DynamicContent/generators/DaysPassedSentence';
 
 export default class DynamicCampaignText implements DynamicContent {
 	private readonly _date: Date;
@@ -113,6 +114,12 @@ export default class DynamicCampaignText implements DynamicContent {
 	public get daysLeftSentence(): string {
 		return this.getCachedValue( 'daysLeftSentence', () => {
 			return new DaysLeftSentence( this.getCampaignTimeRange(), this._translator ).getText();
+		} );
+	}
+
+	public get daysPassedSentence(): string {
+		return this.getCachedValue( 'daysPassedSentence', () => {
+			return new DaysPassedSentence( this.getCampaignTimeRange(), this._translator ).getText();
 		} );
 	}
 
