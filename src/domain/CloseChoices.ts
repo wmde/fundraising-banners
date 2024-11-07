@@ -11,4 +11,6 @@ export enum CloseChoices {
 	NoMoreBannersForCampaign = 'no-more-banners',
 	/** user clicked on the already donated link */
 	AlreadyDonated = 'already-donated',
+	/** window was resized below the threshold */
+	WindowSizeBelowMin = 'window-size-below-min',
 }

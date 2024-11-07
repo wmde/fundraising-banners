@@ -105,6 +105,7 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
+import { useBannerHider } from '@src/components/composables/useBannerHider';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -125,6 +126,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+useBannerHider( 800, emit );
 
 const tracker = inject<Tracker>( 'tracker' );
 
