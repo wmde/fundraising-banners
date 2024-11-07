@@ -1,18 +1,18 @@
 import fg from 'fast-glob';
 import path from 'path';
-import { parse as parseTOML } from "toml";
-import { readFileSync } from "fs";
+import { parse as parseTOML } from 'toml';
+import { readFileSync } from 'fs';
 
 /**
  * Get a list of campaign directories in 'banners/' that are not referenced in the current campaign_info.toml
  *
  * @param {string} campaignConfigPath
- * @returns string[]
+ * @return {string[]}
  */
 export function getExcludedCampaignDirectories( campaignConfigPath ) {
 	const config = parseTOML( readFileSync( campaignConfigPath, 'utf-8' ) );
 	const activeCampaigns = new Set();
-	for ( const channelConfig of Object.values( config) ) {
+	for ( const channelConfig of Object.values( config ) ) {
 		activeCampaigns.add( channelConfig.campaign );
 	}
 
