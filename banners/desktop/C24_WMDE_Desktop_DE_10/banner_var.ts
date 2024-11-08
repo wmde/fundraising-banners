@@ -19,12 +19,8 @@ import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
-
-// Locale-specific imports
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-
-// Channel specific form setup
 import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';

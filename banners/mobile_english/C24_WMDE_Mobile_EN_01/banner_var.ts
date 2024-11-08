@@ -18,12 +18,8 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { Locales } from '@src/domain/Locales';
-
-// Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-
-// Content for EN banners
 import messages from './messages';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { WindowTimer } from '@src/utils/Timer';

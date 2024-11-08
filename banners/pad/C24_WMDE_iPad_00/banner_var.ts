@@ -16,12 +16,8 @@ import eventMappings from './event_map';
 import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
-
-// Channel specific form setup
 import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
-
-// Content
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { WindowTimer } from '@src/utils/Timer';
