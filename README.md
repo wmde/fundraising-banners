@@ -54,6 +54,20 @@ To run both tests and code checks, run
 
     npm run ci
 
+### Checking the sources when committing or pushing
+
+If you want to check the sources before you commit or push to the remote
+repository, you can place the following shell script in the file
+`.git/hooks/pre-commit` or `.git/hooks/pre-push`:
+
+```shell
+#!/bin/sh
+npm run ci
+```
+
+Don't forget to make the file executable! Example command: `chmod a+x .git/hooks/pre-commit`
+
+
 ## Building the assets
 
 All build commands will clear out the `dist/` directory.
