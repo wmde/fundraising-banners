@@ -9,7 +9,7 @@
 				<div class="text-fade">{{ progressBarContent.amountDonated }}</div>
 			</div>
 			<div class="wmde-banner-double-progress-amount-difference">!</div>
-			<div class="wmde-banner-double-progress-right-text text-fade" v-if="!progressBarContent.isLateProgress">{{ progressBarContent.amountNeeded }}</div>
+			<div class="wmde-banner-double-progress-right-text text-fade" v-if="!progressBarContent.isLateProgress">{{ progressBarContent.donationTarget }}</div>
 		</div>
 		<div class="wmde-banner-double-progress-time">
 			<div class="wmde-banner-double-progress-time-fill">
