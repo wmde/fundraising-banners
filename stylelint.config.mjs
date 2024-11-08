@@ -1,6 +1,9 @@
-{
+import { getExcludedCampaignDirectories } from "./webpack/excluded_campaigns.mjs";
+
+export default {
 	"ignoreFiles": [
-		"coverage/*"
+		"coverage/*",
+		...getExcludedCampaignDirectories( 'campaign_info.toml' )
 	],
 	"extends": [
 		"stylelint-config-recommended",

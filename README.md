@@ -8,7 +8,7 @@ To install all dependencies run
 
     npm install
 
-## Starting the preview
+## Starting the development preview
 
 You can preview the banners by running the built-in server.
 
@@ -20,17 +20,53 @@ It will display a selection of banners to preview in their respective channel (G
 
 While the preview is running, you should be able to see changes immediately via hot reload.
 
+### Start the preview with CSS linting
+
+In the default preview, your SCSS won't be linted inside the preview. If you want CSS errors to appear in the console and as an overlay in the browsers, you can the preview with
+
+    npm run dev-strict
+
+The startup of the development environment will be a bit slower with this feature enabled (15-20 seconds).
+
+### Starting the preview of the thank-you banners
+
 If you want to work on the "thank you" banners, run
 
     npm run thankyou
 
-## Check the sources
+## Checking the sources
 
 To verify the code is correct and up to our coding standards. These tests will also run in CI.
 
     npm run test
-    npm run lint:js
-    npm run lint:css
+
+will run all the tests. If you want to run only the banner integration tests, run
+
+    npm run test:banners
+
+To run all the code checks (CSS style, TypeScript type checks, TypeScript code style and best practices) run
+
+    npm run lint
+
+See `package.json` or run `npm run` for an overview of individual checks.
+
+To run both tests and code checks, run
+
+    npm run ci
+
+### Checking the sources when committing or pushing
+
+If you want to check the sources before you commit or push to the remote
+repository, you can place the following shell script in the file
+`.git/hooks/pre-commit` or `.git/hooks/pre-push`:
+
+```shell
+#!/bin/sh
+npm run ci
+```
+
+Don't forget to make the file executable! Example command: `chmod a+x .git/hooks/pre-commit`
+
 
 ## Building the assets
 
@@ -65,9 +101,9 @@ files that you can insert 1:1 in CentralNotice.
 ## Configuring campaigns, banners and tracking
 
 The file `campaign_info.toml` contains the metadata for all banners and
-campaigns. The information is organized into *channels*. A "channel" is a
+campaigns. Each campaign definition is for a *channel*. A "channel" is a
 combination of Website (wikipedia.org or wikipedia.de), platform (desktop,
-mobile, ipad) and language (German, English).
+mobile, ipad) and language (German, English). Each channel has a name.
 
 Webpack uses `campaign_info.toml` to determine the unique file names of the
 output and the input files, the so-called *[entry
@@ -86,6 +122,9 @@ tracking pixels inside the banner.
 The [Banner Screenshots](https://github.com/wmde/banner-screenshots) software
 uses the `.test_matrix` subsection of each channel to determine which browser
 platforms and resolutions to test each banner on.
+
+The `npm run test` and `npm run lint` commands also check the `campaign_info.toml`
+file to determine which files in the `banners/` directory to check.
 
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `banners/desktop/C24_WMDE_Desktop_DE_02`.

@@ -24,6 +24,22 @@ const getBranch = () => new Promise( ( resolve ) => {
 const readCampaignFile = ( fileName ) => fs.readFile( fileName, 'utf8' )
 	.then( contents => toml.parse( contents ) );
 
+/**
+ * This function allows the user to pass `--env stylelint=true` from the command line to activate in-place linting
+ * This might slow down the dev environment and lead to unwanted overlays, but is the preferred option for some
+ * developers who don't like to commit "broken" code.
+ */
+const optionalStyleLint = ( env ) => {
+	if ( !env.stylelint ) {
+		return [];
+	}
+	return [
+		new StyleLintPlugin( {
+			files: [ '**/*.{vue,css,sss,less,scss,sass}' ]
+		} )
+	];
+};
+
 module.exports = ( env ) => Promise.all( [
 	getBranch(),
 	readCampaignFile( env.campaign_info ?? 'campaign_info.toml' )
@@ -46,9 +62,7 @@ module.exports = ( env ) => Promise.all( [
 				CAMPAIGNS: JSON.stringify( campaignInfoToCampaignConfig( campaignConfig ) ),
 				GIT_BRANCH: JSON.stringify( currentBranch )
 			} ),
-			new StyleLintPlugin( {
-				files: [ '**/*.{vue,css,sss,less,scss,sass}' ]
-			} )
+			...optionalStyleLint( env )
 		],
 		devServer: {
 			'port': 8084,
