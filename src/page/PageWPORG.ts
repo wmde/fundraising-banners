@@ -114,6 +114,10 @@ class PageWPORG implements Page {
 	}
 
 	public setCloseCookieIfNecessary( closeEvent: TrackingEvent<void> ): Page {
+
+		// remove banner class (and changes to the wikipedia skin) when the banner hides
+		document.body.classList.remove( showBannerClass );
+
 		switch ( closeEvent.userChoice ) {
 			case CloseChoices.Close:
 			case CloseChoices.TimeOut:

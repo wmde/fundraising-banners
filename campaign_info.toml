@@ -34,9 +34,9 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "C24_WMDE_Mobile_DE_06"
-description = "Based on VAR of C24_WMDE_Mobile_DE_05, VAR has a soft close test."
-campaign_tracking = "mob-de-06-ba-241028"
+campaign = "C24_WMDE_Mobile_DE_07"
+description = "Based on VAR of C24_WMDE_Mobile_DE_06, VAR has a minimisable mini banner."
+campaign_tracking = "mob-de-07-ba-241105"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
@@ -45,14 +45,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
-filename = "./banners/mobile/C24_WMDE_Mobile_DE_06/banner_ctrl.ts"
-pagename = "B24_WMDE_Mobile_DE_06_ctrl"
-tracking = "org-mob06-241028-ctrl"
+filename = "./banners/mobile/C24_WMDE_Mobile_DE_07/banner_ctrl.ts"
+pagename = "B24_WMDE_Mobile_DE_07_ctrl"
+tracking = "org-mob07-241105-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/C24_WMDE_Mobile_DE_06/banner_var.ts"
-pagename = "B24_WMDE_Mobile_DE_06_var"
-tracking = "org-mob05-241028-var"
+filename = "./banners/mobile/C24_WMDE_Mobile_DE_07/banner_var.ts"
+pagename = "B24_WMDE_Mobile_DE_07_var"
+tracking = "org-mob07-241105-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
