@@ -1,11 +1,9 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="[ contentState, fullPageOpenedFrom ]">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			v-if="contentState === ContentStates.Mini"
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
-			@minimise="onMinimise"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -17,13 +15,6 @@
 				</KeenSlider>
 			</template>
 		</MiniBanner>
-
-		<MinimisedBanner
-			v-if="contentState === ContentStates.Minimised"
-			@close="onCloseMinimisedBanner"
-			@show-full-page-banner="onshowFullPageBanner"
-			@maximise="onMaximise"
-		/>
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
@@ -114,7 +105,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -145,12 +136,9 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import MinimisedBanner from '@banners/mobile/C24_WMDE_Mobile_DE_07/components/MinimisedBanner.vue';
-import { MinimisedEvent } from '@src/tracking/events/MinimisedEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
-	Minimised = 'wmde-banner-wrapper--minimised',
 	FullPage = 'wmde-banner-wrapper--full-page',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
@@ -177,7 +165,6 @@ const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const fullPageOpenedFrom = ref<'wmde-banner-opened-from-mini'|'wmde-banner-opened-from-minimised'>( 'wmde-banner-opened-from-mini' );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
@@ -193,14 +180,6 @@ function onCloseMiniBanner(): void {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
 		onClose( 'MainBanner', CloseChoices.Close );
-	}
-}
-
-function onCloseMinimisedBanner(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MinimisedBanner', CloseChoices.Hide );
 	}
 }
 
@@ -233,19 +212,6 @@ function onshowFullPageBannerPreselected(): void {
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
-
-const onMinimise = (): void => {
-	slideShowStopped.value = true;
-	contentState.value = ContentStates.Minimised;
-	fullPageOpenedFrom.value = 'wmde-banner-opened-from-minimised';
-	tracker.trackEvent( new MinimisedEvent( 'MiniBanner', 'minimised' ) );
-};
-
-const onMaximise = (): void => {
-	contentState.value = ContentStates.Mini;
-	fullPageOpenedFrom.value = 'wmde-banner-opened-from-mini';
-	tracker.trackEvent( new MinimisedEvent( 'MinimisedBanner', 'maximised' ) );
-};
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
 	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?

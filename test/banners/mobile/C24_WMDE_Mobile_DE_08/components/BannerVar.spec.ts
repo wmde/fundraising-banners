@@ -19,7 +19,6 @@ import { formActionSwitchFeatures } from '@test/features/form_action_switch/Main
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
-import { minimisedBannerFeatures } from '@test/features/MinimisedBanner';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -92,8 +91,8 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMiniBanner' ]
-			// [ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
+			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
+			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
@@ -164,21 +163,11 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Mini Banner', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
-			// [ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
+			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Minimised Banner', () => {
-		test.each( [
-			[ 'expectMinimisesAndMaximises' ],
-			[ 'expectOpensFullPageFromMiniBanner' ],
-			[ 'expectTracksMinimiseAndMaximise' ]
-		] )( '%s', async ( testName: string ) => {
-			await minimisedBannerFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
