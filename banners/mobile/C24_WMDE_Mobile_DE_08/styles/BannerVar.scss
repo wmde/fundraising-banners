@@ -1,0 +1,108 @@
+@use 'src/themes/Mikings/variables/globals';
+@use 'src/themes/Mikings/variables/fonts';
+
+$transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
+
+@keyframes hide-mini {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 0;
+	}
+	100% {
+		display: none;
+	}
+}
+
+/**
+ * This is for adding a padding to the Minerva navigation that we show the minimise/maximise tab over
+ */
+body.wmde-show-banner {
+	.header-container.header-chrome {
+		padding-top: 16px;
+		transition: padding-top $transition-easing var( --wmde-banner-transition-duration );
+	}
+
+	.minerva-header {
+		border-top: 0;
+	}
+
+	.wmde-banner-mini-inner,
+	.wmde-banner-minimised-inner {
+		box-shadow: var( --mini-box-shadow );
+	}
+
+	.wmde-banner-mini-minimise,
+	.wmde-banner-minimised-maximise {
+		height: 0;
+	}
+}
+
+.wmde-banner {
+
+	&-full {
+		visibility: hidden;
+		opacity: 0;
+		transform: scale( 1.1 );
+		transition: opacity 500ms globals.$banner-easing, transform 500ms globals.$banner-easing;
+	}
+
+	&-wrapper {
+		font-size: 16px;
+		font-family: fonts.$ui;
+		color: var( --main-color );
+
+		&--mini {
+			.wmde-banner-minimised {
+				display: none;
+			}
+		}
+
+		&--minimised {
+			.wmde-banner-mini {
+				display: none;
+			}
+		}
+
+		&--full-page {
+			&.wmde-banner-opened-from-mini {
+				.wmde-banner-mini {
+					animation: hide-mini 500ms;
+				}
+				.wmde-banner-minimised {
+					display: none;
+				}
+			}
+			&.wmde-banner-opened-from-minimised {
+				.wmde-banner-mini {
+					display: none;
+				}
+				.wmde-banner-minimised {
+					animation: hide-mini 500ms;
+				}
+			}
+			.wmde-banner-full {
+				visibility: visible;
+				opacity: 1;
+				transform: scale( 1 );
+			}
+		}
+
+		&--soft-closing {
+			.wmde-banner-minimised {
+				display: none;
+			}
+			.wmde-banner-mini {
+				display: none;
+			}
+		}
+	}
+
+	&--closed,
+	&--not-shown {
+		.wmde-banner-wrapper {
+			display: none;
+		}
+	}
+}
