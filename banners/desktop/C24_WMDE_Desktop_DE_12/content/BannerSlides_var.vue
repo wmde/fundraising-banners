@@ -28,7 +28,9 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
+			Falls Sie zögern, seien Sie versichert: Jede Spende hilft - ob nun 5&nbsp;€ oder 25&nbsp;€.
+			Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>

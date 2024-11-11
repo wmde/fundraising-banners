@@ -18,6 +18,7 @@
 				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
+				Falls Sie zögern, seien Sie versichert: Jede Spende hilft - ob nun 5&nbsp;€ oder 25&nbsp;€.
 				Vielen Dank!
 			</p>
 		</div>
