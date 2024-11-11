@@ -100,7 +100,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
-import ProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
