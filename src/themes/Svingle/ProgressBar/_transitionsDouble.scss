@@ -7,12 +7,6 @@
 		transition: width 3000ms globals.$banner-easing;
 		width: 0;
 		max-width: 100%;
-
-		> div {
-			opacity: 0;
-			transition: opacity 300ms globals.$banner-easing;
-			transition-delay: 3000ms;
-		}
 	}
 
 	&-double-progress-amount-difference,
@@ -21,7 +15,13 @@
 	}
 
 	&-double-progress-amount-fill {
-		min-width: 100px;
+		min-width: 80px;
+	}
+
+	&-double-progress .text-fade {
+		opacity: 0;
+		transition: opacity 300ms globals.$banner-easing;
+		transition-delay: 3000ms;
 	}
 
 	&--visible {
@@ -34,11 +34,8 @@
 			width: var( --wmde-banner-progress-bar-width );
 		}
 
-		.wmde-banner-double-progress-amount-fill,
-		.wmde-banner-double-progress-time-fill {
-			> div {
-				opacity: 1;
-			}
+		.wmde-banner-double-progress .text-fade {
+			opacity: 1;
 		}
 	}
 }

@@ -16,6 +16,7 @@ describe( 'ProgressBar.vue', () => {
 			},
 			currentDayName: '',
 			daysLeftSentence: 'daysLeftSentence',
+			daysPassedSentence: 'daysPassedSentence',
 			donorsNeededSentence: '',
 			goalDonationSum: '',
 			remainingDonationSum: '',

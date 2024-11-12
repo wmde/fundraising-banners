@@ -100,6 +100,10 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.daysLeftSentence ).toBe( 'only 52 days left' );
 	} );
 
+	it( 'Gets the days passed sentence', () => {
+		expect( dynamicCampaignText.daysPassedSentence ).toBe( '8 days' );
+	} );
+
 	it( 'Gets the donors needed sentence', () => {
 		expect( dynamicCampaignText.donorsNeededSentence ).toBe( '445000' );
 	} );

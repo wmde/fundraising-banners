@@ -10,6 +10,7 @@ export interface DynamicContent {
 	currentDate: string;
 	getCurrentDateAndTime: () => DateAndTime;
 	daysLeftSentence: string;
+	daysPassedSentence: string;
 	campaignDaySentence: string;
 	visitorsVsDonorsSentence: string;
 	donorsNeededSentence: string;
