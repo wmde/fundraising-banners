@@ -17,16 +17,15 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
-import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
 
 const formModel = useFormModel();
-const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
+const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -67,6 +66,12 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotEmitCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerAutoHideFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
@@ -122,16 +127,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Donation Form Transaction Fees', () => {
-		test.each( [
-			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
-			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
-			[ 'expectUpsellFormHasTransactionFee' ]
-		] )( '%s', async ( testName: string ) => {
-			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

@@ -3,27 +3,21 @@
 		<div>
 			<p>
 				<strong>
-					<InfoIcon fill="#990a00"/>
-					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still
-					can't be sold.&#8221; - An important update for readers in Germany.
+					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: The internet we were promised
+					- An important update for readers in Germany.
 				</strong>
 			</p>
 			<p>
-				Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-				message will be up for only a few hours.
-				We ask you to reflect on the number of times you visited
-				Wikipedia in the past year and if you're able to give €5 back.
-				<AnimatedText content="If everyone reading this gave just €5, we'd hit our goal in a few hours."/>
-			</p>
-			<p>
-				In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online
-				information, powering everything from your personal searches to emerging AI technologies. Your gift
-				strengthens the knowledge of today and tomorrow.
-			</p>
-			<p>
-				Just 1% of our readers donate, so if you have
-				given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate today. If
-				you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank you.
+				You deserve an explanation, so please don't skip this 1-minute read. It's {{ currentDayName }},
+				{{ currentDate }}, and this message will be up only briefly. Please reflect on how often you've visited
+				Wikipedia this year and if you're able to give €5 back.
+				<AnimatedText content="If everyone reading this gave €5, we'd hit our goal in a few hours."/>
+				The internet we were promised—a place of free, collaborative, and accessible knowledge—is under constant
+				threat. On Wikipedia, volunteers work together to create and verify the pages you rely on, supported by
+				tools that undo vandalism within minutes, ensuring the information you seek is trustworthy. Just 1% of
+				our readers donate, so if you have given in the past and Wikipedia still provides you with €5 worth of
+				knowledge, donate today. If you are undecided, remember any contribution helps, whether it's €5 or €25.
+				Thank you.
 			</p>
 		</div>
 	</div>
@@ -32,7 +26,6 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
