@@ -22,7 +22,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Your gift strengthens the knowledge of today and tomorrow. Just 1&nbsp;% of our readers donate, so if
+			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if
 			you have given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate
 			today. If you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank&nbsp;you.
 		</p>

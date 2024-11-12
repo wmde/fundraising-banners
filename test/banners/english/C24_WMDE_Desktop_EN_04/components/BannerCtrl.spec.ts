@@ -17,7 +17,7 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
@@ -66,6 +66,12 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotEmitCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerAutoHideFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

@@ -2,6 +2,7 @@
 @use 'radio-input';
 
 $height: 23px !default;
+$font-size: 0.9em !default;
 
 .wmde-banner {
 	@include SelectCustomAmount.layout;
@@ -57,7 +58,7 @@ $height: 23px !default;
 			color: var( --select-group-bubble-color );
 			background-color: transparent;
 			padding: 0 20px;
-			font-size: 0.9em;
+			font-size: $font-size;
 			font-weight: normal;
 			border: 0 none;
 			text-align: left;

@@ -111,6 +111,7 @@ import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
+import { useBannerHider } from '@src/components/composables/useBannerHider';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -130,6 +131,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
+useBannerHider( 800, emit );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
