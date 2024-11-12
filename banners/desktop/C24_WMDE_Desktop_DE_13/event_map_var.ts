@@ -15,6 +15,7 @@ import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSu
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { CoverTransactionFeesEvent } from '@src/tracking/events/CoverTransactionFeesEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -43,5 +44,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ BannerSubmitOnReturnEvent.EVENT_NAME,
 		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent =>
 			new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
-	]
+	],
+	[ CoverTransactionFeesEvent.EVENT_NAME, ( e: CoverTransactionFeesEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.userChoice + 'cover-transaction-fee', 1 ) ]
 ] );

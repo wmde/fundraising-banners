@@ -26,7 +26,8 @@ const messages: TranslationMessages = {
 	'upgrade-to-yearly-no': 'Nein, ich spende einmalig {{amount}}',
 	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
 	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
-	'custom-amount-placeholder': 'Wahlbetrag'
+	'custom-amount-placeholder': 'Wahlbetrag',
+	'cover-transaction-costs': 'Ich übernehme zusätzlich die Transaktionsgebühren von {{transactionCosts}}, damit 100% meiner Spende ankommt.'
 };
 
 export default messages;

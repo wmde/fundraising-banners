@@ -28,6 +28,7 @@
 	$font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Svingle/DonationForm/SubComponents/TransactionFees';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px

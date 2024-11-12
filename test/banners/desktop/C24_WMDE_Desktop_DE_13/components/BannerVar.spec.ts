@@ -14,6 +14,7 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -25,7 +26,7 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 
 const formModel = useFormModel();
-const translator = ( key: string ): string => key;
+const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
 let tracker: Tracker;
 
 describe( 'BannerVar.vue', () => {
@@ -137,6 +138,16 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Donation Form Transaction Fees', () => {
+		test.each( [
+			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
+			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
+			[ 'expectUpsellFormHasTransactionFee' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

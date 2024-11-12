@@ -35,7 +35,7 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationFormTransactionFees :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -84,7 +84,6 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -106,6 +105,8 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
+import MainDonationFormTransactionFees from '@src/components/DonationForm/Forms/MainDonationFormTransactionFees.vue';
+import { CoverTransactionFeesEvent } from '@src/tracking/events/CoverTransactionFeesEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -147,6 +148,11 @@ const onSubmit = (): void => {
 	const closeChoice = props.localCloseTracker.getItem();
 	if ( closeChoice !== '' ) {
 		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+
+	// Track transaction fee choice
+	if ( formModel.hasTransactionFee.value ) {
+		tracker.trackEvent( new CoverTransactionFeesEvent() );
 	}
 };
 
