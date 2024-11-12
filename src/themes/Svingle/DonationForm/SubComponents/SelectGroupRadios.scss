@@ -10,6 +10,14 @@ $font-size: 0.95em !default;
 			margin-top: 3px;
 			cursor: pointer;
 			height: 25px;
+
+			@include breakpoints.medium-up {
+				height: 29px;
+			}
+
+			@include breakpoints.large-up {
+				height: 25px;
+			}
 		}
 
 		&-label {

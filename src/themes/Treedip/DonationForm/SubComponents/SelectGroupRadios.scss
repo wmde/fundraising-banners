@@ -6,6 +6,14 @@
 			padding: 3px 10px 0 25px;
 			cursor: pointer;
 			height: 25px;
+
+			@include breakpoints.medium-up {
+				height: 29px;
+			}
+
+			@include breakpoints.large-up {
+				height: 25px;
+			}
 		}
 
 		&-label {
