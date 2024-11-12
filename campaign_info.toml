@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_12"
-description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_11, VAR uses different copy"
-campaign_tracking = "11-ba-241111"
+campaign = "C24_WMDE_Desktop_DE_13"
+description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_12, VAR uses transaction fees"
+campaign_tracking = "13-ba-241113"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
@@ -17,14 +17,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_12/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_12_ctrl"
-tracking = "org-11-241111-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_13/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_13_ctrl"
+tracking = "org-13-241113-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_12/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_12_var"
-tracking = "org-11-241111-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_13/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_13_var"
+tracking = "org-13-241113-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
