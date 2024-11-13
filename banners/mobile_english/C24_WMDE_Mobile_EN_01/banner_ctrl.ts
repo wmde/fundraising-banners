@@ -39,7 +39,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 7500 ),
+		delay: runtimeEnvironment.getBannerDelay( 0 ),
 		transitionDuration: 1000
 	},
 	bannerProps: {
