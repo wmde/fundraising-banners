@@ -5,6 +5,8 @@ import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { PageStub } from '@test/fixtures/PageStub';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'NotShownState', function () {
 	it( 'tracks not shown event on enter', function () {
@@ -12,8 +14,20 @@ describe( 'NotShownState', function () {
 		Object.defineProperty( window, 'innerHeight', { writable: true, configurable: true, value: 200 } );
 
 		const tracker = { trackEvent: vitest.fn() };
-		const trackingEvent = new NotShownEvent( { bannerHeight: 0, viewportHeight: 200, viewportWidth: 100, reason: BannerNotShownReasons.DisallowedNamespace } );
-		const state = new NotShownState( BannerNotShownReasons.DisallowedNamespace, new PageStub(), tracker, new ResizeHandlerStub(), 0 );
+		const trackingEvent = new NotShownEvent( {
+			bannerHeight: 0,
+			viewportHeight: 200,
+			viewportWidth: 100,
+			reason: BannerNotShownReasons.DisallowedNamespace
+		} );
+		const state = new NotShownState(
+			BannerNotShownReasons.DisallowedNamespace,
+			new PageStub(),
+			tracker,
+			new ResizeHandlerStub(),
+			0,
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -29,7 +43,14 @@ describe( 'NotShownState', function () {
 			viewportWidth: window.innerWidth,
 			viewportHeight: window.innerHeight
 		} );
-		const state = new NotShownState( BannerNotShownReasons.SizeIssue, new PageStub(), tracker, new ResizeHandlerStub(), 300 );
+		const state = new NotShownState(
+			BannerNotShownReasons.SizeIssue,
+			new PageStub(),
+			tracker,
+			new ResizeHandlerStub(),
+			300,
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -40,7 +61,14 @@ describe( 'NotShownState', function () {
 	it( 'marks banner as not shown on enter', function () {
 		const page = new PageStub();
 		page.preventImpressionCountForHiddenBanner = vitest.fn( () => page );
-		const state = new NotShownState( BannerNotShownReasons.SizeIssue, page, new TrackerStub(), new ResizeHandlerStub(), 0 );
+		const state = new NotShownState(
+			BannerNotShownReasons.SizeIssue,
+			page,
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			0,
+			new TimerStub()
+		);
 
 		state.enter();
 
@@ -52,12 +80,35 @@ describe( 'NotShownState', function () {
 		const resizeHandler = new ResizeHandlerStub();
 		page.removePageEventListeners = vitest.fn( () => page );
 		resizeHandler.onClose = vitest.fn();
-		const state = new NotShownState( BannerNotShownReasons.UserInteraction, page, new TrackerStub(), resizeHandler, 0 );
+		const state = new NotShownState(
+			BannerNotShownReasons.UserInteraction,
+			page,
+			new TrackerStub(),
+			resizeHandler,
+			0,
+			new TimerStub()
+		);
 
 		state.enter();
 
 		expect( page.removePageEventListeners ).toHaveBeenCalledOnce();
 		expect( resizeHandler.onClose ).toHaveBeenCalledOnce();
+	} );
+
+	it( 'clears the timers', function () {
+		const timer = new TimerSpy();
+		const state = new NotShownState(
+			BannerNotShownReasons.UserInteraction,
+			new PageStub(),
+			new TrackerStub(),
+			new ResizeHandlerStub(),
+			0,
+			timer
+		);
+
+		state.enter();
+
+		expect( timer.clearAllCalls ).toStrictEqual( 1 );
 	} );
 
 	it( 'throws error on exit', function () {
@@ -66,7 +117,8 @@ describe( 'NotShownState', function () {
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			0
+			0,
+			new TimerStub()
 		);
 
 		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );

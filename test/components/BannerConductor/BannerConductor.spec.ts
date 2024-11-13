@@ -15,6 +15,7 @@ import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {
 	const actual = await vi.importActual( '@src/components/BannerConductor/StateMachine/BannerStateMachine' );
@@ -63,7 +64,8 @@ describe( 'BannerConductor.vue', () => {
 			},
 			global: {
 				provide: {
-					tracker: new TrackerStub()
+					tracker: new TrackerStub(),
+					timer: new TimerStub()
 				}
 			}
 		} );

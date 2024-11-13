@@ -4,6 +4,7 @@ import { Page } from '@src/page/Page';
 import { Tracker } from '@src/tracking/Tracker';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import { Timer } from '@src/utils/Timer';
 
 export class ClosedState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Closed;
@@ -11,13 +12,21 @@ export class ClosedState extends BannerState {
 	private _page: Page;
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
+	private _timer: Timer;
 
-	public constructor( closeEvent: TrackingEvent<void>, page: Page, tracker: Tracker, resizeHandler: ResizeHandler ) {
+	public constructor(
+		closeEvent: TrackingEvent<void>,
+		page: Page,
+		tracker: Tracker,
+		resizeHandler: ResizeHandler,
+		timer: Timer
+	) {
 		super();
 		this._closeEvent = closeEvent;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
+		this._timer = timer;
 	}
 
 	public enter(): Promise<any> {
@@ -28,6 +37,7 @@ export class ClosedState extends BannerState {
 			.setCloseCookieIfNecessary( this._closeEvent )
 			.removePageEventListeners();
 		this._resizeHandler.onClose();
+		this._timer.clearAll();
 		return Promise.resolve();
 	}
 

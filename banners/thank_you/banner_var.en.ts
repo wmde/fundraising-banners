@@ -21,6 +21,7 @@ import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrack
 import { createThankYouSettings } from './settings';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { Locales } from '@src/domain/Locales';
+import { WindowTimer } from '@src/utils/Timer';
 
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -48,5 +49,6 @@ const app = createVueApp( BannerConductor, {
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
 app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.EN ) );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

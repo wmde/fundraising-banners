@@ -18,15 +18,12 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
-
-// Locale-specific imports
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-
-// Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { currentCampaignTimePercentage } from './currentCampaignTimePercentage';
+import { WindowTimer } from '@src/utils/Timer';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -72,5 +69,6 @@ app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmo
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '1' } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( date, page.getCampaignParameters() ) );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

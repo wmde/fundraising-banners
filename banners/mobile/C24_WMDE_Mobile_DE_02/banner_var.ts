@@ -17,14 +17,11 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
-
-// Locale-specific imports
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-
-// Channel specific form setup
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
+import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -65,5 +62,6 @@ app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '1' } ) );
 app.provide( 'tracker', tracker );
+app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/pad/C24_WMDE_iPad_DE_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -15,6 +15,8 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
+import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -23,16 +25,13 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 	} );
 
 	afterEach( () => {
 		wrapper.unmount();
-		vi.restoreAllMocks();
-		vi.useRealTimers();
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -52,7 +51,8 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub()
+					tracker: new TrackerStub(),
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
@@ -105,7 +105,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

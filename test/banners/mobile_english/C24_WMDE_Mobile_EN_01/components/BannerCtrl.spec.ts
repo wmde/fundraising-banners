@@ -18,6 +18,8 @@ import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { Timer } from '@src/utils/Timer';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -29,7 +31,6 @@ describe( 'BannerCtrl.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
@@ -41,7 +42,11 @@ describe( 'BannerCtrl.vue', () => {
 		};
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	afterEach( () => {
+		wrapper.unmount();
+	} );
+
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -63,19 +68,14 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker
+					tracker,
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
 
 		return wrapper;
 	};
-
-	afterEach( () => {
-		wrapper.unmount();
-		vi.restoreAllMocks();
-		vi.useRealTimers();
-	} );
 
 	describe( 'Content', () => {
 		test.skip.each( [
@@ -125,7 +125,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

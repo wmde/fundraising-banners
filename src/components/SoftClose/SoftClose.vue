@@ -45,8 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import { Timer } from '@src/utils/Timer';
 
 interface Props {
 	secondsTotal?: number;
@@ -58,33 +59,26 @@ const props = withDefaults( defineProps<Props>(), {
 	showCloseIcon: false
 } );
 
-const timer = ref<number>( 0 );
+const timer = inject<Timer>( 'timer' );
 const secondsRemaining = ref<number>( props.secondsTotal );
 
 const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose' ] );
 
 const onMaybeLaterClick = (): void => {
-	window.clearInterval( timer.value );
 	emit( 'maybeLater' );
 };
 
 const onCloseClick = (): void => {
-	window.clearInterval( timer.value );
 	emit( 'close' );
 };
 
 onMounted( () => {
-	timer.value = window.setInterval( () => {
+	timer.setInterval( () => {
 		secondsRemaining.value = secondsRemaining.value - 1;
 		if ( secondsRemaining.value <= 0 ) {
-			window.clearInterval( timer.value );
 			emit( 'timeOutClose' );
 		}
 	}, 1000 );
-} );
-
-onUnmounted( () => {
-	window.clearInterval( timer.value );
 } );
 
 </script>

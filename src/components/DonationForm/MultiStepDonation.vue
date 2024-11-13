@@ -27,6 +27,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { useFormAction } from '@src/components/composables/useFormAction';
 import { FormActions } from '@src/domain/FormActions';
+import { Timer } from '@src/utils/Timer';
 
 interface Props {
 	showErrorScrollLink?: boolean;
@@ -51,6 +52,7 @@ usedSlotNames.forEach( ( slotName: string, index: number ): void => {
 	slotNameIndices[ slotName ] = index;
 } );
 const tracker = inject<Tracker>( 'tracker' );
+const timer = inject<Timer>( 'timer' );
 const currentStepIndex = ref<number>( 0 );
 const defaultFormAction = useFormAction( inject<FormActions>( 'formActions' ) );
 const formAction = computed( (): string => {
@@ -70,7 +72,7 @@ const [ container, slider ] = useKeenSlider( {
 function onClick(): void {
 	// This is so the banner height is adjusted correctly if form errors change it when they appear
 	// We wait using setTimeout as nextTick() doesn't work here for some reason
-	setTimeout( () => {
+	timer.nextTick( () => {
 		emit( 'formInteraction' );
 	} );
 }
@@ -100,7 +102,7 @@ const onPrevious = async (): Promise<void> => {
 
 onMounted( () => {
 	// This fixes Keen Slider rendering a little early and not having the correct width
-	setTimeout( () => slider.value.update() );
+	timer.nextTick( () => slider.value.update() );
 } );
 
 </script>

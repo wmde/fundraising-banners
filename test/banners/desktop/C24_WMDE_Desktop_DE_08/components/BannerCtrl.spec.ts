@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_08/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -8,7 +8,8 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import {
-	bannerContentAnimatedTextFeatures, bannerContentAverageDonationFeatures,
+	bannerContentAnimatedTextFeatures,
+	bannerContentAverageDonationFeatures,
 	bannerContentDateAndTimeFeatures,
 	bannerContentDisplaySwitchFeatures,
 	bannerContentFeatures
@@ -23,6 +24,8 @@ import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 import { Tracker } from '@src/tracking/Tracker';
+import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -32,18 +35,12 @@ describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 		tracker = {
 			trackEvent: vi.fn()
 		};
 	} );
 
-	afterEach( () => {
-		vi.restoreAllMocks();
-		vi.useRealTimers();
-	} );
-
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -69,7 +66,8 @@ describe( 'BannerCtrl.vue', () => {
 					},
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker
+					tracker,
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
@@ -145,7 +143,7 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectDoesNotShowSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

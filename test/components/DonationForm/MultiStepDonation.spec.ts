@@ -6,6 +6,7 @@ import { StepController } from '@src/components/DonationForm/StepController';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { StepControllerSpy } from '@test/fixtures/StepControllerSpy';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, previous }">
 	<button
@@ -40,7 +41,8 @@ describe( 'MultistepDonation.vue', () => {
 						donateWithAddressAction: `https://example.com/withAddress`,
 						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
 					},
-					tracker
+					tracker,
+					timer: new TimerStub()
 				}
 			}
 		} );

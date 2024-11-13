@@ -2,6 +2,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { nextTick } from 'vue';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { Timer } from '@src/utils/Timer';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'KeenSlider', () => {
 
@@ -14,7 +17,7 @@ describe( 'KeenSlider', () => {
 		vi.useRealTimers();
 	} );
 
-	const getWrapper = (): VueWrapper<any> => {
+	const getWrapper = ( timer: Timer = null ): VueWrapper<any> => {
 		return mount( KeenSlider, {
 			props: {
 				withNavigation: true,
@@ -30,6 +33,11 @@ describe( 'KeenSlider', () => {
 						<div class="wmde-banner-slide-content keen-slider__slide-content" :class="{ 'wmde-banner-slide--current': currentSlide === 1 }">Second Slide</div>
 					</div>
 				</template>`
+			},
+			global: {
+				provide: {
+					timer: timer ?? new TimerStub()
+				}
 			}
 		} );
 	};
@@ -42,42 +50,43 @@ describe( 'KeenSlider', () => {
 		expect( firstSlideContent.attributes().class ).toContain( 'wmde-banner-slide--current' );
 	} );
 
-	// Keen seems to be slow in transitioning between slides so while the slider has started to move
-	// it takes a long time until the transition ends. That means this test is pretty brittle
-	it.todo( 'should advance the slides after the interval when the slider has started', async () => {
-		const wrapper = getWrapper();
+	it( 'should advance the slides after the interval when the slider has started', async () => {
+		const timerSpy = new TimerSpy();
+		timerSpy.setTimeout = ( fn: () => void ): number => {
+			fn();
+			return 0;
+		};
 
+		const wrapper = getWrapper( timerSpy );
 		await wrapper.setProps( { play: true } );
 
-		await vi.advanceTimersByTimeAsync( 199 );
-		expect( wrapper.find( '.wmde-banner-slide:nth-child(1) .wmde-banner-slide--current' ).exists() ).toBeTruthy();
-
-		await vi.advanceTimersByTimeAsync( 2 );
-		expect( wrapper.find( '.wmde-banner-slide:nth-child(2) .wmde-banner-slide--current' ).exists() ).toBeTruthy();
+		expect( timerSpy.setIntervalCalls.length ).toStrictEqual( 1 );
+		expect( timerSpy.setIntervalCalls[ 0 ] ).toStrictEqual( 200 );
 	} );
 
-	it.todo( 'should emit when the slide changes', async () => {
+	/**
+	 * We can't test this as it requires an internal function in Keen that waits for the slide animation
+	 * which seems to take a very long time in the test environment.
+	 */
+	it.skip( 'should emit when the slide changes', async () => {
 		const wrapper = getWrapper();
 		await wrapper.setProps( { play: true } );
 
 		await wrapper.find( '.wmde-banner-slider-navigation-next' ).trigger( 'click' );
-		await vi.advanceTimersByTimeAsync( 200 );
 
 		expect( wrapper.emitted( 'slide-changed' ).length ).toBe( 1 );
 		expect( wrapper.emitted( 'slide-changed' )[ 0 ][ 0 ] ).toBe( 1 );
 	} );
 
 	it( 'should start after a delay if one is passed', async () => {
-		const wrapper = getWrapper();
+		const timerSpy = new TimerSpy();
+		const wrapper = getWrapper( timerSpy );
 
 		await wrapper.setProps( { startDelay: 100 } );
 		await wrapper.setProps( { play: true } );
 
-		await vi.advanceTimersByTimeAsync( 99 );
-		expect( wrapper.find( '.wmde-banner-slider--pending' ).exists() ).toBeTruthy();
-
-		await vi.advanceTimersByTimeAsync( 2 );
-		expect( wrapper.find( '.wmde-banner-slider--playing' ).exists() ).toBeTruthy();
+		expect( timerSpy.setTimeoutCalls.length ).toStrictEqual( 1 );
+		expect( timerSpy.setTimeoutCalls[ 0 ] ).toStrictEqual( 100 );
 	} );
 
 	it( 'should show a pagination dot for each exising slide', async () => {

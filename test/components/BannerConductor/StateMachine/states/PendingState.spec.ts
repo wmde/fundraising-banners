@@ -1,6 +1,8 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import { PendingState } from '@src/components/BannerConductor/StateMachine/states/PendingState';
 import { Page } from '@src/page/Page';
+import { TimerStub } from '@test/fixtures/TimerStub';
+import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'PendingState', function () {
 	let page: Page;
@@ -10,7 +12,7 @@ describe( 'PendingState', function () {
 	} );
 
 	it( 'sets banner height on enter', async () => {
-		const pendingState = new PendingState( page, 60, 1 );
+		const pendingState = new PendingState( page, 60, 1, new TimerStub() );
 
 		await pendingState.enter();
 
@@ -19,26 +21,29 @@ describe( 'PendingState', function () {
 	} );
 
 	it( 'starts delay timeout on enter', async () => {
-		const setTimeoutSpy = vitest.spyOn( window, 'setTimeout' );
-		const pendingState = new PendingState( page, 60, 1 );
+		const timerSpy = new TimerSpy();
+
+		const pendingState = new PendingState( page, 60, 1, timerSpy );
 
 		await pendingState.enter();
 
-		expect( setTimeoutSpy ).toHaveBeenCalledOnce();
-		expect( setTimeoutSpy ).toHaveBeenCalledWith( expect.any( Function ), 1 );
+		expect( timerSpy.setTimeoutCalls.length ).toStrictEqual( 1 );
+		expect( timerSpy.setTimeoutCalls[ 0 ] ).toStrictEqual( 1 );
 	} );
 
 	it( 'stops delay timeout on exit', async () => {
-		const clearTimeoutSpy = vitest.spyOn( window, 'clearTimeout' );
-		const pendingState = new PendingState( page, 60, 1 );
+		const timerSpy = new TimerSpy();
+		const pendingState = new PendingState( page, 60, 1, timerSpy );
 
+		await pendingState.enter();
 		await pendingState.exit();
 
-		expect( clearTimeoutSpy ).toHaveBeenCalledOnce();
+		expect( timerSpy.clearTimeoutIds.length ).toStrictEqual( 1 );
+		expect( timerSpy.clearTimeoutIds[ 0 ] ).toStrictEqual( 0 );
 	} );
 
 	it( 'sets banner size on resize', () => {
-		const pendingState = new PendingState( page, 60, 1 );
+		const pendingState = new PendingState( page, 60, 1, new TimerStub() );
 
 		pendingState.onResize( 42 );
 

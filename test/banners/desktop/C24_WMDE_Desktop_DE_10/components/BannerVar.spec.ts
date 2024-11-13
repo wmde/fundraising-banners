@@ -7,12 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
-import {
-	bannerContentAnimatedTextFeatures,
-	bannerContentDateAndTimeFeatures,
-	bannerContentDisplaySwitchFeatures,
-	bannerContentFeatures
-} from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -23,6 +18,8 @@ import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
 import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 import { Tracker } from '@src/tracking/Tracker';
+import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -43,7 +40,7 @@ describe( 'BannerVar.vue', () => {
 		vi.useRealTimers();
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		return mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -69,7 +66,8 @@ describe( 'BannerVar.vue', () => {
 					},
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker
+					tracker,
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
@@ -144,7 +142,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsCloseIcon' ],
 			[ 'expectCloseIconEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
