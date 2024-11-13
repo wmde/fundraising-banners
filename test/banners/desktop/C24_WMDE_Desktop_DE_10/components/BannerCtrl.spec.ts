@@ -25,7 +25,7 @@ const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 let tracker: Tracker;
 
-describe( 'BannerVar.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
