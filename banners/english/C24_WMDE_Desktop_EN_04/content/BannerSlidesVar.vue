@@ -2,22 +2,23 @@
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p class="headline">
 			<strong>
-				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: The internet we were promised -
-				An important update for readers in Germany.
+				<InfoIcon fill="#990a00"/>
+				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: “The internet we were promised“
+				- An important update for readers in Germany.
 			</strong>
 		</p>
 		<p>
 			You deserve an explanation, so please don't skip this 1-minute read. It's {{ currentDayName }},
 			{{ currentDate }}, and this message will be up only briefly. Please reflect on how often you've visited
 			Wikipedia this year and if you're able to give €5 back.
+			<AnimatedText content="If everyone reading this gave €5, we'd hit our goal in a few hours."/>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<AnimatedText content="If everyone reading this gave €5, we'd hit our goal in a few hours."/> The internet
-			we were promised—a place of free, collaborative, and accessible knowledge—is under constant threat. On
-			Wikipedia, volunteers work together to create and verify the pages you rely on, supported by tools that
-			undo vandalism within minutes, ensuring the information you seek is trustworthy.
+			The internet we were promised—a place of free, collaborative, and accessible knowledge—is under constant
+			threat. On Wikipedia, volunteers work together to create and verify the pages you rely on, supported by
+			tools that undo vandalism within minutes, ensuring the information you seek is trustworthy.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
@@ -35,6 +36,7 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 interface Props {
 	currentSlide: number
