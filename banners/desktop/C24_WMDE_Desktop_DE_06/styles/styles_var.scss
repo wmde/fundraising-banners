@@ -24,7 +24,8 @@
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Svingle/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
-	$font-size: 14px
+	$wmde-banner-form-upgrade-title-font-size: 14px,
+	$wmde-banner-form-upgrade-notice-font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Svingle/Footer/SmallPrintFooter';
