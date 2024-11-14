@@ -31,7 +31,7 @@
 );
 @use '@src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
-	$padding: 0
+	$wmde-banner-sub-form-donation-padding: 0
 );
 @use '@src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyForm';
 @use '@src/themes/Treedip/DonationForm/Forms/CustomAmountForm';

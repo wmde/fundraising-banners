@@ -35,7 +35,7 @@
 @use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
 @use '@src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
-	$padding: 0
+	$wmde-banner-sub-form-donation-padding: 0
 );
 @use '@src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use '@src/themes/Treedip/Footer/FooterAlreadyDonated';

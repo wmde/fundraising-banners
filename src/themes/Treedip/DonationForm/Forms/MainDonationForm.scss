@@ -2,13 +2,13 @@
 @use '../../variables/fonts';
 @use 'src/components/DonationForm/Forms/MainDonationForm';
 
-$padding: 0 !default;
+$wmde-banner-sub-form-donation-padding: 0 !default;
 
 .wmde-banner {
 	@include MainDonationForm.layout;
 
 	&-sub-form-donation {
-		padding: $padding;
+		padding: $wmde-banner-sub-form-donation-padding;
 
 		.wmde-banner-form-field-group {
 			padding: 0 0 10px;
