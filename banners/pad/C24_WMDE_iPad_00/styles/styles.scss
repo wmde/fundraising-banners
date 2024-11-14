@@ -30,7 +30,7 @@
 	$height: 30px
 );
 @use '@src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountButton' with (
-	$height: 30px
+	$wmde-banner-select-custom-amount-input-container-height: 30px
 );
 @use '@src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
