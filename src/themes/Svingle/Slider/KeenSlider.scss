@@ -6,7 +6,7 @@ $font: fonts.$content !default;
 $font-size: 1.3em !default;
 $line-height: 1.5 !default;
 $slider-padding: 16px 0 !default;
-$margin-bottom: 15px !default;
+$wmde-banner-slider-container-margin-bottom: 15px !default;
 
 .wmde-banner {
 	@include KeenSlider.layout;
@@ -19,7 +19,7 @@ $margin-bottom: 15px !default;
 		background-color: var( --slider-background );
 		color: var( --slider-color );
 		border-radius: 9px;
-		margin-bottom: $margin-bottom;
+		margin-bottom: $wmde-banner-slider-container-margin-bottom;
 
 		@include breakpoints.small-up {
 			font-size: $font-size;

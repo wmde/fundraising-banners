@@ -32,7 +32,7 @@
 @use 'src/themes/Svingle/Footer/SelectionInput';
 @use 'src/themes/Svingle/Message/Message';
 @use 'src/themes/Svingle/Slider/KeenSlider' with (
-	$margin-bottom: 5px
+	$wmde-banner-slider-container-margin-bottom: 5px
 );
 
 /**
