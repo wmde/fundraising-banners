@@ -22,10 +22,10 @@
 @use 'src/themes/Svingle/DonationForm/MultiStepDonation';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectGroupRadios' with (
-	$font-size: 14px
+	$wmde-banner-select-group-label-font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/SubComponents/SelectCustomAmountRadio' with (
-	$font-size: 14px
+	$wmde-banner-select-custom-amount-input-font-size: 14px
 );
 @use 'src/themes/Svingle/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Svingle/DonationForm/Forms/MainDonationForm';

@@ -1,4 +1,4 @@
-$font-size: 0.95em !default;
+$wmde-banner-select-group-label-font-size: 0.95em !default;
 
 @use '../../variables/breakpoints';
 @use 'radio-input';
@@ -15,7 +15,7 @@ $font-size: 0.95em !default;
 		&-label {
 			color: var( --select-group-radio-label-color );
 			border: 0 none;
-			font-size: $font-size;
+			font-size: $wmde-banner-select-group-label-font-size;
 		}
 
 		&-input {
