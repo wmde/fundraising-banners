@@ -20,6 +20,8 @@ import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 import { minimisedBannerFeatures } from '@test/features/MinimisedBanner';
+import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -30,7 +32,6 @@ describe( 'BannerVar.vue', () => {
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
 		resetFormModel( formModel );
-		vi.useFakeTimers();
 
 		pageScroller = {
 			scrollIntoView: vi.fn(),
@@ -42,7 +43,11 @@ describe( 'BannerVar.vue', () => {
 		};
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null ): VueWrapper<any> => {
+	afterEach( () => {
+		wrapper.unmount();
+	} );
+
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
 		wrapper = mount( Banner, {
@@ -67,19 +72,14 @@ describe( 'BannerVar.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker
+					tracker,
+					timer: timer ?? new TimerStub()
 				}
 			}
 		} );
 
 		return wrapper;
 	};
-
-	afterEach( () => {
-		wrapper.unmount();
-		vi.restoreAllMocks();
-		vi.useRealTimers();
-	} );
 
 	describe( 'Content', () => {
 		test.each( [
@@ -129,7 +129,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
 		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper() );
+			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
