@@ -1,7 +1,7 @@
 import fg from 'fast-glob';
 import path from 'path';
-import * as readline from "node:readline";
-import * as fs from "node:fs";
+import * as readline from 'node:readline';
+import * as fs from 'node:fs';
 
 const mismatchedImports = [];
 
@@ -31,7 +31,7 @@ for await ( const entry of stream ) {
 	let lineNumber = 1;
 	for await ( const line of lineReader ) {
 		const match = line.match( importRegex );
-		if( match && !match[1].includes( expectedPath ) ) {
+		if ( match && !match[ 1 ].includes( expectedPath ) ) {
 			mismatchedImports.push( { entry, line, lineNumber } );
 		}
 		lineNumber++;
