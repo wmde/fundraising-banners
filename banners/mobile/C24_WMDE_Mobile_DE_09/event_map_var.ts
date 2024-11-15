@@ -11,6 +11,9 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { ReasonsToDonateShownEvent } from '@src/tracking/events/ReasonsToDonateShownEvent';
+import { ReasonsToDonateItemClickedEvent } from '@src/tracking/events/ReasonsToDonateItemClickedEvent';
+import { ReasonsToDonateCTAClickedEvent } from '@src/tracking/events/ReasonsToDonateCTAClickedEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -29,5 +32,11 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		}
 	} ],
 	[ BannerSubmitOnReturnEvent.EVENT_NAME,
-		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ]
+		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
+
+	[ ReasonsToDonateShownEvent.EVENT_NAME, ( e: ReasonsToDonateShownEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
+	[ ReasonsToDonateItemClickedEvent.EVENT_NAME, ( e: ReasonsToDonateItemClickedEvent ): WMDELegacyBannerEvent =>
+		new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
+	],
+	[ ReasonsToDonateCTAClickedEvent.EVENT_NAME, ( e: ReasonsToDonateCTAClickedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ]
 ] );

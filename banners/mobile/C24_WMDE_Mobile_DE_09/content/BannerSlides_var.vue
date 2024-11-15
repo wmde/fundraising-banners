@@ -3,6 +3,16 @@
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
 		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
 		<ProgressBar amount-to-show-on-right="TARGET"/>
+		<p class="wmde-banner-slide-reasons-to-donate-sentence">Falls Sie zögern,
+			<a
+				id="reasons-to-donate-link"
+				class="wmde-banner-reasons-to-donate-link t-reasons-to-donate-link"
+				@click.prevent="$emit( 'showReasonsToDonate' )"
+				href="#"
+			>
+				hier sind 10 gute Gründe
+			</a>
+			für eine Spende.</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">
@@ -32,6 +42,16 @@
 	<KeenSliderSlide :is-current="currentSlide === 4">
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
+			Falls Sie zögern,
+			<a
+				id="reasons-to-donate-link"
+				class="wmde-banner-reasons-to-donate-link t-reasons-to-donate-link"
+				@click.prevent="$emit( 'showReasonsToDonate' )"
+				href="#"
+			>
+				hier sind 10 gute Gründe
+			</a>
+			für eine Spende.
 			<strong> Vielen Dank!</strong>
 		</p>
 	</KeenSliderSlide>
@@ -52,6 +72,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+defineEmits( [ 'showReasonsToDonate' ] );
 
 const {
 	currentDayName,

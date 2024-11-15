@@ -9,8 +9,8 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
-@use './MiniBanner' with (
-	$height: 288px
+@use './MiniBanner_var' with (
+	$height: 306px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';
@@ -27,3 +27,5 @@
 );
 @use 'src/themes/Mikings/SoftClose/SoftClose';
 @use 'src/themes/Mikings/ProgressBar/ProgressBar';
+@use 'src/components/ReasonsToDonate/styles/swatches/skin_default' as reasons-default;
+@use 'src/components/ReasonsToDonate/styles/ReasonsToDonate';

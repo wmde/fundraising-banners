@@ -7,8 +7,4 @@ export class ReasonsToDonateCTAClickedEvent implements TrackingEvent<void> {
 	public readonly customData: void;
 	public readonly feature: TrackingFeatureName;
 	public readonly userChoice: string = '';
-
-	public constructor( feature: TrackingFeatureName ) {
-		this.feature = feature;
-	}
 }

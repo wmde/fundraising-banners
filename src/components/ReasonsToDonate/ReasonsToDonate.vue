@@ -14,7 +14,7 @@
 					class="wmde-banner-10-reasons-accordion-title"
 					tabindex="0"
 					:class="$translate( `reasons-${index}-class` )"
-					@click="$emit( 'accordionItemClicked', index.toString() )"
+					@click="$emit( 'accordionItemClicked', { itemNumber: index.toString() } )"
 				>
 					<span><span class="wmde-banner-10-reasons-accordion-title-index">{{ index }}.</span>{{ $translate( `reasons-${index}-title` ) }}</span>
 					<span class="wmde-banner-10-reasons-accordion-title-chevron"><ChevronDownIcon/></span>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import IconClose from '@src/components/UseOfFunds/Icons/IconClose.vue';
 import ChevronDownIcon from '@src/components/ReasonsToDonate/Icons/ChevronDownIcon.vue';
 
@@ -64,9 +64,5 @@ watch( () => props.visible, ( newVisible: boolean ) => {
 		reasonsDialogue.value.close();
 	}
 } );
-
-const onNativeClose = (): void => emit( 'hide' );
-onMounted( () => reasonsDialogue.value.addEventListener( 'close', onNativeClose ) );
-onUnmounted( () => reasonsDialogue.value.removeEventListener( 'close', onNativeClose ) );
 
 </script>
