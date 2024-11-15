@@ -54,6 +54,9 @@ $blue700: #2a4b8d;
 	--input-selection-color: #{$black};
 	--input-selection-selected-background: #{$red600};
 	--input-selection-selected-color: #{$white};
+	--input-checkbox-border: #{$grey200};
+	--input-checkbox-background-checked: #{$red600};
+	--input-checkbox-border-checked: #{$red600};
 
 	--animated-highlight-color: #{$white};
 	/* stylelint-disable */
