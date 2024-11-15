@@ -19,7 +19,6 @@ import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
