@@ -1,7 +1,7 @@
 @use '../../variables/breakpoints';
 @use 'radio-input';
 
-$height: 23px !default;
+$wmde-banner-select-group-option-label-height: 23px !default;
 
 $margin-left: -6px;
 $border-radius: 8px;
@@ -23,7 +23,7 @@ $check-size: 10px;
 				align-items: center;
 				padding: 0 10px 0 25px;
 				cursor: pointer;
-				height: $height;
+				height: $wmde-banner-select-group-option-label-height;
 				background: var( --select-group-bubble-background );
 				border: 1px solid var( --select-group-bubble-border );
 				border-radius: $border-radius;

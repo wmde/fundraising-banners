@@ -31,7 +31,7 @@
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubble';
 @use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupRadioBubbles' with (
-	$height: 34px,
+	$wmde-banner-select-group-option-label-height: 34px,
 	$font-size: 14px
 );
 @use 'src/themes/Treedip/DonationForm/BubbleForm/SelectCustomAmountRadioBubble' with (
