@@ -9,7 +9,7 @@
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (
-	$height: 267px
+	$wmde-banner-mini-height: 267px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';

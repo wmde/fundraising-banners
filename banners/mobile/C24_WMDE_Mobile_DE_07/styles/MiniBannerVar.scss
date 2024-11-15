@@ -1,6 +1,6 @@
 @use '@src/themes/Mikings/variables/globals';
 
-$height: 288px !default;
+$wmde-banner-mini-height: 288px !default;
 $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 
 .wmde-banner {
@@ -8,7 +8,7 @@ $transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
 	&-mini {
 		display: flex;
 		flex-direction: column;
-		min-height: $height;
+		min-height: $wmde-banner-mini-height;
 
 		&-inner {
 			flex: 1 0 auto;

@@ -1,12 +1,12 @@
 @use '@src/themes/Mikings/variables/globals';
 
-$height: 267px !default;
+$wmde-banner-mini-height: 267px !default;
 
 .wmde-banner {
 	&-mini {
 		display: flex;
 		flex-direction: column;
-		min-height: $height;
+		min-height: $wmde-banner-mini-height;
 		padding: 16px 0;
 		position: relative;
 		border: 2px solid var( --mini-border );

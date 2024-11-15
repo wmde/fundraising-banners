@@ -10,7 +10,7 @@
 @use 'src/themes/Mikings/defaults';
 @use './BannerVar';
 @use './MiniBannerVar' with (
-	$height: 336px
+	$wmde-banner-mini-height: 336px
 );
 @use './FullPageBanner';
 @use './MinimisedBanner';
