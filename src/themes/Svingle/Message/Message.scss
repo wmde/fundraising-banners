@@ -39,5 +39,21 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 			text-align: center;
 			padding-bottom: 15px;
 		}
+
+		button {
+			all: unset;
+		}
+
+		button,
+		a {
+			color: var( --message-link );
+			text-decoration: underline;
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				color: var( --message-link-hover );
+			}
+		}
 	}
 }

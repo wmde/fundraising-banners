@@ -28,24 +28,32 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Falls Sie zögern,
+			<button
+				class="wmde-banner-reasons-to-donate-link"
+				@click.prevent="$emit( 'showReasonsToDonate' )">
+				hier sind 10 gute Gründe
+			</button>
+			für eine Spende. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>
 
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 
 interface Props {
+	playLiveText: boolean;
 	currentSlide: number
 }
+defineEmits( [ 'showReasonsToDonate' ] );
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const {
 	currentDayName,
@@ -57,6 +65,13 @@ const {
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
+
+watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
+	if ( !shouldPlay ) {
+		stopTimer();
+	}
+} );
+
 onMounted( startTimer );
 onUnmounted( stopTimer );
 

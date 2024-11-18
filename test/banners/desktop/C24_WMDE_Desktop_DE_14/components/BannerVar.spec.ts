@@ -1,4 +1,4 @@
-import { beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, Mock, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_14/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -14,7 +14,6 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
-import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -26,18 +25,33 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import { useReasonsToDonateFeatures, useReasonsToDonateScrollFeatures } from '@test/features/ReasonsToDonate';
 
 const formModel = useFormModel();
 const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
+let pageScroller: PageScroller;
 let tracker: Tracker;
 
 describe( 'BannerVar.vue', () => {
+	let showCallback: Mock;
+	let closeCallback: Mock;
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		pageScroller = {
+			scrollIntoView: vi.fn(),
+			scrollToTop: vi.fn()
+		};
 		tracker = {
 			trackEvent: vi.fn()
 		};
+
+		// for the reasonsToDonate feature
+		showCallback = vi.fn();
+		closeCallback = vi.fn();
+		HTMLDialogElement.prototype.showModal = showCallback;
+		HTMLDialogElement.prototype.close = closeCallback;
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
@@ -46,6 +60,7 @@ describe( 'BannerVar.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
+				pageScroller,
 				remainingImpressions: 10,
 				localCloseTracker: {
 					getItem: () => '',
@@ -66,7 +81,7 @@ describe( 'BannerVar.vue', () => {
 					},
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker,
+					tracker: tracker,
 					timer: timer ?? new TimerStub()
 				}
 			}
@@ -138,16 +153,6 @@ describe( 'BannerVar.vue', () => {
 		} );
 	} );
 
-	describe( 'Donation Form Transaction Fees', () => {
-		test.each( [
-			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
-			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
-			[ 'expectUpsellFormHasTransactionFee' ]
-		] )( '%s', async ( testName: string ) => {
-			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
 	describe( 'Soft Close', () => {
 		test.each( [
 			[ 'expectShowsSoftClose' ],
@@ -187,4 +192,22 @@ describe( 'BannerVar.vue', () => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
+
+	describe( 'Reasons to Donate', () => {
+		test.each( [
+			[ 'expectContainsReasonsToDonateDialogue' ],
+			[ 'expectTracksReasonsToDonateShownEvent' ],
+			[ 'expectTracksReasonsToDonateCTAClickedEvent' ],
+			[ 'expectTracksReasonsToDonateItemClickedEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await useReasonsToDonateFeatures[ testName ]( getWrapper(), tracker );
+		} );
+
+		test.each( [
+			[ 'expectScrollsToFormWhenCallToActionIsClicked' ]
+		] )( '%s', async ( testName: string ) => {
+			await useReasonsToDonateScrollFeatures[ testName ]( getWrapper(), pageScroller );
+		} );
+	} );
+
 } );
