@@ -1,0 +1,212 @@
+@use './variables';
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+		transform: scale( 1.1 );
+		display: none;
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale( 1 );
+		display: block;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+		transform: scale( 1.1 );
+		display: block;
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale( 0 );
+		display: none;
+	}
+}
+
+.wmde-banner {
+	&-10-reasons {
+		border: 0;
+		padding: 20px;
+		max-width: 100%;
+		max-height: 100%;
+		height: fit-content;
+		box-sizing: border-box;
+		overflow: hidden;
+		animation: fade-out 500ms ease-in-out;
+		background: var( --background );
+		color: var( --color );
+		overflow-y: auto;
+
+		@include variables.s-up {
+			padding: 40px;
+		}
+
+		&[ open ] {
+			animation: fade-in 500ms ease-in-out;
+		}
+
+		&::backdrop {
+			background-color: rgb( 0 0 0 / 80% );
+		}
+
+		@include variables.s-up {
+			margin: auto;
+			max-height: calc( 100vh - 40px );
+			max-width: 1024px;
+		}
+
+		&-close {
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			top: 10px;
+			right: 16px;
+			z-index: 2;
+
+			button {
+				border: 0;
+				display: block;
+				height: 40px;
+				width: 40px;
+				padding: 4px;
+				border-radius: 50%;
+				background: var( --close-button-background );
+			}
+
+			&-link {
+				display: block;
+				background-color: transparent;
+				border: 0;
+				padding: 0;
+				cursor: pointer;
+				&:hover {
+					background-color: transparent;
+				}
+			}
+
+			&:hover .banner-modal-close-link {
+				opacity: 0.75;
+			}
+		}
+
+		h2 {
+			margin: 0 0 20px;
+			padding: 0 40px 0 0;
+			font-size: 18px;
+			font-weight: bold;
+			border: 0;
+
+			@include variables.s-up {
+				font-size: 24px;
+				margin: 0 0 40px;
+			}
+		}
+
+		&-accordion {
+			border: 1px solid var( --accordion-border );
+			border-top: 0;
+			margin: 0 0 20px;
+
+			@include variables.s-up {
+				margin: 0 0 40px;
+			}
+		}
+
+		&-accordion-title {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 12px 20px 12px 60px;
+			border-top: 1px solid var( --accordion-border );
+			list-style-type: none;
+			cursor: pointer;
+
+			&::-webkit-details-marker {
+				display: none;
+			}
+
+			&.reasons-giving-back {
+				color: var( --color-giving-back );
+			}
+
+			&.reasons-knowledge {
+				color: var( --color-knowledge );
+			}
+
+			&.reasons-technical {
+				color: var( --color-technical );
+			}
+
+			&-index {
+				display: inline-block;
+				text-align: right;
+				width: 24px;
+				margin-right: 20px;
+				margin-left: -44px;
+			}
+
+			&-chevron {
+				width: 26px;
+				flex: 0 0 26px;
+				margin-left: 5px;
+
+				svg {
+					position: relative;
+					top: 3px;
+				}
+			}
+		}
+
+		&-accordion-item[ open ] .wmde-banner-10-reasons-accordion-title-chevron svg {
+			transform: rotate( 180deg );
+		}
+
+		&-accordion-content {
+			font-size: 14px;
+			padding: 0 20px 14px 60px;
+		}
+
+		&-final-content {
+			font-size: 18px;
+			margin: 0 0 20px;
+
+			@include variables.s-up {
+				margin: 0 0 40px;
+			}
+		}
+
+		&-final-highlight {
+			background: var( --highlight-background );
+		}
+
+		&-cta {
+			text-align: center;
+
+			button {
+				display: inline-block;
+				background: var( --cta-background );
+				color: var( --cta-color );
+				border: 0;
+				border-radius: 5px;
+				height: 54px;
+				font-weight: bold;
+				padding: 0 20px;
+				margin: 0 auto;
+				cursor: pointer;
+				transition: background-color 500ms ease-in-out;
+
+				&:hover,
+				&:focus {
+					background: var( --cta-background-hover );
+				}
+			}
+		}
+	}
+}

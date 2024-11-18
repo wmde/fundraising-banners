@@ -1,0 +1,7 @@
+$breakpoint-s: 700px;
+
+@mixin s-up {
+	@media ( min-width: $breakpoint-s ) {
+		@content;
+	}
+}
