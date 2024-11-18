@@ -59,8 +59,7 @@ app.use( DynamicTextPlugin, {
 	date,
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
-	translator,
-	urgencyMessageDaysLeft: 45
+	translator
 } );
 
 const currencyFormatter = localeFactory.getCurrencyFormatter();
