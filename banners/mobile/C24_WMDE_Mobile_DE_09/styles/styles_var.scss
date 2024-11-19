@@ -21,6 +21,7 @@
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SelectCustomAmount';
 @use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Mikings/Message/Message';
 @use 'src/themes/Mikings/Slider/Slider' with (
 	$pagination-padding: 10px,
 	$pagination-height: 40px
