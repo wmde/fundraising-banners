@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
+import { TimerStub } from '@test/fixtures/TimerStub';
 
 describe( 'LargeFooter.vue', () => {
 	it( 'emits show use of funds event on use of funds link click', async () => {
@@ -8,6 +9,9 @@ describe( 'LargeFooter.vue', () => {
 			global: {
 				mocks: {
 					$translate: ( key: string ) => key
+				},
+				provide: {
+					timer: new TimerStub()
 				}
 			}
 		} );
@@ -22,6 +26,9 @@ describe( 'LargeFooter.vue', () => {
 			global: {
 				mocks: {
 					$translate: ( key: string ) => key
+				},
+				provide: {
+					timer: new TimerStub()
 				}
 			}
 		} );

@@ -23,7 +23,6 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _formatters: Formatters;
 	private _campaignParameters: CampaignParameters;
 	private _impressionCount: ImpressionCount;
-	private readonly _urgencyMessageDaysLeft: number;
 	private _cache: Map<string, string>;
 	private _campaignTimeRange: TimeRange;
 	private _campaignProjection: CampaignProjection;
@@ -36,15 +35,13 @@ export default class DynamicCampaignText implements DynamicContent {
 		translator: Translator,
 		formatters: Formatters,
 		campaignParameters: CampaignParameters,
-		impressionCount: ImpressionCount,
-		urgencyMessageDaysLeft: number = 10
+		impressionCount: ImpressionCount
 	) {
 		this._date = date;
 		this._translator = translator;
 		this._formatters = formatters;
 		this._campaignParameters = campaignParameters;
 		this._impressionCount = impressionCount;
-		this._urgencyMessageDaysLeft = urgencyMessageDaysLeft;
 		this._cache = new Map<string, string>();
 		this.getCurrentDateAndTime = this.getCurrentDateAndTime.bind( this );
 	}
@@ -73,7 +70,7 @@ export default class DynamicCampaignText implements DynamicContent {
 				this.getCampaignTimeRange(),
 				this._translator,
 				this._formatters.ordinal,
-				this._urgencyMessageDaysLeft
+				this._campaignParameters.urgencyMessageDaysLeft
 			).getText();
 		} );
 	}

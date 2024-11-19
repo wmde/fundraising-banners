@@ -39,6 +39,7 @@ const campaignParameters: CampaignParameters = {
 	millionImpressionsPerDay: 42,
 	numberOfMembers: 200,
 	startDate: '2023-11-03',
+	urgencyMessageDaysLeft: 10,
 	isLateProgress: false,
 	thankYouCampaign: {
 		progressBarPercentage: 80,

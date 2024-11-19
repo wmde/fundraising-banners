@@ -104,3 +104,11 @@ into the `MainDonationForm` messages.
 
 - `src/components/DonationForm/Forms/messages/MainDonationForm.*.ts`
 - `banners/*/*/messages.ts`
+
+## Remove deprecated urgencyMessageDaysLeft parameter from DynamicTextPlugin
+
+This was hardcoded in our banner entry points and is now moved into the campaign configuration. Deleting it from the plugin constructor items would cause backwards breaking changes so it is deprecated instead and should be removed in 2025.
+
+### Files to look at:
+
+- `src/DynamicTextPlugin.ts`

@@ -38,6 +38,7 @@ export interface CampaignParameters {
     endDate: string,
     numberOfMembers: number,
     isLateProgress: boolean,
+    urgencyMessageDaysLeft: number,
 
     thankYouCampaign: ThankYouCampaignParameters
 }
