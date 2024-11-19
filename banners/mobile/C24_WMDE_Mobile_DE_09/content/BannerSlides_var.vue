@@ -43,14 +43,9 @@
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			Falls Sie zögern,
-			<a
-				id="reasons-to-donate-link"
-				class="wmde-banner-reasons-to-donate-link t-reasons-to-donate-link"
-				@click.prevent="$emit( 'showReasonsToDonate' )"
-				href="#"
-			>
+			<button class="wmde-banner-reasons-to-donate-link" @click.prevent="$emit( 'showReasonsToDonate' )">
 				hier sind 10 gute Gründe
-			</a>
+			</button>
 			für eine Spende.
 			<strong> Vielen Dank!</strong>
 		</p>

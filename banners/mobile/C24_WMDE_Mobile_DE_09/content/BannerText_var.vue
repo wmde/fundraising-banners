@@ -13,14 +13,7 @@
 				weiter. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden
 				Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 				Falls Sie zögern,
-				<a
-					id="reasons-to-donate-link"
-					class="wmde-banner-reasons-to-donate-link t-reasons-to-donate-link"
-					@click.prevent="$emit( 'showReasonsToDonate' )"
-					href="#"
-				>
-					hier sind 10 gute Gründe
-				</a>
+				<button class="wmde-banner-reasons-to-donate-link" @click.prevent="$emit( 'showReasonsToDonate' )">hier sind 10 gute Gründe</button>
 				für eine Spende.
 				Vielen Dank!
 			</p>
