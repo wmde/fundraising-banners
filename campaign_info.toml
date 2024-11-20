@@ -139,9 +139,9 @@ tracking = "wpde-mob01-241028-var"
 [english]
 name = "English Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_EN_04"
-description = "Based on CTRL desktop EN 03"
-campaign_tracking = "en04-ba-241113"
+campaign = "C24_WMDE_Desktop_EN_05"
+description = "Based on CTRL desktop EN 04"
+campaign_tracking = "en05-ba-241125"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
@@ -149,14 +149,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_EN"
 
 [english.banners.ctrl]
-filename = "./banners/english/C24_WMDE_Desktop_EN_04/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_EN_04_ctrl"
-tracking = "org-en04-241113-ctrl"
+filename = "./banners/english/C24_WMDE_Desktop_EN_05/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_EN_05_ctrl"
+tracking = "org-en05-241125-ctrl"
 
 [english.banners.var]
-filename = "./banners/english/C24_WMDE_Desktop_EN_04/banner_var.ts"
-pagename = "B24_WMDE_Desktop_EN_04_var"
-tracking = "org-en04-241113-var"
+filename = "./banners/english/C24_WMDE_Desktop_EN_05/banner_var.ts"
+pagename = "B24_WMDE_Desktop_EN_05_var"
+tracking = "org-en05-241125-var"
 
 [english.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
