@@ -21,6 +21,7 @@ describe( 'PageWPDE', function () {
 			numberOfMembers: 0,
 			startDate: '2023-11-01',
 			isLateProgress: false,
+			urgencyMessageDaysLeft: 10,
 			thankYouCampaign: {
 				progressBarPercentage: 80,
 				numberOfDonors: 42
