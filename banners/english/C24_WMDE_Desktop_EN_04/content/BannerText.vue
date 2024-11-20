@@ -3,7 +3,7 @@
 		<div>
 			<p>
 				<strong>
-					<InfoIcon fill="#990a00"/>
+					<InfoIconStraight/>
 					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still
 					can't be sold.&#8221; - An important update for readers in Germany.
 				</strong>
@@ -32,9 +32,9 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

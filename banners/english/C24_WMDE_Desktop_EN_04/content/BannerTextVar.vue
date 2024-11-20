@@ -3,7 +3,7 @@
 		<div>
 			<p>
 				<strong>
-					<InfoIcon fill="#990a00"/>
+					<InfoIconStraight/>
 					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: “The internet we were
 					promised“ - An important update for readers in Germany.
 				</strong>
@@ -33,7 +33,7 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

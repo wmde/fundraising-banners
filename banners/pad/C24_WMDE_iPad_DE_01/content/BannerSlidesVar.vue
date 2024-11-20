@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			<InfoIcon/>
+			<InfoIconStraight/>
 			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in
 			Deutschland nutzen: Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht
 			weg! Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von
@@ -31,10 +31,10 @@
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 interface Props {
 	currentSlide: number

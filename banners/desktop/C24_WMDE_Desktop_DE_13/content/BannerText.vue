@@ -2,7 +2,7 @@
 	<div class="wmde-banner-message">
 		<div>
 			<div class="wmde-banner-message-title">
-				<InfoIcon fill="#990000" width="21.5" height="21.5" type="italic"/>
+				<InfoIconItalic class="wmde-banner-message-icon"/>
 				<strong>&nbsp;Wikipedia ist unverkäuflich</strong>
 			</div>
 			<div class="wmde-banner-message-date">
@@ -29,7 +29,7 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+import InfoIconItalic from '@src/components/Icons/InfoIconItalic.vue';
 
 const {
 	currentDayName,
