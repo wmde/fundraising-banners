@@ -52,8 +52,11 @@ $blue800: #20303f;
 	--input-selection-color: #{$grey100};
 	--input-selection-selected-background: #{$red600};
 	--input-selection-selected-color: #{$white};
-	--input-checkbox-border: #{$grey200};
-	--input-checkbox-checked-background: #{$blue700};
+
+	--input-checkbox-background: #{$white};
+	--input-checkbox-border: #{$grey500};
+	--input-checkbox-background-checked: #{$blue700};
+	--input-checkbox-border-checked: #{$white};
 
 	--animated-highlight-color: #{$white};
 	/* stylelint-disable */

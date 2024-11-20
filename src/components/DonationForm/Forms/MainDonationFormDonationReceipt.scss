@@ -1,0 +1,31 @@
+@mixin layout {
+	&-sub-form-donation {
+		.wmde-banner-form-field-group {
+			border: 0;
+			margin: 0;
+			display: block;
+
+			&-legend {
+				width: 100%;
+				position: relative;
+				padding: 0;
+			}
+		}
+	}
+
+	.wmde-banner-form-donation-receipt-checkbox {
+		display: inline-block;
+		cursor: pointer;
+		position: relative;
+		padding: 0 0 10px 24px;
+
+		input[ type='checkbox' ] {
+			display: block;
+			float: left;
+			height: 16px;
+			margin: 0 0 0 -24px;
+			transition: background 0.15s ease-out;
+			width: 16px;
+		}
+	}
+}
