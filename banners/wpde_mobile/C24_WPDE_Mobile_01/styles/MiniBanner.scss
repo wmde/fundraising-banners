@@ -7,7 +7,7 @@ $height: 267px !default;
 		display: flex;
 		flex-direction: column;
 		min-height: $height;
-		padding: 16px 0;
+		padding: 16px;
 		position: relative;
 		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
@@ -20,20 +20,21 @@ $height: 267px !default;
 			right: 16px;
 			text-align: center;
 			background: var( --mini-close-background );
-			padding: 10px;
 			z-index: 2;
 
 			&-button {
 				border: none;
 				margin-top: auto;
 				float: right;
-				height: 16px;
-				line-height: 16px;
-				width: 16px;
+				height: 36px;
+				width: 36px;
+				text-align: right;
 				background: var( --mini-close-background );
 				z-index: 2;
 
 				svg {
+					position: relative;
+					top: 1px;
 					height: 16px;
 					width: 16px;
 				}
@@ -101,6 +102,11 @@ $height: 267px !default;
 		&-button-group {
 			display: flex;
 			justify-content: center;
+			margin: 0 -8px;
+
+			@media ( min-width: 400px ) {
+				margin: 0 -16px;
+			}
 		}
 
 		&-button,
@@ -111,12 +117,13 @@ $height: 267px !default;
 			border-radius: 20px;
 			font-weight: bold;
 			color: var( --mini-button-color );
-			margin: 0 16px;
+			margin: 0 8px;
 			font-size: 14px;
 			white-space: nowrap;
 
-			@media ( min-width: 370px ) {
+			@media ( min-width: 400px ) {
 				font-size: 16px;
+				margin: 0 16px;
 			}
 		}
 
