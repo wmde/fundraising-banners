@@ -29,7 +29,7 @@
     "lint:ts": "vue-tsc --noEmit",
     "lint:css": "stylelint '**/*.{scss,vue}'",
     "lint:test-imports": "node test/find_mismatched_imports.mjs",
-    "ci": "npm-run-all lint test",
+    "ci": "npm-run-all lint test check-content-version",
     "check-content-version": "ts-node check-content-version.ts",
     "coverage": "vitest run --coverage",
     "update-content": "npm update fundraising-frontend-content"
