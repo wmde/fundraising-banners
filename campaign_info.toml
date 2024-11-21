@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_13"
-description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_12, VAR uses transaction fees"
-campaign_tracking = "13-ba-241113"
+campaign = "C24_WMDE_Desktop_DE_14"
+description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_13, VAR adds additional copy, displays the '10 good reasons' overlay when the link in the added copy is clicked"
+campaign_tracking = "14-ba-241119"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
@@ -17,14 +17,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_13/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_13_ctrl"
-tracking = "org-13-241113-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_14/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_14_ctrl"
+tracking = "org-14-241119-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_13/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_13_var"
-tracking = "org-13-241113-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_14/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_14_var"
+tracking = "org-14-241119-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
@@ -34,9 +34,9 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "C24_WMDE_Mobile_DE_08"
-description = "Based on CTRL of C24_WMDE_Mobile_DE_07, VAR has different copy."
-campaign_tracking = "mob-de-08-ba-241112"
+campaign = "C24_WMDE_Mobile_DE_09"
+description = "Based on VAR of C24_WMDE_Mobile_DE_08, VAR has 10 reasons pop-up."
+campaign_tracking = "mob-de-09-ba-241118"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
@@ -45,14 +45,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
-filename = "./banners/mobile/C24_WMDE_Mobile_DE_08/banner_ctrl.ts"
-pagename = "B24_WMDE_Mobile_DE_08_ctrl"
-tracking = "org-mob08-241112-ctrl"
+filename = "./banners/mobile/C24_WMDE_Mobile_DE_09/banner_ctrl.ts"
+pagename = "B24_WMDE_Mobile_DE_09_ctrl"
+tracking = "org-mob09-241118-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/C24_WMDE_Mobile_DE_08/banner_var.ts"
-pagename = "B24_WMDE_Mobile_DE_08_var"
-tracking = "org-mob08-241112-var"
+filename = "./banners/mobile/C24_WMDE_Mobile_DE_09/banner_var.ts"
+pagename = "B24_WMDE_Mobile_DE_09_var"
+tracking = "org-mob09-241118-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]

@@ -8,8 +8,7 @@ export class ReasonsToDonateItemClickedEvent implements TrackingEvent<void> {
 	public readonly feature: TrackingFeatureName;
 	public readonly userChoice: string;
 
-	public constructor( feature: TrackingFeatureName, userChoice: string ) {
-		this.feature = feature;
+	public constructor( userChoice: string ) {
 		this.userChoice = userChoice;
 	}
 }

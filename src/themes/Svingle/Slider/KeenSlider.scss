@@ -47,6 +47,22 @@ $margin-bottom: 15px !default;
 			p:last-child {
 				margin: 0;
 			}
+
+			button {
+				all: unset;
+			}
+
+			button,
+			a {
+				color: var( --message-link );
+				text-decoration: underline;
+				cursor: pointer;
+
+				&:hover,
+				&:focus {
+					color: var( --message-link-hover );
+				}
+			}
 		}
 
 		&-title {

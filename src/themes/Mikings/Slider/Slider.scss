@@ -30,6 +30,21 @@ $pagination-height: 60px !default;
 				margin: 13px 0 16px;
 				padding: 0;
 			}
+
+			button {
+				all: unset;
+			}
+
+			button,
+			a {
+				color: var( --content-link-color );
+				cursor: pointer;
+
+				&:hover,
+				&:focus {
+					color: var( --content-link-color-hover );
+				}
+			}
 		}
 	}
 

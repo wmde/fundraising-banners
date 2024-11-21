@@ -59,8 +59,8 @@ describe( 'ReasonsToDonate.vue', () => {
 		await wrapper.find( '.wmde-banner-10-reasons-accordion-item:nth-child(8) .wmde-banner-10-reasons-accordion-title' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'accordionItemClicked' ).length ).toStrictEqual( 2 );
-		expect( wrapper.emitted( 'accordionItemClicked' )[ 0 ][ 0 ] ).toStrictEqual( '1' );
-		expect( wrapper.emitted( 'accordionItemClicked' )[ 1 ][ 0 ] ).toStrictEqual( '8' );
+		expect( wrapper.emitted( 'accordionItemClicked' )[ 0 ][ 0 ] ).toStrictEqual( { itemNumber: '1' } );
+		expect( wrapper.emitted( 'accordionItemClicked' )[ 1 ][ 0 ] ).toStrictEqual( { itemNumber: '8' } );
 
 		await wrapper.find( '.wmde-banner-10-reasons-cta button' ).trigger( 'click' );
 		expect( wrapper.emitted( 'callToActionClicked' ).length ).toStrictEqual( 1 );
