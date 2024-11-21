@@ -55,6 +55,7 @@ $progress-bar-margin: 0 !default;
 			color: var( --progress-bar-fill-color );
 			text-align: right;
 			padding-right: 16px;
+			line-height: $progress-bar-height - 6px;
 		}
 
 		&--late-progress {
