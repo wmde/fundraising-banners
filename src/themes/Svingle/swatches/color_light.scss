@@ -1,3 +1,6 @@
+$yellow100: #ffee00;
+$yellow200: #ffef9d;
+
 $white: #ffffff;
 $black: #000000;
 
@@ -42,6 +45,9 @@ $blue700: #2a4b8d;
 	--message-background: #{$blue700};
 	--message-color: #{$white};
 	--message-border: #{$red600};
+
+	--message-link: #{$yellow100};
+	--message-link-hover: #{$yellow200};
 
 	--color-error: #{$red600};
 	--button-close-fill: #{$grey600};
