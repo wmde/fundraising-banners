@@ -10,21 +10,14 @@
 			</template>
 
 			<template #banner-text>
-				<BannerText
-					:play-live-text="contentState === ContentStates.Main"
-					@showReasonsToDonate="onShowReasonsToDonate"
-				/>
+				<BannerText/>
 			</template>
 
 			<template #banner-slides="{ play }: any">
 				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides
-							:currentSlide="currentSlide"
-							:play-live-text="contentState === ContentStates.Main"
-							@showReasonsToDonate="onShowReasonsToDonate"
-						/>
+						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
 
 				</KeenSlider>
@@ -79,13 +72,6 @@
 				<WMDEFundsForwardingDE/>
 			</template>
 		</FundsModal>
-
-		<ReasonsToDonate
-			:visible="isReasonsToDonateVisible"
-			@accordionItemClicked="onReasonsToDonateAccordionItemClicked"
-			@callToActionClicked="onReasonsToDonateCallToActionClicked"
-			@hide="onHideReasonsToDonate"
-		/>
 	</div>
 </template>
 
@@ -95,8 +81,8 @@ import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
@@ -120,11 +106,6 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import { ReasonsToDonateShownEvent } from '@src/tracking/events/ReasonsToDonateShownEvent';
-import ReasonsToDonate from '@src/components/ReasonsToDonate/ReasonsToDonate.vue';
-import { ReasonsToDonateItemClickedEvent } from '@src/tracking/events/ReasonsToDonateItemClickedEvent';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { ReasonsToDonateCTAClickedEvent } from '@src/tracking/events/ReasonsToDonateCTAClickedEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -139,19 +120,17 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	pageScroller: PageScroller;
 	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'reasonsToDonate' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 useBannerHider( 800, emit );
 
 const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
-const isReasonsToDonateVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -169,27 +148,6 @@ const onSubmit = (): void => {
 	if ( closeChoice !== '' ) {
 		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
 	}
-};
-
-const onShowReasonsToDonate = (): void => {
-	isReasonsToDonateVisible.value = true;
-	tracker.trackEvent( new ReasonsToDonateShownEvent() );
-};
-const onReasonsToDonateAccordionItemClicked = ( payload: { itemNumber: string } ): void => {
-	tracker.trackEvent( new ReasonsToDonateItemClickedEvent( payload.itemNumber ) );
-};
-
-const onHideReasonsToDonate = (): void => {
-	isReasonsToDonateVisible.value = false;
-};
-
-const onReasonsToDonateCallToActionClicked = (): void => {
-	tracker.trackEvent( new ReasonsToDonateCTAClickedEvent() );
-
-	contentState.value = ContentStates.Main;
-
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
-	isReasonsToDonateVisible.value = false;
 };
 
 function onCloseMain(): void {

@@ -37,7 +37,10 @@
 @use 'src/themes/Svingle/Footer/SelectionInput';
 @use 'src/themes/Svingle/Message/Message';
 @use 'src/themes/Svingle/SoftClose/SoftClose';
-@use 'src/themes/Svingle/Slider/KeenSlider';
+@use 'src/themes/Svingle/Slider/KeenSlider' with (
+	$slider-padding: 0,
+	$margin-bottom: 0
+);
 
 /**
  * Fallback banner with "Fijitiv" theme

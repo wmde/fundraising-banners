@@ -111,6 +111,30 @@ const expectShowsLiveDateAndTimeInSlideshow = async ( getWrapper: ( dynamicConte
 	expect( wrapper.find( '.wmde-banner-slider' ).text() ).toContain( 'Third Time' );
 };
 
+const expectShowsLiveDateAndTimeInTitle = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
+	const dynamicContent = newDynamicContent();
+	dynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
+		.mockReturnValueOnce( { currentDate: 'Third Date', currentTime: 'Third Time' } );
+
+	const timer = new TimerSpy();
+	const wrapper = getWrapper( dynamicContent, timer );
+
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Initial Date' );
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Initial Time' );
+
+	await timer.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Second Date' );
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Second Time' );
+
+	await timer.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Third Date' );
+	expect( wrapper.find( '.wmde-banner-message-header' ).text() ).toContain( 'Third Time' );
+};
+
 const expectShowsAverageDonationInMessage = async ( getWrapper: ( dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
 	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
 	const dynamicContent = newDynamicContent();
@@ -208,6 +232,7 @@ export const bannerContentAnimatedTextFeatures: Record<string, ( getWrapper: () 
 export const bannerContentDateAndTimeFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
 	expectShowsLiveDateAndTimeInMessage,
 	expectShowsLiveDateAndTimeInSlideshow,
+	expectShowsLiveDateAndTimeInTitle,
 	expectShowsLiveDateAndTimeInMiniBanner,
 	expectShowsLiveDateAndTimeInFullPageBanner
 };

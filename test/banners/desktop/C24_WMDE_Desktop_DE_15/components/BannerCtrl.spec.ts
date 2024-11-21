@@ -109,8 +109,7 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMessage' ],
-			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
+			[ 'expectShowsLiveDateAndTimeInTitle' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );

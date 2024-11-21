@@ -3,8 +3,11 @@ tart<template>
 		<slot name="close-button"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
-				<slot name="banner-text" v-if="onLargeScreen"/>
-				<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
+				<div class="wmde-banner-message-container">
+					<slot name="banner-title"/>
+					<slot name="banner-text" v-if="onLargeScreen"/>
+					<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
+				</div>
 				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-column-right">
