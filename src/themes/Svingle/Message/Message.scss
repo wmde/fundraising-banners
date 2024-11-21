@@ -35,6 +35,12 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 			font-weight: bold;
 		}
 
+		&-icon {
+			position: relative;
+			width: 20px;
+			height: 20px;
+		}
+
 		&-date {
 			text-align: center;
 			padding-bottom: 15px;

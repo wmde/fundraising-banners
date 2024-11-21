@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p class="headline">
-			<InfoIcon fill="#990a00"/>
+			<InfoIconStraight/>
 			<strong> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
@@ -37,9 +37,9 @@
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 interface Props {
 	currentSlide: number

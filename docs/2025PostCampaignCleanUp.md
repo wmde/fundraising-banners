@@ -105,6 +105,14 @@ into the `MainDonationForm` messages.
 - `src/components/DonationForm/Forms/messages/MainDonationForm.*.ts`
 - `banners/*/*/messages.ts`
 
+## Delete Info Icon
+
+The `InfoIcon.vue` class is not compatible with the swatches. In the "starting" banners (With the "test number" `_00`) of 2025, all remaining instances of the class should be replaced with `InfoIconStraight.vue` or `InfoIconItalic.vue` and the old component should be deleted.
+
+### Files to look at:
+
+- `src/components/Icons/InfoIcon.vue`
+
 ## Remove deprecated urgencyMessageDaysLeft parameter from DynamicTextPlugin
 
 This was hardcoded in our banner entry points and is now moved into the campaign configuration. Deleting it from the plugin constructor items would cause backwards breaking changes so it is deprecated instead and should be removed in 2025.

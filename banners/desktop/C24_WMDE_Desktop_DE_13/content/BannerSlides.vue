@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<div class="wmde-banner-message-title">
-			<InfoIcon fill="#990000" width="21.5" height="21.5" type="italic"/>
+			<InfoIconItalic class="wmde-banner-message-icon"/>
 			<strong>&nbsp;Wikipedia ist unverkäuflich</strong>
 		</div>
 		<div class="wmde-banner-message-date">
@@ -39,7 +39,7 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+import InfoIconItalic from '@src/components/Icons/InfoIconItalic.vue';
 
 interface Props {
 	currentSlide: number

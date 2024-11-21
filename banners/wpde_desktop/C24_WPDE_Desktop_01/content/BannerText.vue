@@ -2,7 +2,7 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-                <InfoIcon fill="#990a00"/> An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um
+                <InfoIconStraight/> An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um
 				{{ liveDateAndTime.currentTime }} sind Sie gefragt:
 			</p>
 			<p>
@@ -24,9 +24,9 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 const {
 	currentDayName,

@@ -2,7 +2,7 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				<InfoIcon fill="#990a00"/> <strong>Please don't ignore this 1-minute read</strong>
+				<InfoIconStraight/> <strong>Please don't ignore this 1-minute read</strong>
 			</p>
 			<p>
 				This {{ currentDayName }}, {{ liveDateAndTime.currentDate }} at {{ liveDateAndTime.currentTime }}, please
@@ -17,8 +17,8 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
 const {
 	currentDayName,

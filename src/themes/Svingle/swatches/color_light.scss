@@ -1,6 +1,3 @@
-$yellow100: #ffee00;
-$yellow200: #ffef9d;
-
 $white: #ffffff;
 $black: #000000;
 
@@ -22,6 +19,9 @@ $blue100: #dff1ff;
 $blue600: #4465a7;
 $blue650: #3366cc;
 $blue700: #2a4b8d;
+
+$yellow100: #ffee00;
+$yellow200: #ffef9d;
 
 @mixin swatch(
 	$slider: false,
@@ -45,6 +45,9 @@ $blue700: #2a4b8d;
 	--message-background: #{$blue700};
 	--message-color: #{$white};
 	--message-border: #{$red600};
+
+	--info-icon-background: #{$red600};
+	--info-icon-color: #{$white};
 
 	--message-link: #{$yellow100};
 	--message-link-hover: #{$yellow200};
