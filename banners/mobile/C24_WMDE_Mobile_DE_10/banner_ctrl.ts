@@ -32,6 +32,8 @@ const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 
+const currencyFormatter = localeFactory.getCurrencyFormatter();
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -42,7 +44,7 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
-		localCloseTracker: new LocalStorageCloseTracker()
+		localCloseTracker: new LocalStorageCloseTracker(),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -58,7 +60,6 @@ app.use( DynamicTextPlugin, {
 	translator,
 	urgencyMessageDaysLeft: 45
 } );
-const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );

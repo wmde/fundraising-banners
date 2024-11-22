@@ -29,16 +29,27 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :page-scroller="pageScroller" :submit-callback="onSubmit">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					@form-interaction="formInteraction"
+					:page-scroller="pageScroller"
+					:submit-callback="onSubmit"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationFormChangesAmountOptions
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+							:amounts-for-form-items="amountOptionsForForm"
+						>
 
 							<template #button>
 								<MainDonationFormButton/>
 							</template>
 
-						</MainDonationForm>
+						</MainDonationFormChangesAmountOptions>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -110,7 +121,7 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationFormChangesAmountOptions from '../MainDonationForm_changesAmountOptions.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
@@ -136,6 +147,10 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
+import { Translator } from '@src/Translator';
+import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -171,6 +186,14 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
+const localTranslator = inject<Translator>( 'translator' );
+const currencyFormatter = inject<Currency>( 'currencyFormatter' );
+
+const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFormatter.euroAmount.bind( currencyFormatter ) );
+const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 ).getItems().amounts;
+const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
+const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
+
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
@@ -203,11 +226,17 @@ const onSubmit = (): void => {
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
+
+	amountOptionsForForm.value = amountOptionsFive;
+
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
+
+	amountOptionsForForm.value = amountOptionsTen;
+
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );

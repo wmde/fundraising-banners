@@ -12,7 +12,6 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			Intervals.MONTHLY,
 			Intervals.YEARLY
 		)
-		.setAmounts( 10, 15, 25, 50, 100 )
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
 			PaymentMethods.DIRECT_DEBIT,
