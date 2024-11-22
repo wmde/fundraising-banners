@@ -35,7 +35,9 @@
 @use 'src/themes/Treedip/Footer/SelectionInput';
 @use 'src/themes/Treedip/Message/Message';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$slider-padding: 0
+);
 
 /**
  * Fallback banner with "Fijitiv" theme
