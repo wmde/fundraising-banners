@@ -35,7 +35,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 name = "Mobile"
 icon = "mobile"
 campaign = "C24_WMDE_Mobile_DE_10"
-description = ""
+description = " based on C24_WMDE_Mobile_DE_09, var has special amount handling"
 campaign_tracking = "mob-de-10-ba-241125"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva&minervanightmode=1"

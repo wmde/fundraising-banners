@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.scss';
+import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -16,8 +16,8 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import eventMappings from './event_map_var';
-import messages from './messages_var';
+import eventMappings from './event_map';
+import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';

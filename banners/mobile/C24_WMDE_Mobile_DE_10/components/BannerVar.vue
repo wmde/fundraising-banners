@@ -9,11 +9,7 @@
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides
-							:currentSlide="currentSlide"
-							:play-live-text="contentState === ContentStates.Mini"
-							@showReasonsToDonate="onShowReasonsToDonate"
-						/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -25,10 +21,7 @@
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
-				<BannerText
-					:play-live-text="contentState === ContentStates.FullPage"
-					@showReasonsToDonate="onShowReasonsToDonate"
-				/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #progress>
@@ -105,13 +98,6 @@
 				<WMDEFundsForwardingDE/>
 			</template>
 		</FundsModal>
-
-		<ReasonsToDonate
-			:visible="isReasonsToDonateVisible"
-			@accordionItemClicked="onReasonsToDonateAccordionItemClicked"
-			@callToActionClicked="onReasonsToDonateCallToActionClicked"
-			@hide="onHideReasonsToDonate"
-		/>
 	</div>
 </template>
 
@@ -126,8 +112,8 @@ import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsClo
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText_var.vue';
-import BannerSlides from '../content/BannerSlides_var.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
@@ -150,10 +136,6 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import ReasonsToDonate from '@src/components/ReasonsToDonate/ReasonsToDonate.vue';
-import { ReasonsToDonateCTAClickedEvent } from '@src/tracking/events/ReasonsToDonateCTAClickedEvent';
-import { ReasonsToDonateShownEvent } from '@src/tracking/events/ReasonsToDonateShownEvent';
-import { ReasonsToDonateItemClickedEvent } from '@src/tracking/events/ReasonsToDonateItemClickedEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -175,12 +157,11 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'reasonsToDonate' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
-const isReasonsToDonateVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
@@ -238,28 +219,6 @@ const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void =
 		'.wmde-banner-full-small-print .wmde-banner-footer-usage-link'
 	);
 	isFundsModalVisible.value = false;
-};
-
-const onShowReasonsToDonate = (): void => {
-	isReasonsToDonateVisible.value = true;
-	tracker.trackEvent( new ReasonsToDonateShownEvent() );
-};
-
-const onReasonsToDonateAccordionItemClicked = ( payload: { itemNumber: string } ): void => {
-	tracker.trackEvent( new ReasonsToDonateItemClickedEvent( payload.itemNumber ) );
-};
-
-const onReasonsToDonateCallToActionClicked = (): void => {
-	tracker.trackEvent( new ReasonsToDonateCTAClickedEvent() );
-
-	slideShowStopped.value = true;
-	contentState.value = ContentStates.FullPage;
-
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
-	isReasonsToDonateVisible.value = false;
-};
-const onHideReasonsToDonate = (): void => {
-	isReasonsToDonateVisible.value = false;
 };
 
 </script>

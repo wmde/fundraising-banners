@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, Mock, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_10/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -21,15 +21,12 @@ import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } f
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { useReasonsToDonateFeatures, useReasonsToDonateScrollFeatures } from '@test/features/ReasonsToDonate';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 describe( 'BannerVar.vue', () => {
-	let showCallback: Mock;
-	let closeCallback: Mock;
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -43,12 +40,6 @@ describe( 'BannerVar.vue', () => {
 		tracker = {
 			trackEvent: vi.fn()
 		};
-
-		// for the reasonsToDonate feature
-		showCallback = vi.fn();
-		closeCallback = vi.fn();
-		HTMLDialogElement.prototype.showModal = showCallback;
-		HTMLDialogElement.prototype.close = closeCallback;
 	} );
 
 	afterEach( () => {
@@ -80,7 +71,7 @@ describe( 'BannerVar.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: tracker,
+					tracker,
 					timer: timer ?? new TimerStub()
 				}
 			}
@@ -166,23 +157,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
-		} );
-	} );
-
-	describe( 'Reasons to Donate', () => {
-		test.each( [
-			[ 'expectContainsReasonsToDonateDialogue' ],
-			[ 'expectTracksReasonsToDonateShownEvent' ],
-			[ 'expectTracksReasonsToDonateCTAClickedEvent' ],
-			[ 'expectTracksReasonsToDonateItemClickedEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await useReasonsToDonateFeatures[ testName ]( getWrapper(), tracker );
-		} );
-
-		test.each( [
-			[ 'expectScrollsToFormWhenCallToActionIsClicked' ]
-		] )( '%s', async ( testName: string ) => {
-			await useReasonsToDonateScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );
 	} );
 
