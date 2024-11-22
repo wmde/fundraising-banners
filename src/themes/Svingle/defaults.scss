@@ -29,8 +29,22 @@ $animated-text-padding-offset: false !default;
 		transition: background-position 2s;
 	}
 
+	&-text-animated-highlight-text {
+		background-image: linear-gradient( 90deg, rgba( 0, 0, 0, 1 ) 0%, rgba( 0, 0, 0, 1 ) 50%, rgba( 255, 255, 255, 1 ) 50%, rgba( 255, 255, 255, 1 ) 100% );
+		background-clip: text;
+		color: transparent;
+		background-size: 201% 100%;
+		background-position: 100% 0;
+		transition: background-position 2s;
+	}
+
 	&--visible .wmde-banner-message .wmde-banner-text-animated-highlight,
 	&-slide--current .wmde-banner-text-animated-highlight {
+		background-position: 0 0;
+	}
+
+	&--visible .wmde-banner-message .wmde-banner-text-animated-highlight-text,
+	&-slide--current .wmde-banner-text-animated-highlight-text {
 		background-position: 0 0;
 	}
 }
