@@ -73,6 +73,10 @@
 		color: var( --select-group-option-color-checked );
 	}
 
+	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-euro-symbol {
+		color: var( --select-group-option-color-checked );
+	}
+
 	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-input-container {
 		border-color: var( --select-group-option-border-checked );
 		background: var( --select-group-option-background-checked );

@@ -64,7 +64,7 @@ const expectEmitsBannerSubmitOnReturnEvent = async ( wrapper: VueWrapper<any>, t
 	const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 	submitForm.element.submit = vi.fn();
 
-	await submitMainDonationForm( wrapper, Intervals.YEARLY, '5', PaymentMethods.PAYPAL );
+	await submitMainDonationForm( wrapper, Intervals.YEARLY, '10', PaymentMethods.PAYPAL );
 
 	expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
 };
@@ -78,7 +78,7 @@ const expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing =
 	const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 	submitForm.element.submit = vi.fn();
 
-	await submitMainDonationForm( wrapper, Intervals.YEARLY, '5', PaymentMethods.PAYPAL );
+	await submitMainDonationForm( wrapper, Intervals.YEARLY, '10', PaymentMethods.PAYPAL );
 
 	expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( '' ) );
 };

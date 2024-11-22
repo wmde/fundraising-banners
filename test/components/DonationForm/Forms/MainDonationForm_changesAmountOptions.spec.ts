@@ -8,18 +8,23 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL ],
 	intervals: [ Intervals.ONCE, Intervals.MONTHLY ],
+	amounts: [],
 	paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD ]
 };
 
 const amounts: FormItem[] = [
-	{ value: '1', label: '€1', className: 'amount-1' },
-	{ value: '5', label: '€5', className: 'amount-5' }
+	{ value: '1', label: '1 €', className: 'amount-1' },
+	{ value: '5', label: '5 €', className: 'amount-5' },
+	{ value: '10', label: '10 €', className: 'amount-10' },
+	{ value: '20', label: '20 €', className: 'amount-20' },
+	{ value: '25', label: '25 €', className: 'amount-25' }
 ];
 
 vi.mock( '@src/validation/DonationFormValidator', () => {
@@ -47,7 +52,7 @@ describe( 'MainDonationForm_changesAmountOptions.vue', () => {
 					$translate: translate
 				},
 				provide: {
-					currencyFormatter: new CurrencyEn(),
+					currencyFormatter: new CurrencyDe(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					formItems: formItems,
 					translator: { translate },
@@ -72,7 +77,7 @@ describe( 'MainDonationForm_changesAmountOptions.vue', () => {
 		await input.setValue( '3,14' );
 		await input.trigger( 'blur' );
 
-		expect( input.element.value ).toBe( '3.14' );
+		expect( input.element.value ).toBe( '3,14' );
 	} );
 
 	it( 'should not format custom amount to 0.00 when input field is blurred and is blank', async () => {
@@ -136,7 +141,7 @@ describe( 'MainDonationForm_changesAmountOptions.vue', () => {
 					$translate: translate
 				},
 				provide: {
-					currencyFormatter: new CurrencyEn(),
+					currencyFormatter: new CurrencyDe(),
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					formItems: formItems,
 					translator: { translate },
@@ -147,5 +152,13 @@ describe( 'MainDonationForm_changesAmountOptions.vue', () => {
 
 		expect( wrapper.find( '.custom-label-paypal' ).exists() ).toBeTruthy();
 		expect( wrapper.find( '.custom-label-credit-cards' ).exists() ).toBeTruthy();
+	} );
+
+	it( 'renders amount FormItems that got passed in as a property', () => {
+		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		const wrapper = getWrapper();
+
+		expect( wrapper.find( '.amount-1' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-5' ).exists() ).toBeTruthy();
 	} );
 } );

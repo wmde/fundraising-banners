@@ -17,7 +17,7 @@ export const expectMainDonationFormSubmits = async (
 	wrapper: VueWrapper<any>,
 	interval: FormItem,
 	payment: FormItem,
-	amount: string = '5'
+	amount: string = '10'
 ): Promise<any> => {
 	const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
 	submitForm.element.submit = vi.fn();
@@ -32,7 +32,7 @@ export const expectMainDonationFormGoesToPageOnSubmit = async (
 	page: number,
 	interval: FormItem,
 	payment: FormItem,
-	amount: string = '5'
+	amount: string = '10'
 ): Promise<any> => {
 	await submitMainDonationForm( wrapper, interval, amount, payment );
 

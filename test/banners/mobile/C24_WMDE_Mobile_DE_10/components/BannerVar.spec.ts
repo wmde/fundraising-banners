@@ -5,12 +5,12 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_changesAmountOptions';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -69,7 +69,7 @@ describe( 'BannerVar.vue', () => {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
-					currencyFormatter: new CurrencyEn(),
+					currencyFormatter: new CurrencyDe(),
 					formItems,
 					tracker,
 					timer: timer ?? new TimerStub()

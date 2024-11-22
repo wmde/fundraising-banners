@@ -44,7 +44,7 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
-		localCloseTracker: new LocalStorageCloseTracker(),
+		localCloseTracker: new LocalStorageCloseTracker()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -63,7 +63,7 @@ app.use( DynamicTextPlugin, {
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { afo: '1', ap: '0' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 

@@ -200,7 +200,7 @@ const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
 const { formAction } = useFormAction(
 	inject<FormActions>( 'formActions' ),
 	10,
-	{ smallAmount: 'xf=0', largeAmount: 'ap=1' }
+	{ smallAmount: 'xf=1', largeAmount: 'ap=1' }
 );
 
 watch( contentState, async () => {
