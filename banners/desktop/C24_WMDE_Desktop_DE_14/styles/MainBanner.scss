@@ -2,11 +2,6 @@ $banner-height: 357px !default;
 $form-width: 300px !default;
 
 .wmde-banner {
-
-	.previous {
-		--slider-chevron: var( --previous-button-fill );
-	}
-
 	&-main {
 		min-height: $banner-height;
 		display: flex;
