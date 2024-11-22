@@ -9,20 +9,20 @@ icon = "desktop"
 campaign = "C24_WMDE_Desktop_DE_14"
 description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_13, VAR adds additional copy, displays the '10 good reasons' overlay when the link in the added copy is clicked"
 campaign_tracking = "14-ba-241119"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_link = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_14/banner_ctrl.ts"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_14_minimised/banner_ctrl.ts"
 pagename = "B24_WMDE_Desktop_DE_14_ctrl"
 tracking = "org-14-241119-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_14/banner_var.ts"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_14_minimised/banner_var.ts"
 pagename = "B24_WMDE_Desktop_DE_14_var"
 tracking = "org-14-241119-var"
 
