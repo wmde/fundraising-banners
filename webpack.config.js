@@ -95,7 +95,8 @@ module.exports = ( env ) => Promise.all( [
 					changeOrigin: true
 				},
 				{
-					context: [ '/wiki/Main_Page' ],
+					context: [ '/enwiki' ],
+					pathRewrite: { '^/enwiki': '' },
 					target: 'https://en.wikipedia.org',
 					changeOrigin: true
 				},

@@ -9,9 +9,9 @@ icon = "desktop"
 campaign = "C24_WMDE_Desktop_DE_14"
 description = "Based on the CTRL banner of C24_WMDE_Desktop_DE_13, VAR adds additional copy, displays the '10 good reasons' overlay when the link in the added copy is clicked"
 campaign_tracking = "14-ba-241119"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_link = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
@@ -37,9 +37,9 @@ icon = "mobile"
 campaign = "C24_WMDE_Mobile_DE_09"
 description = "Based on VAR of C24_WMDE_Mobile_DE_08, VAR has 10 reasons pop-up."
 campaign_tracking = "mob-de-09-ba-241118"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
-preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
-preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
+preview_link = "/mobile/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva"
+preview_link_darkmode = "/mobile/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
+preview_url = 'https://de.m.wikipedia.org/wiki/Hamster?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
@@ -65,9 +65,9 @@ icon = "pad"
 campaign = "C24_WMDE_iPad_DE_01"
 description = "Based on C24_WMDE_iPad_00"
 campaign_tracking = "pad01-ba-241028"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_link = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
@@ -142,9 +142,9 @@ icon = "desktop"
 campaign = "C24_WMDE_Desktop_EN_04"
 description = "Based on CTRL desktop EN 03"
 campaign_tracking = "en04-ba-241113"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
-preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
+preview_link = "/enwiki/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/enwiki/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_url = 'https://en.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_EN"
 
@@ -170,9 +170,9 @@ icon = "mobile"
 campaign = "C24_WMDE_Mobile_EN_01"
 description = "Based on ctrl of C23_WMDE_Mobile_EN_02"
 campaign_tracking = "mob_en01-ba-241028"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
-preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva'
+preview_link = "/en-mobile/wiki/Hamster?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/en-mobile/wiki/Hamster?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
+preview_url = 'https://en.m.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode&useskin=minerva'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_EN"
 
