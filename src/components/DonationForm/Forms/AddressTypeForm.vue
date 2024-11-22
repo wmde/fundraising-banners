@@ -2,7 +2,7 @@
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-address-type">
 		<div class="wmde-banner-form-address-type-back">
 			<a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
-				<ChevronLeftIcon/>
+				<FormPreviousIcon/>
 			</a>
 		</div>
 
@@ -44,7 +44,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { computed, inject } from 'vue';
@@ -56,6 +55,7 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import { Translator } from '@src/Translator';
 import { Tracker } from '@src/tracking/Tracker';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 
 interface Props {
 	isCurrent: boolean

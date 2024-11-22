@@ -3,7 +3,7 @@
         <div class="wmde-banner-form-upgrade-title">
             <a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
 				<slot name="back">
-					<ChevronLeftIcon/>
+					<FormPreviousIcon/>
 				</slot>
             </a>
             {{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}
@@ -50,7 +50,7 @@ import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 
 interface Props {
 	isCurrent: boolean;

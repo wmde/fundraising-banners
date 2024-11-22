@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
 		<a tabIndex="-1" href="#" class="wmde-banner-form-upgrade-back" @click.prevent="onPrevious">
-			<ChevronLeftIcon/>
+			<FormPreviousIcon/>
 		</a>
 		<div class="wmde-banner-form-upgrade-notice">
 			<p><strong>{{ $translate( 'upgrade-to-yearly-header', { amount: secondPageAmount } ) }}</strong></p>
@@ -92,12 +92,12 @@ export default {
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 
 interface Props {
 	isCurrent: boolean

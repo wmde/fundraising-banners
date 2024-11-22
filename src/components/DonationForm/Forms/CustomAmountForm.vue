@@ -4,7 +4,7 @@
 		<div class="wmde-banner-form-new-custom-amount-title">
 			<a tabIndex="-1" href="#" class="previous"
 					@click.prevent="onPrevious">
-				<ChevronLeftIcon/>
+				<FormPreviousIcon/>
 			</a>
 		</div>
 
@@ -63,7 +63,6 @@ import { computed, inject, ref } from 'vue';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
@@ -71,6 +70,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
+import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 
 interface Props {
 	isCurrent: boolean
