@@ -1,0 +1,61 @@
+$banner-height: 357px !default;
+$form-width: 300px !default;
+
+.wmde-banner {
+
+	.previous {
+		--slider-chevron: var( --previous-button-fill );
+	}
+
+	&-main {
+		min-height: $banner-height;
+		display: flex;
+		flex-direction: column;
+		padding: 12px 24px 0;
+	}
+
+	&-content {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+	}
+
+	.wmde-banner-message {
+		height: auto;
+	}
+
+	&-message-container {
+		display: flex;
+		flex: 1 1 auto;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 11px;
+		color: var( --message-color );
+		background-color: var( --message-background );
+		border: none;
+		border-radius: 9px;
+		margin-bottom: 15px;
+	}
+
+	&-column-left {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		margin-bottom: 0;
+		overflow-y: hidden;
+		margin-right: 30px;
+		padding: 0;
+		border: none;
+	}
+
+	&-column-right {
+		order: 2;
+		flex: 0 0 $form-width;
+		display: flex;
+		flex-direction: column;
+		width: $form-width;
+		padding: 10px 0 0;
+	}
+}
