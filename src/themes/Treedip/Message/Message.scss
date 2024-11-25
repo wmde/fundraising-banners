@@ -3,6 +3,7 @@
 
 $font: fonts.$content !default;
 $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
+$slider-main-headline-font-size: 18px !default;
 
 .wmde-banner {
 	&-message {
@@ -45,9 +46,9 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 			max-height: 62px;
 			margin: 0 0 4px;
 			padding: 0;
-			font-size: 18px;
+			font-size: $slider-main-headline-font-size;
 			font-weight: 800;
-			line-height: 18px;
+			line-height: ( $slider-main-headline-font-size ) - 1;
 
 			@include breakpoints.small-up {
 				font-size: 25px;
