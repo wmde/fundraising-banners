@@ -71,3 +71,14 @@ $font-size: 0.9em !default;
 		}
 	}
 }
+
+html[ lang='en' ] .wmde-banner {
+	.wmde-banner-select-custom-amount-euro-symbol {
+		right: auto;
+		left: 20px;
+	}
+
+	.wmde-banner-select-custom-amount-input {
+		padding: 0 10px 0 30px;
+	}
+}

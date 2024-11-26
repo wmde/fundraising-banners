@@ -39,6 +39,10 @@
 									<MastercardLogo/>
 								</span>
 							</template>
+
+							<template #button>
+								<MainDonationFormPaymentsAndReceiptButton/>
+							</template>
 						</MainDonationFormAddressType>
 					</template>
 
@@ -108,6 +112,7 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import MainDonationFormAddressType from '@src/components/DonationForm/Forms/MainDonationFormDonationReceipt.vue';
+import MainDonationFormPaymentsAndReceiptButton from '@src/components/DonationForm/Forms/MainDonationFormPaymentsAndReceiptButton.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

@@ -43,8 +43,9 @@
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationFormDonationReceipt' with (
 	$padding: 14px 0 0
 );
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
-@use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
+@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
 @use 'src/themes/Treedip/Footer/FooterAlreadyDonated' with (
 	$right-column-width: 300px
 );

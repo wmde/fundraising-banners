@@ -88,6 +88,8 @@ $breakpoint: 800px;
 			width: 16px;
 			top: 8px;
 			right: 8px;
+			margin: 0;
+			padding: 0;
 
 			@media ( min-width: $breakpoint ) {
 				height: 30px;
