@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_15"
-description = "Based on the CTRL banner of test 14, VAR uses EN banner theme"
-campaign_tracking = "15-ba-241122"
+campaign = "C24_WMDE_Desktop_DE_16"
+description = "Based on the VAR banner of test 15, VAR uses different copy"
+campaign_tracking = "16-ba-241125"
 preview_link = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
@@ -17,14 +17,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_15/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_15_ctrl"
-tracking = "org-15-241122-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_16/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_16_ctrl"
+tracking = "org-16-241125-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_15/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_15_var"
-tracking = "org-15-241122-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_16/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_16_var"
+tracking = "org-16-241125-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]

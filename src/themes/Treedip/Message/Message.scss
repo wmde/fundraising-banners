@@ -3,6 +3,11 @@
 
 $font: fonts.$content !default;
 $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
+$slider-main-headline-font-size: 18px !default;
+$message-header-padding-bottom: 10px !default;
+$message-header-small-up-padding-bottom: 15px !default;
+$message-header-padding-top: 0 !default;
+$message-header-small-up-padding-top: 0 !default;
 
 .wmde-banner {
 	&-message {
@@ -31,10 +36,12 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 	&-message-header {
 		font-family: $font;
 		text-align: center;
-		padding-bottom: 10px;
+		padding-bottom: $message-header-padding-bottom;
+		padding-top: $message-header-padding-top;
 
 		@include breakpoints.small-up {
-			padding-bottom: 15px;
+			padding-bottom: $message-header-small-up-padding-bottom;
+			padding-top: $message-header-small-up-padding-top;
 		}
 
 		h2 {
@@ -45,9 +52,9 @@ $font-sizes: ( breakpoints.$extra-small: 18px ) !default;
 			max-height: 62px;
 			margin: 0 0 4px;
 			padding: 0;
-			font-size: 18px;
+			font-size: $slider-main-headline-font-size;
 			font-weight: 800;
-			line-height: 18px;
+			line-height: ( $slider-main-headline-font-size ) - 1;
 
 			@include breakpoints.small-up {
 				font-size: 25px;
