@@ -19,7 +19,7 @@
 		width: 50%;
 
 		&-radio {
-			@include radio-input.styles;
+			@include radio-input.styles( $left:0, $size: 18px );
 		}
 
 		&.value-entered,
@@ -56,7 +56,7 @@
 			background-color: transparent;
 			padding: 0 1em;
 			height: 25px;
-			font-size: 0.9em;
+			font-size: 14px;
 			font-weight: bold;
 			border: 0 none;
 			text-align: left;

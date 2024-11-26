@@ -1,9 +1,11 @@
 @use '../../variables/breakpoints';
+@use 'radio-input';
 
 .wmde-banner {
 	&-select-group {
 		&-option label {
-			padding: 3px 10px 0 25px;
+			padding: 0 10px 0 25px;
+			margin-top: 3px;
 			cursor: pointer;
 			height: 25px;
 		}
@@ -11,34 +13,11 @@
 		&-label {
 			color: var( --select-group-radio-label-color );
 			border: 0 none;
-			font-size: 0.95em;
-
-			/* This creates the "radio button" shape */
-			&::before {
-				height: 16px;
-				width: 16px;
-				margin-top: -6px;
-				background: var( --select-group-radio-label-background );
-				border-radius: 50%;
-				border: 1px solid var( --select-group-radio-label-border );
-			}
+			font-size: 14px;
 		}
 
 		&-input {
-			display: none;
-
-			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
-			&:checked + .wmde-banner-select-group-label {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
-			}
-
-			/* This creates the "selected radio button" shape */
-			&:checked + .wmde-banner-select-group-label::before {
-				border: 6px solid var( --select-group-radio-border-checked );
-				box-shadow: none;
-			}
+			@include radio-input.styles( $left:0, $size: 18px );
 		}
 	}
 }
