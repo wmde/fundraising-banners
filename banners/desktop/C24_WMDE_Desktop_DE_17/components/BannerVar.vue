@@ -6,7 +6,13 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
+				<div class="wmde-banner-minimised-button-group">
+					<button class="wmde-banner-minimised-minimise" @click.prevent="onMinimiseBanner">Verkleinern <ChevronDownIcon/></button>
+					<ButtonCloseWithText
+						@close="() => onCloseMain( 'MainBanner', CloseChoices.Close )"
+						buttonText="Schließen"
+					/>
+				</div>
 			</template>
 
 			<template #banner-title>
@@ -58,6 +64,25 @@
 
 		</MainBanner>
 
+		<MinimisedBanner
+			v-if="contentState === ContentStates.Minimised"
+			@maximise="() => onMaximiseBanner( 'maximise' )"
+			@maximise-cta="() => onMaximiseBanner( 'cta' )"
+		>
+			<template #close-button>
+				<ButtonCloseWithText
+					@close="() => onCloseMain( 'MinimisedBanner', CloseChoices.Close )"
+					buttonText="Schließen"
+				/>
+			</template>
+			<template #footer>
+				<FooterAlreadyDonated
+					@showFundsModal="isFundsModalVisible = true"
+					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+				/>
+			</template>
+		</MinimisedBanner>
+
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			:show-close-icon="true"
@@ -65,7 +90,11 @@
 			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
-		/>
+		>
+			<template #close-button>
+				<ButtonClose/>
+			</template>
+		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -83,7 +112,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import MainBanner from './MainBanner.vue';
+import MainBanner from './MainBanner_var.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
@@ -101,6 +130,7 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import ButtonCloseWithText from '@src/components/ButtonCloseWithText/ButtonCloseWithText.vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
@@ -111,9 +141,14 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import ChevronDownIcon from '@src/components/ReasonsToDonate/Icons/ChevronDownIcon.vue';
+import MinimisedBanner from '@banners/desktop/C24_WMDE_Desktop_DE_17/components/MinimisedBanner.vue';
+import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
+import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	Minimised = 'wmde-banner-wrapper--minimised',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
@@ -155,16 +190,25 @@ const onSubmit = (): void => {
 	}
 };
 
-function onCloseMain(): void {
+function onCloseMain( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	if ( props.remainingImpressions > 0 ) {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
+		onClose( feature, userChoice );
 	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onMinimiseBanner(): void {
+	contentState.value = ContentStates.Minimised;
+	tracker.trackEvent( new BannerMinimisedEvent() );
+}
+function onMaximiseBanner( userChoice: string ): void {
+	contentState.value = ContentStates.Main;
+	tracker.trackEvent( new BannerMaximisedEvent( userChoice ) );
 }
 
 </script>

@@ -6,17 +6,19 @@
 	$fallback-banner: true,
 	$progress-bar: true,
 	$soft-close: true,
+	$minimised-banner: true
 );
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'Banner';
 @use 'src/themes/UseOfFunds/UseOfFunds';
-@use 'MainBanner' with (
+@use 'MainBanner_var' with (
 	$banner-height: 357px,
 	$form-width: 300px
 );
+@use 'MinimisedBanner';
 @use 'src/themes/Treedip/defaults';
-@use 'src/themes/Treedip/ButtonClose/ButtonClose';
+@use 'src/themes/Treedip/ButtonCloseWithText/ButtonCloseWithText';
 @use 'src/themes/Treedip/ProgressBar/ProgressBar' with (
 	$progress-bar-margin: 0 15px
 );

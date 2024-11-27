@@ -1,0 +1,46 @@
+@use 'src/components/ButtonCloseWithText/ButtonCloseWithText';
+
+$padding: 0 !default;
+$margin: 0 !default;
+$width: 100px !default;
+$height: 30px !default;
+
+.wmde-banner {
+	@include ButtonCloseWithText.layout;
+
+	&-close {
+		padding: $padding;
+		margin: $margin;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: $width;
+		height: $height;
+		border: 0;
+		background: none;
+
+		&-button-text {
+			font-weight: bold;
+			font-size: 14px;
+			color: var( --minimised-close-button-color );
+			margin-right: 6px;
+		}
+
+		svg {
+			height: 20px;
+			width: 20px;
+		}
+
+		path {
+			transition: fill 500ms;
+		}
+
+		&:hover,
+		&:focus {
+			cursor: pointer;
+			path {
+				fill: var( --button-close-fill );
+			}
+		}
+	}
+}

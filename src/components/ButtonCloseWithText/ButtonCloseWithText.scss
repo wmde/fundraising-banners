@@ -1,0 +1,14 @@
+@mixin layout( $top: 5px, $right: 5px ) {
+	&-close {
+		position: absolute;
+		right: $right;
+		top: $top;
+		width: 100px;
+		height: 32px;
+		z-index: 2;
+	}
+
+	&-close-link {
+		text-decoration: none;
+	}
+}
