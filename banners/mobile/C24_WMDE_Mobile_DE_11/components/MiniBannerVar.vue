@@ -1,21 +1,20 @@
 <template>
 	<div class="wmde-banner-mini">
-		<div class="wmde-banner-mini-close">
-			<button class="wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
+		<div class="wmde-banner-mini-info">
+			<button class="wmde-banner-mini-close t-close-main-banner" @click.prevent="$emit( 'close' )">
 				<CloseIconMobile/>
 			</button>
-		</div>
 
-		<header class="wmde-banner-mini-headline">
-			<div class="wmde-banner-mini-headline-background">
-				<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
+			<header class="wmde-banner-mini-headline">
+				<div class="wmde-banner-mini-headline-background">
+					<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
+				</div>
+			</header>
+
+			<div class="wmde-banner-mini-slideshow">
+				<slot name="banner-slides"/>
 			</div>
-		</header>
-
-		<div class="wmde-banner-mini-slideshow">
-			<slot name="banner-slides"/>
 		</div>
-
 		<div class="wmde-banner-mini-button-group">
 			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
 				Jetzt 10 &euro; spenden

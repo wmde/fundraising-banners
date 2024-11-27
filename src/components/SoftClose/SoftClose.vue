@@ -37,8 +37,9 @@
 
 			</div>
 
-			<ButtonClose v-if="showCloseIcon" @close="onCloseClick"/>
-
+			<slot name="close-button">
+				<ButtonClose v-if="showCloseIcon" @close="onCloseClick"/>
+			</slot>
 		</div>
 	</div>
 
