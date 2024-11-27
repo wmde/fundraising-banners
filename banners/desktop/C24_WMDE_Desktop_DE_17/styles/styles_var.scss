@@ -1,0 +1,60 @@
+// This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/swatches/skin_default' with (
+	$slider: true,
+	$select-group: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+	$progress-bar: true,
+	$soft-close: true,
+);
+@use 'src/components/BannerConductor/banner-transition';
+@use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use 'Banner';
+@use 'src/themes/UseOfFunds/UseOfFunds';
+@use 'MainBanner' with (
+	$banner-height: 357px,
+	$form-width: 300px
+);
+@use 'src/themes/Treedip/defaults';
+@use 'src/themes/Treedip/ButtonClose/ButtonClose';
+@use 'src/themes/Treedip/ProgressBar/ProgressBar' with (
+	$progress-bar-margin: 0 15px
+);
+@use 'src/themes/Treedip/DonationForm/DonationForm';
+@use 'src/themes/Treedip/DonationForm/MultiStepDonation';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
+@use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
+@use 'src/themes/Treedip/Footer/FooterAlreadyDonated';
+@use 'src/themes/Treedip/Footer/SelectionInput';
+@use 'src/themes/Treedip/Message/Message'  with (
+	$slider-main-headline-font-size: 25px,
+	$message-header-padding-bottom: 8px,
+	$message-header-small-up-padding-bottom: 8px,
+	$message-header-padding-top: 20px,
+	$message-header-small-up-padding-top: 20px
+);
+@use 'src/themes/Treedip/SoftClose/SoftClose';
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$slider-padding: 0
+);
+
+/**
+ * Fallback banner with "Fijitiv" theme
+ * All selectors in Fijitiv theme are prefixed with the ".wmde-banner-fallback" class selector,
+  so they override the "default" styles with the same selector
+ */
+@use 'FallbackBanner';
+@use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
+@use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
+@use 'src/themes/Fijitiv/FallbackBanner/SmallFooter';
+@use 'src/themes/Fijitiv/ProgressBar/ProgressBar' as FallbackProgressBar with (
+	$progress-bar-margin: 0 15px
+);
+@use 'src/themes/Fijitiv/Slider/KeenSlider' as FallbackSlider;
