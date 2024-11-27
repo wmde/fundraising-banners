@@ -27,46 +27,65 @@
 		}
 
 		&-prompt {
-			line-height: 40px;
-			height: 40px;
-			padding: 0 10px;
+			width: 100%;
+			position: relative;
+			color: var( --soft-close-prompt-color );
+			line-height: 33px;
+			height: 33px;
+			border-radius: 16px;
+			padding: 0 15px;
 			font-size: 16px;
 			font-family: fonts.$ui;
 			margin-bottom: 8px;
+			margin-top: 2px;
+			background: var( --soft-close-prompt-background );
+			text-align: left;
 
 			@include breakpoints.phone-s-up {
 				font-size: 18px;
 			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: -4px;
+				left: 5%;
+				margin-left: -4px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 5px 4px 0;
+				border-color: var( --soft-close-prompt-background ) transparent transparent transparent;
+			}
 		}
 
 		&-buttons {
-			text-align: center;
+			margin-top: 8px;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
 		}
 
 		&-button {
 			border: 0 none;
 			color: var( --soft-close-button-color );
 			background-color: var( --soft-close-button-background );
-			border-radius: 18px;
+			border-radius: 20px;
 			font-size: 14px;
 			height: 40px;
 			font-weight: bold;
-			text-align: center;
-			margin: 0 4px 8px;
-			min-width: 120px;
-
-			@include breakpoints.phone-xs-up {
-				min-width: 150px;
-			}
+			margin: 0 2px 8px;
+			min-width: clamp( 150px, 42vw, 180px );
 
 			&-already-donated {
 				background: var( --soft-close-donated-button-background );
 				border: 1px solid var( --soft-close-donated-button-border );
 				color: var( --soft-close-donated-button-color );
 				min-width: 190px;
+				margin: 5px auto 8px;
 
 				@include breakpoints.phone-xs-up {
-					min-width: 190px;
+					min-width: 220px;
 				}
 			}
 		}
@@ -88,9 +107,28 @@
 				padding-right: 14px;
 
 				.wmde-banner-close {
-					border: 0;
-					background: none;
-					display: flex;
+					position: absolute;
+					top: 3px;
+					right: 3px;
+					height: 36px;
+					width: 36px;
+					padding: 5px 3px 5px 7px;
+					background: transparent;
+					z-index: 99;
+					border: none;
+
+					svg {
+						height: 15px;
+						width: 15px;
+						background: var( --soft-close-close-button-background );
+						border-radius: 16px;
+						box-sizing: content-box;
+						border: solid 5px var( --soft-close-close-button-background );
+					}
+
+					&:hover {
+						cursor: pointer;
+					}
 				}
 			}
 		}

@@ -1,9 +1,6 @@
 @use 'src/components/Slider/KeenSlider';
 @use '../variables/fonts';
 
-$pagination-padding: 25px 0 !default;
-$pagination-height: 60px !default;
-
 .wmde-banner {
 	@include KeenSlider.layout;
 
@@ -17,11 +14,12 @@ $pagination-height: 60px !default;
 		cursor: grab;
 
 		&-content {
-			padding: 0 17px;
+			padding: 0 12px;
 			text-align: center;
+
 			p {
 				margin: 0;
-				padding-bottom: 16px;
+				padding-bottom: 6px;
 
 				&:last-child {
 					padding-bottom: 0;
@@ -52,8 +50,8 @@ $pagination-height: 60px !default;
 	&-slider-pagination {
 		width: 100%;
 		display: flex;
-		padding: $pagination-padding;
-		height: $pagination-height;
+		padding: 16px 10px 10px;
+		height: 60px;
 		justify-content: center;
 
 		&-dot {

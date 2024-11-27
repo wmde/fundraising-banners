@@ -8,27 +8,30 @@
 				<slot name="banner-text"/>
 				<slot name="progress"/>
 			</div>
+
 			<div class="wmde-banner-full-call-to-action">
 				Jetzt sind Sie <span class="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 			</div>
 
-			<slot name="donation-form"/>
+			<div class="wmde-banner-full-content-below-info">
+				<slot name="donation-form"/>
 
-			<ThankYouBox/>
+				<ThankYouBox/>
 
-			<div class="wmde-banner-full-small-print">
-				<span>
-					<a
-						id="application-of-funds-link"
-						class="wmde-banner-footer-usage-link t-use-of-funds-link"
-						@click.prevent="$emit( 'showFundsModal' )"
-					>
-						{{ $translate( 'use-of-funds-link' ) }}
-					</a>
-				</span>
+				<div class="wmde-banner-full-small-print">
+					<span>
+						<a
+							id="application-of-funds-link"
+							class="wmde-banner-footer-usage-link t-use-of-funds-link"
+							@click.prevent="$emit( 'showFundsModal' )"
+						>
+							{{ $translate( 'use-of-funds-link' ) }}
+						</a>
+					</span>
+				</div>
+
+				<slot name="footer"/>
 			</div>
-
-			<slot name="footer"/>
 		</div>
 	</div>
 </template>
