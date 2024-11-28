@@ -145,7 +145,7 @@ import ChevronDownIcon from '@src/components/ReasonsToDonate/Icons/ChevronDownIc
 import MinimisedBanner from '@banners/desktop/C24_WMDE_Desktop_DE_17/components/MinimisedBanner.vue';
 import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
 import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
-
+import { BannerBeforeSubmitWithMinimise } from '@banners/desktop/C24_WMDE_Desktop_DE_17/events/BannerBeforeSubmitWithMinimise';
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
 	Minimised = 'wmde-banner-wrapper--minimised',
@@ -172,6 +172,7 @@ const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
+const maximizeCount = ref<number>( 0 );
 const formModel = useFormModel();
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
@@ -187,6 +188,9 @@ const onSubmit = (): void => {
 	const closeChoice = props.localCloseTracker.getItem();
 	if ( closeChoice !== '' ) {
 		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+	if ( maximizeCount.value > 0 ) {
+		tracker.trackEvent( new BannerBeforeSubmitWithMinimise() );
 	}
 };
 
@@ -209,6 +213,7 @@ function onMinimiseBanner(): void {
 function onMaximiseBanner( userChoice: string ): void {
 	contentState.value = ContentStates.Main;
 	tracker.trackEvent( new BannerMaximisedEvent( userChoice ) );
+	maximizeCount.value++;
 }
 
 </script>

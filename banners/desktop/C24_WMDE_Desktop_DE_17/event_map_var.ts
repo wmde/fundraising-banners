@@ -17,6 +17,7 @@ import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
 import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
+import { BannerBeforeSubmitWithMinimise } from '@banners/desktop/C24_WMDE_Desktop_DE_17/events/BannerBeforeSubmitWithMinimise';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -47,5 +48,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 			new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
 	],
 	[ BannerMinimisedEvent.EVENT_NAME, ( e: BannerMinimisedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
-	[ BannerMaximisedEvent.EVENT_NAME, ( e: BannerMaximisedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( `${e.eventName}-${e.userChoice}`, 1 ) ]
+	[ BannerMaximisedEvent.EVENT_NAME, ( e: BannerMaximisedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( `${e.eventName}-${e.userChoice}`, 1 ) ],
+	[ BannerBeforeSubmitWithMinimise.EVENT_NAME, ( e: BannerBeforeSubmitWithMinimise ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ]
 ] );
