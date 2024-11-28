@@ -12,12 +12,7 @@
 		&-columns {
 			padding: 8px;
 			flex-wrap: nowrap;
-			justify-content: space-between;
-
-			.wmde-banner-close {
-				position: static;
-				margin-right: -40px;
-			}
+			justify-content: center;
 
 			@include breakpoints.large-up {
 				padding: 8px 27px;

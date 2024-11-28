@@ -31,11 +31,15 @@
 			background-color: var( --minimised-background );
 			border: none;
 			border-radius: 9px;
-			font-size: 14px;
+			font-size: 16px;
 
 			svg {
 				float: left;
 				margin: 10px 0 0 -22px;
+			}
+
+			p + p {
+				line-height: 1.6;
 			}
 		}
 

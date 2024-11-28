@@ -18,6 +18,7 @@
 );
 @use 'MinimisedBanner';
 @use 'src/themes/Treedip/defaults';
+@use 'src/themes/Treedip/ButtonClose/ButtonClose';
 @use 'src/themes/Treedip/ButtonCloseWithText/ButtonCloseWithText';
 @use 'src/themes/Treedip/ProgressBar/ProgressBar' with (
 	$progress-bar-margin: 0 15px

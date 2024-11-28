@@ -54,5 +54,10 @@ $form-width: 300px !default;
 		flex-direction: column;
 		width: $form-width;
 		padding: 0;
+
+		.wmde-banner-close.wmde-banner-close-with-text {
+			right: 14px;
+			top: 8px;
+		}
 	}
 }

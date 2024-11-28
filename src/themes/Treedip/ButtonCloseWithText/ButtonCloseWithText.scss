@@ -8,7 +8,7 @@ $height: 30px !default;
 .wmde-banner {
 	@include ButtonCloseWithText.layout;
 
-	&-close {
+	&-close.wmde-banner-close-with-text {
 		padding: $padding;
 		margin: $margin;
 		display: flex;
@@ -18,13 +18,6 @@ $height: 30px !default;
 		height: $height;
 		border: 0;
 		background: none;
-
-		&-button-text {
-			font-weight: bold;
-			font-size: 14px;
-			color: var( --minimised-close-button-color );
-			margin-right: 6px;
-		}
 
 		svg {
 			height: 20px;
@@ -42,5 +35,12 @@ $height: 30px !default;
 				fill: var( --button-close-fill );
 			}
 		}
+	}
+
+	&-close-button-text {
+		font-weight: bold;
+		font-size: 14px;
+		color: var( --minimised-close-button-color );
+		margin-right: 6px;
 	}
 }

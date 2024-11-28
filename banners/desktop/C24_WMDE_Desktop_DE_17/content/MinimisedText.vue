@@ -2,7 +2,7 @@
 	<div class="wmde-banner-minimised-message">
 		<InfoIconItalic/>
 		<p class="wmde-banner-minimised-title">
-			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen. Die Zeit wird knapp!
+			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen
 		</p>
 		<p>
 			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann geben Sie jetzt etwas zurück.
