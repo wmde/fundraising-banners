@@ -1,0 +1,98 @@
+@use 'src/components/SoftClose/SoftClose';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
+.wmde-banner {
+	@include SoftClose.layout;
+
+	&-soft-close {
+		background: var( --soft-close-background );
+		border: 2px solid var( --soft-close-border );
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		text-align: center;
+		font-weight: bold;
+
+		&-columns {
+			padding: 8px 8px 0;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+
+			@include breakpoints.phone-l-up {
+				padding: 8px 27px 0;
+			}
+		}
+
+		&-actions {
+			justify-content: center;
+		}
+
+		&-prompt {
+			line-height: 40px;
+			height: 40px;
+			padding: 0 10px;
+			font-size: 16px;
+			font-family: fonts.$ui;
+			margin-bottom: 8px;
+
+			@include breakpoints.phone-s-up {
+				font-size: 18px;
+			}
+		}
+
+		&-buttons {
+			text-align: center;
+		}
+
+		&-button {
+			border: 0 none;
+			color: var( --soft-close-button-color );
+			background-color: var( --soft-close-button-background );
+			border-radius: 18px;
+			font-size: 14px;
+			height: 40px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0 4px 8px;
+			min-width: 120px;
+
+			@include breakpoints.phone-xs-up {
+				min-width: 150px;
+			}
+
+			&-already-donated {
+				background: var( --soft-close-donated-button-background );
+				border: 1px solid var( --soft-close-donated-button-border );
+				color: var( --soft-close-donated-button-color );
+				min-width: 190px;
+
+				@include breakpoints.phone-xs-up {
+					min-width: 190px;
+				}
+			}
+		}
+
+		&-countdown-text {
+			display: none;
+		}
+
+		&-countdown-bar {
+			height: 3px;
+		}
+
+		&-countdown-bar-fill {
+			background-color: var( --soft-close-countdown-fill );
+		}
+
+		&-with-close-icon {
+			.wmde-banner-soft-close-columns {
+				padding-right: 14px;
+
+				.wmde-banner-close {
+					border: 0;
+					background: none;
+					display: flex;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,80 @@
+@use '../../variables/select_group';
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+
+		&-container {
+			margin: 0 -4px 16px;
+		}
+
+		&-option {
+			font-size: select_group.$radio-font-size;
+			line-height: select_group.$form-radio-height;
+			flex: 0 0 33.3333%;
+			width: 33.3333%;
+			padding: 0 4px 8px;
+		}
+
+		&-input {
+			display: none;
+		}
+
+		&-label {
+			display: block;
+			width: 100%;
+			border: 1px solid var( --select-group-option-border );
+			border-radius: 2px;
+			background: var( --select-group-option-background );
+			height: select_group.$form-radio-height;
+			font-size: 12px;
+		}
+
+		&-notice {
+			line-height: 13px;
+			padding-top: 4px;
+			color: var( --select-group-option-notice );
+			font-size: 11px;
+			font-weight: normal;
+		}
+
+		&-option:hover .wmde-banner-select-group-label,
+		&-option:focus .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border );
+			background: var( --select-group-option-background-hover );
+		}
+
+		&-option:active .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border-active );
+			background: var( --select-group-option-background-active );
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			color: var( --select-group-option-color-checked );
+			border-color: var( --select-group-option-border-checked );
+			background: var( --select-group-option-background-checked );
+		}
+
+		&-error-message {
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			color: var( --color-error );
+		}
+	}
+
+	&-disabled {
+		opacity: 0.3;
+	}
+
+	&-error-icon {
+		font-size: 14px;
+	}
+}

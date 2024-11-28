@@ -1,0 +1,61 @@
+@use '../../../components/DonationForm/MultiStepDonation';
+
+.wmde-banner {
+	@include MultiStepDonation.layout;
+
+	&-form {
+		height: auto;
+
+		&-field-group {
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		&-field-group-legend {
+			display: block;
+			width: 100%;
+			text-align: center;
+			height: 18px;
+			line-height: 18px;
+			margin-bottom: 8px;
+		}
+
+		&-button {
+			height: 60px;
+			line-height: 60px;
+			border-radius: 30px;
+			font-weight: bold;
+			color: var( --donation-form-button-color );
+			background: var( --donation-form-button-background );
+
+			&:hover,
+			&:focus {
+				background: var( --donation-form-button-background-hover );
+			}
+		}
+
+		&-button-error {
+			display: block;
+			padding: 5px 0;
+			width: 100%;
+			color: var( --color-error );
+			text-align: center;
+			font-size: 14px;
+			font-weight: bold;
+		}
+	}
+
+	&-form-slider {
+		height: 100%;
+		width: 100%;
+	}
+
+	&-sub-form {
+		padding: 16px;
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: 100%;
+		max-width: 100%;
+	}
+}

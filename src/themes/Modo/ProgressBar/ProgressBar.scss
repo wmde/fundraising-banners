@@ -1,0 +1,74 @@
+@use 'src/components/ProgressBar/ProgressBar';
+@use '../variables/fonts';
+@use 'transitions';
+
+.wmde-banner {
+	@include ProgressBar.layout;
+
+	&-progress-bar {
+		font-family: fonts.$ui;
+
+		&-text {
+			display: flex;
+			justify-content: space-between;
+			font-size: 14px;
+			font-weight: bold;
+			margin-bottom: 6px;
+
+			&-left,
+			&-right {
+				height: 18px;
+				line-height: 18px;
+			}
+
+			&-left {
+				padding-left: 16px;
+			}
+
+			&-right {
+				padding-right: 16px;
+			}
+		}
+
+		&-fill-wrapper {
+			height: 18px;
+			line-height: 18px;
+			width: 100%;
+			border: 2px solid var( --progress-bar-border );
+			border-radius: 13px;
+		}
+
+		&-fill {
+			transition: width 3000ms;
+			background: var( --progress-bar-background );
+			border-radius: 11px;
+			text-align: right;
+			color: var( --progress-bar-color );
+			font-size: 12px;
+			font-weight: bold;
+			padding-right: 12px;
+
+			&-text {
+				display: none;
+			}
+		}
+
+		&--late-progress {
+			.wmde-banner-progress-bar-text {
+				margin-bottom: 0;
+				font-size: 12px;
+
+				@media ( min-width: 360px ) {
+					font-size: 14px;
+				}
+			}
+			.wmde-banner-progress-bar-fill-wrapper {
+				height: 26px;
+				line-height: 22px;
+			}
+			.wmde-banner-progress-bar-fill-text {
+				display: inline;
+			}
+		}
+	}
+}

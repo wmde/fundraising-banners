@@ -1,0 +1,5 @@
+/* This is the easing function that most of the banner transitions use */
+$banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 ) !default;
+
+/* This is the border radius of the inputs/buttons etc in the form */
+$form-element-border-radius: 2px !default;

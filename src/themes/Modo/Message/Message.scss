@@ -1,0 +1,18 @@
+.wmde-banner {
+	&-message {
+		button {
+			all: unset;
+		}
+
+		button,
+		a {
+			color: var( --content-link-color );
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				color: var( --content-link-color-hover );
+			}
+		}
+	}
+}

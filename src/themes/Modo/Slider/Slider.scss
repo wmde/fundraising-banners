@@ -1,0 +1,82 @@
+@use 'src/components/Slider/KeenSlider';
+@use '../variables/fonts';
+
+$pagination-padding: 25px 0 !default;
+$pagination-height: 60px !default;
+
+.wmde-banner {
+	@include KeenSlider.layout;
+
+	&-slider-container {
+		flex-grow: 1;
+		font-family: fonts.$ui;
+		font-size: 16px;
+	}
+
+	&-slide {
+		cursor: grab;
+
+		&-content {
+			padding: 0 17px;
+			text-align: center;
+			p {
+				margin: 0;
+				padding-bottom: 16px;
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+			}
+			&-with-progress-bar p {
+				margin: 13px 0 16px;
+				padding: 0;
+			}
+
+			button {
+				all: unset;
+			}
+
+			button,
+			a {
+				color: var( --content-link-color );
+				cursor: pointer;
+
+				&:hover,
+				&:focus {
+					color: var( --content-link-color-hover );
+				}
+			}
+		}
+	}
+
+	&-slider-pagination {
+		width: 100%;
+		display: flex;
+		padding: $pagination-padding;
+		height: $pagination-height;
+		justify-content: center;
+
+		&-dot {
+			border: 0;
+			width: 10px;
+			height: 10px;
+			background: var( --slider-pagination-background );
+			border-radius: 50%;
+			margin: 0 5px;
+			padding: 5px;
+			cursor: pointer;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: var( --slider-pagination-background-active );
+			}
+		}
+	}
+
+	.headline {
+		font-weight: bold;
+	}
+}
