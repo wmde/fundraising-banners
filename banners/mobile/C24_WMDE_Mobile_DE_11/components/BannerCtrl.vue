@@ -37,7 +37,7 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationFormChangesAmountOptions
+						<MainDonationFormAdaptiveAmounts
 							:page-index="pageIndex"
 							@submit="submit"
 							:is-current="isCurrent"
@@ -49,7 +49,7 @@
 								<MainDonationFormButton/>
 							</template>
 
-						</MainDonationFormChangesAmountOptions>
+						</MainDonationFormAdaptiveAmounts>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -121,7 +121,7 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import MainDonationFormChangesAmountOptions from '../MainDonationForm_changesAmountOptions.vue';
+import MainDonationFormAdaptiveAmounts from '@src/components/DonationForm/Forms/MainDonationFormAdaptiveAmounts.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';

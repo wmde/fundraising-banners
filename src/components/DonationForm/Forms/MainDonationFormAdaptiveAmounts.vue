@@ -70,7 +70,7 @@
 <script lang="ts">
 // All form components must have names
 export default {
-	name: 'MainDonationFormChangesAmountOptions'
+	name: 'MainDonationFormAdaptiveAmounts'
 };
 </script>
 <script setup lang="ts">
