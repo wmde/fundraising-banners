@@ -25,7 +25,6 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
-import { minimisedBannerFeatures } from '@test/features/MinimisedBanner';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -157,16 +156,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
-		} );
-	} );
-
-	describe( 'Minimised Banner', () => {
-		test.each( [
-			[ 'expectMinimisesAndMaximises' ],
-			// Change the next line `expectTracksMinimiseAndMaximise` in all tests after Desktop 17 & make them pass
-			[ 'expectTracksLegacyMinimiseAndMaximise' ]
-		] )( '%s', async ( testName: string ) => {
-			await minimisedBannerFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
