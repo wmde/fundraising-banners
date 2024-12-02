@@ -1,0 +1,10 @@
+@mixin layout( $top: 5px, $right: 5px ) {
+	&-close.wmde-banner-close-with-text {
+		position: absolute;
+		right: $right;
+		top: $top;
+		width: 100px;
+		height: 32px;
+		z-index: 2;
+	}
+}

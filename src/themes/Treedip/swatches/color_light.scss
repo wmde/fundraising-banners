@@ -5,11 +5,13 @@ $grey100: #f8f9fa;
 $grey150: #dddddd;
 $grey200: #bbbbbb;
 $grey300: #b7b7b7;
+$grey400: #a9a9a9;
 $grey500: #808080;
 $grey600: #747474;
 $grey700: #202122;
 
 $red600: #990a00;
+$red700: #7d0a00;
 
 $blue600: #4465a7;
 $blue700: #2a4b8d;
@@ -24,7 +26,8 @@ $blue700: #2a4b8d;
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false
+	$fallback-banner: false,
+	$minimised-banner: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -184,5 +187,22 @@ $blue700: #2a4b8d;
 		--fallback-message-background: #{$white};
 		--fallback-message-border: #{$red600};
 		--fallback-uof-link: #{$grey500};
+
+		--fallback-progressbar-background: #{$white};
+		--fallback-progressbar-fill: #{$red600};
+		--fallback-progressbar-color: #{$white};
+	}
+
+	@if $minimised-banner {
+		--minimised-color: #{$white};
+		--minimised-background: #{$blue700};
+		--minimised-button-background: #{$red600};
+		--minimised-button-color: #{$white};
+		--minimised-button-background-hover: #{$red700};
+		--minimised-buttongroup-border: #{$blue700};
+		--minimised-control-color: #{$blue700};
+		--minimised-control-border: #{$blue700};
+		--minimised-control-fill: #{$blue700};
+		--minimised-close-button-color: #{$grey400};
 	}
 }

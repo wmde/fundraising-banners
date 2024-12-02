@@ -19,7 +19,7 @@ import { formActionSwitchFeatures } from '@test/features/form_action_switch/Main
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
-import { minimisedBannerFeatures } from '@test/features/MinimisedBanner';
+import { minimisedBannerFeatures } from '@test/features/MinimisedBannerMobile';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 

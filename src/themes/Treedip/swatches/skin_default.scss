@@ -10,6 +10,7 @@ $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
 $fallback-banner: false !default;
+$minimised-banner: false !default;
 
 .wmde-banner {
 	@include color_light.swatch(
@@ -22,6 +23,7 @@ $fallback-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner
+		$fallback-banner,
+		$minimised-banner
 	);
 }

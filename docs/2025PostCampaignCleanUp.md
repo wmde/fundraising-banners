@@ -120,3 +120,13 @@ This was hardcoded in our banner entry points and is now moved into the campaign
 ### Files to look at:
 
 - `src/DynamicTextPlugin.ts`
+
+## Clean up event classes
+
+Some banners used `events` directory in the banner directory and import it from there in all subsequent banners. We should not do that, but should accumulate all events in `@src/tracking/events` and clean up at the end of the campaign.
+If any imports from the `@banners/` namespace remain in the "final" banner, they should be moved into `@src/tracking/events` instead. Also, the existing events there should be checked if any of them are unused. If they are, delete them.  
+
+### Files to look at
+
+- `banners/*/LAST_BANNER/event_map*` (`LAST_BANNER` is a placeholder for the last banner (i.e. highest test number) in each channel)
+- `src/tracking/events/*.ts`
