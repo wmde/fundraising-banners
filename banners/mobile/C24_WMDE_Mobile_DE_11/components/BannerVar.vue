@@ -84,22 +84,29 @@
 			<template #buttons="{ timer }: any">
 				<button
 					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
+					data-tm="soft-close-yes"
 					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
 					{{ $translate( 'soft-close-button-maybe-later' ) }}
 				</button>
 				<button
 					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
+					data-tm="soft-close-not-now"
 					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
 					{{ $translate( 'soft-close-button-close' ) }}
 				</button>
 				<button
 					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
+					data-tm="soft-close-already-donated"
 					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.AlreadyDonated )">
 					{{ $translate( 'soft-close-button-already-donated' ) }}
 				</button>
 			</template>
 			<template #close-button>
-				<button class="wmde-banner-close" @click.prevent="onClose( 'SoftClose', CloseChoices.Close )">
+				<button
+					class="wmde-banner-close"
+					data-tm="soft-close-close-button"
+					@click.prevent="onClose( 'SoftClose', CloseChoices.Close )"
+				>
 					<CloseIconMobile/>
 				</button>
 			</template>

@@ -1,7 +1,11 @@
 <template>
 	<div class="wmde-banner-mini">
 		<div class="wmde-banner-mini-info">
-			<button class="wmde-banner-mini-close t-close-main-banner" @click.prevent="$emit( 'close' )">
+			<button
+				class="wmde-banner-mini-close t-close-main-banner"
+				data-tm="mini-banner-close"
+				@click.prevent="$emit( 'close' )"
+			>
 				<CloseIconMobile/>
 			</button>
 

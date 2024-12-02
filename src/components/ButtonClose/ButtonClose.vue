@@ -1,5 +1,5 @@
 <template>
-	<button class="wmde-banner-close t-close-main-banner" @click.prevent="$emit( 'close' )">
+	<button class="wmde-banner-close t-close-main-banner" data-tm="banner-close" @click.prevent="$emit( 'close' )">
 		<slot>
 			<CloseIconDefault/>
 		</slot>

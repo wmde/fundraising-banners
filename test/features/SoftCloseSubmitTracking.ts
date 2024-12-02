@@ -14,7 +14,7 @@ const expectStoresCloseChoiceInBannerWithoutSoftClose = async ( wrapper: VueWrap
 		setItem: vi.fn()
 	};
 	await wrapper.setProps( { localCloseTracker } );
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 
 	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'MiniBanner', CloseChoices.Close );
 };
@@ -25,7 +25,7 @@ const expectStoresMaybeLateCloseChoice = async ( wrapper: VueWrapper<any> ): Pro
 		setItem: vi.fn()
 	};
 	await wrapper.setProps( { localCloseTracker } );
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
 
 	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'SoftClose', CloseChoices.MaybeLater );
@@ -37,7 +37,7 @@ const expectStoresCloseCloseChoice = async ( wrapper: VueWrapper<any> ): Promise
 		setItem: vi.fn()
 	};
 	await wrapper.setProps( { localCloseTracker } );
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'SoftClose', CloseChoices.Close );
@@ -49,7 +49,7 @@ const expectStoresAlreadyDonatedCloseChoice = async ( wrapper: VueWrapper<any> )
 		setItem: vi.fn()
 	};
 	await wrapper.setProps( { localCloseTracker } );
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-already-donated' ).trigger( 'click' );
 
 	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'SoftClose', CloseChoices.AlreadyDonated );

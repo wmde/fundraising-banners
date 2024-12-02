@@ -9,7 +9,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 const expectShowsSoftCloseOnMiniBannerClose = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--soft-closing' );
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeTruthy();
@@ -28,7 +28,7 @@ const expectDoesNotShowSoftCloseOnFullBannerClose = async ( getWrapper: () => Vu
 const expectEmitsSoftCloseCloseEvent = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -38,7 +38,7 @@ const expectEmitsSoftCloseCloseEvent = async ( getWrapper: () => VueWrapper<any>
 const expectEmitsSoftCloseMaybeLaterEvent = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -48,7 +48,7 @@ const expectEmitsSoftCloseMaybeLaterEvent = async ( getWrapper: () => VueWrapper
 const expectEmitsSoftCloseAlreadyDonatedEvent = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-soft-close-button-already-donated' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
@@ -59,7 +59,7 @@ const expectEmitsSoftCloseTimeOutEvent = async ( getWrapper: ( dynamicContent: D
 	const timer = new TimerSpy();
 	const wrapper = getWrapper( null, timer );
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 
 	// The soft close counts down over 15 seconds so we need to keep advancing until it runs out
 	for ( let i: number = 0; i < 15; i++ ) {
@@ -73,7 +73,7 @@ const expectEmitsSoftCloseTimeOutEvent = async ( getWrapper: ( dynamicContent: D
 const expectEmitsBannerContentChangedOnSoftClose = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 };
@@ -82,7 +82,7 @@ const expectDoesNotShowSoftCloseOnFinalBannerImpression = async ( getWrapper: ()
 	const wrapper = getWrapper();
 
 	await wrapper.setProps( { remainingImpressions: 0 } );
-	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+	await wrapper.find( '[data-tm=mini-banner-close]' ).trigger( 'click' );
 
 	expect( wrapper.find( '.wmde-banner-soft-close' ).exists() ).toBeFalsy();
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
