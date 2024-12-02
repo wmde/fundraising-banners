@@ -29,7 +29,7 @@
     "lint:ts": "vue-tsc --noEmit",
     "lint:css": "stylelint '**/*.{scss,vue}'",
     "lint:test-imports": "node test/find_mismatched_imports.mjs",
-    "ci": "npm-run-all lint test check-content-version",
+    "ci": "npm-run-all check-tracking-conf lint test check-content-version",
     "check-content-version": "ts-node tools/check-content-version.ts",
     "check-tracking-conf": "ts-node tools/CampaignConfigurationCheck/check-tracking-number-and-date.mjs",
     "coverage": "vitest run --coverage",
