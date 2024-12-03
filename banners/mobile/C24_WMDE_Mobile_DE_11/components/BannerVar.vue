@@ -178,7 +178,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 
@@ -214,6 +214,7 @@ function onCloseMiniBanner(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	emit( 'modalClosed' );
 	props.localCloseTracker.setItem( feature, userChoice );
 }
 
@@ -232,6 +233,7 @@ const onSubmit = (): void => {
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
+	emit( 'modalOpened' );
 
 	amountOptionsForForm.value = amountOptionsFive;
 
