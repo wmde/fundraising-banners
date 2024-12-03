@@ -173,7 +173,9 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Full Page Banner', () => {
 		test.each( [
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ],
+			[ 'expectEmitsModalOpenedEvent' ],
+			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
