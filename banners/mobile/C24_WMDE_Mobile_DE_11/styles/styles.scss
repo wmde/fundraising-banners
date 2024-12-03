@@ -10,7 +10,8 @@
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (
-	$height: 306px
+	$height: 336px,
+	$height-l-up: 306px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';

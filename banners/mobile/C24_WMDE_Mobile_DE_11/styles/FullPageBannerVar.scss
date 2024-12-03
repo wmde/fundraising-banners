@@ -1,5 +1,5 @@
-@use '@src/themes/Mikings/variables/globals';
-@use '@src/themes/Mikings/variables/breakpoints';
+@use '@src/themes/Modo/variables/globals';
+@use '@src/themes/Modo/variables/breakpoints';
 
 .wmde-banner {
 	&-full {
@@ -14,7 +14,7 @@
 			overflow-y: auto;
 			height: 100%;
 			width: 100%;
-			padding: 5px;
+			padding: 12px;
 		}
 
 		p {
@@ -47,7 +47,7 @@
 		}
 
 		&-info {
-			padding: 16px;
+			padding: 12px;
 			background: var( --full-info-background );
 			border-radius: 16px;
 			color: var( --info-color );

@@ -8,9 +8,10 @@
 @use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Modo/defaults';
-@use './Banner';
+@use './BannerVar';
 @use './MiniBannerVar' with (
-	$height: 306px
+	$height: 336px,
+	$height-l-up: 306px
 );
 @use './FullPageBannerVar';
 @use 'src/themes/Modo/Footer/Footer';

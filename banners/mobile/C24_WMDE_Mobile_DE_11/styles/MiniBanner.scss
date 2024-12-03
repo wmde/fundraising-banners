@@ -1,6 +1,8 @@
 @use '@src/themes/Mikings/variables/globals';
+@use '@src/themes/Mikings/variables/breakpoints';
 
-$height: 288px !default;
+$height: 336px !default;
+$height-l-up: 288px !default;
 
 .wmde-banner {
 	&-mini {
@@ -11,6 +13,10 @@ $height: 288px !default;
 		position: relative;
 		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
+
+		@include breakpoints.phone-l-up {
+			min-height: $height-l-up;
+		}
 
 		&-close {
 			position: absolute;

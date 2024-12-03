@@ -1,22 +1,35 @@
-@use '@src/themes/Mikings/variables/globals';
+@use '@src/themes/Modo/variables/globals';
+@use '@src/themes/Modo/variables/breakpoints';
 
-$height: 288px !default;
+$height: 336px !default;
+$height-l-up: 288px !default;
 
 .wmde-banner {
 	&-mini {
 		display: flex;
 		flex-direction: column;
 		min-height: $height;
-		padding-bottom: 16px;
+		padding: 6px;
 		position: relative;
-		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
 		color: var( --info-color );
+
+		@include breakpoints.phone-l-up {
+			min-height: $height-l-up;
+			padding: 12px;
+		}
 
 		&-info {
 			background: var( --mini-info-background );
 			border-radius: 16px;
-			margin: 4px 4px 10px;
+			margin-bottom: 6px;
+			display: flex;
+			flex-direction: column;
+			flex: 1 1 auto;
+
+			@include breakpoints.phone-l-up {
+				margin-bottom: 12px;
+			}
 		}
 
 		&-close {
@@ -100,6 +113,11 @@ $height: 288px !default;
 		&-button-group {
 			display: flex;
 			justify-content: center;
+			margin: 0 -6px;
+
+			@include breakpoints.phone-l-up {
+				margin: 0 -12px;
+			}
 		}
 
 		&-button,
@@ -113,6 +131,10 @@ $height: 288px !default;
 			font-size: 14px;
 			white-space: nowrap;
 			margin: 0 6px;
+
+			@include breakpoints.phone-l-up {
+				margin: 0 12px;
+			}
 
 			@media ( min-width: 370px ) {
 				font-size: 16px;
@@ -129,7 +151,6 @@ $height: 288px !default;
 		}
 
 		&-button-preselect {
-			margin: 0 6px;
 			background: var( --mini-button-alt-background );
 
 			&:hover,

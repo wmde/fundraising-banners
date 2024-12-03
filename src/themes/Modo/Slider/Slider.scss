@@ -1,5 +1,6 @@
 @use 'src/components/Slider/KeenSlider';
 @use '../variables/fonts';
+@use '../variables/breakpoints';
 
 .wmde-banner {
 	@include KeenSlider.layout;
@@ -50,8 +51,8 @@
 	&-slider-pagination {
 		width: 100%;
 		display: flex;
-		padding: 16px 10px 10px;
-		height: 60px;
+		height: 30px;
+		padding: 10px 0;
 		justify-content: center;
 
 		&-dot {
@@ -71,6 +72,11 @@
 			&.is-active {
 				background: var( --slider-pagination-background-active );
 			}
+		}
+
+		@include breakpoints.phone-l-up {
+			height: 50px;
+			padding: 20px 0;
 		}
 	}
 
