@@ -9,7 +9,11 @@
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
+							<template #progress>
+								<ProgressBar amount-to-show-on-right="TARGET"/>
+							</template>
+						</BannerSlides>
 					</template>
 
 				</KeenSlider>
@@ -143,7 +147,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/Forms/MainDonationFormButton.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';

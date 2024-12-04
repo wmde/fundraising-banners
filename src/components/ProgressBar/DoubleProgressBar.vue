@@ -3,9 +3,23 @@
 		'--wmde-banner-progress-bar-width': progressBarContent.percentageTowardsTarget + '%',
 		'--wmde-banner-progress-bar-time-width': currentCampaignTimePercentage + '%'
 	}">
+		<div class="wmde-banner-double-progress-labels">
+			<div class="wmde-banner-double-progress-labels-left">
+				{{ progressBarContent.isLateProgress ? $translate( 'double-progress-close' ) : daysPassedSentence }}
+			</div>
+			<div class="wmde-banner-double-progress-labels-right">
+				{{ progressBarContent.amountNeeded }}
+			</div>
+		</div>
 		<div class="wmde-banner-double-progress-amount">
 			<div class="wmde-banner-double-progress-amount-fill">
-				<div v-if="progressBarContent.isLateProgress" class="amount-needed text-fade">{{ progressBarContent.amountNeeded }}</div>
+				<div class="text-fade">
+					<slot name="left-text-amount">
+						<template v-if="progressBarContent.isLateProgress">
+							{{ progressBarContent.amountNeeded }}
+						</template>
+					</slot>
+				</div>
 				<div class="text-fade">{{ progressBarContent.amountDonated }}</div>
 			</div>
 			<div class="wmde-banner-double-progress-amount-difference">!</div>
@@ -13,13 +27,14 @@
 		</div>
 		<div class="wmde-banner-double-progress-time">
 			<div class="wmde-banner-double-progress-time-fill">
-				<template v-if="progressBarContent.isLateProgress">
-					<div class="close-text text-fade">{{ $translate( 'double-progress-close' ) }}</div>
-					<div class="days-left text-fade">{{ daysLeftSentence }}</div>
-				</template>
-				<template v-else>
-					<div class="text-fade">{{ daysPassedSentence }}</div>
-				</template>
+				<div class="text-fade">
+					<slot name="left-text-time">
+						{{ progressBarContent.isLateProgress ? $translate( 'double-progress-close' ) : '' }}
+					</slot>
+				</div>
+				<div class="text-fade">
+					{{ progressBarContent.isLateProgress ? daysLeftSentence : daysPassedSentence }}
+				</div>
 			</div>
 			<div class="wmde-banner-double-progress-right-text text-fade" v-if="!progressBarContent.isLateProgress">{{ daysLeftSentence }}</div>
 		</div>

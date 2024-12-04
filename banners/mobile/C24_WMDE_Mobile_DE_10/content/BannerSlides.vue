@@ -2,7 +2,7 @@
 
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
 		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
-		<ProgressBar amount-to-show-on-right="TARGET"/>
+		<slot name="progress"/>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :is-current="currentSlide === 1">
