@@ -1,0 +1,45 @@
+@use '@src/themes/Mikings/variables/breakpoints';
+
+.wmde-banner {
+	&-select-group-label {
+		svg {
+			width: auto;
+			padding: 0 5px;
+		}
+		&.with-logos {
+			display: flex;
+			justify-content: center;
+		}
+
+		.paypal-logo {
+			max-width: 90px;
+		}
+
+		&.credit-cards {
+			padding: 10px 0;
+
+			svg {
+				padding: 0 5px;
+			}
+		}
+
+		.mastercard-logo {
+			transform: scale( 1.5 );
+		}
+	}
+
+	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
+		svg path,
+		svg rect {
+			fill: var( --select-group-image-label-fill ) !important; // stylelint-disable-line
+
+			&.highlight-transparent {
+				fill: transparent !important; // stylelint-disable-line
+			}
+
+			&.highlight {
+				fill: var( --select-group-image-label-fill-highlight ) !important; // stylelint-disable-line
+			}
+		}
+	}
+}

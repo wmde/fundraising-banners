@@ -1,0 +1,170 @@
+@use 'src/components/SoftClose/SoftClose';
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
+.wmde-banner {
+	@include SoftClose.layout;
+
+	&-soft-close {
+		background: var( --soft-close-background );
+		box-shadow: var( --soft-close-box-shadow );
+		text-align: center;
+		font-weight: bold;
+
+		&-columns {
+			padding: 8px 8px 0;
+			flex-wrap: nowrap;
+
+			@include breakpoints.phone-l-up {
+				padding: 8px 27px 0;
+			}
+		}
+
+		&-actions {
+			width: 100%;
+			flex-direction: column;
+		}
+
+		&-prompt {
+			position: relative;
+			color: var( --soft-close-prompt-color );
+			line-height: 33px;
+			height: 33px;
+			border-radius: 16px;
+			padding: 0 15px;
+			font-size: 16px;
+			font-family: fonts.$ui;
+			margin-bottom: 16px;
+			margin-top: 2px;
+			background: var( --soft-close-prompt-background );
+			text-align: left;
+
+			@include breakpoints.phone-s-up {
+				font-size: 18px;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: -6px;
+				left: 30px;
+				margin-left: -6px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 6px 6px 0;
+				border-color: var( --soft-close-prompt-background ) transparent transparent transparent;
+			}
+		}
+
+		&-buttons {
+			display: grid;
+			grid-template-columns: repeat( 4, 1fr );
+			grid-gap: 6px;
+			align-items: center;
+			margin: 0 0 6px;
+
+			@include breakpoints.phone-l-up {
+				margin: 0;
+				grid-gap: 12px;
+				grid-template-columns: repeat( 3, 1fr );
+			}
+		}
+
+		&-button {
+			grid-row: 1;
+			grid-column: 1 / 3;
+			display: block;
+			border: 0 none;
+			color: var( --soft-close-button-color );
+			background-color: var( --soft-close-button-background );
+			border-radius: 20px;
+			font-size: 14px;
+			height: 40px;
+			font-weight: bold;
+			margin: 0 0 8px;
+
+			&-already-donated {
+				background: var( --soft-close-donated-button-background );
+				border: 1px solid var( --soft-close-donated-button-border );
+				color: var( --soft-close-donated-button-color );
+			}
+
+			&:nth-child( 1 ) {
+				grid-row: 1;
+				grid-column: 1 / 3;
+			}
+
+			&:nth-child( 2 ) {
+				grid-row: 1;
+				grid-column: 3 / 5;
+			}
+
+			&:nth-child( 3 ) {
+				grid-row: 2;
+				grid-column: 1 / 5;
+			}
+
+			@include breakpoints.phone-s-up {
+				&:nth-child( 3 ) {
+					grid-row: 2;
+					grid-column: 2 / 4;
+				}
+			}
+
+			@include breakpoints.phone-l-up {
+				margin: 0 0 16px;
+
+				&:nth-child( 1 ),
+				&:nth-child( 2 ),
+				&:nth-child( 3 ) {
+					grid-row: 1;
+					grid-column: auto;
+				}
+			}
+		}
+
+		&-countdown-text {
+			display: none;
+		}
+
+		&-countdown-bar {
+			height: 3px;
+		}
+
+		&-countdown-bar-fill {
+			background-color: var( --soft-close-countdown-fill );
+		}
+
+		&-with-close-icon {
+			.wmde-banner-soft-close-columns {
+				padding-right: 14px;
+
+				.wmde-banner-close {
+					position: absolute;
+					top: 3px;
+					right: 3px;
+					height: 36px;
+					width: 36px;
+					padding: 5px 3px 5px 7px;
+					background: transparent;
+					z-index: 99;
+					border: none;
+
+					svg {
+						height: 15px;
+						width: 15px;
+						background: var( --soft-close-close-button-background );
+						border-radius: 16px;
+						box-sizing: content-box;
+						border: solid 5px var( --soft-close-close-button-background );
+					}
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}

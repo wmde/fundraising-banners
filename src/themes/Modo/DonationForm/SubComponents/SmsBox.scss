@@ -1,0 +1,52 @@
+@use '../../variables/select_group';
+@use 'src/components/DonationForm/SubComponents/SmsBox';
+
+.wmde-banner {
+	@include SmsBox.layout;
+
+	&-sms-box {
+		flex: 0 0 33.3333%;
+		width: 33.3333%;
+		padding: 0 4px 8px;
+
+		&-label {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
+			border: 1px solid var( --select-group-option-border );
+			border-radius: 2px;
+			background: var( --select-group-option-background );
+			height: select_group.$form-radio-height;
+			font-size: select_group.$radio-font-size;
+			text-align: center;
+			width: 100%;
+
+			&:hover,
+			&:focus {
+				border-color: var( --select-group-option-border );
+				background: var( --select-group-option-background-hover );
+			}
+		}
+
+		&-notice {
+			display: none;
+		}
+
+		a {
+			color: var( --select-group-option-color );
+
+			&:hover,
+			&:focus {
+				color: var( --select-group-option-color );
+				text-decoration: none;
+			}
+		}
+
+		.sms-icon {
+			width: 26px;
+			margin-right: 10px;
+			margin-top: 5px;
+		}
+	}
+}

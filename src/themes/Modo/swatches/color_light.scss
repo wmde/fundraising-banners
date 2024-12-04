@@ -1,0 +1,187 @@
+@use 'sass:color';
+
+$error: #dd3333;
+
+$white: #ffffff;
+$black: #000000;
+
+$grey800: #202122;
+$grey700: #54595d;
+$grey400: #a2a9b1;
+$grey350: #c8ccd1;
+$grey100: #eaecf0;
+$grey90: #eeeeee;
+
+$blue400: #5d9fd0;
+$blue500: #648196;
+$blue600: #386d94;
+$blue700: #3366cc;
+$blue750: color.adjust( $blue700, $lightness: -5% );
+
+$orange600: #da9000;
+$orange700: #bd7d00;
+
+$yellow100: #ffde67;
+$yellow200: #ffcc33;
+$yellow250: color.adjust( $yellow200, $lightness: -5% );
+
+$green10: #f8faf9;
+$green20: #eaf0ec;
+$green30: #c8d1cc;
+$green100: #dcf3ec;
+$green400: #9eeacb;
+$green600: #6e9e00;
+$green500: color.adjust( $green600, $lightness: -5% );
+$green800: #1d865b;
+
+$purple10: #ebe2fc;
+$purple100: #6b4ba1;
+
+@mixin swatch(
+	$address-type-button-form: false,
+	$upgrade-to-yearly-button-form: false,
+	$select-group-image-label: false,
+	$progress-bar: false,
+	$soft-close: false,
+	$subscription-form: false,
+	$thank-you-box: false
+) {
+	--main-background: #{$white};
+	--main-color: #{$grey800};
+	--info-color: #{$white};
+	--color-error: #{$error};
+	--content-link-color: #{$blue600};
+	--content-link-color-hover: #{$blue400};
+
+	--mini-background: #{$white};
+	--mini-info-background: #{$green800};
+	--mini-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+	--mini-close-background: #{$grey90};
+
+	--mini-headline-line: #{$yellow200};
+	--mini-headline-background: #{$green800};
+	--mini-headline-color: #{$black};
+	--mini-headline-color-white: #{$white};
+
+	--mini-button-color: #{$white};
+	--mini-button-background: #{$orange600};
+	--mini-button-background-hover: #{$orange700};
+	--mini-button-alt-background: #{$blue700};
+	--mini-button-alt-background-hover: #{$blue750};
+
+	--mini-smallprint-color: #{$grey700};
+
+	--full-background: #{$white};
+	--full-info-background: #{$green800};
+	--full-content-below-info-background: #{$green100};
+	--full-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+	--full-cta-background: #{$blue700};
+	--full-cta-color: #{$white};
+
+	--full-smallprint-color: #{$grey700};
+
+	--full-close-background: #{$grey90};
+
+	--slider-pagination-background: #{$grey350};
+	--slider-pagination-background-active: #{$white};
+	--slider-chevron: #{$grey800};
+
+	--donation-form-button-color: #{$white};
+	--donation-form-button-background: #{$yellow200};
+	--donation-form-button-background-hover: #{$yellow250};
+
+	--select-group-option-notice: #{$grey700};
+
+	--select-group-option-border: #{$green30};
+	--select-group-option-background: #{$green10};
+	--select-group-option-color: #{$black};
+
+	--select-group-option-background-hover: #{$green20};
+
+	--select-group-option-border-active: #{$green600};
+	--select-group-option-background-active: #{$green10};
+
+	--select-group-option-border-checked: #{$green600};
+	--select-group-option-background-checked: #{$green800};
+	--select-group-option-color-checked: #{$white};
+
+	--footer-color: #{$black};
+	--selection-input-color: #{$black};
+	--selection-input-selection-color: #{$white};
+	--selection-input-selection-background: #{$blue600};
+
+	--animated-highlight-color: #{$white};
+	/* stylelint-disable */
+	--animated-highlight-gradient: linear-gradient(
+			270deg,
+			rgba( 255, 255, 255, 0 ) 0%,
+			rgba( 255, 255, 255, 0 ) 50%,
+			rgb(153, 10, 0) 50%,
+			rgb(153, 10, 0) 100%
+	);
+	/* stylelint-enable */
+
+	--minimise-background: #{$grey100};
+	--minimise-fill: #{$blue600};
+	--maximise-fill: #{$blue600};
+	--minimise-color: #{$blue600};
+	--minimise-text-highlight-background: #{$yellow100};
+
+	@if $address-type-button-form {
+		--address-type-button-form-notice-color: #{$grey700};
+	}
+
+	@if $upgrade-to-yearly-button-form {
+		--upgrade-to-yearly-button-previous-color: #{$black};
+	}
+
+	@if $select-group-image-label {
+		--select-group-image-label-fill: #{$white};
+		--select-group-image-label-fill-highlight: #{$blue600};
+	}
+
+	@if $progress-bar {
+		--progress-bar-border: #{$yellow200};
+		--progress-bar-background: #{$yellow200};
+		--progress-bar-color: #{$black};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$white};
+		--soft-close-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+		--soft-close-prompt-color: #{$white};
+		--soft-close-prompt-background: #{$green800};
+
+		--soft-close-close-button-background: #{$grey90};
+
+		--soft-close-button-background: #{$blue700};
+		--soft-close-button-color: #{$white};
+
+		--soft-close-donated-button-background: #{$white};
+		--soft-close-donated-button-color: #{$blue700};
+		--soft-close-donated-button-border: #{$blue700};
+
+		--soft-close-countdown-fill: #{$orange600};
+	}
+
+	@if $subscription-form {
+		--sub-form-link-color: #{$orange600};
+		--sub-form-modal-background: #{$white};
+		--sub-form-input-border: #{$grey400};
+		--sub-form-checkbox-color: #{$grey800};
+
+		--sub-form-submit-color: #{$white};
+		--sub-form-submit-background: #{$orange600};
+		--sub-form-submit-background-hover: #{$orange700};
+
+		--sub-form-submit-privacy-color: #{$grey400};
+	}
+
+	@if $thank-you-box {
+		--thank-you-box-background: #{$purple10};
+		--thank-you-box-color: #{$purple100};
+	}
+}

@@ -1,0 +1,53 @@
+$phone-xs: 360px !default;
+$phone-s: 400px !default;
+$phone-m: 480px !default;
+$phone-l: 568px !default;
+$tablet-portrait: 768px !default;
+$tablet-landscape: 1024px !default;
+
+/*
+MIXIN USAGE:
+
+.my-selector {
+	@include breakpoints.small-up {
+		// Stuff that happens when bigger than $small
+	}
+}
+
+*/
+
+@mixin phone-xs-up {
+	@media ( min-width: $phone-xs ) {
+		@content;
+	}
+}
+
+@mixin phone-s-up {
+	@media ( min-width: $phone-s ) {
+		@content;
+	}
+}
+
+@mixin phone-m-up {
+	@media ( min-width: $phone-m ) {
+		@content;
+	}
+}
+
+@mixin phone-l-up {
+	@media ( min-width: $phone-l ) {
+		@content;
+	}
+}
+
+@mixin tablet-portrait-up {
+	@media ( min-width: $tablet-portrait ) {
+		@content;
+	}
+}
+
+@mixin tablet-landscape-up {
+	@media ( min-width: $tablet-landscape ) {
+		@content;
+	}
+}
