@@ -194,6 +194,13 @@ $blue700: #2a4b8d;
 		--fallback-progressbar-background: #{$white};
 		--fallback-progressbar-fill: #{$red600};
 		--fallback-progressbar-color: #{$white};
+
+		--fallback-slider-container-background: #{$white};
+		--fallback-slider-container-color: #{$black};
+		--fallback-slider-pagination-background: #{$grey600};
+		--fallback-slider-pagination-isactive-background: #{$white};
+		--fallback-slider-pagination-border: #{$white};
+		--fallback-slider-pagination-isactive-border: #{$red600};
 	}
 
 	@if $minimised-banner {
