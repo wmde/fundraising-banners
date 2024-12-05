@@ -90,11 +90,7 @@
 			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 			@maybeLater7Days="() => onClose('SoftClose', CloseChoices.Close)"
-		>
-			<template #close-button>
-				<ButtonClose/>
-			</template>
-		</SoftClose>
+		/>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -131,7 +127,6 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonCloseWithText from '@src/components/ButtonCloseWithText/ButtonCloseWithText.vue';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
