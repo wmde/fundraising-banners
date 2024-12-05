@@ -51,7 +51,7 @@
 
 			<template #footer>
 				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
+					@showFundsModal="onModalOpened"
 					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
@@ -70,7 +70,7 @@
 		<FundsModal
 			:content="useOfFundsContent"
 			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
+			@hideFundsModal="onHideFundsModal"
 		>
 			<template #infographic>
 				<WMDEFundsForwardingDE/>
@@ -130,7 +130,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 useBannerHider( 800, emit );
 
 const tracker = inject<Tracker>( 'tracker' );
@@ -165,6 +165,16 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onHideFundsModal(): void {
+	isFundsModalVisible.value = false;
+	emit( 'modalClosed' );
+}
+
+function onModalOpened(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
 }
 
 </script>
