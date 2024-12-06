@@ -1,5 +1,5 @@
-@use '@src/themes/Mikings/variables/globals';
-@use '@src/themes/Mikings/variables/breakpoints';
+@use '@src/themes/Modo/variables/globals';
+@use '@src/themes/Modo/variables/breakpoints';
 
 $height: 336px !default;
 $height-l-up: 288px !default;
@@ -9,51 +9,58 @@ $height-l-up: 288px !default;
 		display: flex;
 		flex-direction: column;
 		min-height: $height;
-		padding: 16px 0;
+		padding: 6px;
 		position: relative;
-		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
+		color: var( --info-color );
 
 		@include breakpoints.phone-l-up {
 			min-height: $height-l-up;
+			padding: 12px;
+		}
+
+		&-info {
+			background: var( --mini-info-background );
+			border-radius: 16px;
+			margin-bottom: 6px;
+			display: flex;
+			flex-direction: column;
+			flex: 1 1 auto;
+
+			@include breakpoints.phone-l-up {
+				margin-bottom: 12px;
+			}
 		}
 
 		&-close {
+			top: -3px;
+			right: -3px;
 			position: absolute;
 			height: 36px;
 			width: 36px;
-			top: 11px;
-			right: 16px;
-			text-align: center;
-			background: var( --mini-close-background );
-			padding: 10px;
-			z-index: 2;
+			padding: 5px 3px 5px 7px;
+			background: transparent;
+			z-index: 99;
+			border: none;
 
-			&-button {
-				border: none;
-				margin-top: auto;
-				float: right;
-				height: 16px;
-				line-height: 16px;
-				width: 16px;
+			svg {
+				height: 15px;
+				width: 15px;
 				background: var( --mini-close-background );
-				z-index: 2;
+				border-radius: 16px;
+				box-sizing: content-box;
+				border: solid 5px var( --mini-close-background );
+			}
 
-				svg {
-					height: 16px;
-					width: 16px;
-				}
-
-				&:hover {
-					cursor: pointer;
-				}
+			&:hover {
+				cursor: pointer;
 			}
 		}
 
 		&-headline {
 			height: 25px;
 			text-align: center;
-			margin: 0 16px 16px;
+			margin: 16px 16px 12px;
 
 			&-background {
 				position: relative;
@@ -82,7 +89,6 @@ $height-l-up: 288px !default;
 				font-weight: bold;
 				font-size: 14px;
 				line-height: 25px;
-				color: var( --mini-headline-color );
 				background: var( --mini-headline-background );
 				padding: 0 5px;
 				z-index: 2;
@@ -107,6 +113,11 @@ $height-l-up: 288px !default;
 		&-button-group {
 			display: flex;
 			justify-content: center;
+			margin: 0 -6px;
+
+			@include breakpoints.phone-l-up {
+				margin: 0 -12px;
+			}
 		}
 
 		&-button,
@@ -117,9 +128,13 @@ $height-l-up: 288px !default;
 			border-radius: 20px;
 			font-weight: bold;
 			color: var( --mini-button-color );
-			margin: 0 16px;
 			font-size: 14px;
 			white-space: nowrap;
+			margin: 0 6px;
+
+			@include breakpoints.phone-l-up {
+				margin: 0 12px;
+			}
 
 			@media ( min-width: 370px ) {
 				font-size: 16px;

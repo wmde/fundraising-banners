@@ -1,4 +1,4 @@
-@use 'src/themes/Mikings/swatches/skin_default' with (
+@use 'src/themes/Modo/swatches/skin_default' with (
 	$upgrade-to-yearly-button-form: true,
 	$progress-bar: true,
 	$soft-close: true,
@@ -7,24 +7,22 @@
 @use 'src/components/BannerConductor/banner-transition';
 @use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
-@use 'src/themes/Mikings/defaults';
-@use './Banner';
-@use './MiniBanner' with (
+@use 'src/themes/Modo/defaults';
+@use 'Banner';
+@use 'MiniBanner' with (
 	$height: 336px,
 	$height-l-up: 306px
 );
-@use './FullPageBanner';
-@use 'src/themes/Mikings/Footer/Footer';
-@use 'src/themes/Mikings/ThankYouBox/ThankYouBox';
-@use 'src/themes/Mikings/Footer/SelectionInput';
-@use 'src/themes/Mikings/DonationForm/MultiStepDonation';
-@use 'src/themes/Mikings/DonationForm/Forms/UpgradeToYearlyButtonForm';
-@use 'src/themes/Mikings/DonationForm/SubComponents/SelectGroup';
-@use 'src/themes/Mikings/DonationForm/SubComponents/SelectCustomAmount';
-@use 'src/themes/Mikings/DonationForm/SubComponents/SmsBox';
-@use 'src/themes/Mikings/Slider/Slider' with (
-	$pagination-padding: 10px,
-	$pagination-height: 40px
-);
-@use 'src/themes/Mikings/SoftClose/SoftClose';
-@use 'src/themes/Mikings/ProgressBar/ProgressBar';
+@use 'FullPageBanner';
+@use 'src/themes/Modo/Footer/Footer';
+@use 'src/themes/Modo/ThankYouBox/ThankYouBox';
+@use 'src/themes/Modo/Footer/SelectionInput';
+@use 'src/themes/Modo/DonationForm/MultiStepDonation';
+@use 'src/themes/Modo/DonationForm/Forms/UpgradeToYearlyButtonForm';
+@use 'src/themes/Modo/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Modo/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/Modo/DonationForm/SubComponents/SmsBox';
+@use 'src/themes/Modo/Slider/Slider';
+@use 'src/themes/Modo/SoftClose/SoftClose';
+@use 'src/themes/Modo/ProgressBar/ProgressBar';
+@use 'src/themes/Modo/Message/Message';

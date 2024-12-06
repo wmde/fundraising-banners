@@ -98,11 +98,6 @@
 					{{ $translate( 'soft-close-button-already-donated' ) }}
 				</button>
 			</template>
-			<template #close-button>
-				<button class="wmde-banner-close" @click.prevent="onClose( 'SoftClose', CloseChoices.Close )">
-					<CloseIconMobile/>
-				</button>
-			</template>
 		</SoftClose>
 
 		<FundsModal
@@ -120,8 +115,8 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBannerVar.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import FullPageBanner from './FullPageBanner.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
@@ -156,7 +151,6 @@ import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
