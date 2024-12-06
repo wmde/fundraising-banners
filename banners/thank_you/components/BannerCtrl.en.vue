@@ -1,12 +1,11 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
 			:show-fireworks="showSuccessContent"
 			:banner-state="bannerState"
 			@close="onClose"
 			@show-modal="onShowModal"
 		>
-
 			<template #text>
 				<MiniBannerTextWin v-if="showSuccessContent" :number-of-donors="settings.numberOfDonors"/>
 				<MiniBannerTextLose v-else :number-of-donors="settings.numberOfDonors"/>
@@ -14,25 +13,6 @@
 
 			<template #progress>
 				<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
-			</template>
-
-			<template #slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000">
-
-					<template #slides="{ currentSlide }: any">
-						<MiniBannerSlidesWin v-if="showSuccessContent" :currentSlide="currentSlide" :number-of-donors="settings.numberOfDonors">
-							<template #progress>
-								<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
-							</template>
-						</MiniBannerSlidesWin>
-						<MiniBannerSlidesLose v-else :currentSlide="currentSlide" :number-of-donors="settings.numberOfDonors">
-							<template #progress>
-								<ProgressBar :fill-percentage="settings.progressBarPercentage"/>
-							</template>
-						</MiniBannerSlidesLose>
-					</template>
-
-				</KeenSlider>
 			</template>
 
 		</MiniBanner>
@@ -44,6 +24,7 @@
 				<FullPageBannerTextLose v-else/>
 			</template>
 
+			<template #cta-title><CTATitle/></template>
 			<template #benefits><MembershipBenefits/></template>
 
 			<template #membership-buttons>
@@ -78,15 +59,11 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import MiniBanner from './MiniBanner.vue';
 import FullPageBanner from './FullPageBanner.vue';
-import colors from '../styles/settings/colors';
 import MiniBannerTextWin from '../content/win/MiniBannerText.en.vue';
-import MiniBannerSlidesWin from '../content/win/MiniBannerSlides.en.vue';
 import FullPageBannerTextWin from '../content/win/FullPageBannerText.en.vue';
 import MiniBannerTextLose from '../content/lose/MiniBannerText.en.vue';
-import MiniBannerSlidesLose from '../content/lose/MiniBannerSlides.en.vue';
 import FullPageBannerTextLose from '../content/lose/FullPageBannerText.en.vue';
 import MembershipBenefits from '../content/MembershipBenefits.en.vue';
-import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ProgressBar from './ProgressBar.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
@@ -94,6 +71,7 @@ import MembershipFormButton from './MembershipButton.vue';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { ThankYouSettings } from '../settings';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import CTATitle from '@banners/thank_you/content/CTATitle.en.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',

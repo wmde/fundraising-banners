@@ -1,6 +1,11 @@
 <template>
-	<ImageWithCopyright/>
-	<p><strong>Thank you! We made it! But it was a close call – closer than ever before.</strong></p>
+	<h2 class="wmde-banner-full-title">Thank you! We made it!</h2>
+	<p class="wmde-banner-full-subtitle">But it was a close call – closer than ever before.</p>
+
+	<div class="wmde-banner-full-sidebar">
+		<ImageWithCopyright/>
+		<StatsBox/>
+	</div>
 
 	<p>
 		For a long time the outcome was uncertain, but at the very last we reached our donation goal. That's a real ray
@@ -9,8 +14,6 @@
 		of them. Wikipedia braves the many storms of our present day: polarization, disinformation, manipulation. It's
 		not perfect, but it's solid as a rock.
 	</p>
-
-	<StatsBox/>
 
 	<p>
 		In times like these, Wikipedia is so valuable because it's a place where people of vastly different viewpoints
@@ -37,10 +40,6 @@
 	<p>
 		That's why we're asking you to <strong>join this community of Wikipedia enthusiasts</strong> and to help us
 		handle, among other things, the many current technological challenges we face.
-	</p>
-
-	<p>
-		<strong>Let your supporting membership ensure that Wikipedia remains a ray of sunshine!</strong>
 	</p>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState" :style="colors">
+	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
 			:show-fireworks="showSuccessContent"
 			:banner-state="bannerState"
@@ -78,7 +78,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import MiniBanner from './MiniBanner.vue';
 import FullPageBanner from './FullPageBanner.vue';
-import colors from '../styles/settings/colors';
 import MiniBannerTextWin from '../content/win/MiniBannerText.de.vue';
 import MiniBannerSlidesWin from '../content/win/MiniBannerSlides.de.vue';
 import FullPageBannerTextWin from '../content/win/FullPageBannerText.de.vue';
