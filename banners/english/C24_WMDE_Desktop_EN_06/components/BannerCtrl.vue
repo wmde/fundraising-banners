@@ -56,7 +56,7 @@
             </template>
 			<template #footer>
 				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
+					@showFundsModal="onOpenUseOfFunds"
 					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
@@ -70,10 +70,10 @@
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
-        <FundsModal
-            :content="useOfFundsContent"
-            :is-funds-modal-visible="isFundsModalVisible"
-            @hideFundsModal="isFundsModalVisible = false"
+    <FundsModal
+        :content="useOfFundsContent"
+        :is-funds-modal-visible="isFundsModalVisible"
+        @hideFundsModal="onCloseUseOfFunds"
 		>
 			<template #infographic>
 				<WMDEFundsForwardingEN/>
@@ -130,7 +130,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 useBannerHider( 800, emit );
 
 const isFundsModalVisible = ref<boolean>( false );
@@ -144,6 +144,16 @@ const stepControllers = [
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
+
+function onOpenUseOfFunds(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
+}
+
+function onCloseUseOfFunds(): void {
+	isFundsModalVisible.value = false;
+	emit( 'modalClosed' );
+}
 
 function onCloseMain(): void {
 	if ( props.remainingImpressions > 0 ) {
