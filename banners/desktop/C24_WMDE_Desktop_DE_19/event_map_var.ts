@@ -15,6 +15,9 @@ import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSu
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { ReasonsToDonateShownEvent } from '@src/tracking/events/ReasonsToDonateShownEvent';
+import { ReasonsToDonateCTAClickedEvent } from '@src/tracking/events/ReasonsToDonateCTAClickedEvent';
+import { ReasonsToDonateItemClickedEvent } from '@src/tracking/events/ReasonsToDonateItemClickedEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -41,7 +44,11 @@ export default new Map<string, TrackingEventConverterFactory>( [
 			new WMDESizeIssueEvent( e.eventName, createViewportInfo(), 1 )
 	],
 	[ BannerSubmitOnReturnEvent.EVENT_NAME,
-		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent =>
-			new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
-	]
+		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
+	],
+	[ ReasonsToDonateShownEvent.EVENT_NAME, ( e: ReasonsToDonateShownEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
+	[ ReasonsToDonateItemClickedEvent.EVENT_NAME, ( e: ReasonsToDonateItemClickedEvent ): WMDELegacyBannerEvent =>
+		new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 )
+	],
+	[ ReasonsToDonateCTAClickedEvent.EVENT_NAME, ( e: ReasonsToDonateCTAClickedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ]
 ] );
