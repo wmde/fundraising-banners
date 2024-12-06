@@ -8,6 +8,6 @@ export class CoverTransactionFeesEvent implements TrackingEvent<void> {
 
 	public readonly eventName = CoverTransactionFeesEvent.EVENT_NAME;
 	public readonly customData: void;
-	public readonly feature: TrackingFeatureName = 'AlreadyDonatedModal';
+	public readonly feature: TrackingFeatureName = 'MainBanner';
 	public readonly userChoice: string = '';
 }
