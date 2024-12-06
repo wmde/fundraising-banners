@@ -10,6 +10,15 @@ const expectEmitsCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> =
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 };
 
+const expectEmitsCloseEventWhenRemainingImpressionsAreZero = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+
+	await wrapper.setProps( { remainingImpressions: 0 } );
+	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
+};
+
 const expectDoesNotEmitCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-main .wmde-banner-close' ).trigger( 'click' );
 
@@ -31,6 +40,7 @@ const expectClosesBannerWhenWindowBecomesSmall = async ( getWrapper: () => VueWr
 
 export const bannerMainFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectEmitsCloseEvent,
+	expectEmitsCloseEventWhenRemainingImpressionsAreZero,
 	expectDoesNotEmitCloseEvent
 };
 

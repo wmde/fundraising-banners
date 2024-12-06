@@ -4,6 +4,8 @@ import { expect } from 'vitest';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { CoverTransactionFeesEvent } from '@src/tracking/events/CoverTransactionFeesEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 const setMainDonationFormValues = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
 	await wrapper.find( `.${interval.className} .wmde-banner-select-group-input` ).setValue();
@@ -44,5 +46,24 @@ export const donationFormTransactionFeeFeatures: Record<string, ( wrapper: VueWr
 		expect( wrapper.find( `.wmde-banner-form-upgrade-title` ).text() ).toContain( '42.98' );
 		expect( wrapper.find( `.t-annual-upgrade-no` ).text() ).toContain( '42.98' );
 		expect( wrapper.find( `.t-annual-upgrade-yes` ).text() ).toContain( '42.98' );
+	}
+};
+
+export const donationFormTransactionFeeTracking: Record<string, ( wrapper: VueWrapper<any>, tracker: Tracker ) => Promise<any>> = {
+	expectTracksCoverTransactionFeesEventOnSubmit: async ( wrapper: VueWrapper<any>, tracker ) => {
+		await setMainDonationFormValues( wrapper, Intervals.MONTHLY, '23', PaymentMethods.CREDIT_CARD );
+		await wrapper.find<HTMLInputElement>( `.wmde-banner-form-transaction-fee  .wmde-banner-form-field-checkbox` ).setValue( true );
+
+		await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
+
+		expect( tracker.trackEvent ).toHaveBeenCalledWith( new CoverTransactionFeesEvent() );
+	},
+	expectDoesNotTrackCoverTransactionFeesEventWhenUnchecked: async ( wrapper: VueWrapper<any>, tracker: Tracker ) => {
+		await setMainDonationFormValues( wrapper, Intervals.MONTHLY, '23', PaymentMethods.CREDIT_CARD );
+		await wrapper.find<HTMLInputElement>( `.wmde-banner-form-transaction-fee  .wmde-banner-form-field-checkbox` ).setValue( false );
+
+		await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
+
+		expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new CoverTransactionFeesEvent() );
 	}
 };

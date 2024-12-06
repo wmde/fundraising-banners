@@ -166,6 +166,7 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
 			// [ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
+			[ 'expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
