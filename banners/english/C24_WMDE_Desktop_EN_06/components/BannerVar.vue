@@ -21,7 +21,7 @@
             </template>
 
 			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<DoubleProgressBar />
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -108,7 +108,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
+import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
