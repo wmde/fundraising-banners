@@ -11,6 +11,7 @@
 				<slot name="progress"/>
 			</div>
 			<div class="wmde-banner-column-right">
+				<slot name="ten-good-reasons-sticker" :on-large-screen="onLargeScreen"/>
 				<slot name="donation-form" :form-interaction="onFormInteraction"/>
 			</div>
 		</div>

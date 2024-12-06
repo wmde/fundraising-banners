@@ -13,6 +13,13 @@
 				<BannerTitle/>
 			</template>
 
+			<template #ten-good-reasons-sticker="{ onLargeScreen }: any">
+				<TenGoodReasonsSticker
+					:on-large-screen="onLargeScreen"
+					@show-ten-good-reasons-modal="onTenGoodReasonsModalOpened"
+				/>
+			</template>
+
 			<template #banner-text>
 				<BannerText/>
 			</template>
@@ -76,6 +83,12 @@
 				<WMDEFundsForwardingDE/>
 			</template>
 		</FundsModal>
+
+		<ReasonsToDonate
+			:visible="isTenGoodReasonsModalVisible"
+			@callToActionClicked="onReasonsToDonateCallToActionClicked"
+			@hide="onHideTenGoodReasonsModal"
+		/>
 	</div>
 </template>
 
@@ -111,6 +124,8 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import TenGoodReasonsSticker from '@banners/desktop/C24_WMDE_Desktop_DE_19/content/TenGoodReasonsSticker.vue';
+import ReasonsToDonate from '@src/components/ReasonsToDonate/ReasonsToDonate.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -136,6 +151,7 @@ useBannerHider( 800, emit );
 const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
+const isTenGoodReasonsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
 const stepControllers = [
@@ -177,4 +193,19 @@ function onModalOpened(): void {
 	emit( 'modalOpened' );
 }
 
+function onTenGoodReasonsModalOpened(): void {
+	isTenGoodReasonsModalVisible.value = true;
+	emit( 'modalOpened' );
+}
+
+function onHideTenGoodReasonsModal(): void {
+	isTenGoodReasonsModalVisible.value = false;
+	emit( 'modalClosed' );
+}
+
+const onReasonsToDonateCallToActionClicked = (): void => {
+	contentState.value = ContentStates.Main;
+	isTenGoodReasonsModalVisible.value = false;
+	emit( 'modalClosed' );
+};
 </script>
