@@ -14,7 +14,10 @@ import {
 	bannerContentFeatures
 } from '@test/features/BannerContent';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
-import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
+import {
+	donationFormTransactionFeeFeatures,
+	donationFormTransactionFeeTracking
+} from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -75,7 +78,8 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ],
+			[ 'expectEmitsCloseEventWhenRemainingImpressionsAreZero' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -145,6 +149,13 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpsellFormHasTransactionFee' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectTracksCoverTransactionFeesEventOnSubmit' ],
+			[ 'expectDoesNotTrackCoverTransactionFeesEventWhenUnchecked' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormTransactionFeeTracking[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
