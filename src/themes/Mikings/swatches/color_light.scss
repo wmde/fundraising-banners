@@ -8,14 +8,17 @@ $black: #000000;
 $grey800: #202122;
 $grey700: #54595d;
 $grey400: #a2a9b1;
+$grey150: #e8e8e8;
 $grey100: #eaecf0;
 
 $blue10: #f8f9fa;
+$blue15: #dff1ff;
 $blue20: #eaecf0;
 $blue30: #c8ccd1;
 $blue400: #5d9fd0;
 $blue500: #648196;
 $blue600: #386d94;
+$blue650: #2b6da0;
 
 $orange600: #da9000;
 $orange700: #bd7d00;
@@ -28,11 +31,16 @@ $green500: color.adjust( $green600, $lightness: -5% );
 $purple10: #ebe2fc;
 $purple100: #6b4ba1;
 
+$red10: #ffe8e8;
+$red500: #fb4848;
+$red600: #990a00;
+
 @mixin swatch(
 	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$progress-bar: false,
+	$double-progress-bar: false,
 	$soft-close: false,
 	$subscription-form: false,
 	$thank-you-box: false
@@ -132,6 +140,20 @@ $purple100: #6b4ba1;
 		--progress-bar-border: #{$blue600};
 		--progress-bar-background: #{$blue600};
 		--progress-bar-color: #{$white};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$white};
+		--double-progress-time-background: #{$grey150};
+		--double-progress-time-fill-background: #{$red600};
+		--double-progress-difference-background: #{$red500};
+
+		--double-progress-amount-background: #{$grey150};
+		--double-progress-amount-fill-background: #{$blue650};
+		--double-progress-right-text-color: #{$grey700};
+
+		--double-progress-hand-fill: #{$red10};
+		--double-progress-timer-fill: #{$blue15};
 	}
 
 	@if $soft-close {
