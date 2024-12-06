@@ -9,7 +9,9 @@
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
+							<template #progress><ProgressBar/></template>
+						</BannerSlides>
 					</template>
 
 				</KeenSlider>
@@ -24,9 +26,7 @@
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
+			<template #progress><ProgressBar/></template>
 
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
@@ -124,7 +124,7 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationFormAdaptiveAmounts from '@src/components/DonationForm/Forms/MainDonationFormAdaptiveAmounts.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
@@ -143,7 +143,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/Forms/MainDonationFormButton.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';

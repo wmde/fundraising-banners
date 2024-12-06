@@ -10,8 +10,10 @@ $grey700: #54595d;
 $grey400: #a2a9b1;
 $grey350: #c8ccd1;
 $grey100: #eaecf0;
-$grey90: #eeeeee;
+$grey75: #e8e8e8;
+$grey50: #eeeeee;
 
+$blue300: #66cfff;
 $blue400: #5d9fd0;
 $blue500: #648196;
 $blue600: #386d94;
@@ -37,11 +39,15 @@ $green800: #1d865b;
 $purple10: #ebe2fc;
 $purple100: #6b4ba1;
 
+$red200: #f17678;
+$red300: #ff5233;
+
 @mixin swatch(
 	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$progress-bar: false,
+	$double-progress-bar: false,
 	$soft-close: false,
 	$subscription-form: false,
 	$thank-you-box: false
@@ -57,7 +63,7 @@ $purple100: #6b4ba1;
 	--mini-info-background: #{$green800};
 	--mini-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
-	--mini-close-background: #{$grey90};
+	--mini-close-background: #{$grey50};
 
 	--mini-headline-line: #{$yellow200};
 	--mini-headline-background: #{$green800};
@@ -82,7 +88,7 @@ $purple100: #6b4ba1;
 
 	--full-smallprint-color: #{$grey700};
 
-	--full-close-background: #{$grey90};
+	--full-close-background: #{$grey50};
 
 	--slider-pagination-background: #{$grey350};
 	--slider-pagination-background-active: #{$white};
@@ -148,6 +154,21 @@ $purple100: #6b4ba1;
 		--progress-bar-color: #{$black};
 	}
 
+	@if $double-progress-bar {
+		--double-progress-color: #{$black};
+		--double-progress-time-background: #{$grey75};
+		--double-progress-time-fill-background: #{$yellow200};
+		--double-progress-difference-background: #{$red300};
+		--double-progress-difference-color: #{$white};
+
+		--double-progress-amount-background: #{$grey75};
+		--double-progress-amount-fill-background: #{$blue300};
+		--double-progress-right-text-color: #{$black};
+
+		--double-progress-hand-fill: #{$black};
+		--double-progress-timer-fill: #{$black};
+	}
+
 	@if $soft-close {
 		--soft-close-background: #{$white};
 		--soft-close-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
@@ -155,7 +176,7 @@ $purple100: #6b4ba1;
 		--soft-close-prompt-color: #{$white};
 		--soft-close-prompt-background: #{$green800};
 
-		--soft-close-close-button-background: #{$grey90};
+		--soft-close-close-button-background: #{$grey50};
 
 		--soft-close-button-background: #{$blue700};
 		--soft-close-button-color: #{$white};
