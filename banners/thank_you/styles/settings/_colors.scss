@@ -1,0 +1,70 @@
+$radial-gradient: radial-gradient( circle, #3b1443 0%, #571c27 100% );
+$linear-gradient: linear-gradient(180deg, #3b1443 0%, #571c27 100%);
+
+$white: #ffffff;
+$black: #000000;
+$shadow: rgb( 0 0 0 / 30% );
+
+$pink300: #f68187;
+$pink400: #f5555d;
+
+$red400: #ea323c;
+$red500: #c42430;
+
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-off-white: #efefef;
+	--color-grey: #bababa;
+	--color-grey-dark: #505050;
+	--color-black: #000000;
+	--color-black-transparent: rgb( 0 0 0 / 60% );
+	--color-primary: #ab150a;
+	--color-primary-hover: #9e1208;
+	--color-secondary: #6e9e00;
+	--color-secondary-hover: #669400;
+
+	--mini-background: #{$radial-gradient};
+	--mini-color: #{$white};
+	--mini-close-fill: #{$white};
+	--mini-text-shadow: #{$shadow};
+
+	--mini-info-color: #{$white};
+	--mini-info-border: #{$white};
+	--mini-info-background-hover: #{$red500};
+
+	--mini-headline-stroke: #{$white};
+	--mini-headline-layer-1: #{$pink300};
+	--mini-headline-layer-2: #{$pink400};
+	--mini-headline-shadow: #{$shadow};
+
+	--mini-button-color: #{$white};
+	--mini-button-border: #{$white};
+	--mini-button-background: #{$shadow};
+	--mini-button-background-hover: #{$red500};
+
+	--progress-bar-border: #{$pink400};
+	--progress-bar-color: #{$white};
+	--progress-bar-fill-background: #{$pink400};
+
+	--full-overlay: rgb( 0 0 0 / 90% );
+	--full-background: #{$white};
+	--full-box-shadow: rgb( 0 0 0 / 20% );
+	--full-close-fill: #{$red500};
+
+	--full-cta-background: #{$linear-gradient};
+	--full-cta-color: #{$white};
+	--full-cta-text-shadow: #{$shadow};
+	--full-cta-link-color: #{$white};
+	--full-cta-link-color-hover: #{$pink300};
+	--full-cta-list-icon-fill: #{$pink300};
+
+	--stats-box-background: #{$linear-gradient};
+	--stats-box-text-shadow: #{$shadow};
+	--stats-box-color: #{$white};
+	--stats-icon-fill: #{$red400};
+
+	--membership-button-color: #{$white};
+	--membership-button-border: #{$white};
+	--membership-button-background: #{$red500};
+	--membership-button-background-hover: #{$red400};
+}

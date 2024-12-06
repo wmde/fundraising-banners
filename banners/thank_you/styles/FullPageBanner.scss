@@ -1,14 +1,17 @@
 @use 'settings/globals';
+@use 'settings/fonts';
 @use 'settings/breakpoints';
 
 .wmde-banner {
 	&-full {
+		--close-icon-fill : var( --full-close-fill );
+
 		visibility: hidden;
 		opacity: 0;
 		transform: scale( 1.1 );
 		font-size: 16px;
 		line-height: 1.5;
-		background: var( --color-black-transparent );
+		background: var( --full-overlay );
 		position: fixed;
 		display: flex;
 		align-items: center;
@@ -26,14 +29,16 @@
 			padding: 10px;
 			max-height: 100vh;
 			overflow-y: auto;
+			margin: 0 auto;
 		}
 
 		&-inner {
+			max-width: 1024px;
 			position: relative;
-			background: var( --color-white );
-			padding: 48px 20px;
+			background: var( --full-background );
+			padding: 48px 20px 20px;
 			border-radius: 6px;
-			box-shadow: 0 5px 5px rgba( 0 0 0 / 0.2 );
+			box-shadow: 0 5px 5px var( --full-box-shadow );
 			display: flex;
 			flex-direction: column;
 
@@ -58,14 +63,47 @@
 			}
 		}
 
+		&-title {
+			font-size: 34px;
+			border: 0;
+			padding: 0;
+			margin: 0 0 5px;
+			font-weight: bold;
+			font-family: fonts.$headline;
+			text-transform: uppercase;
+		}
+
+		&-subtitle {
+			font-weight: bold;
+		}
+
+		&-sidebar {
+			float: right;
+			width: 210px;
+			margin-left: 20px;
+		}
+
 		&-cta {
-			background: var( --color-off-white );
-			padding: 20px;
-			border: 1px solid var( --color-primary );
+			clear: both;
+			background: var( --full-cta-background );
+			color: var( --full-cta-color );
+			text-shadow: 2px 2px 2px var( --full-cta-text-shadow );
+			padding: 10px 20px 20px;
 			border-radius: 6px;
 
 			@include breakpoints.medium-up {
-				padding: 40px;
+				padding: 20px 40px 40px;
+			}
+
+			h2 {
+				font-family: fonts.$headline;
+				text-transform: uppercase;
+				color: var( --full-cta-color );
+				border: none;
+				font-size: 24px;
+				font-weight: bold;
+				text-align: center;
+				margin: 0 0 20px;
 			}
 
 			&-columns {
@@ -88,36 +126,33 @@
 					width: 50%;
 					padding: 0 20px;
 				}
-
-				@include breakpoints.large-up {
-					width: auto;
-				}
 			}
 
 			&-buttons {
 				display: flex;
 				flex-direction: column;
+				align-items: center;
 			}
 		}
 
 		p.wmde-banner-full-subscribe {
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 			font-size: 14px;
-			font-weight: bold;
+			text-align: center;
 
 			a {
-				color: var( --color-black );
+				color: var( --full-cta-link-color );
 				text-decoration: underline;
 				transition: color 500ms ease-in-out;
 				display: inline-block;
 
 				&:hover,
 				&:focus {
-					color: var( --color-secondary );
+					color: var( --full-cta-link-color-hover );
 				}
 
 				&:first-child {
-					margin-bottom: 15px;
+					margin-bottom: 10px;
 				}
 			}
 
@@ -125,6 +160,10 @@
 				margin-bottom: 0;
 			}
 		}
+	}
+
+	&-benefits {
+		font-size: 20px;
 	}
 
 	&-wrapper {

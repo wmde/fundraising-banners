@@ -1,55 +1,127 @@
 @use 'settings/fonts';
 @use 'settings/breakpoints';
 
+@keyframes showLetter {
+	0% {
+		transform: scale( 0.5 );
+	}
+
+	100% {
+		transform: scale( 1 );
+	}
+}
+
+
 .wmde-banner {
 	&-mini {
-		background: var( --color-primary );
+		--close-icon-fill : var( --mini-close-fill );
+
+		background: #3b1443;
+		background: var( --mini-background );
+		color: var( --mini-color );
 		position: relative;
 		padding: 10px;
 		overflow: hidden;
 		text-align: center;
 
 		&-inner {
-			padding: 20px;
-			background: var( --color-white );
-			border-radius: 6px;
-			box-shadow: 0 5px 5px rgba( 0 0 0 / 0.2 );
+			padding: 24px 20px;
 
 			@include breakpoints.small-up {
-				padding: 70px 48px;
+				padding: 24px 28px;
+			}
+		}
+
+		&-headline {
+			font-family: fonts.$headline;
+			font-weight: bolder;
+			font-size: clamp( 40px, 8vw, 150px );
+			line-height: 1;
+
+			color: transparent;
+			-webkit-text-stroke: 2px #ffffff;
+			text-shadow: 3px 3px 0 var( --mini-headline-layer-1 ), 6px 6px 0 var( --mini-headline-layer-2 ), 10px 10px 6px var( --mini-headline-shadow );
+			letter-spacing: -2px;
+
+			@include breakpoints.medium-up {
+				letter-spacing: -6px;
+				text-shadow: 5px 5px 0 var( --mini-headline-layer-1 ), 10px 10px 0 var( --mini-headline-layer-2 ), 15px 15px 10px var( --mini-headline-shadow );
+			}
+
+			span {
+				transform: scale( 0.5 );
+				display: inline-block;
 			}
 		}
 
 		&-text {
-			font-size: 24px;
+			font-size: 16px;
+			text-shadow: 2px 2px 2px var( --mini-text-shadow );
 
-			&-columns {
-				display: flex;
+			@include breakpoints.small-up {
+				font-size: 18px;
 			}
-			&-progress {
-				flex: 1 1 auto;
-				padding-top: 2px;
+
+			@include breakpoints.medium-up {
+				font-size: 20px;
 			}
-			&-button {
-				flex: 0 0 auto;
-				padding-left: 16px;
+
+			@include breakpoints.large-up {
+				font-size: 24px;
+			}
+		}
+
+		&-button {
+			border: 2px solid var( --mini-button-border );
+			height: 42px;
+			padding: 10px 16px;
+			border-radius: 27px;
+			color: var( --mini-button-color );
+			background: var( --mini-button-background );
+			font-size: 14px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: background-color 200ms ease-in-out;
+
+			&:hover {
+				background: var( --mini-button-background-hover );
+			}
+
+			@include breakpoints.medium-up {
+				padding: 10px 26px;
+				font-size: 16px;
 			}
 		}
 	}
 
 	&-info-button {
 		position: absolute;
-		top: 10px;
-		left: 10px;
+		top: 14px;
+		left: 14px;
 		height: 34px;
+		line-height: 30px;
 		width: 34px;
-		padding: 8px;
 		background: none;
-		border: 0;
+		border: 2px solid var( --mini-info-border );
+		color: var( --mini-info-color );
+		border-radius: 17px;
 		cursor: pointer;
+		font-family: fonts.$content;
+		font-size: 22px;
+		font-weight: 800;
+		font-style: italic;
+		transition: background-color 200ms ease-in-out;
 
-		svg circle {
-			fill: var( --color-primary );
+		&:hover {
+			background: var( --mini-info-background-hover );
+		}
+	}
+
+	&--visible {
+		.wmde-banner-mini-headline > span {
+			animation: showLetter 2s cubic-bezier( 0, 1.13, .46, 1.97 );
+			animation-fill-mode: forwards;
+			animation-delay: calc( 0.08s * var( --index ) );
 		}
 	}
 }

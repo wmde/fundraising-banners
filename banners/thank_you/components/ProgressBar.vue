@@ -2,6 +2,7 @@
 	<div class="wmde-banner-progress-bar" :style="{ '--wmde-banner-progress-bar-width': `${fillPercentage}%` }">
 		<div class="wmde-banner-progress-bar-fill">
 			<div class="wmde-banner-progress-bar-fill-text">{{ $translate( translationKey ) }}</div>
+			<div class="wmde-banner-progress-bar-fill-text">€9.3m</div>
 		</div>
 	</div>
 </template>

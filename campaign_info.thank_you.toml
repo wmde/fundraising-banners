@@ -10,6 +10,7 @@ icon = "desktop"
 campaign_tracking = "ty01-240101"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -35,6 +36,7 @@ icon = "desktop"
 campaign_tracking = "ty01-240101"
 description = "Thank you banner"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -60,6 +62,7 @@ icon = "mobile"
 campaign_tracking = "ty01-mob-240101"
 description = "Thank you banner"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -85,6 +88,7 @@ icon = "mobile"
 campaign_tracking = "ty01-mob-en-240101"
 description = "Thank you banner"
 preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -110,6 +114,7 @@ icon = "pad"
 campaign_tracking = "ty01-ipad-240101"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -135,6 +140,7 @@ icon = "desktop"
 campaign_tracking = "ty01-wpde-240101"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -156,6 +162,7 @@ icon = "mobile"
 campaign_tracking = "ty01-wpde-mob-240101"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
