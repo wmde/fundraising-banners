@@ -13,6 +13,10 @@
 				<BannerTitle/>
 			</template>
 
+			<template #ten-good-reasons-sticker>
+				<TenGoodReasonsSticker/>
+			</template>
+
 			<template #banner-text>
 				<BannerText/>
 			</template>
@@ -111,6 +115,7 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import TenGoodReasonsSticker from '@banners/desktop/C24_WMDE_Desktop_DE_19/content/TenGoodReasonsSticker.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

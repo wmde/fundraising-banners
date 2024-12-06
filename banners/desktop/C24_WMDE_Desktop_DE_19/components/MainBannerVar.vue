@@ -5,6 +5,7 @@
 			<div class="wmde-banner-column-left">
 				<div class="wmde-banner-message-container">
 					<slot name="banner-title"/>
+					<slot name="ten-good-reasons-sticker"/>
 					<slot name="banner-text" v-if="onLargeScreen"/>
 					<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
 				</div>
