@@ -17,13 +17,14 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import { Locales } from '@src/domain/Locales';
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { WindowTimer } from '@src/utils/Timer';
+import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -67,5 +68,6 @@ app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmo
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
+app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( new Date(), page.getCampaignParameters() ) );
 
 app.mount( page.getBannerContainer() );
