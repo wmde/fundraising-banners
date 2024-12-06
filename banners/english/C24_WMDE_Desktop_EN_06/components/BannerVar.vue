@@ -28,7 +28,7 @@
 				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationFormAddressType :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
 							</template>
@@ -39,11 +39,7 @@
 									<MastercardLogo/>
 								</span>
 							</template>
-
-							<template #button>
-								<MainDonationFormPaymentsAndReceiptButton/>
-							</template>
-						</MainDonationFormAddressType>
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -60,7 +56,7 @@
             </template>
 			<template #footer>
 				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
+					@showFundsModal="onOpenUseOfFunds"
 					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
@@ -74,10 +70,10 @@
 			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
 		/>
 
-        <FundsModal
-            :content="useOfFundsContent"
-            :is-funds-modal-visible="isFundsModalVisible"
-            @hideFundsModal="isFundsModalVisible = false"
+    <FundsModal
+        :content="useOfFundsContent"
+        :is-funds-modal-visible="isFundsModalVisible"
+        @hideFundsModal="onCloseUseOfFunds"
 		>
 			<template #infographic>
 				<WMDEFundsForwardingEN/>
@@ -94,13 +90,18 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
@@ -111,8 +112,6 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue'
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import MainDonationFormAddressType from '@src/components/DonationForm/Forms/MainDonationFormDonationReceipt.vue';
-import MainDonationFormPaymentsAndReceiptButton from '@src/components/DonationForm/Forms/MainDonationFormPaymentsAndReceiptButton.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -131,7 +130,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 useBannerHider( 800, emit );
 
 const isFundsModalVisible = ref<boolean>( false );
@@ -145,6 +144,16 @@ const stepControllers = [
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
+
+function onOpenUseOfFunds(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
+}
+
+function onCloseUseOfFunds(): void {
+	isFundsModalVisible.value = false;
+	emit( 'modalClosed' );
+}
 
 function onCloseMain(): void {
 	if ( props.remainingImpressions > 0 ) {
