@@ -12,8 +12,10 @@ $grey700: #292929;
 $grey800: #1f1f1f;
 
 $red100: #ff8888;
+$red500: #fb4848;
 $red600: #e60f00;
 
+$blue100: #dff1ff;
 $blue600: #547fd5;
 $blue700: #436fc7;
 $blue800: #20303f;
@@ -21,6 +23,7 @@ $blue800: #20303f;
 @mixin swatch(
 	$slider: false,
 	$progress-bar: false,
+	$double-progress-bar: false,
 	$select-group: false,
 	$select-group-bubble: false,
 	$select-group-button: false,
@@ -82,6 +85,17 @@ $blue800: #20303f;
 		--progress-bar-wrapper-background: #{$grey700};
 		--progress-bar-fill-background: #{$red600};
 		--progress-bar-fill-color: #{$white};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$white};
+		--double-progress-time-background: #{$red100};
+		--double-progress-time-fill-background: #{$red600};
+		--double-progress-difference-background: #{$red500};
+
+		--double-progress-amount-background: #{$blue100};
+		--double-progress-amount-fill-background: #{$blue700};
+		--double-progress-right-text-color: #{$grey700};
 	}
 
 	@if $select-group {
