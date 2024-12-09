@@ -21,6 +21,14 @@ const expectShowsFullPageWhenCallToActionIsClicked = async ( wrapper: VueWrapper
 	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
 };
 
+const expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
+
+	expect( wrapper.classes() ).toContain( 'wmde-banner-wrapper--full-page' );
+	const preselectedAmountValue = wrapper.find<HTMLInputElement>( '.wmde-banner-submit-form input[name=amount]' ).element.value;
+	expect( preselectedAmountValue ).toBeTruthy();
+};
+
 const expectEmitsBannerContentChangedEventWhenCallToActionIsClicked = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 
@@ -31,5 +39,6 @@ export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => 
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
 	expectShowsFullPageWhenCallToActionIsClicked,
+	expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked,
 	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked
 };

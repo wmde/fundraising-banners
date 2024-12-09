@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/wpde_desktop/C24_WPDE_Desktop_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -10,7 +10,10 @@ import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
-import { donationFormTransactionFeeFeatures } from '@test/features/forms/MainDonation_TransactionFee';
+import {
+	donationFormTransactionFeeFeatures,
+	donationFormTransactionFeeTracking
+} from '@test/features/forms/MainDonation_TransactionFee';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -23,11 +26,15 @@ import { TimerStub } from '@test/fixtures/TimerStub';
 
 const formModel = useFormModel();
 const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
+let tracker: TrackerStub;
 
 describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		tracker = {
+			trackEvent: vi.fn()
+		};
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
@@ -47,7 +54,7 @@ describe( 'BannerVar.vue', () => {
 					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub(),
+					tracker: tracker,
 					timer: timer ?? new TimerStub()
 				}
 			},
@@ -58,7 +65,8 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ],
+			[ 'expectEmitsCloseEventWhenRemainingImpressionsAreZero' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -115,6 +123,13 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpsellFormHasTransactionFee' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
+		} );
+
+		test.each( [
+			[ 'expectTracksCoverTransactionFeesEventOnSubmit' ],
+			[ 'expectDoesNotTrackCoverTransactionFeesEventWhenUnchecked' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormTransactionFeeTracking[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 

@@ -75,7 +75,8 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ],
+			[ 'expectEmitsCloseEventWhenRemainingImpressionsAreZero' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -144,6 +145,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ],
 			[ 'expectShowsCloseIcon' ],
 			[ 'expectCloseIconEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
