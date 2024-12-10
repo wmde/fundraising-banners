@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 import chalk from 'chalk';
 
-// This is a script that checks if the fundraising-frontend-content package has a never version
+// This is a script that checks if the fundraising-frontend-content package has a newer version
 // than the one currently installed. This is useful to check if the content has been updated
 // in the remote repository and the package-lock.json file needs to be updated.
 // Run this before builing the banners

@@ -1,5 +1,5 @@
 import { configDefaults, defineConfig, mergeConfig } from 'vitest/config';
-import chalk from 'chalk'
+import chalk from 'chalk';
 import { getFilterForInactiveCampaigns } from './test/filterInactiveCampaigns.mjs';
 import defaultConfig from './vitest.config.mjs';
 
@@ -10,14 +10,14 @@ const { inactiveCampaignGlobs, campaignsWithoutTests } = getFilterForInactiveCam
 
 const outputMissingCampaigns = ( missingCampaigns ) => {
 	missingCampaigns.forEach( c => console.log( `  ${c}` ) );
-}
+};
 
 if ( campaignsWithoutTests.length > 0 ) {
 	if ( CAMPAIGN_WITHOUT_TEST_HANDLING === 'warn' ) {
-		console.warn( `${ chalk.yellow( 'Warning:' ) } Campaigns without tests:`);
+		console.warn( `${ chalk.yellow( 'Warning:' ) } Campaigns without tests:` );
 		outputMissingCampaigns( campaignsWithoutTests );
 	} else if ( CAMPAIGN_WITHOUT_TEST_HANDLING === 'error' ) {
-		console.warn( `${ chalk.yellow( 'Error:' ) } Campaigns without tests:`);
+		console.warn( `${ chalk.yellow( 'Error:' ) } Campaigns without tests:` );
 		outputMissingCampaigns( campaignsWithoutTests );
 		process.exit( 1 );
 	}
