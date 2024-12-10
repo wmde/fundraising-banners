@@ -130,3 +130,18 @@ If any imports from the `@banners/` namespace remain in the "final" banner, they
 
 - `banners/*/LAST_BANNER/event_map*` (`LAST_BANNER` is a placeholder for the last banner (i.e. highest test number) in each channel)
 - `src/tracking/events/*.ts`
+
+## Request coverage of all banners
+
+We want our coverage report to check *all* banners
+
+- Remove `coverage.exclude` section from `vitest.campaign.config.mjs` and
+  clean up the `ignoredBannersGlob` generation from `getFilterForInactiveCampaigns`
+- Remove `--config vitest.campaign.config.mjs` parameter from `coverage` script in `package.json`
+
+### Files to look at
+
+- `vitest.campaign.config.mjs`
+- `package.json`
+- `test/filterForInactiveCampaigns.mjs`
+
