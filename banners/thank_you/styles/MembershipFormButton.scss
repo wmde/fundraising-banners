@@ -5,16 +5,32 @@
 		width: 100%;
 		max-width: 330px;
 		height: 50px;
-		border: 0;
+		border: 2px solid var( --membership-button-border );
 		display: inline-block;
 		padding: 0 10px;
 		font-size: 3.4vw;
 		font-weight: bold;
-		border-radius: 6px;
+		border-radius: 29px;
 		text-decoration: none;
-		margin: 0 0.5em 0.5em 0;
+		margin: 0 0 20px;
 		white-space: nowrap;
 		cursor: pointer;
+		color: var( --membership-button-color );
+		background: var( --membership-button-background );
+		transition: background-color 200ms ease-in-out;
+
+		@include breakpoints.small-up {
+			font-size: 16px;
+		}
+
+		@include breakpoints.medium-up {
+			font-size: 18px;
+		}
+
+		&:hover,
+		&:focus {
+			background: var( --membership-button-background-hover );
+		}
 
 		@include breakpoints.x-small-up {
 			max-width: 360px;

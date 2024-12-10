@@ -2,15 +2,16 @@
 
 .wmde-banner {
 	&-stats-box {
-		background: var( --color-off-white );
+		background: var( --stats-box-background );
+		color: var( --stats-box-color );
+		text-shadow: 2px 2px 2px var( --stats-box-text-shadow );
 		border-radius: 6px;
 		padding: 12px;
 		margin: 0 0 24px;
 
 		@include breakpoints.x-small-up {
-			float: right;
-			max-width: 184px;
-			margin: 0 0 10px 10px;
+			max-width: 100%;
+			margin: 0 0 10px;
 		}
 
 		&-row {
