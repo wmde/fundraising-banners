@@ -1,6 +1,6 @@
 <template>
 	<span v-if="content !== ''" class="wmde-banner-text-animated-highlight">
-		{{ content }}
+		<span class="wmde-banner-text-animated-highlight-text">{{ content }}</span>
 	</span>
 </template>
 
