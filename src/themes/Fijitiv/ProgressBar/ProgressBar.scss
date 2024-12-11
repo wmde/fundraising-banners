@@ -7,6 +7,8 @@ $progress-bar-height: 30px !default;
 $progress-bar-margin: 0 !default;
 
 .wmde-banner .wmde-banner-fallback {
+	@include ProgressBar.layout;
+
 	.wmde-banner {
 		&-progress-bar {
 			position: relative;
@@ -69,19 +71,18 @@ $progress-bar-margin: 0 !default;
 
 			&--late-progress {
 				.wmde-banner-progress-bar-text-left {
+					color: var( --fallback-progressbar-color );
+
 					@include breakpoints.extra-small-up {
 						visibility: visible;
 					}
 				}
-
 				.wmde-banner-progress-bar-text-right {
 					visibility: hidden;
 				}
-
 				.wmde-banner-progress-bar-fill {
 					min-width: 100px;
 				}
-
 				.wmde-banner-progress-bar-target {
 					flex: 0 0 auto;
 					display: block;
