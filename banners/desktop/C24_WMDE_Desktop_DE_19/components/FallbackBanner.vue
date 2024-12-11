@@ -31,7 +31,7 @@
 		<div class="wmde-banner-fallback-large" v-if="onLargeScreen">
 			<div class="wmde-banner-fallback-message">
 				<FallbackText/>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<ProgressBarAlternative amount-to-show-on-right="TARGET"/>
 			</div>
 
 			<LargeFooter @useOfFundsButtonClicked="isFundsModalVisible = true" @submitButtonClicked="onSubmit"/>
@@ -71,7 +71,7 @@ import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import ProgressBarAlternative from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 
 interface Props {
 	bannerState: BannerStates;
