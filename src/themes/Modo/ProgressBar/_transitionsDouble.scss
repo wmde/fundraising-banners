@@ -1,0 +1,49 @@
+@use '../variables/globals';
+
+.wmde-banner {
+	&-double-progress-amount-difference,
+	&-double-progress-time-fill,
+	&-double-progress-amount-fill {
+		transition: width 3000ms globals.$banner-easing;
+		width: 0;
+		max-width: 100%;
+	}
+
+	&-double-progress .text-fade {
+		opacity: 0;
+		transition: opacity 300ms globals.$banner-easing;
+		transition-delay: 3000ms;
+	}
+
+	&--visible {
+		.wmde-banner-mini {
+			.wmde-banner-double-progress-amount-difference,
+			.wmde-banner-double-progress-time-fill {
+				width: var( --wmde-banner-progress-bar-time-width );
+			}
+
+			.wmde-banner-double-progress-amount-fill {
+				width: var( --wmde-banner-progress-bar-width );
+			}
+
+			.wmde-banner-double-progress .text-fade {
+				opacity: 1;
+			}
+		}
+	}
+
+	&-wrapper--full-page {
+		.wmde-banner-double-progress-amount-difference,
+		.wmde-banner-double-progress-time-fill {
+			width: var( --wmde-banner-progress-bar-time-width );
+		}
+
+		.wmde-banner-double-progress-amount-fill {
+			width: var( --wmde-banner-progress-bar-width );
+		}
+
+		.wmde-banner-double-progress .text-fade {
+			opacity: 1;
+		}
+	}
+}

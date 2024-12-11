@@ -1,0 +1,81 @@
+@use 'src/components/ProgressBar/DoubleProgressBar';
+@use 'transitionsDouble';
+
+.wmde-banner {
+	@include DoubleProgressBar.layout;
+
+	.wmde-banner {
+		&-double-progress {
+			margin: 0;
+			font-size: 12px;
+
+			&-labels {
+				display: flex;
+				justify-content: space-between;
+				font-weight: bold;
+				margin-bottom: 6px;
+			}
+
+			&-amount,
+			&-time {
+				height: 16px;
+				line-height: 16px;
+				padding-right: 10px;
+				border-radius: 12px;
+
+				&-fill,
+				&-difference {
+					color: var( --double-progress-color );
+					height: 100%;
+					padding: 0 10px;
+				}
+
+				&-fill {
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+
+			&-right-text {
+				float: right;
+				color: var( --double-progress-right-text-color );
+			}
+
+			&-amount {
+				margin-bottom: 10px;
+				background: var( --double-progress-time-background );
+
+				&-fill,
+				&-difference {
+					border-radius: 12px;
+				}
+
+				&-fill {
+					background: var( --double-progress-time-fill-background );
+					z-index: 2;
+				}
+
+				&-difference {
+					background: var( --double-progress-difference-background );
+					z-index: 1;
+					text-align: right;
+					color: var( --double-progress-difference-color );
+				}
+
+				svg {
+					position: relative;
+					top: 2px;
+				}
+			}
+
+			&-time {
+				background: var( --double-progress-amount-background );
+
+				&-fill {
+					border-radius: 12px;
+					background: var( --double-progress-amount-fill-background );
+				}
+			}
+		}
+	}
+}
