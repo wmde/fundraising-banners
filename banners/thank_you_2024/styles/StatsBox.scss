@@ -1,0 +1,28 @@
+.wmde-banner {
+	&-stats {
+		border-top: 2px solid var( --stats-border );
+		list-style-type: none;
+		list-style-image: none;
+		padding: 0;
+		margin: 0 0 16px;
+		font-size: 14px;
+
+		li {
+			display: flex;
+			align-items: center;
+			border-bottom: 2px solid var( --stats-border );
+			margin: 0;
+			height: 100px;
+		}
+
+		strong {
+			color: var( --stats-bold-color );
+			font-size: 20px;
+		}
+
+		&-icon {
+			flex: 0 0 100px;
+			text-align: center;
+		}
+	}
+}
