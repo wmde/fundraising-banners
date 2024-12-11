@@ -1,6 +1,6 @@
 @use 'src/themes/Mikings/swatches/skin_default' with (
 	$upgrade-to-yearly-button-form: true,
-	$progress-bar: true,
+	$double-progress-bar: true,
 	$soft-close: true,
 	$thank-you-box: true
 );
@@ -26,4 +26,4 @@
 	$pagination-height: 40px
 );
 @use 'src/themes/Mikings/SoftClose/SoftClose';
-@use 'src/themes/Mikings/ProgressBar/ProgressBar';
+@use 'src/themes/Mikings/ProgressBar/DoubleProgressBar';
