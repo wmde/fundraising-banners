@@ -4,12 +4,12 @@
 .wmde-banner {
 	&-progress-bar {
 		font-size: 12px;
-		border: 3px solid var( --color-primary );
+		border: 3px solid var( --progress-bar-border );
 		border-radius: 15px;
 		position: relative;
-		height: 36px;
-		line-height: 30px;
-		margin: 0;
+		height: 30px;
+		line-height: 25px;
+		margin: 0 10px 10px;
 
 		@include breakpoints.x-small-up {
 			font-size: 16px;
@@ -23,15 +23,17 @@
 			width: 10%;
 			transition: width 3000ms globals.$banner-easing;
 			position: absolute;
+			display: flex;
+			justify-content: space-between;
 			top: 0;
 			left: 0;
 			height: 100%;
 			text-align: left;
 			padding: 0 10px;
-			color: var( --color-white );
+			color: var( --progress-bar-color );
 			font-weight: bold;
 			border-radius: 12px;
-			background: var( --color-primary );
+			background: var( --progress-bar-fill-background );
 
 			&-text {
 				opacity: 0;

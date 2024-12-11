@@ -6,22 +6,17 @@
 		text-align: center;
 		position: relative;
 		padding: 0;
-		width: 156px;
+		width: 100%;
 		margin: 0 auto 20px;
 
 		img {
 			border-radius: 50%;
 		}
 
-		@include breakpoints.x-small-up {
-			margin: 6px 30px 10px 0;
-			float: left;
-		}
-
 		&-copyright {
 			position: absolute;
 			top: 0;
-			left: -10px;
+			left: 0;
 			width: 210px;
 			height: 210px;
 			font-size: 6px;
