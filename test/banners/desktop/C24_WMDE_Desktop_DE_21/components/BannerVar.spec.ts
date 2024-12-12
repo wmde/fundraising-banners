@@ -25,12 +25,13 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { autoCollapseFeatures } from '@test/features/AutoCollapseDesktop';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 let tracker: Tracker;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -173,6 +174,18 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Minimised Banner', () => {
+		test.each( [
+			[ 'expectAutoCollapsesTheMainBanner' ],
+			[ 'expectTracksAutoCollapse' ],
+			[ 'expectRemovesEventListenerWhenCollapsed' ],
+			[ 'expectGoesToSoftCloseFromMinimised' ],
+			[ 'expectGoesBackToMainBannerFromMinimised' ]
+		] )( '%s', async ( testName: string ) => {
+			await autoCollapseFeatures[ testName ]( getWrapper, tracker );
 		} );
 	} );
 } );
