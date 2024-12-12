@@ -21,17 +21,13 @@ $form-width: 300px !default;
 	}
 
 	&-message {
-		height: auto;
+		padding: 0 15px;
+		border: 5px solid var( --message-border );
+		border-radius: 9px;
+		margin-bottom: 10px;
 	}
 
-	&-message-container {
-		display: flex;
-		flex: 1 1 auto;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 11px;
-
+	&-slider-container {
 		border: 5px solid var( --message-border );
 		border-radius: 9px;
 		margin-bottom: 10px;
@@ -42,7 +38,6 @@ $form-width: 300px !default;
 		flex-direction: column;
 		justify-content: center;
 		flex: 1 1 auto;
-		// margin-bottom: 0;
 		overflow-y: hidden;
 		margin-right: 30px;
 		padding: 0 0 10px;
@@ -55,6 +50,6 @@ $form-width: 300px !default;
 		display: flex;
 		flex-direction: column;
 		width: $form-width;
-		padding: 10px 0 0;
+		padding: 10px 0;
 	}
 }
