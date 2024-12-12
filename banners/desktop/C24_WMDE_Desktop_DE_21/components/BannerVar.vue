@@ -28,7 +28,7 @@
 			</template>
 
 			<template #progress>
-				<DoubleProgressBar/>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -83,7 +83,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import MainBanner from './MainBannerVar.vue';
+import MainBanner from './MainBanner_var.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
@@ -104,7 +104,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
-import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBarAlternative.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
