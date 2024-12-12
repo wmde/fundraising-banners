@@ -11,6 +11,16 @@
 		</a>
 		<div class="banner-actions-links">
 			<a
+				v-if="props.isWPDE"
+				class="banner-actions-icon"
+				data-tooltip="Preview in offline mode"
+				:href="campaign.previewUrlDevOffline.replace('{{banner}}', bannerPageName)"
+				target="_blank"
+				title="Preview in offline mode"
+			>
+				<IconOfflineMode/>
+			</a>
+			<a
 				class="banner-actions-icon"
 				data-tooltip="Preview in dark mode"
 				:href="campaign.previewUrlDevDark.replace('{{banner}}', bannerPageName)"
@@ -74,6 +84,7 @@ import { CompileInfo } from '../util';
 import LoadingSpinner from './BuildingAnimation.vue';
 import CopyingAnimation from './CopyingAnimation.vue';
 import IconDarkMode from './IconDarkMode.vue';
+import IconOfflineMode from './IconOfflineMode.vue';
 
 interface Props {
 	banner: Banner;
