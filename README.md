@@ -43,6 +43,10 @@ To verify the code is correct and up to our coding standards. These tests will a
 will run all the tests. If you want to run only the banner integration tests, run
 
     npm run test:banners
+    
+or
+
+    npm run test:all-banners
 
 To run all the code checks (CSS style, TypeScript type checks, TypeScript code style and best practices) run
 
