@@ -6,7 +6,7 @@
 			:bannerState="bannerState"
 		>
 			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
+				<ButtonClose @close="onCloseMain( 'MainBanner', CloseChoices.Close )"/>
 			</template>
 
 			<template #banner-title>
@@ -58,6 +58,20 @@
 
 		</MainBanner>
 
+		<MinimisedBanner
+			v-if="contentState === ContentStates.Minimised"
+			@maximise="() => onMaximiseBanner( 'maximise' )"
+			@maximise-cta="() => onMaximiseBanner( 'cta' )"
+			@close="() => onCloseMain( 'MinimisedBanner', CloseChoices.Close )"
+		>
+			<template #footer>
+				<FooterAlreadyDonated
+					@showFundsModal="isFundsModalVisible = true"
+					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+				/>
+			</template>
+		</MinimisedBanner>
+
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
 			:show-close-icon="true"
@@ -83,7 +97,7 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import MainBanner from './MainBanner_var.vue';
+import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
@@ -111,9 +125,14 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import MinimisedBanner from '@banners/desktop/C24_WMDE_Desktop_DE_21/components/MinimisedBanner.vue';
+import { useScrollMinimiser } from '@banners/desktop/C24_WMDE_Desktop_DE_21/useScrollMinimiser';
+import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
+import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	Minimised = 'wmde-banner-wrapper--minimised',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
@@ -142,9 +161,18 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+const wasMinimised = ref<boolean>( false );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
+} );
+
+useScrollMinimiser( 500, wasMinimised, () => {
+	if ( props.bannerState === BannerStates.Visible && contentState.value === ContentStates.Main ) {
+		contentState.value = ContentStates.Minimised;
+		wasMinimised.value = true;
+		tracker.trackEvent( new BannerMinimisedEvent() );
+	}
 } );
 
 const onSubmit = (): void => {
@@ -155,16 +183,23 @@ const onSubmit = (): void => {
 	}
 };
 
-function onCloseMain(): void {
+function onCloseMain( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	if ( props.remainingImpressions > 0 ) {
 		contentState.value = ContentStates.SoftClosing;
+		emit( 'bannerContentChanged' );
 	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
+		onClose( feature, userChoice );
 	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onMaximiseBanner( userChoice: string ): void {
+	contentState.value = ContentStates.Main;
+	tracker.trackEvent( new BannerMaximisedEvent( userChoice ) );
+	emit( 'bannerContentChanged' );
 }
 
 function onHideFundsModal(): void {

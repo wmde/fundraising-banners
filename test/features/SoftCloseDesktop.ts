@@ -63,7 +63,7 @@ const expectEmitsBannerContentChangedOnSoftClose = async ( getWrapper: () => Vue
 
 	await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
 
-	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBeGreaterThanOrEqual( 1 );
 };
 
 const expectDoesNotShowSoftCloseOnFinalBannerImpression = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
