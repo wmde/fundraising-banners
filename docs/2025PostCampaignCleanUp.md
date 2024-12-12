@@ -130,3 +130,19 @@ If any imports from the `@banners/` namespace remain in the "final" banner, they
 
 - `banners/*/LAST_BANNER/event_map*` (`LAST_BANNER` is a placeholder for the last banner (i.e. highest test number) in each channel)
 - `src/tracking/events/*.ts`
+
+## Rename `ProgressBarAlternative.vue`
+
+### Files to look at
+
+- src/components/ProgressBar/ProgressBarAlternative.vue
+
+## Fallback banner progress bar
+
+Currently, if the progress bar on main banner is different than progress bar on fallback banner, then the progress bar on fallback banner becomes broken.
+
+Ex. If main banner uses double progress bar and FB banner uses progress bar alternative, the progress bar on FB banner is broken.
+
+So, somehow the progress bar on FB banner is dependant on progress bar on main banner.
+
+Could we make them fully independent of each other?
