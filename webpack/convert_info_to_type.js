@@ -12,6 +12,7 @@ const CamapignConfigMap = {
 	tracking: 'campaign_tracking',
 	previewUrlDev: 'preview_link',
 	previewUrlDevDark: 'preview_link_darkmode',
+	previewUrlDevOffline: 'preview_link_offline',
 	previewUrlProd: 'preview_url',
 	wrapperTemplate: 'wrapper_template'
 };
