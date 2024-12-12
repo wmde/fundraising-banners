@@ -31,7 +31,9 @@
     "lint:test-imports": "node test/find_mismatched_imports.mjs",
     "ci": "npm-run-all lint test check-content-version",
     "check-content-version": "ts-node check-content-version.ts",
-    "coverage": "vitest run --coverage --config vitest.campaign.config.mjs",
+    "coverage": "coverage:filtered",
+    "coverage:filtered": "vitest run --coverage --config vitest.campaign.config.mjs",
+    "coverage:all": "vitest run --coverage",
     "update-content": "npm update fundraising-frontend-content"
   },
   "keywords": [],
