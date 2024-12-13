@@ -21,6 +21,7 @@ import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } f
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { autoCollapseFeatures } from '@test/features/AutoCollapseMobile';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -164,11 +165,23 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Mini Banner', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
-			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Minimised Banner', () => {
+		test.each( [
+			[ 'expectAutoCollapsesTheMiniBanner' ],
+			[ 'expectTracksAutoCollapse' ],
+			[ 'expectRemovesEventListenerWhenCollapsed' ],
+			[ 'expectGoesToSoftCloseFromMinimised' ],
+			[ 'expectGoesToFullPageFromMinimised' ],
+			[ 'expectTracksExpandingToFullPage' ]
+		] )( '%s', async ( testName: string ) => {
+			await autoCollapseFeatures[ testName ]( getWrapper, tracker );
 		} );
 	} );
 

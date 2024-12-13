@@ -1,0 +1,58 @@
+.wmde-banner {
+	&-minimised {
+		--info-icon-background: var( --minimised-info-background );
+		--info-icon-color: var( --minimised-info-color );
+
+		background: var( --minimised-background );
+		color: var( --minimised-color );
+		position: relative;
+		padding: 5px 36px 5px 10px;
+		font-size: 16px;
+		line-height: 1.8;
+
+		.wmde-banner-close {
+			all: unset;
+			border: 0;
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 36px;
+			width: 36px;
+			cursor: pointer;
+			text-align: center;
+
+			&-icon {
+				background: var( --minimised-close-background );
+				display: inline-block;
+				height: 20px;
+				width: 20px;
+				border-radius: 50%;
+			}
+
+			svg {
+				position: relative;
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				top: -5px;
+			}
+		}
+
+		a {
+			color: var( --minimised-link-color );
+			font-weight: bold;
+			svg {
+				position: relative;
+				top: 2px;
+				path {
+					fill: var( --minimised-link-color );
+				}
+			}
+		}
+	}
+
+	&-info-icon {
+		position: relative;
+		top: 2px;
+	}
+}

@@ -1,9 +1,10 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
+			v-if="contentState === ContentStates.Mini"
 			@close="onCloseMiniBanner"
-			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@show-full-page-banner="onShowFullPageBanner"
+			@show-full-page-banner-preselected="onShowFullPageBannerPreselected"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -17,6 +18,12 @@
 				</KeenSlider>
 			</template>
 		</MiniBanner>
+
+		<MinimisedBanner
+			v-if="contentState === ContentStates.Minimised"
+			@close="onCloseMinimisedBanner"
+			@show-full-page-banner="onShowFullPageBannerFromMinimised"
+		/>
 
 		<FullPageBanner
 			@showFundsModal="isFundsModalVisible = true"
@@ -151,9 +158,13 @@ import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import MinimisedBanner from '@banners/mobile/C24_WMDE_Mobile_DE_13/components/MinimisedBanner.vue';
+import { MinimisedEvent } from '@src/tracking/events/MinimisedEvent';
+import { useScrollMinimiser } from '@banners/mobile/C24_WMDE_Mobile_DE_13/useScrollMinimiser';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
+	Minimised = 'wmde-banner-wrapper--minimised',
 	FullPage = 'wmde-banner-wrapper--full-page',
 	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
@@ -193,6 +204,16 @@ const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFor
 const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 ).getItems().amounts;
 const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
 const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
+const wasMinimised = ref<boolean>( false );
+
+useScrollMinimiser( 500, wasMinimised, () => {
+	if ( props.bannerState === BannerStates.Visible && contentState.value === ContentStates.Mini ) {
+		contentState.value = ContentStates.Minimised;
+		wasMinimised.value = true;
+		slideShowStopped.value = true;
+		tracker.trackEvent( new MinimisedEvent( 'MiniBanner', 'minimised' ) );
+	}
+} );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -203,6 +224,14 @@ function onCloseMiniBanner(): void {
 		contentState.value = ContentStates.SoftClosing;
 	} else {
 		onClose( 'MainBanner', CloseChoices.Close );
+	}
+}
+
+function onCloseMinimisedBanner(): void {
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MinimisedBanner', CloseChoices.Hide );
 	}
 }
 
@@ -224,24 +253,27 @@ const onSubmit = (): void => {
 	}
 };
 
-function onshowFullPageBanner(): void {
+function showFullPageBanner( fromFeature: string ): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
 	emit( 'modalOpened' );
-
-	amountOptionsForForm.value = amountOptionsFive;
-
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
+	tracker.trackEvent( new MobileMiniBannerExpandedEvent( fromFeature ) );
 }
 
-function onshowFullPageBannerPreselected(): void {
-	slideShowStopped.value = true;
+function onShowFullPageBanner(): void {
+	amountOptionsForForm.value = amountOptionsFive;
+	showFullPageBanner( '' );
+}
 
+function onShowFullPageBannerPreselected(): void {
 	amountOptionsForForm.value = amountOptionsTen;
-
 	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+	showFullPageBanner( 'preselected' );
+}
+
+function onShowFullPageBannerFromMinimised(): void {
+	amountOptionsForForm.value = amountOptionsFive;
+	showFullPageBanner( 'minimised' );
 }
 
 const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {

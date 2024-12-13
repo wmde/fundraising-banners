@@ -146,3 +146,20 @@ Ex. If main banner uses double progress bar and FB banner uses progress bar alte
 So, somehow the progress bar on FB banner is dependant on progress bar on main banner.
 
 Could we make them fully independent of each other?
+
+## Fix Heart Icon & Thank You Box
+
+This has a CSS variable setting it's fill, which doesn't work. The fill attribute should be removed from the svg element, and the path changed to `style="fill: var( --heart-icon-fill )"`. Then in the mobile banner themes it should be set up in the thank you box CSS, something like:
+
+```css
+.thank-you-container {
+   --heart-icon-fill: var( --thank-you-box-color );
+}
+```
+Also the CSS that's currently in the Vue component should be moved or removed.
+
+### Files to look at
+- `src/components/Icons/HeartIcon.vue`
+- `src/themes/Modo/ThankYouBox/ThankYouBox.scss`
+- `src/themes/Mikings/ThankYouBox/ThankYouBox.scss`
+- `src/components/ThankYouBox/ThankYouBox.vue`

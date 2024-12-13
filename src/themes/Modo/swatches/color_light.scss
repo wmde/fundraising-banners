@@ -42,7 +42,10 @@ $purple100: #6b4ba1;
 $red200: #f17678;
 $red300: #ff5233;
 
+$pink100: #ff33f1;
+
 @mixin swatch(
+	$minimised-banner: false,
 	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
@@ -129,11 +132,18 @@ $red300: #ff5233;
 	);
 	/* stylelint-enable */
 
-	--minimise-background: #{$grey100};
-	--minimise-fill: #{$blue600};
-	--maximise-fill: #{$blue600};
-	--minimise-color: #{$blue600};
-	--minimise-text-highlight-background: #{$yellow100};
+	@if $minimised-banner {
+		--minimised-background: #{$green800};
+		--minimised-color: #{$white};
+
+		--minimised-close-background: #{$grey50};
+
+		--minimised-link-color: #{$yellow200};
+		--minimised-link-shadow: #{$pink100};
+
+		--minimised-info-background: #{$yellow200};
+		--minimised-info-color: #{$black};
+	}
 
 	@if $address-type-button-form {
 		--address-type-button-form-notice-color: #{$grey700};

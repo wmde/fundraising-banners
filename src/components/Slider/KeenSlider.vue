@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, ref, watch } from 'vue';
+import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
@@ -127,5 +127,7 @@ const goToSlide = ( idx: number ): void => {
 onMounted( () => {
 	emit( 'slide-changed', currentSlide.value, slider.value.slides.length );
 } );
+
+onUnmounted( stopAutoplay );
 
 </script>

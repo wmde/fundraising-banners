@@ -168,4 +168,14 @@ describe( 'KeenSlider', () => {
 
 		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
+
+	it( 'should stop the auto play when unmounted', async () => {
+		const timerSpy = new TimerSpy();
+		const wrapper = getWrapper( timerSpy );
+		await wrapper.setProps( { play: true } );
+		wrapper.unmount();
+
+		expect( timerSpy.clearIntervalIds ).toStrictEqual( [ 0 ] );
+		expect( timerSpy.clearTimeoutIds ).toStrictEqual( [ 0 ] );
+	} );
 } );
