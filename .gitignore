@@ -1,6 +1,7 @@
 .env
 .eslintcache
 .idea/
+*.patch
 npm-debug.log
 node_modules/
 dist/
