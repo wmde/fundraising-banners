@@ -1,6 +1,6 @@
 @use 'src/themes/Modo/swatches/skin_default' with (
 	$upgrade-to-yearly-button-form: true,
-	$progress-bar: true,
+	$double-progress-bar: true,
 	$soft-close: true,
 	$thank-you-box: true
 );
@@ -24,5 +24,5 @@
 @use 'src/themes/Modo/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Modo/Slider/Slider';
 @use 'src/themes/Modo/SoftClose/SoftClose';
-@use 'src/themes/Modo/ProgressBar/ProgressBar';
+@use 'src/themes/Modo/ProgressBar/DoubleProgressBar';
 @use 'src/themes/Modo/Message/Message';

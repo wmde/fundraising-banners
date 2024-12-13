@@ -23,6 +23,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { WindowTimer } from '@src/utils/Timer';
+import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -31,7 +32,7 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
-
+const date = new Date();
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 const app = createVueApp( BannerConductor, {
@@ -54,7 +55,7 @@ const app = createVueApp( BannerConductor, {
 app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
-	date: new Date(),
+	date,
 	formatters: localeFactory.getFormatters(),
 	impressionCount,
 	translator,
@@ -66,5 +67,6 @@ app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmo
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
+app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( date, page.getCampaignParameters() ) );
 
 app.mount( page.getBannerContainer() );
