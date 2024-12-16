@@ -41,6 +41,7 @@ const campaignParameters: CampaignParameters = {
 	startDate: '2023-11-03',
 	urgencyMessageDaysLeft: 10,
 	isLateProgress: false,
+	dramaTextIsVisible: false,
 	thankYouCampaign: {
 		progressBarPercentage: 80,
 		numberOfDonors: 42

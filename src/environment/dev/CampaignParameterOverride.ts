@@ -17,6 +17,7 @@ export function getCampaignParameterOverride( campaignParameters: CampaignParame
 		...campaignParameters,
 		startDate: '2024-10-28',
 		endDate: '2024-12-31',
-		isLateProgress: true
+		isLateProgress: true,
+		dramaTextIsVisible: true
 	};
 }
