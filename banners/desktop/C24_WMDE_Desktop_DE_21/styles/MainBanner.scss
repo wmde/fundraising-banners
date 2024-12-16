@@ -31,6 +31,10 @@ $form-width: 300px !default;
 		justify-content: center;
 		align-items: center;
 		padding: 11px;
+
+		border: 5px solid var( --message-border );
+		border-radius: 9px;
+		margin-bottom: 10px;
 	}
 
 	&-column-left {
@@ -38,13 +42,10 @@ $form-width: 300px !default;
 		flex-direction: column;
 		justify-content: center;
 		flex: 1 1 auto;
-		margin-bottom: 0;
 		overflow-y: hidden;
 		margin-right: 30px;
 		padding: 0 0 10px;
 		background: var( --message-background );
-		border: 5px solid var( --message-border );
-		border-radius: 9px;
 	}
 
 	&-column-right {

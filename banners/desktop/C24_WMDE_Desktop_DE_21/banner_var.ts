@@ -24,6 +24,7 @@ import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
+import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -69,5 +70,6 @@ app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmo
 app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { afo: '1', ap: '0' } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
+app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( new Date(), page.getCampaignParameters() ) );
 
 app.mount( page.getBannerContainer() );
