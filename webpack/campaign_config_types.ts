@@ -12,6 +12,7 @@ export interface Campaign {
 	tracking: string,
 	previewUrlDev: string,
 	previewUrlDevDark: string,
+	previewUrlDevOffline: string,
 	previewUrlProd: string,
 	wrapperTemplate: string,
 	banners: Record<string, Banner>
