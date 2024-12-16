@@ -110,7 +110,7 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import BannerTitle from '../content/BannerTitle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

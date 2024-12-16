@@ -5,4 +5,5 @@ export interface DynamicProgressBarContent {
 	amountDonated: string;
 	amountNeeded: string;
 	isLateProgress: boolean;
+	dramaText: string;
 }

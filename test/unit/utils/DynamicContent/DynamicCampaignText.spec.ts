@@ -41,6 +41,7 @@ const campaignParameters: CampaignParameters = {
 	startDate: '2023-11-03',
 	urgencyMessageDaysLeft: 10,
 	isLateProgress: false,
+	dramaTextIsVisible: false,
 	thankYouCampaign: {
 		progressBarPercentage: 80,
 		numberOfDonors: 42
@@ -135,5 +136,15 @@ describe( 'DynamicCampaignText', () => {
 
 	it( 'Gets the average donation', () => {
 		expect( dynamicCampaignText.averageDonation ).toBe( '€20' );
+	} );
+
+	it( 'Drama text is empty string on dramaTextIsVisible false', () => {
+		campaignParameters.dramaTextIsVisible = false;
+		expect( dynamicCampaignText.dramaText ).toBe( '' );
+	} );
+
+	it( 'Drama text is non-empty string dramaTextIsVisible true', () => {
+		campaignParameters.dramaTextIsVisible = true;
+		expect( dynamicCampaignText.dramaText ).toBe( 'drama-text' );
 	} );
 } );

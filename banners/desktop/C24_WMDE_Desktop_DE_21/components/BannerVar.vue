@@ -124,7 +124,7 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import BannerTitle from '../content/BannerTitle.vue';
 import MinimisedBanner from '@banners/desktop/C24_WMDE_Desktop_DE_21/components/MinimisedBanner.vue';
 import { useScrollMinimiser } from '@banners/desktop/C24_WMDE_Desktop_DE_21/useScrollMinimiser';
 import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';

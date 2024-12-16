@@ -1,7 +1,11 @@
 <template>
 	<div class="wmde-banner-message-header">
 		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich</h2>
-		<p><strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen</strong></p>
+		<p>
+			<strong>
+				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen. {{ dramaText }}
+			</strong>
+		</p>
 	</div>
 </template>
 
@@ -11,7 +15,7 @@ import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTi
 import { inject, onMounted, onUnmounted } from 'vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
-const { getCurrentDateAndTime } = inject<DynamicContent>( 'dynamicCampaignText' );
+const { getCurrentDateAndTime, dramaText } = inject<DynamicContent>( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );

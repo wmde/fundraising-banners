@@ -124,7 +124,7 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import BannerTitle from '../content/BannerTitle.vue';
 import TenGoodReasonsSticker from '@banners/desktop/C24_WMDE_Desktop_DE_19/content/TenGoodReasonsSticker.vue';
 import ReasonsToDonate from '@src/components/ReasonsToDonate/ReasonsToDonate.vue';
 import { ReasonsToDonateShownEvent } from '@src/tracking/events/ReasonsToDonateShownEvent';

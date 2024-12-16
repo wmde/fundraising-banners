@@ -69,6 +69,7 @@ export class PageStub implements Page {
 			numberOfMembers: 0,
 			startDate: '',
 			isLateProgress: false,
+			dramaTextIsVisible: false,
 			urgencyMessageDaysLeft: 0,
 			thankYouCampaign: {
 				progressBarPercentage: 0,
