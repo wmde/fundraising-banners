@@ -1,5 +1,9 @@
 <template>
-	<a class="wmde-banner-fallback-usage-link" @click.prevent="$emit( 'button-clicked' )">
+	<a
+		class="wmde-banner-fallback-usage-link"
+		@click.prevent="$emit( 'button-clicked' )"
+		:title="$translate( 'use-of-funds-link-description' )"
+	>
 		{{ $translate( 'use-of-funds-link' ) }}
 	</a>
 </template>
