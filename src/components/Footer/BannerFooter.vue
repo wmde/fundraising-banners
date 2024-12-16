@@ -21,6 +21,7 @@
 					id="application-of-funds-link"
 					class="wmde-banner-footer-usage-link t-use-of-funds-link"
 					@click.prevent="$emit( 'showFundsModal' )"
+					:title="$translate( 'use-of-funds-link-description' )"
 				>
 					{{ $translate( 'use-of-funds-link' ) }}
 				</a>
