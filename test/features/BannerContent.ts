@@ -39,8 +39,9 @@ const expectHidesAnimatedVisitorsVsDonorsSentenceInMessage = async ( getWrapper:
 
 	expect( wrapper.find( '.wmde-banner-message .wmde-banner-text-animated-highlight' ).exists() ).toBeFalsy();
 };
-const expectShowsAnimatedVisitorsVsDonorsSentenceInMessage = async ( getWrapper: ( dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
-	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 1301 } );
+const expectShowsAnimatedVisitorsVsDonorsSentenceInMessage = async ( getWrapper: ( dynamicContent: DynamicContent ) =>
+	VueWrapper<any>, minWidthForLargeScreen: number = 1301 ): Promise<any> => {
+	Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: minWidthForLargeScreen } );
 	const dynamicContent = newDynamicContent();
 	dynamicContent.visitorsVsDonorsSentence = 'Visitors vs donors sentence';
 	const wrapper = getWrapper( dynamicContent );
@@ -222,12 +223,13 @@ export const bannerContentAverageDonationFeatures: Record<string, ( getWrapper: 
 	expectShowsAverageDonationInSlideshow
 };
 
-export const bannerContentAnimatedTextFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
-	expectHidesAnimatedVisitorsVsDonorsSentenceInMessage,
-	expectShowsAnimatedVisitorsVsDonorsSentenceInMessage,
-	expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow,
-	expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow
-};
+export const bannerContentAnimatedTextFeatures: Record<string, ( getWrapper: () =>
+	VueWrapper<any>, minWidthForLargeScreen: number|void ) => Promise<any>> = {
+		expectHidesAnimatedVisitorsVsDonorsSentenceInMessage,
+		expectShowsAnimatedVisitorsVsDonorsSentenceInMessage,
+		expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow,
+		expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow
+	};
 
 export const bannerContentDateAndTimeFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
 	expectShowsLiveDateAndTimeInMessage,

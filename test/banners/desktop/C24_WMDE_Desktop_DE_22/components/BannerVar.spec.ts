@@ -98,14 +98,14 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsSlideShowOnSmallSizes' ],
 			[ 'expectShowsMessageOnLargeSizes' ]
 		] )( '%s', async ( testName: string ) => {
-			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1300 );
+			await bannerContentDisplaySwitchFeatures[ testName ]( getWrapper, 1550 );
 		} );
 
 		test.each( [
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage', 1551 ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow', 1550 ]
+		] )( '%s', async ( testName: string, width: number ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper, width );
 		} );
 
 		test.each( [
