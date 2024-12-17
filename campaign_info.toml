@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "C24_WMDE_Desktop_DE_19"
-description = "Based on VAR of desktop-de-18, VAR has TenGoodReasonsSticker"
-campaign_tracking = "19-ba-241210"
+campaign = "C24_WMDE_Desktop_DE_20"
+description = "Based on CTRL of desktop-de-19, VAR has a design change relating to progress bar"
+campaign_tracking = "20-ba-241213"
 preview_link = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Hamster?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -18,14 +18,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_19/banner_ctrl.ts"
-pagename = "B24_WMDE_Desktop_DE_19_ctrl"
-tracking = "org-19-241210-ctrl"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_20/banner_ctrl.ts"
+pagename = "B24_WMDE_Desktop_DE_20_ctrl"
+tracking = "org-20-241213-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/C24_WMDE_Desktop_DE_19/banner_var.ts"
-pagename = "B24_WMDE_Desktop_DE_19_var"
-tracking = "org-19-241210-var"
+filename = "./banners/desktop/C24_WMDE_Desktop_DE_20/banner_var.ts"
+pagename = "B24_WMDE_Desktop_DE_20_var"
+tracking = "org-20-241213-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
