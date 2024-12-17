@@ -2,8 +2,6 @@ name: Check backwards compatibility for all Banners
 on:
   schedule:
     - cron: "0 0 * * *"
-  pull_request:
-    types: [ review_requested ]
 
 jobs:
   bc-check:
