@@ -163,3 +163,46 @@ Also the CSS that's currently in the Vue component should be moved or removed.
 - `src/themes/Modo/ThankYouBox/ThankYouBox.scss`
 - `src/themes/Mikings/ThankYouBox/ThankYouBox.scss`
 - `src/components/ThankYouBox/ThankYouBox.vue`
+
+## Fix Heart Icon & Thank You Box
+
+This has a CSS variable setting it's fill, which doesn't work. The fill attribute should be removed from the svg element, and the path changed to `style="fill: var( --heart-icon-fill )"`. Then in the mobile banner themes it should be set up in the thank you box CSS, something like:
+
+```css
+.thank-you-container {
+   --heart-icon-fill: var( --thank-you-box-color );
+}
+```
+Also the CSS that's currently in the Vue component should be moved or removed.
+
+### Files to look at
+- `src/components/Icons/HeartIcon.vue`
+- `src/themes/Modo/ThankYouBox/ThankYouBox.scss`
+- `src/themes/Mikings/ThankYouBox/ThankYouBox.scss`
+- `src/components/ThankYouBox/ThankYouBox.vue`
+
+## New Use of Funds
+
+We needed to implement a new use of funds modal at the last minute for mobile de tests. This caused a good few file duplications in order to not make backwards breaking changes. In January we need to get rid of the old files and rename the new ones. 
+
+### TODO
+- Replace the old Use of Funds with the new one in each banner.
+- Delete the UseOfFunds components, tests, and theme.
+- Rename the UseOfFunds2024 to UseOfFunds.
+- Delete the UseOfFunds interfaces in Domain, and rename the 2024 ones.
+- Delete the UseOfFunds loaders in environment/dev and environment/prod and rename the 2024 ones.
+- Delete the locale factory in utils and rename the 2024 one.
+- Delete the UseOfFunds folder in utils and rename the 2024 one.
+- Delete the LocaleFactory.ts in utils and rename the 2024 one
+
+### Files to look at
+- `src/components/UseOfFunds` & `src/components/UseOfFunds2024`
+- `test/components/UseOfFunds` & `test/components/UseOfFunds2024`
+- `src/domain/UseOfFunds` & `src/domain/UseOfFunds2024`
+- `src/environment/dev/UseOfFundsDeLoader.ts` & `src/environment/dev/UseOfFunds2024DeLoader.ts`
+- `src/environment/dev/UseOfFundsEnLoader.ts` & `src/environment/dev/UseOfFunds2024EnLoader.ts`
+- `src/environment/prod/UseOfFundsDeLoader.ts` & `src/environment/prod/UseOfFunds2024DeLoader.ts`
+- `src/environment/prod/UseOfFundsEnLoader.ts` & `src/environment/prod/UseOfFunds2024EnLoader.ts`
+- `src/utils/LocaleFactory` & `src/utils/LocaleFactory2024`
+- `src/utils/UseOfFunds` & `src/utils/UseOfFunds2024`
+- `src/utils/LocaleFactory.ts` & `src/utils/LocaleFactory2024.ts`
