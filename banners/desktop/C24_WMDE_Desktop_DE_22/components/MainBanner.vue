@@ -34,7 +34,7 @@ const emit = defineEmits( [ 'formInteraction' ] );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 
-const onLargeScreen = useDisplaySwitch( 1300 );
+const onLargeScreen = useDisplaySwitch( 1550 );
 
 const onFormInteraction = (): void => {
 	slideShowStopped.value = true;

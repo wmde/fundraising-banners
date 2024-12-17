@@ -14,13 +14,14 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
-			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Wenn
+			alle, die für Wikipedia dankbar sind, spenden, wäre unser Ziel in wenigen Stunden erreicht.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich,
+			eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>

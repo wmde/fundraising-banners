@@ -12,7 +12,7 @@
 @use 'Banner';
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'MainBanner' with (
-	$banner-height: 357px,
+	$banner-height: 369px,
 	$form-width: 300px
 );
 @use 'src/themes/Treedip/defaults';
