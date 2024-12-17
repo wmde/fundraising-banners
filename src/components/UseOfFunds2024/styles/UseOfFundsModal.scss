@@ -1,0 +1,106 @@
+@use './variables/units';
+@use './variables/breakpoints';
+@use 'sass:map';
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+		transform: scale( 1.1 );
+		display: none;
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale( 1 );
+		display: block;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+		transform: scale( 1.1 );
+		display: block;
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale( 0 );
+		display: none;
+	}
+}
+
+.wmde-banner {
+	&-funds-modal {
+		position: relative;
+		animation: fade-out 500ms ease-in-out;
+		width: 100vw;
+		max-width: 1200px;
+		max-height: 100vh;
+		/* stylelint-disable */
+		height: 100vh;
+		height: -webkit-fill-available;
+		/* stylelint-enable */
+		padding: 0;
+		margin: 0 auto;
+		border: 0;
+		overflow: hidden;
+		background: transparent;
+
+		&-scroll {
+			position: absolute;
+			height: 100%;
+			overflow-y: auto;
+		}
+
+		&[ open ] {
+			animation: fade-in 500ms ease-in-out;
+		}
+
+		&::backdrop {
+			background-color: rgb( 0 0 0 / 80% );
+		}
+
+		&-close {
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			top: 10px;
+			right: 16px;
+			padding: 4px;
+			background: var( --close-button-background );
+			border-radius: 20px;
+			z-index: 2;
+
+			@include breakpoints.desktop-up {
+				top: 22px;
+				right: 32px;
+			}
+
+			button {
+				display: block;
+				height: 32px;
+				width: 32px;
+				background: none;
+				border: 0;
+				padding: 0;
+				margin: 0;
+			}
+
+			&-link {
+				display: block;
+				background-color: transparent;
+				border: 0;
+				padding: 0;
+				cursor: pointer;
+				&:hover {
+					background-color: transparent;
+				}
+			}
+
+			&:hover .banner-modal-close-link {
+				opacity: 0.75;
+			}
+		}
+	}
+}

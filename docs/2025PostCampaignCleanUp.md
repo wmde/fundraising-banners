@@ -197,3 +197,30 @@ See as an example: https://github.com/wmde/fundraising-banners/pull/666
 We used files from banner 15 in later banners instead of the file in their own directory. This dependency should not happen.
 ### Files to look at
 - '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+
+
+## New Use of Funds
+
+We needed to implement a new use of funds modal at the last minute for mobile de tests. This caused a good few file duplications in order to not make backwards breaking changes. In January we need to get rid of the old files and rename the new ones.
+
+### TODO
+- Replace the old Use of Funds with the new one in each banner.
+- Delete the UseOfFunds components, tests, and theme.
+- Rename the UseOfFunds2024 to UseOfFunds.
+- Delete the UseOfFunds interfaces in Domain, and rename the 2024 ones.
+- Delete the UseOfFunds loaders in environment/dev and environment/prod and rename the 2024 ones.
+- Delete the locale factory in utils and rename the 2024 one.
+- Delete the UseOfFunds folder in utils and rename the 2024 one.
+- Delete the LocaleFactory.ts in utils and rename the 2024 one
+
+### Files to look at
+- `src/components/UseOfFunds` & `src/components/UseOfFunds2024`
+- `test/components/UseOfFunds` & `test/components/UseOfFunds2024`
+- `src/domain/UseOfFunds` & `src/domain/UseOfFunds2024`
+- `src/environment/dev/UseOfFundsDeLoader.ts` & `src/environment/dev/UseOfFunds2024DeLoader.ts`
+- `src/environment/dev/UseOfFundsEnLoader.ts` & `src/environment/dev/UseOfFunds2024EnLoader.ts`
+- `src/environment/prod/UseOfFundsDeLoader.ts` & `src/environment/prod/UseOfFunds2024DeLoader.ts`
+- `src/environment/prod/UseOfFundsEnLoader.ts` & `src/environment/prod/UseOfFunds2024EnLoader.ts`
+- `src/utils/LocaleFactory` & `src/utils/LocaleFactory2024`
+- `src/utils/UseOfFunds` & `src/utils/UseOfFunds2024`
+- `src/utils/LocaleFactory.ts` & `src/utils/LocaleFactory2024.ts`
