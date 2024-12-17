@@ -30,6 +30,7 @@ export interface FormModel {
 	disabledPaymentMethods: ComputedRef<string[]>;
 	addressType: Ref<string>;
 	addressTypeValidity: Ref<Validity>;
+	receipt: Ref<boolean|null>;
 	disabledAddressTypes: Ref<string[]>;
 	/**
 	 * Flag to indicate that a payment-provider-specific transaction fee should be added to the total amount

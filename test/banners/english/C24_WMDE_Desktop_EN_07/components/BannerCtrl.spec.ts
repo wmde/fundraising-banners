@@ -47,7 +47,8 @@ describe( 'BannerCtrl.vue', () => {
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub(),
-					timer: timer ?? new TimerStub()
+					timer: timer ?? new TimerStub(),
+					currentCampaignTimePercentage: 42
 				}
 			}
 		} );

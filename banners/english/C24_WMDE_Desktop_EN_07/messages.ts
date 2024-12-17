@@ -23,7 +23,8 @@ const messages: TranslationMessages = {
 	...DoubleProgressBarEn,
 	'upgrade-to-yearly-copy': '<p>Every year we are dependent on the support of people like you. Yearly donations ' +
 		'help sustainably and enable long term development.</p>' +
-		'<p>No risks attached, you can tell us to stop at any time.</p>'
+		'<p>No risks attached, you can tell us to stop at any time.</p>',
+	'donation-receipt-checkbox-label': 'Please send me a tax deductible donation receipt to my postal address.'
 };
 
 export default messages;
