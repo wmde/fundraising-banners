@@ -25,10 +25,14 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					:form-action-override="formAction"
+					@form-interaction="formInteraction"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" :show-receipt-checkbox-below="minimumAmount" @previous="previous">
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
 							</template>
@@ -84,13 +88,13 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from '@banners/english/C24_WMDE_Desktop_EN_07/components/MainDonationFormReceiptAboveValue.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -112,6 +116,10 @@ import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
+import { useFormAction } from '../useFormAction';
+import { FormActions } from '@src/domain/FormActions';
+
+const minimumAmount = 10;
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -140,6 +148,8 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+
+const { formAction } = useFormAction( inject<FormActions>( 'formActions' ), minimumAmount );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
