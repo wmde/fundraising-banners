@@ -1,10 +1,12 @@
-name: Check backwards compatibility for all Banners
+name: BC check for all banners on "Ready for review" label
+#Check backwards compatibility for all Banners whenever "Ready for review" label is added to a pull request
 on:
-  schedule:
-    - cron: "0 0 * * *"
+  pull_request:
+    types: [ labeled ]
 
 jobs:
-  daily-bc-check:
+  bc-check:
+    if: ${{ github.event.label.name == 'Ready for review' }}
     runs-on: ubuntu-latest
 
     strategy:
