@@ -6,7 +6,11 @@ import defaultConfig from './vitest.config.mjs';
 // Set to 'warn' to print a warning, set to 'error' to throw an error, or 'ignore' to do nothing
 const CAMPAIGN_WITHOUT_TEST_HANDLING = 'error';
 
-const { inactiveCampaignGlobs, campaignsWithoutTests } = getFilterForInactiveCampaigns( 'test/banners/*/*', 'campaign_info.toml' );
+const {
+	inactiveCampaignGlobs,
+	inactiveBannerGlobs,
+	campaignsWithoutTests
+} = getFilterForInactiveCampaigns( 'banners/*/*',  'test/banners/*/*', 'campaign_info.toml' );
 
 const outputMissingCampaigns = ( missingCampaigns ) => {
 	missingCampaigns.forEach( c => console.log( `  ${c}` ) );
@@ -30,6 +34,14 @@ export default mergeConfig( defaultConfig, defineConfig( {
 			// in the wrong places and choke on tests in node_modules
 			...configDefaults.exclude,
 			...inactiveCampaignGlobs
-		]
+		],
+		coverage: {
+
+			// Remove this array in 2025, it should inherit from defaultConfig instead.
+			exclude: [
+				...defaultConfig.test.coverage.exclude,
+				...inactiveBannerGlobs,
+			]
+		}
 	}
 } ) );

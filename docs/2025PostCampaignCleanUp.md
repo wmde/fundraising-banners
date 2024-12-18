@@ -163,3 +163,18 @@ Also the CSS that's currently in the Vue component should be moved or removed.
 - `src/themes/Modo/ThankYouBox/ThankYouBox.scss`
 - `src/themes/Mikings/ThankYouBox/ThankYouBox.scss`
 - `src/components/ThankYouBox/ThankYouBox.vue`
+
+## Request coverage of all banners
+
+We want our coverage report to check *all* banners
+
+- Remove `coverage.exclude` section from `vitest.campaign.config.mjs` and
+  clean up the `ignoredBannersGlob` generation from `getFilterForInactiveCampaigns`
+- Remove the `coverage:filtered` script from `package.json`
+
+### Files to look at
+
+- `vitest.campaign.config.mjs`
+- `package.json`
+- `test/filterForInactiveCampaigns.mjs`
+
