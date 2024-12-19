@@ -163,3 +163,10 @@ Also the CSS that's currently in the Vue component should be moved or removed.
 - `src/themes/Modo/ThankYouBox/ThankYouBox.scss`
 - `src/themes/Mikings/ThankYouBox/ThankYouBox.scss`
 - `src/components/ThankYouBox/ThankYouBox.vue`
+
+
+## Disallow @banner-absolute imports in the banner directory
+See as an example: https://github.com/wmde/fundraising-banners/pull/666
+We used files from banner 15 in later banners instead of the file in their own directory. This dependency should not happen.
+### Files to look at
+- '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';

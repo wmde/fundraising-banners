@@ -10,6 +10,7 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 	private readonly _donationSum: number;
 	private readonly _remainingDonationSum: number;
 	private readonly _isLateProgress: boolean;
+	private readonly _dramaText: string;
 
 	public constructor(
 		donationTarget: number,
@@ -18,7 +19,8 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 		remainingDonationSum: number,
 		translator: Translator,
 		currencyFormatter: Currency,
-		isLateProgress: boolean
+		isLateProgress: boolean,
+		dramaText: string
 	) {
 		this._donationTarget = donationTarget;
 		this._percentageTowardsTarget = percentageTowardsTarget;
@@ -27,6 +29,7 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 		this._translator = translator;
 		this._currencyFormatter = currencyFormatter;
 		this._isLateProgress = isLateProgress;
+		this._dramaText = dramaText;
 	}
 
 	public get percentageTowardsTarget(): number {
@@ -56,5 +59,9 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 
 	public get isLateProgress(): boolean {
 		return this._isLateProgress;
+	}
+
+	public get dramaText(): string {
+		return this._dramaText;
 	}
 }

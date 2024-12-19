@@ -19,6 +19,7 @@ describe( 'getCampaignParameterOverride (prod version)', () => {
 			numberOfMembers: 0,
 			startDate: '',
 			isLateProgress: false,
+			dramaTextIsVisible: false,
 			urgencyMessageDaysLeft: 0,
 			thankYouCampaign: {
 				progressBarPercentage: 0,

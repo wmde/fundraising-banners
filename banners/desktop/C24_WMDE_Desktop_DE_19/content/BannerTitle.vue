@@ -1,7 +1,11 @@
 <template>
 	<div class="wmde-banner-message-header">
 		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich</h2>
-		<p><strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen</strong></p>
+		<p>
+			<strong>
+				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen
+			</strong>
+		</p>
 	</div>
 </template>
 

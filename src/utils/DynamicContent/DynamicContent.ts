@@ -19,4 +19,5 @@ export interface DynamicContent {
 	overallImpressionCount: number;
 	progressBarContent: DynamicProgressBarContent;
 	averageDonation: string;
+	dramaText: string;
 }

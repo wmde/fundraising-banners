@@ -27,10 +27,12 @@ describe( 'DoubleProgressBar.vue', () => {
 				donationTargetAmount: 'donationTargetAmount',
 				amountDonated: 'amountDonated',
 				amountNeeded: 'amountNeeded',
-				isLateProgress: false
+				isLateProgress: false,
+				dramaText: 'alarm!'
 			},
 			visitorsVsDonorsSentence: '',
-			averageDonation: ''
+			averageDonation: '',
+			dramaText: 'alarm!'
 		};
 	} );
 
