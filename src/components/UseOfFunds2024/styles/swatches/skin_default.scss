@@ -1,0 +1,5 @@
+@use 'color_light';
+
+.wmde-banner-funds-modal {
+	@include color_light.swatch;
+}

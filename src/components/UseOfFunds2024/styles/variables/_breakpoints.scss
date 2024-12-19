@@ -1,0 +1,39 @@
+$tablet: 769px;
+$desktop: 1024px;
+$widescreen: 1216px;
+$full-hd: 1408px;
+
+/*
+MIXIN USAGE:
+
+.my-selector {
+	@include breakpoints.small-up {
+		// Stuff that happens when bigger than $small
+	}
+}
+
+*/
+
+@mixin tablet-up {
+	@media ( min-width: $tablet ) {
+		@content;
+	}
+}
+
+@mixin desktop-up {
+	@media ( min-width: $desktop ) {
+		@content;
+	}
+}
+
+@mixin widescreen-up {
+	@media ( min-width: $widescreen ) {
+		@content;
+	}
+}
+
+@mixin full-hd-up {
+	@media ( min-width: $full-hd ) {
+		@content;
+	}
+}
