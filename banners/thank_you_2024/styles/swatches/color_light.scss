@@ -1,0 +1,62 @@
+@use 'sass:color';
+
+$black: #000000;
+$white: #ffffff;
+
+$grey200: #d9d9d9;
+
+$sea-blue100: #43e5c5;
+$sea-blue300: #0ea789;
+
+$blue100: #ddf1fd;
+$blue110: #d7edff;
+$blue300: #0e75c4;
+$blue400: #45779d;
+$blue500: #005782;
+$blue510: #2f516a;
+
+@mixin swatch() {
+	--text-color: #{$black};
+	--close-icon-stroke: #{$black};
+
+	--mini-background: #{$white};
+	--mini-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+	--progress-border: #{$sea-blue300};
+	--progress-color: #{$white};
+	--progress-fill-background: #{$sea-blue300};
+	--progress-fill-icon-border: #{$white};
+	--progress-fill-icon-background: #{$sea-blue100};
+	--progress-fill-icon-content: #{$black};
+
+	--read-more-background: #{$blue300};
+	--read-more-background-hover: #{color.adjust( $blue300, $lightness: -5% )};
+	--read-more-color: #{$white};
+
+	--full-background: #{$white};
+	--full-color: #{$black};
+	--full-heading-color: #{$blue500};
+	--full-highlight-background: #{$blue110};
+
+	--stats-border: #{$blue110};
+	--stats-bold-color: #{$blue500};
+	--stats-people-color: #{$blue400};
+	--stats-average-column-color: #{$blue110};
+	--stats-average-line-color: #{$blue400};
+	--stats-contribution-background-color: #{$blue400};
+	--stats-contribution-line-color: #{$white};
+
+	--cta-with-button-background: #{$blue300};
+	--cta-with-button-background-hover: #{color.adjust( $blue300, $lightness: -5% )};
+	--cta-with-button-color: #{$white};
+
+	--cta-without-button-background: #{$grey200};
+	--cta-without-button-background-hover: #{color.adjust( $grey200, $lightness: -5% )};
+	--cta-without-button-color: #{$black};
+
+	--footer-background: #{$blue100};
+	--list-tick-background: #{$sea-blue100};
+	--list-tick-stroke: #{$black};
+	--link-color: #{$blue510};
+	--link-color-hover: #{color.adjust( $blue510, $lightness: 15% )};
+}
