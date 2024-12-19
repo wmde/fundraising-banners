@@ -9,7 +9,7 @@
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Modo/defaults';
 @use 'Banner';
-@use 'MiniBanner' with (
+@use 'MiniBanner_var' with (
 	$height: 336px,
 	$height-l-up: 306px
 );
