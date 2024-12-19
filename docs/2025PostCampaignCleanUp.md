@@ -137,26 +137,39 @@ If any imports from the `@banners/` namespace remain in the "final" banner, they
 
 - src/components/ProgressBar/ProgressBarAlternative.vue
 
-## Fallback banner progress bar
+## Make all Fallback banner classes independent of non-fallback banners
 
-Currently, if the progress bar on main banner is different than progress bar on fallback banner, then the progress bar on fallback banner becomes broken.
+The fallback banner shares some class names with the other banners, leading to wrongly displayed progress bars and other issues. We should make sure that the classes of the fallback banner and the other banners are independent from each other and that the CSS of the fallback banner is self-contained.
 
-Ex. If main banner uses double progress bar and FB banner uses progress bar alternative, the progress bar on FB banner is broken.
+Since the fallback banner uses a progress bar, this means that we'll have to duplicate the progress bar component and its CSS for the fallback banner, to be able to give the progress bar elements different class names as well.
 
-So, somehow the progress bar on FB banner is dependant on progress bar on main banner.
+Also talk with the PM about the "fallback banner" feature in general (and maybe drop it or at least reduce the number of features in it):
+- Duplicating the CSS will increase the size of the banner
+- Duplicating the progress bar and footer components will increase the size of the banner
+- The "resize" feature of the fallback banner means there is additional code and 2 footer components. Do we really need those?
 
-Could we make them fully independent of each other?
+Suggested prefix for the fallback banner classes: `wmde-fallback-banner-`
+
+The styles for the fallback banner should be self-contained in the fallback banner's Vue file instead of bing a separate theme that's included in the `style.scss` files of each banner.
+
+### Files to look at
+
+- `src/components/ProgressBar/ProgressBar.vue`
+- `banners/*/syles/*` Go to the browser inspector and duplicate all the styles from the main banner to the fallback banner
+- `banners/*/components/FallbackBanner.vue`
+- `src/themes/Fijitiv/*` (this is the fallback banner "theme")
+
 
 ## Fix Heart Icon & Thank You Box
 
-This has a CSS variable setting it's fill, which doesn't work. The fill attribute should be removed from the svg element, and the path changed to `style="fill: var( --heart-icon-fill )"`. Then in the mobile banner themes it should be set up in the thank you box CSS, something like:
+This has a CSS variable setting its fill, which doesn't work. The fill attribute should be removed from the `svg` element, and the path changed to `style="fill: var( --heart-icon-fill )"`. Then in the mobile banner themes it should be set up in the thank you box CSS, something like:
 
 ```css
 .thank-you-container {
    --heart-icon-fill: var( --thank-you-box-color );
 }
 ```
-Also the CSS that's currently in the Vue component should be moved or removed.
+Also, the CSS that's currently in the Vue component should be moved or removed.
 
 ### Files to look at
 - `src/components/Icons/HeartIcon.vue`
