@@ -102,8 +102,9 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onHideFundsModal"
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@callToAction="onFundsModalCallToAction"
 		>
 			<template #infographic>
 				<WMDEFundsForwardingDE/>
@@ -117,9 +118,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationFormAdaptiveAmounts from '@src/components/DonationForm/Forms/MainDonationFormAdaptiveAmounts.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -244,12 +244,15 @@ function onshowFullPageBannerPreselected(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
-const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
-	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
-		'.wmde-banner-form' :
-		'.wmde-banner-full-small-print .wmde-banner-footer-usage-link'
-	);
+const onHideFundsModal = (): void => {
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
+};
+
+const onFundsModalCallToAction = (): void => {
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	isFundsModalVisible.value = false;
+	onshowFullPageBanner();
 };
 
 </script>
