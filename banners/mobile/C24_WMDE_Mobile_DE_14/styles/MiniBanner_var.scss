@@ -19,6 +19,26 @@ $height-l-up: 288px !default;
 			padding: 12px;
 		}
 
+		&-uof-link {
+			background: none;
+			border: none;
+			color: var( --info-color );
+			font-size: 11px;
+			cursor: pointer;
+
+			position: absolute;
+			bottom: 8px;
+			left: 8px;
+
+			--info-icon-background: var( --info-color );
+			--info-icon-color: var( --mini-info-background );
+			svg {
+				width: 10px;
+				height: 10px;
+				top: -5px;
+			}
+		}
+
 		&-info {
 			background: var( --mini-info-background );
 			border-radius: 16px;
@@ -26,6 +46,7 @@ $height-l-up: 288px !default;
 			display: flex;
 			flex-direction: column;
 			flex: 1 1 auto;
+			position: relative;
 
 			@include breakpoints.phone-l-up {
 				margin-bottom: 12px;
@@ -33,8 +54,8 @@ $height-l-up: 288px !default;
 		}
 
 		&-close {
-			top: -3px;
-			right: -3px;
+			top: -9px;
+			right: -9px;
 			position: absolute;
 			height: 36px;
 			width: 36px;

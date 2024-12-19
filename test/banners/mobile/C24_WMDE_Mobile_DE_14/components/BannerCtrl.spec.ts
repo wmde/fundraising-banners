@@ -1,14 +1,14 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, Mock, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/mobile/C24_WMDE_Mobile_DE_14/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds2024';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_changesAmountOptions';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -27,6 +27,8 @@ let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 describe( 'BannerCtrl.vue', () => {
+	let showCallback: Mock;
+	let closeCallback: Mock;
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -40,6 +42,12 @@ describe( 'BannerCtrl.vue', () => {
 		tracker = {
 			trackEvent: vi.fn()
 		};
+
+		// for use of funds dialogue
+		showCallback = vi.fn();
+		closeCallback = vi.fn();
+		HTMLDialogElement.prototype.showModal = showCallback;
+		HTMLDialogElement.prototype.close = closeCallback;
 	} );
 
 	afterEach( () => {
@@ -155,7 +163,7 @@ describe( 'BannerCtrl.vue', () => {
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
+			[ 'expectScrollsToFormWhenCloseIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );
