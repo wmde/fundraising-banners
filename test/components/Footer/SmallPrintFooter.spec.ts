@@ -22,6 +22,9 @@ describe( 'SmallPrintFooter.vue', () => {
 
 	it( 'emits event when use of funds link is clicked', () => {
 		const wrapper = shallowMount( SmallPrintFooter, {
+			props: {
+				faqPageLink: ''
+			},
 			global: {
 				mocks: {
 					$translate: ( key: string ) => key
