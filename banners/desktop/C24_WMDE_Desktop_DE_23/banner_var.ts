@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.scss';
+import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -16,7 +16,7 @@ import { Translator } from '@src/Translator';
 import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import eventMappings from './event_map_var';
+import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import messages from './messages';
