@@ -34,12 +34,13 @@
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
 					:step-controllers="stepControllers"
-					@form-interaction="formInteraction"
 					:submit-callback="onSubmit"
+					:form-action-override="formAction"
+					@form-interaction="formInteraction"
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" :show-receipt-checkbox-below="minimumAmount" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -88,7 +89,7 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from './MainDonationFormReceiptAboveValue.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -111,6 +112,10 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '@banners/desktop/C24_WMDE_Desktop_DE_15/content/BannerTitle.vue';
+import { useFormAction } from '../useFormAction';
+import { FormActions } from '@src/domain/FormActions';
+
+const minimumAmount = 10;
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -142,6 +147,8 @@ const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
+
+const { formAction } = useFormAction( inject<FormActions>( 'formActions' ), minimumAmount );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

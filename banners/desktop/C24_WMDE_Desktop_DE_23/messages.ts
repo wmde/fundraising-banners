@@ -29,7 +29,8 @@ const messages: TranslationMessages = {
 	'upgrade-to-yearly-yes': 'Ja, ich spende {{amount}} jährlich',
 	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
 	'custom-amount-placeholder': 'Wahlbetrag',
-	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!'
+	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
+	'donation-receipt-checkbox-label': 'Bitte senden Sie mir eine steuerlich absetzbare Spendenbescheinigung an meine Postanschrift.'
 };
 
 export default messages;
