@@ -1,4 +1,4 @@
-import { beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/C24_WMDE_Desktop_DE_23/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -133,6 +133,50 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+
+		it( 'Set the correct action when amount is above 10', async (): Promise<void> => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
+			await wrapper.find( '.amount-10 input' ).trigger( 'change' );
+			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
+
+			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'with-address&ap=1' );
+		} );
+
+		it( 'Set the correct action when amount is below 10 and receipt is not checked', async (): Promise<void> => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
+			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
+			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
+
+			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'without-address' );
+		} );
+
+		it( 'Set the correct action when amount is below 10 and receipt is checked', async (): Promise<void> => {
+			const wrapper = getWrapper();
+
+			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
+			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
+			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
+			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
+
+			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'with-address&ap=1' );
+		} );
+
+		it( 'Puts the receipt option into the submit form', async (): Promise<void> => {
+			const wrapper = getWrapper();
+
+			expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-form [name="receipt"]' ).element.value ).toStrictEqual( 'false' );
+
+			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
+			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
+			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
+			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
+
+			expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-form [name="receipt"]' ).element.value ).toStrictEqual( 'true' );
 		} );
 	} );
 

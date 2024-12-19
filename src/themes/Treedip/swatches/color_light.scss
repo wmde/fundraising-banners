@@ -58,8 +58,8 @@ $blue700: #2a4b8d;
 
 	--input-checkbox-background: transparent;
 	--input-checkbox-border: #{$grey500};
-	--input-checkbox-background-checked: #{$blue700};
-	--input-checkbox-border-checked: #{$blue700};
+	--input-checkbox-background-checked: #{$red600};
+	--input-checkbox-border-checked: #{$red600};
 
 	--animated-highlight-color: #{$grey700};
 	/* stylelint-disable */
@@ -131,6 +131,9 @@ $blue700: #2a4b8d;
 		--select-group-bubble-radio-background-checked: #{$white};
 		--select-group-bubble-radio-border-checked: #{$blue700};
 		--select-group-bubble-radio-checkmark: #{$blue700};
+
+		--input-checkbox-background-checked: #{$blue700};
+		--input-checkbox-border-checked: #{$blue700};
 	}
 
 	@if $select-group-button {
