@@ -1,5 +1,4 @@
 @use 'src/themes/Modo/swatches/skin_default' with (
-	$minimised-banner: true,
 	$upgrade-to-yearly-button-form: true,
 	$double-progress-bar: true,
 	$soft-close: true,
@@ -9,12 +8,11 @@
 @use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
 @use 'src/themes/UseOfFunds/UseOfFunds';
 @use 'src/themes/Modo/defaults';
-@use 'BannerVar';
+@use 'Banner';
 @use 'MiniBanner' with (
 	$height: 336px,
 	$height-l-up: 306px
 );
-@use 'MinimisedBanner';
 @use 'FullPageBanner';
 @use 'src/themes/Modo/Footer/Footer';
 @use 'src/themes/Modo/ThankYouBox/ThankYouBox';
