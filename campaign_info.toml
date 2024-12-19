@@ -43,7 +43,7 @@ preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&
 preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2024_DE"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [mobile.banners.ctrl]
