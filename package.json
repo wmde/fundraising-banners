@@ -33,7 +33,8 @@
     "ci": "npm-run-all check-tracking-conf lint test check-content-version",
     "check-content-version": "ts-node tools/check-content-version.ts",
     "check-tracking-conf": "ts-node tools/CampaignConfigurationCheck/check-tracking-number-and-date.mjs",
-    "coverage": "vitest run --coverage",
+    "coverage:filtered": "vitest run --coverage --config vitest.campaign.config.mjs",
+    "coverage:all": "vitest run --coverage",
     "update-content": "npm update fundraising-frontend-content"
   },
   "keywords": [],
