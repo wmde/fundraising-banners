@@ -3,7 +3,7 @@ import { TranslationMessages } from '@src/Translator';
 const messages: TranslationMessages = {
 	'progress-bar-inner-text-win': 'Target reached!',
 	'progress-bar-inner-text-lose': 'We didn\'t make it',
-	'mini-read-more-button': 'What you achieved',
+	'mini-read-more-button': 'What you enable',
 	'close': 'schließen',
 	'close-full-page': 'Close thank you message',
 	'call-to-action-more-info': 'For more information, please visit our website',
