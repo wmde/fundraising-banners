@@ -29,6 +29,7 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _progressBarContent: ProgressBarContent;
 	private _currentDate: CurrentDate;
 	private _currentTime: CurrentTime;
+	private _dramaText: string;
 
 	public constructor(
 		date: Date,
@@ -181,7 +182,8 @@ export default class DynamicCampaignText implements DynamicContent {
 				projection.projectedRemainingDonationSum(),
 				this._translator,
 				this._formatters.currency,
-				this._campaignParameters.isLateProgress
+				this._campaignParameters.isLateProgress,
+				this.dramaText
 			);
 		}
 		return this._progressBarContent;
@@ -189,5 +191,8 @@ export default class DynamicCampaignText implements DynamicContent {
 
 	public get averageDonation(): string {
 		return this._formatters.currency.euroAmount( this._campaignParameters.campaignProjection.averageAmountPerDonation );
+	}
+	public get dramaText(): string {
+		return this._campaignParameters.dramaTextIsVisible ? this._translator.translate( 'drama-text' ) : '';
 	}
 }
