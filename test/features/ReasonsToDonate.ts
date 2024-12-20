@@ -12,7 +12,7 @@ const expectContainsReasonsToDonateDialogue = async ( wrapper: VueWrapper<any> )
 };
 
 const expectScrollsToFormWhenCallToActionIsClicked = async ( wrapper: VueWrapper<any>, pageScroller: PageScroller ): Promise<any> => {
-	await wrapper.find( '.ten-good-reasons-sticker-text' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-reasons-to-donate-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-10-reasons-cta button' ).trigger( 'click' );
 
 	expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
@@ -28,8 +28,7 @@ const expectScrollsToFormWhenCallToActionIsClickedUsingTenGoodReasonsSticker = a
 };
 
 const expectTracksReasonsToDonateShownEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
-
-	await wrapper.find( '.ten-good-reasons-sticker-text' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-reasons-to-donate-link' ).trigger( 'click' );
 
 	expect( tracker.trackEvent ).toHaveBeenCalledOnce();
 	expect( tracker.trackEvent ).toHaveBeenCalledWith( new ReasonsToDonateShownEvent() );
@@ -44,7 +43,7 @@ const expectTracksReasonsToDonateShownEventUsingTenGoodReasonsSticker = async ( 
 };
 
 const expectTracksReasonsToDonateCTAClickedEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
-	await wrapper.find( '.ten-good-reasons-sticker-text' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-reasons-to-donate-link' ).trigger( 'click' );
 
 	await wrapper.find( '.wmde-banner-10-reasons-cta button' ).trigger( 'click' );
 
@@ -63,7 +62,7 @@ const expectTracksReasonsToDonateCTAClickedEventUsingTenGoodReasonsSticker = asy
 };
 
 const expectTracksReasonsToDonateItemClickedEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
-	await wrapper.find( '.ten-good-reasons-sticker-text' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-reasons-to-donate-link' ).trigger( 'click' );
 
 	const itemNumber = '5';
 	await wrapper.find( `.wmde-banner-10-reasons-accordion-item:nth-child(${itemNumber}) .wmde-banner-10-reasons-accordion-title` ).trigger( 'click' );
