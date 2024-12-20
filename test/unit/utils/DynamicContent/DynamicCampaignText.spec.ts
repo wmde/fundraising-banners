@@ -131,7 +131,7 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.progressBarContent.donationTarget ).toBe( 'Progress total €9.0M' );
 		expect( dynamicCampaignText.progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
 		expect( dynamicCampaignText.progressBarContent.amountDonated ).toBe( '€0.1M' );
-		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing €8.9M' );
+		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 8,900,000 euro' );
 	} );
 
 	it( 'Gets the average donation', () => {

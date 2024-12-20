@@ -53,7 +53,7 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 
 	public get amountNeeded(): string {
 		return this._translator.translate( 'amount-missing', {
-			amount: this._currencyFormatter.millions( this._remainingDonationSum )
+			amount: this._currencyFormatter.euroAmountWithThousandSeparator( this._remainingDonationSum )
 		} );
 	}
 
