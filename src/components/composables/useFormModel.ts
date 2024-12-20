@@ -32,6 +32,8 @@ const paymentMethodValidity = ref<Validity>( Validity.Unset );
 const addressType = ref<string>( '' );
 const addressTypeValidity = ref<Validity>( Validity.Unset );
 
+const receipt = ref<boolean|null>( null );
+
 const hasTransactionFee = ref<boolean>( false );
 
 const disabledIntervals = computed( (): string[] => {
@@ -121,8 +123,10 @@ export function useFormModel(): FormModel {
 		paymentMethodValidity,
 		disabledPaymentMethods,
 		addressType,
-
 		addressTypeValidity,
+
+		receipt,
+
 		disabledAddressTypes,
 
 		hasTransactionFee,

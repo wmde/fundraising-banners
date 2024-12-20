@@ -51,6 +51,9 @@ export const donationFormTransactionFeeFeatures: Record<string, ( wrapper: VueWr
 
 export const donationFormTransactionFeeTracking: Record<string, ( wrapper: VueWrapper<any>, tracker: Tracker ) => Promise<any>> = {
 	expectTracksCoverTransactionFeesEventOnSubmit: async ( wrapper: VueWrapper<any>, tracker ) => {
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = (): void => {};
+
 		await setMainDonationFormValues( wrapper, Intervals.MONTHLY, '23', PaymentMethods.CREDIT_CARD );
 		await wrapper.find<HTMLInputElement>( `.wmde-banner-form-transaction-fee  .wmde-banner-form-field-checkbox` ).setValue( true );
 
@@ -59,6 +62,9 @@ export const donationFormTransactionFeeTracking: Record<string, ( wrapper: VueWr
 		expect( tracker.trackEvent ).toHaveBeenCalledWith( new CoverTransactionFeesEvent() );
 	},
 	expectDoesNotTrackCoverTransactionFeesEventWhenUnchecked: async ( wrapper: VueWrapper<any>, tracker: Tracker ) => {
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = (): void => {};
+
 		await setMainDonationFormValues( wrapper, Intervals.MONTHLY, '23', PaymentMethods.CREDIT_CARD );
 		await wrapper.find<HTMLInputElement>( `.wmde-banner-form-transaction-fee  .wmde-banner-form-field-checkbox` ).setValue( false );
 
