@@ -1,0 +1,32 @@
+@use './variables/units';
+@use './variables/breakpoints';
+@use 'sass:map';
+
+.wmde-banner {
+	.call-to-action {
+		text-align: center;
+		margin-bottom: map.get( units.$spacing, 'small' );
+
+		@include breakpoints.tablet-up {
+			margin-bottom: map.get( units.$spacing, 'large' );
+		}
+
+		button {
+			padding: map.get( units.$spacing, 'small' ) map.get( units.$spacing, 'large' );
+			border: 0;
+			border-radius: 5px;
+			background: var( --call-to-action-background );
+			color: var( --call-to-action-color );
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+			display: inline-block;
+			&:hover,
+			&:focus {
+				color: var( --call-to-action-color );
+				background: var( --call-to-action-background-hover );
+				text-decoration: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,37 @@
+@use 'sass:color';
+
+$white: #ffffff;
+$black: #000000;
+
+$gray100: #f5f5f5;
+$gray400: #979797;
+
+$blue500: #3366cc;
+$blue500-hover: color.adjust( $blue500, $lightness: -5% );
+
+@mixin swatch() {
+	--background: #{$white};
+	--text-color: #{$black};
+
+	--close-button-background: #{$white};
+	--close-icon-stroke: #{$gray400};
+
+	--usage-1-background: #ecfffb;
+	--usage-1-color: #10826b;
+	--usage-2-background: #ffefef;
+	--usage-2-color: #9d0000;
+	--usage-3-background: #d7edff;
+	--usage-3-color: #154985;
+	--usage-4-background: #f3f3f3;
+	--usage-4-color: #555555;
+
+	--benefits-list-icon: #{$black};
+	--benefits-background: #{$gray100};
+
+	--budget-line-background: #cecece;
+	--budget-line-background-wikipedia: #{$blue500};
+
+	--call-to-action-color: #{$white};
+	--call-to-action-background: #{$blue500};
+	--call-to-action-background-hover: #{$blue500-hover};
+}
