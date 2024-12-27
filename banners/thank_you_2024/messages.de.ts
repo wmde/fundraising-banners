@@ -10,7 +10,6 @@ const messages: TranslationMessages = {
 	'use-of-funds': 'Was Ihre Spende bewirkt',
 	'call-to-action-button-amount-per-month': 'Mit {{amount}} € im Monat fördern',
 	'call-to-action-button-different-amount': 'Mit anderem Betrag fördern',
-	'stats-people-amount': '109.500',
 	'stats-people-text': 'Mitglieder',
 	'stats-average-amount': '5&nbsp;€',
 	'stats-average-text': 'durchschnittlicher Monatsbeitrag',

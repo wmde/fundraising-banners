@@ -9,7 +9,7 @@
 					</article>
 					<aside>
 						<ExecutiveDirectorsImage/>
-						<StatsBox/>
+						<StatsBox :number-of-people="numberOfPeople"/>
 					</aside>
 				</div>
 				<div class="wmde-banner-full-cta">
@@ -40,6 +40,7 @@ import StatsBox from '../components/StatsBox.vue';
 
 interface Props {
 	visible: boolean;
+	numberOfPeople: string
 }
 
 const props = defineProps<Props>();

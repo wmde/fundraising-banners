@@ -25,7 +25,7 @@
 		</p>
 
 		<span class="wmde-banner-mobile-only">
-			<StatsBox/>
+			<StatsBox :number-of-people="numberOfPeople"/>
 		</span>
 
 		<p>
@@ -48,4 +48,9 @@
 <script setup lang="ts">
 import ExecutiveDirectorsImage from '@banners/thank_you_2024/content/ExecutiveDirectorsImage.vue';
 import StatsBox from '@banners/thank_you_2024/components/StatsBox.vue';
+interface Props {
+	numberOfPeople: string
+}
+
+defineProps<Props>();
 </script>

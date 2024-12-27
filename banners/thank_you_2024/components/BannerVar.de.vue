@@ -13,12 +13,13 @@
 
 		<FullPageBanner
 			:visible="contentState === ContentStates.Full"
+			:number-of-people="settings.numberOfMembers"
 			@close="hideModal"
 			@membership-with-amount="membershipWithAmount"
 			@membership-without-amount="membershipWithoutAmount"
 		>
 			<template #text>
-				<FullPageBannerTextWin/>
+				<FullPageBannerTextWin :number-of-people="settings.numberOfMembers"/>
 			</template>
 
 			<template #benefits>
@@ -37,7 +38,7 @@
 
 import { inject, ref } from 'vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ThankYouSettings } from '@banners/thank_you/settings';
+import { ThankYouSettings } from '@banners/thank_you_2024/settings';
 import { Tracker } from '@src/tracking/Tracker';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
