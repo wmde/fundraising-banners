@@ -15,7 +15,7 @@
 				</svg>
 			</span>
 			<span>
-				<strong v-html="$translate( 'stats-people-amount' )"/><br/>
+				<strong>{{ numberOfPeople }}</strong><br/>
 				<span v-html="$translate( 'stats-people-text' )"/>
 			</span>
 		</li>
@@ -51,3 +51,10 @@
 		</li>
 	</ul>
 </template>
+<script setup lang="ts">
+interface Props {
+	numberOfPeople: string
+}
+
+defineProps<Props>();
+</script>

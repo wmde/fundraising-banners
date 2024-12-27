@@ -16,7 +16,8 @@ describe( 'FullPageBanner.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( FullPageBanner, {
 			props: {
-				visible: false
+				visible: false,
+				numberOfPeople: '23'
 			},
 			global: {
 				mocks: {

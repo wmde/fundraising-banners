@@ -31,6 +31,7 @@ describe( 'BannerCtrl.de.vue', () => {
 				bannerState: BannerStates.Pending,
 				settings: {
 					numberOfDonors: '42',
+					numberOfMembers: '23',
 					progressBarPercentage
 				},
 				subscribeURL: 'SUBSCRIBE URL',

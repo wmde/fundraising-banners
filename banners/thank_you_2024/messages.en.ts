@@ -10,7 +10,6 @@ const messages: TranslationMessages = {
 	'use-of-funds': 'Where does my donation go?',
 	'call-to-action-button-amount-per-month': 'Support with €{{amount}} per month',
 	'call-to-action-button-different-amount': 'Support with a custom amount',
-	'stats-people-amount': '109.500',
 	'stats-people-text': 'members',
 	'stats-average-amount': '€5',
 	'stats-average-text': 'average monthly membership fee',
