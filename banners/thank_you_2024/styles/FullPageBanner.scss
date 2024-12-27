@@ -35,23 +35,19 @@
 		max-width: 1200px;
 		height: fit-content;
 		max-height: 100vh;
-		height: -webkit-fill-available;
 		background: var( --full-background );
 		color: var( --full-color );
 		margin: 0 auto;
 		border: 0;
 		padding: 0;
+		position: relative;
 
 		// This vertically centers the dialog, it needs to be tested more
 		top: 50%;
 		transform: translateY(-50%);
 
-		@include breakpoints.small-up {
-			// chrome based browsers have issues with calc + vh
-			// max-height: calc( 100vh - 80px );
-			box-sizing: border-box;
-			height: 85vh;
-			margin: 20px auto -20px;
+		@include breakpoints.medium-up {
+			max-height: calc( 100vh - 80px );
 		}
 
 		&[ open ] {
