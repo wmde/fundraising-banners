@@ -44,7 +44,8 @@ const campaignParameters: CampaignParameters = {
 	dramaTextIsVisible: false,
 	thankYouCampaign: {
 		progressBarPercentage: 80,
-		numberOfDonors: 42
+		numberOfDonors: 42,
+		numberOfMembers: 23
 	}
 };
 const impressionCount: ImpressionCount = {

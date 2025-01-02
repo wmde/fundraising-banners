@@ -174,6 +174,7 @@ class PageWPORG implements Page {
 			urgencyMessageDaysLeft: Number( data.urgencyMessageDaysLeft ),
 			thankYouCampaign: {
 				numberOfDonors: Number( data.tyNumberOfDonors ),
+				numberOfMembers: Number( data.tyNumberOfMembers ),
 				progressBarPercentage: Number( data.tyProgressBarPercentage )
 			}
 		};

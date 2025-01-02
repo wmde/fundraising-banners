@@ -73,7 +73,8 @@ export class PageStub implements Page {
 			urgencyMessageDaysLeft: 0,
 			thankYouCampaign: {
 				progressBarPercentage: 0,
-				numberOfDonors: 0
+				numberOfDonors: 0,
+				numberOfMembers: 0
 			}
 		};
 	}
