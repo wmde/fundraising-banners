@@ -133,7 +133,9 @@ If any imports from the `@banners/` namespace remain in the "final" banner, they
 
 ## Remove old thank-you banners
 
-Delete `banners/thank_you` and rename `banners/thank_you_2024` to `banners/thank_you`. Adapt `campaign_info.thank_you.toml`.
+- Delete `banners/thank_you` and rename `banners/thank_you_2024` to `banners/thank_you`.
+- Adapt `campaign_info.thank_you.toml`.
+- Remove `(_2024)?` from regular expression in `webpack.common.js`
 
 ## Make "Campaign Parameters" for thank-you banners independent of main campaign parameters
 To avoid littering all banners with thank-you related content (and vice versa) define a thank-you specific campaign parameter data structure and remove all thank-you related things from `CampaignParameters`.
@@ -146,6 +148,8 @@ To avoid littering all banners with thank-you related content (and vice versa) d
 - `banners/thank_you/*.ts`
 
 ## Rename `ProgressBarAlternative.vue`
+
+If `ProgressBar.vue` is no longer used, rename `ProgressBarAlternative.vue` to `ProgressBar.vue`. Otherwise, choose meaningful names for both progress bars.
 
 ### Files to look at
 

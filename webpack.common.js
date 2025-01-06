@@ -3,6 +3,9 @@ const { VueLoaderPlugin } = require( 'vue-loader' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 
+const REGEX_WPDE_BANNER_PATH = '(wpde_desktop|wpde_mobile)\\/\\w+\\/banner(_ctrl|_var)';
+const REGEX_WPDE_THANKYOU_PATH = 'thank_you(_2024)?\\/banner_(ctrl|var)\\.wpde';
+
 module.exports = ( env ) => {
 	const campaigns = CampaignConfig.readFromFile( env.campaign_info ?? 'campaign_info.toml' );
 	return {
@@ -24,7 +27,7 @@ module.exports = ( env ) => {
 				// This is a "special" rule for all wikipedia.de banner entry points. It should be in sync with the rules for `.ts` files.
 				// It replaces tracking parameter placeholders with tracking parameters read from the campaign configuration.
 				{
-					test: /(wpde_desktop|wpde_mobile)\/\w+\/banner(_ctrl|_var)\.ts/,
+					test: new RegExp( `(${REGEX_WPDE_BANNER_PATH}|${REGEX_WPDE_THANKYOU_PATH})\\.ts$` ),
 					use: [
 						{
 							loader: 'ts-loader',
