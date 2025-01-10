@@ -60,7 +60,8 @@ describe( 'BannerConductor.vue', () => {
 				bannerConfig: { delay: 42, transitionDuration: 5 },
 				resizeHandler: resizeHandler ?? new ResizeHandlerStub(),
 				banner: markRaw( banner ),
-				impressionCount: new ImpressionCountStub()
+				impressionCount: new ImpressionCountStub(),
+				bannerCategory: 'fundraising'
 			},
 			global: {
 				provide: {
@@ -193,7 +194,7 @@ describe( 'BannerConductor.vue', () => {
 		const wrapper = await getShownBannerWrapper( page );
 		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
 
-		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( new CloseEvent( 'MainBanner', 'closed' ) );
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( new CloseEvent( 'MainBanner', 'closed' ), 'fundraising' );
 	} );
 
 	it( 'moves to closed state when an page event that should hide the banner happens', async () => {

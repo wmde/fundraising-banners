@@ -38,6 +38,7 @@ const app = createVueApp( BannerConductor, {
 		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
+	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),

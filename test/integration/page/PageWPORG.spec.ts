@@ -12,6 +12,8 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 describe( 'PageWPORG', function () {
 	let mediaWiki: MediaWiki;
 
+	const bannerTestCategory = 'fundraising';
+
 	beforeEach( () => {
 		mediaWiki = {
 			isInArticleNamespace(): boolean {
@@ -88,7 +90,10 @@ describe( 'PageWPORG', function () {
 	it( 'stores "close" cookie for already donated "enough for this year" events', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.NoMoreBannersForCampaign ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'AlreadyDonated', CloseChoices.NoMoreBannersForCampaign ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).toHaveBeenCalledOnce();
 	} );
@@ -96,7 +101,10 @@ describe( 'PageWPORG', function () {
 	it( 'does not store cookie for the AlreadyDonated "Maybe Later" event', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'AlreadyDonated', CloseChoices.MaybeLater ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'AlreadyDonated', CloseChoices.MaybeLater ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
@@ -104,7 +112,10 @@ describe( 'PageWPORG', function () {
 	it( 'does not store cookie for the "Hide" event', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'FullPageBanner', CloseChoices.Hide ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'FullPageBanner', CloseChoices.Hide ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayUntilEndOfCampaign ).not.toHaveBeenCalledOnce();
 	} );
@@ -112,7 +123,10 @@ describe( 'PageWPORG', function () {
 	it( 'stores close cookie when user closes soft close', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.Close ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'SoftClose', CloseChoices.Close ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -120,7 +134,10 @@ describe( 'PageWPORG', function () {
 	it( 'stores close cookie when user ignores soft close', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.TimeOut ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'SoftClose', CloseChoices.TimeOut ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -128,7 +145,10 @@ describe( 'PageWPORG', function () {
 	it( 'stores close cookie when user closes main banner', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -136,7 +156,10 @@ describe( 'PageWPORG', function () {
 	it( 'stores close cookie when user closes mini banner', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'MiniBanner', CloseChoices.Close ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayForPeriod ).toHaveBeenCalledOnce();
 	} );
@@ -144,10 +167,13 @@ describe( 'PageWPORG', function () {
 	it( 'stores close cookie when user closes with maybe later', () => {
 		const page = new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() );
 
-		page.setCloseCookieIfNecessary( new CloseEvent( 'SoftClose', CloseChoices.MaybeLater ) );
+		page.setCloseCookieIfNecessary(
+			new CloseEvent( 'SoftClose', CloseChoices.MaybeLater ),
+			bannerTestCategory
+		);
 
 		expect( mediaWiki.preventBannerDisplayForHours ).toHaveBeenCalledOnce();
-		expect( mediaWiki.preventBannerDisplayForHours ).toHaveBeenCalledWith( 6 );
+		expect( mediaWiki.preventBannerDisplayForHours ).toHaveBeenCalledWith( 6, bannerTestCategory );
 	} );
 
 	it( 'returns campaign parameters', () => {

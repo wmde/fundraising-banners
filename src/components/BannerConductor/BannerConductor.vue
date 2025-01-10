@@ -32,6 +32,7 @@ import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { Timer } from '@src/utils/Timer';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 interface Props {
 	page: Page,
@@ -40,6 +41,7 @@ interface Props {
 	banner: Object,
 	bannerProps?: Object,
 	impressionCount: ImpressionCount,
+	bannerCategory: BannerCategory
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -49,7 +51,7 @@ const tracker = inject<Tracker>( 'tracker' );
 const timer = inject<Timer>( 'timer' );
 
 const bannerRef = ref( null );
-const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer, props.bannerCategory );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 

@@ -11,6 +11,7 @@ campaign_tracking = "ty01-250101"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
@@ -37,6 +38,7 @@ campaign_tracking = "ty01-250101"
 description = "Thank you banner"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_link_offline = ""
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
@@ -63,6 +65,7 @@ campaign_tracking = "ty01-mob-250101"
 description = "Thank you banner"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
+preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
@@ -89,6 +92,7 @@ campaign_tracking = "ty01-mob-en-250101"
 description = "Thank you banner"
 preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
+preview_link_offline = ""
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
@@ -115,6 +119,7 @@ campaign_tracking = "ty01-ipad-250101"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_org"
 
@@ -141,6 +146,7 @@ campaign_tracking = "ty01-wpde-250101"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+preview_link_offline = ""
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
@@ -163,6 +169,7 @@ campaign_tracking = "ty01-wpde-mob-250101"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+preview_link_offline = ""
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}&devMode'
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false

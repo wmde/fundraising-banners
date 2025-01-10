@@ -5,10 +5,12 @@ import { Tracker } from '@src/tracking/Tracker';
 import { ResizeHandler } from '@src/utils/ResizeHandler';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { Timer } from '@src/utils/Timer';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export class ClosedState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Closed;
 	private readonly _closeEvent: TrackingEvent<void>;
+	private readonly _bannerCategory: BannerCategory;
 	private _page: Page;
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
@@ -16,6 +18,7 @@ export class ClosedState extends BannerState {
 
 	public constructor(
 		closeEvent: TrackingEvent<void>,
+		bannerCategory: BannerCategory,
 		page: Page,
 		tracker: Tracker,
 		resizeHandler: ResizeHandler,
@@ -23,6 +26,7 @@ export class ClosedState extends BannerState {
 	) {
 		super();
 		this._closeEvent = closeEvent;
+		this._bannerCategory = bannerCategory;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
@@ -34,7 +38,7 @@ export class ClosedState extends BannerState {
 		this._page
 			.unsetAnimated()
 			.setSpace( 0 )
-			.setCloseCookieIfNecessary( this._closeEvent )
+			.setCloseCookieIfNecessary( this._closeEvent, this._bannerCategory )
 			.removePageEventListeners();
 		this._resizeHandler.onClose();
 		this._timer.clearAll();
