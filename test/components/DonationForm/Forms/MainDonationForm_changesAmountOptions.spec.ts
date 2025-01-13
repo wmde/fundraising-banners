@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import DonationForm from '@src/../banners/mobile/C24_WMDE_Mobile_DE_10/MainDonationForm_changesAmountOptions.vue';
+import DonationForm from './C24_WMDE_Mobile_DE_10/MainDonationForm_changesAmountOptions.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';

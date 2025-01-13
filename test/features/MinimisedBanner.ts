@@ -2,8 +2,8 @@ import { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
 import { Tracker } from '@src/tracking/Tracker';
 import { MinimisedEvent } from '@src/tracking/events/MinimisedEvent';
-import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
-import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
+import { BannerMinimisedEvent } from '@src/tracking/events/BannerMinimisedEvent';
+import { BannerMaximisedEvent } from '@src/tracking/events/BannerMaximisedEvent';
 
 const expectMinimisesAndMaximises = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-minimised-minimise' ).trigger( 'click' );

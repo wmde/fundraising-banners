@@ -3,8 +3,8 @@ import { Tracker } from '@src/tracking/Tracker';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { nextTick } from 'vue';
 import { expect, vi } from 'vitest';
-import { BannerMaximisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMaximisedEvent';
-import { BannerMinimisedEvent } from '@banners/desktop/C24_WMDE_Desktop_DE_00/events/BannerMinimisedEvent';
+import { BannerMaximisedEvent } from '@src/tracking/events/BannerMaximisedEvent';
+import { BannerMinimisedEvent } from '@src/tracking/events/BannerMinimisedEvent';
 
 const expectAutoCollapsesTheMainBanner = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	let scrollCallback: () => void;
