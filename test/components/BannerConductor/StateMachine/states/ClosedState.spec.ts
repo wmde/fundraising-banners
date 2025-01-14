@@ -14,6 +14,7 @@ describe( 'ClosedState', function () {
 		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
 		const state = new ClosedState(
 			closeEvent,
+			'fundraising',
 			new PageStub(),
 			tracker,
 			new ResizeHandlerStub(),
@@ -31,6 +32,7 @@ describe( 'ClosedState', function () {
 		page.unsetAnimated = vitest.fn( () => page );
 		const state = new ClosedState(
 			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			'fundraising',
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
@@ -49,6 +51,7 @@ describe( 'ClosedState', function () {
 		const closeEvent = new CloseEvent( 'MainBanner', CloseChoices.Close );
 		const state = new ClosedState(
 			closeEvent,
+			'fundraising',
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
@@ -58,7 +61,7 @@ describe( 'ClosedState', function () {
 		state.enter();
 
 		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledOnce();
-		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( closeEvent );
+		expect( page.setCloseCookieIfNecessary ).toHaveBeenCalledWith( closeEvent, 'fundraising' );
 	} );
 
 	it( 'removes the event listeners', function () {
@@ -68,6 +71,7 @@ describe( 'ClosedState', function () {
 		resizeHandler.onClose = vitest.fn();
 		const state = new ClosedState(
 			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			'fundraising',
 			page,
 			new TrackerStub(),
 			resizeHandler,
@@ -84,6 +88,7 @@ describe( 'ClosedState', function () {
 		const timer = new TimerSpy();
 		const state = new ClosedState(
 			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			'fundraising',
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),
@@ -98,6 +103,7 @@ describe( 'ClosedState', function () {
 	it( 'throws error on exit', function () {
 		const state = new ClosedState(
 			new CloseEvent( 'MainBanner', CloseChoices.Close ),
+			'fundraising',
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),

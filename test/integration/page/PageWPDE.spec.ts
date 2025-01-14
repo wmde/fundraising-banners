@@ -25,7 +25,8 @@ describe( 'PageWPDE', function () {
 			urgencyMessageDaysLeft: 10,
 			thankYouCampaign: {
 				progressBarPercentage: 80,
-				numberOfDonors: 42
+				numberOfDonors: 42,
+				numberOfMembers: 23
 			}
 		};
 		const page = new PageWPDE( tracking );

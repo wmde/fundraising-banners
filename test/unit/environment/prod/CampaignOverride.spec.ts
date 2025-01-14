@@ -23,7 +23,8 @@ describe( 'getCampaignParameterOverride (prod version)', () => {
 			urgencyMessageDaysLeft: 0,
 			thankYouCampaign: {
 				progressBarPercentage: 0,
-				numberOfDonors: 0
+				numberOfDonors: 0,
+				numberOfMembers: 0
 			}
 		};
 

@@ -1,0 +1,9 @@
+@use './variables/fonts';
+
+.wmde-banner {
+	font-family: fonts.$content;
+
+	&, * {
+		box-sizing: border-box;
+	}
+}

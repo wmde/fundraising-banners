@@ -10,6 +10,7 @@ import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { ChannelNameWPORG } from '@src/page/ChannelNameWPORG';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export const bannerAppId = 'wmde-banner-app';
 export const bannerAnimatedClass = 'wmde-animate-banner';
@@ -113,7 +114,7 @@ class PageWPORG implements Page {
 		return this;
 	}
 
-	public setCloseCookieIfNecessary( closeEvent: TrackingEvent<void> ): Page {
+	public setCloseCookieIfNecessary( closeEvent: TrackingEvent<void>, bannerCategory: BannerCategory ): Page {
 
 		// remove banner class (and changes to the wikipedia skin) when the banner hides
 		document.body.classList.remove( showBannerClass );
@@ -121,16 +122,16 @@ class PageWPORG implements Page {
 		switch ( closeEvent.userChoice ) {
 			case CloseChoices.Close:
 			case CloseChoices.TimeOut:
-				this._mediaWiki.preventBannerDisplayForPeriod();
+				this._mediaWiki.preventBannerDisplayForPeriod( bannerCategory );
 				break;
 			case CloseChoices.NoMoreBannersForCampaign:
-				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign();
+				this._mediaWiki.preventBannerDisplayUntilEndOfCampaign( bannerCategory );
 				break;
 			case CloseChoices.MaybeLater:
-				this._mediaWiki.preventBannerDisplayForHours( 6 );
+				this._mediaWiki.preventBannerDisplayForHours( 6, bannerCategory );
 				break;
 			case CloseChoices.AlreadyDonated:
-				this._mediaWiki.preventBannerDisplayForHours( 4 * 7 * 24 );
+				this._mediaWiki.preventBannerDisplayForHours( 4 * 7 * 24, bannerCategory );
 				break;
 			case CloseChoices.Hide:
 				// Don't add cookie
@@ -174,6 +175,7 @@ class PageWPORG implements Page {
 			urgencyMessageDaysLeft: Number( data.urgencyMessageDaysLeft ),
 			thankYouCampaign: {
 				numberOfDonors: Number( data.tyNumberOfDonors ),
+				numberOfMembers: Number( data.tyNumberOfMembers ),
 				progressBarPercentage: Number( data.tyProgressBarPercentage )
 			}
 		};

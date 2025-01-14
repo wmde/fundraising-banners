@@ -13,6 +13,7 @@ import { ClosedState } from '@src/components/BannerConductor/StateMachine/states
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
 import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { Timer } from '@src/utils/Timer';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -21,14 +22,22 @@ export class StateFactory {
 	private readonly _resizeHandler: ResizeHandler;
 	private readonly _impressionCount: ImpressionCount;
 	private readonly _timer: Timer;
+	private readonly _bannerCategory: BannerCategory;
 
-	public constructor( bannerConfig: BannerConfig, page: Page, tracker: Tracker, resizeHandler: ResizeHandler, impressionCount: ImpressionCount, timer: Timer ) {
+	public constructor(
+		bannerConfig: BannerConfig,
+		page: Page, tracker: Tracker,
+		resizeHandler: ResizeHandler,
+		impressionCount: ImpressionCount,
+		timer: Timer,
+		bannerCategory: BannerCategory ) {
 		this._bannerConfig = bannerConfig;
 		this._page = page;
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._impressionCount = impressionCount;
 		this._timer = timer;
+		this._bannerCategory = bannerCategory;
 	}
 
 	public newInitialState(): BannerState {
@@ -52,7 +61,7 @@ export class StateFactory {
 	}
 
 	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
-		return new ClosedState( closeEvent, this._page, this._tracker, this._resizeHandler, this._timer );
+		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer );
 	}
 }
 
@@ -62,7 +71,8 @@ export function newStateFactory(
 	tracker: Tracker,
 	resizeHandler: ResizeHandler,
 	impressionCount: ImpressionCount,
-	timer: Timer
+	timer: Timer,
+	bannerCategory: BannerCategory
 ): StateFactory {
 	return new StateFactory(
 		bannerConfig,
@@ -70,6 +80,7 @@ export function newStateFactory(
 		tracker,
 		resizeHandler,
 		impressionCount,
-		timer
+		timer,
+		bannerCategory
 	);
 }
