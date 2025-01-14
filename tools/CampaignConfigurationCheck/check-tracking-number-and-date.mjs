@@ -29,18 +29,18 @@ for ( const channelConfig of Object.values( configObject ) ) {
 		campaignName.testNumber !== ctrlTracking.testNumber ||
 		campaignName.testNumber !== campaignTracking.testNumber
 	) {
-		console.warn( `${ chalk.red( 'CAMPAIGN CONFIGURATION ERROR:' ) } Faulty test number for ${ channelConfig.campaign } ` );
-		console.log( campaignName.testNumber );
-		console.log( campaignTracking.testNumber );
-		console.log( ctrlTracking.testNumber );
-		console.log( varTracking.testNumber );
+		console.warn( `${ chalk.red( 'CAMPAIGN CONFIGURATION ERROR:' ) } Mismatched test numbers for ${ channelConfig.campaign } ` );
+		console.log( `Campaign test number:             ${campaignName.testNumber}` );
+		console.log( `Campaign tracking test number:    ${campaignTracking.testNumber}` );
+		console.log( `CTRL banner tracking test number: ${ctrlTracking.testNumber}` );
+		console.log( `VAR banner tracking test number:  ${varTracking.testNumber}` );
 		process.exit( 1 );
 	}
 	if ( !ctrlTracking.matchesDate( varTracking ) || !ctrlTracking.matchesDate( campaignTracking ) ) {
-		console.warn( `${ chalk.red( 'CAMPAIGN CONFIGURATION ERROR:' ) } Faulty start date for ${ channelConfig.campaign } ` );
-		console.log( campaignTracking.startDate );
-		console.log( ctrlTracking.startDate );
-		console.log( varTracking.startDate );
+		console.warn( `${ chalk.red( 'CAMPAIGN CONFIGURATION ERROR:' ) } Mismatched start dates in tracking codes for ${ channelConfig.campaign } ` );
+		console.log( `Campaign:    ${campaignTracking.startDate}` );
+		console.log( `CTRL banner: ${ctrlTracking.startDate}` );
+		console.log( `VAR banner:  ${varTracking.startDate}` );
 		process.exit( 1 );
 	}
 
