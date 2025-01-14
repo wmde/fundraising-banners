@@ -4,6 +4,7 @@ import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { setCookie } from '@src/page/MediaWiki/setCookie';
 import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSetter';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
@@ -53,29 +54,29 @@ export class WindowMediaWiki implements MediaWiki {
 		window.mw.track( name, trackingData );
 	}
 
-	public preventBannerDisplayForPeriod(): void {
-		this.hideBanner( 'close', this.getConfigItem( 'wgNoticeCookieDurations' ).close );
+	public preventBannerDisplayForPeriod( bannerCategory: BannerCategory ): void {
+		this.hideBanner( 'close', this.getConfigItem( 'wgNoticeCookieDurations' ).close, bannerCategory );
 	}
 
-	public preventBannerDisplayUntilEndOfCampaign(): void {
+	public preventBannerDisplayUntilEndOfCampaign( bannerCategory: BannerCategory ): void {
 		const endOfYear = new Date( new Date().getFullYear(), 11, 31, 23, 59, 59 );
 		const secondsToEndOfYear = Math.abs( ( endOfYear.getTime() - Date.now() ) / 1000 );
-		this.hideBanner( 'donate', secondsToEndOfYear );
+		this.hideBanner( 'donate', secondsToEndOfYear, bannerCategory );
 	}
 
-	public preventBannerDisplayForHours( hours: number ): void {
+	public preventBannerDisplayForHours( hours: number, bannerCategory: BannerCategory ): void {
 		const until = new Date();
 		until.setHours( until.getHours() + hours );
 		const secondsToHideBannerFor = Math.abs( ( until.getTime() - Date.now() ) / 1000 );
-		this.hideBanner( 'donate', secondsToHideBannerFor );
+		this.hideBanner( 'donate', secondsToHideBannerFor, bannerCategory );
 	}
 
 	public setBannerLoadedButHidden(): void {
 		window.mw.centralNotice.setBannerLoadedButHidden();
 	}
 
-	private hideBanner( reason: string, durationInSeconds: number ): void {
-		setCookie( reason, new Date(), durationInSeconds );
+	private hideBanner( reason: string, durationInSeconds: number, bannerCategory: BannerCategory ): void {
+		setCookie( reason, new Date(), durationInSeconds, bannerCategory );
 		createImageCookieSetter( reason, durationInSeconds, this.getConfigItem( 'wgNoticeHideUrls' )[ 0 ] );
 	}
 }

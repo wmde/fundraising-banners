@@ -1,6 +1,8 @@
-const COOKIE_NAME = 'centralnotice_hide_fundraising';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
-export function setCookie( reason: string, created: Date, durationInSeconds: number ): void {
+const COOKIE_NAME = 'centralnotice_hide_';
+
+export function setCookie( reason: string, created: Date, durationInSeconds: number, cookieNameSuffix: BannerCategory ): void {
 	const expiryDate = new Date( created.getTime() );
 	expiryDate.setSeconds( created.getSeconds() + durationInSeconds );
 
@@ -10,5 +12,6 @@ export function setCookie( reason: string, created: Date, durationInSeconds: num
 		reason: reason
 	};
 
-	document.cookie = `${ COOKIE_NAME }=${ encodeURIComponent( JSON.stringify( hideData ) ) }; expires=${ expiryDate.toUTCString() }; path=/; SameSite=None;`;
+	const fullCookieName = COOKIE_NAME + cookieNameSuffix;
+	document.cookie = `${ fullCookieName }=${ encodeURIComponent( JSON.stringify( hideData ) ) }; expires=${ expiryDate.toUTCString() }; path=/; SameSite=None;`;
 }

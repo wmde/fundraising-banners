@@ -33,6 +33,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { Timer } from '@src/utils/Timer';
+import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 interface Props {
 	page: Page,
@@ -43,6 +44,7 @@ interface Props {
 	minWidthForMainBanner: number,
 	bannerProps?: Object,
 	impressionCount: ImpressionCount,
+	bannerCategory: BannerCategory
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -53,7 +55,7 @@ const timer = inject<Timer>( 'timer' );
 
 const banner = shallowRef<Object>( props.banner );
 const bannerRef = ref( null );
-const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer );
+const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer, props.bannerCategory );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 
