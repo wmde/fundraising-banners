@@ -26,7 +26,7 @@
     "thankyou": "webpack serve --host 0.0.0.0 --env campaign_info=campaign_info.thank_you.toml",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint": "npm-run-all lint:*",
-    "lint:js": "eslint --ext .js,.vue,.ts,.cjs --cache --cache-location .eslintcache --ignore-path .gitignore .",
+    "lint:js": "eslint --cache --cache-location .eslintcache banners test src",
     "lint:ts": "vue-tsc --noEmit",
     "lint:css": "stylelint '**/*.{scss,vue}'",
     "lint:test-imports": "node test/find_mismatched_imports.mjs",
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.4",
+    "@stylistic/eslint-plugin": "^2.13.0",
     "@stylistic/eslint-plugin-js": "^2.9.0",
     "@stylistic/eslint-plugin-jsx": "^2.9.0",
     "@stylistic/eslint-plugin-ts": "^2.9.0",
