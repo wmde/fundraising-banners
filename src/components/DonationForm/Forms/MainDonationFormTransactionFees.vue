@@ -87,6 +87,7 @@ export default {
 	name: 'MainDonationFormTransactionFees'
 };
 </script>
+
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';

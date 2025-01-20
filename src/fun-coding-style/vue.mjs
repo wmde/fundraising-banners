@@ -5,13 +5,10 @@ export default {
 		vue: pluginVue,
 	},
 	rules: {
-		// TODO apply when doing the automated fix
-		/*
 		'vue/component-tags-order': [ 'error', {
 			'order': [ 'template', 'script', 'style' ],
 		} ],
 		'vue/html-indent': [ 'error', 'tab' ],
-		 */
 		'vue/html-closing-bracket-newline': 'off',
 
 		// NEEDS_TEAM_DECISION
@@ -49,8 +46,7 @@ export default {
 		// 'vue/no-useless-v-bind': 'error',
 		'vue/no-v-text': 'error',
 		'vue/brace-style': [ 'error', '1tbs', { 'allowSingleLine': true } ],
-		// TODO enable when doing the automated fix
-		// 'vue/padding-line-between-blocks': [ 'error', 'always' ],
+		'vue/padding-line-between-blocks': [ 'error', 'always' ],
 		'vue/v-on-function-call': 'error',
 		'vue/component-name-in-template-casing': [ 'error', 'PascalCase' ],
 		'vue/no-child-content': 'error',

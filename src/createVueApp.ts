@@ -7,7 +7,7 @@ import type { Component, App } from 'vue';
 // eslint-disable-next-line no-var
 declare var Vue: unknown;
 
-type Data = Record<string, unknown>
+type Data = Record<string, unknown>;
 
 interface MediaWikiVue {
 	createMwApp( rootComponent: Component, rootProps?: Data ): App

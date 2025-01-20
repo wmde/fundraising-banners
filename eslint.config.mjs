@@ -37,17 +37,10 @@ export default [
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-wrapper-object-types': 'off',
 
-			// temporarily disable formatting checks until we do a code-wide, automated fix
-			// TODO enable and auto-fix
+			// NEEDS_TEAM_DECISION
 			'@stylistic/comma-dangle': 'off',
 			'@stylistic/space-infix-ops': 'off',
-			'@stylistic/indent': 'off',
 			'@stylistic/member-delimiter-style': 'off',
-			'@stylistic/block-spacing': 'off',
-			'@stylistic/curly-spacing': 'off',
-			'@stylistic/object-curly-spacing': 'off',
-			'@stylistic/space-before-blocks': 'off',
-			'@stylistic/semi': 'off',
 
 			// We do have some classes that use an underscore for private methods/properties
 			'no-underscore-dangle': 'off',

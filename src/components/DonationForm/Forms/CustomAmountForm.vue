@@ -3,7 +3,7 @@
 
 		<div class="wmde-banner-form-new-custom-amount-title">
 			<a tabIndex="-1" href="#" class="previous"
-					@click.prevent="onPrevious">
+				@click.prevent="onPrevious">
 				<FormPreviousIcon/>
 			</a>
 		</div>
