@@ -3,6 +3,7 @@ import globals from 'globals';
 import parser from 'vue-eslint-parser';
 import commonStyle from './src/fun-coding-style/common.mjs';
 import typescriptStyle from './src/fun-coding-style/typescript.mjs';
+import vueRules from './src/fun-coding-style/vue.mjs';
 
 export default [
 	commonStyle,
@@ -94,6 +95,7 @@ export default [
 		},
 		rules: {
 			...pluginVue.configs.essential.rules,
+			...vueRules.rules,
 
 			// Vue 3 allows for multiple template roots, we should not have this rule
 			// TODO investigate why we have to manually disable this
@@ -120,6 +122,9 @@ export default [
 			'vue/no-unused-components': [ 'error', {
 				ignoreWhenBindingPresent: false,
 			} ],
+
+			// We're using inline styles in SCG icon files and one-off content components
+			'vue/no-static-inline-styles': 'off',
 
 			// This forces script and style lang in Vue single file components
 			'vue/block-lang': [ 'error', {

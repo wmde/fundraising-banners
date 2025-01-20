@@ -33,7 +33,6 @@ import { FormActions } from '@src/domain/FormActions';
 import { Timer } from '@src/utils/Timer';
 
 interface Props {
-	showErrorScrollLink?: boolean;
 	stepControllers: StepController[];
 	pageScroller?: PageScroller;
 	formActionOverride?: string;
