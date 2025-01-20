@@ -47,8 +47,8 @@ const props = withDefaults( defineProps<Props>(), {
 } );
 const emit = defineEmits( [ 'formInteraction' ] );
 
-const slots = useSlots();
-const usedSlotNames = Object.keys( slots );
+const slots: object = useSlots();
+const usedSlotNames: string[] = Object.keys( slots );
 const slotNameIndices: Record<string, number> = {};
 usedSlotNames.forEach( ( slotName: string, index: number ): void => {
 	slotNameIndices[ slotName ] = index;
