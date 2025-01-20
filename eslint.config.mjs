@@ -4,6 +4,7 @@ import parser from 'vue-eslint-parser';
 import commonStyle from './src/fun-coding-style/common.mjs';
 import typescriptStyle from './src/fun-coding-style/typescript.mjs';
 import vueRules from './src/fun-coding-style/vue.mjs';
+import vueFormattingRules from './src/fun-coding-style/vue_formatting.mjs';
 
 export default [
 	commonStyle,
@@ -96,6 +97,7 @@ export default [
 		rules: {
 			...pluginVue.configs.essential.rules,
 			...vueRules.rules,
+			...vueFormattingRules.rules,
 
 			// Vue 3 allows for multiple template roots, we should not have this rule
 			// TODO investigate why we have to manually disable this

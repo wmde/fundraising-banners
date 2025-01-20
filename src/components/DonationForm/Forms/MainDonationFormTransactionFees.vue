@@ -66,7 +66,7 @@
 				v-model="hasTransactionFee"
 			>
 			<label for="wmde-banner-form-cover-transaction-costs">
-				{{ $translate('cover-transaction-costs', { transactionCosts: currencyFormatter.euroAmount( transactionFee ) } ) }}
+				{{ $translate( 'cover-transaction-costs', { transactionCosts: currencyFormatter.euroAmount( transactionFee ) } ) }}
 			</label>
 		</div>
 
