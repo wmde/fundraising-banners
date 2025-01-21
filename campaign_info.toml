@@ -28,8 +28,8 @@ pagename = "B25_WMDE_Desktop_DE_00_var"
 tracking = "org-00-250114-var"
 
 [desktop.test_matrix]
-platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
-resolution = ["800x600", "1025x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
+platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
+resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 
 
 [mobile]
@@ -56,7 +56,7 @@ pagename = "B25_WMDE_Mobile_DE_00_var"
 tracking = "org-mob00-250114-var"
 
 [mobile.test_matrix]
-device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
+device = [ "android_old_browser", "android_old_chrome", "android_firefox", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
 orientation = [ "portrait", "landscape"]
 
 
@@ -84,7 +84,7 @@ pagename = "B25_WMDE_iPad_DE_00_var"
 tracking = "org-pad00-250114-var"
 
 [pad.test_matrix]
-device = [ 'ipad_mini', 'ipad', 'ipad_pro_9_7_inch', 'ipad_pro_12_inch' ]
+device = [ 'ipad_mini', 'ipad_medium', 'ipad_big' ]
 orientation = [ "portrait", "landscape"]
 
 
@@ -162,8 +162,8 @@ pagename = "B25_WMDE_Desktop_EN_00_var"
 tracking = "org-en00-251209-var"
 
 [english.test_matrix]
-platform = ["edge", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
-resolution = ["800x600", "1025x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
+platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
+resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 
 
 
@@ -191,6 +191,6 @@ pagename = "B25_WMDE_Mobile_EN_00_var"
 tracking = "org-mob_en00-250114-var"
 
 [mobile_english.test_matrix]
-device = [ 'samsung_s10', 'nexus_6', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max" ]
+device = [ "android_old_browser", "android_old_chrome", "android_firefox", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
 orientation = [ "portrait", "landscape" ]
 
