@@ -30,21 +30,14 @@ describe( 'SubmittableMainDonationFormUpgradeOptions', () => {
 		[ PaymentMethods.PAYPAL.value, '101', 'yearly' ],
 		[ PaymentMethods.BANK_TRANSFER.value, '101', 'yearly' ],
 		[ PaymentMethods.CREDIT_CARD.value, '101', 'yearly' ],
-		[ PaymentMethods.DIRECT_DEBIT.value, '101', 'yearly' ],
-		[ PaymentMethods.PAYPAL.value, '12', 'monthly' ],
-		[ PaymentMethods.BANK_TRANSFER.value, '12', 'monthly' ],
-		[ PaymentMethods.CREDIT_CARD.value, '12', 'monthly' ],
-		[ PaymentMethods.DIRECT_DEBIT.value, '12', 'monthly' ]
+		[ PaymentMethods.DIRECT_DEBIT.value, '101', 'yearly' ]
 	] )( 'goes to correct step when payment method is not Sofort', async ( paymentMethod: string, selectedAmount: string, expectedPage: string ) => {
 		formModel.paymentMethod.value = paymentMethod;
 		formModel.interval.value = Intervals.ONCE.value;
 		formModel.selectedAmount.value = selectedAmount;
 		const donationForm = createSubmittableMainDonationFormUpgradeOptions(
 			formModel,
-			'yearly',
-			'monthly',
-			11,
-			100
+			'yearly'
 		);
 
 		await donationForm.submit( stepNavigation, {} );
@@ -64,9 +57,6 @@ describe( 'SubmittableMainDonationFormUpgradeOptions', () => {
 		const donationForm = createSubmittableMainDonationFormUpgradeOptions(
 			formModel,
 			'yearly',
-			'monthly',
-			11,
-			100
 		);
 
 		await donationForm.submit( stepNavigation, {} );
@@ -92,10 +82,7 @@ describe( 'SubmittableMainDonationFormUpgradeOptions', () => {
 		formModel.paymentMethod.value = PaymentMethods.PAYPAL.value;
 		const donationForm = createSubmittableMainDonationFormUpgradeOptions(
 			formModel,
-			'yearly',
-			'monthly',
-			11,
-			100
+			'yearly'
 		);
 
 		await donationForm.submit( stepNavigation, {} );
@@ -106,10 +93,7 @@ describe( 'SubmittableMainDonationFormUpgradeOptions', () => {
 	it( 'rejects calls to previous', async () => {
 		const donationForm = createSubmittableMainDonationFormUpgradeOptions(
 			formModel,
-			'yearly',
-			'monthly',
-			11,
-			100
+			'yearly'
 		);
 
 		expect( donationForm.previous( stepNavigation ) ).rejects.toEqual( 'we can\'t go to previous! This should never happen' );

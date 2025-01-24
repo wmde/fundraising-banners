@@ -7,7 +7,6 @@ import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent
 export function mapFormStepShownEvent( e: FormStepShownEvent ): WMDELegacyBannerEvent {
 	const stepNameToEventLookup: Record<string, string> = {
 		UpgradeToYearlyForm: 'upgrade-to-yearly-form-page-shown',
-		UpgradeToMonthlyForm: 'upgrade-to-monthly-form-page-shown',
 		CustomAmountForm: 'custom-amount-form-page-shown',
 		AddressTypeForm: 'address-type-form-page-shown'
 	};
