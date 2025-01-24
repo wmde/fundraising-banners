@@ -83,6 +83,9 @@
 
 <script lang="ts">
 // All form components must have names
+/**
+ * @deprecated "TransactionFees" is a feature that won't be used anymore
+ */
 export default {
 	name: 'MainDonationFormTransactionFees'
 };

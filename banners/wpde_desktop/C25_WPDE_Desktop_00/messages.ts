@@ -1,4 +1,3 @@
-import CustomAmountFormDe from '@src/components/DonationForm/Forms/messages/CustomAmountForm.de';
 import DynamicCampaignTextDe from '@src/utils/DynamicContent/messages/DynamicCampaignText.de';
 import { TranslationMessages } from '@src/Translator';
 import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/UpgradeToYearly.de';
@@ -9,7 +8,6 @@ import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/Main
 import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 
 const messages: TranslationMessages = {
-	...CustomAmountFormDe,
 	...DynamicCampaignTextDe,
 	...UpgradeToYearlyDe,
 	...SoftCloseDe,

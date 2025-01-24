@@ -71,7 +71,7 @@
 
 		<div class="wmde-banner-form-button-container">
 			<slot name="button">
-				<MainDonationFormButtonMultiStep :payment-labels-below="showReceiptCheckboxBelow"/>
+				<MainDonationFormPaymentsAndReceiptButton :payment-labels-below="showReceiptCheckboxBelow"/>
 			</slot>
 			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
 				{{ $translate( 'global-error' ) }}
@@ -99,7 +99,7 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import MainDonationFormButtonMultiStep from './MainDonationFormPaymentsAndReceiptButton.vue';
+import MainDonationFormPaymentsAndReceiptButton from './MainDonationFormPaymentsAndReceiptButton.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 

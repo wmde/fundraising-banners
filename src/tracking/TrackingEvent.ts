@@ -13,7 +13,6 @@ export type TrackingFeatureName = '' |
 	'AlreadyDonatedModal' |
 
 	'MainDonationForm' |
-	'CustomAmountForm' |
 	'UpgradeToYearlyForm' |
 	'AddressTypeForm' |
 

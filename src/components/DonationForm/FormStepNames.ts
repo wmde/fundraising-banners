@@ -5,7 +5,6 @@
 export const useFormStepNames = (): Record<string, string> => ( {
 	AddressTypeButtonForm: 'AddressTypeButtonForm',
 	AddressTypeForm: 'AddressTypeForm',
-	CustomAmountForm: 'CustomAmountForm',
 	MainDonationForm: 'MainDonationForm',
 	UpgradeToYearlyForm: 'UpgradeToYearlyForm'
 } );
