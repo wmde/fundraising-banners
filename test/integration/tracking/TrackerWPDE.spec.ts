@@ -1,6 +1,5 @@
 import { describe, beforeEach, it, expect, vi, test, afterEach } from 'vitest';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
-import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
@@ -52,8 +51,6 @@ describe( 'TrackerWPDE', function () {
 
 	test.each( [
 		[ new CloseEvent( 'SoftClose', 'close' ), 'banner-closed-close' ],
-		[ new CustomAmountChangedEvent( 'increased' ), 'increased-amount' ],
-		[ new CustomAmountChangedEvent( 'decreased' ), 'decreased-amount' ],
 		[ new FormStepShownEvent( 'UpgradeToYearlyForm' ), 'form-step-shown-UpgradeToYearlyForm' ],
 		[ { eventName: 'some-action', feature: '', userChoice: '', customData: {} }, 'some-action' ],
 		[ { eventName: 'some-action', feature: '', userChoice: 'with-choice', customData: {} }, 'some-action-with-choice' ]
@@ -120,8 +117,6 @@ describe( 'TrackerWPDE', function () {
 	} );
 
 	test.each( [
-		[ new CustomAmountChangedEvent( 'increased' ), CustomAmountChangedEvent.EVENT_NAME, 'increased-amount' ],
-		[ new CustomAmountChangedEvent( 'decreased' ), CustomAmountChangedEvent.EVENT_NAME, 'decreased-amount' ],
 		[ new ClickAlreadyDonatedEvent(), ClickAlreadyDonatedEvent.EVENT_NAME, ClickAlreadyDonatedEvent.EVENT_NAME ]
 	] )( 'should generate event identifiers from tracking data, data set %#',
 		( trackingEvent: TrackingEvent<void>, allowedAction: string, expectedId: string ) => {

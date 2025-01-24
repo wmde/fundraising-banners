@@ -30,7 +30,6 @@
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px
 );
-@use 'src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use 'src/themes/Treedip/Footer/FooterAlreadyDonated';
 @use 'src/themes/Treedip/Footer/SelectionInput';
 @use 'src/themes/Treedip/Message/Message'  with (

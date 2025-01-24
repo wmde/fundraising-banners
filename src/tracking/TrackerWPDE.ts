@@ -1,6 +1,5 @@
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { CustomAmountChangedEvent } from '@src/tracking/events/CustomAmountChangedEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
@@ -114,8 +113,6 @@ export class TrackerWPDE implements Tracker {
 	 */
 	private convertEventNameForTracker( event: TrackingEvent<void> ): string {
 		switch ( event.eventName ) {
-			case CustomAmountChangedEvent.EVENT_NAME:
-				return event.userChoice + '-amount';
 			case CloseEvent.EVENT_NAME:
 				return 'banner-closed-' + event.userChoice;
 			case FormStepShownEvent.EVENT_NAME:
