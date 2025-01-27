@@ -1,6 +1,5 @@
 @use 'color_light';
 
-$address-type-button-form: false !default;
 $upgrade-to-yearly-button-form: false !default;
 $select-group-image-label: false !default;
 $progress-bar: false !default;
@@ -10,7 +9,6 @@ $thank-you-box: false !default;
 
 .wmde-banner {
 	@include color_light.swatch(
-		$address-type-button-form,
 		$upgrade-to-yearly-button-form,
 		$select-group-image-label,
 		$progress-bar,

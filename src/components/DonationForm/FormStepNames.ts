@@ -3,8 +3,6 @@
 // delete and replace this object with using the Component.name in the form step setup parameters
 
 export const useFormStepNames = (): Record<string, string> => ( {
-	AddressTypeButtonForm: 'AddressTypeButtonForm',
-	AddressTypeForm: 'AddressTypeForm',
 	MainDonationForm: 'MainDonationForm',
 	UpgradeToYearlyForm: 'UpgradeToYearlyForm'
 } );

@@ -29,7 +29,6 @@ $purple10: #ebe2fc;
 $purple100: #6b4ba1;
 
 @mixin swatch(
-	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$progress-bar: false,
@@ -114,10 +113,6 @@ $purple100: #6b4ba1;
 	--maximise-fill: #{$blue600};
 	--minimise-color: #{$blue600};
 	--minimise-text-highlight-background: #{$yellow100};
-
-	@if $address-type-button-form {
-		--address-type-button-form-notice-color: #{$grey700};
-	}
 
 	@if $upgrade-to-yearly-button-form {
 		--upgrade-to-yearly-button-previous-color: #{$black};

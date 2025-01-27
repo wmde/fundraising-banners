@@ -31,5 +31,4 @@ export interface FormModel {
 	addressType: Ref<string>;
 	addressTypeValidity: Ref<Validity>;
 	receipt: Ref<boolean|null>;
-	disabledAddressTypes: Ref<string[]>;
 }

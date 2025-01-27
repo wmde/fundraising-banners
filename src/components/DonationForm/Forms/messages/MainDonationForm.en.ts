@@ -10,8 +10,6 @@ const translations: TranslationMessages = {
 	'amount-too-low-message': 'The donation needs to be at least 1 Euro.',
 	'amount-too-high-message': 'The donation cannot be more than 99999 Euros',
 	'no-payment-type-message': 'How would you like to pay your donation?',
-	'address-type-info-message': 'Please notice that we cannot provide a donation receipt without your address.',
-	'no-type-statement-message': 'Do you want to provide your address?',
 	'anonymous-BEZ-info-message': 'We need your address for a debit payment.',
 	'sms-info-message': 'Text "WIKI" to 81190. Additional costs for sending text messages may apply.',
 	'sms-payment-message': '€5 by text message',

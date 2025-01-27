@@ -57,18 +57,6 @@ describe( 'useFormModel', () => {
 		expect( model.disabledPaymentMethods.value ).toEqual( [] );
 	} );
 
-	it( 'disables anonymous address type when direct debit was selected', function () {
-		model.paymentMethod.value = PaymentMethods.DIRECT_DEBIT.value;
-
-		expect( model.disabledAddressTypes.value ).toEqual( [ AddressTypes.ANONYMOUS.value ] );
-	} );
-
-	it( 'allows all address types when any other payment type than direct debit was selected', function () {
-		model.paymentMethod.value = PaymentMethods.PAYPAL.value;
-
-		expect( model.disabledAddressTypes.value ).toEqual( [] );
-	} );
-
 	it( 'should clear custom amount when amount changes', async function () {
 		model.selectedAmount.value = '';
 		model.customAmount.value = '999';

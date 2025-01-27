@@ -39,13 +39,6 @@ const disabledPaymentMethods = computed( (): string[] => {
 	}
 } );
 
-const disabledAddressTypes = computed( (): string[] => {
-	if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-		return [ AddressTypes.ANONYMOUS.value ];
-	}
-	return [];
-} );
-
 watch( interval, ( newInterval: string ) => {
 	if ( intervalValidity.value === Validity.Invalid && newInterval !== '' ) {
 		intervalValidity.value = Validity.Valid;
@@ -97,8 +90,6 @@ export function useFormModel(): FormModel {
 		addressType,
 		addressTypeValidity,
 
-		receipt,
-
-		disabledAddressTypes
+		receipt
 	};
 }
