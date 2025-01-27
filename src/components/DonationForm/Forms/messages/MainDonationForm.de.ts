@@ -18,6 +18,13 @@ const translations: TranslationMessages = {
 	'submit-label-short': 'Weiter',
 	'submit-label': 'Weiter, um Spende abzuschließen',
 
+	'submit-label-paypal': 'Weiter zu PayPal',
+	'submit-label-credit-card': 'Weiter zur Dateneingabe',
+	'submit-label-sofort': 'Weiter zu Sofort',
+	'submit-label-bank-transfer': 'Weiter zur Bankverbindung',
+	'submit-label-default': 'Weiter zur Adresseingabe',
+	'donation-receipt-checkbox-label': 'Bitte senden Sie mir eine steuerlich absetzbare Spendenbescheinigung an meine Postanschrift.',
+
 	'interval-once': 'Einmalig',
 	'interval-monthly': 'Monatlich',
 	'interval-quarterly': 'Vierteljährlich',
@@ -28,7 +35,7 @@ const translations: TranslationMessages = {
 	'payment-bank-transfer': 'Banküberweisung',
 	'payment-credit-card': 'Kreditkarte',
 	'payment-paypal': 'PayPal',
-	'payment-sofort': 'Sofortüberweisung'
+	'payment-sofort': 'Sofortüberweisung',
 };
 
 export default translations;

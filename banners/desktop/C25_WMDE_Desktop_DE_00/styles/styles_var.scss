@@ -24,7 +24,7 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
-@use 'src/themes/Treedip/DonationForm/Forms/MainDonationFormDonationReceipt' with (
+@use 'src/themes/Treedip/DonationForm/Forms/MainDonationFormReceipt' with (
 	$padding: 14px 0 0
 );
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (

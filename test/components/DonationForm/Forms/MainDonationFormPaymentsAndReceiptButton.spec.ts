@@ -3,7 +3,7 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { shallowMount } from '@vue/test-utils';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import MainDonationFormPaymentsAndReceiptButton from '@src/components/DonationForm/Forms/MainDonationFormPaymentsAndReceiptButton.vue';
+import MainDonationFormPaymentsAndReceiptButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormPaymentsAndReceiptButton.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 
 const translate = ( key: string ): string => key;

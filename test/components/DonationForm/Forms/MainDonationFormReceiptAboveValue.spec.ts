@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import DonationForm from '@src/components/DonationForm/Forms/MainDonationFormDonationReceipt.vue';
+import MainDonationFormReceiptAboveValue
+	from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValue.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
@@ -30,15 +31,16 @@ vi.mock( '@src/validation/DonationFormValidator', () => {
 const formModel = useFormModel();
 const translate = ( key: string ): string => key;
 
-describe( 'MainDonationFormDonationReceipt.vue', () => {
+describe( 'MainDonationFormReceiptAboveValue.vue', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( formModel ) );
 
 	const getWrapper = ( showErrorScrollLink: boolean = false ): VueWrapper<any> => {
-		return mount( DonationForm, {
+		return mount( MainDonationFormReceiptAboveValue, {
 			props: {
-				showErrorScrollLink
+				showErrorScrollLink,
+				showReceiptCheckboxBelow: 10
 			},
 			global: {
 				mocks: {
@@ -121,9 +123,10 @@ describe( 'MainDonationFormDonationReceipt.vue', () => {
 	} );
 
 	it( 'passes payment label slots dynamically to select group', () => {
-		const wrapper = mount( DonationForm, {
+		const wrapper = mount( MainDonationFormReceiptAboveValue, {
 			props: {
-				showErrorScrollLink: false
+				showErrorScrollLink: false,
+				showReceiptCheckboxBelow: 10
 			},
 			slots: {
 				'label-payment-ppl': `<template #label-payment-ppl><span class="custom-label-paypal"></span></template>`,
@@ -177,39 +180,39 @@ describe( 'MainDonationFormDonationReceipt.vue', () => {
 		expect( wrapper.find( '.wmde-banner-form-donation-receipt-checkbox' ).exists() ).toBeFalsy();
 	} );
 
-	it( 'updates the address type based on the donation receipt', async () => {
+	it( 'updates the form model receipt', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.interval-0 .wmde-banner-select-group-input' ).trigger( 'change' );
 		await wrapper.find( '.amount-5 .wmde-banner-select-group-input' ).trigger( 'change' );
 		await wrapper.find( '.payment-ppl .wmde-banner-select-group-input' ).trigger( 'change' );
 
-		expect( formModel.addressType.value ).toStrictEqual( AddressTypes.ANONYMOUS.value );
+		expect( formModel.receipt.value ).toStrictEqual( false );
 
 		await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
 
-		expect( formModel.addressType.value ).toStrictEqual( '' );
+		expect( formModel.receipt.value ).toStrictEqual( true );
 
 		await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
 
-		expect( formModel.addressType.value ).toStrictEqual( AddressTypes.ANONYMOUS.value );
+		expect( formModel.receipt.value ).toStrictEqual( false );
 	} );
 
-	it( 'clears the address type when radio field becomes hidden', async () => {
+	it( 'clears the receipt option when radio field becomes hidden', async () => {
 		const wrapper = getWrapper();
 
 		await wrapper.find( '.interval-0 .wmde-banner-select-group-input' ).trigger( 'change' );
 		await wrapper.find( '.amount-5 .wmde-banner-select-group-input' ).trigger( 'change' );
 		await wrapper.find( '.payment-ppl .wmde-banner-select-group-input' ).trigger( 'change' );
 
-		expect( formModel.addressType.value ).toStrictEqual( AddressTypes.ANONYMOUS.value );
+		expect( formModel.receipt.value ).toStrictEqual( false );
 
 		await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
 
-		expect( formModel.addressType.value ).toStrictEqual( '' );
+		expect( formModel.receipt.value ).toStrictEqual( true );
 
 		await wrapper.find( '.payment-bez .wmde-banner-select-group-input' ).trigger( 'change' );
 
-		expect( formModel.addressType.value ).toStrictEqual( AddressTypes.ANONYMOUS.value );
+		expect( formModel.receipt.value ).toStrictEqual( false );
 	} );
 } );

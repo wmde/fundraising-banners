@@ -71,7 +71,7 @@
 
 		<div class="wmde-banner-form-button-container">
 			<slot name="button">
-				<MainDonationFormPaymentsAndReceiptButton :payment-labels-below="showReceiptCheckboxBelow"/>
+				<MainDonationFormButton :payment-labels-below="showReceiptCheckboxBelow"/>
 			</slot>
 			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
 				{{ $translate( 'global-error' ) }}
@@ -81,9 +81,14 @@
 </template>
 
 <script lang="ts">
+/**
+ * The difference to `MainDonationFormReceiptAboveValue.vue` is that it's using a specific Button
+ * that displays the button label under different conditions
+ */
+
 // All form components must have names
 export default {
-	name: 'MainDonationFormDonationReceipt'
+	name: 'MainDonationFormReceiptAboveValueDynamicLabel'
 };
 </script>
 
@@ -99,7 +104,7 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import MainDonationFormPaymentsAndReceiptButton from './MainDonationFormPaymentsAndReceiptButton.vue';
+import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 

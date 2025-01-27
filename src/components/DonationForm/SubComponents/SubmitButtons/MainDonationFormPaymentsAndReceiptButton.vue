@@ -5,11 +5,18 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * This Button handels displaying different labels based on
+ * - interval
+ * - address type (anonymous)
+ * - payment type
+ */
+
 import { computed, inject } from 'vue';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Translator } from '@src/Translator';
-import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 
 const formModel = useFormModel();

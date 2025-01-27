@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import DonationForm from '@banners/desktop/C25_WMDE_Desktop_DE_00/components/MainDonationFormReceiptAboveValue.vue';
+import DonationForm from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValueDynamicLabel.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
@@ -30,7 +30,7 @@ vi.mock( '@src/validation/DonationFormValidator', () => {
 const formModel = useFormModel();
 const translate = ( key: string ): string => key;
 
-describe( 'MainDonationFormReceiptAboveValue.vue', () => {
+describe( 'MainDonationFormReceiptAboveValueDynamicLabel.vue', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( formModel ) );

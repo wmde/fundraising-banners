@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * This Button handels displaying different labels based on
+ * - interval
+ * - payment type
+ */
+
 import { computed, inject } from 'vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';

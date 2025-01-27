@@ -18,6 +18,13 @@ const translations: TranslationMessages = {
 	'submit-label-short': 'Proceed',
 	'submit-label': 'Proceed with the donation',
 
+	'submit-label-paypal': 'Proceed with PayPal',
+	'submit-label-credit-card': 'Proceed with credit card',
+	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
+	'submit-label-bank-transfer': 'Proceed with bank transfer',
+	'submit-label-default': 'Proceed with the donation',
+	'donation-receipt-checkbox-label': 'Please send me a tax deductible donation receipt to my postal address.',
+
 	'interval-once': 'one-time',
 	'interval-monthly': 'monthly',
 	'interval-quarterly': 'quarterly',

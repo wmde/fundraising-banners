@@ -142,7 +142,7 @@ import {
 import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton from '@src/components/DonationForm/Forms/MainDonationFormButton.vue';
+import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
 import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';

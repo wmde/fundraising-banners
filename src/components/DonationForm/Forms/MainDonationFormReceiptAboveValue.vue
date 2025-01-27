@@ -62,7 +62,7 @@
 				type="checkbox"
 				value="person"
 				id="wmde-banner-form-donation-receipt"
-				v-model="receiptNeeded"
+				v-model="receipt"
 			>
 			<label for="wmde-banner-form-donation-receipt">
 				{{ $translate( 'donation-receipt-checkbox-label' ) }}
@@ -71,7 +71,7 @@
 
 		<div class="wmde-banner-form-button-container">
 			<slot name="button">
-				<MainDonationFormButtonMultiStep/>
+				<MainDonationFormButton :payment-labels-below="showReceiptCheckboxBelow"/>
 			</slot>
 			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
 				{{ $translate( 'global-error' ) }}
@@ -83,7 +83,7 @@
 <script lang="ts">
 // All form components must have names
 export default {
-	name: 'MainDonationFormDonationReceipt'
+	name: 'MainDonationFormDonationReceiptAboveValue'
 };
 </script>
 
@@ -99,16 +99,17 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import MainDonationFormButtonMultiStep from '@src/components/DonationForm/Forms/MainDonationFormButtonMultiStep.vue';
+import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormPaymentsAndReceiptButton.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
 interface Props {
+	showReceiptCheckboxBelow: number;
 	showErrorScrollLink?: boolean;
 	customAmountPlaceholderKey?: string;
 }
 
-withDefaults( defineProps<Props>(), {
+const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false,
 	customAmountPlaceholderKey: 'custom-amount-placeholder'
 } );
@@ -126,13 +127,12 @@ const showReceiptCheckbox = computed<boolean>( () => {
 		return false;
 	}
 
-	if ( numericAmount.value === 0 ) {
+	if ( numericAmount.value >= props.showReceiptCheckboxBelow ) {
 		return false;
 	}
 
 	return true;
 } );
-const receiptNeeded = ref<boolean>( false );
 const isFormValid = ref<boolean>( true );
 
 const validate = (): void => {
@@ -147,7 +147,7 @@ const {
 	interval, intervalValidity, disabledIntervals,
 	selectedAmount, customAmount, numericAmount, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods,
-	addressType
+	addressType, receipt
 } = formModel;
 
 const clearSelectedAmount = (): void => {
@@ -160,13 +160,9 @@ const formatCustomAmount = (): void => {
 	}
 };
 
-watch( receiptNeeded, ( newValue: boolean ) => {
-	addressType.value = newValue ? '' : AddressTypes.ANONYMOUS.value;
-} );
-
 watch( [ interval, paymentMethod, numericAmount ], () => {
 	if ( !showReceiptCheckbox.value ) {
-		receiptNeeded.value = false;
+		receipt.value = false;
 	}
 } );
 
