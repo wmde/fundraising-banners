@@ -32,18 +32,4 @@ export interface FormModel {
 	addressTypeValidity: Ref<Validity>;
 	receipt: Ref<boolean|null>;
 	disabledAddressTypes: Ref<string[]>;
-	/**
-	 * Flag to indicate that a payment-provider-specific transaction fee should be added to the total amount
-	 */
-	hasTransactionFee: Ref<boolean>;
-
-	/**
-	 * Computed transaction fee for the selected payment method and amount. Only non-zero if hasTransactionFee is true.
-	 */
-	transactionFee: ComputedRef<number>;
-
-	/**
-	 * Computed total amount plus transaction fee, if hasTransactionFee is true.
-	 */
-	totalNumericAmount: ComputedRef<number>;
 }

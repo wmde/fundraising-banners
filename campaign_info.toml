@@ -93,7 +93,7 @@ orientation = [ "portrait", "landscape"]
 name = "WPDE Desktop"
 icon = "desktop"
 campaign = "C25_WPDE_Desktop_00"
-description = "Based on C23_WPDE_Desktop_02"
+description = "Based on C23_WPDE_Desktop_02 (VAR changes are already deleted, because the transaction fee feature has been deleted in a clean-up)"
 campaign_tracking = "wpde-00-250114"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"

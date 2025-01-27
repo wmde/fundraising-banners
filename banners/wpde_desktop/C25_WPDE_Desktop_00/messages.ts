@@ -18,7 +18,6 @@ const messages: TranslationMessages = {
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
-	'cover-transaction-costs': 'Ich übernehme gerne die Transaktionsgebühren von {{transactionCosts}}, damit 100 % meiner Spende ankommt.'
 };
 
 export default messages;

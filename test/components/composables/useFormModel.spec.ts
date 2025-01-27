@@ -169,40 +169,4 @@ describe( 'useFormModel', () => {
 
 		expect( model.amountValidity.value ).toBe( expectedValidity );
 	} );
-
-	it( 'should calculate the fee but leave the total amount unchanged when hasTransactionFee is false', () => {
-		model.customAmount.value = '50';
-		model.paymentMethod.value = 'PPL';
-		model.hasTransactionFee.value = false;
-
-		expect( model.totalNumericAmount.value ).toBe( 50 );
-		expect( model.transactionFee.value ).toBe( 1.10 );
-	} );
-
-	it( 'should round the fee to 2 digits', () => {
-		model.customAmount.value = '50';
-		model.paymentMethod.value = 'MCP';
-		model.hasTransactionFee.value = false;
-
-		// 50 * 0.0175 + 0.29 = 1.165
-		expect( model.transactionFee.value ).toBe( 1.17 );
-	} );
-
-	it( 'should add the transaction fee to the amount when there is a transaction fee', () => {
-		model.customAmount.value = '100';
-		model.paymentMethod.value = 'PPL';
-		model.hasTransactionFee.value = true;
-
-		expect( model.totalNumericAmount.value ).toBe( 101.85 );
-		expect( model.transactionFee.value ).toBe( 1.85 );
-	} );
-
-	it( 'should leave the amount unchanged when there is no fee for the selected payment method', () => {
-		model.customAmount.value = '100';
-		model.paymentMethod.value = 'SUB';
-		model.hasTransactionFee.value = true;
-
-		expect( model.totalNumericAmount.value ).toBe( 100 );
-		expect( model.transactionFee.value ).toBe( 0 );
-	} );
 } );
