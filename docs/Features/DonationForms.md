@@ -7,7 +7,8 @@
 - **file name(s):**
   - `MainDonationForm.vue`
 - **description:**
-  - TBD
+  - Basic Donation form that asks the user for interval, payment type and amount
+  - The button is set to `MainDonationFormButtonMultiStep.vue`, so it can dynamically change its label depending on invertal and payment type.
 - **used in (banner name):**
   - `C25_WMDE_Mobile_EN_00`
   - `C25_WMDE_iPad_DE_00`
@@ -24,7 +25,7 @@
   - `C25_WMDE_Mobile_DE_00` 
 
 
-### Show Donation Receipt checkbox (generic)
+### ( Show Donation Receipt checkbox (generic) )
 - ( no longer used )
 - **important file(s):**
   - `MainDonationFormReceipt.scss`
@@ -32,9 +33,9 @@
   - Show additional checkbox on the form that asks whether the user needs a donation receipt.
   - This influences whether we offer the user to donate anonymously or not.
 - **used in (banner name):**
-  - TBD
+  - no longer used
 
-### Show Donation Receipt checkbox only below a certain amount threshold
+### ( Show Donation Receipt checkbox only below a certain amount threshold )
 - ( no longer used? )
 - **extends:**
   - `Show Donation Receipt checkbox`
@@ -52,13 +53,13 @@
       - go to fundraising page to enter the address data first
   - https://phabricator.wikimedia.org/T382304
 - **used in (banner name):**
-  - TODO
+  - no longer used
 
 ### Show Donation Receipt checkbox only below a certain amount threshold with different submit button labels
 - **extends:**
   - `Show Donation Receipt checkbox only below a certain amount threshold`
 - **difference:**
-  - TODO
+  - the Submit Button shows different labels, depending on address type, amount, payment type, receipt checkbox
 - **important file(s):**
   - `MainDonationFormReceipt.scss`
   - `MainDonationFormReceiptAboveValueDynamicLabel.vue`
@@ -67,7 +68,15 @@
   - `C25_WMDE_Desktop_DE_00`
   - `C25_WMDE_Desktop_EN_00`
 
-
+- - -
 ## Upgrade to Yearly Form Page
+
+### Upgrade to Yearly Form
+- **file name(s):**
+  - `UpgradeToYearlyButtonForm.vue`
+  - `SubmittableUpgradeToYearly.ts`
+- **description:**
+  - Banner form page that shows upsell buttons, asking the user to increase the payment interval to "yearly".
+- **used in (banner name):**
 
 - - -
