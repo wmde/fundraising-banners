@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 /**
- * This Button handels displaying different labels based on
+ * This Button handles displaying different labels based on
  * - the receipt checkbox input
  * - address type (anonymous)
  * - threshold for the amount

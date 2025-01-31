@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 /**
- * This Button handels displaying different labels based on
+ * This Button handles displaying different labels based on
  * - interval
  * - payment type
  */

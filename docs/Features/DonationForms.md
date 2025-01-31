@@ -8,7 +8,8 @@
   - `MainDonationForm.vue`
 - **description:**
   - Basic Donation form that asks the user for interval, payment type and amount
-  - The button is set to `MainDonationFormButtonMultiStep.vue`, so it can dynamically change its label depending on invertal and payment type.
+  - The button is set to `MainDonationFormButtonMultiStep.vue`, so it can dynamically change its label depending on 
+    interval and payment type.
 - **used in (banner name):**
   - `C25_WMDE_Mobile_EN_00`
   - `C25_WMDE_iPad_DE_00`
@@ -20,13 +21,17 @@
   - `MainDonationFormAdaptiveAmounts.vue`
 - **description:** 
   - This form allows to pass in amount options for the donation form directly with a new property.
-  - It got introduced in `C24_WMDE_Mobile_DE_10`
+  - The amounts no longer come from the `form_items.ts` file. Instead, the (mobile) banner component that
+     includes `MainDonationFormAdaptiveAmounts.vue` has two sets of amounts and changes them, depending on which button
+     the user clicked in the mini banner.
+  - It is used for the mobile banners (full page form) to react to the situation when a user chooses "other amount" 
+    in the MiniBanner and should see different amount options than the amount suggestion they already got in the MiniBanner ("donate 10€").
+    - It got introduced in `C24_WMDE_Mobile_DE_10`
 - **used in (banner name):** 
   - `C25_WMDE_Mobile_DE_00` 
 
 
-### ( Show Donation Receipt checkbox (generic) )
-- ( no longer used )
+### 🗑️ Show Donation Receipt checkbox (generic)
 - **important file(s):**
   - `MainDonationFormReceipt.scss`
 - **difference:**
@@ -35,16 +40,16 @@
 - **used in (banner name):**
   - no longer used
 
-### ( Show Donation Receipt checkbox only below a certain amount threshold )
-- ( no longer used? )
+### 🗑️ Show Donation Receipt checkbox only below a certain amount threshold
 - **extends:**
   - `Show Donation Receipt checkbox`
 - **important file(s):**
   - `MainDonationFormReceipt.scss`
   - `MainDonationFormReceiptAboveValue.vue`
-  - - `MainDonationFormPaymentsAndReceiptButton.vue`
+  - `MainDonationFormPaymentsAndReceiptButton.vue`
+  - `useFormActionWithReceipt.ts`
 - **difference:**
-  - It got introduced in `B24_WMDE_Desktop_EN_07_var` 
+  - It got introduced in `B24_WMDE_Desktop_EN_07_var`.
   - When a user selects <10€ a checkbox will appear and ask whether they need a donation receipt.
   - When the user selects >=10€ they will get sent to `?ap=1` without a checkbox
     - Depending on the choice, this will mean: 
@@ -67,6 +72,10 @@
 - **used in (banner name):**
   - `C25_WMDE_Desktop_DE_00`
   - `C25_WMDE_Desktop_EN_00`
+  - `C25_WMDE_Mobile_DE_00`
+  - `C25_WMDE_Mobile_EN_00`
+  - `C25_WPDE_Mobile_00`
+  - `C25_WPDE_Desktop_00`
 
 - - -
 ## Upgrade to Yearly Form Page
@@ -77,6 +86,8 @@
   - `SubmittableUpgradeToYearly.ts`
 - **description:**
   - Banner form page that shows upsell buttons, asking the user to increase the payment interval to "yearly".
+  - This is supposed to increase recurring donations.
 - **used in (banner name):**
-
+  - `C25_WMDE_Desktop_DE_00`
+  - `C25_WMDE_Desktop_EN_00`
 - - -
