@@ -94,7 +94,7 @@ import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import MainDonationForm from './MainDonationFormReceiptAboveValue.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValueDynamicLabel.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';

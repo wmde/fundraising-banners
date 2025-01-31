@@ -13,10 +13,10 @@
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { computed } from 'vue';
 
-const { addressType, totalNumericAmount, interval, paymentMethod, receipt } = useFormModel();
+const { addressType, numericAmount, interval, paymentMethod, receipt } = useFormModel();
 
 const formattedAmountForServer = computed( (): number => {
-	return parseFloat( totalNumericAmount.value.toFixed( 2 ) ) * 100;
+	return parseFloat( numericAmount.value.toFixed( 2 ) ) * 100;
 } );
 
 </script>

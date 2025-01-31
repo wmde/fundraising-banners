@@ -1,11 +1,11 @@
 @use '../../variables/globals';
 @use '../../variables/fonts';
-@use '../../../../components/DonationForm/Forms/MainDonationFormDonationReceipt';
+@use '../../../../components/DonationForm/Forms/MainDonationFormReceipt';
 
 $padding: 0 !default;
 
 .wmde-banner {
-	@include MainDonationFormDonationReceipt.layout;
+	@include MainDonationFormReceipt.layout;
 
 	&-sub-form-donation {
 		padding: $padding;

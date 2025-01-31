@@ -86,7 +86,7 @@ import { newDonationFormValidator } from '@src/validation/DonationFormValidator'
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import MainDonationFormButtonMultiStep from '@src/components/DonationForm/Forms/MainDonationFormButtonMultiStep.vue';
+import MainDonationFormButtonMultiStep from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButtonMultiStep.vue';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 interface Props {

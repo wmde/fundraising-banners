@@ -7,17 +7,6 @@ import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
-export type TransactionFee = {
-	fixedFee: number;
-	percentage: number;
-	minimumPercentage: number;
-};
-
-export const TRANSACTION_FEES = new Map<string, TransactionFee>( [
-	[ 'PPL', { fixedFee: 0.35, percentage: 0.015, minimumPercentage: 0 } ],
-	[ 'MCP', { fixedFee: 0.29, percentage: 0.0175, minimumPercentage: 0.35 } ]
-] );
-
 const interval = ref<string>( '' );
 const intervalValidity = ref<Validity>( Validity.Unset );
 
@@ -34,8 +23,6 @@ const addressTypeValidity = ref<Validity>( Validity.Unset );
 
 const receipt = ref<boolean|null>( null );
 
-const hasTransactionFee = ref<boolean>( false );
-
 const disabledIntervals = computed( (): string[] => {
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
 		return RecurringIntervals;
@@ -50,27 +37,6 @@ const disabledPaymentMethods = computed( (): string[] => {
 	} else {
 		return [ PaymentMethods.SOFORT.value ];
 	}
-} );
-
-const disabledAddressTypes = computed( (): string[] => {
-	if ( paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-		return [ AddressTypes.ANONYMOUS.value ];
-	}
-	return [];
-} );
-
-const transactionFee = computed( () => {
-	const fee = TRANSACTION_FEES.get( paymentMethod.value );
-	if ( fee === undefined ) {
-		return 0;
-	}
-	const calculatedFee = fee.fixedFee + Math.max( numericAmount.value * fee.percentage, fee.minimumPercentage );
-	// See https://stackoverflow.com/q/11832914/130121 for an in-depth analysis how to round to 2 decimal places
-	return Math.round( ( calculatedFee + Number.EPSILON ) * 100 ) / 100;
-} );
-
-const totalNumericAmount = computed( () => {
-	return numericAmount.value + ( hasTransactionFee.value ? transactionFee.value : 0 );
 } );
 
 watch( interval, ( newInterval: string ) => {
@@ -116,7 +82,6 @@ export function useFormModel(): FormModel {
 		selectedAmount,
 		customAmount,
 		numericAmount,
-		totalNumericAmount,
 		amountValidity,
 
 		paymentMethod,
@@ -125,11 +90,6 @@ export function useFormModel(): FormModel {
 		addressType,
 		addressTypeValidity,
 
-		receipt,
-
-		disabledAddressTypes,
-
-		hasTransactionFee,
-		transactionFee
+		receipt
 	};
 }

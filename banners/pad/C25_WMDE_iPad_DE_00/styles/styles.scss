@@ -42,7 +42,6 @@
 	$padding: 0
 );
 @use '@src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
-@use '@src/themes/Treedip/DonationForm/Forms/CustomAmountForm';
 @use '@src/themes/Treedip/Footer/FooterAlreadyDonated';
 @use '@src/themes/Treedip/Footer/BannerFooter' with (
 	$right-column-width: 35%

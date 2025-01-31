@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * This Button handles displaying different labels based on
+ * - interval
+ * - payment type
+ */
+
 import { computed, inject } from 'vue';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
@@ -13,13 +19,7 @@ import { Translator } from '@src/Translator';
 
 const formModel = useFormModel();
 const translator = inject<Translator>( 'translator' );
-const { interval, paymentMethod, numericAmount } = formModel;
-
-interface Props {
-	maxAmount: number;
-}
-
-const props = defineProps<Props>();
+const { interval, paymentMethod } = formModel;
 
 const submitButtonLabel = computed( (): string => {
 	if ( interval.value !== Intervals.ONCE.value ) {
@@ -27,10 +27,6 @@ const submitButtonLabel = computed( (): string => {
 	}
 
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
-		return translator.translate( 'submit-label' );
-	}
-
-	if ( numericAmount.value >= props.maxAmount ) {
 		return translator.translate( 'submit-label' );
 	}
 

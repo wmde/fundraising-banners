@@ -2,7 +2,6 @@ export type TrackingFeatureName = '' |
 	'SoftClose' |
 	'Page' |
 	'AlreadyDonated' |
-	'CustomAmount' |
 
 	'MainBanner' |
 	'MiniBanner' |
@@ -13,10 +12,7 @@ export type TrackingFeatureName = '' |
 	'AlreadyDonatedModal' |
 
 	'MainDonationForm' |
-	'CustomAmountForm' |
 	'UpgradeToYearlyForm' |
-	'UpgradeToMonthlyForm' |
-	'AddressTypeForm' |
 
 	'Footer' |
 

@@ -5,22 +5,26 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * This Button handles displaying different labels based on
+ * - the receipt checkbox input
+ * - address type (anonymous)
+ * - threshold for the amount
+ * - payment type
+ */
+
 import { computed, inject } from 'vue';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Translator } from '@src/Translator';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
-
 interface Props {
 	paymentLabelsBelow: number;
 }
-
 const props = defineProps<Props>();
-
 const formModel = useFormModel();
 const translator = inject<Translator>( 'translator' );
-const { paymentMethod, addressType, numericAmount, receipt } = formModel;
-
+const { paymentMethod, addressType, receipt, numericAmount } = formModel;
 const submitButtonLabel = computed( (): string => {
 	if ( numericAmount.value < props.paymentLabelsBelow && !receipt.value && [ AddressTypes.ANONYMOUS.value, '' ].includes( addressType.value ) ) {
 		if ( paymentMethod.value === PaymentMethods.PAYPAL.value ) {

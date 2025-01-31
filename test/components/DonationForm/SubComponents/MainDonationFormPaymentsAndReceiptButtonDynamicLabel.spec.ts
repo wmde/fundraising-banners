@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it, test } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { shallowMount } from '@vue/test-utils';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
-import MainDonationFormPaymentsAndReceiptButton from '@banners/desktop/C25_WMDE_Desktop_DE_00/components/MainDonationFormPaymentsAndReceiptButton.vue';
+import MainDonationFormPaymentsAndReceiptButtonDynamicLabel from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { resetFormModel } from '@test/resetFormModel';
 
 const translate = ( key: string ): string => key;
 const formModel = useFormModel();
 
-describe( 'MainDonationFormPaymentsAndReceiptButton.vue', () => {
+describe( 'MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue', () => {
 
 	beforeEach( () => resetFormModel( formModel ) );
 
@@ -23,7 +23,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButton.vue', () => {
 		formModel.paymentMethod.value = PaymentMethods.PAYPAL.value;
 		formModel.customAmount.value = '9.99';
 
-		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButton, {
+		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
 				paymentLabelsBelow: 10
 			},
@@ -47,7 +47,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButton.vue', () => {
 		formModel.addressType.value = AddressTypes.ANONYMOUS.value;
 		formModel.customAmount.value = '9.99';
 
-		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButton, {
+		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
 				paymentLabelsBelow: 10
 			},
@@ -72,7 +72,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButton.vue', () => {
 		formModel.paymentMethod.value = paymentMethod;
 		formModel.customAmount.value = '9.99';
 
-		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButton, {
+		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
 				paymentLabelsBelow: 10
 			},
@@ -92,7 +92,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButton.vue', () => {
 		formModel.addressType.value = AddressTypes.ANONYMOUS.value;
 		formModel.customAmount.value = '10';
 
-		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButton, {
+		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
 				paymentLabelsBelow: 10
 			},

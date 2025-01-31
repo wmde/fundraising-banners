@@ -46,7 +46,6 @@ $pink100: #ff33f1;
 
 @mixin swatch(
 	$minimised-banner: false,
-	$address-type-button-form: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$progress-bar: false,
@@ -143,10 +142,6 @@ $pink100: #ff33f1;
 
 		--minimised-info-background: #{$yellow200};
 		--minimised-info-color: #{$black};
-	}
-
-	@if $address-type-button-form {
-		--address-type-button-form-notice-color: #{$grey700};
 	}
 
 	@if $upgrade-to-yearly-button-form {
