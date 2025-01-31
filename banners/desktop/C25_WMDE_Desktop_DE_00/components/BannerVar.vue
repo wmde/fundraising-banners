@@ -112,7 +112,7 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '../content/BannerTitle.vue';
-import { useFormAction } from '../useFormAction';
+import { useFormActionWithReceipt } from '@src/components/composables/useFormActionWithReceipt';
 import { FormActions } from '@src/domain/FormActions';
 
 const minimumAmount = 10;
@@ -148,7 +148,7 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
-const { formAction } = useFormAction( inject<FormActions>( 'formActions' ), minimumAmount );
+const { formAction } = useFormActionWithReceipt( inject<FormActions>( 'formActions' ), minimumAmount );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
