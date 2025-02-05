@@ -29,6 +29,7 @@ describe( 'FallbackBanner.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
+					currentCampaignTimePercentage: 42,
 					tracker: tracker ?? new TrackerStub(),
 					timer: timer ?? new TimerStub()
 				}
