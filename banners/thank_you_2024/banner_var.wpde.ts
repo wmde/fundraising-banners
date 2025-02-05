@@ -39,7 +39,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
-		settings: createThankYouSettings( new IntegerDe(), page.getCampaignParameters().thankYouCampaign ),
+		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {

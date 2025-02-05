@@ -1,6 +1,7 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { CampaignParameters } from '@src/domain/CampaignParameters';
+import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 
 export class PageStub implements Page {
@@ -70,12 +71,15 @@ export class PageStub implements Page {
 			startDate: '',
 			isLateProgress: false,
 			dramaTextIsVisible: false,
-			urgencyMessageDaysLeft: 0,
-			thankYouCampaign: {
-				progressBarPercentage: 0,
-				numberOfDonors: 0,
-				numberOfMembers: 0
-			}
+			urgencyMessageDaysLeft: 0
+		};
+	}
+
+	public getThankYouCampaignParameters(): ThankYouCampaignParameters {
+		return {
+			progressBarPercentage: 0,
+			numberOfDonors: 0,
+			numberOfMembers: 0
 		};
 	}
 
