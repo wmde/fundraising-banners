@@ -11,10 +11,6 @@ interface DynamicCampaignTextOptions {
 	formatters: Formatters;
 	campaignParameters: CampaignParameters;
 	impressionCount: ImpressionCount;
-	/**
-	 * @deprecated This should be removed in the 2025 campaign cleanup
-	 */
-	urgencyMessageDaysLeft?: number;
 }
 
 export default {
