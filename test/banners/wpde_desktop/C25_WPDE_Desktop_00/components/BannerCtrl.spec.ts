@@ -16,7 +16,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { setCookieImageFeatures } from '@test/features/SetCookieImage';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 
@@ -146,7 +146,7 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
+			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

@@ -9,7 +9,6 @@ import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
-import { AlreadyDonatedShownEvent } from '@src/tracking/events/AlreadyDonatedShownEvent';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
@@ -19,7 +18,6 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
-	[ AlreadyDonatedShownEvent.EVENT_NAME, ( e: AlreadyDonatedShownEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 ) ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {

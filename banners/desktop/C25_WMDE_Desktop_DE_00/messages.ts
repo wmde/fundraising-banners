@@ -4,7 +4,6 @@ import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/Upgra
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import DoubleProgressBarDe from '@src/components/ProgressBar/messages/DoubleProgressBar.de';
 
@@ -13,11 +12,10 @@ const messages: TranslationMessages = {
 	...UpgradeToYearlyDe,
 	...FooterDe,
 	...MainDonationFormDe,
-	...AlreadyDonatedModal,
 	...FallbackBanner,
 	...SoftCloseDe,
 	...DoubleProgressBarDe,
-	'already-donated-go-away-button': 'Im Moment nicht',
+	'already-donated-link': 'Habe schon gespendet',
 	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
 	'upgrade-to-yearly-copy': `<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns besonders und ermöglichen langfristige Weiterentwicklungen.</p>
 		<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>`,

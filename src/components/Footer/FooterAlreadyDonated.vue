@@ -16,7 +16,7 @@
 				@click.prevent="onClickAlreadyDonated"
 				:title="$translate( 'already-donated-description' )"
 			>
-				<TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-open-link' ) }}
+				<TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-link' ) }}
 			</a>
 		</div>
 
@@ -36,6 +36,10 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * This footer contains a link (button behaviour) (#wmde-banner-footer-already-donated) that closes the banner
+ */
+
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { inject } from 'vue';
