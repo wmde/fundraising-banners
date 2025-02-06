@@ -30,8 +30,7 @@ $blue700: #2a4b8d;
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false,
-	$minimised-banner: false
+	$fallback-banner: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -219,18 +218,5 @@ $blue700: #2a4b8d;
 		--fallback-slider-pagination-isactive-background: #{$white};
 		--fallback-slider-pagination-border: #{$white};
 		--fallback-slider-pagination-isactive-border: #{$red600};
-	}
-
-	@if $minimised-banner {
-		--minimised-color: #{$white};
-		--minimised-background: #{$blue700};
-		--minimised-button-background: #{$red600};
-		--minimised-button-color: #{$white};
-		--minimised-button-background-hover: #{$red700};
-		--minimised-buttongroup-border: #{$blue700};
-		--minimised-control-color: #{$blue700};
-		--minimised-control-border: #{$blue700};
-		--minimised-control-fill: #{$blue700};
-		--minimised-close-button-color: #{$grey400};
 	}
 }

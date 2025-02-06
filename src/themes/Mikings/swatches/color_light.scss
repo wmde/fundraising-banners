@@ -108,12 +108,6 @@ $purple100: #6b4ba1;
 	);
 	/* stylelint-enable */
 
-	--minimise-background: #{$grey100};
-	--minimise-fill: #{$blue600};
-	--maximise-fill: #{$blue600};
-	--minimise-color: #{$blue600};
-	--minimise-text-highlight-background: #{$yellow100};
-
 	@if $upgrade-to-yearly-button-form {
 		--upgrade-to-yearly-button-previous-color: #{$black};
 	}

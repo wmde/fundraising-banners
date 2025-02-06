@@ -45,7 +45,6 @@ $red300: #ff5233;
 $pink100: #ff33f1;
 
 @mixin swatch(
-	$minimised-banner: false,
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$progress-bar: false,
@@ -130,19 +129,6 @@ $pink100: #ff33f1;
 			rgb(153, 10, 0) 100%
 	);
 	/* stylelint-enable */
-
-	@if $minimised-banner {
-		--minimised-background: #{$green800};
-		--minimised-color: #{$white};
-
-		--minimised-close-background: #{$grey50};
-
-		--minimised-link-color: #{$yellow200};
-		--minimised-link-shadow: #{$pink100};
-
-		--minimised-info-background: #{$yellow200};
-		--minimised-info-color: #{$black};
-	}
 
 	@if $upgrade-to-yearly-button-form {
 		--upgrade-to-yearly-button-previous-color: #{$black};
