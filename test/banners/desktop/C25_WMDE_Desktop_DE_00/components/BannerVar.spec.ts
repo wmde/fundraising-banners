@@ -20,7 +20,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
-import { alreadyDonatedModalFeatures } from '@test/features/AlreadyDonatedModal';
+import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
@@ -207,7 +207,7 @@ describe( 'BannerVar.vue', () => {
 		test.each( [
 			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
-			await alreadyDonatedModalFeatures[ testName ]( getWrapper() );
+			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

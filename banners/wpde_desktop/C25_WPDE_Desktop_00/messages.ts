@@ -4,7 +4,6 @@ import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/Upgra
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
-import AlreadyDonatedModal from '@src/components/AlreadyDonatedModal/translations/AlreadyDonatedModal.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -12,7 +11,7 @@ const messages: TranslationMessages = {
 	...SoftCloseDe,
 	...FooterDe,
 	...MainDonationFormDe,
-	...AlreadyDonatedModal,
+	'already-donated-link': 'Habe schon gespendet',
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',

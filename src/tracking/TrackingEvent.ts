@@ -9,7 +9,6 @@ export type TrackingFeatureName = '' |
 	'FallbackBanner' |
 	'MinimisedBanner' |
 	'EarlyBanner' |
-	'AlreadyDonatedModal' |
 
 	'MainDonationForm' |
 	'UpgradeToYearlyForm' |
