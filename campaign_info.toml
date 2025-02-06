@@ -103,9 +103,9 @@ wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wpde_desktop.banners.ctrl]
-filename = "./banners/wpde_desktop/C25_WPDE_Desktop_00/banner_ctrl.ts"
-pagename = "B25_WPDE_Desktop_00_ctrl"
-tracking = "wpde-00-250114-ctrl"
+filename = "./banners/wpde_desktop/C25_WPDE_Desktop_test/banner_ctrl.ts"
+pagename = "B25_WPDE_Desktop_test_ctrl"
+tracking = "wpde-test-250114-ctrl"
 
 [wpde_desktop.banners.var]
 filename = "./banners/wpde_desktop/C25_WPDE_Desktop_00/banner_var.ts"
