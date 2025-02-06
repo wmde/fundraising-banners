@@ -22,18 +22,26 @@ describe( 'PageWPDE', function () {
 			startDate: '2023-11-01',
 			isLateProgress: false,
 			dramaTextIsVisible: false,
-			urgencyMessageDaysLeft: 10,
-			thankYouCampaign: {
-				progressBarPercentage: 80,
-				numberOfDonors: 42,
-				numberOfMembers: 23
-			}
+			urgencyMessageDaysLeft: 10
 		};
 		const page = new PageWPDE( tracking );
 
 		const retrievedCampaignParameters = page.getCampaignParameters();
 
 		expect( retrievedCampaignParameters.startDate ).toBe( '2023-11-01' );
+	} );
+
+	it( 'returns campaign parameters for thankyou banners', () => {
+		window.thankYouCampaignParameters = {
+			progressBarPercentage: 80,
+			numberOfDonors: 42,
+			numberOfMembers: 23
+		};
+		const page = new PageWPDE( tracking );
+
+		const retrievedCampaignParameters = page.getThankYouCampaignParameters();
+
+		expect( retrievedCampaignParameters ).toEqual( window.thankYouCampaignParameters );
 	} );
 
 	it( 'throws error if campaign parameters are not set in global namespace', () => {

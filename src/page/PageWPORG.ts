@@ -5,6 +5,7 @@ import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { Vector2 } from '@src/utils/Vector2';
 import { CampaignParameters } from '@src/domain/CampaignParameters';
+import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { CloseChoices } from '@src/domain/CloseChoices';
@@ -172,15 +173,22 @@ class PageWPORG implements Page {
 			numberOfMembers: Number( data.numberOfMembers ),
 			isLateProgress: data.isLateProgress === 'true',
 			dramaTextIsVisible: data.dramaTextIsVisible === 'true',
-			urgencyMessageDaysLeft: Number( data.urgencyMessageDaysLeft ),
-			thankYouCampaign: {
-				numberOfDonors: Number( data.tyNumberOfDonors ),
-				numberOfMembers: Number( data.tyNumberOfMembers ),
-				progressBarPercentage: Number( data.tyProgressBarPercentage )
-			}
+			urgencyMessageDaysLeft: Number( data.urgencyMessageDaysLeft )
 		};
 
 		return getCampaignParameterOverride( campaignParameters );
+	}
+
+	public getThankYouCampaignParameters(): ThankYouCampaignParameters {
+		const data = this.getCampaignData();
+
+		const thankYouCampaignParameters = {
+			numberOfDonors: Number( data.tyNumberOfDonors ),
+			numberOfMembers: Number( data.tyNumberOfMembers ),
+			progressBarPercentage: Number( data.tyProgressBarPercentage )
+		};
+
+		return thankYouCampaignParameters;
 	}
 
 	public getTracking(): TrackingParameters {

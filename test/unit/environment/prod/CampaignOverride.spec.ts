@@ -20,12 +20,7 @@ describe( 'getCampaignParameterOverride (prod version)', () => {
 			startDate: '',
 			isLateProgress: false,
 			dramaTextIsVisible: false,
-			urgencyMessageDaysLeft: 0,
-			thankYouCampaign: {
-				progressBarPercentage: 0,
-				numberOfDonors: 0,
-				numberOfMembers: 0
-			}
+			urgencyMessageDaysLeft: 0
 		};
 
 		const modifiedParams = getCampaignParameterOverride( params );

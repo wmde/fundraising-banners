@@ -1,5 +1,5 @@
 import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
-import { ThankYouCampaignParameters } from '@src/domain/CampaignParameters';
+import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
 
 export interface ThankYouSettings {
 	numberOfDonors: string;

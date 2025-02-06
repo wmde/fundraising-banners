@@ -1,6 +1,7 @@
 import { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from './BannerNotShownReasons';
 import { CampaignParameters } from '@src/domain/CampaignParameters';
+import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
@@ -9,6 +10,7 @@ export const showBannerClass = 'wmde-show-banner';
 
 export interface WpdeWindow extends Window {
 	campaignParameters: CampaignParameters;
+	thankYouCampaignParameters: ThankYouCampaignParameters;
 }
 
 declare let window: WpdeWindow;
@@ -79,6 +81,14 @@ class PageWPDE implements Page {
 		}
 
 		return getCampaignParameterOverride( window.campaignParameters );
+	}
+
+	public getThankYouCampaignParameters(): ThankYouCampaignParameters {
+		if ( !window.thankYouCampaignParameters ) {
+			throw new Error( 'Campaign parameters are not set globally' );
+		}
+
+		return window.thankYouCampaignParameters;
 	}
 
 	public getTracking(): TrackingParameters {
