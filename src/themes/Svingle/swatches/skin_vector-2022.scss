@@ -11,7 +11,6 @@ $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
 $fallback-banner: false !default;
-$minimised-banner: false !default;
 
 .skin-theme-clientpref-day .wmde-banner {
 	@include color_light.swatch(
@@ -24,8 +23,7 @@ $minimised-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner,
-		$minimised-banner
+		$fallback-banner
 	);
 }
 
@@ -40,8 +38,7 @@ $minimised-banner: false !default;
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
-		$fallback-banner,
-		$minimised-banner
+		$fallback-banner
 	);
 }
 
@@ -57,8 +54,7 @@ $minimised-banner: false !default;
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
-			$fallback-banner,
-			$minimised-banner
+			$fallback-banner
 		);
 	}
 
@@ -73,8 +69,7 @@ $minimised-banner: false !default;
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
-			$fallback-banner,
-			$minimised-banner
+			$fallback-banner
 		);
 	}
 }
