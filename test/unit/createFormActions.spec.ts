@@ -9,9 +9,9 @@ describe( 'createFormActions', function () {
 			keyword: 'coolBanner'
 		}, new ImpressionCountStub(), { locale: 'de_DE', ast: '1' } );
 		expect( formActions ).toEqual( {
-			donateWithAddressAction:
+			donateWithAddressActionUrl:
 				'https://spenden.wikimedia.de/donation/new?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1',
-			donateAnonymouslyAction:
+			donateAnonymouslyActionUrl:
 				'https://spenden.wikimedia.de/donation/add?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1'
 		} );
 	} );

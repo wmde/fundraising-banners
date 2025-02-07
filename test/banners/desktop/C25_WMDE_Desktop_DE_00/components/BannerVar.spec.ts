@@ -60,8 +60,8 @@ describe( 'BannerVar.vue', () => {
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					currentCampaignTimePercentage: 42,
 					formActions: {
-						donateWithAddressAction: 'https://example.com/with-address',
-						donateAnonymouslyAction: 'https://example.com/without-address'
+						donateWithAddressActionUrl: 'https://example.com/with-address',
+						donateAnonymouslyActionUrl: 'https://example.com/without-address'
 					},
 					currencyFormatter: new CurrencyEn(),
 					formItems,

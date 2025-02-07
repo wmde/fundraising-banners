@@ -26,7 +26,7 @@ export function createFormActions( tracking: TrackingParameters, impressionCount
 	} );
 
 	return {
-		donateWithAddressAction: `${DONATE_WITH_ADDRESS_URL}?${urlParameters}`,
-		donateAnonymouslyAction: `${DONATE_ANONYMOUSLY_URL}?${urlParameters}`
+		donateWithAddressActionUrl: `${DONATE_WITH_ADDRESS_URL}?${urlParameters}`,
+		donateAnonymouslyActionUrl: `${DONATE_ANONYMOUSLY_URL}?${urlParameters}`
 	};
 }

@@ -1,4 +1,4 @@
 export interface FormActions {
-	donateWithAddressAction: string;
-	donateAnonymouslyAction: string;
+	donateWithAddressActionUrl: string;
+	donateAnonymouslyActionUrl: string;
 }

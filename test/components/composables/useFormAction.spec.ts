@@ -21,8 +21,8 @@ describe( 'useFormAction', () => {
 		formModel.paymentMethod.value = paymentMethod;
 
 		const { formAction } = useFormAction( {
-			donateAnonymouslyAction: anonymousAction,
-			donateWithAddressAction: withAddressAction
+			donateAnonymouslyActionUrl: anonymousAction,
+			donateWithAddressActionUrl: withAddressAction
 		} );
 
 		expect( formAction.value ).toBe( expectedAction );

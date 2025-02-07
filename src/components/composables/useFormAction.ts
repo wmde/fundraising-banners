@@ -17,14 +17,14 @@ export function useFormAction( formActions: FormActions ): { formAction: Ref<str
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
 		if ( formModel.addressType.value !== AddressTypes.ANONYMOUS.value ) {
-			return formActions.donateWithAddressAction;
+			return formActions.donateWithAddressActionUrl;
 		}
 
 		if ( formModel.paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-			return formActions.donateWithAddressAction;
+			return formActions.donateWithAddressActionUrl;
 		}
 
-		return formActions.donateAnonymouslyAction;
+		return formActions.donateAnonymouslyActionUrl;
 	} );
 
 	return {

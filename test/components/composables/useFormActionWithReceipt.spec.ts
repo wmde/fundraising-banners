@@ -28,8 +28,8 @@ describe( 'useFormActionWithReceipt', () => {
 
 		const { formAction } = useFormActionWithReceipt(
 			{
-				donateAnonymouslyAction: anonymousAction,
-				donateWithAddressAction: withAddressAction
+				donateAnonymouslyActionUrl: anonymousAction,
+				donateWithAddressActionUrl: withAddressAction
 			},
 			10
 		);

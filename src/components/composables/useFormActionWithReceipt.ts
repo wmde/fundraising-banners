@@ -24,12 +24,12 @@ export function useFormActionWithReceipt( formActions: FormActions, minimumAmoun
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
 
-		let URL: string = formActions.donateAnonymouslyAction;
+		let URL: string = formActions.donateAnonymouslyActionUrl;
 
 		if ( formModel.numericAmount.value >= minimumAmount ||
 			formModel.receipt.value ||
 			formModel.paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-			URL = formActions.donateWithAddressAction + '&ap=1';
+			URL = formActions.donateWithAddressActionUrl + '&ap=1';
 		}
 
 		return URL;

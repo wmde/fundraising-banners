@@ -80,7 +80,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
+					formActions: { donateWithAddressActionUrl: 'https://example.com/with-address', donateAnonymouslyActionUrl: 'https://example.com/without-address' },
 					currencyFormatter: new CurrencyDe(),
 					formItems,
 					tracker,

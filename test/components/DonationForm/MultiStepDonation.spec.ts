@@ -38,8 +38,8 @@ describe( 'MultistepDonation.vue', () => {
 			global: {
 				provide: {
 					formActions: {
-						donateWithAddressAction: `https://example.com/withAddress`,
-						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
+						donateWithAddressActionUrl: `https://example.com/withAddress`,
+						donateWithoutAddressActionUrl: `https://example.com/?withoutAddress=okay`
 					},
 					tracker,
 					timer: new TimerStub()
