@@ -1,14 +1,6 @@
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 
 /**
- * @deprecated Use FormActionCollection instead
- */
-export interface FormActions {
-	donateWithAddressActionUrl: string;
-	donateAnonymouslyActionUrl: string;
-}
-
-/**
  * This class encapsulates URL generation to an end point to the fundraising application and all parameters needed for
  * the fundraising application.
  *
@@ -52,24 +44,10 @@ export class FormAction {
 /**
  * This class represents the available end points of the fundraising application.
  */
-export class FormActionCollection implements FormActions {
+export class FormActionCollection {
 	public constructor(
 		public readonly donateWithAddressAction: FormAction,
 		public readonly donateAnonymouslyAction: FormAction
 	) {
-	}
-
-	/**
-	 * @deprecated Use donateAnonymouslyAction.toString() instead
-	 */
-	public get donateAnonymouslyActionUrl(): string {
-		return this.donateAnonymouslyAction.toString();
-	}
-
-	/**
-	 * @deprecated Use donateWithAddressAction.toString() instead
-	 */
-	public get donateWithAddressActionUrl(): string {
-		return this.donateWithAddressAction.toString();
 	}
 }

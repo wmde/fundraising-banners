@@ -117,7 +117,7 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import { useFormActionWithReceipt } from '@src/components/composables/useFormActionWithReceipt';
-import { FormActions } from '@src/domain/FormActions';
+import { FormActionCollection } from '@src/domain/FormActions';
 
 const minimumAmount = 10;
 
@@ -149,7 +149,7 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
-const { formAction } = useFormActionWithReceipt( inject<FormActions>( 'formActions' ), minimumAmount );
+const { formAction } = useFormActionWithReceipt( inject<FormActionCollection>( 'formActions' ), minimumAmount );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

@@ -25,6 +25,7 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -59,10 +60,7 @@ describe( 'BannerCtrl.vue', () => {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					currentCampaignTimePercentage: 42,
-					formActions: {
-						donateWithAddressActionUrl: 'https://example.com/with-address',
-						donateAnonymouslyActionUrl: 'https://example.com/without-address'
-					},
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker,

@@ -29,12 +29,13 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { Tracker } from '@src/tracking/Tracker';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { useFormAction } from '@src/components/composables/useFormAction';
-import { FormActions } from '@src/domain/FormActions';
+import { FormActionCollection } from '@src/domain/FormActions';
 import { Timer } from '@src/utils/Timer';
 
 interface Props {
 	stepControllers: StepController[];
 	pageScroller?: PageScroller;
+	// This allows banners to override the default `useFormAction` composable
 	formActionOverride?: string;
 	// This is to allow the banner to trigger side effects when the form is submitted
 	submitCallback?: () => void;
@@ -56,7 +57,7 @@ usedSlotNames.forEach( ( slotName: string, index: number ): void => {
 const tracker = inject<Tracker>( 'tracker' );
 const timer = inject<Timer>( 'timer' );
 const currentStepIndex = ref<number>( 0 );
-const defaultFormAction = useFormAction( inject<FormActions>( 'formActions' ) );
+const defaultFormAction = useFormAction( inject<FormActionCollection>( 'formActions' ) );
 const formAction = computed( (): string => {
 	return props.formActionOverride ? props.formActionOverride : defaultFormAction.formAction.value;
 } );

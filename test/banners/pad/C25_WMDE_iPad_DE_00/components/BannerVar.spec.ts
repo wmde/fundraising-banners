@@ -17,6 +17,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -48,7 +49,7 @@ describe( 'BannerCtrl.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressActionUrl: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub(),

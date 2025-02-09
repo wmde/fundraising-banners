@@ -1,4 +1,4 @@
-import { FormActions } from '@src/domain/FormActions';
+import { FormActionCollection } from '@src/domain/FormActions';
 import { computed, Ref } from 'vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -11,20 +11,20 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
  * When a user wants to donate via direct debit, they will have to specify their address.
  *
  * The form action should be independent of the form and only rely on the FormModel.
- * @param { FormActions }  formActions
+ * @param { FormActionCollection }  formActions
  */
-export function useFormAction( formActions: FormActions ): { formAction: Ref<string> } {
+export function useFormAction( formActions: FormActionCollection ): { formAction: Ref<string> } {
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
 		if ( formModel.addressType.value !== AddressTypes.ANONYMOUS.value ) {
-			return formActions.donateWithAddressActionUrl;
+			return formActions.donateWithAddressAction.toString();
 		}
 
 		if ( formModel.paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-			return formActions.donateWithAddressActionUrl;
+			return formActions.donateWithAddressAction.toString();
 		}
 
-		return formActions.donateAnonymouslyActionUrl;
+		return formActions.donateAnonymouslyAction.toString();
 	} );
 
 	return {

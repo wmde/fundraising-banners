@@ -18,6 +18,7 @@ import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -43,7 +44,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressActionUrl: '/donateWithAddressAction', donateAnonymouslyActionUrl: '/donateAnonymouslyAction' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub(),
@@ -116,7 +117,9 @@ describe( 'BannerVar.vue', () => {
 			await wrapper.find( '.amount-10 input' ).trigger( 'change' );
 			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'donateWithAddressAction&ap=1' );
+			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
+			expect( formActionAttribute ).toContain( 'with-address' );
+			expect( formActionAttribute ).toContain( 'ap=1' );
 		} );
 
 		it( 'Set the correct action when amount is below 10 and receipt is not checked', async (): Promise<void> => {
@@ -126,7 +129,7 @@ describe( 'BannerVar.vue', () => {
 			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
 			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'donateAnonymouslyAction' );
+			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'without-address' );
 		} );
 
 		it( 'Set the correct action when amount is below 10 and receipt is checked', async (): Promise<void> => {
@@ -137,7 +140,9 @@ describe( 'BannerVar.vue', () => {
 			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
 
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'donateWithAddressAction&ap=1' );
+			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
+			expect( formActionAttribute ).toContain( 'with-address' );
+			expect( formActionAttribute ).toContain( 'ap=1' );
 		} );
 
 		it( 'Puts the receipt option into the submit form', async (): Promise<void> => {

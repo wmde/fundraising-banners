@@ -21,6 +21,7 @@ import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } f
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -66,7 +67,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressActionUrl: 'https://example.com/with-address', donateAnonymouslyActionUrl: 'https://example.com/without-address' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker,
