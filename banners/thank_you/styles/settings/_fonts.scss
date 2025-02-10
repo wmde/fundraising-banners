@@ -1,9 +1,0 @@
-/* These font stacks come from: https://github.com/system-fonts/modern-font-stacks */
-$-neo-grotesque: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
-$-transitional: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
-
-/* This is used for all the ui text, buttons, inputs, labels etc */
-$ui: $-neo-grotesque !default;
-
-/* This is the font the for the copy and is only applied to the long form text */
-$content: $-transitional !default;

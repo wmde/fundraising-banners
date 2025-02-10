@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import ProgressBar from '@banners/thank_you_2024/components/ProgressBar.vue';
+import ProgressBar from '@banners/thank_you/components/ProgressBar.vue';
 
 describe( 'ProgressBar.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {

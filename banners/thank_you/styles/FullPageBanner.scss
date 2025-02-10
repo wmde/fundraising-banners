@@ -1,139 +1,267 @@
-@use 'settings/globals';
-@use 'settings/breakpoints';
+@use './variables/breakpoints';
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+		transform: scale( 1.1 ) translateY(-50%);
+		display: none;
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale( 1 ) translateY(-50%);
+		display: block;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+		transform: scale( 1.1 ) translateY(-50%);
+		display: block;
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale( 0 ) translateY(-50%);
+		display: none;
+	}
+}
 
 .wmde-banner {
 	&-full {
-		visibility: hidden;
-		opacity: 0;
-		transform: scale( 1.1 );
-		font-size: 16px;
-		line-height: 1.5;
-		background: var( --color-black-transparent );
-		position: fixed;
-		display: flex;
-		align-items: center;
-		top: 0;
-		z-index: 1000;
-		height: 100vh;
+		animation: fade-out 500ms ease-in-out;
 		width: 100vw;
-		transition: opacity 500ms globals.$banner-easing, visibility 500ms globals.$banner-easing, transform 500ms globals.$banner-easing;
+		max-width: 1200px;
+		height: fit-content;
+		max-height: 100vh;
+		background: var( --full-background );
+		color: var( --full-color );
+		margin: 0 auto;
+		border: 0;
+		padding: 0;
+
+		// This vertically centers the dialog, it needs to be tested more
+		top: 50%;
+		transform: translateY(-50%);
 
 		@include breakpoints.medium-up {
-			font-size: 18px;
+			max-height: calc( 100vh - 80px );
 		}
 
-		&-scroll {
-			padding: 10px;
-			max-height: 100vh;
-			overflow-y: auto;
+		&[ open ] {
+			animation: fade-in 500ms ease-in-out;
 		}
 
-		&-inner {
-			position: relative;
-			background: var( --color-white );
-			padding: 48px 20px;
-			border-radius: 6px;
-			box-shadow: 0 5px 5px rgba( 0 0 0 / 0.2 );
+		&::backdrop {
+			background-color: rgb( 0 0 0 / 80% );
+		}
+
+		.wmde-banner-close {
+			top: 12px;
+			right: 20px;
+		}
+
+		&-content {
 			display: flex;
-			flex-direction: column;
+			flex-wrap: nowrap;
+			padding: 50px 20px 0;
 
-			@include breakpoints.medium-up {
-				padding: 48px;
+			@include breakpoints.small-up {
+				padding: 30px 40px 0;
 			}
 
-			@include breakpoints.x-small-up {
-				display: block;
+			article {
+				padding-right: 16px;
 			}
 
-			& > *:nth-child( -n + 7 ) {
-				order: 1;
-			}
+			aside {
+				margin: 30px 0 0;
+				flex: 0 0 264px;
+				width: 264px;
+				display: none;
 
-			/* Pull down the stats box */
-			& > *:nth-child( 5 ) {
-				order: 2;
-			}
-			& > *:nth-child( n+8 ) {
-				order: 3;
+				@include breakpoints.small-up {
+					display: block;
+				}
 			}
 		}
 
-		&-cta {
-			background: var( --color-off-white );
-			padding: 20px;
-			border: 1px solid var( --color-primary );
-			border-radius: 6px;
+		h2 {
+			all: unset;
+			display: block;
+			color: var( --full-heading-color );
+			font-size: 20px;
+			line-height: 1.5;
+			margin-bottom: 24px;
 
-			@include breakpoints.medium-up {
-				padding: 40px;
-			}
-
-			&-columns {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: stretch;
-				align-items: stretch;
-				margin: 0;
-
-				@include breakpoints.small-up {
-					margin: 0 -20px;
-				}
-			}
-
-			&-benefits,
-			&-buttons {
-				width: 100%;
-
-				@include breakpoints.small-up {
-					width: 50%;
-					padding: 0 20px;
-				}
-
-				@include breakpoints.large-up {
-					width: auto;
-				}
-			}
-
-			&-buttons {
-				display: flex;
-				flex-direction: column;
+			@include breakpoints.small-up {
+				font-size: 24px;
+				margin-bottom: 40px;
 			}
 		}
 
-		p.wmde-banner-full-subscribe {
-			margin-bottom: 20px;
-			font-size: 14px;
-			font-weight: bold;
+		p {
+			font-size: 16px;
+			line-height: 1.5;
+			margin: 0 0 16px;
+		}
 
-			a {
-				color: var( --color-black );
-				text-decoration: underline;
-				transition: color 500ms ease-in-out;
-				display: inline-block;
+		.highlight {
+			background: var( --full-highlight-background );
+		}
 
-				&:hover,
-				&:focus {
-					color: var( --color-secondary );
-				}
+		footer {
+			background: var( --footer-background );
+			padding: 20px 20px 10px;
 
-				&:first-child {
-					margin-bottom: 15px;
-				}
-			}
-
-			@include breakpoints.medium-up {
-				margin-bottom: 0;
+			@include breakpoints.small-up {
+				padding: 30px 40px;
 			}
 		}
 	}
 
-	&-wrapper {
-		&--full-page {
-			.wmde-banner-full {
-				visibility: visible;
-				opacity: 1;
-				transform: scale( 1 );
+	&-content-columns {
+		@include breakpoints.medium-up {
+			columns: 2;
+		}
+	}
+
+	&-mobile-only {
+		@include breakpoints.small-up {
+			display: none;
+		}
+	}
+
+	&-full-cta {
+		padding: 20px 20px 10px;
+		text-align: center;
+		font-size: 16px;
+		font-weight: bold;
+
+		@include breakpoints.small-up {
+			font-size: 18px;
+			padding: 30px 40px;
+		}
+
+		a {
+			display: inline-block;
+			margin: 0 0 16px;
+			line-height: 54px;
+			width: 100%;
+			border-radius: 5px;
+			transition: background 200ms ease-in-out;
+
+			@include breakpoints.x-small-up {
+				width: 360px;
 			}
+
+			@include breakpoints.small-up {
+				margin: 0 12px 16px;
+			}
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+			}
+		}
+
+		&-with {
+			background: var( --cta-with-button-background );
+			color: var( --cta-with-button-color );
+
+			&:hover,
+			&:focus {
+				color: var( --cta-with-button-color );
+				background: var( --cta-with-button-background-hover );
+			}
+		}
+
+		&-without {
+			background: var( --cta-without-button-background );
+			color: var( --cta-without-button-color );
+
+			&:hover,
+			&:focus {
+				color: var( --cta-without-button-color );
+				background: var( --cta-without-button-background-hover );
+			}
+		}
+	}
+
+	&-benefits {
+		list-style-type: none;
+		list-style-image: none;
+		margin: 0 0 16px;
+		padding: 0;
+		font-weight: bold;
+
+		@include breakpoints.small-up {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		@include breakpoints.large-up {
+			flex-wrap: nowrap;
+		}
+
+		li {
+			position: relative;
+			padding: 0 10px 0 30px;
+			margin-bottom: 16px;
+			overflow-wrap: break-word;
+
+			@include breakpoints.small-up {
+				width: 50%;
+			}
+
+			@include breakpoints.large-up {
+				width: 25%;
+			}
+		}
+	}
+
+	&-subscribe {
+		text-align: left;
+		font-size: 14px;
+		line-height: 1.5;
+
+		@include breakpoints.small-up {
+			font-size: 16px;
+			text-align: center;
+		}
+
+		a {
+			display: block;
+			color: var( --link-color );
+			text-decoration: underline;
+			margin-bottom: 10px;
+			transition: color 200ms ease-in-out;
+
+			@include breakpoints.small-up {
+				padding: 0 20px;
+				display: inline;
+			}
+
+			&:hover,
+			&:focus {
+				color: var( --link-color-hover );
+			}
+		}
+	}
+
+	&-list-tick {
+		position: absolute;
+		background: var( --list-tick-background );
+		display: inline-block;
+		height: 22px;
+		width: 22px;
+		left: 0;
+		border-radius: 50%;
+
+		svg {
+			position: relative;
+			left: 5px;
 		}
 	}
 }

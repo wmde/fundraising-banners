@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import FullPageBanner from '@banners/thank_you_2024/components/FullPageBanner.vue';
+import FullPageBanner from '@banners/thank_you/components/FullPageBanner.vue';
 
 describe( 'FullPageBanner.vue', () => {
 	let showCallback: Mock;

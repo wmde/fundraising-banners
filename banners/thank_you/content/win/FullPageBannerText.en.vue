@@ -1,50 +1,51 @@
 <template>
-	<ImageWithCopyright/>
-	<p><strong>Thank you! We made it! But it was a close call – closer than ever before.</strong></p>
+	<h2>Donations goal reached! That's great news.</h2>
 
-	<p>
-		For a long time the outcome was uncertain, but at the very last we reached our donation goal. That's a real ray
-		of sunshine in these critical times, when so much is unstable, and we're questioning much that we thought was
-		certain. It's all more than a little unsettling. But there are also things that give us hope. Wikipedia is one
-		of them. Wikipedia braves the many storms of our present day: polarization, disinformation, manipulation. It's
-		not perfect, but it's solid as a rock.
-	</p>
+	<div class="wmde-banner-content-columns">
+		<p>
+			Because there's a lot to be done: the profound technological upheaval we're living through, an era of AI (artificial intelligence) as well as fake news and deception
+			in the digital space, makes our technical commitment to Wikipedia more important than ever. As ever, this year we're investing most of our budget in the further
+			technical development of our projects.
+		</p>
 
-	<StatsBox/>
+		<span class="wmde-banner-mobile-only">
+			<ExecutiveDirectorsImage/>
+		</span>
 
-	<p>
-		In times like these, Wikipedia is so valuable because it's a place where people of vastly different viewpoints
-		still hold conversations -- frequently controversial ones, but ones that stay within the rules.
-	</p>
+		<p>
+			We're making sure Wikipedia is stable, flexible and secure, so that thousands of people can simultaneously write an article while millions read along. We developed
+			Wikidata, a knowledge database unique in all the world, that automatically provides over 100 million pieces of data to Wikipedia in all its language versions. Our
+			long-standing efforts around developing and improving infrastructure have made us technical pioneers for Wikipedia and its fellow projects.
+		</p>
 
-	<p>
-		Participants debate content, sources and wording in an open and transparent way. At times all that can be
-		tedious, not to mention exhausting. But it's that very process that allows the creation of verified, neutral
-		and trustworthy information. Nobody has the power to declare what should be in Wikipedia – neither billionaires
-		nor the powers that be. And because it's an independent and collaborative project, it can't be bought up by
-		someone and destroyed. That's what Wikipedia stands for – as do we, the charitable organization behind this
-		marvelous project.
-	</p>
+		<p>
+			That's how we ensure that we're not overcome by technical developments and are instead able to help shape them. Thus we're working on our own AI applications: to
+			fight article vandalism, to correct spelling and grammar errors and to detect AI-generated content.
+		</p>
 
-	<p>
-		One of the pillars of content independence is <strong>financial independence</strong>. Precisely because
-		Wikipedia is non-commercial and anybody can use it for free, we depend on the <strong>regular support</strong>
-		of dedicated <strong>supporting members</strong> who help protect this one-of-a-kind place of democracy on the
-		internet. And yet, given how beloved Wikipedia is across the world, those protectors are still very few and far
-		between.
-	</p>
+		<span class="wmde-banner-mobile-only">
+			<StatsBox :number-of-people="numberOfPeople"/>
+		</span>
 
-	<p>
-		That's why we're asking you to <strong>join this community of Wikipedia enthusiasts</strong> and to help us
-		handle, among other things, the many current technological challenges we face.
-	</p>
+		<p>
+			All that comes at a high price. As a fee-free and ad-free knowledge platform, Wikipedia earns no money, which makes us dependent on the reliable support of committed
+			sustaining members. But despite how beloved Wikipedia is, the number of people who provide that support remains quite small.
+		</p>
 
-	<p>
-		<strong>Let your supporting membership ensure that Wikipedia remains a ray of sunshine!</strong>
-	</p>
+		<p>
+			That's why we're asking you to <span class="highlight">become a sustaining member and to help us grapple with the coming technological challenges.</span> So volunteers
+			can always do their work under optimal conditions -- and so you can rely now and in the future on Wikipedia as a place of open access to knowledge and education.
+		</p>
+	</div>
+
 </template>
 
 <script setup lang="ts">
-import ImageWithCopyright from '../ImageWithCopyright.vue';
-import StatsBox from '../StatsBox.vue';
+import ExecutiveDirectorsImage from '@banners/thank_you/content/ExecutiveDirectorsImage.vue';
+import StatsBox from '@banners/thank_you/components/StatsBox.vue';
+interface Props {
+	numberOfPeople: string
+}
+
+defineProps<Props>();
 </script>

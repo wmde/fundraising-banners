@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_wporg.scss';
 
 import PageWPORG from '@src/page/PageWPORG';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
@@ -16,8 +16,7 @@ import Banner from './components/BannerCtrl.en.vue';
 import messages from './messages.en';
 import eventMappings from './event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
-import { TrackingMembershipFormActions } from './MembershipFormActions';
-import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
+import { createTrackedURL, MEMBERSHIP_FORM_URL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import { createThankYouSettings } from './settings';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 import { Locales } from '@src/domain/Locales';
@@ -39,8 +38,15 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerEn(), page.getThankYouCampaignParameters() ),
-		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, Locales.EN ),
-		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, Locales.EN )
+		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.EN } ),
+		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.EN } ),
+		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
+			locale: Locales.EN,
+			interval: '1',
+			fee: '500',
+			type: 'sustaining'
+		} ),
+		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.EN, type: 'sustaining' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -49,7 +55,6 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
-app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.EN ) );
 app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );

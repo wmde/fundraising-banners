@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_wpde.scss';
 import { Translator } from '@src/Translator';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
@@ -9,8 +9,7 @@ import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import Banner from './components/BannerCtrl.de.vue';
 import messages from './messages.de';
 import TranslationPlugin from '@src/TranslationPlugin';
-import { TrackingMembershipFormActions } from './MembershipFormActions';
-import { createTrackedURL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
+import { createTrackedURL, MEMBERSHIP_FORM_URL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import PageWPDE from '@src/page/PageWPDE';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from './event_map.wpde';
@@ -41,8 +40,15 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
-		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, Locales.DE ),
-		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, Locales.DE )
+		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
+		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
+		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
+			locale: Locales.DE,
+			interval: '1',
+			fee: '500',
+			type: 'sustaining'
+		} ),
+		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -51,7 +57,6 @@ const app = createVueApp( BannerConductor, {
 
 app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
-app.provide( 'formActions', new TrackingMembershipFormActions( page.getTracking(), impressionCount, Locales.DE ) );
 app.provide( 'timer', new WindowTimer() );
 
 app.mount( page.getBannerContainer() );
