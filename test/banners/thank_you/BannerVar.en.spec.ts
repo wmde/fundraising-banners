@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import Banner from '@banners/thank_you_2024/components/BannerVar.de.vue';
-import MiniBannerTextWin from '@banners/thank_you_2024/content/win/MiniBannerText.de.vue';
-import FullPageBannerTextWin from '@banners/thank_you_2024/content/win/FullPageBannerTextVar.de.vue';
+import Banner from '@banners/thank_you/components/BannerVar.en.vue';
+import MiniBannerTextWin from '@banners/thank_you/content/win/MiniBannerText.en.vue';
+import FullPageBannerTextWin from '@banners/thank_you/content/win/FullPageBannerTextVar.en.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
@@ -12,7 +12,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
 
-describe( 'BannerVar.de.vue', () => {
+describe( 'BannerVar.en.vue', () => {
 	let tracker: Tracker;
 	let showCallback: Mock;
 	let closeCallback: Mock;

@@ -1,47 +1,57 @@
 <template>
-	<ImageWithCopyright/>
-	<p><strong>Danke, wir haben es geschafft! Aber es war knapper denn je. </strong></p>
+	<h2>Spendenziel erreicht! Das ist eine gute Nachricht.</h2>
 
-	<p>
-		Lange war es ungewiss, doch letztlich haben wir unser Spendenziel erreicht. Ein echter Lichtblick in diesen
-		krisenhaften Zeiten: Vieles ist ins Rutschen geraten, vertraute Gewissheiten stehen in Frage, so manches
-		verunsichert uns. Doch es gibt auch Dinge, die uns hoffen lassen. Dazu gehört Wikipedia. Sie trotzt den
-		Stürmen der Gegenwart wie Polarisierung, Desinformation, Manipulation. Sie ist nicht perfekt – und doch
-		ein Fels in der Brandung.
-	</p>
+	<div class="wmde-banner-content-columns">
+		<p>
+			Denn es gibt viel zu tun: Der tiefgreifende technologische Umbruch, den wir in Zeiten Künstlicher Intelligenz (KI) sowie Fakenews und Manipulation im
+			digitalen Raum erleben, macht unser technisches Engagement für Wikipedia wichtiger denn je. Auch in diesem Jahr investieren wir den größten Teil unseres
+			Budgets in die technische Weiterentwicklung unserer Projekte.
+		</p>
 
-	<StatsBox/>
+		<span class="wmde-banner-mobile-only">
+			<ExecutiveDirectorsImage/>
+		</span>
 
-	<p>
-		Was Wikipedia gerade heute so wertvoll macht: Hier sprechen Menschen mit unterschiedlichen Sichtweisen noch
-		miteinander. Oft kontrovers, aber nach Regeln. Alle Debatten über Inhalte, Quellen und Formulierungen führen
-		sie offen und transparent. Das ist zuweilen langwierig und kann auch anstrengend sein. Doch nur so entsteht
-		gesichertes, neutrales und vertrauenswürdiges Wissen. Niemand kann die Inhalte in Wikipedia einfach bestimmen,
-		kein Milliardär und kein Machthaber. Und als unabhängiges Gemeinschaftsprojekt kann sie auch nicht von einem
-		einzelnen gekauft und kaputt gemacht werden. Dafür steht Wikipedia – genau wie wir, der gemeinnützige Verein
-		hinter diesem großartigen Projekt.
-	</p>
+		<p>
+			Wir sorgen dafür, dass Wikipedia stabil, veränderbar und sicher ist, damit tausende Menschen gleichzeitig Artikel schreiben und Millionen parallel darin
+			lesen können. Wir haben die weltweit einmalige Wissensdatenbank Wikidata entwickelt, die alle Wikipedia-Sprachversionen automatisch mit über 100 Millionen
+			aktuellen Daten versorgen kann. Unser langjähriger Einsatz bei der Entwicklung und Verbesserung der Infrastruktur hat uns zum technischen Pionier
+			für Wikipedia & Co gemacht.
+		</p>
 
-	<p>
-		Eine Säule inhaltlicher Unabhängigkeit ist <strong>finanzielle Unabhängigkeit</strong>. Gerade weil Wikipedia
-		nicht kommerziell und für alle kostenlos nutzbar ist, sind wir auf die <strong>regelmäßige Unterstützung</strong>
-		engagierter <strong>Fördermitglieder</strong> angewiesen, die diesen einzigartigen demokratischen Ort im
-		Internet verteidigen. Doch angesichts der Beliebtheit von Wikipedia sind es immer noch recht wenige Menschen,
-		die dies leisten.
-	</p>
+		<p>
+			Damit stellen wir sicher, dass wir von der technischen Entwicklung nicht überrollt werden, sondern sie mitgestalten. So arbeiten wir an eigenen
+			KI-Anwendungen, um Vandalismus in Artikeln zu bekämpfen, Rechtschreib- und Grammatikfehler zu verbessern oder KI-generierte Texte aufzuspüren.
+		</p>
 
-	<p>
-		Deshalb unsere Bitte: <strong>Werden auch Sie Teil dieser Gemeinschaft von Wikipedia-begeisterten Menschen</strong>
-		und helfen Sie mit Ihrem Beitrag, beispielsweise die vielen aktuellen technologischen Herausforderungen der
-		Wikipedia zu meistern.
-	</p>
+		<span class="wmde-banner-mobile-only">
+			<StatsBox :number-of-people="numberOfPeople"/>
+		</span>
 
-	<p>
-		<strong>Sorgen Sie jetzt als Fördermitglied dafür, dass Wikipedia ein Lichtblick bleibt!</strong>
-	</p>
+		<p>
+			Das alles ist mit hohen Kosten verbunden. Da Wikipedia als gebühren- und werbefreie Wissensplattform kein Geld verdient, sind wir auf verlässliche
+			Unterstützung durch engagierte Fördermitglieder angewiesen. Es sind allerdings, trotz der Beliebtheit von Wikipedia, immer noch recht wenige Menschen, die dies leisten.
+		</p>
+
+		<p>
+			Daher unsere Bitte: <span class="highlight">Werden Sie Fördermitglied und helfen Sie uns, die kommenden technologischen Herausforderungen zu meistern.</span> Damit
+			die Freiwilligen stets unter besten Bedingungen arbeiten können – und Sie sich auch in Zukunft auf Wikipedia als Ort des freien Zugangs zu Wissen und Bildung
+			verlassen können.
+		</p>
+
+		<p>
+			<strong>Vielen Dank für alles, was Sie für Wikipedia tun!</strong>
+		</p>
+	</div>
+
 </template>
 
 <script setup lang="ts">
-import ImageWithCopyright from '../ImageWithCopyright.vue';
-import StatsBox from '../StatsBox.vue';
+import ExecutiveDirectorsImage from '@banners/thank_you/content/ExecutiveDirectorsImage.vue';
+import StatsBox from '@banners/thank_you/components/StatsBox.vue';
+interface Props {
+	numberOfPeople: string
+}
+
+defineProps<Props>();
 </script>

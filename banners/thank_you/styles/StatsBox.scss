@@ -1,38 +1,28 @@
-@use 'settings/breakpoints';
-
 .wmde-banner {
-	&-stats-box {
-		background: var( --color-off-white );
-		border-radius: 6px;
-		padding: 12px;
-		margin: 0 0 24px;
+	&-stats {
+		border-top: 2px solid var( --stats-border );
+		list-style-type: none;
+		list-style-image: none;
+		padding: 0;
+		margin: 0 0 16px;
+		font-size: 14px;
 
-		@include breakpoints.x-small-up {
-			float: right;
-			max-width: 184px;
-			margin: 0 0 10px 10px;
+		li {
+			display: flex;
+			align-items: center;
+			border-bottom: 2px solid var( --stats-border );
+			margin: 0;
+			height: 100px;
 		}
 
-		&-row {
-			display: flex;
-
-			&:not( :last-child ) {
-				margin-bottom: 12px;
-			}
+		strong {
+			color: var( --stats-bold-color );
+			font-size: 20px;
 		}
 
 		&-icon {
-			flex: 0 0 auto;
-		}
-
-		&-text {
-			flex: 1 1 auto;
-			padding-left: 12px;
-			font-size: 12px;
-
-			strong {
-				font-size: 16px;
-			}
+			flex: 0 0 100px;
+			text-align: center;
 		}
 	}
 }

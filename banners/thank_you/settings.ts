@@ -3,12 +3,14 @@ import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParamete
 
 export interface ThankYouSettings {
 	numberOfDonors: string;
+	numberOfMembers: string;
 	progressBarPercentage: number;
 }
 
 export function createThankYouSettings( formatter: Integer, campaignParameters: ThankYouCampaignParameters ): ThankYouSettings {
 	return {
 		numberOfDonors: formatter.format( campaignParameters.numberOfDonors ),
+		numberOfMembers: formatter.format( campaignParameters.numberOfMembers ),
 		progressBarPercentage: campaignParameters.progressBarPercentage
 	};
 }

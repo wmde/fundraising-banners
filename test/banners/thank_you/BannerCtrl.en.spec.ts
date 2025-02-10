@@ -1,39 +1,43 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import BannerCtrl from '@banners/thank_you/components/BannerVar.en.vue';
+import Banner from '@banners/thank_you/components/BannerCtrl.en.vue';
 import MiniBannerTextWin from '@banners/thank_you/content/win/MiniBannerText.en.vue';
-import MiniBannerSlidesWin from '@banners/thank_you/content/win/MiniBannerSlides.en.vue';
 import FullPageBannerTextWin from '@banners/thank_you/content/win/FullPageBannerText.en.vue';
-import MiniBannerTextLose from '@banners/thank_you/content/lose/MiniBannerText.en.vue';
-import MiniBannerSlidesLose from '@banners/thank_you/content/lose/MiniBannerSlides.en.vue';
-import FullPageBannerTextLose from '@banners/thank_you/content/lose/FullPageBannerText.en.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
-import { MembershipFormActions } from '@banners/thank_you/MembershipFormActions';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
 
-const formActions: MembershipFormActions = {
-	create: ( extraUrlParameters: Record<string, string> ) => `URL [ ${ extraUrlParameters?.interval }, ${ extraUrlParameters?.fee } ]`
-};
-
-describe( 'BannerVar.en.vue', () => {
+describe( 'BannerCtrl.en.vue', () => {
 	let tracker: Tracker;
+	let showCallback: Mock;
+	let closeCallback: Mock;
+
+	beforeEach( () => {
+		tracker = { trackEvent: vi.fn() };
+		showCallback = vi.fn();
+		closeCallback = vi.fn();
+		HTMLDialogElement.prototype.showModal = showCallback;
+		HTMLDialogElement.prototype.close = closeCallback;
+	} );
 
 	const getWrapper = ( progressBarPercentage: number = 80 ): VueWrapper<any> => {
-		tracker = { trackEvent: vi.fn() };
-		return mount( BannerCtrl, {
+		return mount( Banner, {
 			props: {
 				bannerState: BannerStates.Pending,
 				settings: {
 					numberOfDonors: '42',
+					numberOfMembers: '23',
 					progressBarPercentage
 				},
 				subscribeURL: 'SUBSCRIBE URL',
-				useOfFundsURL: 'USE OF FUNDS'
+				useOfFundsURL: 'USE OF FUNDS',
+				membershipWithAmountURL: 'WITH_AMOUNT',
+				membershipWithoutAmountURL: 'WITHOUT_AMOUNT'
 			},
 			global: {
 				mocks: {
@@ -41,7 +45,6 @@ describe( 'BannerVar.en.vue', () => {
 				},
 				provide: {
 					tracker: tracker,
-					formActions,
 					timer: new TimerStub()
 				}
 			}
@@ -57,54 +60,30 @@ describe( 'BannerVar.en.vue', () => {
 		expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 	} );
 
-	it( 'shows text win content', () => {
+	it( 'shows win content', () => {
 		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
 		const wrapper = getWrapper( 100 );
 
 		expect( wrapper.findComponent( MiniBannerTextWin ).exists() ).toBeTruthy();
 		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( MiniBannerTextLose ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeFalsy();
-		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 5 );
 	} );
 
-	it( 'shows slider win content', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
-		const wrapper = getWrapper( 100 );
+	it( 'Shows and hides the full page modal', async () => {
+		const wrapper = getWrapper();
 
-		expect( wrapper.findComponent( MiniBannerSlidesWin ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( MiniBannerSlidesLose ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeFalsy();
-		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 5 );
-	} );
+		await wrapper.find( '.wmde-banner-mini-read-more' ).trigger( 'click' );
 
-	it( 'shows text lose content', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
-		const wrapper = getWrapper( 99 );
+		expect( showCallback ).toHaveBeenCalled();
 
-		expect( wrapper.findComponent( MiniBannerTextWin ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( MiniBannerTextLose ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeTruthy();
-		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
-	} );
+		await wrapper.find( '.wmde-banner-full .wmde-banner-close' ).trigger( 'click' );
 
-	it( 'shows slider lose content', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
-		const wrapper = getWrapper( 99 );
-
-		expect( wrapper.findComponent( MiniBannerSlidesWin ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeFalsy();
-		expect( wrapper.findComponent( MiniBannerSlidesLose ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( FullPageBannerTextLose ).exists() ).toBeTruthy();
-		expect( wrapper.findAll( '.wmde-banner-firework' ).length ).toStrictEqual( 0 );
+		expect( closeCallback ).toHaveBeenCalled();
 	} );
 
 	it( 'emits modal shown events', () => {
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-button' ).trigger( 'click' );
+		wrapper.find( '.wmde-banner-mini-read-more' ).trigger( 'click' );
 
 		expect( tracker.trackEvent ).toHaveBeenCalledOnce();
 		expect( tracker.trackEvent ).toHaveBeenCalledWith( new ThankYouModalShownEvent() );
@@ -116,6 +95,8 @@ describe( 'BannerVar.en.vue', () => {
 
 		wrapper.find( '.wmde-banner-full .wmde-banner-close' ).trigger( 'click' );
 
+		expect( tracker.trackEvent ).toHaveBeenCalledOnce();
+		expect( tracker.trackEvent ).toHaveBeenCalledWith( new ThankYouModalHiddenEvent() );
 		expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );
 	} );
 
@@ -138,29 +119,23 @@ describe( 'BannerVar.en.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:first-child' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-full-cta-with' ).trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'URL [ 1, 200 ]' );
+		expect( location.href ).toStrictEqual( 'WITH_AMOUNT' );
 
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:nth-child( 2 )' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-full-cta-without' ).trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'URL [ 1, 500 ]' );
-
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:last-child' ).trigger( 'click' );
-
-		expect( location.href ).toStrictEqual( 'URL [ undefined, undefined ]' );
+		expect( location.href ).toStrictEqual( 'WITHOUT_AMOUNT' );
 	} );
 
 	it( 'tracks when membership buttons are clicked', async () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: { href: '' } } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:first-child' ).trigger( 'click' );
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:nth-child( 2 )' ).trigger( 'click' );
-		await wrapper.find( '.wmde-banner-full-cta-buttons .wmde-banner-button:last-child' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-full-cta-with' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-full-cta-without' ).trigger( 'click' );
 
-		expect( tracker.trackEvent ).toBeCalledTimes( 3 );
-		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'with-amount-2' ) );
+		expect( tracker.trackEvent ).toBeCalledTimes( 2 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'with-amount-5' ) );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'without-amount' ) );
 	} );
@@ -170,7 +145,7 @@ describe( 'BannerVar.en.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-subscribe a:first-child' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-subscribe a:first-child' ).trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'SUBSCRIBE URL' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
@@ -182,7 +157,7 @@ describe( 'BannerVar.en.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-subscribe a:last-child' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-subscribe a:last-child' ).trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'USE OF FUNDS' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );

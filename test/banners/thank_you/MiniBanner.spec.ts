@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import MiniBanner from '@banners/thank_you_2024/components/MiniBanner.vue';
+import MiniBanner from '@banners/thank_you/components/MiniBanner.vue';
 
 describe( 'MiniBanner.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {

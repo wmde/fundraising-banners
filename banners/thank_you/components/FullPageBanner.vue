@@ -1,34 +1,58 @@
 <template>
-	<div class="wmde-banner-full">
+	<dialog class="wmde-banner-full" ref="fullPageBanner">
+		<CloseButton :label="$translate( 'close-full-page' ) + '&nbsp;&nbsp;'" @click="$emit( 'close' )"/>
 		<div class="wmde-banner-full-scroll">
 			<div class="wmde-banner-full-inner">
-				<ButtonClose @close="$emit( 'close' )">
-					{{ $translate( 'close-modal' ) }} <CloseIconDefault/>
-				</ButtonClose>
-				<slot name="text"/>
-				<div class="wmde-banner-full-cta">
-					<div class="wmde-banner-full-cta-columns">
-						<div class="wmde-banner-full-cta-benefits">
-							<slot name="benefits"/>
-							<p class="wmde-banner-full-subscribe">
-								<slot name="subscribe"/>
-							</p>
-						</div>
-						<div class="wmde-banner-full-cta-buttons">
-							<slot name="membership-buttons"/>
-						</div>
-					</div>
+				<div class="wmde-banner-full-content">
+					<article>
+						<slot name="text"/>
+					</article>
+					<aside>
+						<ExecutiveDirectorsImage/>
+						<StatsBox :number-of-people="numberOfPeople"/>
+					</aside>
 				</div>
+				<div class="wmde-banner-full-cta">
+					<a href="#" @click.prevent="$emit( 'membershipWithAmount' )" class="wmde-banner-full-cta-with">
+						{{ $translate( 'call-to-action-button-amount-per-month', { amount: 5 } ) }}
+					</a>
+					<a href="#" @click.prevent="$emit( 'membershipWithoutAmount' )"  class="wmde-banner-full-cta-without">
+						{{ $translate( 'call-to-action-button-different-amount' ) }}
+					</a>
+				</div>
+				<footer>
+					<slot name="benefits"/>
+					<div class="wmde-banner-subscribe">
+						<slot name="subscribe"/>
+					</div>
+				</footer>
 			</div>
 		</div>
-	</div>
+	</dialog>
 </template>
 
 <script setup lang="ts">
 
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import CloseIconDefault from '@src/components/Icons/CloseIconDefault.vue';
+import { ref, watch } from 'vue';
+import CloseButton from './CloseButton.vue';
+import ExecutiveDirectorsImage from '../content/ExecutiveDirectorsImage.vue';
+import StatsBox from '../components/StatsBox.vue';
 
-defineEmits( [ 'close' ] );
+interface Props {
+	visible: boolean;
+	numberOfPeople: string
+}
+
+const props = defineProps<Props>();
+defineEmits( [ 'close', 'membershipWithAmount', 'membershipWithoutAmount' ] );
+const fullPageBanner = ref<HTMLDialogElement>();
+
+watch( () => props.visible, ( newVisible: boolean ) => {
+	if ( newVisible ) {
+		fullPageBanner.value.showModal();
+	} else {
+		fullPageBanner.value.close();
+	}
+} );
 
 </script>
