@@ -25,6 +25,7 @@ import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } f
 import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -80,7 +81,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyDe(),
 					formItems,
 					tracker,

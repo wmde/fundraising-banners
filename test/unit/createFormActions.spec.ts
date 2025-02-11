@@ -8,11 +8,11 @@ describe( 'createFormActions', function () {
 			campaign: 'C1',
 			keyword: 'coolBanner'
 		}, new ImpressionCountStub(), { locale: 'de_DE', ast: '1' } );
-		expect( formActions ).toEqual( {
-			donateWithAddressAction:
-				'https://spenden.wikimedia.de/donation/new?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1',
-			donateAnonymouslyAction:
-				'https://spenden.wikimedia.de/donation/add?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1'
-		} );
+		expect( formActions.donateWithAddressAction.toString() ).toBe(
+			'https://spenden.wikimedia.de/donation/new?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1'
+		);
+		expect( formActions.donateAnonymouslyAction.toString() ).toBe(
+			'https://spenden.wikimedia.de/donation/add?piwik_kwd=coolBanner&piwik_campaign=C1&banner_submission=1&impCount=1&bImpCount=1&locale=de_DE&ast=1'
+		);
 	} );
 } );

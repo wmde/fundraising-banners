@@ -1,5 +1,4 @@
-/* eslint-disable camelcase */
-import { FormActions } from '@src/domain/FormActions';
+import { FormAction, FormActionCollection } from '@src/domain/FormActions';
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { ImpressionCount } from '@src/utils/ImpressionCount';
 
@@ -15,18 +14,17 @@ const DONATE_ANONYMOUSLY_URL = 'https://spenden.wikimedia.de/donation/add';
  * @param {ImpressionCount} impressionCount
  * @param {Record<string, string>} extraUrlParameters
  */
-export function createFormActions( tracking: TrackingParameters, impressionCount: ImpressionCount, extraUrlParameters: Record<string, string> = {} ): FormActions {
-	const urlParameters = new URLSearchParams( {
-		piwik_kwd: tracking.keyword,
-		piwik_campaign: tracking.campaign,
-		banner_submission: '1',
+export function createFormActions(
+	tracking: TrackingParameters,
+	impressionCount: ImpressionCount,
+	extraUrlParameters: Record<string, string> = {}
+): FormActionCollection {
+	const urlParameters: Record<string, string> = {
 		impCount: String( impressionCount.overallCountIncremented ),
 		bImpCount: String( impressionCount.bannerCountIncremented ),
-		...extraUrlParameters
-	} );
-
-	return {
-		donateWithAddressAction: `${DONATE_WITH_ADDRESS_URL}?${urlParameters}`,
-		donateAnonymouslyAction: `${DONATE_ANONYMOUSLY_URL}?${urlParameters}`
+		...extraUrlParameters,
 	};
+	const withAddressAction = new FormAction( DONATE_WITH_ADDRESS_URL, tracking, urlParameters );
+	const anonymouslyAction = new FormAction( DONATE_ANONYMOUSLY_URL, tracking, urlParameters );
+	return new FormActionCollection( withAddressAction, anonymouslyAction );
 }

@@ -20,6 +20,7 @@ import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -65,7 +66,7 @@ describe( 'BannerCtrl.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com/with-address', donateAnonymouslyAction: 'https://example.com/without-address' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker,

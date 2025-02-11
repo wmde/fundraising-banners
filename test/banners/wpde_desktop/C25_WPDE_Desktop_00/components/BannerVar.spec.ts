@@ -19,6 +19,7 @@ import { setCookieImageFeatures } from '@test/features/SetCookieImage';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -43,7 +44,7 @@ describe( 'BannerVar.vue', () => {
 				provide: {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
-					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker: new TrackerStub(),

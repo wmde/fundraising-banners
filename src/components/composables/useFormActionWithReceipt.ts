@@ -1,4 +1,4 @@
-import { FormActions } from '@src/domain/FormActions';
+import { FormActionCollection } from '@src/domain/FormActions';
 import { computed, Ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
@@ -17,22 +17,24 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
  * Else they will be redirected to an anonymous donation.
  *
  * The form action should be independent of the form and only rely on the FormModel.
- * @param { FormActions } formActions
+ * @param { FormActionCollection } formActions
  * @param { number } minimumAmount Threshold at where a donation counts as "big donation" (where a receipt might be wanted)
  */
-export function useFormActionWithReceipt( formActions: FormActions, minimumAmount: number ): { formAction: Ref<string> } {
+export function useFormActionWithReceipt( formActions: FormActionCollection, minimumAmount: number ): { formAction: Ref<string> } {
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
 
-		let URL: string = formActions.donateAnonymouslyAction;
+		let action = formActions.donateAnonymouslyAction;
 
 		if ( formModel.numericAmount.value >= minimumAmount ||
 			formModel.receipt.value ||
 			formModel.paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
-			URL = formActions.donateWithAddressAction + '&ap=1';
+			action = formActions.donateWithAddressAction;
+			// Use address page without anonymous option
+			action.setParameter( 'ap', '1' );
 		}
 
-		return URL;
+		return action.toString();
 	} );
 
 	return {

@@ -25,6 +25,7 @@ import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftClose
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -59,10 +60,7 @@ describe( 'BannerVar.vue', () => {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					currentCampaignTimePercentage: 42,
-					formActions: {
-						donateWithAddressAction: 'https://example.com/with-address',
-						donateAnonymouslyAction: 'https://example.com/without-address'
-					},
+					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
 					tracker,
@@ -142,7 +140,9 @@ describe( 'BannerVar.vue', () => {
 			await wrapper.find( '.amount-10 input' ).trigger( 'change' );
 			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'with-address&ap=1' );
+			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
+			expect( formActionAttribute ).toContain( 'with-address' );
+			expect( formActionAttribute ).toContain( 'ap=1' );
 		} );
 
 		it( 'Set the correct action when amount is below 10 and receipt is not checked', async (): Promise<void> => {
@@ -163,7 +163,9 @@ describe( 'BannerVar.vue', () => {
 			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
 			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
 
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'with-address&ap=1' );
+			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
+			expect( formActionAttribute ).toContain( 'with-address' );
+			expect( formActionAttribute ).toContain( 'ap=1' );
 		} );
 
 		it( 'Puts the receipt option into the submit form', async (): Promise<void> => {

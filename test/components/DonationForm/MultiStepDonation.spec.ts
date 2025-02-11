@@ -7,6 +7,7 @@ import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { StepControllerSpy } from '@test/fixtures/StepControllerSpy';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { TimerStub } from '@test/fixtures/TimerStub';
+import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 
 const subFormEmitterTemplate = `<template #form-page-1="{ pageIndex, submit, previous }">
 	<button
@@ -37,10 +38,7 @@ describe( 'MultistepDonation.vue', () => {
 			slots: forms,
 			global: {
 				provide: {
-					formActions: {
-						donateWithAddressAction: `https://example.com/withAddress`,
-						donateWithoutAddressAction: `https://example.com/?withoutAddress=okay`
-					},
+					formActions: fakeFormActions,
 					tracker,
 					timer: new TimerStub()
 				}
@@ -179,7 +177,7 @@ describe( 'MultistepDonation.vue', () => {
 		const wrapper = getWrapper( { form01: SubFormStub, form02: SubFormStub, form03: SubFormStub } );
 
 		expect( wrapper.find( '.wmde-banner-submit-form' ).attributes( 'action' ) )
-			.toContain( 'example.com/withAddress' );
+			.toBe( fakeFormActions.donateWithAddressAction.toString() );
 	} );
 
 	it( 'should render the URL override', async () => {
@@ -188,6 +186,6 @@ describe( 'MultistepDonation.vue', () => {
 		await wrapper.setProps( { formActionOverride: 'https://example.com/withBellsAndWhistles' } );
 
 		expect( wrapper.find( '.wmde-banner-submit-form' ).attributes( 'action' ) )
-			.toContain( 'https://example.com/withBellsAndWhistles' );
+			.toBe( 'https://example.com/withBellsAndWhistles' );
 	} );
 } );
