@@ -62,7 +62,6 @@
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm
-							:show-manual-upgrade-option="false"
 							:page-index="pageIndex"
 							:is-current="isCurrent"
 							@submit="submit"

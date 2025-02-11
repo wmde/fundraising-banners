@@ -28,16 +28,6 @@
 			>
 				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
 			</button>
-
-			<a
-				v-if="showManualUpgradeOption"
-				tabIndex="-1"
-				href="#"
-				class="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom"
-				@click.prevent="onGoToChangeOfAmount"
-			>
-				{{ $translate( 'upgrade-to-yearly-link' ) }}
-			</a>
 		</div>
 	</form>
 </template>
@@ -55,12 +45,9 @@ import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 interface Props {
 	// eslint-disable-next-line vue/no-unused-properties
 	isCurrent: boolean;
-	showManualUpgradeOption?: boolean;
 }
 
-const props = withDefaults( defineProps<Props>(), {
-	showManualUpgradeOption: true
-} );
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'submit', 'previous' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
@@ -76,13 +63,6 @@ const onSubmit = ( e: SubmitEvent ): void => {
 	) );
 
 	emit( 'submit', { upgradeToYearlyInterval: submitValue } );
-};
-
-const onGoToChangeOfAmount = (): void => {
-	emit( 'submit', {
-		changeOfAmount: true,
-		upgradeToYearlyInterval: Intervals.YEARLY.value
-	} );
 };
 
 const onPrevious = (): void => {

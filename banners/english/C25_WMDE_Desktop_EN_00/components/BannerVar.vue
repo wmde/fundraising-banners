@@ -50,7 +50,6 @@
 						<UpgradeToYearlyButtonForm
 							:page-index="pageIndex"
 							:is-current="isCurrent"
-							:show-manual-upgrade-option="false"
 							@submit="submit"
 							@previous="previous"
 						/>
