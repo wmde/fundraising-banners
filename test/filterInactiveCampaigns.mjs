@@ -24,7 +24,6 @@ function getCampaignNamesAndMappings( campaignConfigPath ) {
  */
 export function getFilterForInactiveCampaigns( bannerGlob, bannerTestGlob, campaignConfigPath ) {
 	const potentialCampaignTestFolders = fg.globSync( bannerTestGlob, { onlyDirectories: true } );
-	const potentialBannerFolders = fg.globSync( bannerGlob, { onlyDirectories: true } );
 
 	const { activeCampaigns, campaignsToChannels } = getCampaignNamesAndMappings( campaignConfigPath );
 
@@ -43,21 +42,12 @@ export function getFilterForInactiveCampaigns( bannerGlob, bannerTestGlob, campa
 		return !activeCampaigns.includes( campaignName );
 	} );
 
-	const inactiveBannerFolders = potentialBannerFolders.filter( folder => {
-		const campaignName = path.basename( folder );
-		return !activeCampaigns.includes( campaignName );
-	} );
-
 	// Create recursive glob expressions for use in vitest "exclude"
 	const inactiveCampaignGlobs = inactiveCampaignTestFolders.map( folder => path.join( folder, '**' ) );
-
-	// Create recursive glob expressions for use in vitest "coverage.exclude"
-	const inactiveBannerGlobs = inactiveBannerFolders.map( folder => path.join( folder, '**' ) );
 
 	return {
 		activeCampaigns,
 		inactiveCampaignGlobs,
-		inactiveBannerGlobs,
 		campaignsWithoutTests,
 	};
 }

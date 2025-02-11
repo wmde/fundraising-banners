@@ -8,9 +8,8 @@ const CAMPAIGN_WITHOUT_TEST_HANDLING = 'error';
 
 const {
 	inactiveCampaignGlobs,
-	inactiveBannerGlobs,
-	campaignsWithoutTests
-} = getFilterForInactiveCampaigns( 'banners/*/*',  'test/banners/*/*', 'campaign_info.toml' );
+	campaignsWithoutTests,
+} = getFilterForInactiveCampaigns( 'banners/*/*', 'test/banners/*/*', 'campaign_info.toml' );
 
 const outputMissingCampaigns = ( missingCampaigns ) => {
 	missingCampaigns.forEach( c => console.log( `  ${c}` ) );
@@ -33,15 +32,7 @@ export default mergeConfig( defaultConfig, defineConfig( {
 			// It's important to preserve the defaults, otherwise vitest will be looking for tests
 			// in the wrong places and choke on tests in node_modules
 			...configDefaults.exclude,
-			...inactiveCampaignGlobs
+			...inactiveCampaignGlobs,
 		],
-		coverage: {
-
-			// Remove this array in 2025, it should inherit from defaultConfig instead.
-			exclude: [
-				...defaultConfig.test.coverage.exclude,
-				...inactiveBannerGlobs,
-			]
-		}
-	}
+	},
 } ) );
