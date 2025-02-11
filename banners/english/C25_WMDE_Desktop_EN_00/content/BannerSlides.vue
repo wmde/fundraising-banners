@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
-import InfoIcon from '@src/components/Icons/InfoIcon.vue';
+import InfoIcon from '@src/components/Icons/InfoIconStraight.vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
