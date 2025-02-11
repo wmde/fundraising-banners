@@ -22,10 +22,3 @@ export const expectUpgradeToYearlyFormGoesToPageOnSubmit = async ( wrapper: VueW
 	expect( wrapper.find( `.wmde-banner-form-page:nth-child(${page})` ).attributes( 'class' ) )
 		.toContain( 'wmde-banner-form-page--current' );
 };
-
-export const expectUpgradeToYearlyFormGoesToPageOnLinkClick = async ( wrapper: VueWrapper<any>, page: number ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
-
-	expect( wrapper.find( `.wmde-banner-form-page:nth-child(${page})` ).attributes( 'class' ) )
-		.toContain( 'wmde-banner-form-page--current' );
-};

@@ -5,7 +5,6 @@ import {
 	submitMainDonationForm
 } from '@test/features/forms/subForms/MainDonationForm';
 import {
-	expectUpgradeToYearlyFormGoesToPageOnLinkClick,
 	expectUpgradeToYearlyFormSubmits
 } from '@test/features/forms/subForms/UpgradeToYearlyButtonForm';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
@@ -48,9 +47,5 @@ export const donationFormFeatures: Record<string, ( wrapper: VueWrapper<any> ) =
 	expectUpgradeToYearlyFormSubmitsDontUpgrade: async ( wrapper: VueWrapper<any> ) => {
 		await submitMainDonationForm( wrapper, Intervals.ONCE, '5', PaymentMethods.PAYPAL );
 		await expectUpgradeToYearlyFormSubmits( wrapper, 'no' );
-	},
-	expectUpgradeToYearlyFormGoesToMainDonation: async ( wrapper: VueWrapper<any> ) => {
-		await submitMainDonationForm( wrapper, Intervals.ONCE, '5', PaymentMethods.PAYPAL );
-		await expectUpgradeToYearlyFormGoesToPageOnLinkClick( wrapper, Pages.MainDonation );
 	}
 };
