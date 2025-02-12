@@ -19,6 +19,7 @@ import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -138,6 +139,15 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );

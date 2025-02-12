@@ -18,6 +18,7 @@ import { bannerMainFeatures } from '@test/features/MainBanner';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -117,6 +118,15 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectHidesUseOfFunds' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

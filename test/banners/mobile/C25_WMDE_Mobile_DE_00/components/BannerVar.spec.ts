@@ -14,7 +14,7 @@ import {
 	useOfFundsTrackingFeatures
 } from '@test/features/UseOfFunds2024';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton_changesAmountOptions';
+import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';

@@ -20,32 +20,26 @@ export const donationFormFeatures: Record<string, ( wrapper: VueWrapper<any> ) =
 		wrapper,
 		Intervals.ONCE,
 		PaymentMethods.SOFORT,
-		'5'
+		'15'
 	),
 	expectMainDonationFormSubmitsWhenYearlyIsSelected: ( wrapper: VueWrapper<any> ) => expectMainDonationFormSubmits(
 		wrapper,
 		Intervals.YEARLY,
 		PaymentMethods.PAYPAL,
-		'5'
-	),
-	expectMainDonationFormSubmitsWhenAmountIsGreaterThanMaxAmount: async ( wrapper: VueWrapper<any> ) => expectMainDonationFormSubmits(
-		wrapper,
-		Intervals.YEARLY,
-		PaymentMethods.PAYPAL,
-		'25'
+		'15'
 	),
 	expectMainDonationFormGoesToUpgrade: ( wrapper: VueWrapper<any> ) => expectMainDonationFormGoesToPageOnSubmit( wrapper,
 		Pages.UpgradeToYearly,
 		Intervals.ONCE,
 		PaymentMethods.PAYPAL,
-		'20'
+		'25'
 	),
 	expectUpgradeToYearlyFormSubmitsUpgrade: async ( wrapper: VueWrapper<any> ) => {
-		await submitMainDonationForm( wrapper, Intervals.ONCE, '5', PaymentMethods.PAYPAL );
+		await submitMainDonationForm( wrapper, Intervals.ONCE, '15', PaymentMethods.PAYPAL );
 		await expectUpgradeToYearlyFormSubmits( wrapper, 'yes' );
 	},
 	expectUpgradeToYearlyFormSubmitsDontUpgrade: async ( wrapper: VueWrapper<any> ) => {
-		await submitMainDonationForm( wrapper, Intervals.ONCE, '5', PaymentMethods.PAYPAL );
+		await submitMainDonationForm( wrapper, Intervals.ONCE, '25', PaymentMethods.PAYPAL );
 		await expectUpgradeToYearlyFormSubmits( wrapper, 'no' );
 	}
 };

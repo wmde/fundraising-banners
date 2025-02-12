@@ -20,6 +20,7 @@ import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -148,6 +149,16 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ],
+			[ 'expectShowsSepaLogo' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
