@@ -88,7 +88,6 @@ module.exports = ( env ) => {
 		resolve: {
 			extensions: [ '.ts', '.js', '.json' ],
 			alias: {
-				'@banners': path.resolve( __dirname, 'banners' ),
 				'@src': path.resolve( __dirname, 'src' )
 			},
 			fallback: {
