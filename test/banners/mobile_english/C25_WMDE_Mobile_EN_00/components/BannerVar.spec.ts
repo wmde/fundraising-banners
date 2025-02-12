@@ -22,6 +22,7 @@ import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent'
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -182,6 +183,15 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );

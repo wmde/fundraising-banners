@@ -56,7 +56,12 @@
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm :page-index="pageIndex" :showManualUpgradeOption="false" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<UpgradeToYearlyButtonForm
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+						>
 							<template #back>
 								<ChevronLeftIcon/>
 							</template>

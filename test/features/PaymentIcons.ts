@@ -4,7 +4,8 @@ import { expect } from 'vitest';
 const expectShowsCreditCardLogos = ( wrapper: VueWrapper<any> ): void => {
 	expect( wrapper.find( '.visa-logo' ).exists() ).toBeTruthy();
 	expect( wrapper.find( '.mastercard-logo' ).exists() ).toBeTruthy();
-	expect( wrapper.find( '.amex-logo' ).exists() ).toBeTruthy();
+	// the amex logo is currently not supported by our provider: https://phabricator.wikimedia.org/T352980
+	// expect( wrapper.find( '.amex-logo' ).exists() ).toBeTruthy();
 };
 
 const expectShowsPayPalLogo = ( wrapper: VueWrapper<any> ): void => {

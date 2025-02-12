@@ -21,6 +21,7 @@ import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } f
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -163,6 +164,15 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );

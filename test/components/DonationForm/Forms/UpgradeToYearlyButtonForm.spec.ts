@@ -49,15 +49,6 @@ describe( 'UpgradeToYearlyButtonForm.vue', () => {
 		expect( wrapper.emitted( 'previous' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit "submit" event with payload when user wants to donate yearly with different amount', async () => {
-		const wrapper = getWrapper();
-
-		await wrapper.find( '.wmde-banner-form-upgrade-custom' ).trigger( 'click' );
-
-		expect( wrapper.emitted( 'submit' ).length ).toBe( 1 );
-		expect( wrapper.emitted( 'submit' )[ 0 ][ 0 ] ).toEqual( { changeOfAmount: true, upgradeToYearlyInterval: '12' } );
-	} );
-
 	it( 'should emit "submit" event when user clicks a submit button for an interval', async function () {
 		const wrapper = getWrapper();
 

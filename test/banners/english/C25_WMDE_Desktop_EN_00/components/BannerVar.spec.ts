@@ -9,7 +9,7 @@ import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
+import { donationFormFeatures } from '@test/features/forms/MainDonationDonationReceipt_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
@@ -19,6 +19,7 @@ import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { paymentIconFeatures } from '@test/features/PaymentIcons';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -105,7 +106,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectMainDonationFormShowsDonationReceiptCheckbox' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
@@ -186,6 +188,15 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
 		] )( '%s', async ( testName: string ) => {
 			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Payment Icons', () => {
+		test.each( [
+			[ 'expectShowsPayPalLogo' ],
+			[ 'expectShowsCreditCardLogos' ]
+		] )( '%s', async ( testName: string ) => {
+			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );
