@@ -67,6 +67,7 @@ export default defineConfig( {
 	},
 	resolve: {
 		alias: {
+			'@banners': path.resolve( __dirname, './banners' ),
 			'@src': path.resolve( __dirname, './src' ),
 			'@environment': path.resolve( __dirname, './src/environment/prod' ),
 			'@test': path.resolve( __dirname, './test' ),
