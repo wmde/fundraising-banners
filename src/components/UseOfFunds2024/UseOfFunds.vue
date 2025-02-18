@@ -1,6 +1,6 @@
 <template>
 	<div class="use-of-funds">
-		<h2>{{ content.title }}</h2>
+		<h2 class="use-of-funds-heading">{{ content.title }}</h2>
 		<p class="use-of-funds-summary-text">{{ content.summary }}</p>
 
 		<div class="use-of-funds-usage">
@@ -49,7 +49,7 @@
 							{{ company.budgetString }}
 						</span>
 						<span class="use-of-funds-companies-link">
-							<a v-if="company.link !== ''" class="company_budgets__citation_link" :href="company.link" target="_blank">
+							<a v-if="company.link !== ''" :href="company.link" target="_blank">
 								{{ company.linkText }}
 							</a>
 							<span v-else>&nbsp;</span>

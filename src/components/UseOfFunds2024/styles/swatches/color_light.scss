@@ -12,6 +12,8 @@ $blue500-hover: color.adjust( $blue500, $lightness: -5% );
 @mixin swatch() {
 	--background: #{$white};
 	--text-color: #{$black};
+	--link-color: #{$blue500};
+	--link-color-hover: #{$black};
 
 	--close-button-background: #{$white};
 	--close-icon-stroke: #{$gray400};

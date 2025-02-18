@@ -7,8 +7,12 @@ import { Tracker } from '@src/tracking/Tracker';
 
 /*
 The new 2024 use of funds component uses the html <dialog> element
-which currently (2024) has no direct support from our testing library for visibility checking
+which currently (2024) has no direct support from our testing library for visibility checking.
+JSDOM also doesn't implement the methods used to open and close native dialogues so we need to manually mock them
  */
+HTMLDialogElement.prototype.showModal = () => {};
+HTMLDialogElement.prototype.close = () => {};
+
 const expectShowsUseOfFunds = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
 
@@ -48,13 +52,14 @@ const expectScrollsToFormWhenCloseIsClicked = async ( wrapper: VueWrapper<any>, 
 const expectEmitsModalOpenedEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
 
-	expect( wrapper.emitted( 'onModalOpened' ).length ).toStrictEqual( 1 );
+	expect( wrapper.emitted( 'modalOpened' ).length ).toStrictEqual( 1 );
 };
 
 const expectEmitsModalClosedEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
-	expect( wrapper.emitted( 'onModalClosed' ).length ).toStrictEqual( 1 );
+	expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );
 };
 
 const expectClickingUoFLinkOnMiniBannerTracksEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {

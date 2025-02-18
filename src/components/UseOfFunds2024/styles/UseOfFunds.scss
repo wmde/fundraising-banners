@@ -7,14 +7,34 @@
 		color: var( --text-color );
 		background: var( --background );
 		padding: map.get( units.$spacing, 'small' );
+		line-height: 1.8;
+		font-size: 16px;
 
 		@include breakpoints.desktop-up {
 			padding: map.get( units.$spacing, 'large' );
 		}
 
+		p {
+			margin: 0 0 map.get( units.$spacing, 'small' );
+			padding: 0;
+			font-size: 16px;
+			font-weight: 400;
+		}
+
+		a {
+			color: var( --link-color );
+			&:hover,
+			&:focus {
+				color: var( --link-color-hover );
+			}
+		}
+
 		h2 {
 			font-weight: bold;
 			font-size: 18px;
+			margin: 0 0 map.get( units.$spacing, 'small' );
+			padding: 0;
+			border: 0;
 
 			@include breakpoints.tablet-up {
 				font-size: 22px;
@@ -25,7 +45,15 @@
 			}
 		}
 
-		&-summary-text {
+		h2.use-of-funds-heading {
+			font-weight: normal;
+			margin-bottom: 16px;
+		}
+
+		p.use-of-funds-summary-text {
+			line-height: 1.8;
+			font-size: 18px;
+
 			@include breakpoints.tablet-up {
 				font-size: 18px;
 			}
@@ -217,6 +245,7 @@
 			ul {
 				list-style-type: none;
 				padding: 0;
+				margin: 0;
 
 				li {
 					display: flex;

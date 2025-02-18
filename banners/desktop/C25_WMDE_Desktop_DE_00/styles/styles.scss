@@ -8,9 +8,9 @@
 	$soft-close: true,
 );
 @use 'src/components/BannerConductor/banner-transition';
-@use 'src/themes/UseOfFunds/swatches/skin_default' as uof-default;
+@use 'src/components/UseOfFunds2024/styles/swatches/skin_default' as uof-default;
 @use 'Banner';
-@use 'src/themes/UseOfFunds/UseOfFunds';
+@use 'src/components/UseOfFunds2024/styles/styles';
 @use 'MainBanner' with (
 	$banner-height: 357px,
 	$form-width: 300px
