@@ -8,5 +8,5 @@
 </template>
 
 <script setup lang="ts">
-import ListTick from '@banners/thank_you/content/ListTick.vue';
+import ListTick from './ListTick.vue';
 </script>

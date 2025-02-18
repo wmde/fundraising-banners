@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import ExecutiveDirectorsImage from '@banners/thank_you/content/ExecutiveDirectorsImage.vue';
-import StatsBox from '@banners/thank_you/components/StatsBox.vue';
+import ExecutiveDirectorsImage from '../ExecutiveDirectorsImage.vue';
+import StatsBox from '../../components/StatsBox.vue';
 interface Props {
 	numberOfPeople: string
 }

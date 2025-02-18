@@ -37,14 +37,14 @@
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import { ThankYouSettings } from '@banners/thank_you/settings';
+import { ThankYouSettings } from '../settings';
 import { Tracker } from '@src/tracking/Tracker';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
-import MiniBanner from '@banners/thank_you/components/MiniBanner.vue';
-import FullPageBanner from '@banners/thank_you/components/FullPageBanner.vue';
+import MiniBanner from '../components/MiniBanner.vue';
+import FullPageBanner from '../components/FullPageBanner.vue';
 
 import MiniBannerTextWin from '../content/win/MiniBannerText.de.vue';
 import FullPageBannerTextWin from '../content/win/FullPageBannerTextVar.de.vue';
