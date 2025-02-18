@@ -28,6 +28,21 @@ describe( 'CurrencyDe', () => {
 		} );
 	} );
 
+	describe( '#euroAmountFromCents', () => {
+
+		it( 'returns single integer euro when cents are zero', () => {
+			expect( formatter.euroAmountFromCents( 1 ) ).toBe( '0,01 €' );
+			expect( formatter.euroAmountFromCents( 100 ) ).toBe( '1 €' );
+			expect( formatter.euroAmountFromCents( 1000_00 ) ).toBe( '1000 €' );
+			expect( formatter.euroAmountFromCents( 999_999_99 ) ).toBe( '999999,99 €' );
+
+			// the following inputs would be domain/logic errors and should ideally never happen
+			expect( formatter.euroAmountFromCents( 1.1 ) ).toBe( '0,01 €' );
+			expect( formatter.euroAmountFromCents( 1.99 ) ).toBe( '0,01 €' );
+			expect( formatter.euroAmountFromCents( 1.999999 ) ).toBe( '0,01 €' );
+		} );
+	} );
+
 	describe( '#customAmountInput', () => {
 		it( 'returns amount with 2 decimal places, 0-padding if needed', () => {
 			expect( formatter.customAmountInput( 1 ) ).toBe( '1,00' );

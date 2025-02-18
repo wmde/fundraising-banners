@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-submit-values">
 		<input type="hidden" name="addressType" :value="addressType" />
-		<input type="hidden" name="amount" :value="formattedAmountForServer" />
+		<input type="hidden" name="amount" :value="amountInCents" />
 		<input type="hidden" name="interval" :value="interval" />
 		<input type="hidden" name="paymentType" :value="paymentMethod" />
 		<input type="hidden" name="receipt" :value="receipt" />
@@ -11,12 +11,7 @@
 <script setup lang="ts">
 
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { computed } from 'vue';
 
-const { addressType, numericAmount, interval, paymentMethod, receipt } = useFormModel();
-
-const formattedAmountForServer = computed( (): number => {
-	return parseFloat( numericAmount.value.toFixed( 2 ) ) * 100;
-} );
+const { addressType, amountInCents, interval, paymentMethod, receipt } = useFormModel();
 
 </script>

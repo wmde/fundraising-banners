@@ -4,7 +4,7 @@ import { Validity } from '@src/utils/FormModel/Validity';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
-import { parseFloatFromFormattedString } from '@src/utils/parseFloatFromFormattedString';
+import { parseIntegerFromFormattedString } from '@src/utils/parseIntegerFromFormattedString';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 const interval = ref<string>( '' );
@@ -13,7 +13,7 @@ const intervalValidity = ref<Validity>( Validity.Unset );
 const selectedAmount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const customAmount = ref<string>( '' );
-const numericAmount = computed( (): number => parseFloatFromFormattedString( selectedAmount.value || customAmount.value ) );
+const amountInCents = computed( () => parseIntegerFromFormattedString( selectedAmount.value || customAmount.value ) );
 
 const paymentMethod = ref<string>( '' );
 const paymentMethodValidity = ref<Validity>( Validity.Unset );
@@ -81,7 +81,7 @@ export function useFormModel(): FormModel {
 
 		selectedAmount,
 		customAmount,
-		numericAmount,
+		amountInCents,
 		amountValidity,
 
 		paymentMethod,

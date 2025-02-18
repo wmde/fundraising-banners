@@ -80,18 +80,18 @@ describe( 'useFormModel', () => {
 	} );
 
 	test.each( [
-		[ '555', 555 ],
-		[ '555,32', 555.32 ],
-		[ '555.45', 555.45 ],
-		[ '1234.6767674957234', 1234.6767674957234 ],
-		[ '1234,6767674957234', 1234.6767674957234 ],
-		[ '1234,67.5656.', 1234675656 ],
-		[ '1234,67.5656', 123467.5656 ],
-		[ '1234,675,656', 1234675.656 ]
-	] )( 'should set numericAmount when amount changes', function ( inputAmount: string, expectedNumericAmount: number ) {
+		[ '555', 555_00 ],
+		[ '555,32', 555_32 ],
+		[ '555.45', 555_45 ],
+		[ '1234.6767674957234', 1234_67 ],
+		[ '1234,6767674957234', 1234_67 ],
+		[ '1234,67.5656.', 1234675656_00 ],
+		[ '1234,67.5656', 123_467_56 ],
+		[ '1234,675,656', 1_234_675_65 ]
+	] )( 'should set amountInCents when amount changes', function ( inputAmount: string, expectedAmountInCents: number ) {
 		model.selectedAmount.value = inputAmount;
 
-		expect( model.numericAmount.value ).toEqual( expectedNumericAmount );
+		expect( model.amountInCents.value ).toEqual( expectedAmountInCents );
 	} );
 
 	it( 'sets Invalid paymentMethodValidity to valid when a payment method is selected', async () => {

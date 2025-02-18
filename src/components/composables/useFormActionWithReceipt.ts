@@ -18,15 +18,15 @@ import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethod
  *
  * The form action should be independent of the form and only rely on the FormModel.
  * @param { FormActionCollection } formActions
- * @param { number } minimumAmount Threshold at where a donation counts as "big donation" (where a receipt might be wanted)
+ * @param { number } minimumAmountInCents Threshold (in cents) at where a donation counts as "big donation" (where a receipt might be wanted)
  */
-export function useFormActionWithReceipt( formActions: FormActionCollection, minimumAmount: number ): { formAction: Ref<string> } {
+export function useFormActionWithReceipt( formActions: FormActionCollection, minimumAmountInCents: number ): { formAction: Ref<string> } {
 	const formModel = useFormModel();
 	const formAction = computed( (): string => {
 
 		let action = formActions.donateAnonymouslyAction;
 
-		if ( formModel.numericAmount.value >= minimumAmount ||
+		if ( formModel.amountInCents.value >= minimumAmountInCents ||
 			formModel.receipt.value ||
 			formModel.paymentMethod.value === PaymentMethods.DIRECT_DEBIT.value ) {
 			action = formActions.donateWithAddressAction;

@@ -19,14 +19,14 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { Translator } from '@src/Translator';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 interface Props {
-	paymentLabelsBelow: number;
+	paymentLabelsBelowCents: number;
 }
 const props = defineProps<Props>();
 const formModel = useFormModel();
 const translator = inject<Translator>( 'translator' );
-const { paymentMethod, addressType, receipt, numericAmount } = formModel;
+const { paymentMethod, addressType, receipt, amountInCents } = formModel;
 const submitButtonLabel = computed( (): string => {
-	if ( numericAmount.value < props.paymentLabelsBelow && !receipt.value && [ AddressTypes.ANONYMOUS.value, '' ].includes( addressType.value ) ) {
+	if ( amountInCents.value < props.paymentLabelsBelowCents && !receipt.value && [ AddressTypes.ANONYMOUS.value, '' ].includes( addressType.value ) ) {
 		if ( paymentMethod.value === PaymentMethods.PAYPAL.value ) {
 			return translator.translate( 'submit-label-paypal' );
 		} else if ( paymentMethod.value === PaymentMethods.CREDIT_CARD.value ) {

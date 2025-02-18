@@ -117,7 +117,7 @@ const validate = (): void => {
 
 const {
 	interval, intervalValidity, disabledIntervals,
-	selectedAmount, customAmount, numericAmount, amountValidity,
+	selectedAmount, customAmount, amountInCents, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods
 } = formModel;
 
@@ -127,7 +127,7 @@ const clearSelectedAmount = (): void => {
 
 const formatCustomAmount = (): void => {
 	if ( customAmount.value !== '' ) {
-		customAmount.value = currencyFormatter.customAmountInput( numericAmount.value );
+		customAmount.value = currencyFormatter.customAmountInputFromCents( amountInCents.value );
 	}
 };
 

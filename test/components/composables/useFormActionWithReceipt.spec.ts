@@ -10,7 +10,7 @@ const withAddressAction: string = 'WithAddress';
 
 describe( 'useFormActionWithReceipt', () => {
 
-	const MINIMUM_AMOUNT = 10;
+	const MINIMUM_AMOUNT_IN_CENTS = 10_00;
 	const actionCollection = new FormActionCollection(
 		new FormAction( withAddressAction, new FakeTrackingParameters() ),
 		new FormAction( anonymousAction, new FakeTrackingParameters() )
@@ -26,18 +26,18 @@ describe( 'useFormActionWithReceipt', () => {
 	] )( 'returns the correct action with address type', (
 		receiptNeeded: boolean,
 		paymentMethod: string,
-		amount: string,
+		amountInEuros: string,
 		expectedAction: string,
 		hasAddressParameters: boolean,
 	) => {
 		const formModel = useFormModel();
 		formModel.receipt.value = receiptNeeded;
 		formModel.paymentMethod.value = paymentMethod;
-		formModel.customAmount.value = amount;
+		formModel.customAmount.value = amountInEuros;
 
 		const { formAction } = useFormActionWithReceipt(
 			actionCollection,
-			MINIMUM_AMOUNT
+			MINIMUM_AMOUNT_IN_CENTS
 		);
 
 		// eslint-disable-next-line security/detect-non-literal-regexp

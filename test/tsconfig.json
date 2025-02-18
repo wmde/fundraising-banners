@@ -2,7 +2,10 @@
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"paths": {
-			"@banners/*": [ "banners/*" ]
+			"@banners/*": [ "banners/*" ],
+			"@src/*": [ "src/*" ],
+			"@test/*": [ "test/*" ],
+			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]
 		}
 	}
 }
