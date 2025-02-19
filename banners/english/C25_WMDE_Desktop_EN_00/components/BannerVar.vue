@@ -75,13 +75,10 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onCloseUseOfFunds"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingEN/>
-			</template>
-		</FundsModal>
+			:visible="isFundsModalVisible"
+			@hide="onCloseUseOfFunds"
+			@call-to-action="onCloseUseOfFunds"
+		/>
 	</div>
 </template>
 
@@ -89,8 +86,8 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValueDynamicLabel.vue';
@@ -113,7 +110,6 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import WMDEFundsForwardingEN from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingEN.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import { useFormActionWithReceipt } from '@src/components/composables/useFormActionWithReceipt';
 import { FormActionCollection } from '@src/domain/FormActions';
