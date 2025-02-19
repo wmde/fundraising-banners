@@ -8,7 +8,7 @@ import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds2024';
+import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds2024';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -156,10 +156,12 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
+			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
+			[ 'expectDoesNotEmitModalOpenedEventOnFullPageBanner' ],
+			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ],
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [

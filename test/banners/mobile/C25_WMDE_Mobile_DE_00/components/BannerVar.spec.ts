@@ -9,7 +9,7 @@ import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import {
-	useOfFundsFeatures,
+	mobileUseOfFundsFeatures,
 	useOfFundsScrollFeatures,
 	useOfFundsTrackingFeatures
 } from '@test/features/UseOfFunds2024';
@@ -160,11 +160,15 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFunds' ],
 			[ 'expectShowsUseOfFundsOnMiniBanner' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
+			[ 'expectHidesUseOfFundsOnMiniBanner' ],
+			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
+			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
+			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
+			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [

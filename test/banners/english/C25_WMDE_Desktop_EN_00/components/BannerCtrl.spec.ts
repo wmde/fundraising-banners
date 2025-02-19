@@ -6,7 +6,7 @@ import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { useOfFundsFeatures } from '@test/features/UseOfFunds2024';
+import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds2024';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
@@ -132,7 +132,7 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsModalOpenedEvent' ],
 			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

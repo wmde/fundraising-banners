@@ -9,6 +9,7 @@
 		padding: map.get( units.$spacing, 'small' );
 		line-height: 1.8;
 		font-size: 16px;
+		max-width: 100vw;
 
 		@include breakpoints.desktop-up {
 			padding: map.get( units.$spacing, 'large' );
@@ -146,8 +147,11 @@
 			padding: map.get( units.$spacing, 'small' );
 
 			@include breakpoints.tablet-up {
-				margin: 0 ( -( map.get( units.$spacing, 'large' ) ) ) map.get( units.$spacing, 'large' );
 				padding: map.get( units.$spacing, 'large' );
+			}
+
+			@include breakpoints.desktop-up {
+				margin: 0 ( -( map.get( units.$spacing, 'large' ) ) ) map.get( units.$spacing, 'large' );
 			}
 
 			h2 {

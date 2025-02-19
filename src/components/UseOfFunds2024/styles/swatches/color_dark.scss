@@ -8,9 +8,9 @@ $gray400: #979797;
 $gray500: #555555;
 $gray800: #323232;
 
-$blue300: #88C7F6;
+$blue300: #88c7f6;
 $blue300-hover: color.adjust( $blue300, $lightness: 5% );
-$blue500: #2C9BF0;
+$blue500: #2c9bf0;
 $blue500-hover: color.adjust( $blue500, $lightness: -5% );
 
 @mixin swatch() {
