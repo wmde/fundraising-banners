@@ -12,10 +12,10 @@
 @use 'Banner';
 @use 'MainBanner' with (
 	$banner-height: 378px,
-	$form-width: 35%
+	$form-width: 300px
 );
-@use '@src/themes/UseOfFunds/swatches/skin_default' as uof-default;
-@use '@src/themes/UseOfFunds/UseOfFunds';
+@use 'src/components/UseOfFunds2024/styles/swatches/skin_default' as uof-default;
+@use 'src/components/UseOfFunds2024/styles/styles';
 @use '@src/themes/Treedip/defaults';
 @use '@src/themes/Treedip/ButtonClose/ButtonClose';
 @use '@src/themes/Treedip/ProgressBar/ProgressBar' with (

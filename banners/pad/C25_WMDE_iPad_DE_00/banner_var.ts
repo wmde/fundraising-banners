@@ -19,7 +19,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import messages from './messages';
-import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
+import { LocaleFactoryDe } from '@src/utils/LocaleFactory2024/LocaleFactoryDe';
 import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryDe();

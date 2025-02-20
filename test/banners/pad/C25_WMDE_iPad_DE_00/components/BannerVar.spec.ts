@@ -3,12 +3,11 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/pad/C25_WMDE_iPad_DE_00/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
-import { useOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -19,6 +18,7 @@ import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
+import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds2024';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -115,9 +115,11 @@ describe( 'BannerCtrl.vue', () => {
 	describe( 'Use of Funds', () => {
 		test.each( [
 			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectHidesUseOfFunds' ],
+			[ 'expectEmitsModalOpenedEvent' ],
+			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
