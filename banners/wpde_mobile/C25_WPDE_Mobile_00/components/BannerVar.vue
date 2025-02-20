@@ -85,13 +85,10 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onHideFundsModal"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@call-to-action="onHideFundsModal"
+		/>
 	</div>
 </template>
 
@@ -101,9 +98,8 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBannerVar.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -128,7 +124,6 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -205,12 +200,9 @@ function onshowFullPageBannerPreselected(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
-const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
-	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
-		'.wmde-banner-form' :
-		'.wmde-banner-full-small-print .wmde-banner-footer-usage-link'
-	);
+const onHideFundsModal = (): void => {
 	isFundsModalVisible.value = false;
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 };
 
 function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
