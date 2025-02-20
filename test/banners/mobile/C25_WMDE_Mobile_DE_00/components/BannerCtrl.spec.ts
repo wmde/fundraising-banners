@@ -166,7 +166,7 @@ describe( 'BannerCtrl.vue', () => {
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToFormWhenCloseIsClicked' ]
+			[ 'expectScrollsToFormWhenClosesToFullPage' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );

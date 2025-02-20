@@ -4,7 +4,7 @@
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected-amount="onShowFullPageBannerPreselectedAmount"
-			@show-use-of-funds="() => onShowUseOfFunds( 'MiniBanner' )"
+			@show-use-of-funds="onShowFundsModal( 'MiniBanner' )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
@@ -18,9 +18,8 @@
 		</MiniBanner>
 
 		<FullPageBanner
-			@showFundsModal="isFundsModalVisible = true"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
-			@show-use-of-funds="() => onShowUseOfFunds( 'FullPageBanner' )"
+			@show-use-of-funds="onShowFundsModal( 'FullPageBanner' )"
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
@@ -77,7 +76,7 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="() => onShowUseOfFunds( 'Footer' )" />
+				<BannerFooter @showFundsModal="onShowFundsModal( 'Footer' )" />
 			</template>
 		</FullPageBanner>
 
@@ -108,8 +107,9 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onHideFundsModal"
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@callToAction="onFundsModalCallToAction"
 		/>
 	</div>
 </template>
@@ -120,9 +120,8 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBannerVar.vue';
 import MiniBanner from './MiniBannerVar.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -167,7 +166,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 
@@ -209,19 +208,35 @@ function onShowFullPageBannerPreselectedAmount(): void {
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
-const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
-	if ( payload.source === UseOfFundsCloseSources.callToAction ) {
-		contentState.value = ContentStates.FullPage;
-		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
-	} else {
-		props.pageScroller.scrollIntoView( '.wmde-banner-full-small-print .wmde-banner-footer-usage-link' );
+const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
+	isFundsModalVisible.value = true;
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalOpened' );
 	}
-	isFundsModalVisible.value = false;
 };
 
-const onShowUseOfFunds = ( feature: TrackingFeatureName ): void => {
-	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
-	isFundsModalVisible.value = true;
+const onHideFundsModal = (): void => {
+	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
+};
+
+const onFundsModalCallToAction = (): void => {
+	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		onshowFullPageBanner();
+	}
+
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 };
 
 function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {

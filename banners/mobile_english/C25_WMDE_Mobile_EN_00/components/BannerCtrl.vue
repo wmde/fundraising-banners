@@ -106,8 +106,9 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onHideFundsModal"
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@callToAction="onHideFundsModal"
 		/>
 	</div>
 </template>
@@ -118,9 +119,8 @@ import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
-import { UseOfFundsCloseSources } from '@src/components/UseOfFunds/UseOfFundsCloseSources';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -165,7 +165,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 
@@ -192,19 +192,24 @@ function onCloseMiniBanner(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	emit( 'modalClosed' );
+}
+
+function showFullPageBanner(): void {
+	slideShowStopped.value = true;
+	contentState.value = ContentStates.FullPage;
+	emit( 'modalOpened' );
 }
 
 function onshowFullPageBanner(): void {
-	slideShowStopped.value = true;
-	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
+	showFullPageBanner();
 }
 
 function onShowFullPageBannerPreselectedAmount(): void {
-	slideShowStopped.value = true;
 	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
+	showFullPageBanner();
 }
 
 const onShowUseOfFunds = ( feature: TrackingFeatureName ): void => {
@@ -212,11 +217,8 @@ const onShowUseOfFunds = ( feature: TrackingFeatureName ): void => {
 	isFundsModalVisible.value = true;
 };
 
-const onHideFundsModal = ( payload: { source: UseOfFundsCloseSources } ): void => {
-	props.pageScroller.scrollIntoView( payload.source === UseOfFundsCloseSources.callToAction ?
-		'.wmde-banner-form' :
-		'.wmde-banner-full-small-print .wmde-banner-footer-usage-link'
-	);
+const onHideFundsModal = (): void => {
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
 };
 

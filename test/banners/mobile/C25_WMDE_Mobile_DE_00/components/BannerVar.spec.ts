@@ -173,7 +173,8 @@ describe( 'BannerVar.vue', () => {
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToFormWhenCloseIsClicked' ]
+			[ 'expectScrollsToFormWhenClosesToFullPage' ],
+			[ 'expectDoesNotScrollToFormWhenClosesToMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );

@@ -105,12 +105,20 @@ const expectScrollsToFormWhenCallToActionIsClicked = async ( wrapper: VueWrapper
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'callToAction' ).length ).toStrictEqual( 1 );
 };
 
-const expectScrollsToFormWhenCloseIsClicked = async ( wrapper: VueWrapper<any>, pageScroller: PageScroller ): Promise<any> => {
+const expectScrollsToFormWhenClosesToFullPage = async ( wrapper: VueWrapper<any>, pageScroller: PageScroller ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
 	expect( pageScroller.scrollIntoView ).toHaveBeenCalledOnce();
 	expect( pageScroller.scrollIntoView ).toHaveBeenCalledWith( '.wmde-banner-form' );
+};
+
+const expectDoesNotScrollToFormWhenClosesToMiniBanner = async ( wrapper: VueWrapper<any>, pageScroller: PageScroller ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
+
+	expect( pageScroller.scrollIntoView ).not.toHaveBeenCalled();
 };
 
 const expectClickingUoFLinkOnMiniBannerTracksEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
@@ -139,7 +147,8 @@ export const mobileUseOfFundsFeatures: Record<string, ( wrapper: VueWrapper<any>
 
 export const useOfFundsScrollFeatures: Record<string, ( wrapper: VueWrapper<any>, pageScroller: PageScroller ) => Promise<any>> = {
 	expectScrollsToFormWhenCallToActionIsClicked,
-	expectScrollsToFormWhenCloseIsClicked
+	expectScrollsToFormWhenClosesToFullPage,
+	expectDoesNotScrollToFormWhenClosesToMiniBanner
 };
 
 export const useOfFundsTrackingFeatures: Record<string, ( wrapper: VueWrapper<any>, tracker: Tracker ) => Promise<any>> = {

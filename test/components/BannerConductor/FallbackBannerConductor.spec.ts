@@ -295,12 +295,12 @@ describe( 'FallbackBannerConductor.vue', () => {
 
 	it( 'tells the page that a modal was closed', async () => {
 		const page = new PageStub();
-		page.setModalOpened = vi.fn();
+		page.setModalClosed = vi.fn();
 		const wrapper = await getShownBannerWrapper( page );
 
-		await wrapper.find( '.emit-banner-modal-open' ).trigger( 'click' );
+		await wrapper.find( '.emit-banner-modal-closed' ).trigger( 'click' );
 
-		expect( page.setModalOpened ).toHaveBeenCalledOnce();
+		expect( page.setModalClosed ).toHaveBeenCalledOnce();
 	} );
 
 } );

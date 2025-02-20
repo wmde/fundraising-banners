@@ -3,12 +3,12 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/mobile_english/C25_WMDE_Mobile_EN_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds2024';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -133,15 +133,17 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
+			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
+			[ 'expectDoesNotEmitModalOpenedEventOnFullPageBanner' ],
+			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ],
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
+			[ 'expectScrollsToFormWhenClosesToFullPage' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );

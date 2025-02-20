@@ -242,11 +242,14 @@ function onshowFullPageBannerPreselected(): void {
 }
 
 const onHideFundsModal = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
 
 	if ( contentState.value === ContentStates.Mini ) {
 		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	}
 };
 
