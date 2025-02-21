@@ -5,14 +5,10 @@
 			clip-rule="evenodd"
 			d="M16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1C7.71573 1 1 7.71573 1 16C1 24.2843
 			7.71573 31 16 31Z"
-			stroke="#979797"
 			stroke-width="2"
+			style="stroke: var( --close-icon-stroke );"
 		/>
-		<path d="M9 9L24 24" stroke="#979797" stroke-width="2" stroke-linecap="square"/>
-		<path d="M8.49512 23.4586L24.5049 9.54144" stroke="#979797" stroke-width="2" stroke-linecap="square"/>
+		<path d="M9 9L24 24" stroke-width="2" stroke-linecap="square" style="stroke: var( --close-icon-stroke );"/>
+		<path d="M8.49512 23.4586L24.5049 9.54144" stroke-width="2" stroke-linecap="square" style="stroke: var( --close-icon-stroke );"/>
 	</svg>
 </template>
-
-<script setup lang="ts">
-
-</script>

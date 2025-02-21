@@ -113,7 +113,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
-import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationFormAdaptiveAmounts from '@src/components/DonationForm/Forms/MainDonationFormAdaptiveAmounts.vue';

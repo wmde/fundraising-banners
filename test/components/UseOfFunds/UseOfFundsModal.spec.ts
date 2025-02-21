@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import UseOfFundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 
 const content: UseOfFundsContent = {

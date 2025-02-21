@@ -2,7 +2,7 @@ import { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
-import UseOfFundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { Tracker } from '@src/tracking/Tracker';
 
 /*

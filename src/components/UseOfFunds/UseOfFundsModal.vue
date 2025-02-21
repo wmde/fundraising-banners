@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import IconClose from '@src/components/UseOfFunds2024/Icons/IconClose.vue';
-import UseOfFunds from '@src/components/UseOfFunds2024/UseOfFunds.vue';
+import IconClose from '@src/components/UseOfFunds/Icons/IconClose.vue';
+import UseOfFunds from '@src/components/UseOfFunds/UseOfFunds.vue';
 import { UseOfFundsContent } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 
 interface Props {

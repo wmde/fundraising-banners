@@ -39,13 +39,10 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+			:visible="isFundsModalVisible"
+			@hide="isFundsModalVisible = false"
+			@call-to-action="isFundsModalVisible = false"
+		/>
 
 	</div>
 </template>
@@ -56,21 +53,20 @@ import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import { computed, inject, ref } from 'vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import FallbackSlides from '../content/FallbackSlides.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import FallbackText from '../content/FallbackText.vue';
 import FallbackButton from '@src/components/FallbackBanner/FallbackButton.vue';
 import SmallFooter from '@src/components/FallbackBanner/SmallFooter.vue';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 
 interface Props {

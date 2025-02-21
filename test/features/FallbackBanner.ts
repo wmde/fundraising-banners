@@ -10,6 +10,15 @@ import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
+import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
+
+/*
+The new 2024 use of funds component uses the html <dialog> element
+which currently (2024) has no direct support from our testing library for visibility checking.
+JSDOM also doesn't implement the methods used to open and close native dialogues so we need to manually mock them
+ */
+HTMLDialogElement.prototype.showModal = () => {};
+HTMLDialogElement.prototype.close = () => {};
 
 const showsTheSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
@@ -47,16 +56,16 @@ const showsUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: numbe
 
 	await wrapper.find( '.wmde-banner-fallback-small .wmde-banner-fallback-usage-link' ).trigger( 'click' );
 
-	expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
+	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'shown' ).length ).toBe( 1 );
 };
 
 const hidesUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
 
 	await wrapper.find( '.wmde-banner-fallback-small .wmde-banner-fallback-usage-link' ).trigger( 'click' );
-	await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
-	expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'hide' ).length ).toBe( 1 );
 };
 
 const showsUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
@@ -64,16 +73,16 @@ const showsUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: numbe
 
 	await wrapper.find( '.wmde-banner-fallback-large .wmde-banner-fallback-usage-link' ).trigger( 'click' );
 
-	expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
+	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'shown' ).length ).toBe( 1 );
 };
 
 const hidesUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 800 );
 
 	await wrapper.find( '.wmde-banner-fallback-large .wmde-banner-fallback-usage-link' ).trigger( 'click' );
-	await wrapper.find( '.banner-modal-close-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
-	expect( wrapper.find( '.banner-modal' ).classes() ).not.toContain( 'is-visible' );
+	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'hide' ).length ).toBe( 1 );
 };
 
 const showsTheAnimatedHighlightInLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent ) => VueWrapper<any> ): Promise<any> => {
