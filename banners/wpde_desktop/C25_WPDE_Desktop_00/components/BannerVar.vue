@@ -103,7 +103,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import UseOfFunds from '@src/components/UseOfFunds/UseOfFunds.vue';
-import { UseOfFundsContent } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
+import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 const content: UseOfFundsContent = {
 	accordion: { items: [], summary: '' },

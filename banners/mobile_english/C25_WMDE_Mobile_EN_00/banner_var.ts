@@ -21,7 +21,7 @@ import { Locales } from '@src/domain/Locales';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import messages from './messages';
-import { LocaleFactoryEn } from '@src/utils/LocaleFactory2024/LocaleFactoryEn';
+import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryEn();

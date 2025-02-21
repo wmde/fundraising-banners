@@ -2,7 +2,7 @@ import { describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import FallbackBanner from '@banners/desktop/C25_WMDE_Desktop_DE_00/components/FallbackBanner.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { Tracker } from '@src/tracking/Tracker';

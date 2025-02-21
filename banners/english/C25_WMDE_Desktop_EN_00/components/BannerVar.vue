@@ -87,7 +87,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { inject, ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValueDynamicLabel.vue';
