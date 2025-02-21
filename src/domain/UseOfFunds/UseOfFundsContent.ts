@@ -1,53 +1,40 @@
-import { ApplicationOfFundsItem } from '@src/domain/UseOfFunds/ApplicationOfFundsItem';
-import { Benefit } from '@src/domain/UseOfFunds/Benefit';
-import { Company } from '@src/domain/UseOfFunds/Company';
+interface AccordionItem {
+	title: string;
+	content: string;
+}
+
+interface BenefitsItem {
+	icon: 'hand' | 'smartphone' | 'world' | 'megaphone' | 'twentyfourseven';
+	content: string;
+}
+
+export interface RevenueComparisonItem {
+	name: string;
+	budget: number;
+	budgetString: string;
+	link: string;
+	linkText: string;
+}
 
 export interface UseOfFundsContent {
-	intro: {
-		dynamicHeadline: {
-			published: string;
-			provisional: string;
-		}
-		text: string;
-	}
-
-	applicationOfFundsData: ApplicationOfFundsItem[];
-
-	detailedReports: {
-		mixed: {
-			text: string;
-		}
-		germany: {
-			intro: string;
-			linkName: string;
-			linkUrl: string;
-		}
-		international: {
-			intro: string;
-			linkName: string;
-			linkUrl: string;
-		}
-	}
-
-	benefitsList: {
-		headline: string;
-		benefits: Benefit[];
-	}
-
-	comparison: {
-		headline: string;
-		paragraphs: string[];
-		subhead: string;
-		companies: Company[];
-		citationLabel: string;
-	}
-
-	orgchart: {
-		headline: string;
-		imageUrl: string;
-		paragraphs: string[];
-	}
-
+	title: string;
+	summary: string;
 	callToAction: string;
-	provisional: string;
+	accordion: {
+		items: AccordionItem[];
+		summary: string;
+	};
+	benefits: {
+		title: string;
+		items: BenefitsItem[];
+	};
+	revenueComparison: {
+		title: string;
+		content: string[];
+		companies: {
+			title: string;
+			items: RevenueComparisonItem[];
+		};
+	};
+	closingParagraph: string;
 }

@@ -3,7 +3,7 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/mobile_english/C25_WMDE_Mobile_EN_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';

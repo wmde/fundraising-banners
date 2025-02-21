@@ -3,7 +3,7 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/pad/C25_WMDE_iPad_DE_00/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';

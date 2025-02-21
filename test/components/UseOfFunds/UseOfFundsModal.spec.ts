@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import { UseOfFundsContent } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
+import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 const content: UseOfFundsContent = {
 	accordion: { items: [], summary: '' },

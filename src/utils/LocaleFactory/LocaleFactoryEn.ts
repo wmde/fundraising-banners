@@ -1,11 +1,11 @@
 import { LocaleFactory } from '@src/utils/LocaleFactory';
+import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
+import { UseOfFundsEnLoader } from '@environment/UseOfFundsEnLoader';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
-import { UseOfFundsEnLoader } from '@environment/UseOfFundsEnLoader';
 import { TimeEn } from '@src/utils/DynamicContent/formatters/TimeEn';
 
 export class LocaleFactoryEn implements LocaleFactory {

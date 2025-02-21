@@ -17,7 +17,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import messages from './messages';
-import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory2024/LocaleFactoryWpDe';
+import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
 import { WindowTimer } from '@src/utils/Timer';
 
 const localeFactory = new LocaleFactoryWpDe();
