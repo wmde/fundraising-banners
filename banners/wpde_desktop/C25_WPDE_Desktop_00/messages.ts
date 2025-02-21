@@ -1,4 +1,5 @@
 import DynamicCampaignTextDe from '@src/utils/DynamicContent/messages/DynamicCampaignText.de';
+import CloseButtonTextDe from '@src/components/ButtonClose/messages/ButtonClose.de';
 import { TranslationMessages } from '@src/Translator';
 import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/UpgradeToYearly.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
@@ -7,6 +8,7 @@ import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/Main
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
+	...CloseButtonTextDe,
 	...UpgradeToYearlyDe,
 	...SoftCloseDe,
 	...FooterDe,

@@ -2,6 +2,7 @@
 	<dialog class="wmde-banner-funds-modal" ref="useOfFundsDialogue">
 		<div class="wmde-banner-funds-modal-close">
 			<button @click="$emit( 'hide' )">
+				<span class="is-sr-only">{{ $translate( 'close' ) }}</span>
 				<IconClose/>
 			</button>
 		</div>
