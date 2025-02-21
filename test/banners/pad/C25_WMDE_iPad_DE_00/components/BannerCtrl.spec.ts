@@ -18,7 +18,7 @@ import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
-import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds2024';
+import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
