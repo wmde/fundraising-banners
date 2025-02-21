@@ -117,7 +117,7 @@ import { nextTick, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
-import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerSlides from '../content/BannerSlidesVar.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';

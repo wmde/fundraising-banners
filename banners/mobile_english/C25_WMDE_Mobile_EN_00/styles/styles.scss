@@ -6,8 +6,8 @@
 	$upgrade-to-yearly: true
 );
 @use '@src/components/BannerConductor/banner-transition';
-@use '@src/components/UseOfFunds2024/styles/swatches/skin_minerva' as uof-minerva;
-@use '@src/components/UseOfFunds2024/styles/styles';
+@use '@src/components/UseOfFunds/styles/swatches/skin_minerva' as uof-minerva;
+@use '@src/components/UseOfFunds/styles/styles';
 @use '@src/themes/Yperala/defaults';
 @use 'Banner';
 @use 'MiniBanner';
