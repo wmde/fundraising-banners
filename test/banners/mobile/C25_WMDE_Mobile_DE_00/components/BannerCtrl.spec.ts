@@ -8,7 +8,7 @@ import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds2024';
+import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';

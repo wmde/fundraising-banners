@@ -12,7 +12,7 @@ import {
 	mobileUseOfFundsFeatures,
 	useOfFundsScrollFeatures,
 	useOfFundsTrackingFeatures
-} from '@test/features/UseOfFunds2024';
+} from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
