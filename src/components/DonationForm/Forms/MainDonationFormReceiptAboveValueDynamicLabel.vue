@@ -71,7 +71,7 @@
 
 		<div class="wmde-banner-form-button-container">
 			<slot name="button">
-				<MainDonationFormButton :payment-labels-below="showReceiptCheckboxBelow"/>
+				<MainDonationFormButton :payment-labels-below-cents="showReceiptCheckboxBelowCents"/>
 			</slot>
 			<button v-if="!isFormValid && showErrorScrollLink" class="wmde-banner-form-button-error">
 				{{ $translate( 'global-error' ) }}
@@ -109,7 +109,7 @@ import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
 interface Props {
-	showReceiptCheckboxBelow: number;
+	showReceiptCheckboxBelowCents: number;
 	showErrorScrollLink?: boolean;
 	customAmountPlaceholderKey?: string;
 }
@@ -132,7 +132,7 @@ const showReceiptCheckbox = computed<boolean>( () => {
 		return false;
 	}
 
-	if ( numericAmount.value >= props.showReceiptCheckboxBelow ) {
+	if ( amountInCents.value >= props.showReceiptCheckboxBelowCents ) {
 		return false;
 	}
 
@@ -150,7 +150,7 @@ const validate = (): void => {
 
 const {
 	interval, intervalValidity, disabledIntervals,
-	selectedAmount, customAmount, numericAmount, amountValidity,
+	selectedAmount, customAmount, amountInCents, amountValidity,
 	paymentMethod, paymentMethodValidity, disabledPaymentMethods,
 	addressType, receipt
 } = formModel;
@@ -161,11 +161,11 @@ const clearSelectedAmount = (): void => {
 
 const formatCustomAmount = (): void => {
 	if ( customAmount.value !== '' ) {
-		customAmount.value = currencyFormatter.customAmountInput( numericAmount.value );
+		customAmount.value = currencyFormatter.customAmountInputFromCents( amountInCents.value );
 	}
 };
 
-watch( [ interval, paymentMethod, numericAmount ], () => {
+watch( [ interval, paymentMethod, amountInCents ], () => {
 	if ( !showReceiptCheckbox.value ) {
 		receipt.value = false;
 	}

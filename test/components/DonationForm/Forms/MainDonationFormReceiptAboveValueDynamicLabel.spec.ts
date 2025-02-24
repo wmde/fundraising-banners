@@ -39,7 +39,7 @@ describe( 'MainDonationFormReceiptAboveValueDynamicLabel.vue', () => {
 		return mount( DonationForm, {
 			props: {
 				showErrorScrollLink,
-				showReceiptCheckboxBelow: 10
+				showReceiptCheckboxBelowCents: 10_00
 			},
 			global: {
 				mocks: {
@@ -125,7 +125,7 @@ describe( 'MainDonationFormReceiptAboveValueDynamicLabel.vue', () => {
 		const wrapper = mount( DonationForm, {
 			props: {
 				showErrorScrollLink: false,
-				showReceiptCheckboxBelow: 10
+				showReceiptCheckboxBelowCents: 10_00
 			},
 			slots: {
 				'label-payment-ppl': `<template #label-payment-ppl><span class="custom-label-paypal"></span></template>`,

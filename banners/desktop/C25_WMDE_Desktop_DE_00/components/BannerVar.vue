@@ -40,7 +40,7 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" :show-receipt-checkbox-below="minimumAmount" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" :show-receipt-checkbox-below-cents="minimumAmountInCents" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -120,7 +120,7 @@ import BannerTitle from '../content/BannerTitle.vue';
 import { useFormActionWithReceipt } from '@src/components/composables/useFormActionWithReceipt';
 import { FormActionCollection } from '@src/domain/FormActions';
 
-const minimumAmount = 10;
+const minimumAmountInCents = 1000;
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -153,7 +153,7 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
-const { formAction } = useFormActionWithReceipt( inject<FormActionCollection>( 'formActions' ), minimumAmount );
+const { formAction } = useFormActionWithReceipt( inject<FormActionCollection>( 'formActions' ), minimumAmountInCents );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );

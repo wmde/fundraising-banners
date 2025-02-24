@@ -11,9 +11,14 @@ export interface Currency {
 	millions( amount: number ): string;
 
 	/**
-     * Format an amount for displaying as a label or inline in text
+     * Format an amount (float) for displaying as a label or inline in text
      */
 	euroAmount( amount: number ): string;
+
+	/**
+	 * Format an amount (in cents) for displaying as a label or inline in text
+	 */
+	euroAmountFromCents( amountInCents: number ): string;
 
 	/**
      * Full amount, followed by 'Euro' word
@@ -22,7 +27,12 @@ export interface Currency {
 	euroAmountWithThousandSeparator( amount: number ): string;
 
 	/**
-     * Format an amount while editing it in the custom amount input field
+     * Format an amount (float in Euros) while editing it in the custom amount input field
      */
-	customAmountInput( amount: number ): string;
+	customAmountInput( amountInEuros: number ): string;
+
+	/**
+	 * Format an amount (in cents) while editing it in the custom amount input field
+	 */
+	customAmountInputFromCents( amountInCents: number ): string;
 }

@@ -25,7 +25,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue', () => {
 
 		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
-				paymentLabelsBelow: 10
+				paymentLabelsBelowCents: 10_00
 			},
 			global: {
 				provide: {
@@ -49,7 +49,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue', () => {
 
 		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
-				paymentLabelsBelow: 10
+				paymentLabelsBelowCents: 10_00
 			},
 			global: {
 				provide: {
@@ -74,7 +74,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue', () => {
 
 		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
-				paymentLabelsBelow: 10
+				paymentLabelsBelowCents: 10_00
 			},
 			global: {
 				provide: {
@@ -94,7 +94,7 @@ describe( 'MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue', () => {
 
 		const wrapper = shallowMount( MainDonationFormPaymentsAndReceiptButtonDynamicLabel, {
 			props: {
-				paymentLabelsBelow: 10
+				paymentLabelsBelowCents: 10_00
 			},
 			global: {
 				provide: {

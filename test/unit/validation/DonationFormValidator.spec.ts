@@ -18,14 +18,14 @@ describe( 'DonationFormValidator', () => {
 		[ '', '0.99', AmountValidity.TooLow ],
 		[ '', '1', AmountValidity.Valid ],
 		[ '100', '', AmountValidity.Valid ],
-		[ '', '99999.99', AmountValidity.Valid ],
-		[ '', '100000', AmountValidity.TooHigh ]
+		[ '', '99_999.99', AmountValidity.Valid ],
+		[ '', '100_000', AmountValidity.TooHigh ]
 	] )( 'sets amount validity during validation', (
-		amountInputInEuros: string,
+		selectedAmountInputInEuros: string,
 		customAmountInputInEuros: string,
 		expectedAmountValidity: AmountValidity
 	) => {
-		model.selectedAmount.value = amountInputInEuros;
+		model.selectedAmount.value = selectedAmountInputInEuros;
 		model.customAmount.value = customAmountInputInEuros;
 
 		( new DonationFormValidator( model ) ).validate();

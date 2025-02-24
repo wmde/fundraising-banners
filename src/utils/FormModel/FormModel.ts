@@ -18,12 +18,12 @@ export interface FormModel {
 	customAmount: Ref<string>;
 
 	/**
-	 * Parsed amount from either selected amount or custom amount, as a floating point number representing Euros and cents.
+	 * Parsed amount from either selected amount or custom amount, as an integer representing cents.
 	 * Our watchers make sure that only one of them is set.
 	 * German-formatted amounts will be converted,
 	 * non-numeric chars will be filtered for maximum resilience (@see parseFloatFromFormattedString)
 	 */
-	numericAmount: ComputedRef<number>;
+	amountInCents: ComputedRef<number>;
 	amountValidity: Ref<AmountValidity>;
 	paymentMethod: Ref<string>;
 	paymentMethodValidity: Ref<Validity>;

@@ -21,8 +21,18 @@ export class CurrencyEn implements Currency {
 		return this._euroAmountFormatter( amount ).replace( '.00', '' );
 	}
 
-	public customAmountInput( amount: number ): string {
-		return this._customAmountInputFormatter( amount );
+	public euroAmountFromCents( amountInCents: number ): string {
+		const floatValue = Math.trunc( amountInCents ) / 100;
+		return this.euroAmount( floatValue );
+	}
+
+	public customAmountInput( amountInEuros: number ): string {
+		return this._customAmountInputFormatter( amountInEuros );
+	}
+
+	public customAmountInputFromCents( amountInCents: number ): string {
+		const floatValue = Math.trunc( amountInCents ) / 100;
+		return this._customAmountInputFormatter( floatValue );
 	}
 
 	public millions( amount: number ): string {
