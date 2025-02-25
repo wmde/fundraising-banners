@@ -1,0 +1,39 @@
+@use 'variables/breakpoints';
+
+.wmde-fbb {
+	.wmde-banner-close {
+		height: 16px;
+		width: 16px;
+		top: 8px;
+		right: 8px;
+
+		position: absolute;
+		z-index: 2;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		background: none;
+
+		@include breakpoints.small-up {
+			right: 12px;
+			top: 12px;
+			width: 30px;
+			height: 30px;
+		}
+
+		path {
+			transition: fill 500ms;
+		}
+
+		&:hover,
+		&:focus {
+			cursor: pointer;
+			path {
+				fill: var( --button-close-fill );
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+$small: 800px !default;
+
+/*
+MIXIN USAGE:
+
+.my-selector {
+	@include breakpoints.small-up {
+		// Stuff that happens when bigger than $small
+	}
+}
+
+*/
+
+@mixin small-up {
+	@media ( min-width: $small ) {
+		@content;
+	}
+}

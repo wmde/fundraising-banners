@@ -53,7 +53,5 @@
 );
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use 'FallbackBanner';
-@use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
-@use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
-@use 'src/themes/Fijitiv/FallbackBanner/SmallFooter';
+@use 'src/components/FallbackBanner/styles/swatches/skin_vector-2022' as fbb-default;
+@use 'src/components/FallbackBanner/styles/styles' as fbb-styles;

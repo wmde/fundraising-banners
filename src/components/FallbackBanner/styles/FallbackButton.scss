@@ -1,6 +1,6 @@
 @use 'src/themes/Treedip/variables/globals';
 
-.wmde-banner-fallback {
+.wmde-fbb {
 	&-button {
 		width: 300px;
 		background: var( --fallback-button-background );
@@ -20,7 +20,7 @@
 	}
 
 	&-small {
-		.wmde-banner-fallback-button {
+		.wmde-fbb-button {
 			margin-bottom: 8px;
 		}
 	}
