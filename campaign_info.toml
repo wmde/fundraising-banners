@@ -194,3 +194,32 @@ tracking = "org-mob_en00-250114-var"
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
 orientation = [ "portrait", "landscape" ]
 
+
+
+[fallback]
+name = "Fallback Banner"
+icon = "desktop"
+campaign = "C25_WMDE_Fallback_00"
+description = "Based on the fallback banner in the 24 campaign"
+campaign_tracking = "fbb00-ba-250225"
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
+preview_link_offline = ""
+preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
+wrapper_template = "wikipedia_org"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
+
+[fallback.banners.ctrl]
+filename = "./banners/fallback/C25_WMDE_Fallback_00/banner_ctrl.ts"
+pagename = "B25_WMDE_Fallback_00_ctrl"
+tracking = "org-fbb00-250225-ctrl"
+
+[fallback.banners.var]
+filename = "./banners/fallback/C25_WMDE_Fallback_00/banner_ctrl.ts"
+pagename = "B25_WMDE_Fallback_00_var"
+tracking = "org-fbb00-250225-ctrl"
+
+[fallback.test_matrix]
+platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
+resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
+

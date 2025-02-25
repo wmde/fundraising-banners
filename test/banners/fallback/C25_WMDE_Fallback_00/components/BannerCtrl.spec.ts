@@ -1,6 +1,6 @@
 import { describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import FallbackBanner from '@banners/english/C25_WMDE_Desktop_EN_00/components/FallbackBanner.vue';
+import BannerCtrl from '@banners/fallback/C25_WMDE_Fallback_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
@@ -13,10 +13,10 @@ import { Timer } from '@src/utils/Timer';
 
 const translator = ( key: string ): string => key;
 
-describe( 'FallbackBanner.vue', () => {
+describe( 'BannerCtrl.vue', () => {
 	const getWrapperAtWidth = ( width: number, dynamicContent: DynamicContent = null, tracker: Tracker = null, timer: Timer = null ): VueWrapper<any> => {
 		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: width } );
-		return mount( FallbackBanner, {
+		return mount( BannerCtrl, {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,

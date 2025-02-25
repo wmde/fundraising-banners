@@ -23,15 +23,15 @@ HTMLDialogElement.prototype.close = () => {};
 const showsTheSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
 
-	expect( wrapper.find( '.wmde-banner-fallback-small' ).exists() ).toBeTruthy();
-	expect( wrapper.find( '.wmde-banner-fallback-large' ).exists() ).toBeFalsy();
+	expect( wrapper.find( '.wmde-fbb-small' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.wmde-fbb-large' ).exists() ).toBeFalsy();
 };
 
 const showsTheLargeBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 800 );
 
-	expect( wrapper.find( '.wmde-banner-fallback-small' ).exists() ).toBeFalsy();
-	expect( wrapper.find( '.wmde-banner-fallback-large' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.wmde-fbb-small' ).exists() ).toBeFalsy();
+	expect( wrapper.find( '.wmde-fbb-large' ).exists() ).toBeTruthy();
 };
 
 const emitsTheBannerCloseEvent = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
@@ -54,7 +54,7 @@ const playsTheSlideshowWhenBecomesVisible = async ( getWrapperAtWidth: ( width: 
 const showsUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
 
-	await wrapper.find( '.wmde-banner-fallback-small .wmde-banner-fallback-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-small .wmde-fbb-usage-link' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'shown' ).length ).toBe( 1 );
 };
@@ -62,7 +62,7 @@ const showsUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: numbe
 const hidesUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 799 );
 
-	await wrapper.find( '.wmde-banner-fallback-small .wmde-banner-fallback-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-small .wmde-fbb-usage-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'hide' ).length ).toBe( 1 );
@@ -71,7 +71,7 @@ const hidesUseOfFundsFromSmallBanner = async ( getWrapperAtWidth: ( width: numbe
 const showsUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 800 );
 
-	await wrapper.find( '.wmde-banner-fallback-large .wmde-banner-fallback-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-large .wmde-fbb-usage-link' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'shown' ).length ).toBe( 1 );
 };
@@ -79,7 +79,7 @@ const showsUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: numbe
 const hidesUseOfFundsFromLargeBanner = async ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapperAtWidth( 800 );
 
-	await wrapper.find( '.wmde-banner-fallback-large .wmde-banner-fallback-usage-link' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-large .wmde-fbb-usage-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'hide' ).length ).toBe( 1 );
@@ -107,18 +107,18 @@ const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: (
 	const timerSpy = new TimerSpy();
 	const wrapper = getWrapperAtWidth( 800, localDynamicContent, null, timerSpy );
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Date' );
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Time' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Initial Date' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Initial Time' );
 
 	await timerSpy.advanceInterval();
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Date' );
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Time' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Second Date' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Second Time' );
 
 	await timerSpy.advanceInterval();
 
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Date' );
-	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Time' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Third Date' );
+	expect( wrapper.find( '.wmde-fbb-message' ).text() ).toContain( 'Third Time' );
 };
 
 const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
@@ -127,7 +127,7 @@ const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	const trackerSpy = new TrackerSpy();
 	const wrapper = getWrapperAtWidth( 800, null, trackerSpy );
 
-	await wrapper.find( '.wmde-banner-fallback-large .wmde-banner-fallback-button' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-large .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
 	expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );
@@ -139,7 +139,7 @@ const submitsFromSmallBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	const trackerSpy = new TrackerSpy();
 	const wrapper = getWrapperAtWidth( 799, null, trackerSpy );
 
-	await wrapper.find( '.wmde-banner-fallback-small .wmde-banner-fallback-button' ).trigger( 'click' );
+	await wrapper.find( '.wmde-fbb-small .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
 	expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );

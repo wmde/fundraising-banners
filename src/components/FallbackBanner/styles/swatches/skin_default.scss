@@ -1,0 +1,5 @@
+@use 'color_light';
+
+.wmde-fbb {
+	@include color_light.swatch;
+}

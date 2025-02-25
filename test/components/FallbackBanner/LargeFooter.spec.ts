@@ -16,7 +16,7 @@ describe( 'LargeFooter.vue', () => {
 			}
 		} );
 
-		await wrapper.find( '.wmde-banner-fallback-usage-link' ).trigger( 'click' );
+		await wrapper.find( '.wmde-fbb-usage-link' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'use-of-funds-button-clicked' ).length ).toStrictEqual( 1 );
 	} );
@@ -33,7 +33,7 @@ describe( 'LargeFooter.vue', () => {
 			}
 		} );
 
-		await wrapper.find( '.wmde-banner-fallback-button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-fbb-button' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'submit-button-clicked' ).length ).toStrictEqual( 1 );
 	} );

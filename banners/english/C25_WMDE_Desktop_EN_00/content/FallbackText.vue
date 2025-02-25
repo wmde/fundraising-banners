@@ -1,6 +1,6 @@
 <template>
-	<div class="wmde-banner-message">
-		<div>
+	<div class="wmde-fbb-message">
+		<div class="wmde-fbb-message-content">
 			<p>
 				<InfoIcon fill="#990a00"/> <strong>Please don't ignore this 1-minute read</strong>
 			</p>

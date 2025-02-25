@@ -1,5 +1,5 @@
 <template>
-	<button class="wmde-banner-fallback-button" @click.prevent="$emit( 'button-clicked' )">
+	<button class="wmde-fbb-button" @click.prevent="$emit( 'button-clicked' )">
 		{{ $translate( 'fallback-banner-button' ) }}
 	</button>
 </template>

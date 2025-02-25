@@ -1,0 +1,46 @@
+$white: #ffffff;
+$black: #000000;
+
+$grey200: #cccccc;
+$grey400: #808080;
+$grey450: #747474;
+$grey700: #202122;
+$grey800: #1f1f1f;
+
+$red600: #e60f00;
+
+$blue600: #547fd5;
+$blue700: #436fc7;
+
+@mixin swatch() {
+	--fallback-background: #{$grey800};
+	--fallback-border: #{$red600};
+	--fallback-color: #{$white};
+	--fallback-box-shadow: none;
+
+	--button-close-fill: #{$grey450};
+
+	--info-icon-background: #{$red600};
+	--info-icon-color: #{$white};
+
+	--fallback-uof-link-color: #{$grey200};
+	--fallback-uof-link-color-hover: #{$white};
+
+	--fallback-message-color: #{$white};
+	--fallback-message-background: #{$grey800};
+	--fallback-message-border: #{$red600};
+
+	--slider-chevron: #{$grey400};
+
+	--fallback-button-background: #{$blue700};
+	--fallback-button-background-hover: #{$blue600};
+	--fallback-button-color: #{$white};
+
+	--fallback-progressbar-background: #{$white};
+	--fallback-progressbar-fill: #{$red600};
+	--fallback-progressbar-color: #{$white};
+
+	--input-selection-color: #{$black};
+	--input-selection-selected-background: #{$red600};
+	--input-selection-selected-color: #{$white};
+}
