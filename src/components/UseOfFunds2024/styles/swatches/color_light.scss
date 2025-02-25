@@ -4,6 +4,7 @@ $white: #ffffff;
 $black: #000000;
 
 $gray100: #f5f5f5;
+$gray200: #cecece;
 $gray400: #979797;
 
 $blue500: #3366cc;
@@ -30,7 +31,7 @@ $blue500-hover: color.adjust( $blue500, $lightness: -5% );
 	--benefits-list-icon: #{$black};
 	--benefits-background: #{$gray100};
 
-	--budget-line-background: #cecece;
+	--budget-line-background: #{$gray200};
 	--budget-line-background-wikipedia: #{$blue500};
 
 	--call-to-action-color: #{$white};

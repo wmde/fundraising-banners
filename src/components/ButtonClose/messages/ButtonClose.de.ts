@@ -1,7 +1,7 @@
 import { TranslationMessages } from '@src/Translator';
 
 const translations: TranslationMessages = {
-	'close': 'Schließen Sie'
+	'close': 'Schließen'
 };
 
 export default translations;

@@ -1,6 +1,6 @@
 <template>
 	<div class="use-of-funds">
-		<h2 class="use-of-funds-heading">{{ content.title }}</h2>
+		<h2 class="use-of-funds-heading" id="use-of-funds-heading">{{ content.title }}</h2>
 		<p class="use-of-funds-summary-text">{{ content.summary }}</p>
 
 		<div class="use-of-funds-usage">
