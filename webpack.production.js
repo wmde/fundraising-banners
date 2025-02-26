@@ -8,6 +8,8 @@ const LoadVueOnWpde = require( './webpack/load_vue_on_wpde' );
 const CampaignConfig = require( './webpack/campaign_config' );
 const path = require( 'path' );
 
+const BannerSizeWarningPlugin = require( './webpack/banner_size_warning_plugin' );
+
 function readWrapperTemplate( name ) {
 	// eslint-disable-next-line security/detect-non-literal-fs-filename
 	return fs.readFileSync( `./webpack/wikitext_templates/${name}.hbs`, 'utf8' );
@@ -83,7 +85,8 @@ module.exports = ( env ) => {
 							rimraf.sync( './dist/*.LICENSE.txt' );
 						} );
 					}
-				} )()
+				} )(),
+				new BannerSizeWarningPlugin( { limit: 250 * 1024 } ) // compiled banner size (in bytes)
 			],
 			externals: [
 				/**
