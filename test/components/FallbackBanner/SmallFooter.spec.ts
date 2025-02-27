@@ -16,7 +16,7 @@ describe( 'SmallFooter.vue', () => {
 			}
 		} );
 
-		await wrapper.find( '.wmde-banner-fallback-usage-link' ).trigger( 'click' );
+		await wrapper.find( '.wmde-fbb-usage-link' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'use-of-funds-button-clicked' ).length ).toStrictEqual( 1 );
 	} );
