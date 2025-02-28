@@ -4,8 +4,8 @@
 	$soft-close: true
 );
 @use 'src/components/BannerConductor/banner-transition';
-@use 'src/components/UseOfFunds2024/styles/swatches/skin_default' as uof-default;
-@use 'src/components/UseOfFunds2024/styles/styles';
+@use '../../../../src/components/UseOfFunds/styles/swatches/skin_default' as uof-default;
+@use '../../../../src/components/UseOfFunds/styles/styles';
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (

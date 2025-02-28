@@ -18,7 +18,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import { Locales } from '@src/domain/Locales';
 import messages from './messages';
-import { LocaleFactoryEn } from '@src/utils/LocaleFactory2024/LocaleFactoryEn';
+import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import eventMappings from './event_map';

@@ -68,10 +68,10 @@
 <script setup lang="ts">
 
 import { computed } from 'vue';
-import BenefitsIcon from '@src/components/UseOfFunds2024/BenefitsIcon.vue';
-import CallToAction from '@src/components/UseOfFunds2024/CallToAction.vue';
-import ChevronDown from '@src/components/UseOfFunds2024/Icons/ChevronDown.vue';
-import { RevenueComparisonItem, UseOfFundsContent } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
+import BenefitsIcon from '@src/components/UseOfFunds/BenefitsIcon.vue';
+import CallToAction from '@src/components/UseOfFunds/CallToAction.vue';
+import ChevronDown from '@src/components/UseOfFunds/Icons/ChevronDown.vue';
+import { RevenueComparisonItem, UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
 
 interface Props {
 	content: UseOfFundsContent
