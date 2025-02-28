@@ -19,6 +19,11 @@ $blue500-hover: color.adjust( $blue500, $lightness: -5% );
 	--close-button-background: #{$white};
 	--close-icon-stroke: #{$gray400};
 
+	/**
+	These colours are not part of our design system, but are WMDE's branding.
+	They're only being used for the accordion items and the hex codes are inlined
+	so as not to confuse/mix these colours with our own.
+	 */
 	--usage-1-background: #ecfffb;
 	--usage-1-color: #10826b;
 	--usage-2-background: #ffefef;

@@ -102,37 +102,41 @@ $orange700: #b47200;
 		--progress-bar-color: #{$white};
 	}
 
+	/**
+	These colours are not part of our design system, but are based on the payment service's branding.
+	The hex codes are inlined so as not to confuse/mix these colours with our own.
+	 */
 	@if $select-group-image-label {
 		--paypal-primary-fill: #003087;
 		--paypal-secondary-fill: #0070e0;
 		--paypal-overlap-fill: #001c64;
-		--paypal-primary-fill-active: #{$white};
-		--paypal-secondary-fill-active: #{$white};
+		--paypal-primary-fill-active: #ffffff;
+		--paypal-secondary-fill-active: #ffffff;
 		--paypal-overlap-fill-active: transparent;
 
 		--visa-fill: #1434cb;
-		--visa-fill-active: #{$white};
+		--visa-fill-active: #ffffff;
 
 		--mastercard-primary-fill: #eb001b;
 		--mastercard-secondary-fill: #f79e1b;
 		--mastercard-overlap-fill: #ff5a00;
 		--mastercard-text-fill: #2f292b;
-		--mastercard-primary-fill-active: #{$white};
-		--mastercard-secondary-fill-active: #{$white};
+		--mastercard-primary-fill-active: #ffffff;
+		--mastercard-secondary-fill-active: #ffffff;
 		--mastercard-overlap-fill-active: transparent;
-		--mastercard-text-fill-active: #{$white};
+		--mastercard-text-fill-active: #ffffff;
 
 		--sepa-primary-fill: #0366a6;
 		--sepa-secondary-fill: #a2aab5;
-		--sepa-primary-fill-active: #{$white};
-		--sepa-secondary-fill-active: #{$white};
+		--sepa-primary-fill-active: #ffffff;
+		--sepa-secondary-fill-active: #ffffff;
 
-		--bank-transfer-fill: #{$grey800};
-		--bank-transfer-fill-active: #{$white};
+		--bank-transfer-fill: #222222;
+		--bank-transfer-fill-active: #ffffff;
 
 		--amex-primary-fill: #006fcf;
-		--amex-text-fill: #{$white};
-		--amex-primary-fill-active: #{$white};
+		--amex-text-fill: #ffffff;
+		--amex-primary-fill-active: #ffffff;
 		--amex-text-fill-active: transparent;
 	}
 
