@@ -15,8 +15,8 @@
 	$banner-height: 355px,
 	$form-width: 300px
 );
-@use 'src/themes/UseOfFunds/swatches/skin_vector-2022' as uof-vector-2022;
-@use 'src/themes/UseOfFunds/UseOfFunds';
+@use 'src/components/UseOfFunds2024/styles/swatches/skin_vector-2022' as uof-default;
+@use 'src/components/UseOfFunds2024/styles/styles';
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose' with (
 	$padding: 4px,

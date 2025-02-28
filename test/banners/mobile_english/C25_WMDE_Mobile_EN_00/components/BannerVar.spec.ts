@@ -3,12 +3,12 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/mobile_english/C25_WMDE_Mobile_EN_00/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { useOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures, useOfFundsTrackingFeatures } from '@test/features/UseOfFunds2024';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -134,25 +134,37 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectShowsUseOfFundsOnMiniBanner' ],
+			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
+			[ 'expectHidesUseOfFundsOnMiniBanner' ],
+			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
+			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
+			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
+			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToLinkWhenCloseIsClicked' ]
+			[ 'expectScrollsToFormWhenClosesToFullPage' ],
+			[ 'expectDoesNotScrollToFormWhenClosesToMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
 		} );
 
-		it( 'Shows the use of funds from header link', async () => {
+		test.each( [
+			[ 'expectClickingUoFLinkOnMiniBannerTracksEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await useOfFundsTrackingFeatures[ testName ]( getWrapper(), tracker );
+		} );
+
+		it( 'Shows the use of funds from header link in full page banner', async () => {
 			wrapper = getWrapper();
 
+			await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 			await wrapper.find( '.wmde-banner-full .wmde-banner-headline' ).trigger( 'click' );
 
-			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
 			expect( tracker.trackEvent ).toBeCalledWith( new UseOfFundsShownEvent( 'FullPageBanner' ) );
 		} );
 	} );
@@ -166,15 +178,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
-		} );
-
-		it( 'Shows the use of funds from header link', async () => {
-			wrapper = getWrapper();
-
-			await wrapper.find( '.wmde-banner-mini .wmde-banner-headline' ).trigger( 'click' );
-
-			expect( wrapper.find( '.banner-modal' ).classes() ).toContain( 'is-visible' );
-			expect( tracker.trackEvent ).toBeCalledWith( new UseOfFundsShownEvent( 'MiniBanner' ) );
 		} );
 	} );
 

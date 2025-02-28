@@ -74,22 +74,19 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="onHideFundsModal"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@call-to-action="onHideFundsModal"
+		/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -108,7 +105,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';

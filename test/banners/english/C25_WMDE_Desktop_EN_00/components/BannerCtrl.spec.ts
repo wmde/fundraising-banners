@@ -3,10 +3,10 @@ import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/english/C25_WMDE_Desktop_EN_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { useOfFundsContent } from '@test/banners/useOfFundsContent';
+import { useOfFundsContent } from '@test/banners/useOfFundsContent2024';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
-import { useOfFundsFeatures } from '@test/features/UseOfFunds';
+import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds2024';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
@@ -128,9 +128,11 @@ describe( 'BannerCtrl.vue', () => {
 	describe( 'Use of Funds', () => {
 		test.each( [
 			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
+			[ 'expectHidesUseOfFunds' ],
+			[ 'expectEmitsModalOpenedEvent' ],
+			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsFeatures[ testName ]( getWrapper() );
+			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

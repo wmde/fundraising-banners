@@ -103,12 +103,8 @@
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
-			@callToAction="onFundsModalCallToAction"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+			@callToAction="onHideFundsModal"
+		/>
 	</div>
 </template>
 
@@ -141,7 +137,6 @@ import {
 	createSubmittableUpgradeToYearly
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
@@ -246,12 +241,6 @@ function onshowFullPageBannerPreselected(): void {
 const onHideFundsModal = (): void => {
 	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
-};
-
-const onFundsModalCallToAction = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
-	isFundsModalVisible.value = false;
-	onshowFullPageBanner();
 };
 
 </script>

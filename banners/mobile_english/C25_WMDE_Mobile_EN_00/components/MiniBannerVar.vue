@@ -7,7 +7,7 @@
 				</button>
 			</div>
 
-			<button @click="$emit( 'showUseOfFunds' )" class="wmde-banner-headline">
+			<button @click="$emit( 'showUseOfFunds' )" class="wmde-banner-headline wmde-banner-mini-uof-link">
 				<span class="wmde-banner-headline-icon"><SimpleInfoIcon/></span> <span class="wmde-banner-headline-link">Why</span> even &euro;10 makes a difference
 			</button>
 

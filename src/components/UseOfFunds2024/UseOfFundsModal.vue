@@ -1,7 +1,8 @@
 <template>
-	<dialog class="wmde-banner-funds-modal" ref="useOfFundsDialogue">
+	<dialog class="wmde-banner-funds-modal" ref="useOfFundsDialogue" aria-labelledby="use-of-funds-heading" tabindex="-1">
 		<div class="wmde-banner-funds-modal-close">
 			<button @click="$emit( 'hide' )">
+				<span class="is-sr-only">{{ $translate( 'close' ) }}</span>
 				<IconClose/>
 			</button>
 		</div>
@@ -32,6 +33,7 @@ const useOfFundsDialogue = ref<HTMLDialogElement>();
 watch( () => props.visible, ( newVisible: boolean ) => {
 	if ( newVisible ) {
 		useOfFundsDialogue.value.showModal();
+		useOfFundsDialogue.value.focus();
 		emit( 'shown' );
 	} else {
 		useOfFundsDialogue.value.close();

@@ -11,7 +11,9 @@
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress><ProgressBar/></template>
+							<template #progress>
+								<ProgressBar/>
+							</template>
 						</BannerSlides>
 					</template>
 
@@ -27,7 +29,9 @@
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
 
-			<template #progress><ProgressBar/></template>
+			<template #progress>
+				<ProgressBar/>
+			</template>
 
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
@@ -61,7 +65,8 @@
 							@previous="previous"
 						>
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+								<ChevronLeftIcon/>
+								{{ $translate( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -105,11 +110,7 @@
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
 			@callToAction="onFundsModalCallToAction"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+		/>
 	</div>
 </template>
 
@@ -135,14 +136,9 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
@@ -246,19 +242,34 @@ function onshowFullPageBannerPreselected(): void {
 }
 
 const onHideFundsModal = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
 };
 
 const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
-	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
 	isFundsModalVisible.value = true;
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalOpened' );
+	}
 };
 
 const onFundsModalCallToAction = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
-	onshowFullPageBanner();
+
+	if ( contentState.value === ContentStates.Mini ) {
+		onshowFullPageBanner();
+	}
+
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 };
 
 </script>

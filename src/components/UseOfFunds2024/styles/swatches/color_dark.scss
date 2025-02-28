@@ -6,35 +6,39 @@ $black: #000000;
 $gray100: #f5f5f5;
 $gray200: #cecece;
 $gray400: #979797;
+$gray500: #555555;
+$gray800: #323232;
 
-$blue500: #3366cc;
+$blue300: #88c7f6;
+$blue300-hover: color.adjust( $blue300, $lightness: 5% );
+$blue500: #2c9bf0;
 $blue500-hover: color.adjust( $blue500, $lightness: -5% );
 
 @mixin swatch() {
-	--background: #{$white};
-	--text-color: #{$black};
-	--link-color: #{$blue500};
-	--link-color-hover: #{$black};
+	--background: #{$gray800};
+	--text-color: #{$white};
+	--link-color: #{$blue300};
+	--link-color-hover: #{$blue300-hover};
 
-	--close-button-background: #{$white};
-	--close-icon-stroke: #{$gray400};
+	--close-button-background: #{$gray800};
+	--close-icon-stroke: #{$white};
 
 	/**
 	These colours are not part of our design system, but are WMDE's branding.
 	They're only being used for the accordion items and the hex codes are inlined
 	so as not to confuse/mix these colours with our own.
 	 */
-	--usage-1-background: #ecfffb;
-	--usage-1-color: #10826b;
-	--usage-2-background: #ffefef;
-	--usage-2-color: #9d0000;
-	--usage-3-background: #d7edff;
-	--usage-3-color: #154985;
-	--usage-4-background: #f3f3f3;
-	--usage-4-color: #555555;
+	--usage-1-background: #10826b;
+	--usage-1-color: #ffffff;
+	--usage-2-background: #9d0000;
+	--usage-2-color: #ffffff;
+	--usage-3-background: #154985;
+	--usage-3-color: #ffffff;
+	--usage-4-background: #555555;
+	--usage-4-color: #ffffff;
 
-	--benefits-list-icon: #{$black};
-	--benefits-background: #{$gray100};
+	--benefits-list-icon: #{$white};
+	--benefits-background: #{$gray500};
 
 	--budget-line-background: #{$gray200};
 	--budget-line-background-wikipedia: #{$blue500};

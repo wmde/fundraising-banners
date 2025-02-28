@@ -86,13 +86,10 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
+			:visible="isFundsModalVisible"
+			@hide="isFundsModalVisible = false"
+			@call-to-action="isFundsModalVisible = false"
+		/>
 
 		<SoftClose
 			v-if="contentState === ContentStates.SoftClosing"
@@ -106,9 +103,9 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerText from '../content/BannerText.vue';
@@ -138,7 +135,6 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import BankTransferLogo from '@src/components/PaymentLogos/BankTransferLogo.vue';
 import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',

@@ -72,7 +72,7 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="isFundsModalVisible = true"/>
+				<BannerFooter @showFundsModal="onShowFundsModal"/>
 			</template>
 		</MainBanner>
 
@@ -103,24 +103,20 @@
 
 		<FundsModal
 			:content="useOfFundsContent"
-			:is-funds-modal-visible="isFundsModalVisible"
-			@hideFundsModal="isFundsModalVisible = false"
-		>
-			<template #infographic>
-				<WMDEFundsForwardingDE/>
-			</template>
-		</FundsModal>
-
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@call-to-action="onHideFundsModal"
+		/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { nextTick, ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds2024/UseOfFundsContent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import MainBanner from './MainBanner.vue';
-import FundsModal from '@src/components/UseOfFunds/FundsModal.vue';
+import FundsModal from '@src/components/UseOfFunds2024/UseOfFundsModal.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
@@ -144,7 +140,6 @@ import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import WMDEFundsForwardingDE from '@src/components/UseOfFunds/Infographics/WMDEFundsForwardingDE.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -163,7 +158,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -181,6 +176,16 @@ function onFormInteraction(): void {
 	nextTick( () => {
 		emit( 'bannerContentChanged' );
 	} );
+}
+
+function onShowFundsModal(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
+}
+
+function onHideFundsModal(): void {
+	isFundsModalVisible.value = false;
+	emit( 'modalClosed' );
 }
 
 function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {

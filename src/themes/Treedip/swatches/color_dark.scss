@@ -137,37 +137,43 @@ $blue800: #20303f;
 		--select-group-button-color-checked: #{$white};
 	}
 
+	/**
+	These colours are not part of our design system, but are based on the payment service's branding.
+	The hex codes are inlined so as not to confuse/mix these colours with our own. They're currently
+	all set to white, as on dark mode it's easier to see them that way and the white hex code is used
+	to keep it consistent with the light colour swatch.
+	 */
 	@if $select-group-image-label {
-		--paypal-primary-fill: #{white};
-		--paypal-secondary-fill: #{white};
+		--paypal-primary-fill: #ffffff;
+		--paypal-secondary-fill: #ffffff;
 		--paypal-overlap-fill: transparent;
-		--paypal-primary-fill-active: #{$white};
-		--paypal-secondary-fill-active: #{$white};
+		--paypal-primary-fill-active: #ffffff;
+		--paypal-secondary-fill-active: #ffffff;
 		--paypal-overlap-fill-active: transparent;
 
-		--visa-fill: #{$white};
-		--visa-fill-active: #{$white};
+		--visa-fill: #ffffff;
+		--visa-fill-active: #ffffff;
 
-		--mastercard-primary-fill: #{$white};
-		--mastercard-secondary-fill: #{$white};
+		--mastercard-primary-fill: #ffffff;
+		--mastercard-secondary-fill: #ffffff;
 		--mastercard-overlap-fill: transparent;
-		--mastercard-text-fill: #{$white};
-		--mastercard-primary-fill-active: #{$white};
-		--mastercard-secondary-fill-active: #{$white};
+		--mastercard-text-fill: #ffffff;
+		--mastercard-primary-fill-active: #ffffff;
+		--mastercard-secondary-fill-active: #ffffff;
 		--mastercard-overlap-fill-active: transparent;
-		--mastercard-text-fill-active: #{$white};
+		--mastercard-text-fill-active: #ffffff;
 
-		--sepa-primary-fill: #{$white};
-		--sepa-secondary-fill: #{$white};
-		--sepa-primary-fill-active: #{$white};
-		--sepa-secondary-fill-active: #{$white};
+		--sepa-primary-fill: #ffffff;
+		--sepa-secondary-fill: #ffffff;
+		--sepa-primary-fill-active: #ffffff;
+		--sepa-secondary-fill-active: #ffffff;
 
-		--bank-transfer-fill: #{$white};
-		--bank-transfer-fill-active: #{$white};
+		--bank-transfer-fill: #ffffff;
+		--bank-transfer-fill-active: #ffffff;
 
-		--amex-primary-fill: #{$white};
+		--amex-primary-fill: #ffffff;
 		--amex-text-fill: transparent;
-		--amex-primary-fill-active: #{$white};
+		--amex-primary-fill-active: #ffffff;
 		--amex-text-fill-active: transparent;
 	}
 

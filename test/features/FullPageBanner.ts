@@ -21,7 +21,7 @@ const expectEmitsModalClosedEvent = async ( wrapper: VueWrapper<any> ): Promise<
 	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-full-close' ).trigger( 'click' );
 
-	expect( wrapper.emitted( 'modalOpened' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'modalClosed' ).length ).toBe( 1 );
 };
 
 export const fullPageBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {

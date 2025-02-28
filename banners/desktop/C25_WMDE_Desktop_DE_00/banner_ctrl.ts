@@ -20,7 +20,7 @@ import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import messages from './messages';
-import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
+import { LocaleFactoryDe } from '@src/utils/LocaleFactory2024/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
@@ -41,8 +41,8 @@ const app = createVueApp( BannerConductor, {
 		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
+	bannerCategory: 'fundraising',
 	bannerProps: {
-		bannerCategory: 'fundraising',
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
 		localCloseTracker: new LocalStorageCloseTracker(),

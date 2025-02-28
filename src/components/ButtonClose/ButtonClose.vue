@@ -1,5 +1,6 @@
 <template>
 	<button class="wmde-banner-close t-close-main-banner" @click.prevent="$emit( 'close' )">
+		<span class="is-sr-only">{{ $translate( 'close' ) }}</span>
 		<slot>
 			<CloseIconDefault/>
 		</slot>
