@@ -51,9 +51,7 @@
 @use 'src/themes/Treedip/Message/Message' with (
 	$font-sizes: ( 1400px: 15px, 1600px: 16px, 1800px: 18px )
 );
-@use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/themes/Treedip/SoftClose/SoftClose';
-@use 'FallbackBanner';
-@use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
-@use 'src/themes/Fijitiv/FallbackBanner/LargeFooter';
-@use 'src/themes/Fijitiv/FallbackBanner/SmallFooter';
+@use 'src/themes/Treedip/Slider/KeenSlider';
+@use 'src/components/FallbackBanner/styles/swatches/skin_vector-2022' as fbb-default;
+@use 'src/components/FallbackBanner/styles/styles' as fbb-styles;

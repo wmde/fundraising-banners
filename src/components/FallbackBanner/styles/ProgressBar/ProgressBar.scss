@@ -1,0 +1,105 @@
+@use '../variables/fonts';
+@use 'transitions';
+
+$progress-bar-height: 30px;
+
+.wmde-fbb {
+	display: flex;
+	flex-direction: column;
+
+	&-progress-bar {
+		position: relative;
+		font-family: fonts.$ui;
+		font-size: 12px;
+		height: $progress-bar-height;
+		line-height: $progress-bar-height;
+		font-weight: bold;
+		margin: 10px 0;
+
+		&-text {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 30px;
+			display: flex;
+			justify-content: space-between;
+
+			&-left {
+				visibility: hidden;
+				color: var( --fallback-progressbar-color );
+				padding-left: 10px;
+			}
+
+			&-right {
+				padding-right: 10px;
+			}
+		}
+
+		&-wrapper {
+			display: flex;
+		}
+
+		&-target {
+			flex: 0 0 auto;
+			display: none;
+			padding-left: 10px;
+		}
+
+		&-fill-wrapper {
+			position: relative;
+			background: var( --fallback-progressbar-background );
+			border: 3px solid var( --fallback-progressbar-fill );
+			height: $progress-bar-height;
+			border-radius: 15px;
+		}
+
+		&-fill {
+			position: absolute;
+			left: 0;
+			height: 100%;
+			width: 0;
+			min-width: 80px;
+			max-width: 100%;
+			background: var( --fallback-progressbar-fill );
+			border-radius: 15px;
+			color: var( --fallback-progressbar-color );
+			text-align: right;
+			padding-right: 16px;
+			line-height: 26px;
+		}
+
+		&--late-progress {
+			.wmde-fbb-progress-bar-text-left {
+				color: var( --fallback-progressbar-color );
+			}
+			.wmde-fbb-progress-bar-text-right {
+				visibility: hidden;
+			}
+			.wmde-fbb-progress-bar-fill {
+				min-width: 100px;
+			}
+			.wmde-fbb-progress-bar-target {
+				flex: 0 0 auto;
+				display: block;
+			}
+		}
+	}
+
+	&-fallback-small {
+		.wmde-fbb-progress-bar {
+			height: 25px;
+			line-height: 25px;
+		}
+
+		.wmde-fbb-progress-bar-text,
+		.wmde-fbb-progress-bar-fill-wrapper {
+			height: 25px;
+		}
+
+		.wmde-fbb-progress-bar-fill {
+			line-height: 19px;
+		}
+	}
+}

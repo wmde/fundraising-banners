@@ -1,0 +1,44 @@
+$white: #ffffff;
+$black: #000000;
+
+$grey400: #808080;
+$grey450: #747474;
+$grey700: #202122;
+
+$red600: #990a00;
+
+$blue600: #4465a7;
+$blue700: #2a4b8d;
+
+@mixin swatch() {
+	--fallback-background: #{$white};
+	--fallback-border: #{$red600};
+	--fallback-color: #{$grey700};
+	--fallback-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+
+	--button-close-fill: #{$grey450};
+
+	--info-icon-background: #{$red600};
+	--info-icon-color: #{$white};
+
+	--fallback-uof-link-color: #{$grey400};
+	--fallback-uof-link-color-hover: #{$black};
+
+	--fallback-message-color: #{$grey700};
+	--fallback-message-background: #{$white};
+	--fallback-message-border: #{$red600};
+
+	--slider-chevron: #{$grey400};
+
+	--fallback-button-background: #{$blue700};
+	--fallback-button-background-hover: #{$blue600};
+	--fallback-button-color: #{$white};
+
+	--fallback-progressbar-background: #{$white};
+	--fallback-progressbar-fill: #{$red600};
+	--fallback-progressbar-color: #{$white};
+
+	--input-selection-color: #{$black};
+	--input-selection-selected-background: #{$red600};
+	--input-selection-selected-color: #{$white};
+}

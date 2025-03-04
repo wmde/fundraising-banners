@@ -39,19 +39,5 @@
 @use 'src/themes/Treedip/Slider/KeenSlider' with (
 	$slider-padding: 0
 );
-
-/**
- * Fallback banner with "Fijitiv" theme
- * All selectors in Fijitiv theme are prefixed with the ".wmde-banner-fallback" class selector,
-  so they override the "default" styles with the same selector
- */
-@use 'FallbackBanner';
-@use 'src/themes/Fijitiv/FallbackBanner/FallbackButton';
-@use 'src/themes/Fijitiv/FallbackBanner/LargeFooter' with (
-	$fallback-large-footer-right-before-border-color: white
-);
-@use 'src/themes/Fijitiv/FallbackBanner/SmallFooter';
-@use 'src/themes/Fijitiv/ProgressBar/ProgressBar' as FallbackProgressBar with (
-	$progress-bar-margin: 0 15px
-);
-@use 'src/themes/Fijitiv/Slider/KeenSlider' as FallbackSlider;
+@use 'src/components/FallbackBanner/styles/swatches/skin_default' as fbb-default;
+@use 'src/components/FallbackBanner/styles/styles' as fbb-styles;
