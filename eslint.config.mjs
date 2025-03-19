@@ -126,6 +126,9 @@ export default [
 				script: { lang: 'ts' },
 				style: { lang: 'scss' },
 			} ],
+
+			// We use mixed handler styles depending on the situation so turn this rule off
+			'vue/v-on-handler-style': 'off',
 		},
 	},
 ];

@@ -5,7 +5,7 @@ export default {
 		vue: pluginVue,
 	},
 	rules: {
-		'vue/component-tags-order': [ 'error', {
+		'vue/block-order': [ 'error', {
 			'order': [ 'template', 'script', 'style' ],
 		} ],
 		'vue/html-indent': [ 'error', 'tab' ],
@@ -23,7 +23,7 @@ export default {
 		'vue/no-deprecated-slot-attribute': 'error',
 		'vue/no-deprecated-slot-scope-attribute': 'error',
 		'vue/no-duplicate-attr-inheritance': 'error',
-		'vue/no-invalid-model-keys': 'error',
+		'vue/valid-model-definition': 'error',
 		'vue/no-multiple-objects-in-class': 'error',
 		'vue/no-reserved-component-names': [ 'error', {
 			'disallowVueBuiltInComponents': true,
@@ -47,7 +47,7 @@ export default {
 		'vue/no-v-text': 'error',
 		'vue/brace-style': [ 'error', '1tbs', { 'allowSingleLine': true } ],
 		'vue/padding-line-between-blocks': [ 'error', 'always' ],
-		'vue/v-on-function-call': 'error',
+		'vue/v-on-handler-style': [ 'error', [ 'method', 'inline-function' ] ],
 		'vue/component-name-in-template-casing': [ 'error', 'PascalCase' ],
 		'vue/no-child-content': 'error',
 		'vue/no-expose-after-await': 'error',
