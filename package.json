@@ -61,7 +61,7 @@
     "eslint": "^9.25.1",
     "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-unicorn": "^59.0.0",
-    "eslint-plugin-vue": "^10.0.1",
+    "eslint-plugin-vue": "^10.1.0",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",
     "jsdom": "^26.1.0",
