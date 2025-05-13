@@ -1,7 +1,7 @@
 $red100: #dbb0ad;
 $red400: #990a00;
 $red500: #6c0000;
-$red-transparent100: rgba( 219, 176, 173, 0.3 );
+$red-transparent100: rgb( 219, 176, 173, 0.3 );
 
 $blue10: #f8f9fa; /* offwhite */
 
@@ -44,7 +44,7 @@ $orange700: #b47200;
 
 	--mini-background: #{$blue10};
 	--mini-border: #{$red400};
-	--mini-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+	--mini-box-shadow: 0 7px 22px 0 rgb( 0, 0, 0, 0.35 );
 
 	--mini-button-color: #{$white};
 	--mini-button-background: #{$orange600};
@@ -60,7 +60,7 @@ $orange700: #b47200;
 
 	--full-background: #{$blue10};
 	--full-border: #{$red400};
-	--full-box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+	--full-box-shadow: 0 7px 22px 0 rgb( 0, 0, 0, 0.35 );
 
 	--full-close-background: #{$blue10};
 
@@ -142,7 +142,7 @@ $orange700: #b47200;
 
 	@if $soft-close {
 		--soft-close-background: #{$white};
-		--soft-close-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		--soft-close-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 		--soft-close-button-background: #{$red400};
 		--soft-close-button-color: #{$white};

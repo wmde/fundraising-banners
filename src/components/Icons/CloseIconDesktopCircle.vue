@@ -2,7 +2,7 @@
 	<svg width="100%" height="100%" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg"
 		style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-501,-373)">
-			<circle id="CloseButton" cx="512" cy="384" r="11" style="fill: rgba( 138, 20, 12, 1 );"/>
+			<circle id="CloseButton" cx="512" cy="384" r="11" style="fill: rgb( 138, 20, 12, 1 );"/>
 			<clipPath id="_clip1CloseButton">
 				<circle id="CloseButton1" cx="512" cy="384" r="11"/>
 			</clipPath>
