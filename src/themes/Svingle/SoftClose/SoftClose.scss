@@ -9,7 +9,7 @@ $background-color: var( --color-primary ) !default;
 
 	&-soft-close {
 		background: var( --soft-close-background );
-		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 		&-columns {
 			padding: 8px;

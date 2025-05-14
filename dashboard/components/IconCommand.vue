@@ -4,7 +4,7 @@
 		<g transform="matrix(1,0,0,1,-841,-68)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Command" transform="matrix(1.10345,0,0,1.10345,137,-518.897)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 52, 52, 52, 1 );"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgb( 52, 52, 52, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>

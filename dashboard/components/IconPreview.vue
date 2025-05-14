@@ -4,7 +4,7 @@
 		<g transform="matrix(1,0,0,1,-605,-72)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Preview" transform="matrix(0.965517,0,0,0.965517,-11,-503.034)">
-					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgba( 120, 23, 191, 1 );"/>
+					<circle cx="652.5" cy="100.5" r="14.5" style="fill: rgb( 120, 23, 191, 1 );"/>
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
@@ -13,7 +13,7 @@
 							<ellipse cx="619" cy="85.5" rx="9" ry="6.5" style="fill: #ffffff;"/>
 						</g>
 						<g transform="matrix(1.03571,0,0,1.03571,10.3981,11.0135)">
-							<ellipse cx="620.005" cy="86.299" rx="2.247" ry="2.172" style="fill: rgba( 118, 185, 72, 1 );"/>
+							<ellipse cx="620.005" cy="86.299" rx="2.247" ry="2.172" style="fill: rgb( 118, 185, 72, 1 );"/>
 						</g>
 						<g id="Preview1" transform="matrix(0.470779,0,0,0.462372,370.032,-1020.29)">
 							<path

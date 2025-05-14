@@ -62,7 +62,7 @@ $pink100: #ff33f1;
 
 	--mini-background: #{$white};
 	--mini-info-background: #{$green800};
-	--mini-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+	--mini-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 	--mini-close-background: #{$grey50};
 
@@ -82,7 +82,7 @@ $pink100: #ff33f1;
 	--full-background: #{$white};
 	--full-info-background: #{$green800};
 	--full-content-below-info-background: #{$green100};
-	--full-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+	--full-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 	--full-cta-background: #{$blue700};
 	--full-cta-color: #{$white};
@@ -162,7 +162,7 @@ $pink100: #ff33f1;
 
 	@if $soft-close {
 		--soft-close-background: #{$white};
-		--soft-close-box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		--soft-close-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 		--soft-close-prompt-color: #{$white};
 		--soft-close-prompt-background: #{$green800};
