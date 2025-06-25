@@ -3,7 +3,6 @@
 $progress-bar: false !default;
 $select-group-image-label: false !default;
 $soft-close: false !default;
-$sms-icon: false !default;
 $upgrade-to-yearly: false !default;
 
 .wmde-banner {
@@ -11,7 +10,6 @@ $upgrade-to-yearly: false !default;
 		$progress-bar,
 		$select-group-image-label,
 		$soft-close,
-		$sms-icon,
 		$upgrade-to-yearly
 	);
 }

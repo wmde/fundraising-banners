@@ -28,7 +28,6 @@
 				<div><PayPalLogo/></div>
 				<div><VisaLogo/></div>
 				<div><MastercardLogo/></div>
-				<div><SmsIcon/></div>
 			</div>
 
 		</div>
@@ -40,7 +39,6 @@
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
 
 defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close' ] );

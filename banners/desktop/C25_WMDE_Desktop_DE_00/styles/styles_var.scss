@@ -23,7 +23,6 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationFormReceipt' with (
 	$padding: 14px 0 0
 );

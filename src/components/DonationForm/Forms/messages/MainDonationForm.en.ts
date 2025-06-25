@@ -11,8 +11,6 @@ const translations: TranslationMessages = {
 	'amount-too-high-message': 'The donation cannot be more than 99999 Euros',
 	'no-payment-type-message': 'How would you like to pay your donation?',
 	'anonymous-BEZ-info-message': 'We need your address for a debit payment.',
-	'sms-info-message': 'Text "WIKI" to 81190. Additional costs for sending text messages may apply.',
-	'sms-payment-message': '€5 by text message',
 	'custom-amount-placeholder': 'Other amount',
 	'custom-amount-placeholder-short': 'other',
 	'submit-label-short': 'Proceed',

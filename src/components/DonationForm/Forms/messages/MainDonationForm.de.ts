@@ -11,8 +11,6 @@ const translations: TranslationMessages = {
 	'amount-too-high-message': 'Es darf nicht mehr als 99999 € sein.',
 	'no-payment-type-message': 'Bitte wählen Sie eine Zahlungsweise aus.',
 	'anonymous-BEZ-info-message': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
-	'sms-info-message': 'SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.',
-	'sms-payment-message': '5 € per SMS',
 	'custom-amount-placeholder': 'Wunschbetrag',
 	'custom-amount-placeholder-short': 'anderer',
 	'submit-label-short': 'Weiter',

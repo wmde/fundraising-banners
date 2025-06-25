@@ -2,7 +2,6 @@
 	$progress-bar: true,
 	$select-group-image-label: true,
 	$soft-close: true,
-	$sms-icon: true,
 	$upgrade-to-yearly: true
 );
 @use '@src/components/BannerConductor/banner-transition';
@@ -19,7 +18,6 @@
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectGroup';
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectGroupImageLabel';
 @use '@src/themes/Yperala/DonationForm/SubComponents/SelectCustomAmount';
-@use '@src/themes/Yperala/DonationForm/SubComponents/SmsBox';
 @use '@src/themes/Yperala/Footer/Footer';
 @use '@src/themes/Yperala/Footer/SelectionInput';
 @use '@src/themes/Yperala/SoftClose/SoftClose';
