@@ -1,0 +1,42 @@
+// This is the file where we import the theme-specific component styles
+@use 'src/themes/Treedip/swatches/skin_default' with (
+	$slider: true,
+	$select-group: true,
+	$upgrade-to-yearly: true,
+	$fallback-banner: true,
+	$double-progress-bar: true,
+	$soft-close: true,
+);
+@use 'src/components/BannerConductor/banner-transition';
+@use '../../../../src/components/UseOfFunds/styles/swatches/skin_default' as uof-default;
+@use 'Banner';
+@use '../../../../src/components/UseOfFunds/styles/styles';
+@use 'MainBanner' with (
+	$banner-height: 357px,
+	$form-width: 300px
+);
+@use 'src/themes/Treedip/defaults';
+@use 'src/themes/Treedip/ButtonClose/ButtonClose';
+@use 'src/themes/Treedip/ProgressBar/DoubleProgressBar';
+@use 'src/themes/Treedip/DonationForm/DonationForm';
+@use 'src/themes/Treedip/DonationForm/MultiStepDonation';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
+@use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+	$font-size: 14px
+);
+@use 'src/themes/Treedip/Footer/FooterAlreadyDonated';
+@use 'src/themes/Treedip/Footer/SelectionInput';
+@use 'src/themes/Treedip/Message/Message'  with (
+	$slider-main-headline-font-size: 25px,
+	$message-header-padding-bottom: 8px,
+	$message-header-small-up-padding-bottom: 8px
+);
+@use 'src/themes/Treedip/SoftClose/SoftClose';
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$slider-padding: 0
+);
+@use 'src/components/FallbackBanner/styles/swatches/skin_default' as fbb-default;
+@use 'src/components/FallbackBanner/styles/styles' as fbb-styles;
