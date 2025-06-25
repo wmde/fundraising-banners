@@ -67,15 +67,15 @@ $brown300: #453217;
 	--input-checkbox-border-checked: #{$white};
 
 	--animated-highlight-color: #{$white};
-	--animated-highlight-gradient: #{$brown300};
 	/* stylelint-disable */
-	/*--animated-highlight-gradient: linear-gradient(
+	// --animated-highlight-gradient1:
+	--animated-highlight-gradient: linear-gradient(
 		270deg,
 		rgba( 255, 255, 255, 0 ) 0%,
 		rgba( 255, 255, 255, 0 ) 50%,
 		rgba( 42, 75, 141 ) 50%,
 		rgba( 42, 75, 141 ) 100%
-	);*/
+	);
 	/* stylelint-enable */
 
 	@if $slider {
@@ -160,8 +160,31 @@ $brown300: #453217;
 		--paypal-secondary-fill-active: #ffffff;
 		--paypal-overlap-fill-active: transparent;
 
+		--paypal-dark-blue: #253b80;
+		--paypal-light-blue: #179bd7;
+		--paypal-overlap-blue: #222d65;
+
 		--visa-fill: #ffffff;
 		--visa-fill-active: #ffffff;
+
+		/*
+		--mastercard-dark-orange: #dd8f8fff;
+		--mastercard-yellow: #f1cb93ff;
+		--mastercard-overlap-orange: #ffa674ff;
+		--mastercard-text: #{$white};
+		--mastercard-background-white: #{$white};
+		*/
+
+		--mastercard-dark-orange: #eb001b;
+		--mastercard-yellow: #f79e1b;
+		--mastercard-overlap-orange: #ff5a00;
+		--mastercard-text: #{$white};
+		--mastercard-background-white: #{$white};
+
+		--bank-transfer-blue: #{$white};
+
+		--direct-debit-card-fill: #{$white};
+		--direct-debit-pen-fill: #{$white};
 
 		--mastercard-primary-fill: #ffffff;
 		--mastercard-secondary-fill: #ffffff;

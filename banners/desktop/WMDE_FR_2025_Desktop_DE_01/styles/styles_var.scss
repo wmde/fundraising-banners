@@ -2,6 +2,9 @@
 @use 'src/themes/Treedip/swatches/skin_vector-2022' with (
 	$slider: true,
 	$select-group: true,
+	$select-group-bubble: true,
+	$select-group-button: true,
+	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 );
@@ -17,8 +20,11 @@
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
 @use 'src/themes/Treedip/DonationForm/DonationForm';
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup' with (
+	$payment-option-width: 25%
+);
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
+@use 'components/SelectGroupImageLabel';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (

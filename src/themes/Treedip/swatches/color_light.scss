@@ -18,7 +18,7 @@ $red600: #990a00;
 $red700: #7d0a00;
 
 $blue100: #dff1ff;
-$blue400: #3366CC;
+$blue400: #3366cc;
 $blue600: #4465a7;
 $blue700: #2a4b8d;
 
@@ -152,6 +152,22 @@ $blue700: #2a4b8d;
 	The hex codes are inlined so as not to confuse/mix these colours with our own.
 	 */
 	@if $select-group-image-label {
+		--paypal-dark-blue: #253b80;
+		--paypal-light-blue: #179bd7;
+		--paypal-overlap-blue: #222d65;
+
+		--mastercard-dark-orange: #eb001b;
+		--mastercard-yellow: #f79e1b;
+		--mastercard-overlap-orange: #ff5a00;
+		--mastercard-text: #{$black};
+		--mastercard-background-white: #{$white};
+		--test: #74ee15;
+
+		--bank-transfer-blue: #005da0;
+
+		--direct-debit-card-fill: #aeb1bc;
+		--direct-debit-pen-fill: #4465a7;
+
 		--paypal-primary-fill: #003087;
 		--paypal-secondary-fill: #0070e0;
 		--paypal-overlap-fill: #001c64;

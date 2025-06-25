@@ -1,4 +1,4 @@
-tart<template>
+<template>
 	<div class="wmde-banner-main">
 		<slot name="close-button"/>
 		<div class="wmde-banner-content">
