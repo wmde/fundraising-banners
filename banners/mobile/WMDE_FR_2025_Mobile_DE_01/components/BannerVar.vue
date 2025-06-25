@@ -116,8 +116,8 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationFormAdaptiveAmounts from '@src/components/DonationForm/Forms/MainDonationFormAdaptiveAmounts.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
