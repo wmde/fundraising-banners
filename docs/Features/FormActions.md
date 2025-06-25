@@ -42,8 +42,8 @@ To choose one action (and potentially changing parameters) means our form action
 - **description:**
   - See [Show Donation Receipt checkbox only below a certain amount threshold with different submit button labels](DonationForms.md)
 - **used in (banner name):**
-  - `C25_WMDE_Desktop_DE_00 VAR` 
-  - `C25_WMDE_Desktop_EN_00 VAR` 
+  - `WMDE_FR_2025_Desktop_DE_00 VAR` 
+  - `WMDE_FR_2025_Desktop_EN_00 VAR` 
 
 ## Creating a new banner test with same banner, but different A/B test behavior in the Fundraising application
 
