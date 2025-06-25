@@ -27,20 +27,15 @@
 				</KeenSlider>
 			</template>
 
-			<template #progress>
-				<DoubleProgressBar/>
-			</template>
-
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
 					:step-controllers="stepControllers"
-					:submit-callback="onSubmit"
-					:form-action-override="formAction"
 					@form-interaction="formInteraction"
+					:submit-callback="onSubmit"
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" :show-receipt-checkbox-below-cents="minimumAmountInCents" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -64,15 +59,6 @@
 
 		</MainBanner>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose( 'SoftClose', CloseChoices.Close )"
-		/>
-
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
@@ -91,7 +77,7 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormReceiptAboveValueDynamicLabel.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -106,21 +92,14 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '../content/BannerTitle.vue';
-import { useFormActionWithReceipt } from '@src/components/composables/useFormActionWithReceipt';
-import { FormActionCollection } from '@src/domain/FormActions';
-
-const minimumAmountInCents = 1000;
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -131,7 +110,6 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -149,8 +127,6 @@ const stepControllers = [
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
 ];
 
-const { formAction } = useFormActionWithReceipt( inject<FormActionCollection>( 'formActions' ), minimumAmountInCents );
-
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
@@ -164,11 +140,7 @@ const onSubmit = (): void => {
 };
 
 function onCloseMain(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	onClose( 'MainBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {

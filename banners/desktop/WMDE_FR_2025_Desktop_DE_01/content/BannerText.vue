@@ -4,8 +4,7 @@
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 				{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
-				{{campaignDaySentence}}
-				<AnimatedText :content="visitorsVsDonorsSentence"/>
+				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
@@ -24,8 +23,6 @@ import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 const {
 	currentDayName,
 	currentDate,
-	campaignDaySentence,
-	visitorsVsDonorsSentence,
 	averageDonation
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 

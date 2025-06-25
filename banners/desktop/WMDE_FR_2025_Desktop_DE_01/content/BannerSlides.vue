@@ -7,8 +7,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			{{campaignDaySentence}}
-			<AnimatedText :content="visitorsVsDonorsSentence"/>
+			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
@@ -40,8 +39,6 @@ defineProps<Props>();
 const {
 	currentDayName,
 	currentDate,
-	campaignDaySentence,
-	visitorsVsDonorsSentence,
 	averageDonation
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 

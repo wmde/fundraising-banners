@@ -17,11 +17,9 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
-import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
@@ -46,7 +44,6 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				remainingImpressions: 10,
 				localCloseTracker: {
 					getItem: () => '',
 					setItem: () => {}
@@ -71,12 +68,6 @@ describe( 'BannerCtrl.vue', () => {
 	};
 
 	describe( 'Main Banner', () => {
-		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerMainFeatures[ testName ]( getWrapper() );
-		} );
-
 		test.each( [
 			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
 		] )( '%s', async ( testName: string ) => {
@@ -131,29 +122,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectShowsCloseIcon' ],
-			[ 'expectCloseIconEmitsCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Soft Close Submit Tracking', () => {
-		test.each( [
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
-			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
