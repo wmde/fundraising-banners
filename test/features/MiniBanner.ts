@@ -1,6 +1,8 @@
 import { VueWrapper } from '@vue/test-utils';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { expect } from 'vitest';
+import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import { CloseChoices } from '@src/domain/CloseChoices';
 
 const expectSlideShowPlaysWhenMiniBannerBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {
 	await wrapper.setProps( { bannerState: BannerStates.Visible } );
@@ -35,10 +37,18 @@ const expectEmitsBannerContentChangedEventWhenCallToActionIsClicked = async ( wr
 	expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
 };
 
+const expectEmitsCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-close' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
+};
+
 export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
 	expectShowsFullPageWhenCallToActionIsClicked,
 	expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked,
-	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked
+	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked,
+	expectEmitsCloseEvent
 };

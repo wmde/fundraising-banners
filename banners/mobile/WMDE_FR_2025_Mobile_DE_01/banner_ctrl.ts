@@ -45,7 +45,6 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) ),
 		localCloseTracker: new LocalStorageCloseTracker()
 	},
 	resizeHandler: new WindowResizeHandler(),

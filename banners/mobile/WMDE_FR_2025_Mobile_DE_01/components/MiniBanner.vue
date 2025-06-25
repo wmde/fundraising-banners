@@ -14,6 +14,14 @@
 			<div class="wmde-banner-mini-slideshow">
 				<slot name="banner-slides"/>
 			</div>
+
+			<button
+				class="wmde-banner-mini-uof-link"
+				@click.prevent="$emit( 'showFundsModal' )"
+				:title="$translate( 'use-of-funds-link-description' )"
+			>
+				<InfoIconStraight/> Warum spenden?
+			</button>
 		</div>
 		<div class="wmde-banner-mini-button-group">
 			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
@@ -30,7 +38,8 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal' ] );
 
 </script>

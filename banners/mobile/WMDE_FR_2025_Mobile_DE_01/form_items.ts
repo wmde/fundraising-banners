@@ -10,13 +10,13 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setIntervals(
 			Intervals.ONCE,
 			Intervals.MONTHLY,
+			Intervals.QUARTERLY,
 			Intervals.YEARLY
 		)
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
 			PaymentMethods.DIRECT_DEBIT,
 			PaymentMethods.BANK_TRANSFER,
-			PaymentMethods.CREDIT_CARD,
-			PaymentMethods.SOFORT
+			PaymentMethods.CREDIT_CARD
 		).getItems();
 }
