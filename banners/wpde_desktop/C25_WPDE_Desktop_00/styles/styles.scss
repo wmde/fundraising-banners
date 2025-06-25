@@ -33,7 +33,6 @@
 	$height: 38px
 );
 @use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
-@use '@src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
 	$padding: 0
 );

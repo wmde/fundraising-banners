@@ -23,7 +23,6 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SmsBox';
 @use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px

@@ -28,7 +28,6 @@ $orange700: #b47200;
 	$progress-bar: false,
 	$select-group-image-label: false,
 	$soft-close: false,
-	$sms-icon: false,
 	$upgrade-to-yearly: false
 ) {
 	--main-color: #{$grey800};
@@ -83,7 +82,6 @@ $orange700: #b47200;
 	--select-group-option-background: #{$grey100};
 	--select-group-option-color: #{$grey800};
 	--select-group-option-color-disabled: #{$grey150};
-	--select-group-sms-notice-color: #{$blue-grey400};
 
 	--select-group-option-background-active: #{$red400};
 	--select-group-option-color-active: #{$white};
@@ -149,11 +147,6 @@ $orange700: #b47200;
 		--soft-close-button-background-hover: #{$red500};
 
 		--soft-close-countdown-fill: #{$red400};
-	}
-
-	@if $sms-icon {
-		--sms-icon-primary-fill: #328be5;
-		--sms-icon-text-fill: #{$white};
 	}
 
 	@if $upgrade-to-yearly {
