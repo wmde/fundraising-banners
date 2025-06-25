@@ -27,10 +27,6 @@
 				</KeenSlider>
 			</template>
 
-			<template #progress>
-				<DoubleProgressBar/>
-			</template>
-
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
 					:step-controllers="stepControllers"
@@ -62,15 +58,6 @@
 			</template>
 
 		</MainBanner>
-
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose( 'SoftClose', CloseChoices.Close )"
-		/>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -105,8 +92,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
@@ -115,7 +100,6 @@ import BannerTitle from '../content/BannerTitle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -126,7 +110,6 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -157,11 +140,7 @@ const onSubmit = (): void => {
 };
 
 function onCloseMain(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	onClose( 'MainBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {

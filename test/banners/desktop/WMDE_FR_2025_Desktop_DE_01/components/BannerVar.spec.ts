@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, test, vi } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/WMDE_FR_2025_Desktop_DE_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -17,11 +17,9 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
-import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
@@ -46,7 +44,6 @@ describe( 'BannerVar.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				remainingImpressions: 10,
 				localCloseTracker: {
 					getItem: () => '',
 					setItem: () => {}
@@ -71,12 +68,6 @@ describe( 'BannerVar.vue', () => {
 	};
 
 	describe( 'Main Banner', () => {
-		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerMainFeatures[ testName ]( getWrapper() );
-		} );
-
 		test.each( [
 			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
 		] )( '%s', async ( testName: string ) => {
@@ -131,77 +122,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
-		} );
-
-		it( 'Set the correct action when amount is above 10', async (): Promise<void> => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
-			await wrapper.find( '.amount-10 input' ).trigger( 'change' );
-			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
-
-			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
-			expect( formActionAttribute ).toContain( 'with-address' );
-			expect( formActionAttribute ).toContain( 'ap=1' );
-		} );
-
-		it( 'Set the correct action when amount is below 10 and receipt is not checked', async (): Promise<void> => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
-			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
-			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
-
-			expect( wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action ).toContain( 'without-address' );
-		} );
-
-		it( 'Set the correct action when amount is below 10 and receipt is checked', async (): Promise<void> => {
-			const wrapper = getWrapper();
-
-			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
-			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
-			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
-			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
-
-			const formActionAttribute = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' ).element.action;
-			expect( formActionAttribute ).toContain( 'with-address' );
-			expect( formActionAttribute ).toContain( 'ap=1' );
-		} );
-
-		it( 'Puts the receipt option into the submit form', async (): Promise<void> => {
-			const wrapper = getWrapper();
-
-			expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-form [name="receipt"]' ).element.value ).toStrictEqual( 'false' );
-
-			await wrapper.find( '.interval-0 input' ).trigger( 'change' );
-			await wrapper.find( '.amount-5 input' ).trigger( 'change' );
-			await wrapper.find( '.payment-ppl input' ).trigger( 'change' );
-			await wrapper.find( '#wmde-banner-form-donation-receipt' ).trigger( 'click' );
-
-			expect( wrapper.find<HTMLInputElement>( '.wmde-banner-submit-form [name="receipt"]' ).element.value ).toStrictEqual( 'true' );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectShowsCloseIcon' ],
-			[ 'expectCloseIconEmitsCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Soft Close Submit Tracking', () => {
-		test.each( [
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
-			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 

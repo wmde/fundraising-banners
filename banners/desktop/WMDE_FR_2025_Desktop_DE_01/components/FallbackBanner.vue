@@ -5,7 +5,6 @@
 		</template>
 		<template #message>
 			<FallbackText>
-				<ProgressBar/>
 			</FallbackText>
 		</template>
 	</FallbackBanner>
@@ -16,7 +15,6 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import FallbackBanner from '@src/components/FallbackBanner/FallbackBanner.vue';
-import ProgressBar from '@src/components/FallbackBanner/ProgressBar.vue';
 import FallbackSlides from '../content/FallbackSlides.vue';
 import FallbackText from '../content/FallbackText.vue';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
