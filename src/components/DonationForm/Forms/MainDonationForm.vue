@@ -48,11 +48,6 @@
 				<template #select-group-label="{ label, slotName }: any">
 					<slot :name="'label-' + slotName" :label="label"/>
 				</template>
-				<SmsBox>
-					<template #sms-icon>
-						<slot name="sms-icon"/>
-					</template>
-				</SmsBox>
 			</SelectGroup>
 		</fieldset>
 
@@ -80,7 +75,6 @@ import { inject, ref } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
-import SmsBox from '@src/components/DonationForm/SubComponents/SmsBox.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';

@@ -52,10 +52,6 @@
 								</span>
 							</template>
 
-							<template #sms-icon>
-								<SmsIcon/>
-							</template>
-
 						</MainDonationForm>
 					</template>
 
@@ -138,7 +134,6 @@ import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBa
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import SmsIcon from '@src/components/Icons/SmsIcon.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';

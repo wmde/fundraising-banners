@@ -1,4 +1,4 @@
-import eslintStylistic from '@stylistic/eslint-plugin';
+import stylistic from '@stylistic/eslint-plugin';
 
 /**
  * This is an ESLint flat configuration object to configure the space-heavy formatting rules of the Wikimedia Deutschland FUN team.
@@ -7,7 +7,7 @@ import eslintStylistic from '@stylistic/eslint-plugin';
 export default {
 	name: 'WMDE FUN Coding Style Formatting',
 	plugins: {
-		'@stylistic': eslintStylistic,
+		'@stylistic': stylistic,
 	},
 	rules: {
 		'@stylistic/array-bracket-spacing': [ 'error', 'always' ],
@@ -19,7 +19,7 @@ export default {
 		'@stylistic/computed-property-spacing': [ 'error', 'always' ],
 		'@stylistic/dot-location': [ 'error', 'property' ],
 		'@stylistic/eol-last': 'error',
-		'@stylistic/func-call-spacing': 'error',
+		'@stylistic/function-call-spacing': 'error',
 		'@stylistic/indent': [ 'error', 'tab', { SwitchCase: 1 } ],
 		'@stylistic/keyword-spacing': 'error',
 		'@stylistic/linebreak-style': [ 'error', 'unix' ],
