@@ -7,7 +7,6 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
-import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 import {
 	mobileUseOfFundsFeatures,
 	useOfFundsScrollFeatures,
@@ -21,8 +20,7 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
-import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
-import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
+import { bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
@@ -96,15 +94,6 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Content', () => {
 		test.each( [
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
-		} );
-
-		test.each( [
 			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
 			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
@@ -128,33 +117,6 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseAlreadyDonatedEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Soft Close Submit Tracking', () => {
-		test.each( [
-			[ 'expectStoresMaybeLateCloseChoice' ],
-			[ 'expectStoresCloseCloseChoice' ],
-			[ 'expectStoresAlreadyDonatedCloseChoice' ],
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
-			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
@@ -191,7 +153,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
 			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
-			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
+			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
+			[ 'expectEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );

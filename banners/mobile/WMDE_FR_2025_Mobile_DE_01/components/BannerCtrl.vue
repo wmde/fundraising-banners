@@ -1,17 +1,16 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			@close="onCloseMiniBanner"
+			@close="() => onClose( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
 		>
 			<template #banner-slides>
-				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress><ProgressBar/></template>
-						</BannerSlides>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -19,14 +18,12 @@
 		</MiniBanner>
 
 		<FullPageBanner
-			@showFundsModal="isFundsModalVisible = true"
+			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
 			</template>
-
-			<template #progress><ProgressBar/></template>
 
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
@@ -60,7 +57,8 @@
 							@previous="previous"
 						>
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+								<ChevronLeftIcon/>
+								{{ $translate( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -103,7 +101,7 @@
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
-			@callToAction="onHideFundsModal"
+			@callToAction="onFundsModalCallToAction"
 		/>
 	</div>
 </template>
@@ -130,14 +128,9 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import ProgressBar from '../content/ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
@@ -145,6 +138,7 @@ import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -161,7 +155,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -191,14 +184,6 @@ const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
-
-function onCloseMiniBanner(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
-}
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
@@ -239,8 +224,34 @@ function onshowFullPageBannerPreselected(): void {
 }
 
 const onHideFundsModal = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
+};
+
+const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
+	isFundsModalVisible.value = true;
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalOpened' );
+	}
+};
+
+const onFundsModalCallToAction = (): void => {
+	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		onshowFullPageBanner();
+	}
+
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 };
 
 </script>

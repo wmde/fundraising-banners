@@ -1,5 +1,5 @@
-@use '@src/themes/Modo/variables/globals';
-@use '@src/themes/Modo/variables/breakpoints';
+@use 'src/themes/Modo/variables/globals';
+@use 'src/themes/Modo/variables/breakpoints';
 
 .wmde-banner {
 	&-full {
@@ -56,6 +56,7 @@
 
 		&-content-below-info {
 			background: var( --full-content-below-info-background );
+			color: var( --full-content-below-info-color );
 			border-radius: 16px;
 		}
 

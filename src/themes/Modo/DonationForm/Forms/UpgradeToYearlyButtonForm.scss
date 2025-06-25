@@ -4,6 +4,7 @@
 	}
 
 	.previous {
+		--slider-chevron: var( --upgrade-to-yearly-button-previous-color );
 		display: block;
 		color: var( --upgrade-to-yearly-button-previous-color );
 		margin-bottom: 35px;

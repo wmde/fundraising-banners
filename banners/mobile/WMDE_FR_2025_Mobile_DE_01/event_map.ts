@@ -11,6 +11,7 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -29,5 +30,17 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		}
 	} ],
 	[ BannerSubmitOnReturnEvent.EVENT_NAME,
-		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ]
+		( e: BannerSubmitOnReturnEvent ): WMDELegacyBannerEvent =>
+			new WMDELegacyBannerEvent(
+				e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ),
+				1
+			)
+	],
+	[ UseOfFundsShownEvent.EVENT_NAME,
+		( e: UseOfFundsShownEvent ): WMDELegacyBannerEvent =>
+			new WMDELegacyBannerEvent(
+				e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ),
+				1
+			)
+	]
 ] );
