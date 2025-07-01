@@ -34,7 +34,6 @@ $form-width: 300px !default;
 
 		border: 5px solid var( --message-border );
 		border-radius: 9px;
-		margin-bottom: 10px;
 	}
 
 	&-column-left {
@@ -44,8 +43,6 @@ $form-width: 300px !default;
 		flex: 1 1 auto;
 		overflow-y: hidden;
 		margin-right: 30px;
-		padding: 0 0 10px;
-		background: var( --message-background );
 	}
 
 	&-column-right {
