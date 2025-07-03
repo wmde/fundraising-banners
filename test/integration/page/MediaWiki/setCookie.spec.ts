@@ -17,7 +17,8 @@ describe( 'setCookie', () => {
 			'centralnotice_hide_fundraising=%7B%22v%22%3A1%2C%22created%22%3A872820840%2C%22reason%22%3A%22testReason%22%7D;',
 			'expires=Mon, 08 Sep 1997 02:14:00 GMT;',
 			'path=/;',
-			'SameSite=None;'
+			'SameSite=None;',
+			'Secure;'
 		].join( ' ' ) );
 	} );
 
@@ -36,7 +37,8 @@ describe( 'setCookie', () => {
 			'centralnotice_hide_fundraisingThankyou=%7B%22v%22%3A1%2C%22created%22%3A872820840%2C%22reason%22%3A%22testReason%22%7D;',
 			'expires=Mon, 08 Sep 1997 02:14:00 GMT;',
 			'path=/;',
-			'SameSite=None;'
+			'SameSite=None;',
+			'Secure;'
 		].join( ' ' ) );
 	} );
 } );
