@@ -13,5 +13,5 @@ export function setCookie( reason: string, created: Date, durationInSeconds: num
 	};
 
 	const fullCookieName = COOKIE_NAME + cookieNameSuffix;
-	document.cookie = `${ fullCookieName }=${ encodeURIComponent( JSON.stringify( hideData ) ) }; expires=${ expiryDate.toUTCString() }; path=/; SameSite=None;`;
+	document.cookie = `${ fullCookieName }=${ encodeURIComponent( JSON.stringify( hideData ) ) }; expires=${ expiryDate.toUTCString() }; path=/; SameSite=None; Secure;`;
 }
