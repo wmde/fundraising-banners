@@ -1,6 +1,5 @@
 @use 'variables/fonts';
 @use 'variables/breakpoints';
-@use '../../Slider/KeenSlider';
 
 $font: fonts.$content !default;
 $font-size: 1.3em !default;
@@ -8,19 +7,19 @@ $line-height: 1.5 !default;
 $slider-padding: 0 !default;
 
 .wmde-banner {
-	@include KeenSlider.layout;
+	.wmde-fbb {
+		.wmde-banner-slider-navigation-previous,
+		.wmde-banner-slider-navigation-next {
+			width: 38px;
+		}
 
-	&-slider-navigation-previous,
-	&-slider-navigation-next {
-		width: 38px;
-	}
+		.wmde-banner-slider-navigation-previous {
+			padding: 0 8px 0 16px;
+		}
 
-	&-slider-navigation-previous {
-		padding: 0 8px 0 16px;
-	}
-
-	&-slider-navigation-next {
-		padding: 0 16px 0 8px;
+		.wmde-banner-slider-navigation-next {
+			padding: 0 16px 0 8px;
+		}
 	}
 }
 
