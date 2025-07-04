@@ -16,8 +16,8 @@
 		&-option {
 			font-size: select_group.$radio-font-size;
 			line-height: select_group.$form-radio-height;
-			flex: 0 0 33.3333%;
-			width: 33.3333%;
+			flex: 0 0 50%;
+			width: 50%;
 			padding: 0 4px 8px;
 		}
 
@@ -31,6 +31,7 @@
 			border: 1px solid var( --select-group-option-border );
 			border-radius: 3px;
 			background: var( --select-group-option-background );
+			color: var( --select-group-option-color );
 			height: select_group.$form-radio-height;
 			font-size: 12px;
 		}
@@ -46,7 +47,7 @@
 		&-option:hover .wmde-banner-select-group-label,
 		&-option:focus .wmde-banner-select-group-label {
 			color: var( --select-group-option-color );
-			border-color: var( --select-group-option-border );
+			border-color: var( --select-group-option-border-hover );
 			background: var( --select-group-option-background-hover );
 		}
 
