@@ -1,0 +1,60 @@
+@use 'color_dark';
+@use 'color_light';
+
+$upgrade-to-yearly-button-form: false !default;
+$select-group-image-label: false !default;
+$progress-bar: false !default;
+$double-progress-bar: false !default;
+$soft-close: false !default;
+$subscription-form: false !default;
+$thank-you-box: false !default;
+
+.skin-theme-clientpref-night .wmde-banner {
+	@include color_dark.swatch(
+		$upgrade-to-yearly-button-form,
+		$select-group-image-label,
+		$progress-bar,
+		$double-progress-bar,
+		$soft-close,
+		$subscription-form,
+		$thank-you-box
+	);
+}
+
+.skin-theme-clientpref-day .wmde-banner {
+	@include color_light.swatch(
+		$upgrade-to-yearly-button-form,
+		$select-group-image-label,
+		$progress-bar,
+		$double-progress-bar,
+		$soft-close,
+		$subscription-form,
+		$thank-you-box
+	);
+}
+
+.skin-theme-clientpref-os .wmde-banner {
+	@media ( prefers-color-scheme: dark ) {
+		@include color_dark.swatch(
+			$upgrade-to-yearly-button-form,
+			$select-group-image-label,
+			$progress-bar,
+			$double-progress-bar,
+			$soft-close,
+			$subscription-form,
+			$thank-you-box
+		);
+	}
+
+	@media ( prefers-color-scheme: light ) {
+		@include color_light.swatch(
+			$upgrade-to-yearly-button-form,
+			$select-group-image-label,
+			$progress-bar,
+			$double-progress-bar,
+			$soft-close,
+			$subscription-form,
+			$thank-you-box
+		);
+	}
+}

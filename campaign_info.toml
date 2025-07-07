@@ -35,9 +35,9 @@ resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "C25_WMDE_Mobile_DE_00"
-description = "based on VAR of C24_WMDE_Mobile_DE_12, VAR has auto collapse"
-campaign_tracking = "mob-de-00-ba-250114"
+campaign = "WMDE_FR_2025_Mobile_DE_01"
+description = "based on VAR of C24_WMDE_Mobile_DE_14, VAR has slightly different copy"
+campaign_tracking = "mob-de-01-ba-250703"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
@@ -46,14 +46,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 [mobile.banners.ctrl]
-filename = "./banners/mobile/C25_WMDE_Mobile_DE_00/banner_ctrl.ts"
-pagename = "B25_WMDE_Mobile_DE_00_ctrl"
-tracking = "org-mob00-250114-ctrl"
+filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_01/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Mobile_DE_01_ctrl"
+tracking = "org-mob01-250703-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/C25_WMDE_Mobile_DE_00/banner_var.ts"
-pagename = "B25_WMDE_Mobile_DE_00_var"
-tracking = "org-mob00-250114-var"
+filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_01/banner_var.ts"
+pagename = "WMDE_FR_2025_Mobile_DE_01_var"
+tracking = "org-mob01-250703-var"
 
 [mobile.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
