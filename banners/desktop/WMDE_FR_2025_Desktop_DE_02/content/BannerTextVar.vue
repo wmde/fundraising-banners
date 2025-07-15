@@ -3,13 +3,14 @@
 		<div>
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+				{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu
+				unterstützen. Wikipedia steht für das Internet, das uns versprochen wurde – ein Ort, wo wir Wissen
+				finden, frei von Werbung und den Interessen mächtiger Konzerne.
 				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
-				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-				Vielen Dank!
+				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende beträgt
+				{{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia Ihnen in diesem Jahr Wissen im
+				Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und
+				geben Sie etwas zurück. Vielen Dank!
 			</p>
 		</div>
 	</div>

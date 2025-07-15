@@ -7,14 +7,16 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
+			Wikipedia steht für das Internet, das uns versprochen wurde – ein Ort, wo wir Wissen finden, frei von
+			Werbung und den Interessen mächtiger Konzerne.
 			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
-			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende beträgt
+			{{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia Ihnen in diesem Jahr Wissen
+			im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
