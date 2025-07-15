@@ -35,7 +35,31 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal">
+									<PayPalIcon/><span>Paypal</span>
+								</span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<MasterCardIcon/><span>Kreditkarte</span>
+								</span>
+							</template>
+
+							<template #label-payment-ueb>
+								<span class="wmde-banner-select-group-label with-logos bank-transfer">
+									<BankTransferIcon/><span>Überweisung</span>
+								</span>
+							</template>
+
+							<template #label-payment-bez>
+								<span class="wmde-banner-select-group-label with-logos bank-transfer">
+									<DirectDebitIcon/><span>Lastschrift</span>
+								</span>
+							</template>
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -97,6 +121,10 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '../content/BannerTitle.vue';
+import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
+import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
+import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
+import MasterCardIcon from '@src/components/PaymentLogos/MasterCardIcon.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
