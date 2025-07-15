@@ -16,7 +16,7 @@
 				@click.prevent="onClickAlreadyDonated"
 				:title="$translate( 'already-donated-description' )"
 			>
-				<TickIcon :fill="'#5B5B5B'"/> {{ $translate( 'already-donated-link' ) }}
+				<TickIcon/> {{ $translate( 'already-donated-link' ) }}
 			</a>
 		</div>
 
