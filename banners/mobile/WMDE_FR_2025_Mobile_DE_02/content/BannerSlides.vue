@@ -13,7 +13,7 @@
 		<p>
 			{{ campaignDaySentence }}
 			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Andere, weil Wikipedia in diesen Zeiten wichtiger denn je ist.
 		</p>
 	</KeenSliderSlide>
 
