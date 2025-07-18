@@ -9,7 +9,7 @@
 @use '../../../../src/components/UseOfFunds/styles/styles';
 @use 'src/themes/Modo/defaults';
 @use 'Banner';
-@use 'MiniBanner' with (
+@use 'MiniBanner_var' with (
 	$height: 336px,
 	$height-l-up: 306px
 );
@@ -21,7 +21,7 @@
 @use 'src/themes/Modo/DonationForm/Forms/UpgradeToYearlyButtonForm';
 @use 'src/themes/Modo/DonationForm/SubComponents/SelectGroup';
 @use 'src/themes/Modo/DonationForm/SubComponents/SelectCustomAmount';
-@use 'src/themes/Modo/Slider/Slider';
+@use './Slider';
 @use 'src/themes/Modo/SoftClose/SoftClose';
 @use 'src/themes/Modo/ProgressBar/DoubleProgressBar';
 @use 'src/themes/Modo/Message/Message';

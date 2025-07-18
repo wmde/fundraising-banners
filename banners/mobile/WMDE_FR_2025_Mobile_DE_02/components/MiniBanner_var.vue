@@ -16,6 +16,13 @@
 			</div>
 
 			<button
+				class="wmde-banner-mini-already-donated-button"
+				@click.prevent="$emit( 'alreadyDonatedClicked' )"
+			>
+				{{ $translate( 'mini-banner-already-donated-button' ) }}
+			</button>
+
+			<button
 				class="wmde-banner-mini-uof-link"
 				@click.prevent="$emit( 'showFundsModal' )"
 				:title="$translate( 'use-of-funds-link-description' )"
