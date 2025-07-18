@@ -51,7 +51,8 @@ $pink100: #ff33f1;
 	$double-progress-bar: false,
 	$soft-close: false,
 	$subscription-form: false,
-	$thank-you-box: false
+	$thank-you-box: false,
+	$already-donated: true
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey800};
@@ -122,6 +123,10 @@ $pink100: #ff33f1;
 	--selection-input-selection-background: #{$blue600};
 
 	--animated-highlight-color: #{$white};
+
+	--mini-info-section-color: #{$green800};
+	--mini-info-section-icon-color: #{$white};
+
 	/* stylelint-disable */
 	--animated-highlight-gradient: linear-gradient(
 			270deg,
@@ -197,5 +202,9 @@ $pink100: #ff33f1;
 	@if $thank-you-box {
 		--thank-you-box-background: #{$purple10};
 		--thank-you-box-color: #{$purple100};
+	}
+
+	@if $already-donated {
+		--already-donated-button-color: #{$white};
 	}
 }

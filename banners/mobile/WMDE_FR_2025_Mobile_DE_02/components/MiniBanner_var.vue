@@ -1,5 +1,23 @@
 <template>
 	<div class="wmde-banner-mini">
+
+		<div class="wmde-banner-mini-info-section">
+			<button
+				class="wmde-banner-mini-uof-link"
+				@click.prevent="$emit( 'showFundsModal' )"
+				:title="$translate( 'use-of-funds-link-description' )"
+			>
+				<InfoIconStraight/> Warum spenden?
+			</button>
+
+			<button
+				class="wmde-banner-mini-already-donated-button"
+				@click.prevent="$emit( 'alreadyDonatedClicked' )"
+			>
+				<InfoIconStraight/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+			</button>
+		</div>
+
 		<div class="wmde-banner-mini-info">
 			<button class="wmde-banner-mini-close wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
 				<CloseIconMobile/>
@@ -14,14 +32,6 @@
 			<div class="wmde-banner-mini-slideshow">
 				<slot name="banner-slides"/>
 			</div>
-
-			<button
-				class="wmde-banner-mini-uof-link"
-				@click.prevent="$emit( 'showFundsModal' )"
-				:title="$translate( 'use-of-funds-link-description' )"
-			>
-				<InfoIconStraight/> Warum spenden?
-			</button>
 		</div>
 		<div class="wmde-banner-mini-button-group">
 			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">

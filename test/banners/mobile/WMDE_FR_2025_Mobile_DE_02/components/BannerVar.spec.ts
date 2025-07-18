@@ -154,7 +154,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ],
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
