@@ -51,7 +51,8 @@ $pink100: #ff33f1;
 	$double-progress-bar: false,
 	$soft-close: false,
 	$subscription-form: false,
-	$thank-you-box: false
+	$thank-you-box: false,
+	$already-donated: true
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey800};
@@ -197,5 +198,9 @@ $pink100: #ff33f1;
 	@if $thank-you-box {
 		--thank-you-box-background: #{$purple10};
 		--thank-you-box-color: #{$purple100};
+	}
+
+	@if $already-donated {
+		--already-donated-button-color: #{$white};
 	}
 }

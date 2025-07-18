@@ -35,8 +35,10 @@ $green100: #dcf3ec;
 $green400: #9eeacb;
 $green600: #5bca66;
 $green500: color.adjust( $green600, $lightness: -5% );
+$green600: #1a8559;
 $green700: #1fa86f;
 $green750: #2a9168;
+$green775: #299168;
 $green800: #1d865b;
 $green900: #145a3f;
 
@@ -106,18 +108,18 @@ $pink100: #ff33f1;
 
 	--select-group-option-notice: #{$grey700};
 
-	--select-group-option-border: #{$green750};
-	--select-group-option-background: #{$grey800};
+	--select-group-option-border: #{$green775};
+	--select-group-option-background: #{$green600};
 	--select-group-option-color: #{$white};
 
 	--select-group-option-background-hover: #{$green750};
 	--select-group-option-border-hover: #{$green700};
 
-	--select-group-option-border-active: #{$green700};
-	--select-group-option-background-active: #{$green700};
+	--select-group-option-border-active: #{$blue700};
+	--select-group-option-background-active: #{$blue700};
 
-	--select-group-option-border-checked: #{$green600};
-	--select-group-option-background-checked: #{$green800};
+	--select-group-option-border-checked: #{$blue700};
+	--select-group-option-background-checked: #{$blue700};
 	--select-group-option-color-checked: #{$white};
 
 	--footer-color: #{$white};
@@ -199,7 +201,7 @@ $pink100: #ff33f1;
 	}
 
 	@if $thank-you-box {
-		--thank-you-box-background: #{$purple10};
-		--thank-you-box-color: #{$purple100};
+		--thank-you-box-background: #{$blue700};
+		--thank-you-box-color: #{$white};
 	}
 }
