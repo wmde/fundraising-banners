@@ -60,7 +60,7 @@
     "css-loader": "^7.1.2",
     "eslint": "^9.31.0",
     "eslint-plugin-security": "^3.0.1",
-    "eslint-plugin-unicorn": "^59.0.1",
+    "eslint-plugin-unicorn": "^60.0.0",
     "eslint-plugin-vue": "^10.3.0",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",
