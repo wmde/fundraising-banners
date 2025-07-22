@@ -44,11 +44,19 @@ const expectEmitsCloseEvent = async ( wrapper: VueWrapper<any> ): Promise<any> =
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 };
 
+const expectsEmitsCloseEventOnAlreadyDonated = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-already-donated-button' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonated', CloseChoices.AlreadyDonated ) );
+};
+
 export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
 	expectShowsFullPageWhenCallToActionIsClicked,
 	expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked,
 	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked,
-	expectEmitsCloseEvent
+	expectEmitsCloseEvent,
+	expectsEmitsCloseEventOnAlreadyDonated
 };
