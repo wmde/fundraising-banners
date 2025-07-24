@@ -8,6 +8,7 @@ $select-group: false !default;
 $select-group-bubble: false !default;
 $select-group-button: false !default;
 $select-group-image-label: false !default;
+$select-group-cheering: false !default;
 $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
@@ -22,6 +23,7 @@ $fallback-banner: false !default;
 		$select-group-bubble,
 		$select-group-button,
 		$select-group-image-label,
+		$select-group-cheering,
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
@@ -38,6 +40,7 @@ $fallback-banner: false !default;
 		$select-group-bubble,
 		$select-group-button,
 		$select-group-image-label,
+		$select-group-cheering,
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
@@ -55,6 +58,7 @@ $fallback-banner: false !default;
 			$select-group-bubble,
 			$select-group-button,
 			$select-group-image-label,
+			$select-group-cheering,
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
@@ -71,6 +75,7 @@ $fallback-banner: false !default;
 			$select-group-bubble,
 			$select-group-button,
 			$select-group-image-label,
+			$select-group-cheering,
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,

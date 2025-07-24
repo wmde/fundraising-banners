@@ -101,7 +101,7 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormAmountCheering.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
