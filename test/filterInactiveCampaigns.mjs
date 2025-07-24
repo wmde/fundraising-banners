@@ -8,6 +8,12 @@ function getCampaignNamesAndMappings( campaignConfigPath ) {
 	const config = parseTOML( readFileSync( campaignConfigPath, 'utf-8' ) );
 	return Object.entries( config ).reduce( function ( acc, [ channelName, channelConfig ] ) {
 		acc.activeCampaigns.push( channelConfig.campaign );
+
+		// The tests for channels with feature in their name are grouped in a features folder
+		if ( channelName.includes( 'feature' ) ) {
+			channelName = 'features';
+		}
+
 		acc.campaignsToChannels[ channelConfig.campaign ] = channelName;
 		return acc;
 	}, { activeCampaigns: [], campaignsToChannels: {} } );
