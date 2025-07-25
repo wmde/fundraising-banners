@@ -1,0 +1,45 @@
+@use 'src/themes/Treedip/variables/breakpoints';
+
+.wmde-banner {
+	.select-payment-method {
+		.wmde-banner-select-group-option label {
+			flex-direction: column-reverse;
+			height: auto;
+			padding: 0;
+			align-items: center;
+			input {
+				position: relative;
+				left: 0;
+				top: 0;
+				flex-shrink: 0;
+				flex-grow: 0;
+				margin: 0;
+			}
+		}
+	}
+	&-select-group-label {
+		& span {
+			font-size: smaller;
+		}
+		svg {
+			width: auto;
+			max-height: 28px;
+			padding: 0 5px;
+			flex-shrink: 0;
+		}
+		&.with-logos {
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+			min-height: 55px;
+		}
+
+		.mastercard-logo {
+			transform: scale( 1.5 );
+		}
+
+		.bank-transfer {
+			transform: scale( 1.25 );
+		}
+	}
+}
