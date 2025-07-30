@@ -199,9 +199,9 @@ orientation = [ "portrait", "landscape" ]
 [fallback]
 name = "Fallback Banner"
 icon = "desktop"
-campaign = "C25_WMDE_Fallback_00"
+campaign = "WMDE_FR_2025_Fallback_01"
 description = "Based on the fallback banner in the 24 campaign"
-campaign_tracking = "fbb00-ba-250225"
+campaign_tracking = "fbb01-ba-250225"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -210,14 +210,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
 
 [fallback.banners.ctrl]
-filename = "./banners/fallback/C25_WMDE_Fallback_00/banner_ctrl.ts"
-pagename = "B25_WMDE_Fallback_00_ctrl"
-tracking = "org-fbb00-250225-ctrl"
+filename = "./banners/fallback/WMDE_FR_2025_Fallback_01/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Fallback_01_ctrl"
+tracking = "org-fbb01-250225-ctrl"
 
 [fallback.banners.var]
-filename = "./banners/fallback/C25_WMDE_Fallback_00/banner_ctrl.ts"
-pagename = "B25_WMDE_Fallback_00_var"
-tracking = "org-fbb00-250225-ctrl"
+filename = "./banners/fallback/WMDE_FR_2025_Fallback_01/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Fallback_01_var"
+tracking = "org-fbb01-250225-ctrl"
 
 [fallback.test_matrix]
 platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
