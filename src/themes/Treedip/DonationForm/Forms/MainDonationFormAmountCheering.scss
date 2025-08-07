@@ -1,0 +1,65 @@
+@use '../../variables/globals';
+@use '../../variables/fonts';
+@use 'src/components/DonationForm/Forms/MainDonationForm';
+
+$padding: 0 !default;
+
+.wmde-banner {
+	@include MainDonationForm.layout;
+
+	&-sub-form-donation {
+		padding: $padding;
+
+		.wmde-banner-form-field-group {
+			padding: 0 0 10px;
+
+			&-legend {
+				display: none;
+				visibility: hidden;
+				font-family: fonts.$ui;
+				font-size: 12px;
+				line-height: 13px;
+				color: var( --main-color );
+			}
+		}
+
+		&:has( input[ value='5' ]:checked, input[ value='10' ]:checked, input[ value='20' ]:checked, input[ value='25' ]:checked ) {
+			.wmde-banner-cheering-top {
+				opacity: 1;
+				visibility: visible;
+				height: 24px;
+			}
+		}
+
+		&:has( input[ value='50' ]:checked, input[ value='100' ]:checked, .wmde-banner-select-custom-amount-radio:checked ) {
+			.wmde-banner-cheering-bottom {
+				opacity: 1;
+				visibility: visible;
+				height: 24px;
+			}
+		}
+	}
+
+	&-cheering {
+		background: var( --cheering-background );
+		color: var( --cheering-color );
+		padding: 3px 0;
+		white-space: nowrap;
+		border-radius: 2px;
+		font-style: italic;
+		text-shadow: 1px 1px 1px rgb( 0 0 0 / 20% );
+		text-align: center;
+		visibility: hidden;
+		opacity: 0;
+		height: 0;
+	}
+
+	&-cheering-top,
+	&-cheering-bottom {
+		transition: opacity 150ms ease-out, height 150ms ease-out;
+	}
+
+	&-cheering-bottom {
+		transform: translateY( -8px );
+	}
+}

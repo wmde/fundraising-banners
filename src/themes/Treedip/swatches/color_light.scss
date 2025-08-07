@@ -30,6 +30,7 @@ $blue700: #2a4b8d;
 	$select-group-bubble: false,
 	$select-group-button: false,
 	$select-group-image-label: false,
+	$select-group-cheering: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -60,8 +61,8 @@ $blue700: #2a4b8d;
 
 	--input-checkbox-background: transparent;
 	--input-checkbox-border: #{$grey500};
-	--input-checkbox-background-checked: #{$red600};
-	--input-checkbox-border-checked: #{$red600};
+	--input-checkbox-background-checked: #{$blue400};
+	--input-checkbox-border-checked: #{$blue400};
 
 	--animated-highlight-color: #{$grey700};
 	/* stylelint-disable */
@@ -109,8 +110,8 @@ $blue700: #2a4b8d;
 		--select-group-radio-background: #{$white};
 		--select-group-radio-border: #{$grey200};
 		--select-group-radio-checkmark: #{$white};
-		--select-group-radio-background-checked: #{$red600};
-		--select-group-radio-border-checked: #{$red600};
+		--select-group-radio-background-checked: #{$blue400};
+		--select-group-radio-border-checked: #{$blue400};
 
 		--select-custom-amount-border: #{$grey150};
 		--select-custom-amount-color: #{$grey700};
@@ -119,6 +120,15 @@ $blue700: #2a4b8d;
 		--select-custom-amount-radio-background: #{$white};
 		--select-custom-amount-radio-border: #{$grey200};
 		--select-custom-amount-radio-border-checked: #{$blue700};
+	}
+
+	@if $select-group-cheering {
+		--select-group-radio-cheering-background-checked: #{$white};
+		--select-group-radio-cheering-color: #{$blue400};
+		--select-group-radio-triangle-color-top: #ff512f;
+		--select-group-radio-triangle-color-bottom: #dd2476;
+		--cheering-background: linear-gradient( 357deg, rgb( 255 81 47 / 100% ) 0%, rgb( 221 36 118 / 100% ) 100% );
+		--cheering-color: #{$white};
 	}
 
 	@if $select-group-bubble {
