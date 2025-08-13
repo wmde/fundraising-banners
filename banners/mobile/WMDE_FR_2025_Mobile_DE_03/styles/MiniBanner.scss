@@ -34,6 +34,22 @@ $height-l-up: 288px !default;
 			border: none;
 			cursor: pointer;
 
+			padding-right: 20px;
+
+			--info-icon-background: var( --mini-info-section-color );
+			--info-icon-color: var( --mini-info-section-icon-color );
+			svg {
+				width: 10px;
+				height: 10px;
+				top: -5px;
+			}
+		}
+
+		&-already-donated-button {
+			background: none;
+			border: none;
+			cursor: pointer;
+
 			--info-icon-background: var( --mini-info-section-color );
 			--info-icon-color: var( --mini-info-section-icon-color );
 			svg {

@@ -9,6 +9,13 @@
 			>
 				<InfoIconStraight/> Warum spenden?
 			</button>
+
+			<button
+				class="wmde-banner-mini-already-donated-button"
+				@click.prevent="$emit( 'alreadyDonatedClicked' )"
+			>
+				<InfoIconStraight/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+			</button>
 		</div>
 
 		<div class="wmde-banner-mini-info">
@@ -43,6 +50,6 @@
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal', 'alreadyDonatedClicked' ] );
 
 </script>

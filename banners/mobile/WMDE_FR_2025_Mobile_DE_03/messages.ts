@@ -27,6 +27,7 @@ const messages: TranslationMessages = {
 	'campaign-day-only-n-days': 'Heute sind es nur noch {{days}} Tage bis zum Ende unserer Spendenkampagne.',
 	'soft-close-prompt': 'Wikipedia später unterstützen?',
 	'soft-close-button-already-donated': 'Habe schon gespendet',
+	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': ''
 };
 

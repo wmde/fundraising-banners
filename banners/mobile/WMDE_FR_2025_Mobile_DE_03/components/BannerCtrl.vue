@@ -5,6 +5,7 @@
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
+			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
@@ -128,9 +129,14 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import MainDonationFormButton
+	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
