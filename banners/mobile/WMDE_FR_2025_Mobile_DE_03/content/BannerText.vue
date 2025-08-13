@@ -11,7 +11,6 @@
 				{{ campaignDaySentence }}
 				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-				Andere, weil Wikipedia in diesen Zeiten wichtiger denn je ist.
 				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
