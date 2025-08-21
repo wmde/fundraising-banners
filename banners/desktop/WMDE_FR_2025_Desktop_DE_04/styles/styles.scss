@@ -5,6 +5,7 @@
 	$select-group-bubble: true,
 	$select-group-button: true,
 	$select-group-image-label: true,
+	$select-group-cheering: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 );
@@ -23,10 +24,10 @@
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup' with (
 	$payment-option-width: 25%
 );
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadiosAmountCheering';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupPortraitImageLabel';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
-@use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadioAmountCheering';
+@use 'src/themes/Treedip/DonationForm/Forms/MainDonationFormAmountCheering';
 @use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px
 );
