@@ -28,42 +28,18 @@
 			content: '❤';
 			height: 18px;
 			width: 18px;
+			line-height: 18px;
+			font-size: 16px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			vertical-align: middle;
 			background: transparent;
 			color: var( --select-group-radio-cheering-color );
 		}
 
-		.wmde-banner-select-group-input::after {
-			content: '';
-			width: 0;
-			height: 0;
-			position: absolute;
-			top: -12px;
-			left: 50%;
-			transform: translateX( -6px );
-			border-style: solid;
-			border-width: 3px 6px 0;
-			border-color: var( --select-group-radio-triangle-color-top ) transparent transparent transparent;
-			opacity: 0;
-			transition: opacity 150ms ease-out;
-		}
-
 		.wmde-banner-select-group-input:checked::before {
 			transform: scale( 1 );
-		}
-
-		.wmde-banner-select-group-input:checked::after {
-			opacity: 1;
-		}
-
-		.amount-50 .wmde-banner-select-group-input::after,
-		.amount-100 .wmde-banner-select-group-input::after {
-			top: auto;
-			bottom: -10px;
-			border-width: 0 6px 3px;
-			border-color: transparent transparent var( --select-group-radio-triangle-color-bottom ) transparent;
 		}
 	}
 }

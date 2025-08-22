@@ -47,19 +47,56 @@ $padding: 0 !default;
 		white-space: nowrap;
 		border-radius: 2px;
 		font-style: italic;
-		text-shadow: 1px 1px 1px rgb( 0 0 0 / 20% );
 		text-align: center;
 		visibility: hidden;
 		opacity: 0;
 		height: 0;
+
+		&::after {
+			content: '';
+			width: 0;
+			height: 0;
+			position: absolute;
+			top: calc( 100% - 1px );
+			left: calc( 50% - 3px );
+			border-style: solid;
+			border-width: 7px 6px 0;
+			border-color: var( --cheering-background ) transparent transparent transparent;
+			transition: opacity 150ms ease-out;
+		}
+	}
+
+	&-cheering-500::after,
+	&-cheering-5000::after {
+		left: 3px;
+	}
+
+	&-cheering-1000::after,
+	&-cheering-10000::after {
+		left: 25%;
+	}
+
+	&-cheering-2000::after {
+		left: calc( 50% - 3px );
+	}
+
+	&-cheering-2500::after {
+		left: calc( 75% - 8px );
 	}
 
 	&-cheering-top,
 	&-cheering-bottom {
+		position: relative;
 		transition: opacity 150ms ease-out, height 150ms ease-out;
 	}
 
 	&-cheering-bottom {
 		transform: translateY( -8px );
+	}
+
+	&-cheering-bottom::after {
+		top: -6px;
+		border-width: 0 6px 7px;
+		border-color: transparent transparent var( --cheering-background ) transparent;
 	}
 }
