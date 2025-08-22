@@ -16,7 +16,7 @@
 			/>
 		</fieldset>
 
-		<div class="wmde-banner-cheering wmde-banner-cheering-top">
+		<div class="wmde-banner-cheering wmde-banner-cheering-top" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
 			{{ $translate( cheerKey ) }}
 		</div>
 
@@ -39,7 +39,7 @@
 			</SelectGroup>
 		</fieldset>
 
-		<div class="wmde-banner-cheering wmde-banner-cheering-bottom">
+		<div class="wmde-banner-cheering wmde-banner-cheering-bottom" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
 			{{ $translate( cheerKey ) }}
 		</div>
 
