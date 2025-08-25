@@ -1,12 +1,10 @@
 <template>
 	<div class="wmde-banner-message">
 		<div>
-			<p>
-				<strong>
-					<InfoIcon fill="#990a00"/>
-					{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still
-					can't be sold.&#8221; - An important update for readers in Germany.
-				</strong>
+			<p class="headline">
+				<InfoIcon fill="#990a00"/>
+				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still
+				can't be sold.&#8221; - An important update for readers in Germany.
 			</p>
 			<p>
 				Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this

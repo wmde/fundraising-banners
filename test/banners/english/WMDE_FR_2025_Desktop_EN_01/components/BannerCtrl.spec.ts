@@ -15,7 +15,6 @@ import { resetFormModel } from '@test/resetFormModel';
 import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
@@ -109,19 +108,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

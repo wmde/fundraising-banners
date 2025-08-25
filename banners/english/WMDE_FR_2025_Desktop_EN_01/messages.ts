@@ -20,7 +20,8 @@ const messages: TranslationMessages = {
 	'already-donated-link': 'I\'ve already donated',
 	'upgrade-to-yearly-copy': '<p>Every year we are dependent on the support of people like you. Yearly donations ' +
 		'help sustainably and enable long term development.</p>' +
-		'<p>No risks attached, you can tell us to stop at any time.</p>'
+		'<p>No risks attached, you can tell us to stop at any time.</p>',
+	'upgrade-to-yearly-header': 'Please make it {{amount}} yearly!'
 };
 
 export default messages;
