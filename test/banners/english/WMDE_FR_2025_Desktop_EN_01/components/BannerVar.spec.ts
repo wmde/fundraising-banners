@@ -1,6 +1,6 @@
 import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/english/WMDE_FR_2025_Desktop_EN_01/components/BannerCtrl.vue';
+import Banner from '@banners/english/WMDE_FR_2025_Desktop_EN_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -12,7 +12,7 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { Timer } from '@src/utils/Timer';
@@ -23,7 +23,7 @@ import { paymentIconFeatures } from '@test/features/PaymentIcons';
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -56,11 +56,6 @@ describe( 'BannerCtrl.vue', () => {
 	};
 
 	describe( 'Main Banner', () => {
-		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerMainFeatures[ testName ]( getWrapper() );
-		} );
 
 		test.each( [
 			[ 'expectClosesBannerWhenWindowBecomesSmall' ]

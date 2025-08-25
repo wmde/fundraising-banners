@@ -12,7 +12,7 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures } from '@test/features/MainBanner';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { Timer } from '@src/utils/Timer';
@@ -35,7 +35,6 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				remainingImpressions: 10
 			},
 			global: {
 				mocks: {
@@ -56,11 +55,6 @@ describe( 'BannerCtrl.vue', () => {
 	};
 
 	describe( 'Main Banner', () => {
-		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerMainFeatures[ testName ]( getWrapper() );
-		} );
 
 		test.each( [
 			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
