@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "WMDE_FR_2025_Desktop_DE_03"
-description = "Based on CTRL of desktop-de-02, VAR: uses cheering elements"
-campaign_tracking = "03-ba-250807"
+campaign = "WMDE_FR_2025_Desktop_DE_04"
+description = "Based on VAR of desktop-de-03, VAR: uses different copy"
+campaign_tracking = "04-ba-250825"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -18,14 +18,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_03/banner_ctrl.ts"
-pagename = "WMDE_FR_2025_Desktop_DE_03_ctrl"
-tracking = "org-03-250807-ctrl"
+filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_04/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Desktop_DE_04_ctrl"
+tracking = "org-04-250825-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_03/banner_var.ts"
-pagename = "WMDE_FR_2025_Desktop_DE_03_var"
-tracking = "org-03-250807-var"
+filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_04/banner_var.ts"
+pagename = "WMDE_FR_2025_Desktop_DE_04_var"
+tracking = "org-04-250825-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
