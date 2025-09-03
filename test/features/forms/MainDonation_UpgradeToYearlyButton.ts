@@ -2,6 +2,8 @@ import { VueWrapper } from '@vue/test-utils';
 import {
 	expectMainDonationFormGoesToPageOnSubmit,
 	expectMainDonationFormSubmits,
+	expectMainDonationFormUsesAlternativeDynamicAmounts,
+	expectMainDonationFormUsesDefaultDynamicAmounts,
 	submitMainDonationForm
 } from '@test/features/forms/subForms/MainDonationForm';
 import {
@@ -41,5 +43,7 @@ export const donationFormFeatures: Record<string, ( wrapper: VueWrapper<any> ) =
 	expectUpgradeToYearlyFormSubmitsDontUpgrade: async ( wrapper: VueWrapper<any> ) => {
 		await submitMainDonationForm( wrapper, Intervals.ONCE, '25', PaymentMethods.PAYPAL );
 		await expectUpgradeToYearlyFormSubmits( wrapper, 'no' );
-	}
+	},
+	expectMainDonationFormUsesDefaultDynamicAmounts: ( wrapper: VueWrapper<any> ) => expectMainDonationFormUsesDefaultDynamicAmounts( wrapper ),
+	expectMainDonationFormUsesAlternativeDynamicAmounts: ( wrapper: VueWrapper<any> ) => expectMainDonationFormUsesAlternativeDynamicAmounts( wrapper ),
 };
