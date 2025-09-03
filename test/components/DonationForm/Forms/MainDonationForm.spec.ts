@@ -145,4 +145,19 @@ describe( 'MainDonationForm.vue', () => {
 		expect( wrapper.find( '.custom-label-paypal' ).exists() ).toBeTruthy();
 		expect( wrapper.find( '.custom-label-credit-cards' ).exists() ).toBeTruthy();
 	} );
+
+	it( 'uses the dynamic amounts when they exist', async () => {
+		const wrapper = getWrapper();
+
+		expect( wrapper.find( '.amount-1' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-5' ).exists() ).toBeTruthy();
+
+		await wrapper.setProps( { dynamicAmounts: [
+			{ value: '3', label: '€3', className: 'amount-3' },
+			{ value: '42', label: '€42', className: 'amount-42' }
+		] } );
+
+		expect( wrapper.find( '.amount-3' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-42' ).exists() ).toBeTruthy();
+	} );
 } );

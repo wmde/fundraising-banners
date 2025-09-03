@@ -25,7 +25,7 @@
 
 			<SelectGroup
 				fieldName="select-amount"
-				:selectionItems="formItems.amounts"
+				:selectionItems="dynamicAmounts ?? formItems.amounts"
 				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="$translate( amountValidityMessageKey( amountValidity ) )"
 				v-model:inputValue="selectedAmount"
@@ -90,10 +90,12 @@ import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import MainDonationFormButtonMultiStep from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButtonMultiStep.vue';
+import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 interface Props {
 	showErrorScrollLink?: boolean;
 	customAmountPlaceholderKey?: string;
+	dynamicAmounts?: FormItem[];
 }
 
 withDefaults( defineProps<Props>(), {

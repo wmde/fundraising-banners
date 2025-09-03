@@ -174,4 +174,23 @@ describe( 'MainDonationFormAmountCheering.vue', () => {
 		expect( wrapper.find( '.wmde-banner-cheering-top' ).element.textContent ).toStrictEqual( 'cheering-custom' );
 		expect( wrapper.find( '.wmde-banner-cheering-bottom' ).element.textContent ).toStrictEqual( 'cheering-custom' );
 	} );
+
+	it( 'uses the dynamic amounts when they exist', async () => {
+		const wrapper = getWrapper();
+
+		expect( wrapper.find( '.amount-5' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-10' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-20' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-25' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-50' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-100' ).exists() ).toBeTruthy();
+
+		await wrapper.setProps( { dynamicAmounts: [
+			{ value: '3', label: '€3', className: 'amount-3' },
+			{ value: '42', label: '€42', className: 'amount-42' }
+		] } );
+
+		expect( wrapper.find( '.amount-3' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.amount-42' ).exists() ).toBeTruthy();
+	} );
 } );
