@@ -25,7 +25,7 @@
 
 			<header class="wmde-banner-mini-headline">
 				<div class="wmde-banner-mini-headline-background">
-					<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
+					<span class="wmde-banner-mini-headline-content">Eine wichtige Nachricht für Sie</span>
 				</div>
 			</header>
 
