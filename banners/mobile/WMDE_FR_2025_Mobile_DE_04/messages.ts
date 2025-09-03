@@ -28,7 +28,14 @@ const messages: TranslationMessages = {
 	'soft-close-prompt': 'Wikipedia später unterstützen?',
 	'soft-close-button-already-donated': 'Habe schon gespendet',
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
-	'amount-total': ''
+	'amount-total': '',
+	'cheering-500': 'Kleiner Betrag, große Wirkung. Danke!',
+	'cheering-1000': 'Kleiner Betrag, große Wirkung. Danke!',
+	'cheering-1500': 'Gute Wahl. Eine der häufigsten Spenden.',
+	'cheering-2500': 'Ein starker Beitrag, der viel bewirkt. Toll',
+	'cheering-5000': 'Wenige Menschen spenden so viel. Danke!',
+	'cheering-10000': 'Wow. So viel wird selten gespendet. Danke!',
+	'cheering-custom': 'Ihr Betrag, Ihre Wirkung! Herzlichen Dank.',
 };
 
 export default messages;

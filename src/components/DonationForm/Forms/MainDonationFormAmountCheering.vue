@@ -20,7 +20,7 @@
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
 
 			<div class="wmde-banner-cheering wmde-banner-cheering-top" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
-				{{ $translate( cheerKey ) }}
+				<span>{{ $translate( cheerKey ) }}</span>
 			</div>
 
 			<SelectGroup
@@ -40,7 +40,7 @@
 			</SelectGroup>
 
 			<div class="wmde-banner-cheering wmde-banner-cheering-bottom" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
-				{{ $translate( cheerKey ) }}
+				<span>{{ $translate( cheerKey ) }}</span>
 			</div>
 		</fieldset>
 
@@ -138,6 +138,7 @@ const cheerKey = computed<string>( () => {
 	switch ( amountInCents.value ) {
 		case 500:
 		case 1000:
+		case 1500:
 		case 2000:
 		case 2500:
 		case 5000:

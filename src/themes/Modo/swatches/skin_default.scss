@@ -2,6 +2,7 @@
 
 $upgrade-to-yearly-button-form: false !default;
 $select-group-image-label: false !default;
+$select-group-cheering: false !default;
 $progress-bar: false !default;
 $double-progress-bar: false !default;
 $soft-close: false !default;
@@ -12,6 +13,7 @@ $thank-you-box: false !default;
 	@include color_light.swatch(
 		$upgrade-to-yearly-button-form,
 		$select-group-image-label,
+		$select-group-cheering,
 		$progress-bar,
 		$double-progress-bar,
 		$soft-close,
