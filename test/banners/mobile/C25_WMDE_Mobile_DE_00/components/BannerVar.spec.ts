@@ -118,7 +118,9 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
 			[ 'expectMainDonationFormGoesToUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
+			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
+			[ 'expectMainDonationFormUsesDefaultDynamicAmounts' ],
+			[ 'expectMainDonationFormUsesAlternativeDynamicAmounts' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );

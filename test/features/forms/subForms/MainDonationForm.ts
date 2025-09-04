@@ -39,3 +39,23 @@ export const expectMainDonationFormGoesToPageOnSubmit = async (
 	expect( wrapper.find( `.wmde-banner-form-page:nth-child(${page})` ).attributes( 'class' ) )
 		.toContain( 'wmde-banner-form-page--current' );
 };
+
+export const expectMainDonationFormUsesDefaultDynamicAmounts = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '.amount-5' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-15' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-25' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-50' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-100' ).exists() ).toBeTruthy();
+};
+
+export const expectMainDonationFormUsesAlternativeDynamicAmounts = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-button-preselect' ).trigger( 'click' );
+
+	expect( wrapper.find( '.amount-10' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-15' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-25' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-50' ).exists() ).toBeTruthy();
+	expect( wrapper.find( '.amount-100' ).exists() ).toBeTruthy();
+};

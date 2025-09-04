@@ -1,0 +1,195 @@
+@use '../../variables/select_group';
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+
+		&-container {
+			margin: 0 -4px;
+		}
+
+		&-option {
+			font-size: select_group.$radio-font-size;
+			line-height: select_group.$form-radio-height;
+			flex: 0 0 50%;
+			width: 50%;
+			padding: 0 4px 8px;
+		}
+
+		&-container.select-amount .wmde-banner-select-group-option {
+			flex: 0 0 33.3333%;
+			width: 33.3333%;
+		}
+
+		&-input {
+			display: none;
+		}
+
+		&-label {
+			display: block;
+			width: 100%;
+			border: 1px solid var( --select-group-option-border );
+			border-radius: 4px;
+			background: var( --select-group-option-background );
+			color: var( --select-group-option-color );
+			height: select_group.$form-radio-height;
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		&-notice {
+			line-height: 13px;
+			padding-top: 4px;
+			color: var( --select-group-option-notice );
+			font-size: 11px;
+			font-weight: normal;
+		}
+
+		&-option:hover .wmde-banner-select-group-label,
+		&-option:focus .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border-hover );
+			background: var( --select-group-option-background-hover );
+		}
+
+		&-option:active .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border-active );
+			background: var( --select-group-option-background-active );
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			color: var( --select-group-option-color-checked );
+			border-color: var( --select-group-option-border-checked );
+			background: var( --select-group-option-background-checked );
+		}
+
+		&-error-message {
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			color: var( --color-error );
+		}
+	}
+
+	&-disabled {
+		opacity: 0.3;
+	}
+
+	&-error-icon {
+		font-size: 14px;
+	}
+
+	&-form-field-group:has( .wmde-banner-cheering-bottom ) {
+		.wmde-banner-select-group-option:last-child,
+		.wmde-banner-select-group-option:nth-last-child( 2 ),
+		.wmde-banner-select-group-option:nth-last-child( 3 ) {
+			padding-bottom: 0;
+		}
+	}
+
+	&-cheering {
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		font-size: 15px;
+		font-style: italic;
+		visibility: hidden;
+		opacity: 0;
+		height: 0;
+		transition: justify-content 500ms ease-in-out;
+
+		> span {
+			border-radius: 15px;
+			height: 30px;
+			padding: 4px 12px;
+			display: inline-block;
+			background: var( --cheering-background );
+			color: var( --cheering-color );
+		}
+
+		&::after {
+			content: '';
+			width: 0;
+			height: 0;
+			position: absolute;
+			top: calc( 100% - 1px );
+			left: calc( 83.3333% - 6px );
+			border-style: solid;
+			border-width: 7px 6px 0;
+			border-color: var( --cheering-background ) transparent transparent transparent;
+		}
+	}
+
+	$bounce: linear( 0, 0.036 2%, 0.154 4.4%, 0.753 12.4%, 0.975 16%, 1.114 19.4%, 1.185 23%, 1.182 28.2%, 1.014 40.4%, 0.965 47.8%, 1.006 72.2%, 1 );
+
+	&-cheering-top,
+	&-cheering-bottom {
+		transition: opacity 300ms ease-in-out, height 1s $bounce, transform 750ms $bounce;
+	}
+
+	&-cheering-top {
+		margin-bottom: 8px;
+		align-items: flex-end;
+		transform: translateY( -30px );
+	}
+
+	&-cheering-bottom {
+		margin-top: 8px;
+		transform: translateY( 30px );
+
+		&::after {
+			top: -6px;
+			border-width: 0 6px 7px;
+			border-color: transparent transparent var( --cheering-background ) transparent;
+		}
+	}
+
+	&-cheering-500,
+	&-cheering-1000,
+	&-cheering-5000 {
+		justify-content: flex-start;
+
+		&::after {
+			left: calc( 16.6666% - 6px );
+		}
+	}
+
+	&-cheering-1500,
+	&-cheering-10000 {
+		justify-content: center;
+
+		&::after {
+			left: calc( 50% - 6px );
+		}
+	}
+
+	&-cheering-2500 {
+		justify-content: flex-end;
+	}
+
+	&-sub-form-donation {
+		&:has( input[ value='5' ]:checked, input[ value='10' ]:checked, input[ value='15' ]:checked, input[ value='25' ]:checked ) {
+			.wmde-banner-cheering-top {
+				opacity: 1;
+				visibility: visible;
+				height: 30px;
+				transform: translateY( 0 );
+			}
+		}
+
+		&:has( input[ value='50' ]:checked, input[ value='100' ]:checked, .wmde-banner-select-custom-amount-radio:checked ) {
+			.wmde-banner-cheering-bottom {
+				opacity: 1;
+				visibility: visible;
+				height: 30px;
+				transform: translateY( 0 );
+			}
+		}
+	}
+}

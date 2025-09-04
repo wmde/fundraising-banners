@@ -31,7 +31,7 @@ export default {
 		"declaration-property-value-disallowed-list": null,
 		"color-function-notation": null,
 		"alpha-value-notation": null,
-		"function-no-unknown": null,
+		"function-no-unknown": [ true, { "ignoreFunctions" : [ "linear" ] } ],
 		"media-feature-range-notation": "prefix",
 		"function-disallowed-list": null,
 		"font-family-name-quotes": "always-unless-keyword",

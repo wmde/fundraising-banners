@@ -53,6 +53,7 @@ $pink100: #ff33f1;
 @mixin swatch(
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
+	$select-group-cheering: false,
 	$progress-bar: false,
 	$double-progress-bar: false,
 	$soft-close: false,
@@ -149,6 +150,11 @@ $pink100: #ff33f1;
 	@if $select-group-image-label {
 		--select-group-image-label-fill: #{$white};
 		--select-group-image-label-fill-highlight: #{$blue600};
+	}
+
+	@if $select-group-cheering {
+		--cheering-background: #{$blue700};
+		--cheering-color: #{$white};
 	}
 
 	@if $progress-bar {
