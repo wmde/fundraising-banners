@@ -13,6 +13,7 @@ $grey700: #202122;
 $red100: #ffe8e8;
 $red500: #fb4848;
 $red525: #f54739;
+$red575: #dd3333;
 $red550: #ab150a;
 $red600: #990a00;
 $red700: #7d0a00;
@@ -125,9 +126,7 @@ $blue700: #2a4b8d;
 	@if $select-group-cheering {
 		--select-group-radio-cheering-background-checked: #{$white};
 		--select-group-radio-cheering-color: #{$blue400};
-		--select-group-radio-triangle-color-top: #ff512f;
-		--select-group-radio-triangle-color-bottom: #dd2476;
-		--cheering-background: linear-gradient( 357deg, rgb( 255 81 47 / 100% ) 0%, rgb( 221 36 118 / 100% ) 100% );
+		--cheering-background: #{$blue400};
 		--cheering-color: #{$white};
 	}
 
