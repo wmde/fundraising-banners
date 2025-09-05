@@ -16,12 +16,11 @@
 			/>
 		</fieldset>
 
-		<div class="wmde-banner-cheering wmde-banner-cheering-top" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
-			{{ $translate( cheerKey ) }}
-		</div>
-
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
+			<div class="wmde-banner-cheering wmde-banner-cheering-top" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
+				<span>{{ $translate( cheerKey ) }}</span>
+			</div>
 			<SelectGroup
 				fieldName="select-amount"
 				:selectionItems="formItems.amounts"
@@ -37,11 +36,10 @@
 					:placeholder="$translate( customAmountPlaceholderKey )"
 				/>
 			</SelectGroup>
+			<div class="wmde-banner-cheering wmde-banner-cheering-bottom" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
+				<span>{{ $translate( cheerKey ) }}</span>
+			</div>
 		</fieldset>
-
-		<div class="wmde-banner-cheering wmde-banner-cheering-bottom" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
-			{{ $translate( cheerKey ) }}
-		</div>
 
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'payments-header' ) }}</legend>
