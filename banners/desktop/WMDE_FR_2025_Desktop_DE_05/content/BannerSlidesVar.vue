@@ -1,25 +1,27 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-			{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+			Am heutigen {{ currentDayName }}, den {{ currentDate }}, können Sie mit einem kleinen Beitrag die
+			Unabhängigkeit von Wikipedia verteidigen.<AnimatedText content="Millionen Menschen nutzen Wikipedia,
+			aber 99 % spenden nicht."/>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			Dabei steht Wikipedia unter Druck: Desinformation und Manipulation überschwemmen das Internet. Deshalb ist
+			es gerade in diesen Zeiten wichtig, Wikipedia zu schützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
-			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			Heute kommt es auch auf Sie an – denn Wikipedia ist ein Gemeinschaftswerk: Je mehr sich beteiligen, desto
+			besser. Die durchschnittliche Spende beträgt 22,89 €, doch bereits 5&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann stärken Sie uns mit
+			einer Spende Ihrer Wahl. Sie helfen damit mehr, als Sie vielleicht denken. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>
@@ -38,8 +40,7 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	currentDate,
-	averageDonation
+	currentDate
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
