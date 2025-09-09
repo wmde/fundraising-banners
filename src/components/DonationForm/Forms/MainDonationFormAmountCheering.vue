@@ -16,15 +16,16 @@
 			/>
 		</fieldset>
 
-		<div class="wmde-banner-cheering wmde-banner-cheering-top">
-			{{ $translate( cheerKey ) }}
-		</div>
-
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
+
+			<div class="wmde-banner-cheering wmde-banner-cheering-top" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
+				<span>{{ $translate( cheerKey ) }}</span>
+			</div>
+
 			<SelectGroup
 				fieldName="select-amount"
-				:selectionItems="formItems.amounts"
+				:selectionItems="dynamicAmounts ?? formItems.amounts"
 				:isValid="isValidOrUnset( amountValidity )"
 				:errorMessage="$translate( amountValidityMessageKey( amountValidity ) )"
 				v-model:inputValue="selectedAmount"
@@ -37,11 +38,11 @@
 					:placeholder="$translate( customAmountPlaceholderKey )"
 				/>
 			</SelectGroup>
-		</fieldset>
 
-		<div class="wmde-banner-cheering wmde-banner-cheering-bottom">
-			{{ $translate( cheerKey ) }}
-		</div>
+			<div class="wmde-banner-cheering wmde-banner-cheering-bottom" :class="`wmde-banner-cheering-${customAmount !== '' ? 'custom' : amountInCents}`">
+				<span>{{ $translate( cheerKey ) }}</span>
+			</div>
+		</fieldset>
 
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'payments-header' ) }}</legend>
@@ -89,10 +90,12 @@ import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import MainDonationFormButtonMultiStep from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButtonMultiStep.vue';
+import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 interface Props {
 	showErrorScrollLink?: boolean;
 	customAmountPlaceholderKey?: string;
+	dynamicAmounts?: FormItem[];
 }
 
 withDefaults( defineProps<Props>(), {
@@ -135,6 +138,7 @@ const cheerKey = computed<string>( () => {
 	switch ( amountInCents.value ) {
 		case 500:
 		case 1000:
+		case 1500:
 		case 2000:
 		case 2500:
 		case 5000:

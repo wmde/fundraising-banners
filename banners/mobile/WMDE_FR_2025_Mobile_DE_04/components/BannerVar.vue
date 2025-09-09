@@ -5,6 +5,7 @@
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
+			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
@@ -114,10 +115,10 @@ import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormAmountCheering.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
@@ -128,9 +129,14 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
+import {
+	createSubmittableMainDonationForm
+} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import {
+	createSubmittableUpgradeToYearly
+} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import MainDonationFormButton
+	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, Mock, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/mobile/WMDE_FR_2025_Mobile_DE_01/components/BannerVar.vue';
+import Banner from '@banners/mobile/WMDE_FR_2025_Mobile_DE_04/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
@@ -156,7 +156,8 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ],
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
