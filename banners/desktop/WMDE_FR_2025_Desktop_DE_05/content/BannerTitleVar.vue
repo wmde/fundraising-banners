@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-message-header">
 		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich – auch dank Ihnen</h2>
-		<p>
+		<p class="headline">
 			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die in Deutschland ein
 			Zeichen setzen wollen
 		</p>
