@@ -10,8 +10,9 @@ $soft-close: false !default;
 $subscription-form: false !default;
 $thank-you-box: false !default;
 
-.skin-theme-clientpref-night .wmde-banner {
-	@include color_dark.swatch(
+.wmde-banner,
+.skin-theme-clientpref-day .wmde-banner {
+	@include color_light.swatch(
 		$upgrade-to-yearly-button-form,
 		$select-group-image-label,
 		$select-group-cheering,
@@ -23,8 +24,8 @@ $thank-you-box: false !default;
 	);
 }
 
-.skin-theme-clientpref-day .wmde-banner {
-	@include color_light.swatch(
+.skin-theme-clientpref-night .wmde-banner {
+	@include color_dark.swatch(
 		$upgrade-to-yearly-button-form,
 		$select-group-image-label,
 		$select-group-cheering,
