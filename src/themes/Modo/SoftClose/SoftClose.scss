@@ -60,13 +60,13 @@
 		&-buttons {
 			display: grid;
 			grid-template-columns: repeat( 4, 1fr );
-			grid-gap: 6px;
+			gap: 6px;
 			align-items: center;
 			margin: 0 0 6px;
 
 			@include breakpoints.phone-l-up {
 				margin: 0;
-				grid-gap: 12px;
+				gap: 12px;
 				grid-template-columns: repeat( 3, 1fr );
 			}
 		}
