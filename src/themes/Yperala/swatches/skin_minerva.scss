@@ -6,8 +6,9 @@ $select-group-image-label: false !default;
 $soft-close: false !default;
 $upgrade-to-yearly: false !default;
 
-.skin-theme-clientpref-night .wmde-banner {
-	@include color_dark.swatch(
+.wmde-banner,
+.skin-theme-clientpref-day .wmde-banner {
+	@include color_light.swatch(
 		$progress-bar,
 		$select-group-image-label,
 		$soft-close,
@@ -15,8 +16,8 @@ $upgrade-to-yearly: false !default;
 	);
 }
 
-.skin-theme-clientpref-day .wmde-banner {
-	@include color_light.swatch(
+.skin-theme-clientpref-night .wmde-banner {
+	@include color_dark.swatch(
 		$progress-bar,
 		$select-group-image-label,
 		$soft-close,

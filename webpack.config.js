@@ -83,18 +83,6 @@ module.exports = ( env ) => Promise.all( [
 			},
 			'proxy': [
 				{
-					context: [ '/mobile' ],
-					pathRewrite: { '^/mobile': '' },
-					target: 'https://de.m.wikipedia.org',
-					changeOrigin: true
-				},
-				{
-					context: [ '/en-mobile' ],
-					pathRewrite: { '^/en-mobile': '' },
-					target: 'https://en.m.wikipedia.org',
-					changeOrigin: true
-				},
-				{
 					context: [ '/wiki/Main_Page' ],
 					target: 'https://en.wikipedia.org',
 					changeOrigin: true
