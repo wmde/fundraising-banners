@@ -28,6 +28,7 @@ $padding: 0 !default;
 				opacity: 1;
 				visibility: visible;
 				height: 24px;
+				transform: translateY( 0 );
 			}
 		}
 
@@ -36,21 +37,30 @@ $padding: 0 !default;
 				opacity: 1;
 				visibility: visible;
 				height: 24px;
+				transform: translateY( 0 );
 			}
 		}
 	}
 
 	&-cheering {
-		background: var( --cheering-background );
-		color: var( --cheering-color );
-		padding: 3px 0;
-		white-space: nowrap;
-		border-radius: 2px;
+		position: relative;
+		display: flex;
 		font-style: italic;
-		text-align: center;
 		visibility: hidden;
 		opacity: 0;
 		height: 0;
+		transition: justify-content 500ms ease-in-out;
+
+		> span {
+			border-radius: 2px;
+			height: 24px;
+			width: 100%;
+			padding: 3px 0;
+			display: block;
+			text-align: center;
+			background: var( --cheering-background );
+			color: var( --cheering-color );
+		}
 
 		&::after {
 			content: '';
@@ -58,11 +68,34 @@ $padding: 0 !default;
 			height: 0;
 			position: absolute;
 			top: calc( 100% - 1px );
-			left: calc( 50% - 3px );
+			left: calc( 83.3333% - 6px );
 			border-style: solid;
 			border-width: 7px 6px 0;
 			border-color: var( --cheering-background ) transparent transparent transparent;
-			transition: opacity 150ms ease-out;
+		}
+	}
+
+	$bounce: linear( 0, 0.036 2%, 0.154 4.4%, 0.753 12.4%, 0.975 16%, 1.114 19.4%, 1.185 23%, 1.182 28.2%, 1.014 40.4%, 0.965 47.8%, 1.006 72.2%, 1 );
+
+	&-cheering-top,
+	&-cheering-bottom {
+		transition: opacity 300ms ease-in-out, height 1s $bounce, transform 750ms $bounce;
+	}
+
+	&-cheering-top {
+		margin-bottom: 8px;
+		align-items: flex-end;
+		transform: translateY( -30px );
+	}
+
+	&-cheering-bottom {
+		margin-top: 8px;
+		transform: translateY( 30px );
+
+		&::after {
+			top: -6px;
+			border-width: 0 6px 7px;
+			border-color: transparent transparent var( --cheering-background ) transparent;
 		}
 	}
 
@@ -82,25 +115,5 @@ $padding: 0 !default;
 
 	&-cheering-2500::after {
 		left: calc( 75% - 8px );
-	}
-
-	&-cheering-top,
-	&-cheering-bottom {
-		position: relative;
-		transition: opacity 150ms ease-out, height 150ms ease-out;
-	}
-
-	&-cheering-top {
-		margin-bottom: 2px;
-	}
-
-	&-cheering-bottom {
-		margin-top: 5px;
-	}
-
-	&-cheering-bottom::after {
-		top: -6px;
-		border-width: 0 6px 7px;
-		border-color: transparent transparent var( --cheering-background ) transparent;
 	}
 }
