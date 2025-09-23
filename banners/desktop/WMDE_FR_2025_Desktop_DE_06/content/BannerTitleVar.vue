@@ -1,8 +1,9 @@
 <template>
 	<div class="wmde-banner-message-header">
-		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich</h2>
+		<h2><InfoIconItalic/> Wikipedia ist unverkäuflich - auch dank Ihnen?</h2>
 		<p class="headline">
-			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen
+			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle in Deutschland, die diesmal
+			ein Zeichen setzen wollen
 		</p>
 	</div>
 </template>

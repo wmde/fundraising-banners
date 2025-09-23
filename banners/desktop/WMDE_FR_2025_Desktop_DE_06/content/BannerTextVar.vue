@@ -2,14 +2,14 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
-				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
-				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-				Vielen Dank!
+				Auch wenn wir jetzt stören: Klicken Sie bitte nicht weg! Am heutigen {{ currentDayName }}, den
+				{{ currentDate }}, können Sie die Unabhängigkeit von Wikipedia stärken.
+				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen
+				diesen Aufruf."/> Vielleicht haben auch Sie bisher gezögert? Doch jetzt brauchen wir Sie wirklich. Denn
+				gerade in diesen Zeiten ist Wikipedia wichtiger denn je. Wir bitten nicht um viel, bereits 5&nbsp;€ sind
+				ein wirksamer Beitrag. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+				Dann geben Sie sich bitte einen Ruck. Es geht um Wikipedia, aber zugleich um viel mehr: Setzen Sie jetzt
+				mit einer Spende ein Zeichen gegen Fake News und Desinformation – für neutrales Wissen. Vielen Dank!
 			</p>
 		</div>
 	</div>
@@ -22,8 +22,7 @@ import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 const {
 	currentDayName,
-	currentDate,
-	averageDonation
+	currentDate
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
