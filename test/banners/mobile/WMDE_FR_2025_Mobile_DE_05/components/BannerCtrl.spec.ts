@@ -125,9 +125,7 @@ describe( 'BannerVar.vue', () => {
 	describe( 'Use of Funds', () => {
 		test.each( [
 			[ 'expectShowsUseOfFundsOnMiniBanner' ],
-			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
 			[ 'expectHidesUseOfFundsOnMiniBanner' ],
-			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
 			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
 			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
 			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ]

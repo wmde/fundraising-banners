@@ -18,18 +18,6 @@
 
 				<ThankYouBox/>
 
-				<div class="wmde-banner-full-small-print">
-					<span>
-						<a
-							id="application-of-funds-link"
-							class="wmde-banner-footer-usage-link t-use-of-funds-link"
-							@click.prevent="$emit( 'showFundsModal' )"
-						>
-							{{ $translate( 'use-of-funds-link' ) }}
-						</a>
-					</span>
-				</div>
-
 				<slot name="footer"/>
 			</div>
 		</div>
