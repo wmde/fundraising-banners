@@ -1,6 +1,7 @@
 @use 'color_dark';
 @use 'color_light';
 
+.wmde-banner .wmde-banner-funds-modal,
 .skin-theme-clientpref-day .wmde-banner-funds-modal {
 	@include color_light.swatch;
 }
