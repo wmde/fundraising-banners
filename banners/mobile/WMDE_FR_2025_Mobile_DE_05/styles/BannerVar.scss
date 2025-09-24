@@ -53,4 +53,10 @@
 			display: none;
 		}
 	}
+
+	&-text-highlight {
+		padding: 0 5px;
+		color: var( --animated-highlight-color );
+		background-color: #990a00;
+	}
 }

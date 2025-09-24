@@ -8,7 +8,7 @@
 @use '../../../../src/components/UseOfFunds/styles/swatches/skin_minerva' as uof-default;
 @use '../../../../src/components/UseOfFunds/styles/styles';
 @use 'src/themes/Modo/defaults';
-@use 'Banner';
+@use 'BannerVar';
 @use 'MiniBanner' with (
 	$height: 336px,
 	$height-l-up: 306px
