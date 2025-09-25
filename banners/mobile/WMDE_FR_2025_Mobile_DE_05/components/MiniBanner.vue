@@ -3,7 +3,7 @@
 
 		<div class="wmde-banner-mini-info-section">
 			<button
-				class="wmde-banner-mini-uof-link"
+				class="wmde-banner-mini-uof-link wmde-banner-footer-usage-link"
 				@click.prevent="$emit( 'showFundsModal' )"
 				:title="$translate( 'use-of-funds-link-description' )"
 			>
