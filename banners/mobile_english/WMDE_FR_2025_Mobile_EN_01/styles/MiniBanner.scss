@@ -101,19 +101,41 @@ $height-large: 288px !default;
 			visibility: hidden;
 		}
 
-		&-payment-icons {
+		&-already-donated-button {
+			background: none;
+			border: none;
+			cursor: pointer;
 			display: flex;
-			justify-content: center;
-			width: 100%;
-			height: 45px;
-			padding: 10px 0;
-			text-align: center;
+			align-items: center;
+			gap: 3px;
 
 			svg {
-				display: inline-block;
-				height: 18px;
-				width: auto;
-				margin: 0 5px;
+				width: 14px;
+				height: 14px;
+			}
+		}
+
+		&-already-donated-icon {
+			position: relative;
+			top: 1px;
+		}
+
+		&-payment-icons {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 45px;
+			padding: 10px 15px;
+
+			.right {
+				display: flex;
+				align-items: center;
+
+				svg {
+					height: 18px;
+					width: auto;
+					margin-left: 10px;
+				}
 			}
 		}
 	}
