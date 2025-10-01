@@ -6,9 +6,9 @@
 
 		<div class="wmde-banner-full-content">
 
-			<header class="wmde-banner-headline">
-				Is Wikipedia worth €10 to you?
-			</header>
+			<button @click="$emit( 'showUseOfFunds' )" class="wmde-banner-headline">
+				<span class="wmde-banner-headline-icon"><SimpleInfoIcon/></span> <span class="wmde-banner-headline-link">Why</span> even &euro;10 makes a difference
+			</button>
 
 			<div class="wmde-banner-full-info">
 				<slot name="banner-text"/>
@@ -30,7 +30,8 @@
 <script setup lang="ts">
 
 import CloseIconChunky from '@src/components/Icons/CloseIconChunky.vue';
+import SimpleInfoIcon from './SimpleInfoIcon.vue';
 
-defineEmits( [ 'close' ] );
+defineEmits( [ 'close', 'showUseOfFunds' ] );
 
 </script>

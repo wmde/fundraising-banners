@@ -42,5 +42,4 @@ withDefaults( defineProps<Props>(), {
 } );
 
 defineEmits( [ 'showFundsModal' ] );
-
 </script>

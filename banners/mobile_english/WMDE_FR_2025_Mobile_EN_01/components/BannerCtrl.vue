@@ -4,9 +4,11 @@
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected-amount="onShowFullPageBannerPreselectedAmount"
+			@show-use-of-funds="onShowFundsModal( 'MiniBanner' )"
+			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
-				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
@@ -17,8 +19,8 @@
 		</MiniBanner>
 
 		<FullPageBanner
-			@showFundsModal="isFundsModalVisible = true"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
+			@show-use-of-funds="onShowFundsModal( 'FullPageBanner' )"
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
@@ -57,8 +59,8 @@
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm
 							:page-index="pageIndex"
-							@submit="submit"
 							:is-current="isCurrent"
+							@submit="submit"
 							@previous="previous"
 						>
 							<template #back>
@@ -71,47 +73,21 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="() => onShowUseOfFunds( 'Footer' )" />
+				<BannerFooter @showFundsModal="onShowFundsModal( 'Footer' )" :showFundsLink="false"/>
 			</template>
 		</FullPageBanner>
-
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		>
-			<template #buttons="{ timer }: any">
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
-					{{ $translate( 'soft-close-button-maybe-later' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
-					{{ $translate( 'soft-close-button-close' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.NoMoreBannersForCampaign )">
-					{{ $translate( 'soft-close-button-already-donated' ) }}
-				</button>
-			</template>
-		</SoftClose>
 
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
-			@callToAction="onHideFundsModal"
+			@callToAction="onFundsModalCallToAction"
 		/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
@@ -144,7 +120,6 @@ const formModel = useFormModel();
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
 	FullPage = 'wmde-banner-wrapper--full-page',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
 enum FormStepNames {
@@ -156,7 +131,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	remainingImpressions: number;
 }
 
 const props = defineProps<Props>();
@@ -178,48 +152,55 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	onClose( 'MainBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	emit( 'modalClosed' );
-}
-
-function showFullPageBanner(): void {
-	slideShowStopped.value = true;
-	contentState.value = ContentStates.FullPage;
-	emit( 'modalOpened' );
 }
 
 function onshowFullPageBanner(): void {
+	slideShowStopped.value = true;
+	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'different-amount' ) );
-	showFullPageBanner();
 }
 
 function onShowFullPageBannerPreselectedAmount(): void {
+	slideShowStopped.value = true;
 	formModel.selectedAmount.value = '10';
+	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
-	showFullPageBanner();
 }
 
-const onShowUseOfFunds = ( feature: TrackingFeatureName ): void => {
-	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
 	isFundsModalVisible.value = true;
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalOpened' );
+	}
 };
 
 const onHideFundsModal = (): void => {
-	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
 };
 
-function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	window.clearInterval( timer );
-	onClose( feature, userChoice );
-}
+const onFundsModalCallToAction = (): void => {
+	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		onshowFullPageBanner();
+	}
+
+	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+};
 
 </script>

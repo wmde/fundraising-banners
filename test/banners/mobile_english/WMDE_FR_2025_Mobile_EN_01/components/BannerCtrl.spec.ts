@@ -7,8 +7,10 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { formItems } from '@test/banners/formItems';
-import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import {
+	mobileMiniBannerUseOfFundsFeatures,
+	useOfFundsScrollFeaturesWhenUoFOpenedFromMiniBanner
+} from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -116,36 +118,21 @@ describe( 'BannerCtrl.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close', () => {
-		test.skip.each( [
-			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseAlreadyDonatedEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
-			[ 'expectHidesUseOfFundsOnFullPageBanner' ],
-			[ 'expectDoesNotEmitModalOpenedEventOnFullPageBanner' ],
-			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ],
+			[ 'expectShowsUseOfFundsOnMiniBanner' ],
+			[ 'expectHidesUseOfFundsOnMiniBanner' ],
+			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
+			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
 		] )( '%s', async ( testName: string ) => {
-			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
+			await mobileMiniBannerUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToFormWhenClosesToFullPage' ]
+			[ 'expectDoesNotScrollToFormWhenClosesToMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
-			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
+			await useOfFundsScrollFeaturesWhenUoFOpenedFromMiniBanner[ testName ]( getWrapper(), pageScroller );
 		} );
 	} );
 
@@ -177,4 +164,13 @@ describe( 'BannerCtrl.vue', () => {
 			await paymentIconFeatures[ testName ]( getWrapper() );
 		} );
 	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
+		] )( '%s', async ( testName: string ) => {
+			await miniBannerFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
 } );

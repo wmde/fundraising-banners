@@ -7,9 +7,9 @@
 				</button>
 			</div>
 
-			<header class="wmde-banner-headline">
-				Is Wikipedia worth €10 to you?
-			</header>
+			<button @click="$emit( 'showUseOfFunds' )" class="wmde-banner-headline wmde-banner-mini-uof-link">
+				<span class="wmde-banner-headline-icon"><SimpleInfoIcon/></span> <span class="wmde-banner-headline-link">Why</span> even &euro;10 makes a difference
+			</button>
 
 			<div class="wmde-banner-mini-slideshow">
 				<slot name="banner-slides"/>
@@ -25,9 +25,20 @@
 			</div>
 
 			<div class="wmde-banner-mini-payment-icons">
-				<div><PayPalLogo/></div>
-				<div><VisaLogo/></div>
-				<div><MastercardLogo/></div>
+				<div>
+					<button
+						class="wmde-banner-mini-already-donated-button"
+						@click.prevent="$emit( 'alreadyDonatedClicked' )"
+					>
+						<span class="wmde-banner-mini-already-donated-icon"><SimpleInfoIcon/></span>
+						<span>{{ $translate( 'mini-banner-already-donated-button' ) }}</span>
+					</button>
+				</div>
+				<div class="right">
+					<PayPalLogo/>
+					<VisaLogo/>
+					<MastercardLogo/>
+				</div>
 			</div>
 
 		</div>
@@ -40,7 +51,8 @@ import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
+import SimpleInfoIcon from './SimpleInfoIcon.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close', 'showUseOfFunds', 'alreadyDonatedClicked' ] );
 
 </script>
