@@ -2,7 +2,7 @@
 @use '@src/themes/Yperala/variables/breakpoints';
 @use '@src/themes/Treedip/variables/fonts';
 
-$height-small: 328px !default;
+$height-small: 338px !default;
 $height-large: 288px !default;
 
 .wmde-banner {
@@ -26,6 +26,8 @@ $height-large: 288px !default;
 			box-shadow: var( --mini-box-shadow );
 			border-radius: 15px;
 			width: 98%;
+			display: flex;
+			flex-direction: column;
 		}
 
 		&-close {
@@ -50,7 +52,7 @@ $height-large: 288px !default;
 			}
 		}
 
-		&-banner-slideshow {
+		&-slideshow {
 			width: 100%;
 			flex: 1 0 auto;
 		}
