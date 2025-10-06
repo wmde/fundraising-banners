@@ -5,9 +5,12 @@
 		</slot>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
-				<slot name="banner-text" v-if="onLargeScreen"/>
-				<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
-				<slot name="progress"/>
+				<div class="wmde-banner-message-container">
+					<slot name="banner-title"/>
+					<slot name="banner-text" v-if="onLargeScreen"/>
+					<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
+					<slot name="progress"/>
+				</div>
 			</div>
 			<div class="wmde-banner-column-right">
 				<slot name="donation-form" :form-interaction="onFormInteraction"/>

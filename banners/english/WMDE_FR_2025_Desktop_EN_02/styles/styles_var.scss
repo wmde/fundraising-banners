@@ -11,7 +11,7 @@
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
 @use 'Banner';
-@use 'MainBanner' with (
+@use 'MainBannerVar' with (
 	$banner-height: 355px,
 	$form-width: 300px
 );
