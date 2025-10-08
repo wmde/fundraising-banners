@@ -24,7 +24,7 @@
 				</button>
 			</div>
 
-			<div class="wmde-banner-mini-payment-icons">
+			<div class="wmde-banner-mini-footer">
 				<div>
 					<button
 						class="wmde-banner-mini-already-donated-button"
@@ -34,7 +34,7 @@
 						<span>{{ $translate( 'mini-banner-already-donated-button' ) }}</span>
 					</button>
 				</div>
-				<div class="right">
+				<div class="wmde-banner-mini-footer-payment-icons">
 					<PayPalLogo/>
 					<VisaLogo/>
 					<MastercardLogo/>
