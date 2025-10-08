@@ -122,22 +122,22 @@ $height-large: 288px !default;
 			top: 1px;
 		}
 
-		&-payment-icons {
+		&-footer {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			height: 45px;
 			padding: 10px 15px;
+		}
 
-			.right {
-				display: flex;
-				align-items: center;
+		&-footer-payment-icons {
+			display: flex;
+			align-items: center;
 
-				svg {
-					height: 18px;
-					width: auto;
-					margin-left: 10px;
-				}
+			svg {
+				height: 18px;
+				width: auto;
+				margin-left: 10px;
 			}
 		}
 	}
