@@ -2,24 +2,24 @@
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-			{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+			{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie die Unabhängigkeit von Wikipedia zu unterstützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
+			Die durchschnittliche Spende beträgt 22,89&nbsp;€, doch bereits 5&nbsp;€ helfen uns weiter. Hat Wikipedia
 			Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Jeder Beitrag
+			hilft – am wirksamsten ist dabei eine jährliche Spende von z.B. 5&nbsp;€. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>
@@ -38,8 +38,7 @@ defineProps<Props>();
 
 const {
 	currentDayName,
-	currentDate,
-	averageDonation
+	currentDate
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
