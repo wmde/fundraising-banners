@@ -27,6 +27,7 @@
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
+			Jeder Beitrag hilft – am wirksamsten ist dabei eine jährliche Spende von z.B. 5&nbsp;€.
 			<strong> Vielen Dank!</strong>
 		</p>
 	</KeenSliderSlide>
