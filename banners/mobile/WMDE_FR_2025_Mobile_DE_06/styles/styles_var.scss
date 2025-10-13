@@ -1,0 +1,27 @@
+@use 'src/themes/Modo/swatches/skin_minerva' with (
+	$upgrade-to-yearly-button-form: true,
+	$double-progress-bar: true,
+	$soft-close: true,
+	$thank-you-box: true
+);
+@use 'src/components/BannerConductor/banner-transition';
+@use '../../../../src/components/UseOfFunds/styles/swatches/skin_minerva' as uof-default;
+@use '../../../../src/components/UseOfFunds/styles/styles';
+@use 'src/themes/Modo/defaults';
+@use 'BannerVar';
+@use 'MiniBanner' with (
+	$height: 336px,
+	$height-l-up: 306px
+);
+@use 'FullPageBanner';
+@use 'src/themes/Modo/Footer/Footer';
+@use 'src/themes/Modo/ThankYouBox/ThankYouBox';
+@use 'src/themes/Modo/Footer/SelectionInput';
+@use 'src/themes/Modo/DonationForm/MultiStepDonation';
+@use 'src/themes/Modo/DonationForm/Forms/UpgradeToYearlyButtonForm';
+@use 'src/themes/Modo/DonationForm/SubComponents/SelectGroup';
+@use 'src/themes/Modo/DonationForm/SubComponents/SelectCustomAmount';
+@use 'src/themes/Modo/Slider/Slider';
+@use 'src/themes/Modo/SoftClose/SoftClose';
+@use 'src/themes/Modo/ProgressBar/DoubleProgressBar';
+@use 'src/themes/Modo/Message/Message';
