@@ -1,0 +1,81 @@
+@use '@src/themes/Treedip/variables/fonts';
+@use '@src/themes/Treedip/variables/breakpoints';
+
+$banner-height: 353px !default;
+$form-width: 256px !default;
+
+.wmde-banner {
+	&-main {
+		height: $banner-height;
+		display: flex;
+		flex-direction: column;
+		padding: 12px 24px 0;
+	}
+
+	&-content {
+		display: flex;
+		flex: 1 1 auto;
+
+		&-headline {
+			font-family: fonts.$content;
+			font-size: 21px;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 20px;
+			padding: 0 20px;
+			position: relative;
+
+			@include breakpoints.medium-up {
+				padding: 0 52px;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				height: 1px;
+				top: 50%;
+				left: 20px;
+				right: 20px;
+				background: var( --main-title-line-background );
+				z-index: 98;
+
+				@include breakpoints.medium-up {
+					left: 52px;
+					right: 52px;
+				}
+			}
+
+			&-text {
+				position: relative;
+				display: inline-block;
+				z-index: 99;
+				padding: 0 10px;
+				line-height: 24px;
+				background: var( --main-background );
+			}
+		}
+	}
+
+	&-column-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1 1 auto;
+		overflow-y: hidden;
+		margin-right: 20px;
+
+		border: 5px solid var( --message-border );
+		border-radius: 9px;
+		padding: 20px 0;
+	}
+
+	&-column-right {
+		flex: 1 1 $form-width;
+		width: $form-width;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		padding: 10px 16px 10px 0;
+	}
+}

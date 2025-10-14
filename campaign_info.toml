@@ -63,9 +63,9 @@ orientation = [ "portrait", "landscape"]
 [pad]
 name = "iPad"
 icon = "pad"
-campaign = "C25_WMDE_iPad_DE_00"
-description = "Based on C25_WMDE_iPad_00"
-campaign_tracking = "pad00-ba-250114"
+campaign = "WMDE_FR_2025_ipad_DE_01"
+description = "Based on CTRL of C25_WMDE_iPad_00"
+campaign_tracking = "pad01-ba-251027"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -74,14 +74,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 [pad.banners.ctrl]
-filename = "./banners/pad/C25_WMDE_iPad_DE_00/banner_ctrl.ts"
-pagename = "B25_WMDE_iPad_DE_00_ctrl"
-tracking = "org-pad00-250114-ctrl"
+filename = "./banners/pad/WMDE_FR_2025_ipad_DE_01/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_ipad_DE_01_ctrl"
+tracking = "org-pad01-251027-ctrl"
 
 [pad.banners.var]
-filename = "./banners/pad/C25_WMDE_iPad_DE_00/banner_var.ts"
-pagename = "B25_WMDE_iPad_DE_00_var"
-tracking = "org-pad00-250114-var"
+filename = "./banners/pad/WMDE_FR_2025_ipad_DE_01/banner_var.ts"
+pagename = "WMDE_FR_2025_ipad_DE_01_var"
+tracking = "org-pad01-251027-var"
 
 [pad.test_matrix]
 device = [ 'ipad_mini', 'ipad_medium', 'ipad_big' ]
