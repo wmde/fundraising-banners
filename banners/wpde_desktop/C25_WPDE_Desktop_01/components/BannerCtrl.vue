@@ -36,10 +36,10 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :submit-callback="onFormSubmit">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationFormTransactionFees :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
 
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
@@ -60,13 +60,14 @@
 								</span>
 							</template>
 
-						</MainDonationForm>
+						</MainDonationFormTransactionFees>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<UpgradeToYearlyButtonForm
 							:page-index="pageIndex"
 							:is-current="isCurrent"
+							:show-manual-upgrade-option="false"
 							@submit="submit"
 							@previous="previous"
 						/>
@@ -102,7 +103,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
@@ -111,7 +112,7 @@ import BannerSlides from '../content/BannerSlides.vue';
 import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationFormTransactionFees from '@src/components/DonationForm/Forms/MainDonationFormTransactionFees.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
@@ -125,6 +126,8 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import { Tracker } from '@src/tracking/Tracker';
+import { CoverTransactionFeesEvent } from '@src/tracking/events/CoverTransactionFeesEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
@@ -155,6 +158,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
 
+const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
 const showSetCookieImage = ref<boolean>( false );
 const showAlreadyDonatedCookieImage = ref<boolean>( false );
@@ -194,6 +198,12 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 			showAlreadyDonatedCookieImage.value = true;
 			break;
 
+	}
+}
+
+function onFormSubmit(): void {
+	if ( formModel.hasTransactionFee.value ) {
+		tracker.trackEvent( new CoverTransactionFeesEvent() );
 	}
 }
 

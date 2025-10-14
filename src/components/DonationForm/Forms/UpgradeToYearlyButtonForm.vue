@@ -70,8 +70,8 @@ const onPrevious = (): void => {
 	emit( 'previous' );
 };
 
-const { amountInCents } = useFormModel();
+const { totalNumericAmountInCents } = useFormModel();
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
-const secondPageAmount = computed( (): string => currencyFormatter.euroAmountFromCents( amountInCents.value ) );
+const secondPageAmount = computed( (): string => currencyFormatter.euroAmountFromCents( totalNumericAmountInCents.value ) );
 
 </script>

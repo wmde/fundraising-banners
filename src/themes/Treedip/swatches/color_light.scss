@@ -32,6 +32,7 @@ $blue700: #2a4b8d;
 	$select-group-button: false,
 	$select-group-image-label: false,
 	$select-group-cheering: false,
+	$transaction-fees: false,
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
@@ -62,6 +63,7 @@ $blue700: #2a4b8d;
 
 	--input-checkbox-background: transparent;
 	--input-checkbox-border: #{$grey500};
+	--input-checkbox-checked-background: #{$blue600};
 	--input-checkbox-background-checked: #{$blue400};
 	--input-checkbox-border-checked: #{$blue400};
 

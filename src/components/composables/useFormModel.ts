@@ -23,12 +23,39 @@ const addressTypeValidity = ref<Validity>( Validity.Unset );
 
 const receipt = ref<boolean|null>( null );
 
+export type TransactionFee = {
+	fixedFee: number;
+	percentage: number;
+	minimumPercentage: number;
+};
+
+export const TRANSACTION_FEES = new Map<string, TransactionFee>( [
+	[ 'PPL', { fixedFee: 0.35, percentage: 0.015, minimumPercentage: 0 } ],
+	[ 'MCP', { fixedFee: 0.29, percentage: 0.0175, minimumPercentage: 0.35 } ]
+] );
+
+const hasTransactionFee = ref<boolean>( false );
+
 const disabledIntervals = computed( (): string[] => {
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
 		return RecurringIntervals;
 	} else {
 		return [];
 	}
+} );
+
+const transactionFee = computed( () => {
+	const fee = TRANSACTION_FEES.get( paymentMethod.value );
+	if ( fee === undefined ) {
+		return 0;
+	}
+	const calculatedFee = fee.fixedFee + Math.max( ( amountInCents.value / 100 ) * fee.percentage, fee.minimumPercentage );
+	// See https://stackoverflow.com/q/11832914/130121 for an in-depth analysis how to round to 2 decimal places
+	return Math.round( ( calculatedFee + Number.EPSILON ) * 100 ) / 100;
+} );
+
+const totalNumericAmountInCents = computed( () => {
+	return amountInCents.value + ( hasTransactionFee.value ? ( transactionFee.value * 100 ) : 0 );
 } );
 
 const disabledPaymentMethods = computed( (): string[] => {
@@ -82,6 +109,7 @@ export function useFormModel(): FormModel {
 		selectedAmount,
 		customAmount,
 		amountInCents,
+		totalNumericAmountInCents,
 		amountValidity,
 
 		paymentMethod,
@@ -90,6 +118,9 @@ export function useFormModel(): FormModel {
 		addressType,
 		addressTypeValidity,
 
-		receipt
+		receipt,
+
+		hasTransactionFee,
+		transactionFee
 	};
 }

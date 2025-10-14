@@ -1,7 +1,7 @@
 <template>
 	<div class="wmde-banner-submit-values">
 		<input type="hidden" name="addressType" :value="addressType" />
-		<input type="hidden" name="amount" :value="amountInCents" />
+		<input type="hidden" name="amount" :value="totalNumericAmountInCents" />
 		<input type="hidden" name="interval" :value="interval" />
 		<input type="hidden" name="paymentType" :value="paymentMethod" />
 		<input type="hidden" name="receipt" :value="receipt" />
@@ -12,6 +12,6 @@
 
 import { useFormModel } from '@src/components/composables/useFormModel';
 
-const { addressType, amountInCents, interval, paymentMethod, receipt } = useFormModel();
+const { addressType, totalNumericAmountInCents, interval, paymentMethod, receipt } = useFormModel();
 
 </script>

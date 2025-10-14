@@ -21,9 +21,12 @@ import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
+import { donationFormTransactionFeeFeatures } from '@test/features/MainBanner_TransactionFee';
 
 const formModel = useFormModel();
-const translator = ( key: string ): string => key;
+
+// the next line is needed for the `expectUpsellFormHasTransactionFee` test to work
+const translator = ( key: string, context: any ): string => context ? `${key} -- ${Object.entries( context )}` : key;
 
 describe( 'BannerVar.vue', () => {
 
@@ -159,6 +162,16 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsSepaLogo' ]
 		] )( '%s', async ( testName: string ) => {
 			await paymentIconFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Donation Form Transaction Fees Paths', () => {
+		test.each( [
+			[ 'expectMainDonationFormShowsTransactionFeeForPayPalAndCreditCard' ],
+			[ 'expectMainDonationFormSetsSubmitValuesWithTransactionFee' ],
+			[ 'expectUpsellFormHasTransactionFee' ]
+		] )( '%s', async ( testName: string ) => {
+			await donationFormTransactionFeeFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
