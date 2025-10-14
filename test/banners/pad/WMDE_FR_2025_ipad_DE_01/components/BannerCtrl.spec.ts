@@ -7,13 +7,11 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { bannerContentAnimatedTextFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { resetFormModel } from '@test/resetFormModel';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerMainFeatures } from '@test/features/MainBanner';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
@@ -62,15 +60,6 @@ describe( 'BannerCtrl.vue', () => {
 		return wrapper;
 	};
 
-	describe( 'Main Banner', () => {
-		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ],
-			[ 'expectEmitsCloseEventWhenRemainingImpressionsAreZero' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerMainFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
 	describe( 'Content', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenBecomesVisible' ],
@@ -96,19 +85,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

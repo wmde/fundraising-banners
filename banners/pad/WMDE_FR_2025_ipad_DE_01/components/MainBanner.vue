@@ -3,6 +3,7 @@
 		<ButtonClose @close="$emit( 'close' )"/>
 		<div class="wmde-banner-content">
 			<div class="wmde-banner-column-left">
+				<slot name="banner-already-donated"/>
 				<slot name="banner-slides" :play="slideshowShouldPlay"/>
 				<slot name="progress"/>
 			</div>
