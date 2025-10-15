@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -15,7 +15,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryWpDe } from '@src/utils/LocaleFactory/LocaleFactoryWpDe';
 import { WindowTimer } from '@src/utils/Timer';
 
