@@ -116,9 +116,9 @@ tracking = "wpde-00-250114-var"
 [wpde_mobile]
 name = "WPDE Mobile"
 icon = "mobile"
-campaign = "C25_WPDE_Mobile_00"
+campaign = "C25_WPDE_Mobile_01"
 description = "Based on the control banner of last year's mobile-wpde-01"
-campaign_tracking = "wpde-mob00-250114"
+campaign_tracking = "wpde-mob01-251027"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_offline = "/wpde-offline?devbanner={{banner}}&banner=dev-mode-wpde"
@@ -127,14 +127,14 @@ wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wpde_mobile.banners.ctrl]
-filename = "./banners/wpde_mobile/C25_WPDE_Mobile_00/banner_ctrl.ts"
-pagename = "B25_WPDE_Mobile_00_ctrl"
-tracking = "wpde-mob00-250114-ctrl"
+filename = "./banners/wpde_mobile/C25_WPDE_Mobile_01/banner_ctrl.ts"
+pagename = "B25_WPDE_Mobile_01_ctrl"
+tracking = "wpde-mob01-251027-ctrl"
 
 [wpde_mobile.banners.var]
-filename = "./banners/wpde_mobile/C25_WPDE_Mobile_00/banner_var.ts"
-pagename = "B25_WPDE_Mobile_00_var"
-tracking = "wpde-mob00-250114-var"
+filename = "./banners/wpde_mobile/C25_WPDE_Mobile_01/banner_var.ts"
+pagename = "B25_WPDE_Mobile_01_var"
+tracking = "wpde-mob01-251027-var"
 
 
 
