@@ -8,6 +8,7 @@
 	$upgrade-to-yearly: true,
 	$soft-close: false,
 	$fallback-banner: true,
+	$transaction-fees: true,
 );
 @use '@src/themes/Treedip/variables/breakpoints';
 @use '@src/components/BannerConductor/banner-transition';
@@ -35,6 +36,7 @@
 	$height: 38px
 );
 @use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
+@use '@src/themes/Treedip/DonationForm/SubComponents/TransactionFees';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
 	$padding: 0
 );
