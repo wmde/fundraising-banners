@@ -47,7 +47,13 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationFormTransactionFees :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationFormTransactionFees
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+							:hasIntervalCheering="true"
+						>
 
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>

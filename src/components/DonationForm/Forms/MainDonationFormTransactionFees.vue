@@ -6,6 +6,9 @@
 	>
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'intervals-header' ) }}</legend>
+			<div v-if="hasIntervalCheering" class="wmde-banner-cheering wmde-banner-cheering-top wmde-banner-cheering-interval" >
+				<span>{{ $translate( 'recurring-interval-cheering' ) }}</span>
+			</div>
 			<SelectGroup
 				:field-name="'select-interval'"
 				:selectionItems="formItems.intervals"
@@ -101,11 +104,13 @@ interface Props {
 	showErrorScrollLink?: boolean;
 	customAmountPlaceholderKey?: string;
 	dynamicAmounts?: FormItem[];
+	hasIntervalCheering?: boolean;
 }
 
 withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false,
 	customAmountPlaceholderKey: 'custom-amount-placeholder',
+	hasIntervalCheering: false,
 } );
 const emit = defineEmits( [ 'submit' ] );
 
