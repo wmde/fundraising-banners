@@ -14,7 +14,6 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
-import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { setCookieImageFeatures } from '@test/features/SetCookieImage';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { TimerStub } from '@test/fixtures/TimerStub';
@@ -36,7 +35,10 @@ describe( 'BannerVar.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				remainingImpressions: 10
+				localCloseTracker: {
+					getItem: () => '',
+					setItem: () => {}
+				}
 			},
 			global: {
 				mocks: {
@@ -59,7 +61,7 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Main Banner', () => {
 		test.each( [
-			[ 'expectDoesNotEmitCloseEvent' ],
+			[ 'expectEmitsCloseEvent' ],
 			[ 'expectEmitsCloseEventWhenRemainingImpressionsAreZero' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
@@ -91,8 +93,7 @@ describe( 'BannerVar.vue', () => {
 		} );
 
 		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMessage' ],
-			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
+			[ 'expectShowsLiveDateAndTimeInTitle' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
@@ -110,37 +111,11 @@ describe( 'BannerVar.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
 	describe( 'Set Cookie Image', () => {
 		test.each( [
-			[ 'expectSetsCookieImageOnSoftCloseClose' ],
-			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ],
-			[ 'expectDoesNotSetCookieImageOnSoftCloseMaybeLater' ],
 			[ 'expectSetCookieImageOnAlreadyDonatedLink' ],
-			[ 'expectSetsMaybeLaterCookieOnSoftCloseMaybeLater' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Use of Funds', () => {
-		test.each( [
-			[ 'expectShowsUseOfFunds' ],
-			[ 'expectHidesUseOfFunds' ]
-		] )( '%s', async ( testName: string ) => {
-			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -159,6 +134,17 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectShowsSepaLogo' ]
 		] )( '%s', async ( testName: string ) => {
 			await paymentIconFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Use of Funds', () => {
+		test.each( [
+			[ 'expectShowsUseOfFunds' ],
+			[ 'expectHidesUseOfFunds' ],
+			[ 'expectEmitsModalOpenedEvent' ],
+			[ 'expectEmitsModalClosedEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 

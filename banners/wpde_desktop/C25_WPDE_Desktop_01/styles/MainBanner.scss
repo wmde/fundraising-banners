@@ -16,7 +16,16 @@ $form-width: 300px !default;
 	}
 
 	&-message {
-		padding: 0 15px;
+		height: auto;
+	}
+
+	&-message-container {
+		display: flex;
+		flex: 1 1 auto;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 11px;
 	}
 
 	&-column-left {
