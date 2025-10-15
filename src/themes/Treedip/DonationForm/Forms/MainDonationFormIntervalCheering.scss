@@ -1,0 +1,30 @@
+@use '../../variables/globals';
+@use '../../variables/fonts';
+@use 'src/components/DonationForm/Forms/MainDonationForm';
+
+$padding: 0 !default;
+
+.wmde-banner {
+	@include MainDonationForm.layout;
+
+	&-cheering-interval {
+		display: block;
+		text-align: right;
+		margin-right: 20px;
+
+		color: var( --select-group-radio-cheering-color );
+		font-size: 14px;
+		line-height: 30px;
+
+		.heart-icon {
+			padding-top: 3px;
+			--heart-icon-fill: var( --select-group-radio-cheering-color );
+		}
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option:nth-last-child( -n + 2 ) label {
+			background: var( --select-group-radio-cheering-highlighted-option-background );
+		}
+	}
+}

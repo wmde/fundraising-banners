@@ -19,6 +19,7 @@ $red525: #f54739;
 $red575: #dd3333;
 $red600: #e60f00;
 
+$blue050: #eaf3ff;
 $blue100: #dff1ff;
 $blue600: #547fd5;
 $blue700: #436fc7;
@@ -131,6 +132,8 @@ $brown300: #453217;
 		--select-group-radio-cheering-color: #{$blue700};
 		--cheering-background: #{$blue700};
 		--cheering-color: #{$white};
+
+		--select-group-radio-cheering-highlighted-option-background: #{$blue050};
 	}
 
 	@if $select-group-bubble {
