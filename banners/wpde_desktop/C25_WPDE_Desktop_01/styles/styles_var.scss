@@ -5,10 +5,10 @@
 	$select-group: true,
 	$select-group-bubble: true,
 	$select-group-image-label: true,
+	$select-group-cheering: true,
 	$upgrade-to-yearly: true,
 	$soft-close: false,
 	$fallback-banner: true,
-	$transaction-fees: true,
 );
 @use '@src/themes/Treedip/variables/breakpoints';
 @use '@src/components/BannerConductor/banner-transition';
@@ -36,7 +36,6 @@
 	$height: 38px
 );
 @use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
-@use '@src/themes/Treedip/DonationForm/SubComponents/TransactionFees';
 @use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
 	$padding: 0
 );
@@ -47,3 +46,4 @@
 	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large + 100px: 18px )
 );
 @use '@src/themes/Treedip/Slider/KeenSlider';
+@use '@src/themes/Treedip/DonationForm/Forms/MainDonationFormIntervalCheering';

@@ -46,8 +46,13 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
-
+						<MainDonationForm
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+							:hasIntervalCheering="true"
+						>
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
 							</template>
@@ -111,9 +116,10 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerText from '../content/BannerText.vue';
+import BannerTitle from '../content/BannerTitle.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormIntervalCheering.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
@@ -127,7 +133,6 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import { Tracker } from '@src/tracking/Tracker';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
@@ -137,7 +142,6 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
 import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
-import BannerTitle from '../../../desktop/C25_WMDE_Desktop_DE_00/content/BannerTitle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main'
@@ -193,6 +197,7 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 
 	}
 }
+
 function onHideFundsModal(): void {
 	isFundsModalVisible.value = false;
 	emit( 'modalClosed' );
