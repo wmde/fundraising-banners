@@ -9,6 +9,10 @@
 			:bannerState="bannerState"
 			v-if="contentState === ContentStates.Main"
 		>
+			<template #banner-title>
+				<BannerTitle/>
+			</template>
+
 			<template #banner-text>
 				<BannerText/>
 			</template>
@@ -36,7 +40,11 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction" :submit-callback="onFormSubmit">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					@form-interaction="formInteraction"
+					:submit-callback="onFormSubmit"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationFormTransactionFees :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
@@ -50,7 +58,9 @@
 							</template>
 
 							<template #label-payment-ueb>
-								<span class="wmde-banner-select-group-label with-logos bank-transfer"><BankTransferLogo/>&nbsp;Überweisung</span>
+								<span class="wmde-banner-select-group-label with-logos bank-transfer">
+									<BankTransferIcon/><span>Überweisung</span>
+								</span>
 							</template>
 
 							<template #label-payment-mcp>
@@ -78,7 +88,7 @@
 
 			<template #footer>
 				<FooterAlreadyDonated
-					@showFundsModal="isFundsModalVisible = true"
+					@showFundsModal="onModalOpened"
 					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
@@ -88,15 +98,8 @@
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
-			@hide="isFundsModalVisible = false"
-			@call-to-action="isFundsModalVisible = false"
-		/>
-
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@hide="onHideFundsModal"
+			@call-to-action="onHideFundsModal"
 		/>
 	</div>
 </template>
@@ -128,7 +131,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { CoverTransactionFeesEvent } from '@src/tracking/events/CoverTransactionFeesEvent';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
@@ -136,12 +138,12 @@ import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
-import BankTransferLogo from '@src/components/PaymentLogos/BankTransferLogo.vue';
+import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
 import SetMaybeLaterCookieImage from '@src/components/SetWPDECookieImage/SetMaybeLaterCookieImage.vue';
+import BannerTitle from '../../../desktop/C25_WMDE_Desktop_DE_00/content/BannerTitle.vue';
 
 enum ContentStates {
-	Main = 'wmde-banner-wrapper--main',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
+	Main = 'wmde-banner-wrapper--main'
 }
 
 enum FormStepNames {
@@ -152,11 +154,10 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	remainingImpressions: number;
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+defineProps<Props>();
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
@@ -175,11 +176,7 @@ watch( contentState, async () => {
 } );
 
 function onCloseMain(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	onClose( 'MainBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
@@ -205,6 +202,16 @@ function onFormSubmit(): void {
 	if ( formModel.hasTransactionFee.value ) {
 		tracker.trackEvent( new CoverTransactionFeesEvent() );
 	}
+}
+
+function onHideFundsModal(): void {
+	isFundsModalVisible.value = false;
+	emit( 'modalClosed' );
+}
+
+function onModalOpened(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
 }
 
 </script>
