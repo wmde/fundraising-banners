@@ -36,7 +36,7 @@
 	$height: 42px,
 	$padding: 0 8px 8px
 );
-@use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
+@use '@src/themes/Treedip/DonationForm/Forms/MainDonationFormAmountButtonHighlighted' with (
 	$padding: 0
 );
 @use '@src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
