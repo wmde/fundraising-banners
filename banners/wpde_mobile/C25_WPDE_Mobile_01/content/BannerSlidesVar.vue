@@ -19,7 +19,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Doch schon mit einer Spende von 15&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
+			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			<AnimatedText :content="visitorsVsDonorsSentence"/>
 		</p>
 	</KeenSliderSlide>
@@ -64,4 +64,5 @@ watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
 	}
 } );
 onMounted( startTimer );
+
 </script>
