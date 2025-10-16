@@ -105,7 +105,7 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormAmountButtonHighlighted.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
