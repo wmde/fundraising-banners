@@ -1,18 +1,36 @@
 <template>
 	<div class="wmde-banner-mini">
-		<div class="wmde-banner-mini-close">
-			<button class="wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
+
+		<div class="wmde-banner-mini-info-section">
+			<button
+				class="wmde-banner-mini-uof-link wmde-banner-footer-usage-link"
+				@click.prevent="$emit( 'showFundsModal' )"
+				:title="$translate( 'use-of-funds-link-description' )"
+			>
+				<InfoIconStraight/> Warum spenden?
+			</button>
+
+			<button
+				class="wmde-banner-mini-already-donated-button"
+				@click.prevent="$emit( 'alreadyDonatedClicked' )"
+			>
+				<InfoIconStraight/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+			</button>
+		</div>
+
+		<div class="wmde-banner-mini-info">
+			<button class="wmde-banner-mini-close wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
 				<CloseIconMobile/>
 			</button>
 		</div>
 
 		<header class="wmde-banner-mini-headline">
 			<div class="wmde-banner-mini-headline-background">
-				<span class="wmde-banner-mini-headline-content">Ist Ihnen Wikipedia 5&nbsp;€ wert?</span>
+				<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
 			</div>
 		</header>
 
-		<div class="wmde-banner-mini-banner-slideshow">
+		<div class="wmde-banner-mini-slideshow">
 			<slot name="banner-slides"/>
 		</div>
 		<div class="wmde-banner-mini-button-group">
@@ -30,7 +48,8 @@
 <script setup lang="ts">
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close' ] );
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal', 'alreadyDonatedClicked' ] );
 
 </script>

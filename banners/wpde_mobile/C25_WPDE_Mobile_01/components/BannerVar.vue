@@ -6,9 +6,11 @@
 			@close="onCloseMiniBanner"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
+			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
-				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="5000">
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
@@ -19,7 +21,7 @@
 		</MiniBanner>
 
 		<FullPageBanner
-			@showFundsModal="isFundsModalVisible = true"
+			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
 			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
@@ -45,7 +47,8 @@
 							@previous="previous"
 						>
 							<template #back>
-								<ChevronLeftIcon/> {{ $translate( 'back-button' ) }}
+								<ChevronLeftIcon/>
+								{{ $translate( 'back-button' ) }}
 							</template>
 						</UpgradeToYearlyButtonForm>
 					</template>
@@ -58,43 +61,17 @@
 			</template>
 		</FullPageBanner>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.Hide )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		>
-			<template #buttons="{ timer }: any">
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Hide )">
-					{{ $translate( 'soft-close-button-maybe-later' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
-					{{ $translate( 'soft-close-button-close' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.AlreadyDonated )">
-					{{ $translate( 'soft-close-button-already-donated' ) }}
-				</button>
-			</template>
-		</SoftClose>
-
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
-			@call-to-action="onHideFundsModal"
+			@callToAction="onFundsModalCallToAction"
 		/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBannerVar.vue';
@@ -124,6 +101,7 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
+import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -140,13 +118,13 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	remainingImpressions: number;
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
+
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const showSetCookieImage = ref<boolean>( false );
@@ -164,15 +142,12 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
+	onClose( 'MiniBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	emit( 'modalClosed' );
 	switch ( userChoice ) {
 		case CloseChoices.MaybeLater:
 		case CloseChoices.Hide:
@@ -190,6 +165,8 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
 	contentState.value = ContentStates.FullPage;
+	emit( 'modalOpened' );
+
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
@@ -202,11 +179,33 @@ function onshowFullPageBannerPreselected(): void {
 
 const onHideFundsModal = (): void => {
 	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalClosed' );
+	}
+
+	if ( contentState.value === ContentStates.FullPage ) {
+		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
+	}
+};
+
+const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
+	isFundsModalVisible.value = true;
+	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+
+	if ( contentState.value === ContentStates.Mini ) {
+		emit( 'modalOpened' );
+	}
+};
+
+const onFundsModalCallToAction = (): void => {
+	isFundsModalVisible.value = false;
+
+	if ( contentState.value === ContentStates.Mini ) {
+		onshowFullPageBanner();
+	}
+
 	props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 };
 
-function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	window.clearInterval( timer );
-	onClose( feature, userChoice );
-}
 </script>

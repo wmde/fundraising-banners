@@ -1,31 +1,38 @@
-import { afterEach, beforeEach, describe, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, Mock, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/wpde_mobile/C25_WPDE_Mobile_01/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
+import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
-import { softCloseFeatures } from '@test/features/SoftCloseMobile';
-import { mobileUseOfFundsFeatures, useOfFundsScrollFeatures } from '@test/features/UseOfFunds';
+import {
+	mobileUseOfFundsFeatures,
+	useOfFundsScrollFeatures,
+	useOfFundsTrackingFeatures
+} from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
-import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
+import { bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { setCookieImageFeatures } from '@test/features/SetCookieImageMobile';
-import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
+import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { Tracker } from '@src/tracking/Tracker';
 
 let pageScroller: PageScroller;
+let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
 
 describe( 'BannerVar.vue', () => {
+	let showCallback: Mock;
+	let closeCallback: Mock;
 
 	let wrapper: VueWrapper<any>;
 	beforeEach( () => {
@@ -35,6 +42,16 @@ describe( 'BannerVar.vue', () => {
 			scrollIntoView: vi.fn(),
 			scrollToTop: vi.fn()
 		};
+
+		tracker = {
+			trackEvent: vi.fn()
+		};
+
+		// for use of funds dialogue
+		showCallback = vi.fn();
+		closeCallback = vi.fn();
+		HTMLDialogElement.prototype.showModal = showCallback;
+		HTMLDialogElement.prototype.close = closeCallback;
 	} );
 
 	afterEach( () => {
@@ -50,7 +67,10 @@ describe( 'BannerVar.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				localCloseTracker: {
+					getItem: () => '',
+					setItem: () => {}
+				}
 			},
 			global: {
 				mocks: {
@@ -60,16 +80,25 @@ describe( 'BannerVar.vue', () => {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: fakeFormActions,
-					currencyFormatter: new CurrencyEn(),
+					currencyFormatter: new CurrencyDe(),
 					formItems,
-					tracker: new TrackerStub(),
-					timer: timer ?? new TimerStub()
+					tracker,
+					timer: timer ?? new TimerStub(),
 				}
 			}
 		} );
 
 		return wrapper;
 	};
+
+	describe( 'Content', () => {
+		test.each( [
+			[ 'expectShowsLiveTimeInMiniBanner' ],
+			[ 'expectShowsLiveTimeInFullPageBanner' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
+		} );
+	} );
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [
@@ -83,23 +112,9 @@ describe( 'BannerVar.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close', () => {
-		test.each( [
-			[ 'expectShowsSoftCloseOnMiniBannerClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFullBannerClose' ],
-			[ 'expectEmitsSoftCloseCloseEvent' ],
-			[ 'expectEmitsSoftCloseTimeOutEvent' ],
-			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
-			[ 'expectDoesNotShowSoftCloseOnFinalBannerImpression' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
 	describe( 'Set Cookie Image', () => {
 		test.each( [
-			[ 'expectSetsCookieImageOnSoftCloseClose' ],
-			[ 'expectSetsCookieImageOnSoftCloseTimeOut' ]
+			[ 'expectSetsCookieImageOnMiniBannerClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await setCookieImageFeatures[ testName ]( getWrapper );
 		} );
@@ -107,17 +122,27 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Use of Funds', () => {
 		test.each( [
-			[ 'expectShowsUseOfFundsOnFullPageBanner' ],
-			[ 'expectHidesUseOfFundsOnFullPageBanner' ]
+			[ 'expectShowsUseOfFundsOnMiniBanner' ],
+			[ 'expectHidesUseOfFundsOnMiniBanner' ],
+			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
+			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
+			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToFormWhenClosesToFullPage' ]
+			[ 'expectScrollsToFormWhenClosesToFullPage' ],
+			[ 'expectDoesNotScrollToFormWhenClosesToMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
+		} );
+
+		test.each( [
+			[ 'expectClickingUoFLinkOnMiniBannerTracksEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await useOfFundsTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
@@ -127,7 +152,9 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked' ],
-			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ]
+			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
+			[ 'expectEmitsCloseEvent' ],
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
@@ -135,10 +162,11 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Full Page Banner', () => {
 		test.each( [
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectEmitsCloseEvent' ],
+			[ 'expectEmitsModalOpenedEvent' ],
+			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
-
 } );

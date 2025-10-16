@@ -10,6 +10,7 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setIntervals(
 			Intervals.ONCE,
 			Intervals.MONTHLY,
+			Intervals.QUARTERLY,
 			Intervals.YEARLY
 		)
 		.setAmounts( 5, 15, 25, 50, 100 )
@@ -18,6 +19,5 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			PaymentMethods.CREDIT_CARD,
 			PaymentMethods.DIRECT_DEBIT,
 			PaymentMethods.BANK_TRANSFER,
-			PaymentMethods.SOFORT
 		).getItems();
 }

@@ -1,6 +1,12 @@
 @use '../../variables/select_group';
 @use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
 
+/**
+ These are for defining the column widths of the individual select groups
+ Use 50% for 2 columns, use 25% for 4 columns, 33.3333% for 3 columns
+ */
+$width: 33.3333% !default;
+
 .wmde-banner {
 	@include SelectCustomAmount.layout;
 
@@ -11,8 +17,8 @@
 	to keep the styles in sync
 	 */
 	&-select-custom-amount {
-		flex: 0 0 33.3333%;
-		width: 33.3333%;
+		flex: 0 0 $width;
+		width: $width;
 		padding: 0 4px;
 
 		&-input-container {
