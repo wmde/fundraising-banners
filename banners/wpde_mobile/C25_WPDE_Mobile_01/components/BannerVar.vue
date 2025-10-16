@@ -195,7 +195,7 @@ function onshowFullPageBanner(): void {
 
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
-	formModel.selectedAmount.value = '15';
+	formModel.selectedAmount.value = '5';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
