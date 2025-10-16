@@ -156,6 +156,28 @@ const expectShowsAverageDonationInSlideshow = async ( getWrapper: ( dynamicConte
 	expect( wrapper.find( '.wmde-banner-slider' ).text() ).toContain( '== Average Donation ==' );
 };
 
+const expectShowsLiveTimeInMiniBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
+	const localDynamicContent = newDynamicContent();
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
+		.mockReturnValueOnce( { currentDate: 'Third Date', currentTime: 'Third Time' } );
+
+	const timerSpy = new TimerSpy();
+	const wrapper = getWrapper( localDynamicContent, timerSpy );
+
+	expect( wrapper.find( '.wmde-banner-mini-slideshow' ).text() ).toContain( 'Initial Time' );
+
+	await timerSpy.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-mini-slideshow' ).text() ).toContain( 'Second Time' );
+
+	await timerSpy.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-mini-slideshow' ).text() ).toContain( 'Third Time' );
+};
+
 const expectShowsLiveDateAndTimeInMiniBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
 	const localDynamicContent = newDynamicContent();
 	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
@@ -179,6 +201,30 @@ const expectShowsLiveDateAndTimeInMiniBanner = async ( getWrapper: ( dynamicCont
 
 	expect( wrapper.find( '.wmde-banner-mini-slideshow' ).text() ).toContain( 'Third Date' );
 	expect( wrapper.find( '.wmde-banner-mini-slideshow' ).text() ).toContain( 'Third Time' );
+};
+
+const expectShowsLiveTimeInFullPageBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
+	const localDynamicContent = newDynamicContent();
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
+		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
+		.mockReturnValueOnce( { currentDate: 'Third Date', currentTime: 'Third Time' } );
+
+	const timerSpy = new TimerSpy();
+	const wrapper = getWrapper( localDynamicContent, timerSpy );
+
+	await wrapper.find( '.wmde-banner-mini-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Initial Time' );
+
+	await timerSpy.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Second Time' );
+
+	await timerSpy.advanceInterval();
+
+	expect( wrapper.find( '.wmde-banner-message' ).text() ).toContain( 'Third Time' );
 };
 
 const expectShowsLiveDateAndTimeInFullPageBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
@@ -235,6 +281,8 @@ export const bannerContentDateAndTimeFeatures: Record<string, ( getWrapper: () =
 	expectShowsLiveDateAndTimeInMessage,
 	expectShowsLiveDateAndTimeInSlideshow,
 	expectShowsLiveDateAndTimeInTitle,
+	expectShowsLiveTimeInMiniBanner,
 	expectShowsLiveDateAndTimeInMiniBanner,
+	expectShowsLiveTimeInFullPageBanner,
 	expectShowsLiveDateAndTimeInFullPageBanner
 };

@@ -1,6 +1,14 @@
 @use '../../variables/select_group';
 @use 'src/components/DonationForm/SubComponents/SelectGroup';
 
+/**
+ These are for defining the column widths of the individual select groups
+ Use 50% for 2 columns, use 25% for 4 columns
+ */
+$amount-option-width: 33.3333% !default;
+$interval-option-width: 33.3333% !default;
+$payment-option-width: 33.3333% !default;
+
 .wmde-banner {
 	@include SelectGroup.layout;
 
@@ -16,8 +24,7 @@
 		&-option {
 			font-size: select_group.$radio-font-size;
 			line-height: select_group.$form-radio-height;
-			flex: 0 0 33.3333%;
-			width: 33.3333%;
+			flex: 0 0 auto;
 			padding: 0 4px 8px;
 		}
 
@@ -76,5 +83,24 @@
 
 	&-error-icon {
 		font-size: 14px;
+	}
+
+	&-select-group-container.select-amount {
+		margin-top: 0;
+		.wmde-banner-select-group-option {
+			width: $amount-option-width;
+		}
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option {
+			width: $interval-option-width;
+		}
+	}
+
+	&-select-group-container.select-payment-method {
+		.wmde-banner-select-group-option {
+			width: $payment-option-width;
+		}
 	}
 }

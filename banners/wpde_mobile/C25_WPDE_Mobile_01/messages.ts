@@ -21,11 +21,13 @@ const messages: TranslationMessages = {
 		'per E-Mail. Sie erhalten von uns keine Information, wenn Wikipedia wieder Hilfe braucht.',
 	'soft-close-prompt': 'Wikipedia später unterstützen?',
 	'soft-close-button-already-donated': 'Habe schon gespendet',
+	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen.' +
 		' Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'payment-sofort': 'Sofort',
-	'payment-bank-transfer': 'Überweisung'
+	'payment-bank-transfer': 'Überweisung',
+	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!'
 };
 
 export default messages;

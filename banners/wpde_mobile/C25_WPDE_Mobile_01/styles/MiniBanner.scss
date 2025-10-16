@@ -7,10 +7,53 @@ $height: 267px !default;
 		display: flex;
 		flex-direction: column;
 		min-height: $height;
-		padding: 16px;
+		padding: 6px 16px 16px;
 		position: relative;
 		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
+
+		&-info-section {
+			display: flex;
+			position: relative;
+			color: var( --mini-headline-color );
+			font-weight: bold;
+			font-size: 11px;
+
+			padding-bottom: 8px;
+
+			left: -10px;
+		}
+
+		&-uof-link {
+			background: none;
+			border: none;
+			cursor: pointer;
+
+			padding-right: 15px;
+
+			--info-icon-background: var( --mini-info-section-color );
+			--info-icon-color: var( --mini-info-section-icon-color );
+			svg {
+				width: 10px;
+				height: 10px;
+				top: -5px;
+			}
+		}
+
+		&-already-donated-button {
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding-right: 30px;
+
+			--info-icon-background: var( --mini-info-section-color );
+			--info-icon-color: var( --mini-info-section-icon-color );
+			svg {
+				width: 10px;
+				height: 10px;
+				top: -5px;
+			}
+		}
 
 		&-close {
 			position: absolute;
