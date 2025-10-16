@@ -6,15 +6,6 @@
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
-			<template #banner-already-donated>
-				<button
-					class="wmde-banner-already-donated-button"
-					@click.prevent="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
-				>
-					<span>&check; Habe schon gespendet</span>
-				</button>
-			</template>
-
 			<template #banner-slides="{ play }: any">
 				<div class="wmde-banner-content-headline">
 					<span class="wmde-banner-content-headline-text">
@@ -83,7 +74,10 @@
 			</template>
 
 			<template #footer>
-				<BannerFooter @showFundsModal="onShowFundsModal"/>
+				<FooterAlreadyDonated
+					@showFundsModal="onModalOpened"
+					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+				/>
 			</template>
 		</MainBanner>
 
@@ -124,7 +118,7 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -161,11 +155,6 @@ function onFormInteraction(): void {
 	} );
 }
 
-function onShowFundsModal(): void {
-	isFundsModalVisible.value = true;
-	emit( 'modalOpened' );
-}
-
 function onHideFundsModal(): void {
 	isFundsModalVisible.value = false;
 	emit( 'modalClosed' );
@@ -177,6 +166,11 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onModalOpened(): void {
+	isFundsModalVisible.value = true;
+	emit( 'modalOpened' );
 }
 
 </script>
