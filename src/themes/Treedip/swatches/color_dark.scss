@@ -68,6 +68,8 @@ $brown300: #453217;
 	--input-checkbox-background-checked: #{$blue700};
 	--input-checkbox-border-checked: #{$white};
 
+	--sticky-color: #{$blue700};
+
 	--animated-highlight-color: #{$white};
 	/* stylelint-disable */
 	// --animated-highlight-gradient1:
@@ -148,8 +150,8 @@ $brown300: #453217;
 
 	@if $select-group-button {
 		--select-group-button-border: #{$grey300};
-		--select-group-button-background: #{$grey100};
-		--select-group-button-background-focused: #{$grey150};
+		--select-group-button-background: #{$grey600};
+		--select-group-button-background-focused: #{$grey650};
 		--select-group-button-border-checked: #{$grey600};
 		--select-group-button-background-checked: #{$blue700};
 		--select-group-button-color-checked: #{$white};
