@@ -21,7 +21,7 @@
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
 
 			<div v-if="showPreferredNote" class="wmde-banner-preferred-sticky">
-				<span>Preferred Amount</span>
+				<span>Mehr als durchschnittlich gespendet wird!</span>
 			</div>
 
 			<SelectGroup

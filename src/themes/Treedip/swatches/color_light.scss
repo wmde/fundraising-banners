@@ -23,8 +23,6 @@ $blue400: #3366cc;
 $blue600: #4465a7;
 $blue700: #2a4b8d;
 
-$yellow700: #fcd53f;
-
 @mixin swatch(
 	$slider: false,
 	$progress-bar: false,
@@ -37,8 +35,7 @@ $yellow700: #fcd53f;
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false,
-	$select-group-preferred-sticky: false
+	$fallback-banner: false
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -68,7 +65,7 @@ $yellow700: #fcd53f;
 	--input-checkbox-background-checked: #{$blue400};
 	--input-checkbox-border-checked: #{$blue400};
 
-	--sticky-color: #{$yellow700};
+	--sticky-color: #{$blue400};
 
 	--animated-highlight-color: #{$grey700};
 	/* stylelint-disable */
