@@ -7,7 +7,7 @@
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
@@ -80,7 +80,7 @@ import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/Use
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText.vue';
+import BannerText from '../content/BannerTextVar.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import BannerSlides from '../content/BannerSlides.vue';
