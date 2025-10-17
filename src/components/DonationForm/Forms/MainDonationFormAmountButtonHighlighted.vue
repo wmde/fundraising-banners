@@ -21,7 +21,7 @@
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'amounts-header' ) }}</legend>
 
 			<div v-if="showPreferredNote" class="wmde-banner-preferred-sticky">
-				<span>Preferred Amount</span>
+				<span>Empfohlener Betrag</span>
 			</div>
 
 			<SelectGroup
@@ -139,7 +139,8 @@ const formatCustomAmount = (): void => {
 };
 
 const showPreferredNote = computed( () => {
-	return interval.value !== '1' && interval.value !== '12';
+	const intervalIsValid = isValidOrUnset( intervalValidity.value );
+	return intervalIsValid && interval.value !== '1' && interval.value !== '12';
 } );
 
 </script>

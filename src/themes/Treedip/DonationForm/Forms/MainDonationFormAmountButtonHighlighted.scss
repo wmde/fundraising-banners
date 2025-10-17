@@ -31,29 +31,29 @@ $padding: 0 !default;
 	&-preferred-sticky {
 		position: absolute;
 		top: -27px;
-		left: 75%;
-		transform: translateX( -50% );
+		left: 55%;
+		transform: translateX( -2% );
 		z-index: 30;
 		display: inline-block;
 		min-width: 120px;
-		padding: 1px 0 0;
+		padding: 1px 7px 0;
 		height: 20px;
 		line-height: 16px;
 		text-align: center;
 		white-space: nowrap;
 		background: var( --sticky-color );
-		box-shadow: 0 4px 8px rgb( 0, 0, 0, 0.18 );
+		color: black;
 		border-radius: 1px;
 		font-family: fonts.$ui;
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: 600;
 
 		&::after {
 			content: '';
 			position: absolute;
 			bottom: -6px;
-			left: calc( 75% - 8px );
-			transform: translateX( -50% );
+			left: calc( 82% );
+			transform: translateX( -200% );
 			border-style: solid;
 			border-width: 7px 7px 0;
 			border-color: var( --sticky-color ) transparent transparent transparent;

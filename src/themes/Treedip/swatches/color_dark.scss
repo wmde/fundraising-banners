@@ -8,6 +8,7 @@ $grey200: #bbbbbb;
 $grey300: #b7b7b7;
 $grey500: #808080;
 $grey600: #777777;
+$grey625: #626262;
 $grey650: #383838;
 $grey700: #292929;
 $grey800: #1f1f1f;
@@ -26,7 +27,7 @@ $blue800: #20303f;
 
 $brown300: #453217;
 
-$yellow700: #d7b13f;
+$yellow700: #fcd53f;
 
 @mixin swatch(
 	$slider: false,
@@ -152,7 +153,7 @@ $yellow700: #d7b13f;
 
 	@if $select-group-button {
 		--select-group-button-border: #{$grey300};
-		--select-group-button-background: #{$grey600};
+		--select-group-button-background: #{$grey625};
 		--select-group-button-background-focused: #{$grey650};
 		--select-group-button-border-checked: #{$grey600};
 		--select-group-button-background-checked: #{$blue700};
