@@ -73,17 +73,17 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import FullPageBanner from './FullPageBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerTextVar.vue';
+import BannerText from '../content/BannerText.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
