@@ -15,8 +15,8 @@ import { CampaignParameters } from '@src/domain/CampaignParameters';
 export function getCampaignParameterOverride( campaignParameters: CampaignParameters ): CampaignParameters {
 	return {
 		...campaignParameters,
-		startDate: '2024-10-28',
-		endDate: '2024-12-31',
+		startDate: '2025-10-28',
+		endDate: '2025-12-31',
 		isLateProgress: true,
 		dramaTextIsVisible: true
 	};
