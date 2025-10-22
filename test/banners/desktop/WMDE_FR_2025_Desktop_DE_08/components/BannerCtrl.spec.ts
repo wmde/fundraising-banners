@@ -24,6 +24,8 @@ import { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
+import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -122,6 +124,23 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForPayPal' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close', () => {
+		test.each( [
+			[ 'expectDoesNotShowSoftClose' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseFeatures[ testName ]( getWrapper );
+		} );
+	} );
+
+	describe( 'Soft Close Submit Tracking', () => {
+		test.each( [
+			// this ctrl banner does not have the softclose feature
+			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
