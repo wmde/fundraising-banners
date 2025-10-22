@@ -17,7 +17,7 @@ import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeT
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { bannerAutoHideFeatures } from '@test/features/MainBanner';
+import { bannerAutoHideFeatures, bannerMainFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { Tracker } from '@src/tracking/Tracker';
@@ -46,6 +46,7 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
+				remainingImpressions: 10,
 				localCloseTracker: {
 					getItem: () => '',
 					setItem: () => {}
@@ -74,6 +75,11 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectClosesBannerWhenWindowBecomesSmall' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerAutoHideFeatures[ testName ]( getWrapper );
+		} );
+		test.each( [
+			[ 'expectDoesNotEmitCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
@@ -129,7 +135,13 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Soft Close', () => {
 		test.each( [
-			[ 'expectDoesNotShowSoftClose' ]
+			[ 'expectShowsSoftClose' ],
+			[ 'expectEmitsSoftCloseCloseEvent' ],
+			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseTimeOutEvent' ],
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectShowsCloseIcon' ],
+			[ 'expectCloseIconEmitsCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper );
 		} );
@@ -137,8 +149,9 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Soft Close Submit Tracking', () => {
 		test.each( [
-			// this ctrl banner does not have the softclose feature
-			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ]
+			// this var banner has the softclose feature
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );

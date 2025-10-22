@@ -87,6 +87,15 @@
 
 		</MainBanner>
 
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybeLater7Days="() => onClose( 'SoftClose', CloseChoices.Close )"
+		/>
+
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
@@ -130,9 +139,11 @@ import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
 import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
 import MasterCardIcon from '@src/components/PaymentLogos/MasterCardIcon.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -143,6 +154,7 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
+	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -173,7 +185,11 @@ const onSubmit = (): void => {
 };
 
 function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
