@@ -2,9 +2,12 @@
 	<div class="wmde-banner-message">
 		<div>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
-				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
+				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
+				Seit 25 Jahren steht Wikipedia für ein Internet, das von Menschen erschaffen wird – nicht von Maschinen.
+				Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
+				Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, die Unabhängigkeit von Wikipedia zu unterstützen.
+				{{ campaignDaySentence }}
+				<AnimatedText :content="visitorsVsDonorsSentence"/>
 				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
@@ -23,7 +26,9 @@ import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 const {
 	currentDayName,
 	currentDate,
-	averageDonation
+	averageDonation,
+	campaignDaySentence,
+	visitorsVsDonorsSentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
