@@ -7,6 +7,7 @@
 	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
+	$progress-bar: true,
 );
 @use 'src/components/BannerConductor/banner-transition';
 @use '../../../../src/components/UseOfFunds/styles/swatches/skin_vector-2022' as uof-default;
@@ -18,6 +19,7 @@
 );
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
+@use 'src/themes/Treedip/ProgressBar/ProgressBar';
 @use 'src/themes/Treedip/DonationForm/DonationForm';
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup' with (

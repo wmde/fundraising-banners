@@ -36,6 +36,13 @@ $form-width: 300px !default;
 		border-radius: 9px;
 	}
 
+	&-slider-container {
+		margin-bottom: 10px;
+	}
+	&-progress-bar {
+		width: 100%;
+	}
+
 	&-column-left {
 		display: flex;
 		flex-direction: column;
