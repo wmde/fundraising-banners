@@ -38,7 +38,7 @@
 			</div>
 
 			<slot name="close-button">
-				<ButtonClose v-if="showCloseIcon" @close="onCloseClick"/>
+				<ButtonClose v-if="showCloseIcon" @close="onCloseXIconClick"/>
 			</slot>
 		</div>
 	</div>
@@ -63,7 +63,7 @@ const props = withDefaults( defineProps<Props>(), {
 const timer = inject<Timer>( 'timer' );
 const secondsRemaining = ref<number>( props.secondsTotal );
 
-const emit = defineEmits( [ 'close', 'maybeLater', 'timeOutClose' ] );
+const emit = defineEmits( [ 'close', 'maybeLater', 'x-icon-close', 'timeOutClose' ] );
 
 const onMaybeLaterClick = (): void => {
 	emit( 'maybeLater' );
@@ -71,6 +71,10 @@ const onMaybeLaterClick = (): void => {
 
 const onCloseClick = (): void => {
 	emit( 'close' );
+};
+
+const onCloseXIconClick = (): void => {
+	emit( 'x-icon-close' );
 };
 
 onMounted( () => {
