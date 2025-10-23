@@ -12,13 +12,13 @@ export class LocalStorageCloseTracker implements LocalCloseTracker {
 		if ( !hasLocalStorage() ) {
 			return;
 		}
-		window.localStorage.setItem( 'fundraising.closeChoice', `${feature}_${closeChoice}` );
+		window.localStorage.setItem( 'fundraising.closeChoice2025', `${feature}_${closeChoice}` );
 	}
 
 	public getItem(): string {
 		if ( !hasLocalStorage() ) {
 			return '';
 		}
-		return window.localStorage.getItem( 'fundraising.closeChoice' ) || '';
+		return window.localStorage.getItem( 'fundraising.closeChoice2025' ) || '';
 	}
 }
