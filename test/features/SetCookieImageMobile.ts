@@ -4,6 +4,13 @@ import { TimerSpy } from '@test/fixtures/TimerSpy';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { Timer } from '@src/utils/Timer';
 
+const expectSetsCookieImageOnMiniBannerClose = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
+	const wrapper = getWrapper();
+
+	await wrapper.find( '.wmde-banner-mini-close-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '.wmde-banner-set-cookie-image' ).exists() ).toBeTruthy();
+};
 const expectSetsCookieImageOnSoftCloseClose = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
 
@@ -39,6 +46,7 @@ const expectDoesNotSetCookieImageOnSoftCloseMaybeLater = async ( getWrapper: () 
 };
 
 export const setCookieImageFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {
+	expectSetsCookieImageOnMiniBannerClose,
 	expectSetsCookieImageOnSoftCloseClose,
 	expectSetsCookieImageOnSoftCloseTimeOut,
 	expectDoesNotSetCookieImageOnSoftCloseMaybeLater

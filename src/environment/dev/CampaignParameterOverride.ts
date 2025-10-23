@@ -18,6 +18,6 @@ export function getCampaignParameterOverride( campaignParameters: CampaignParame
 		startDate: '2025-10-28',
 		endDate: '2025-12-31',
 		isLateProgress: false,
-		dramaTextIsVisible: true
+		dramaTextIsVisible: false
 	};
 }
