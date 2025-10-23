@@ -5,7 +5,7 @@
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
