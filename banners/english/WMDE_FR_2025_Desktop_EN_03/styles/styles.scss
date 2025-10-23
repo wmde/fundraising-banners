@@ -5,7 +5,7 @@
 	$select-group-image-label: true,
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
-	$double-progress-bar: true,
+	$progress-bar: true,
 	$soft-close: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
@@ -24,7 +24,9 @@
 	$right: 8px,
 	$margin: -4.5px
 );
-@use 'src/themes/Treedip/ProgressBar/DoubleProgressBar';
+@use 'src/themes/Treedip/ProgressBar/ProgressBar' with (
+	$progress-bar-margin: 15px
+);
 @use 'src/themes/Treedip/DonationForm/DonationForm';
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
 @use 'src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubble';
