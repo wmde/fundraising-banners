@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/english/WMDE_FR_2025_Desktop_EN_03/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -8,7 +8,6 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
-import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -19,14 +18,21 @@ import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
+import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
+import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
+import { Tracker } from '@src/tracking/Tracker';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
+let tracker: Tracker;
 
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 
 	beforeEach( () => {
 		resetFormModel( formModel );
+		tracker = {
+			trackEvent: vi.fn()
+		};
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
@@ -35,6 +41,7 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
+				remainingImpressions: 10,
 				localCloseTracker: {
 					getItem: () => '',
 					setItem: () => {}
@@ -50,7 +57,7 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub(),
+					tracker,
 					timer: timer ?? new TimerStub(),
 					currentCampaignTimePercentage: 42
 				}
@@ -66,7 +73,7 @@ describe( 'BannerCtrl.vue', () => {
 			await bannerAutoHideFeatures[ testName ]( getWrapper );
 		} );
 		test.each( [
-			[ 'expectEmitsCloseEvent' ]
+			[ 'expectDoesNotEmitCloseEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerMainFeatures[ testName ]( getWrapper() );
 		} );
@@ -122,6 +129,33 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close', () => {
+		test.each( [
+			[ 'expectShowsSoftClose' ],
+			[ 'expectEmitsSoftCloseCloseEvent' ],
+			[ 'expectEmitsSoftCloseMaybeLaterEvent' ],
+			[ 'expectEmitsSoftCloseTimeOutEvent' ],
+			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
+			[ 'expectShowsCloseIcon' ],
+			[ 'expectCloseIconEmitsCloseEvent' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseFeatures[ testName ]( getWrapper );
+		} );
+	} );
+
+	describe( 'Soft Close Submit Tracking Desktop', () => {
+		test.each( [
+			// this var banner has the softclose feature
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectStoresXCloseChoice' ],
+			[ 'expectStoresCloseCloseChoice' ],
+			[ 'expectStoresMaybeLateCloseChoice' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
