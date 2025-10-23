@@ -60,10 +60,20 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="onOpenUseOfFunds"
-					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
 		</MainBanner>
+
+		<SoftClose
+			v-if="contentState === ContentStates.SoftClosing"
+			:show-close-icon="true"
+			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+			@x-icon-close="() => onClose( 'SoftClose', CloseChoices.XIconClose )"
+			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+			@maybeLater7Days="() => onClose( 'SoftClose', CloseChoices.Close )"
+		/>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -105,9 +115,11 @@ import { useBannerHider } from '@src/components/composables/useBannerHider';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
+	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -118,6 +130,7 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
+	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -158,11 +171,16 @@ function onCloseUseOfFunds(): void {
 }
 
 function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( 'MainBanner', CloseChoices.Close );
+	}
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>

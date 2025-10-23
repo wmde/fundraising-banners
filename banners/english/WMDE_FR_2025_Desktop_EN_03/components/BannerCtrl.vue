@@ -60,7 +60,7 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="onOpenUseOfFunds"
-					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
 		</MainBanner>
@@ -163,6 +163,7 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>

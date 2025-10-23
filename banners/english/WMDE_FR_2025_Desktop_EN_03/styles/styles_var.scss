@@ -6,7 +6,7 @@
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 	$progress-bar: true,
-	$soft-close: false,
+	$soft-close: true,
 );
 @use 'src/themes/Treedip/variables/breakpoints';
 @use 'src/components/BannerConductor/banner-transition';
@@ -52,6 +52,7 @@
 @use 'src/themes/Treedip/Message/Message' with (
 	$font-sizes: ( 1400px: 15px, 1600px: 16px, 1800px: 18px )
 );
+@use 'src/themes/Treedip/SoftClose/SoftClose';
 @use 'src/themes/Treedip/Slider/KeenSlider';
 @use 'src/components/FallbackBanner/styles/swatches/skin_vector-2022' as fbb-default;
 @use 'src/components/FallbackBanner/styles/styles' as fbb-styles;
