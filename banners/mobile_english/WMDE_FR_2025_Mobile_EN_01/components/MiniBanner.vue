@@ -30,7 +30,7 @@
 						class="wmde-banner-mini-already-donated-button"
 						@click.prevent="$emit( 'alreadyDonatedClicked' )"
 					>
-						<span class="wmde-banner-mini-already-donated-icon"><SimpleInfoIcon/></span>
+						<span class="wmde-banner-mini-already-donated-icon">&check;</span>
 						<span>{{ $translate( 'mini-banner-already-donated-button' ) }}</span>
 					</button>
 				</div>
