@@ -14,7 +14,7 @@
 				class="wmde-banner-mini-already-donated-button"
 				@click.prevent="$emit( 'alreadyDonatedClicked' )"
 			>
-				<InfoIconStraight/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+				<TickIcon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
 			</button>
 		</div>
 
@@ -49,6 +49,7 @@
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
+import TickIcon from '@src/components/Icons/TickIcon.vue';
 
 defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal', 'alreadyDonatedClicked' ] );
 
