@@ -17,6 +17,7 @@ import { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
 import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds';
+import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -105,6 +106,14 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsCreditCardLogos' ]
 		] )( '%s', async ( testName: string ) => {
 			await paymentIconFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Already Donated', () => {
+		test.each( [
+			[ 'expectFiresMaybeLaterEventOnLinkClick' ]
+		] )( '%s', async ( testName: string ) => {
+			await alreadyDonatedLinkFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 
