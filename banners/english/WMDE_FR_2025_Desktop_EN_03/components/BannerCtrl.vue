@@ -25,7 +25,11 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
+				<MultiStepDonation
+					:step-controllers="stepControllers"
+					@form-interaction="formInteraction"
+					:submit-callback="onSubmit"
+				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
 						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
@@ -72,7 +76,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
@@ -83,6 +87,7 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
@@ -98,6 +103,8 @@ import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -111,11 +118,14 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
+	localCloseTracker: LocalCloseTracker;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 useBannerHider( 800, emit );
+
+const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -128,6 +138,14 @@ const stepControllers = [
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
+
+const onSubmit = (): void => {
+	// special callback function: asking for previous close choices
+	const closeChoice = props.localCloseTracker.getItem();
+	if ( closeChoice !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
+	}
+};
 
 function onOpenUseOfFunds(): void {
 	isFundsModalVisible.value = true;
