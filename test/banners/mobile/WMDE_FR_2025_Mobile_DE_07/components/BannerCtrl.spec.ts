@@ -20,10 +20,11 @@ import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
-import { bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
+import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -94,6 +95,15 @@ describe( 'BannerVar.vue', () => {
 
 	describe( 'Content', () => {
 		test.each( [
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
+			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
 			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
 			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
 		] )( '%s', async ( testName: string ) => {
@@ -119,6 +129,17 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close Submit Tracking', () => {
+		test.each( [
+			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectStoresAlreadyDonatedCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 

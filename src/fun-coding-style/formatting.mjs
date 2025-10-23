@@ -41,7 +41,7 @@ export default {
 		'@stylistic/no-trailing-spaces': 'error',
 		'@stylistic/no-whitespace-before-property': 'error',
 		'@stylistic/object-curly-spacing': [ 'error', 'always' ],
-		'@stylistic/quotes': [ 'error', 'single', { allowTemplateLiterals: true } ],
+		'@stylistic/quotes': [ 'error', 'single', { allowTemplateLiterals: 'always' } ],
 		'@stylistic/semi': [ 'error', 'always' ],
 		'@stylistic/semi-spacing': [ 'error', { before: false, after: true } ],
 		'@stylistic/semi-style': [ 'error', 'last' ],

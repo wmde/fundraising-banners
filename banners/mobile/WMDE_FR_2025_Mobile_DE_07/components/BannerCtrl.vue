@@ -5,13 +5,15 @@
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
+							<template #progress><ProgressBar amount-to-show-on-right="TARGET"/></template>
+						</BannerSlides>
 					</template>
 
 				</KeenSlider>
@@ -24,6 +26,10 @@
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
+			</template>
+
+			<template #progress>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -72,32 +78,6 @@
 			</template>
 		</FullPageBanner>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		>
-			<template #buttons="{ timer }: any">
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-maybe-later"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.MaybeLater )">
-					{{ $translate( 'soft-close-button-maybe-later' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-close"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.Close )">
-					{{ $translate( 'soft-close-button-close' ) }}
-				</button>
-				<button
-					class="wmde-banner-soft-close-button wmde-banner-soft-close-button-already-donated"
-					@click="() => onSoftCloseClose( timer, 'SoftClose', CloseChoices.AlreadyDonated )">
-					{{ $translate( 'soft-close-button-already-donated' ) }}
-				</button>
-			</template>
-		</SoftClose>
-
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
@@ -139,12 +119,12 @@ import MainDonationFormButton
 	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -195,11 +175,6 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 	props.localCloseTracker.setItem( feature, userChoice );
-}
-
-function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	window.clearInterval( timer );
-	onClose( feature, userChoice );
 }
 
 const onSubmit = (): void => {
