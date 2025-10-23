@@ -7,7 +7,7 @@ import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds';
-import { bannerContentAnimatedTextFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -83,6 +83,13 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
+		} );
+
+		test.each( [
+			[ 'expectShowsLiveDateAndTimeInMessage' ],
+			[ 'expectShowsLiveDateAndTimeInSlideshow' ]
+		] )( '%s', async ( testName: string ) => {
+			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
 		} );
 	} );
 

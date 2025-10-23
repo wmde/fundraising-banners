@@ -6,11 +6,6 @@
 			:banner-state="bannerState"
 			v-if="contentState === ContentStates.Main"
 		>
-
-			<template #banner-title>
-				<BannerTitle/>
-			</template>
-
 			<template #banner-text>
 				<BannerText/>
 			</template>
@@ -74,13 +69,12 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { ref, watch } from 'vue';
+import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import BannerTitle from '../content/BannerTitleVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import MainBanner from './MainBannerVar.vue';
+import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerText.vue';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
