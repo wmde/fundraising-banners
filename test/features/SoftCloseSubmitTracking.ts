@@ -55,6 +55,17 @@ const expectStoresAlreadyDonatedCloseChoice = async ( wrapper: VueWrapper<any> )
 	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'SoftClose', CloseChoices.AlreadyDonated );
 };
 
+const expectStoresAlreadyDonatedCloseChoiceInBannerWithoutSoftClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	const localCloseTracker: LocalCloseTracker = {
+		getItem: vi.fn(),
+		setItem: vi.fn()
+	};
+	await wrapper.setProps( { localCloseTracker } );
+	await wrapper.find( '.wmde-banner-mini-already-donated-button' ).trigger( 'click' );
+
+	expect( localCloseTracker.setItem ).toHaveBeenCalledWith( 'MiniBanner', CloseChoices.AlreadyDonated );
+};
+
 const expectEmitsBannerSubmitOnReturnEvent = async ( wrapper: VueWrapper<any>, tracker: Tracker ): Promise<any> => {
 	const localCloseTracker: LocalCloseTracker = {
 		getItem: () => 'I chose not to choose a close choice',
@@ -88,6 +99,7 @@ export const softCloseSubmitTrackingFeatures: Record<string, ( wrapper: VueWrapp
 	expectStoresMaybeLateCloseChoice,
 	expectStoresCloseCloseChoice,
 	expectStoresAlreadyDonatedCloseChoice,
+	expectStoresAlreadyDonatedCloseChoiceInBannerWithoutSoftClose,
 	expectEmitsBannerSubmitOnReturnEvent,
 	expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing
 };
