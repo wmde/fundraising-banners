@@ -141,16 +141,19 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsSoftCloseTimeOutEvent' ],
 			[ 'expectEmitsBannerContentChangedOnSoftClose' ],
 			[ 'expectShowsCloseIcon' ],
-			[ 'expectCloseIconEmitsCloseEvent' ]
+			[ 'expectCloseIconEmitsCloseEvent' ],
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper );
 		} );
 	} );
 
-	describe( 'Soft Close Submit Tracking', () => {
+	describe( 'Soft Close Submit Tracking Desktop', () => {
 		test.each( [
 			// this var banner has the softclose feature
 			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectStoresXCloseChoice' ],
+			[ 'expectStoresCloseCloseChoice' ],
+			[ 'expectStoresMaybeLateCloseChoice' ],
 			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );

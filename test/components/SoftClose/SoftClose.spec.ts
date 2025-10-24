@@ -101,6 +101,6 @@ describe( 'SoftClose', function () {
 
 		await wrapper.findComponent( ButtonClose ).trigger( 'click' );
 
-		expect( wrapper.emitted( 'close' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'x-icon-close' ).length ).toBe( 1 );
 	} );
 } );
