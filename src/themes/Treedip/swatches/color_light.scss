@@ -23,6 +23,8 @@ $blue400: #3366cc;
 $blue600: #4465a7;
 $blue700: #2a4b8d;
 
+$yellow700: #fcd53f;
+
 @mixin swatch(
 	$slider: false,
 	$progress-bar: false,
@@ -64,6 +66,8 @@ $blue700: #2a4b8d;
 	--input-checkbox-border: #{$grey500};
 	--input-checkbox-background-checked: #{$blue400};
 	--input-checkbox-border-checked: #{$blue400};
+
+	--sticky-color: #{$yellow700};
 
 	--animated-highlight-color: #{$grey700};
 	/* stylelint-disable */

@@ -42,16 +42,10 @@
 
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
-import { inject } from 'vue';
-import { Tracker } from '@src/tracking/Tracker';
-import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
-
-const tracker = inject<Tracker>( 'tracker' );
 
 const emit = defineEmits( [ 'clickedAlreadyDonatedLink', 'showFundsModal' ] );
 
 const onClickAlreadyDonated = (): void => {
-	tracker.trackEvent( new ClickAlreadyDonatedEvent() );
 	emit( 'clickedAlreadyDonatedLink' );
 };
 </script>

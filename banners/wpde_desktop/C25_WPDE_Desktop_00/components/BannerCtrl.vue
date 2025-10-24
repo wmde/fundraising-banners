@@ -78,7 +78,7 @@
 			<template #footer>
 				<FooterAlreadyDonated
 					@showFundsModal="isFundsModalVisible = true"
-					@clickedAlreadyDonatedLink="onClose( 'AlreadyDonated', CloseChoices.AlreadyDonated )"
+					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
 
