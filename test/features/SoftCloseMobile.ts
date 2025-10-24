@@ -5,7 +5,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
 import { Timer } from '@src/utils/Timer';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 
 const expectShowsSoftCloseOnMiniBannerClose = async ( getWrapper: () => VueWrapper<any> ): Promise<any> => {
 	const wrapper = getWrapper();
