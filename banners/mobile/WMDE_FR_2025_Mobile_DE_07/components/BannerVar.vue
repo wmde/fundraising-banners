@@ -196,11 +196,6 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 	props.localCloseTracker.setItem( feature, userChoice );
 }
 
-function onSoftCloseClose( timer: number, feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	window.clearInterval( timer );
-	onClose( feature, userChoice );
-}
-
 const onSubmit = (): void => {
 	const closeChoice = props.localCloseTracker.getItem();
 	if ( closeChoice !== '' ) {
