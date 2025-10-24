@@ -99,10 +99,6 @@ $height-large: 288px !default;
 			}
 		}
 
-		.wmde-banner-progress-bar-text {
-			visibility: hidden;
-		}
-
 		&-already-donated-button {
 			background: none;
 			border: none;
@@ -139,6 +135,12 @@ $height-large: 288px !default;
 				width: auto;
 				margin-left: 10px;
 			}
+		}
+	}
+	&-slide-content-with-progress-bar {
+		p > strong {
+			display: block;
+			margin-bottom: 30px;
 		}
 	}
 }
