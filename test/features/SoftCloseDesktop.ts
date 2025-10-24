@@ -93,7 +93,7 @@ const expectCloseIconEmitsCloseEvent = async ( getWrapper: () => VueWrapper<any>
 	await wrapper.find( '.wmde-banner-soft-close .wmde-banner-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.Close ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', CloseChoices.XIconClose ) );
 };
 
 export const softCloseFeatures: Record<string, ( getWrapper: () => VueWrapper<any> ) => Promise<any>> = {

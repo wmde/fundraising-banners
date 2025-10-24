@@ -6,9 +6,9 @@
 [desktop]
 name = "Desktop"
 icon = "desktop"
-campaign = "WMDE_FR_2025_Desktop_DE_07"
-description = "Based on CTRL of desktop-de-06, VAR: uses different copy"
-campaign_tracking = "07-ba-251013"
+campaign = "WMDE_FR_2025_Desktop_DE_08"
+description = "Based on CTRL of desktop-de-07, VAR: introduces softclose feature again"
+campaign_tracking = "08-ba-251027"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -18,14 +18,14 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_07/banner_ctrl.ts"
-pagename = "WMDE_FR_2025_Desktop_DE_07_ctrl"
-tracking = "org-07-251013-ctrl"
+filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_08/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Desktop_DE_08_ctrl"
+tracking = "org-08-251027-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_07/banner_var.ts"
-pagename = "WMDE_FR_2025_Desktop_DE_07_var"
-tracking = "org-07-251013-var"
+filename = "./banners/desktop/WMDE_FR_2025_Desktop_DE_08/banner_var.ts"
+pagename = "WMDE_FR_2025_Desktop_DE_08_var"
+tracking = "org-08-251027-var"
 
 [desktop.test_matrix]
 platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
