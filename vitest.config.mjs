@@ -7,10 +7,10 @@ export default defineConfig( {
 
 	test: {
 		globals: false,
-		workspace: [
-			// The `just-the-defaults` directory is a "workspace" that does not exist.
+		projects: [
+			// The `just-the-defaults` directory is a "project" that does not exist.
 			// We only use it to define the shared defaults (coverage and resolve aliases) for the others
-			// See https://vitest.dev/guide/workspace.html
+			// See https://vitest.dev/guide/projects
 			'just-the-defaults/*',
 			{
 				extends: true,
