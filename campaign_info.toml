@@ -92,9 +92,9 @@ orientation = [ "portrait", "landscape"]
 [wpde_desktop]
 name = "WPDE Desktop"
 icon = "desktop"
-campaign = "C25_WPDE_Desktop_00"
-description = "Based on C23_WPDE_Desktop_02 (VAR changes are already deleted, because the transaction fee feature has been deleted in a clean-up)"
-campaign_tracking = "wpde-00-250114"
+campaign = "C25_WPDE_Desktop_01"
+description = "Based on the VAR of C24_WPDE_Desktop_01; VAR highlights recurrent options in the form"
+campaign_tracking = "wpde-01-251027"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_offline = "/wpde-offline?devbanner={{banner}}"
@@ -103,14 +103,14 @@ wrap_in_wikitext = false
 preview_url = 'https://www.wikipedia.de/?banner={{banner}}'
 
 [wpde_desktop.banners.ctrl]
-filename = "./banners/wpde_desktop/C25_WPDE_Desktop_00/banner_ctrl.ts"
-pagename = "B25_WPDE_Desktop_00_ctrl"
-tracking = "wpde-00-250114-ctrl"
+filename = "./banners/wpde_desktop/C25_WPDE_Desktop_01/banner_ctrl.ts"
+pagename = "B25_WPDE_Desktop_01_ctrl"
+tracking = "wpde-01-251027-ctrl"
 
 [wpde_desktop.banners.var]
-filename = "./banners/wpde_desktop/C25_WPDE_Desktop_00/banner_var.ts"
-pagename = "B25_WPDE_Desktop_00_var"
-tracking = "wpde-00-250114-var"
+filename = "./banners/wpde_desktop/C25_WPDE_Desktop_01/banner_var.ts"
+pagename = "B25_WPDE_Desktop_01_var"
+tracking = "wpde-01-251027-var"
 
 
 [wpde_mobile]
