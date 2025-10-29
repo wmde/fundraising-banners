@@ -178,7 +178,6 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 function onHideFundsModal(): void {
