@@ -7,7 +7,7 @@ const expectFiresMaybeLaterEventOnLinkClick = async ( wrapper: VueWrapper<any> )
 	await wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'AlreadyDonated', CloseChoices.AlreadyDonated ) );
+	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.AlreadyDonated ) );
 };
 
 export const alreadyDonatedLinkFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {

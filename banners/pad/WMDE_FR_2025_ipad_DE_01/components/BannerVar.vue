@@ -1,45 +1,60 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MainBanner
-			@form-interaction="$emit( 'bannerContentChanged' )"
+			@close="onCloseMain"
+			@form-interaction="onFormInteraction"
 			v-if="contentState === ContentStates.Main"
 			:bannerState="bannerState"
 		>
-			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
-			</template>
-
-			<template #banner-title>
-				<BannerTitle/>
-			</template>
-
-			<template #banner-text>
-				<BannerText/>
-			</template>
-
 			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
+				<div class="wmde-banner-content-headline">
+					<span class="wmde-banner-content-headline-text">
+						Wikipedia ist unverkäuflich
+					</span>
+				</div>
+				<KeenSlider :with-navigation="true" :play="play" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide"/>
+					</template>
+
+					<template #left-icon>
+						<ChevronLeftIcon :fill="'#990a00'"/>
+					</template>
+
+					<template #right-icon>
+						<ChevronRightIcon :fill="'#990a00'"/>
 					</template>
 
 				</KeenSlider>
 			</template>
 
 			<template #progress>
-				<DoubleProgressBar/>
+				<ProgressBar amount-to-show-on-right="TARGET"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation
-					:step-controllers="stepControllers"
-					@form-interaction="formInteraction"
-					:submit-callback="onSubmit"
-				>
+				<MultiStepDonation :step-controllers="stepControllers" @form-interaction="formInteraction">
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous"/>
+						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+
+							<template #label-payment-ppl>
+								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
+							</template>
+
+							<template #label-payment-bez>
+								<span class="wmde-banner-select-group-label with-logos sepa"><SepaLogo/></span>
+							</template>
+
+							<template #label-payment-mcp>
+								<span class="wmde-banner-select-group-label with-logos credit-cards">
+									<VisaLogo/>
+									<MastercardLogo/>
+								</span>
+							</template>
+
+						</MainDonationForm>
 					</template>
 
 					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -48,7 +63,11 @@
 							@submit="submit"
 							:is-current="isCurrent"
 							@previous="previous"
-						/>
+						>
+							<template #back>
+								<ChevronLeftIcon/>
+							</template>
+						</UpgradeToYearlyButtonForm>
 					</template>
 
 				</MultiStepDonation>
@@ -60,17 +79,7 @@
 					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
 				/>
 			</template>
-
 		</MainBanner>
-
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			:show-close-icon="true"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@maybeLater="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@timeOutClose="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-			@maybeLater7Days="() => onClose( 'SoftClose', CloseChoices.Close )"
-		/>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -83,16 +92,18 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { inject, ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
+import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
+import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFormAmountButtonHighlighted.vue';
+import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
+import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
@@ -103,19 +114,14 @@ import {
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import DoubleProgressBar from '@src/components/ProgressBar/DoubleProgressBar.vue';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { Tracker } from '@src/tracking/Tracker';
-import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '../content/BannerTitle.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing',
 }
 
 enum FormStepNames {
@@ -126,15 +132,10 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	remainingImpressions: number;
-	localCloseTracker: LocalCloseTracker;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
-useBannerHider( 800, emit );
-
-const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -148,29 +149,23 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-const onSubmit = (): void => {
-	// special callback function: asking for previous close choices
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
-
-function onCloseMain(): void {
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', CloseChoices.Close );
-	}
-}
-
-function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+function onFormInteraction(): void {
+	nextTick( () => {
+		emit( 'bannerContentChanged' );
+	} );
 }
 
 function onHideFundsModal(): void {
 	isFundsModalVisible.value = false;
 	emit( 'modalClosed' );
+}
+
+function onCloseMain(): void {
+	onClose( 'MainBanner', CloseChoices.Close );
+}
+
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 function onModalOpened(): void {

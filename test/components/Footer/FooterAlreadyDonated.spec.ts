@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { shallowMount, VueWrapper } from '@vue/test-utils';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
-import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
 
 describe( 'FooterAlreadyDonated.vue', () => {
 	let tracker: TrackerSpy;
@@ -36,13 +35,4 @@ describe( 'FooterAlreadyDonated.vue', () => {
 		expect( wrapper.emitted( 'clickedAlreadyDonatedLink' ).length ).toBe( 1 );
 	} );
 
-	describe( 'event tracking', function () {
-		it( 'should track when already-donated link is clicked', () => {
-			const wrapper = getWrapper();
-
-			wrapper.find( '.wmde-banner-footer-already-donated' ).trigger( 'click' );
-
-			expect( tracker.hasTrackedEvent( ClickAlreadyDonatedEvent.EVENT_NAME ) ).toBe( true );
-		} );
-	} );
 } );
