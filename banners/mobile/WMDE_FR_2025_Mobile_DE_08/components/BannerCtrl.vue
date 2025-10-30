@@ -128,8 +128,7 @@ import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
-	FullPage = 'wmde-banner-wrapper--full-page',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
+	FullPage = 'wmde-banner-wrapper--full-page'
 }
 
 enum FormStepNames {
@@ -174,7 +173,6 @@ watch( contentState, async () => {
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
-	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 const onSubmit = (): void => {
