@@ -1,6 +1,7 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_wpde.scss';
+import './styles/OLD/styles_wpde.scss';
+
 import { Translator } from '@src/Translator';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';

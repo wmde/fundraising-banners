@@ -1,0 +1,16 @@
+.wmde-b-profile img {
+	max-width: 8rem;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: #ddd;
+}
+
+.wmde-b-profile h3 {
+	color: var(--profile-name-color);
+	font-weight: var(--font-semi-bold);
+}
+
+.wmde-b-profile p {
+	max-width: 30ch;
+	text-wrap: balance;
+}
