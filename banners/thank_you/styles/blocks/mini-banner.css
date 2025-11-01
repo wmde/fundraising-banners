@@ -1,0 +1,39 @@
+.wmde-b-mini {
+	min-height: var( --mini-banner-height );
+	background: var(--mini-banner-background);
+	box-shadow: var(--mini-banner-shadow);
+	padding: var(--space-xs);
+}
+
+.wmde-b-mini-content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gutter);
+	justify-content: center;
+	align-items: center;
+}
+
+.wmde-b-mini-cta {
+	text-align: center;
+}
+
+.wmde-b-mini-content > :first-child {
+	font-size: var(--type-step-5);
+	flex-basis: 6ch;
+	flex-grow: 1;
+}
+
+.wmde-b-mini-content > :last-child {
+	flex-basis: 0;
+	flex-grow: 999;
+	min-width: 75%;
+}
+
+.wmde-b-mini-content h2 {
+	font-size: var(--type-step-5);
+}
+
+.wmde-b-mini-content p {
+	text-wrap: balance;
+	font-size: var(--type-step-0-1);
+}

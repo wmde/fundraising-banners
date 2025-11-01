@@ -1,0 +1,16 @@
+.wmde-b-disclosure summary {
+	--repel-vertical-alignment: flex-start;
+}
+
+.wmde-b-disclosure summary::marker,
+.wmde-b-disclosure summary::-webkit-details-marker {
+	display: none;
+}
+
+.wmde-b-disclosure[open] summary svg {
+	transform: scaleY(-1);
+}
+
+.wmde-b-disclosure__icon {
+
+}
