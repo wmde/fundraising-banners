@@ -1,15 +1,18 @@
 <template>
 	<div class="wmde-banner-mini">
-		<CloseButton :label="$translate( 'close' )" @click="$emit( 'close' )"/>
-		<div class="wmde-banner-mini-content">
-			<slot name="text"/>
-		</div>
-		<ProgressBar :fill-percentage="progressBarFillPercentage" :show-success-content="showSuccessContent"/>
 
-		<div class="wmde-banner-mini-actions">
-			<button class="wmde-banner-mini-read-more" @click="$emit( 'read-more' )">
-				{{ $translate( 'mini-read-more-button' ) }}
-			</button>
+		<div class="wrapper flow">
+			<CloseButton :hide-label="true" @click="$emit( 'close' )"/>
+			<div class="wmde-banner-mini-content">
+				<slot name="text"/>
+			</div>
+			<ProgressBar :fill-percentage="progressBarFillPercentage" :show-success-content="showSuccessContent"/>
+
+			<div class="wmde-banner-mini-cta">
+				<button class="wmde-banner-button" @click="$emit( 'read-more' )">
+					{{ $translate( 'mini-read-more-button' ) }}
+				</button>
+			</div>
 		</div>
 	</div>
 </template>

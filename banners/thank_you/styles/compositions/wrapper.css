@@ -1,0 +1,13 @@
+/* CONTENT WRAPPER COMPOSITION
+A common wrapper/container. Usually used for the top-level elements on the page (children of `body`) to center them horizontally.
+
+Note: This is called `.content-wrapper` only because some ad-blockers target the class `.wrapper`
+*/
+.wrapper {
+	margin-inline: auto;
+	width: 100%;
+	max-width: var(--wrapper-max-width, 1200px);
+	padding-left: var(--space-0-s);
+	padding-right: var(--space-0-s);
+	position: relative;
+}
