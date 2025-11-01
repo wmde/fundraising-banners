@@ -1,8 +1,8 @@
 <template>
-	<div class="wmde-banner-progress-bar" :style="{ '--wmde-banner-progress-bar-width': `${fillPercentage}%` }">
-		<div class="wmde-banner-progress-bar-fill">
-			<div class="wmde-banner-progress-bar-fill-text">{{ $translate( translationKey ) }}</div>
-			<div class="wmde-banner-progress-bar-fill-icon">
+	<div class="wmde-banner-progress" :style="{ '--wmde-banner-progress-width': `${fillPercentage}%` }">
+		<div class="wmde-banner-progress-fill">
+			<p>{{ $translate( translationKey ) }}</p>
+			<div class="wmde-banner-progress-icon">
 				<svg width="27" height="25" viewBox="0 0 27 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M2 12L9 22L25 1" stroke-width="3" style="stroke: var( --progress-fill-icon-content );"/>
 				</svg>

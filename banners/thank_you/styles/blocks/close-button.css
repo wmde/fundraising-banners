@@ -1,0 +1,21 @@
+.wmde-banner-close-button {
+	color: var(--close-icon-color);
+
+	text-align: right;
+}
+
+.wmde-banner-close-button button {
+	--gutter: var(--space-2xs);
+
+	display: inline-flex;
+	height: var(--space-l);
+	padding-inline: var(--space-2xs);
+	border: 0;
+	background: transparent;
+	transition: opacity 200ms ease-in-out;
+}
+
+.wmde-banner-close-button button:hover,
+.wmde-banner-close-button button:focus {
+	opacity: 0.5;
+}

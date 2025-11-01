@@ -1,0 +1,27 @@
+.wmde-banner-button {
+	--button-bg: var(--button-background);
+
+	font-size: var(--type-step-0);
+	font-weight: var(--font-bold);
+	background: var(--button-bg);
+	color: var(--button-color);
+	border: 0;
+	border-radius: var(--border-radius);
+	padding-block: var(--space-2xs);
+	padding-inline: var(--space-m);
+	transition: background-color 200ms ease-in-out;
+}
+
+.wmde-banner-button[data-secondary] {
+	--button-bg: var(--button-background-secondary);
+}
+
+.wmde-banner-button:hover,
+.wmde-banner-button:focus {
+	--button-bg: oklch(from var(--button-background) 60% c h);
+}
+
+.wmde-banner-button[data-secondary]:hover,
+.wmde-banner-button[data-secondary]:focus {
+	--button-bg: oklch(from var(--button-background-secondary) 60% c h);
+}

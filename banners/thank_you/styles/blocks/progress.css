@@ -1,0 +1,49 @@
+.wmde-banner-progress {
+	border: 2px solid var(--progress-primary-color);
+	height: var(--space-l);
+	border-radius: calc(var(--space-l)/2);
+	line-height: 100%;
+	font-weight: bold;
+	color: var(--progress-text-color);
+	margin-inline-end: 2.5rem;
+}
+
+.wmde-banner-progress-fill {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 20rem;
+	height: 100%;
+	background: var(--progress-primary-color);
+	border-radius: calc(var(--space-l)/2 - 4px);
+	padding-inline-start: var(--space-2xs);
+	transition: width 3s ease-in-out;
+}
+
+.wmde-banner-progress-icon {
+	height: 100%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: var(--progress-primary-color);
+	box-shadow: var(--progress-icon-shadow);
+	transition: transform 50ms ease-in-out;
+	transition-delay: 3s;
+}
+
+.wmde-banner-progress p {
+	opacity: 0;
+	transition: opacity 200ms ease-in-out;
+	transition-delay: 3s;
+}
+
+.wmde-banner--visible .wmde-banner-progress-fill {
+	width: var(--wmde-banner-progress-width);
+}
+
+.wmde-banner--visible .wmde-banner-progress-icon {
+	transform: scale( 3 );
+}
+
+.wmde-banner--visible .wmde-banner-progress p {
+	opacity: 1;
+}
