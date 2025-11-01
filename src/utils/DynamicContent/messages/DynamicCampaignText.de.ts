@@ -21,7 +21,6 @@ const Translations: TranslationMessages = {
 	'amount-missing': 'Noch fehlen {{amount}}',
 	'drama-text': 'Die Zeit wird knapp!',
 	'amount-total': 'Spendenziel:',
-	'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
 	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
 	'campaign-day-nth-day': 'Heute ist der {{days}} Tag unserer Spendenkampagne.',
 	'campaign-day-only-n-days': 'In {{days}} Tagen endet unsere Spendenkampagne.',

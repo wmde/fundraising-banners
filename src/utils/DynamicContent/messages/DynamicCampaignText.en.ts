@@ -21,7 +21,6 @@ const Translations: TranslationMessages = {
 	'amount-missing': 'Still missing {{amount}}',
 	'drama-text': 'Time is running out!',
 	'amount-total': 'Donation target:',
-	'campaign-day-before-campaign': 'Today we ask for your support.',
 	'campaign-day-first-day': 'Today our fundraising campaign starts.',
 	'campaign-day-nth-day': 'This is the {{days}} day of our campaign.',
 	'campaign-day-only-n-days': 'Only {{days}} days left to donate for Wikipedia this year.',

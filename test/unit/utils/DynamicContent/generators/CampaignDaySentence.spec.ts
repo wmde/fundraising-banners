@@ -24,7 +24,7 @@ describe( 'CampaignDaySentence', function () {
 		const campaignDays = new TimeRange( startDate, endDate, beforeStartDate );
 		const campaignDaySentence = new CampaignDaySentence( campaignDays, new Translator( {} ), new OrdinalDe() );
 
-		expect( campaignDaySentence.getText() ).toEqual( 'campaign-day-before-campaign' );
+		expect( campaignDaySentence.getText() ).toEqual( '' );
 	} );
 
 	it( 'returns the correct sentence for the first day of the campaign', () => {

@@ -22,7 +22,7 @@ export class CampaignDaySentence implements TextGenerator {
 
 	public getText(): string {
 		if ( !this._campaignTimeRange.hasStarted() ) {
-			return this._translator.translate( 'campaign-day-before-campaign' );
+			return '';
 		}
 
 		if ( this._campaignTimeRange.hasEnded() ) {
