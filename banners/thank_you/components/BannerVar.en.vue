@@ -11,7 +11,7 @@
 			</template>
 		</MiniBanner>
 
-		<FullPageBanner
+		<BannerModal
 			:visible="contentState === ContentStates.Full"
 			:number-of-people="settings.numberOfMembers"
 			@close="hideModal"
@@ -30,7 +30,7 @@
 				<a :href="subscribeURL" @click.prevent="subscribe">{{ $translate( 'call-to-action-more-info' ) }}</a>
 				<a :href="useOfFundsURL" @click.prevent="useOfFunds">{{ $translate( 'use-of-funds' ) }}</a>
 			</template>
-		</FullPageBanner>
+		</BannerModal>
 	</div>
 </template>
 
@@ -44,7 +44,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import MiniBanner from '../components/MiniBanner.vue';
-import FullPageBanner from '../components/FullPageBanner.vue';
+import BannerModal from './BannerModal.vue';
 
 import MiniBannerTextWin from '../content/win/MiniBannerText.en.vue';
 import FullPageBannerTextWin from '../content/win/FullPageBannerTextVar.en.vue';

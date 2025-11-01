@@ -1,5 +1,5 @@
 <template>
-	<h2>
+	<h2 class="wmde-b-animated-letters">
 		<span style="--index: 1;">D</span>
 		<span style="--index: 2;">a</span>
 		<span style="--index: 3;">n</span>

@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_wporg.scss';
+import './styles/OLD/styles_wporg.scss';
 
 import PageWPORG from '@src/page/PageWPORG';
 import { SkinFactory } from '@src/page/skin/SkinFactory';

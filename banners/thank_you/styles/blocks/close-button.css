@@ -1,0 +1,24 @@
+.wmde-b-close-button {
+	text-align: right;
+}
+
+.wmde-b-close-button button {
+	--gutter: var(--space-2xs);
+
+	color: var(--close-icon-color);
+	display: inline-flex;
+	height: var(--space-l);
+	border: 0;
+	background: transparent;
+	transition: color 200ms ease-in-out;
+}
+
+.wmde-b-close-button path {
+	transition: fill 200ms ease-in-out;
+}
+
+.wmde-b-close-button button:hover,
+.wmde-b-close-button button:focus-visible {
+	--close-icon-stroke: oklch(from var(--close-icon-color) 60% c h);
+	color: oklch(from var(--close-icon-color) 60% c h);
+}

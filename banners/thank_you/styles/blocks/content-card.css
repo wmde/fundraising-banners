@@ -1,0 +1,6 @@
+.wmde-b-content-card {
+	background: var(--content-card-background);
+	border-bottom: 1px solid var(--content-card-border);
+	border-radius: 4px;
+	padding: var(--space-s-xl);
+}
