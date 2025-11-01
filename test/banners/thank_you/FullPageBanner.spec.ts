@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import FullPageBanner from '@banners/thank_you/components/FullPageBanner.vue';
+import BannerModal from '@banners/thank_you/components/BannerModal.vue';
 
 describe( 'FullPageBanner.vue', () => {
 	let showCallback: Mock;
@@ -14,7 +14,7 @@ describe( 'FullPageBanner.vue', () => {
 	} );
 
 	const getWrapper = (): VueWrapper<any> => {
-		return mount( FullPageBanner, {
+		return mount( BannerModal, {
 			props: {
 				visible: false,
 				numberOfPeople: '23'

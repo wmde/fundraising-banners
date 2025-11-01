@@ -1,9 +1,9 @@
-@use './variables/fonts';
-@use './variables/breakpoints';
+@use 'variables/fonts';
+@use 'variables/breakpoints';
 
 $height: 248px !default;
 
-@keyframes showLetter {
+@keyframes show-letter {
 	0% {
 		transform: scale( 0.5 );
 	}
@@ -114,7 +114,7 @@ $height: 248px !default;
 
 	&--visible {
 		.wmde-banner-mini h2 > span {
-			animation: showLetter 2s cubic-bezier( 0, 1.13, .46, 1.97 );
+			animation: show-letter 2s cubic-bezier( 0, 1.13, 0.46, 1.97 );
 			animation-fill-mode: forwards;
 			animation-delay: calc( 0.08s * var( --index ) );
 		}

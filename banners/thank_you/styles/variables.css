@@ -1,0 +1,105 @@
+.wmde-banner {
+	--colour-black: #000000;
+	--colour-white: #ffffff;
+
+	--colour-grey-300: #A1A1A1;
+	--colour-grey-700: #282828;
+	--colour-grey-800: #131313;
+
+	--colour-yellow-500: #FFC825;
+
+	--colour-blue-100: #DCE4E8;
+	--colour-blue-500: #3366CC;
+
+	--colour-blue-green-500: #0DA888;
+	--colour-blue-green-550: #14866D;
+
+	--colour-primary: var(--colour-grey-300);
+
+	--font-base: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
+	--font-normal: 400;
+	--font-semi-bold: 600;
+	--font-bold: 700;
+
+	/* @link https://utopia.fyi/type/calculator?c=360,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--type-step-000: clamp(0.6944rem, 0.6513rem + 0.1919vw, 0.8rem);
+	--type-step-00: clamp(0.8333rem, 0.7652rem + 0.303vw, 1rem);
+	--type-step-0: clamp(1rem, 0.8977rem + 0.4545vw, 1.25rem);
+	--type-step-1: clamp(1.2rem, 1.0517rem + 0.6591vw, 1.5625rem);
+	--type-step-2: clamp(1.44rem, 1.2301rem + 0.933vw, 1.9531rem);
+	--type-step-3: clamp(1.728rem, 1.4362rem + 1.2971vw, 2.4414rem);
+	--type-step-4: clamp(2.0736rem, 1.6734rem + 1.7785vw, 3.0518rem);
+	--type-step-5: clamp(2.4883rem, 1.9457rem + 2.4116vw, 3.8147rem);
+
+	--type-step-0-1: clamp(1rem, 0.9747rem + 0.5568vw, 1.5625rem);
+
+	/* Type Leading */
+	--leading-micro: 0.85;
+	--leading-flat: 1;
+	--leading-fine: 1.2;
+	--leading-standard: 1.4;
+	--leading-loose: 1.7;
+
+	/* @link https://utopia.fyi/space/calculator/?c=360,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-xl|s-l&g=s,l,xl,12 */
+	--space-3xs: clamp(0.25rem, 0.2244rem + 0.1136vw, 0.3125rem);
+	--space-2xs: clamp(0.5rem, 0.4489rem + 0.2273vw, 0.625rem);
+	--space-xs: clamp(0.75rem, 0.6733rem + 0.3409vw, 0.9375rem);
+	--space-s: clamp(1rem, 0.8977rem + 0.4545vw, 1.25rem);
+	--space-m: clamp(1.5rem, 1.3466rem + 0.6818vw, 1.875rem);
+	--space-l: clamp(2rem, 1.7955rem + 0.9091vw, 2.5rem);
+	--space-xl: clamp(3rem, 2.6932rem + 1.3636vw, 3.75rem);
+	--space-2xl: clamp(4rem, 3.5909rem + 1.8182vw, 5rem);
+	--space-3xl: clamp(6rem, 5.3864rem + 2.7273vw, 7.5rem);
+
+	/* Custom pairs */
+	--space-s-xl: clamp(1rem, -0.125rem + 5vw, 3.75rem);
+	--space-s-l: clamp(1rem, 0.3864rem + 2.7273vw, 2.5rem);
+
+	/* Global Variables */
+	--gutter: var(--space-xs);
+	--stroke-width: 1px;
+	--stroke-color: var(--colour-primary);
+	--stroke: var(--stroke-width) solid var(--stroke-color);
+	--easing: cubic-bezier(0.885, 0.09, 0.49, 0.85);
+	--border-radius: 8px;
+
+	--wrapper-max-width: 99.75rem; /* Match Vector 2022 */
+	--mini-banner-height: 294px;
+	--mini-banner-background: var(--colour-white);
+	--mini-banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--selection-background: var(--colour-blue-500);
+	--selection-colour: var(--colour-white);
+	--focus-colour: var(--colour-blue-500);
+
+	--font-colour: var(--colour-black);
+	--link-colour: var(--colour-blue-500);
+
+	--close-icon-stroke: var(--colour-black);
+	--close-icon-color: var(--colour-black);
+
+	--progress-primary-color: var(--colour-blue-green-500);
+	--progress-text-color: var(--colour-white);
+	--progress-icon-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--progress-fill-icon-content: var(--colour-white);
+	--confetti-background: var(--colour-blue-500);
+
+	--button-background: var(--colour-blue-500);
+	--button-border-focus: var(--colour-white);
+	--button-background-secondary: var(--colour-grey-300);
+	--button-color: var(--colour-white);
+
+	--modal-backdrop: var(--colour-blue-100);
+	--content-card-background: var(--colour-white);
+	--content-card-border: var(--colour-blue-500);
+
+	--tick-icon-fill: var(--colour-blue-500);
+	--heart-icon-fill: var(--colour-blue-green-500);
+	--globe-icon-fill: var(--colour-blue-500);
+	--star-icon-fill: var(--colour-blue-500);
+	--chevron-down-icon-fill: var(--colour-blue-500);
+	--people-icon-fill: var(--colour-black);
+	--average-icon-fill: var(--colour-black);
+	--coin-icon-fill: var(--colour-black);
+
+	--profile-name-color: var(--colour-blue-green-500);
+}

@@ -1,15 +1,15 @@
-@use './variables/breakpoints';
+@use 'variables/breakpoints';
 
 @keyframes fade-in {
 	0% {
 		opacity: 0;
-		transform: scale( 1.1 ) translateY(-50%);
+		transform: scale( 1.1 ) translateY( -50% );
 		display: none;
 	}
 
 	100% {
 		opacity: 1;
-		transform: scale( 1 ) translateY(-50%);
+		transform: scale( 1 ) translateY( -50% );
 		display: block;
 	}
 }
@@ -17,13 +17,13 @@
 @keyframes fade-out {
 	0% {
 		opacity: 1;
-		transform: scale( 1.1 ) translateY(-50%);
+		transform: scale( 1.1 ) translateY( -50% );
 		display: block;
 	}
 
 	100% {
 		opacity: 0;
-		transform: scale( 0 ) translateY(-50%);
+		transform: scale( 0 ) translateY( -50% );
 		display: none;
 	}
 }
@@ -43,7 +43,7 @@
 
 		// This vertically centers the dialog, it needs to be tested more
 		top: 50%;
-		transform: translateY(-50%);
+		transform: translateY( -50% );
 
 		@include breakpoints.medium-up {
 			max-height: calc( 100vh - 80px );
