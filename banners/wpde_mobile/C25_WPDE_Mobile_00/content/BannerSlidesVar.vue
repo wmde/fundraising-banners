@@ -13,7 +13,7 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Heute bitten wir Sie um Ihre Unterstützung. Insgesamt spenden 99% nichts – sie übergehen diesen
+			{{ campaignDaySentence }} {Insgesamt spenden 99% nichts – sie übergehen diesen
 			Aufruf. Wikipedia wird durch Spenden von durchschnittlich {{ averageDonation }} finanziert.
 		</p>
 	</KeenSliderSlide>
@@ -53,7 +53,8 @@ const {
 	currentDate,
 	visitorsVsDonorsSentence,
 	goalDonationSum,
-	averageDonation
+	averageDonation,
+	campaignDaySentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
