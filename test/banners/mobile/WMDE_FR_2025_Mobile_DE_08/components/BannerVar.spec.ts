@@ -21,6 +21,7 @@ import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
@@ -128,6 +129,15 @@ describe( 'BannerVar.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ]
 		] )( '%s', async ( testName: string ) => {
 			await formActionSwitchFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Track user choice on the previous soft-close banner', () => {
+		test.each( [
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
