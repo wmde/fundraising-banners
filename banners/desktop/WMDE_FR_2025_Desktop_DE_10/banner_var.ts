@@ -68,7 +68,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '2' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '0' } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( new Date(), page.getCampaignParameters() ) );
