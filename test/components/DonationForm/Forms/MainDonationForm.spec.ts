@@ -146,6 +146,31 @@ describe( 'MainDonationForm.vue', () => {
 		expect( wrapper.find( '.custom-label-credit-cards' ).exists() ).toBeTruthy();
 	} );
 
+	it( 'shows the interval select group if passed as a slot', () => {
+		const wrapper = mount( DonationForm, {
+			props: {
+				showErrorScrollLink: false
+			},
+			slots: {
+				'interval-select-group': `<template #interval-select-group><span class="custom-interval-select-group"></span></template>`,
+			},
+			global: {
+				mocks: {
+					$translate: translate
+				},
+				provide: {
+					currencyFormatter: new CurrencyEn(),
+					formActions: { donateWithAddressAction: 'https://example.com', donateWithoutAddressAction: 'https://example.com' },
+					formItems: formItems,
+					translator: { translate },
+					tracker: new TrackerSpy()
+				}
+			}
+		} );
+
+		expect( wrapper.find( '.custom-interval-select-group' ).exists() ).toBeTruthy();
+	} );
+
 	it( 'uses the dynamic amounts when they exist', async () => {
 		const wrapper = getWrapper();
 

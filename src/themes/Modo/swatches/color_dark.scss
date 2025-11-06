@@ -54,6 +54,7 @@ $pink100: #ff33f1;
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$select-group-cheering: false,
+	$select-group-highlighted-interval: false,
 	$progress-bar: false,
 	$double-progress-bar: false,
 	$soft-close: false,
@@ -155,6 +156,11 @@ $pink100: #ff33f1;
 	@if $select-group-cheering {
 		--cheering-background: #{$blue700};
 		--cheering-color: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$yellow200};
+		--higlighted-interval-color: #{$black};
 	}
 
 	@if $progress-bar {
