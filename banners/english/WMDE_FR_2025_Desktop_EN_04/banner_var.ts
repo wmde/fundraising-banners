@@ -17,7 +17,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import { Locales } from '@src/domain/Locales';
-import messages from './messages';
+import messages from './messages_var';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { createFormItems } from './form_items';

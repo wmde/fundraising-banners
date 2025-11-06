@@ -36,7 +36,7 @@ const {
 	currentDayName,
 	getCurrentDateAndTime,
 	visitorsVsDonorsSentence,
-	campaignDaySentence
+	campaignDaySentence,
 }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
