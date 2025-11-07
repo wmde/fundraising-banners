@@ -9,6 +9,7 @@ $grey300: #b7b7b7;
 $grey500: #808080;
 $grey600: #777777;
 $grey625: #626262;
+$grey635: #484848;
 $grey650: #383838;
 $grey700: #292929;
 $grey800: #1f1f1f;
@@ -43,6 +44,7 @@ $yellow700: #fcd53f;
 	$already-donated: false,
 	$soft-close: false,
 	$fallback-banner: false,
+	$select-group-highlighted-interval: false,
 ) {
 	--main-background: #{$grey800};
 	--main-color: #{$white};
@@ -161,6 +163,11 @@ $yellow700: #fcd53f;
 		--select-group-button-border-checked: #{$grey600};
 		--select-group-button-background-checked: #{$blue700};
 		--select-group-button-color-checked: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$grey635};
+		--higlighted-interval-color: #{$white};
 	}
 
 	/**

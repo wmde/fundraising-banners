@@ -39,11 +39,27 @@
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm :page-index="pageIndex" @submit="submit" :is-current="isCurrent" @previous="previous">
+						<MainDonationForm
+							:page-index="pageIndex"
+							@submit="submit"
+							:is-current="isCurrent"
+							@previous="previous"
+						>
 							<template #label-payment-ppl>
 								<span class="wmde-banner-select-group-label with-logos paypal">
 									<PayPalIcon/><span>Paypal</span>
 								</span>
+							</template>
+
+							<template #interval-select-group="{ fieldName, selectionItems, isValid, errorMessage, disabledOptions }: any">
+								<SelectGroup
+									:field-name="fieldName"
+									:selectionItems="selectionItems"
+									:isValid="isValid"
+									:errorMessage="errorMessage"
+									v-model:inputValue="interval"
+									:disabledOptions="disabledOptions"
+								/>
 							</template>
 
 							<template #label-payment-mcp>
@@ -130,6 +146,7 @@ import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
 import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
 import MasterCardIcon from '@src/components/PaymentLogos/MasterCardIcon.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroupHighlightedInterval.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -155,6 +172,7 @@ const tracker = inject<Tracker>( 'tracker' );
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const formModel = useFormModel();
+const { interval } = formModel;
 const stepControllers = [
 	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
 	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
