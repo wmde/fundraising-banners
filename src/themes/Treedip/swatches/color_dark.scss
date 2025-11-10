@@ -24,6 +24,7 @@ $red600: #e60f00;
 $blue050: #eaf3ff;
 $blue100: #dff1ff;
 $blue600: #547fd5;
+$blue610: #4465a7;
 $blue700: #436fc7;
 $blue800: #20303f;
 
@@ -166,8 +167,9 @@ $yellow700: #fcd53f;
 	}
 
 	@if $select-group-highlighted-interval {
-		--higlighted-interval-background: #{$grey635};
+		--higlighted-interval-background: #{$blue610};
 		--higlighted-interval-color: #{$white};
+		--select-group-radio-border-checked: #{$white};
 	}
 
 	/**
