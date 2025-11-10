@@ -7,7 +7,7 @@
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 				{{ currentDayName }}, den {{ currentDate }} um {{ liveDateAndTime.currentTime }} Uhr, bitten wir Sie
-				bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen. Heute bitten wir Sie um Ihre Unterstützung.
+				bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen. {{ campaignDaySentence }}
 				Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia wird durch Spenden von
 				durchschnittlich {{ averageDonation }} finanziert. Doch schon mit einer Spende von 15&nbsp;€ kann Wikipedia sich auch
 				in Zukunft erfolgreich entwickeln. <AnimatedText :content="visitorsVsDonorsSentence"/> Die meisten
@@ -36,7 +36,8 @@ const {
 	currentDayName,
 	currentDate,
 	visitorsVsDonorsSentence,
-	averageDonation
+	averageDonation,
+	campaignDaySentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
