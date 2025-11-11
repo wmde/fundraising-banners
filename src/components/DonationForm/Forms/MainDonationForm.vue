@@ -6,14 +6,23 @@
 	>
 		<fieldset class="wmde-banner-form-field-group">
 			<legend class="wmde-banner-form-field-group-legend">{{ $translate( 'intervals-header' ) }}</legend>
-			<SelectGroup
+			<slot
+				name="interval-select-group"
 				:field-name="'select-interval'"
-				:selectionItems="formItems.intervals"
-				:isValid="isValidOrUnset( intervalValidity )"
-				:errorMessage="$translate( 'no-interval-message' )"
-				v-model:inputValue="interval"
-				:disabledOptions="disabledIntervals"
-			/>
+				:selection-items="formItems.intervals"
+				:is-valid="isValidOrUnset( intervalValidity )"
+				:error-message="$translate( 'no-interval-message' )"
+				:disabled-options="disabledIntervals"
+			>
+				<SelectGroup
+					:field-name="'select-interval'"
+					:selectionItems="formItems.intervals"
+					:isValid="isValidOrUnset( intervalValidity )"
+					:errorMessage="$translate( 'no-interval-message' )"
+					v-model:inputValue="interval"
+					:disabledOptions="disabledIntervals"
+				/>
+			</slot>
 		</fieldset>
 
 		<fieldset class="wmde-banner-form-field-group">

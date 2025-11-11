@@ -1,0 +1,119 @@
+@use '../../variables/select_group';
+@use 'src/components/DonationForm/SubComponents/SelectGroup';
+
+.wmde-banner {
+	@include SelectGroup.layout;
+
+	&-select-group {
+		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+
+		&-container {
+			margin: 0 -4px;
+		}
+
+		&-option {
+			font-size: select_group.$radio-font-size;
+			line-height: select_group.$form-radio-height;
+			flex: 0 0 50%;
+			width: 50%;
+			padding: 0 4px 8px;
+		}
+
+		&-option.interval-0 {
+			align-self: flex-end;
+			flex: 0 0 33.3333%;
+			width: 33.3333%;
+		}
+
+		&-recurring {
+			flex-grow: 1;
+			padding: 4px 0 0;
+			margin-right: 4px;
+			border-radius: 4px;
+			background: var( --higlighted-interval-background );
+		}
+
+		&-recurring p {
+			color: var( --higlighted-interval-color );
+			font-size: 14px;
+			padding: 0;
+			margin: 0 0 5px;
+		}
+
+		&-recurring svg {
+			--heart-icon-fill: var( --higlighted-interval-color );
+			position: relative;
+			width: 10px;
+			top: 3px;
+		}
+
+		&-recurring-options {
+			display: flex;
+			flex-wrap: nowrap;
+		}
+
+		&-input {
+			display: none;
+		}
+
+		&-label {
+			display: block;
+			width: 100%;
+			border: 1px solid var( --select-group-option-border );
+			border-radius: 4px;
+			background: var( --select-group-option-background );
+			color: var( --select-group-option-color );
+			height: select_group.$form-radio-height;
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		&-notice {
+			line-height: 13px;
+			padding-top: 4px;
+			color: var( --select-group-option-notice );
+			font-size: 11px;
+			font-weight: normal;
+		}
+
+		&-option:hover .wmde-banner-select-group-label,
+		&-option:focus .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border-hover );
+			background: var( --select-group-option-background-hover );
+		}
+
+		&-option:active .wmde-banner-select-group-label {
+			color: var( --select-group-option-color );
+			border-color: var( --select-group-option-border-active );
+			background: var( --select-group-option-background-active );
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			color: var( --select-group-option-color-checked );
+			border-color: var( --select-group-option-border-checked );
+			background: var( --select-group-option-background-checked );
+		}
+
+		&-error-message {
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			color: var( --color-error );
+		}
+	}
+
+	&-disabled {
+		opacity: 0.3;
+	}
+
+	&-error-icon {
+		font-size: 14px;
+	}
+}
+
+.wmde-banner-select-group-container.select-interval .wmde-banner-select-group {
+	flex-wrap: nowrap;
+}

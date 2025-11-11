@@ -3,6 +3,7 @@ import { Skin } from '@src/page/skin/Skin';
 class Minerva implements Skin {
 	private _searchField: HTMLInputElement;
 	private _searchButton: HTMLButtonElement;
+	private _langButton: HTMLAnchorElement;
 	private _hideBannerCallback: () => void;
 	private readonly _referencedHideBannerCallback: () => void;
 
@@ -11,8 +12,10 @@ class Minerva implements Skin {
 
 		this._searchField = document.getElementById( 'searchInput' ) as HTMLInputElement;
 		this._searchButton = document.getElementById( 'searchIcon' ) as HTMLButtonElement;
+		this._langButton = document.querySelector( 'a[href="#p-lang"]' );
 		this._searchField.addEventListener( 'focus', this._referencedHideBannerCallback );
 		this._searchButton.addEventListener( 'click', this._referencedHideBannerCallback );
+		this._langButton.addEventListener( 'click', this._referencedHideBannerCallback );
 	}
 
 	public addHideBannerListener( hideBannerListener: () => void ): void {
@@ -22,6 +25,7 @@ class Minerva implements Skin {
 	public removeEventListeners(): void {
 		this._searchField.removeEventListener( 'focus', this._referencedHideBannerCallback );
 		this._searchButton.removeEventListener( 'click', this._referencedHideBannerCallback );
+		this._langButton.removeEventListener( 'click', this._referencedHideBannerCallback );
 	}
 
 	public minimumVisiblePageBeneathBanner(): number {

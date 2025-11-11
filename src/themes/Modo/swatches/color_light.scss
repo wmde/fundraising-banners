@@ -31,6 +31,7 @@ $green10: #f8faf9;
 $green20: #eaf0ec;
 $green30: #c8d1cc;
 $green100: #dcf3ec;
+$green350: #b7e8d9;
 $green400: #9eeacb;
 $green600: #6e9e00;
 $green500: color.adjust( $green600, $lightness: -5% );
@@ -48,6 +49,7 @@ $pink100: #ff33f1;
 	$upgrade-to-yearly-button-form: false,
 	$select-group-image-label: false,
 	$select-group-cheering: false,
+	$select-group-highlighted-interval: false,
 	$progress-bar: false,
 	$double-progress-bar: false,
 	$soft-close: false,
@@ -150,6 +152,11 @@ $pink100: #ff33f1;
 	@if $select-group-cheering {
 		--cheering-background: #{$blue700};
 		--cheering-color: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$green350};
+		--higlighted-interval-color: #{$blue700};
 	}
 
 	@if $progress-bar {
