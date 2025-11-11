@@ -13,6 +13,7 @@ $upgrade-to-yearly: false !default;
 $already-donated: false !default;
 $soft-close: false !default;
 $fallback-banner: false !default;
+$select-group-highlighted-interval: false !default;
 
 .skin-theme-clientpref-day .wmde-banner {
 	@include color_light.swatch(
@@ -24,6 +25,7 @@ $fallback-banner: false !default;
 		$select-group-button,
 		$select-group-image-label,
 		$select-group-cheering,
+		$select-group-highlighted-interval,
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
@@ -41,6 +43,7 @@ $fallback-banner: false !default;
 		$select-group-button,
 		$select-group-image-label,
 		$select-group-cheering,
+		$select-group-highlighted-interval,
 		$upgrade-to-yearly,
 		$already-donated,
 		$soft-close,
@@ -59,6 +62,7 @@ $fallback-banner: false !default;
 			$select-group-button,
 			$select-group-image-label,
 			$select-group-cheering,
+			$select-group-highlighted-interval,
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,
@@ -76,6 +80,7 @@ $fallback-banner: false !default;
 			$select-group-button,
 			$select-group-image-label,
 			$select-group-cheering,
+			$select-group-highlighted-interval,
 			$upgrade-to-yearly,
 			$already-donated,
 			$soft-close,

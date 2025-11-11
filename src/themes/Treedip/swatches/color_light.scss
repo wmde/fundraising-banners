@@ -38,7 +38,8 @@ $yellow700: #fcd53f;
 	$upgrade-to-yearly: false,
 	$already-donated: false,
 	$soft-close: false,
-	$fallback-banner: false
+	$fallback-banner: false,
+	$select-group-highlighted-interval: false,
 ) {
 	--main-background: #{$white};
 	--main-color: #{$grey700};
@@ -161,6 +162,11 @@ $yellow700: #fcd53f;
 		--select-group-button-border-checked: #{$grey600};
 		--select-group-button-background-checked: #{$blue700};
 		--select-group-button-color-checked: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$blue050};
+		--higlighted-interval-color: #{$blue700};
 	}
 
 	/**
