@@ -215,5 +215,14 @@ $height-l-up: 288px !default;
 				}
 			}
 		}
+
+		&-more-stuff {
+			display: none;
+			color: #1f1f1f;
+		}
 	}
+}
+
+.wmde-banner-wrapper--expanded .wmde-banner-mini-more-stuff {
+	display: block;
 }

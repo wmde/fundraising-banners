@@ -4,15 +4,15 @@
 	$thank-you-box: true
 );
 @use 'src/components/BannerConductor/banner-transition';
-@use '../../../../src/components/UseOfFunds/styles/swatches/skin_minerva' as uof-default;
-@use '../../../../src/components/UseOfFunds/styles/styles';
+@use 'banner-position-adjustment';
+@use 'src/components/UseOfFunds/styles/swatches/skin_minerva' as uof-default;
+@use 'src/components/UseOfFunds/styles/styles';
 @use 'src/themes/Modo/defaults';
 @use 'Banner';
 @use 'MiniBanner' with (
 	$height: 336px,
 	$height-l-up: 306px
 );
-@use 'FullPageBanner';
 @use 'src/themes/Modo/Footer/Footer';
 @use 'src/themes/Modo/ThankYouBox/ThankYouBox';
 @use 'src/themes/Modo/Footer/SelectionInput';

@@ -13,18 +13,14 @@ import {
 	useOfFundsTrackingFeatures
 } from '@test/features/UseOfFunds';
 import { miniBannerFeatures } from '@test/features/MiniBanner';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
-import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { Tracker } from '@src/tracking/Tracker';
-import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
+import { bannerContentAnimatedTextFeatures } from '@test/features/BannerContent';
 import { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
-import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -95,49 +91,10 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Content', () => {
 		test.each( [
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ],
 			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInSlideShow' ]
 		] )( '%s', async ( testName: string ) => {
 			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
-		} );
-
-		test.each( [
-			[ 'expectShowsLiveDateAndTimeInMiniBanner' ],
-			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Donation Form Happy Paths', () => {
-		test.each( [
-			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
-			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'expectMainDonationFormUsesDefaultDynamicAmounts' ],
-			[ 'expectMainDonationFormUsesAlternativeDynamicAmounts' ]
-		] )( '%s', async ( testName: string ) => {
-			await donationFormFeatures[ testName ]( getWrapper() );
-		} );
-
-		test.each( [
-			[ 'expectMainDonationFormSubmitsWithAddressForDirectDebit' ],
-			[ 'expectUpgradeToYearlyFormSubmitsWithAddressForDirectDebit' ]
-		] )( '%s', async ( testName: string ) => {
-			await formActionSwitchFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Track user choice on the previous soft-close banner', () => {
-		test.each( [
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
-			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseSubmitTrackingFeatures[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 
@@ -146,15 +103,13 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsUseOfFundsOnMiniBanner' ],
 			[ 'expectHidesUseOfFundsOnMiniBanner' ],
 			[ 'expectEmitsModalOpenedEventOnMiniBanner' ],
-			[ 'expectEmitsModalClosedEventOnMiniBanner' ],
-			[ 'expectDoesNotEmitModalClosedEventOnFullPageBanner' ]
+			[ 'expectEmitsModalClosedEventOnMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await mobileUseOfFundsFeatures[ testName ]( getWrapper() );
 		} );
 
 		test.each( [
 			[ 'expectScrollsToFormWhenCallToActionIsClicked' ],
-			[ 'expectScrollsToFormWhenClosesToFullPage' ],
 			[ 'expectDoesNotScrollToFormWhenClosesToMiniBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await useOfFundsScrollFeatures[ testName ]( getWrapper(), pageScroller );
@@ -171,22 +126,11 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectSlideShowPlaysWhenMiniBannerBecomesVisible' ],
 			[ 'expectSlideShowStopsWhenFullBannerBecomesVisible' ],
-			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
 			[ 'expectEmitsCloseEvent' ],
 			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
-		} );
-	} );
-
-	describe( 'Full Page Banner', () => {
-		test.each( [
-			[ 'expectEmitsCloseEvent' ],
-			[ 'expectEmitsModalOpenedEvent' ],
-			[ 'expectEmitsModalClosedEvent' ]
-		] )( '%s', async ( testName: string ) => {
-			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );
 	} );
 } );

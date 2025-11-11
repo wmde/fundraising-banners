@@ -2,8 +2,8 @@
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
 			@close="() => onClose( 'MiniBanner', CloseChoices.Close )"
-			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
+			@show-full-page-banner="onExpandBanner"
+			@show-full-page-banner-preselected="onExpandBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
 			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
@@ -20,64 +20,6 @@
 			</template>
 		</MiniBanner>
 
-		<FullPageBanner
-			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
-		>
-			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
-			</template>
-
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
-			</template>
-
-			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation
-					:step-controllers="stepControllers"
-					@form-interaction="formInteraction"
-					:page-scroller="pageScroller"
-					:submit-callback="onSubmit"
-				>
-
-					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-							:dynamic-amounts="amountOptionsForForm"
-						>
-
-							<template #button>
-								<MainDonationFormButton/>
-							</template>
-
-						</MainDonationForm>
-					</template>
-
-					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-						>
-							<template #back>
-								<ChevronLeftIcon/>
-								{{ $translate( 'back-button' ) }}
-							</template>
-						</UpgradeToYearlyButtonForm>
-					</template>
-
-				</MultiStepDonation>
-			</template>
-
-			<template #footer>
-				<BannerFooter :show-funds-link="false"/>
-			</template>
-		</FullPageBanner>
-
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
@@ -90,57 +32,34 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
-import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton
-	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import { Translator } from '@src/Translator';
 import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
+import { CloseChoices } from '@src/domain/CloseChoices';
+import BannerSlides from '../content/BannerSlides.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
-	FullPage = 'wmde-banner-wrapper--full-page'
-}
-
-enum FormStepNames {
-	MainDonationFormStep = 'MainDonationForm',
-	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+	Expanded = 'wmde-banner-wrapper--expanded'
 }
 
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -153,10 +72,6 @@ const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
-const stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
-];
 
 const localTranslator = inject<Translator>( 'translator' );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
@@ -166,39 +81,29 @@ const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 )
 const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
 const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
 
-watch( contentState, async () => {
-	emit( 'bannerContentChanged' );
-} );
+watch( contentState, async () => emit( 'bannerContentChanged' ) );
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 }
 
-const onSubmit = (): void => {
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
-
-function onshowFullPageBanner(): void {
+function onExpandBanner(): void {
 	slideShowStopped.value = true;
-	contentState.value = ContentStates.FullPage;
-	emit( 'modalOpened' );
+	contentState.value = ContentStates.Expanded;
 
 	amountOptionsForForm.value = amountOptionsFive;
 
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
 
-function onshowFullPageBannerPreselected(): void {
+function onExpandBannerPreselected(): void {
 	slideShowStopped.value = true;
 
 	amountOptionsForForm.value = amountOptionsTen;
 
 	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
+	contentState.value = ContentStates.Expanded;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
@@ -209,7 +114,7 @@ const onHideFundsModal = (): void => {
 		emit( 'modalClosed' );
 	}
 
-	if ( contentState.value === ContentStates.FullPage ) {
+	if ( contentState.value === ContentStates.Expanded ) {
 		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	}
 };
@@ -227,7 +132,7 @@ const onFundsModalCallToAction = (): void => {
 	isFundsModalVisible.value = false;
 
 	if ( contentState.value === ContentStates.Mini ) {
-		onshowFullPageBanner();
+		onExpandBanner();
 	}
 
 	props.pageScroller.scrollIntoView( '.wmde-banner-form' );

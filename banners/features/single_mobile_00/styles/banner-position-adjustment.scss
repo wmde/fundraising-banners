@@ -1,0 +1,35 @@
+.wmde-show-banner:has( .wmde-banner-wrapper--expanded ) {
+	#wmde-banner-app,
+	// Vector
+	#mw-panel,
+	#mw-head,
+	#mw-page-base,
+	// Vector 2022
+	.vector-header-container,
+	// Minerva
+	#mw-mf-viewport,
+	#mw-mf-page-left {
+		transition-duration: 0s;
+	}
+
+	#wmde-banner-app {
+		position: relative;
+		top: 0;
+	}
+
+	#mainbox {
+		margin-top: 0;
+	}
+
+	#mw-panel,
+	#mw-head,
+	#mw-mf-page-left {
+		top: 0;
+	}
+
+	#mw-page-base,
+	#mw-mf-viewport,
+	.vector-header-container {
+		padding-top: 0;
+	}
+}

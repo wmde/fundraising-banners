@@ -42,6 +42,15 @@
 			</button>
 		</div>
 
+		<div class="wmde-banner-mini-more-stuff">
+			<h3>More stuff here</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium atque, autem corporis deleniti dignissimos eaque earum esse id, in laboriosam laudantium nobis numquam officiis optio porro quae quaerat reiciendis tempore.</p>
+
+			<p>Ad adipisci alias aperiam blanditiis culpa cupiditate deserunt et eveniet exercitationem expedita fuga incidunt, iste iure labore laboriosam minus molestias obcaecati officia perspiciatis, quam quasi quibusdam quod recusandae, tempore ut?</p>
+
+			<p>Ab accusamus amet assumenda, aut debitis deserunt ea et expedita fuga hic illo laborum magni minima molestiae nam necessitatibus officia perspiciatis placeat quisquam rem repellat sapiente, sint soluta tenetur voluptatem!</p>
+		</div>
+
 	</div>
 </template>
 
