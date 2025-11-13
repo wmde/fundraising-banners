@@ -1,0 +1,4 @@
+.wmde-b-prose p {
+	max-width: 60ch;
+	text-wrap: pretty;
+}

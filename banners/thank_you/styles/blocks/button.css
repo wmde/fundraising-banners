@@ -1,0 +1,31 @@
+.wmde-b-button {
+	--button-bg: var(--button-background);
+
+	font-size: var(--type-step-0);
+	font-weight: var(--font-bold);
+	background: var(--button-bg);
+	color: var(--button-color);
+	border: 0;
+	border-radius: var(--border-radius);
+	padding-block: var(--space-2xs);
+	padding-inline: var(--space-m);
+	transition: background-color 200ms ease-in-out;
+}
+
+.wmde-b-button[data-secondary] {
+	--button-bg: var(--button-background-secondary);
+}
+
+.wmde-b-button:hover,
+.wmde-b-button:focus-visible {
+	--button-bg: oklch(from var(--button-background) 60% c h);
+}
+
+.wmde-b-button[data-secondary]:hover,
+.wmde-b-button[data-secondary]:focus-visible {
+	--button-bg: oklch(from var(--button-background-secondary) 60% c h);
+}
+
+.wmde-b-button[fill-width] {
+	width: 100%;
+}

@@ -1,0 +1,23 @@
+@keyframes show-letter {
+	0% {
+		transform: scale( 0.5 );
+	}
+
+	100% {
+		transform: scale( 1 );
+	}
+}
+
+.wmde-b-animated-letters span {
+	display: inline-block;
+}
+
+.wmde-banner--visible .wmde-b-animated-letters span {
+	animation: show-letter 2s cubic-bezier( 0, 1.13, 0.46, 1.97 );
+	animation-fill-mode: forwards;
+	animation-delay: calc( 0.08s * var( --index ) );
+
+	@starting-style {
+		transform: scale( 0.5 );
+	}
+}
