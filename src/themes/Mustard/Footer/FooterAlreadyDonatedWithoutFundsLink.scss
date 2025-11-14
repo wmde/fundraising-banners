@@ -1,0 +1,41 @@
+@use 'src/components/Footer/FooterAlreadyDonated';
+
+$right-column-width: 344px !default;
+$left-column-margin: 0 30px 0 0 !default;
+
+.wmde-banner {
+	@include FooterAlreadyDonated.layout;
+
+	&-footer {
+		font-size: 12px;
+		line-height: 20px;
+		color: var( --footer-color );
+		padding: 0;
+		margin-top: 0;
+
+		&-bank,
+		&-usage {
+			padding: 5px 0;
+		}
+
+		&-bank {
+			margin: $left-column-margin;
+
+			&-item {
+				padding-right: 2em;
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-already-donated,
+		&-already-donated:visited {
+			margin-left: auto;
+			color: var( --footer-color );
+			margin-right: $right-column-width;
+		}
+	}
+}

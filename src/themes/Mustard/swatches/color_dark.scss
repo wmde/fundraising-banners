@@ -1,0 +1,265 @@
+$white: #ffffff;
+$black: #000000;
+
+$grey100: #f8f9fa;
+$grey110: #eaecf0;
+$grey150: #dddddd;
+$grey200: #bbbbbb;
+$grey300: #b7b7b7;
+$grey500: #808080;
+$grey600: #777777;
+$grey625: #626262;
+$grey635: #484848;
+$grey650: #383838;
+$grey700: #292929;
+$grey800: #1f1f1f;
+$grey900: #101418;
+
+$red100: #ff8888;
+$red500: #fb4848;
+$red525: #f54739;
+$red575: #dd3333;
+$red600: #e60f00;
+
+$blue050: #eaf3ff;
+$blue100: #dff1ff;
+$blue600: #547fd5;
+$blue610: #4465a7;
+$blue700: #436fc7;
+$blue800: #20303f;
+
+$brown300: #453217;
+
+$yellow700: #fcd53f;
+
+@mixin swatch(
+	$slider: false,
+	$progress-bar: false,
+	$double-progress-bar: false,
+	$select-group: false,
+	$select-group-bubble: false,
+	$select-group-button: false,
+	$select-group-image-label: false,
+	$select-group-cheering: false,
+	$upgrade-to-yearly: false,
+	$already-donated: false,
+	$soft-close: false,
+	$fallback-banner: false,
+	$select-group-highlighted-interval: false,
+) {
+	--main-background: #{$grey800};
+	--main-color: #{$white};
+	--main-title-line-background: #{$grey100};
+	--main-border-bottom: #{$grey600};
+	--main-box-shadow: none;
+
+	--message-background: #{$grey700};
+	--message-border: #{$red600};
+
+	--info-icon-background: #{$red600};
+	--info-icon-color: #{$white};
+
+	--color-error: #{$red100};
+	--button-close-fill: #{$grey600};
+	--button-background: #{$blue700};
+	--button-color: #{$white};
+	--previous-button-fill: #{$white};
+
+	--footer-color: #{$grey100};
+	--input-selection-color: #{$grey100};
+	--input-selection-selected-background: #{$red600};
+	--input-selection-selected-color: #{$white};
+
+	--input-checkbox-background: #{$white};
+	--input-checkbox-border: #{$white};
+	--input-checkbox-background-checked: #{$blue700};
+	--input-checkbox-border-checked: #{$white};
+
+	--sticky-color: #{$yellow700};
+
+	--animated-highlight-color: #{$white};
+	/* stylelint-disable */
+	// --animated-highlight-gradient1:
+	--animated-highlight-gradient: linear-gradient(
+		270deg,
+		rgba( 255, 255, 255, 0 ) 0%,
+		rgba( 255, 255, 255, 0 ) 50%,
+		rgba( 42, 75, 141 ) 50%,
+		rgba( 42, 75, 141 ) 100%
+	);
+	/* stylelint-enable */
+
+	@if $slider {
+		--slider-pagination-background: #{$grey800};
+		--slider-pagination-border: #{$white};
+		--slider-pagination-background-active: #{$grey800};
+		--slider-pagination-border-active: #{$red600};
+		--slider-chevron: #{$white};
+	}
+
+	@if $progress-bar {
+		--progress-bar-wrapper-border: #{$red600};
+		--progress-bar-wrapper-background: #{$grey700};
+		--progress-bar-fill-background: #{$red600};
+		--progress-bar-fill-color: #{$white};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$white};
+		--double-progress-time-background: #{$red100};
+		--double-progress-time-fill-background: #{$red600};
+		--double-progress-difference-background: #{$red500};
+
+		--double-progress-amount-background: #{$blue100};
+		--double-progress-amount-fill-background: #{$blue700};
+		--double-progress-right-text-color: #{$grey700};
+	}
+
+	@if $select-group {
+		--select-group-background: #{$grey800};
+		--select-group-radio-label-color: #{$white};
+		--select-group-radio-label-background: #{$grey800};
+		--select-group-radio-label-border: #{$grey200};
+		--select-group-radio-border: #{$grey110};
+		--select-group-radio-border-checked: #{$blue700};
+		--select-group-radio-background: #{$grey800};
+		--select-group-radio-background-checked: #{$blue700};
+		--select-group-radio-checkmark: #{$white};
+
+		--select-custom-amount-border: #{$grey500};
+		--select-custom-amount-color: #{$white};
+		--select-custom-amount-border-checked: #{$blue700};
+
+		--select-custom-amount-radio-background: #{$white};
+		--select-custom-amount-radio-border: #{$grey200};
+		--select-custom-amount-radio-border-checked: #{$blue700};
+	}
+
+	@if $select-group-cheering {
+		--select-group-radio-cheering-background-checked: #{$grey800};
+		--select-group-radio-cheering-color: #{$blue700};
+		--cheering-background: #{$blue700};
+		--cheering-color: #{$white};
+
+		--select-group-radio-cheering-highlighted-option-background: #{$blue050};
+	}
+
+	@if $select-group-bubble {
+		--select-group-bubble-color: #{$grey150};
+		--select-group-bubble-background: #{$grey700};
+		--select-group-bubble-background-active: #{$blue800};
+		--select-group-bubble-border: #{$grey650};
+		--select-group-bubble-border-active: #{$blue700};
+		--select-group-bubble-radio-background: #{$white};
+		--select-group-bubble-radio-border: #{$grey600};
+		--select-group-bubble-radio-background-checked: #{$blue700};
+		--select-group-bubble-radio-border-checked: #{$white};
+		--select-group-bubble-radio-checkmark: #{$blue700};
+	}
+
+	@if $select-group-button {
+		--select-group-button-border: #{$grey300};
+		--select-group-button-background: #{$grey625};
+		--select-group-button-background-focused: #{$grey650};
+		--select-group-button-border-checked: #{$grey600};
+		--select-group-button-background-checked: #{$blue700};
+		--select-group-button-color-checked: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$blue610};
+		--higlighted-interval-color: #{$white};
+		--select-group-radio-border-checked: #{$white};
+	}
+
+	/**
+	These colours are not part of our design system, but are based on the payment service's branding.
+	The hex codes are inlined so as not to confuse/mix these colours with our own. They're currently
+	all set to white, as on dark mode it's easier to see them that way and the white hex code is used
+	to keep it consistent with the light colour swatch.
+	 */
+	@if $select-group-image-label {
+		--paypal-primary-fill: #ffffff;
+		--paypal-secondary-fill: #ffffff;
+		--paypal-overlap-fill: transparent;
+		--paypal-primary-fill-active: #ffffff;
+		--paypal-secondary-fill-active: #ffffff;
+		--paypal-overlap-fill-active: transparent;
+
+		--paypal-dark-blue: #253b80;
+		--paypal-light-blue: #179bd7;
+		--paypal-overlap-blue: #222d65;
+
+		--visa-fill: #ffffff;
+		--visa-fill-active: #ffffff;
+
+		/*
+		--mastercard-dark-orange: #dd8f8fff;
+		--mastercard-yellow: #f1cb93ff;
+		--mastercard-overlap-orange: #ffa674ff;
+		--mastercard-text: #{$white};
+		--mastercard-background-white: #{$white};
+		*/
+
+		--mastercard-dark-orange: #eb001b;
+		--mastercard-yellow: #f79e1b;
+		--mastercard-overlap-orange: #ff5a00;
+		--mastercard-text: #{$white};
+		--mastercard-background-white: #{$white};
+
+		--bank-transfer-blue: #{$white};
+
+		--direct-debit-card-fill: #{$white};
+		--direct-debit-pen-fill: #{$white};
+
+		--mastercard-primary-fill: #ffffff;
+		--mastercard-secondary-fill: #ffffff;
+		--mastercard-overlap-fill: transparent;
+		--mastercard-text-fill: #ffffff;
+		--mastercard-primary-fill-active: #ffffff;
+		--mastercard-secondary-fill-active: #ffffff;
+		--mastercard-overlap-fill-active: transparent;
+		--mastercard-text-fill-active: #ffffff;
+
+		--sepa-primary-fill: #ffffff;
+		--sepa-secondary-fill: #ffffff;
+		--sepa-primary-fill-active: #ffffff;
+		--sepa-secondary-fill-active: #ffffff;
+
+		--bank-transfer-fill: #ffffff;
+		--bank-transfer-fill-active: #ffffff;
+
+		--amex-primary-fill: #ffffff;
+		--amex-text-fill: transparent;
+		--amex-primary-fill-active: #ffffff;
+		--amex-text-fill-active: transparent;
+	}
+
+	@if $upgrade-to-yearly {
+		--upgrade-to-yearly-link-color: #{$blue700};
+		--upgrade-to-yearly-back-color: #{$white};
+	}
+
+	@if $already-donated {
+		--already-donated-button-background: #{$red600};
+		--already-donated-button-color: #{$white};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$grey700};
+		--soft-close-button-background: #{$red600};
+		--soft-close-button-color: #{$white};
+		--soft-close-bar-background: #{$red600};
+	}
+
+	@if $fallback-banner {
+		--fallback-background: #{$grey800};
+		--fallback-border: #{$red600};
+		--fallback-button-background: #{$blue700};
+		--fallback-button-color: #{$white};
+		--fallback-button-background-hover: #{$blue600};
+		--fallback-message-background: #{$grey700};
+		--fallback-message-border: #{$red600};
+		--fallback-uof-link: #{$grey200};
+	}
+}

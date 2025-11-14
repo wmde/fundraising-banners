@@ -1,0 +1,88 @@
+@use 'src/components/DonationForm/SubComponents/SelectCustomAmount';
+@use 'radio-input';
+
+.wmde-banner {
+	@include SelectCustomAmount.layout;
+
+	/*
+	The layout settings of this element should be similar to wmde-banner-select-group-option
+	because the custom amount is presented as an "option" inside the amount select group
+	In the future, we might use tools of the CSS framework (e.g. SCSS mixins)
+	to keep the styles in sync
+	 */
+	&-select-custom-amount {
+		padding: 3px 10px 0 25px;
+		cursor: pointer;
+		height: auto;
+
+		/* This width determines the "column span" of the custom amount */
+		width: 50%;
+
+		&-radio {
+			@include radio-input.styles( $left:0, $size: 18px );
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				border: 1px solid var( --select-custom-amount-border-checked );
+			}
+
+			.wmde-banner-select-custom-amount-input {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+
+		&-input-container {
+			border: 1px solid var( --select-custom-amount-border );
+			min-width: 110px;
+			margin: -2px 0 0;
+			line-height: 25px;
+			height: 26px;
+		}
+
+		&-euro-symbol {
+			height: 20px;
+			width: 10px;
+			line-height: 21px;
+			text-align: center;
+			margin-top: -10px;
+		}
+
+		&-input {
+			color: var( --select-custom-amount-color );
+			background-color: transparent;
+			padding: 0 1em;
+			height: 25px;
+			font-size: 14px;
+			font-weight: bold;
+			border: 0 none;
+			text-align: left;
+
+			&:focus,
+			&:active {
+				border: 1px solid var( --select-custom-amount-border-checked );
+			}
+		}
+
+		&-radio::before {
+			content: '❤';
+			height: 18px;
+			line-height: 18px;
+			width: 18px;
+			font-size: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			vertical-align: middle;
+			background: transparent;
+			color: var( --select-group-radio-cheering-color );
+		}
+
+		&-radio:checked::before {
+			transform: scale( 1 );
+		}
+	}
+}

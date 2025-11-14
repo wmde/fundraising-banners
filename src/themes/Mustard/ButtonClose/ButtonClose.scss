@@ -1,0 +1,36 @@
+@use 'src/components/ButtonClose/ButtonClose';
+
+$top: 12px !default;
+$right: 20px !default;
+$padding: 0 !default;
+$margin: 0 !default;
+$width: 15px !default;
+$height: 15px !default;
+
+.wmde-banner {
+	@include ButtonClose.layout( $top: $top, $right: $right );
+
+	&-close {
+		padding: $padding;
+		margin: $margin;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: $width;
+		height: $height;
+		border: 0;
+		background: none;
+
+		path {
+			transition: fill 500ms;
+		}
+
+		&:hover,
+		&:focus {
+			cursor: pointer;
+			path {
+				fill: var( --button-close-fill );
+			}
+		}
+	}
+}

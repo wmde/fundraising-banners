@@ -1,5 +1,5 @@
 // This is the file where we import the theme-specific component styles
-@use 'src/themes/Treedip/swatches/skin_vector-2022' with (
+@use 'src/themes/Mustard/swatches/skin_vector-2022' with (
 	$slider: true,
 	$select-group: true,
 	$select-group-bubble: true,
@@ -14,34 +14,34 @@
 @use '../../../../src/components/UseOfFunds/styles/swatches/skin_vector-2022' as uof-default;
 @use 'Banner';
 @use '../../../../src/components/UseOfFunds/styles/styles';
-@use 'MainBanner' with (
-	$banner-height: 357px,
-	$form-width: 310px
+@use 'MainBanner_var' with (
+	$banner-height: 357px
 );
-@use 'src/themes/Treedip/defaults';
-@use 'src/themes/Treedip/ButtonClose/ButtonClose';
-@use 'src/themes/Treedip/ProgressBar/ProgressBar';
-@use 'src/themes/Treedip/DonationForm/DonationForm';
-@use 'src/themes/Treedip/DonationForm/MultiStepDonation';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupHighlightedInterval' with (
+@use 'src/themes/Mustard/defaults';
+@use 'src/themes/Mustard/ButtonClose/ButtonClose';
+@use 'src/themes/Mustard/ProgressBar/ProgressBar';
+@use 'src/themes/Mustard/DonationForm/DonationForm';
+@use 'src/themes/Mustard/DonationForm/MultiStepDonation';
+@use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroupHighlightedInterval' with (
 	$payment-option-width: 25%
 );
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupPortraitImageLabel';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectCustomAmountRadio';
-@use 'src/themes/Treedip/DonationForm/Forms/MainDonationForm';
-@use 'src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
+@use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroupRadios';
+@use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroupPortraitImageLabel';
+@use 'src/themes/Mustard/DonationForm/SubComponents/SelectCustomAmountRadio';
+@use 'src/themes/Mustard/DonationForm/Forms/MainDonationForm';
+@use 'src/themes/Mustard/DonationForm/Forms/UpgradeToYearlyButtonForm' with (
 	$font-size: 14px
 );
-@use 'src/themes/Treedip/Footer/FooterAlreadyDonated';
-@use 'src/themes/Treedip/Footer/SelectionInput';
-@use 'src/themes/Treedip/Message/Message'  with (
+@use 'src/themes/Mustard/Footer/FooterAlreadyDonatedWithoutFundsLink';
+@use 'src/themes/Mustard/Footer/SelectionInput';
+@use 'src/themes/Mustard/Message/Message'  with (
 	$slider-main-headline-font-size: 25px,
 	$message-header-padding-bottom: 8px,
 	$message-header-small-up-padding-bottom: 8px
 );
-@use 'src/themes/Treedip/Slider/KeenSlider' with (
+@use 'src/themes/Mustard/Slider/KeenSlider' with (
 	$slider-padding: 0
 );
+@use 'src/themes/Mustard/UseOfFundsLink/UseOfFundsLink';
 @use 'src/components/FallbackBanner/styles/swatches/skin_vector-2022' as fbb-default;
 @use 'src/components/FallbackBanner/styles/styles' as fbb-styles;

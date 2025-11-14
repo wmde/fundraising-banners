@@ -1,0 +1,85 @@
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+@use 'transitions';
+@use 'src/components/ProgressBar/ProgressBar';
+
+$progress-bar-height: 30px !default;
+$progress-bar-margin: 0 !default;
+
+.wmde-banner {
+	@include ProgressBar.layout;
+
+	&-progress-bar {
+		position: relative;
+		font-family: fonts.$ui;
+		font-size: 12px;
+		height: $progress-bar-height;
+		line-height: $progress-bar-height;
+		font-weight: bold;
+		margin: $progress-bar-margin;
+
+		&-text {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 30px;
+			display: flex;
+			justify-content: space-between;
+
+			&-left {
+				visibility: hidden;
+				color: var( --progress-bar-fill-color );
+				padding-left: 10px;
+			}
+
+			&-right {
+				padding-right: 10px;
+			}
+		}
+
+		&-fill-wrapper {
+			position: relative;
+			background: var( --progress-bar-wrapper-background );
+			border: 3px solid var( --progress-bar-wrapper-border );
+			height: $progress-bar-height;
+			border-radius: 15px;
+		}
+
+		&-fill {
+			min-width: 80px;
+			max-width: 100%;
+			background: var( --progress-bar-fill-background );
+			border-radius: 15px;
+			color: var( --progress-bar-fill-color );
+			text-align: right;
+			padding-right: 16px;
+			line-height: $progress-bar-height - 6px;
+		}
+
+		&--late-progress {
+			height: 60px;
+			margin-top: 0;
+
+			@include breakpoints.large-up {
+				margin-top: -30px;
+			}
+
+			.wmde-banner-progress-bar-text {
+				position: static;
+			}
+			.wmde-banner-progress-bar-text-left {
+				margin-top: 30px;
+				color: var( --progress-bar-fill-color );
+
+				@include breakpoints.extra-small-up {
+					visibility: visible;
+				}
+			}
+			.wmde-banner-progress-bar-fill {
+				min-width: 100px;
+			}
+		}
+	}
+}
