@@ -8,6 +8,7 @@
 	$upgrade-to-yearly: true,
 	$fallback-banner: true,
 	$progress-bar: true,
+	$select-group-highlighted-interval: true,
 );
 @use 'src/components/BannerConductor/banner-transition';
 @use '../../../../src/components/UseOfFunds/styles/swatches/skin_vector-2022' as uof-default;
@@ -15,14 +16,14 @@
 @use '../../../../src/components/UseOfFunds/styles/styles';
 @use 'MainBanner' with (
 	$banner-height: 357px,
-	$form-width: 300px
+	$form-width: 310px
 );
 @use 'src/themes/Treedip/defaults';
 @use 'src/themes/Treedip/ButtonClose/ButtonClose';
 @use 'src/themes/Treedip/ProgressBar/ProgressBar';
 @use 'src/themes/Treedip/DonationForm/DonationForm';
 @use 'src/themes/Treedip/DonationForm/MultiStepDonation';
-@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroup' with (
+@use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupHighlightedInterval' with (
 	$payment-option-width: 25%
 );
 @use 'src/themes/Treedip/DonationForm/SubComponents/SelectGroupRadios';
