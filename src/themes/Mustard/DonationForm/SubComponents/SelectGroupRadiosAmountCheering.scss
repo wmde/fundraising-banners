@@ -1,0 +1,45 @@
+@use '../../variables/breakpoints';
+@use 'radio-input';
+
+.wmde-banner {
+	&-select-group {
+		&-option label {
+			padding: 0 10px 0 25px;
+			margin-top: 3px;
+			cursor: pointer;
+			height: 25px;
+		}
+
+		&-label {
+			color: var( --select-group-radio-label-color );
+			border: 0 none;
+			font-size: 14px;
+		}
+
+		&-input {
+			@include radio-input.styles( $left:0, $size: 18px );
+		}
+	}
+
+	.select-amount {
+		--select-group-radio-background-checked: var( --select-group-radio-cheering-background-checked );
+
+		.wmde-banner-select-group-input::before {
+			content: '❤';
+			height: 18px;
+			width: 18px;
+			line-height: 18px;
+			font-size: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			vertical-align: middle;
+			background: transparent;
+			color: var( --select-group-radio-cheering-color );
+		}
+
+		.wmde-banner-select-group-input:checked::before {
+			transform: scale( 1 );
+		}
+	}
+}

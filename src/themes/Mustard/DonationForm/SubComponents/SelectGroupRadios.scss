@@ -1,0 +1,23 @@
+@use '../../variables/breakpoints';
+@use 'radio-input';
+
+.wmde-banner {
+	&-select-group {
+		&-option label {
+			padding: 0 10px 0 25px;
+			margin-top: 3px;
+			cursor: pointer;
+			height: 25px;
+		}
+
+		&-label {
+			color: var( --select-group-radio-label-color );
+			border: 0 none;
+			font-size: 14px;
+		}
+
+		&-input {
+			@include radio-input.styles( $left:0, $size: 18px );
+		}
+	}
+}

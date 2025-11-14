@@ -1,0 +1,48 @@
+@use '../variables/globals';
+@use '../variables/fonts';
+
+$button-font-size: 14px !default;
+$border-radius: 18px !default;
+$height: 38px !default;
+
+.wmde-banner {
+	&-form {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		overflow: hidden;
+
+		&-page {
+			height: 100%;
+			width: 100%;
+		}
+
+		&-button {
+			min-width: 240px;
+			color: var( --button-color );
+			background-color: var( --button-background );
+			border-radius: $border-radius;
+			font-size: $button-font-size;
+			line-height: $height;
+			height: $height;
+			font-weight: bold;
+			text-align: center;
+			transition: background-color 500ms globals.$banner-easing;
+			padding: 0;
+
+			&:hover {
+				background-color: var( --button-background );
+			}
+		}
+	}
+
+	&-sub-form {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: 100%;
+		max-width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+}

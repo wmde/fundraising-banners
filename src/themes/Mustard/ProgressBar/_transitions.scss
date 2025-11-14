@@ -1,0 +1,26 @@
+@use '../variables/globals';
+
+.wmde-banner {
+	&-progress-bar-fill {
+		transition: width 3000ms globals.$banner-easing;
+	}
+
+	&-progress-bar-text-left,
+	&-progress-bar-text-right,
+	&-progress-bar-fill-text {
+		opacity: 0;
+		transition: opacity 300ms globals.$banner-easing;
+		transition-delay: 3000ms;
+	}
+
+	&--visible {
+		.wmde-banner-progress-bar-fill {
+			width: var( --wmde-banner-progress-bar-width );
+		}
+		.wmde-banner-progress-bar-text-left,
+		.wmde-banner-progress-bar-text-right,
+		.wmde-banner-progress-bar-fill-text {
+			opacity: 1;
+		}
+	}
+}

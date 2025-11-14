@@ -1,0 +1,76 @@
+@use '../variables/fonts';
+@use '../variables/breakpoints';
+
+$font: fonts.$content !default;
+$font-sizes: ( breakpoints.$extra-small: 18px ) !default;
+$slider-main-headline-font-size: 18px !default;
+$message-header-padding-bottom: 10px !default;
+$message-header-small-up-padding-bottom: 15px !default;
+$message-header-padding-top: 0 !default;
+$message-header-small-up-padding-top: 0 !default;
+
+.wmde-banner {
+	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		font-family: $font;
+		line-height: 1.3em;
+		text-align: left;
+
+		@each $width, $font-size in $font-sizes {
+			@media ( min-width: $width ) {
+				font-size: $font-size;
+			}
+		}
+
+		p {
+			margin: 0 0 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&-message-header {
+		font-family: $font;
+		text-align: center;
+		padding-bottom: $message-header-padding-bottom;
+		padding-top: $message-header-padding-top;
+
+		@include breakpoints.small-up {
+			padding-bottom: $message-header-small-up-padding-bottom;
+			padding-top: $message-header-small-up-padding-top;
+		}
+
+		h2 {
+			font-family: $font;
+			color: var( --message-color );
+			border: 0;
+			display: inline-block;
+			max-height: 62px;
+			margin: 0 0 4px;
+			padding: 0;
+			font-size: $slider-main-headline-font-size;
+			font-weight: 800;
+			line-height: ( $slider-main-headline-font-size ) - 1;
+
+			@include breakpoints.small-up {
+				font-size: 25px;
+				line-height: 24px;
+			}
+		}
+
+		svg {
+			height: 20px;
+			width: 20px;
+		}
+
+		p {
+			font-size: 18px;
+			margin: 0;
+			padding: 0;
+		}
+	}
+}

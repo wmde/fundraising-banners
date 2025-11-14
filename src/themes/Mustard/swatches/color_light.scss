@@ -1,0 +1,276 @@
+$white: #ffffff;
+$black: #000000;
+
+$grey100: #f8f9fa;
+$grey150: #dddddd;
+$grey200: #bbbbbb;
+$grey300: #b7b7b7;
+$grey400: #a9a9a9;
+$grey500: #808080;
+$grey600: #72777d;
+$grey700: #202122;
+
+$orange500: #ff5a00;
+
+$beige200: #ebece5;
+$beige400: #7d825d;
+$beige600: #3d3f2c;
+
+
+
+$red100: #ffe8e8;
+$red500: #fb4848;
+$red525: #f54739;
+$red575: #dd3333;
+$red550: #ab150a;
+$red600: #990a00;
+$red700: #7d0a00;
+
+$blue050: #eaf3ff;
+$blue100: #dff1ff;
+$blue400: #3366cc;
+$blue600: #4465a7;
+$blue700: #2a4b8d;
+
+$yellow600: #fede67;
+$yellow700: #fcd53f;
+
+@mixin swatch(
+	$slider: false,
+	$progress-bar: false,
+	$double-progress-bar: false,
+	$select-group: false,
+	$select-group-bubble: false,
+	$select-group-button: false,
+	$select-group-image-label: false,
+	$select-group-cheering: false,
+	$upgrade-to-yearly: false,
+	$already-donated: false,
+	$soft-close: false,
+	$fallback-banner: false,
+	$select-group-highlighted-interval: false,
+) {
+	--main-background: #{$white};
+	--main-color: #{$grey700};
+	--main-border-bottom: #{$grey200};
+	--main-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+	--message-background: #{$beige200};
+	--message-border: #{$beige200};
+
+	--info-icon-background: #{$orange500};
+	--info-icon-color: #{$white};
+
+	--color-error: #{$red600};
+	--button-close-fill: #{$grey600};
+	--button-background: #{$orange500};
+	--button-color: #{$white};
+	--previous-button-fill: #{$grey600};
+
+	--footer-color: #{$black};
+	--input-selection-color: #{$black};
+	--input-selection-selected-background: #{$red600};
+	--input-selection-selected-color: #{$white};
+
+	--input-checkbox-background: transparent;
+	--input-checkbox-border: #{$grey500};
+	--input-checkbox-background-checked: #{$blue400};
+	--input-checkbox-border-checked: #{$blue400};
+
+	--sticky-color: #{$yellow700};
+
+	--animated-highlight-color: #{$grey700};
+	/* stylelint-disable */
+	--animated-highlight-gradient: linear-gradient(
+		270deg,
+		rgba( 255, 255, 255, 0 ) 0%,
+		rgba( 255, 255, 255, 0 ) 50%,
+		rgba( 255, 222, 103 ) 50%,
+		rgba( 255, 222, 103 ) 100%
+	);
+	/* stylelint-enable */
+
+	@if $slider {
+		--slider-pagination-background: #{$white};
+		--slider-pagination-border: #{$white};
+		--slider-pagination-background-active: #{$black};
+		--slider-pagination-border-active: #{$black};
+		--slider-chevron: #{$grey700};
+	}
+
+	@if $progress-bar {
+		--progress-bar-wrapper-border: #{$beige200};
+		--progress-bar-wrapper-background: #{$white};
+		--progress-bar-wrapper-color: #{$orange500};
+		--progress-bar-fill-background: #{$orange500};
+		--progress-bar-fill-color: #{$white};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$white};
+		--double-progress-time-background: #{$red100};
+		--double-progress-time-fill-background: #{$red600};
+		--double-progress-difference-background: #{$red500};
+
+		--double-progress-amount-background: #{$blue100};
+		--double-progress-amount-fill-background: #{$blue700};
+		--double-progress-right-text-color: #{$grey700};
+	}
+
+	@if $select-group {
+		--select-group-background: #{$white};
+		--select-group-radio-label-color: #{$black};
+		--select-group-radio-label-background: #{$grey200};
+		--select-group-radio-label-border: #{$grey200};
+
+		--select-group-radio-background: #{$white};
+		--select-group-radio-border: #{$grey200};
+		--select-group-radio-checkmark: #{$white};
+		--select-group-radio-background-checked: #{$orange500};
+		--select-group-radio-border-checked: #{$orange500};
+
+		--select-custom-amount-border: #{$grey150};
+		--select-custom-amount-color: #{$grey700};
+		--select-custom-amount-border-checked: #{$beige600};
+
+		--select-custom-amount-radio-background: #{$white};
+		--select-custom-amount-radio-border: #{$grey200};
+		--select-custom-amount-radio-border-checked: #{$beige600};
+	}
+
+	@if $select-group-cheering {
+		--select-group-radio-cheering-background-checked: #{$white};
+		--select-group-radio-cheering-color: #{$blue400};
+		--cheering-background: #{$blue400};
+		--cheering-color: #{$white};
+
+		--select-group-radio-cheering-highlighted-option-background: #{$blue050};
+	}
+
+	@if $select-group-bubble {
+		--select-group-bubble-color: #{$black};
+		--select-group-bubble-background: #{$white};
+		--select-group-bubble-background-active: #{$white};
+		--select-group-bubble-border: #{$grey300};
+		--select-group-bubble-border-active: #{$blue700};
+
+		--select-group-bubble-radio-background: #{$white};
+		--select-group-bubble-radio-border: #{$grey500};
+		--select-group-bubble-radio-background-checked: #{$white};
+		--select-group-bubble-radio-border-checked: #{$blue700};
+		--select-group-bubble-radio-checkmark: #{$blue700};
+
+		--input-checkbox-background-checked: #{$blue700};
+		--input-checkbox-border-checked: #{$blue700};
+	}
+
+	@if $select-group-button {
+		--select-group-button-border: #{$grey300};
+		--select-group-button-background: #{$grey100};
+		--select-group-button-background-focused: #{$grey150};
+		--select-group-button-border-checked: #{$grey600};
+		--select-group-button-background-checked: #{$blue700};
+		--select-group-button-color-checked: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$beige200};
+		--higlighted-interval-color: #{$beige400};
+	}
+
+	/**
+	These colours are not part of our design system, but are based on the payment service's branding.
+	The hex codes are inlined so as not to confuse/mix these colours with our own.
+	 */
+	@if $select-group-image-label {
+		--paypal-dark-blue: #253b80;
+		--paypal-light-blue: #179bd7;
+		--paypal-overlap-blue: #222d65;
+
+		--mastercard-dark-orange: #eb001b;
+		--mastercard-yellow: #f79e1b;
+		--mastercard-overlap-orange: #ff5a00;
+		--mastercard-text: #{$black};
+		--mastercard-background-white: #{$white};
+		--test: #74ee15;
+
+		--bank-transfer-blue: #005da0;
+
+		--direct-debit-card-fill: #aeb1bc;
+		--direct-debit-pen-fill: #4465a7;
+
+		--paypal-primary-fill: #003087;
+		--paypal-secondary-fill: #0070e0;
+		--paypal-overlap-fill: #001c64;
+		--paypal-primary-fill-active: #ffffff;
+		--paypal-secondary-fill-active: #ffffff;
+		--paypal-overlap-fill-active: transparent;
+
+		--visa-fill: #1434cb;
+		--visa-fill-active: #ffffff;
+
+		--mastercard-primary-fill: #eb001b;
+		--mastercard-secondary-fill: #f79e1b;
+		--mastercard-overlap-fill: #ff5a00;
+		--mastercard-text-fill: #2f292b;
+		--mastercard-primary-fill-active: #ffffff;
+		--mastercard-secondary-fill-active: #ffffff;
+		--mastercard-overlap-fill-active: transparent;
+		--mastercard-text-fill-active: #ffffff;
+
+		--sepa-primary-fill: #0366a6;
+		--sepa-secondary-fill: #a2aab5;
+		--sepa-primary-fill-active: #ffffff;
+		--sepa-secondary-fill-active: #ffffff;
+
+		--bank-transfer-fill: #222222;
+		--bank-transfer-fill-active: #ffffff;
+
+		--amex-primary-fill: #006fcf;
+		--amex-text-fill: #ffffff;
+		--amex-primary-fill-active: #ffffff;
+		--amex-text-fill-active: transparent;
+	}
+
+	@if $upgrade-to-yearly {
+		--upgrade-to-yearly-link-color: #{$blue700};
+		--upgrade-to-yearly-back-color: #{$grey600};
+	}
+
+	@if $already-donated {
+		--already-donated-button-background: #{$red600};
+		--already-donated-button-color: #{$white};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$white};
+		--soft-close-button-background: #{$red600};
+		--soft-close-button-color: #{$white};
+		--soft-close-bar-background: #{$red600};
+		--soft-close-donated-button-background: #{$red600};
+		--soft-close-donated-button-border: #{$red600};
+		--soft-close-donated-button-color: #{$white};
+	}
+
+	@if $fallback-banner {
+		--fallback-background: #{$white};
+		--fallback-border: #{$red600};
+		--fallback-button-background: #{$blue700};
+		--fallback-button-color: #{$white};
+		--fallback-button-background-hover: #{$blue600};
+		--fallback-message-background: #{$white};
+		--fallback-message-border: #{$red600};
+		--fallback-uof-link: #{$grey500};
+
+		--fallback-progressbar-background: #{$white};
+		--fallback-progressbar-fill: #{$red600};
+		--fallback-progressbar-color: #{$white};
+
+		--fallback-slider-container-background: #{$white};
+		--fallback-slider-container-color: #{$black};
+		--fallback-slider-pagination-background: #{$grey600};
+		--fallback-slider-pagination-isactive-background: #{$white};
+		--fallback-slider-pagination-border: #{$white};
+		--fallback-slider-pagination-isactive-border: #{$red600};
+	}
+}

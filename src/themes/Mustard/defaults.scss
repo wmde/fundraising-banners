@@ -1,0 +1,42 @@
+.wmde-banner {
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	ul {
+		list-style-image: unset;
+	}
+
+	&-text-animated-highlight {
+		padding: 0 5px;
+
+		color: var( --animated-highlight-color );
+		background: var( --animated-highlight-gradient );
+
+		background-size: 201% 100%;
+		background-position: 100% 0;
+		transition: background-position 2s;
+	}
+
+	&--visible .wmde-banner-message .wmde-banner-text-animated-highlight,
+	&-slide--current .wmde-banner-text-animated-highlight {
+		background-position: 0 0;
+	}
+
+	.is-sr-only {
+		border: none !important;
+		clip-path: inset( 50% ) !important;
+		height: 0.01em !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		position: absolute !important;
+		white-space: nowrap !important;
+		width: 0.01em !important;
+	}
+}
