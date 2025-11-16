@@ -1,0 +1,223 @@
+@use 'sass:color';
+
+$error: #dd3333;
+
+$white: #ffffff;
+$black: #000000;
+
+$grey800: #202122;
+$grey700: #54595d;
+$grey400: #a2a9b1;
+$grey350: #c8ccd1;
+$grey100: #eaecf0;
+$grey75: #e8e8e8;
+$grey50: #eeeeee;
+
+$blue300: #66cfff;
+$blue400: #5d9fd0;
+$blue500: #648196;
+$blue600: #386d94;
+$blue700: #3366cc;
+$blue750: color.adjust( $blue700, $lightness: -5% );
+
+$orange300: #f9b943;
+$orange600: #da9000;
+$orange700: #bd7d00;
+
+$yellow100: #ffde67;
+$yellow200: #ffcc33;
+$yellow250: color.adjust( $yellow200, $lightness: -5% );
+
+$green10: #f8faf9;
+$green20: #eaf0ec;
+$green30: #c8d1cc;
+$green100: #dcf3ec;
+$green400: #9eeacb;
+$green600: #5bca66;
+$green500: color.adjust( $green600, $lightness: -5% );
+$green600: #1a8559;
+$green700: #1fa86f;
+$green750: #2a9168;
+$green775: #299168;
+$green800: #1d865b;
+$green900: #145a3f;
+
+$purple10: #ebe2fc;
+$purple100: #6b4ba1;
+
+$red200: #f17678;
+$red300: #ff5233;
+
+$pink100: #ff33f1;
+
+@mixin swatch(
+	$upgrade-to-yearly-button-form: false,
+	$select-group-image-label: false,
+	$select-group-cheering: false,
+	$select-group-highlighted-interval: false,
+	$progress-bar: false,
+	$double-progress-bar: false,
+	$soft-close: false,
+	$subscription-form: false,
+	$thank-you-box: false
+) {
+	--main-background: #{$white};
+	--main-color: #{$grey800};
+	--info-color: #{$white};
+	--color-error: #{$orange300};
+	--content-link-color: #{$blue600};
+	--content-link-color-hover: #{$blue400};
+
+	--mini-background: #{$grey800};
+	--mini-info-background: #{$green800};
+	--mini-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+	--mini-close-background: #{$grey50};
+
+	--mini-headline-line: #{$yellow200};
+	--mini-headline-background: #{$green800};
+	--mini-headline-color: #{$black};
+	--mini-headline-color-white: #{$white};
+
+	--mini-button-color: #{$white};
+	--mini-button-background: #{$orange600};
+	--mini-button-background-hover: #{$orange700};
+	--mini-button-alt-background: #{$blue700};
+	--mini-button-alt-background-hover: #{$blue750};
+
+	--mini-smallprint-color: #{$grey700};
+
+	--full-background: #{$grey800};
+	--full-info-background: #{$green800};
+	--full-content-below-info-background: #{$green900};
+	--full-content-below-info-color: #{$white};
+	--full-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+	--full-cta-background: #{$blue700};
+	--full-cta-color: #{$white};
+
+	--full-smallprint-color: #{$yellow100};
+
+	--full-close-background: #{$grey50};
+
+	--slider-pagination-background: #{$grey350};
+	--slider-pagination-background-active: #{$white};
+	--slider-chevron: #{$grey800};
+
+	--donation-form-button-color: #{$white};
+	--donation-form-button-background: #{$yellow200};
+	--donation-form-button-background-hover: #{$yellow250};
+
+	--select-group-option-notice: #{$grey700};
+
+	--select-group-option-border: #{$green775};
+	--select-group-option-background: #{$green600};
+	--select-group-option-color: #{$white};
+
+	--select-group-option-background-hover: #{$green750};
+	--select-group-option-border-hover: #{$green700};
+
+	--select-group-option-border-active: #{$blue700};
+	--select-group-option-background-active: #{$blue700};
+
+	--select-group-option-border-checked: #{$blue700};
+	--select-group-option-background-checked: #{$blue700};
+	--select-group-option-color-checked: #{$white};
+
+	--footer-color: #{$white};
+	--selection-input-color: #{$white};
+	--selection-input-selection-color: #{$white};
+	--selection-input-selection-background: #{$blue600};
+
+	--animated-highlight-color: #{$white};
+
+	--mini-info-section-color: #{$white};
+	--mini-info-section-icon-color: #{$green800};
+
+	/* stylelint-disable */
+	--animated-highlight-gradient: linear-gradient(
+					270deg,
+					rgba( 255, 255, 255, 0 ) 0%,
+					rgba( 255, 255, 255, 0 ) 50%,
+					rgb(153, 10, 0) 50%,
+					rgb(153, 10, 0) 100%
+	);
+	/* stylelint-enable */
+
+	@if $upgrade-to-yearly-button-form {
+		--upgrade-to-yearly-button-previous-color: #{$white};
+	}
+
+	@if $select-group-image-label {
+		--select-group-image-label-fill: #{$white};
+		--select-group-image-label-fill-highlight: #{$blue600};
+	}
+
+	@if $select-group-cheering {
+		--cheering-background: #{$blue700};
+		--cheering-color: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$yellow200};
+		--higlighted-interval-color: #{$black};
+	}
+
+	@if $progress-bar {
+		--progress-bar-border: #{$yellow200};
+		--progress-bar-background: #{$yellow200};
+		--progress-bar-color: #{$black};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$black};
+		--double-progress-time-background: #{$grey75};
+		--double-progress-time-fill-background: #{$yellow200};
+		--double-progress-difference-background: #{$red300};
+		--double-progress-difference-color: #{$white};
+
+		--double-progress-amount-background: #{$grey75};
+		--double-progress-amount-fill-background: #{$blue300};
+		--double-progress-right-text-color: #{$black};
+
+		--double-progress-hand-fill: #{$black};
+		--double-progress-timer-fill: #{$black};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$white};
+		--soft-close-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+		--soft-close-prompt-color: #{$white};
+		--soft-close-prompt-background: #{$green800};
+
+		--soft-close-close-button-background: #{$grey50};
+
+		--soft-close-button-background: #{$blue700};
+		--soft-close-button-color: #{$white};
+
+		--soft-close-donated-button-background: #{$white};
+		--soft-close-donated-button-color: #{$blue700};
+		--soft-close-donated-button-border: #{$blue700};
+
+		--soft-close-countdown-fill: #{$orange600};
+	}
+
+	@if $subscription-form {
+		--sub-form-link-color: #{$orange600};
+		--sub-form-modal-background: #{$white};
+		--sub-form-input-border: #{$grey400};
+		--sub-form-checkbox-color: #{$grey800};
+
+		--sub-form-submit-color: #{$white};
+		--sub-form-submit-background: #{$orange600};
+		--sub-form-submit-background-hover: #{$orange700};
+
+		--sub-form-submit-privacy-color: #{$grey400};
+	}
+
+	@if $thank-you-box {
+		--thank-you-box-background: #{$blue700};
+		--thank-you-box-color: #{$white};
+	}
+}
