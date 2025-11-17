@@ -98,7 +98,7 @@ $pink100: #ff33f1;
 	--full-background: #{$black};
 	--full-info-background: #{$grey755};
 	--full-content-below-info-background: #{$grey755};
-	--full-content-below-info-color: #{$grey800};
+	--full-content-below-info-color: #{$white};
 	--full-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 	--full-cta-background: #{$yellow300};
@@ -117,16 +117,17 @@ $pink100: #ff33f1;
 	--donation-form-button-background-hover: #{$red-orange550};
 
 	--select-group-option-notice: #{$grey700};
+	--select-group-legend-color: #{$white};
 
-	--select-group-option-border: #{$green30};
-	--select-group-option-background: #{$green10};
-	--select-group-option-color: #{$black};
+	--select-group-option-border: #{$black};
+	--select-group-option-background: #{$black};
+	--select-group-option-color: #{$white};
 
-	--select-group-option-background-hover: #{$green20};
-	--select-group-option-border-hover: #{$green30};
+	--select-group-option-background-hover: #{$black};
+	--select-group-option-border-hover: #{$black};
 
-	--select-group-option-border-active: #{$green600};
-	--select-group-option-background-active: #{$green10};
+	--select-group-option-border-active: #{$yellow300};
+	--select-group-option-background-active: #{$yellow300};
 
 	--select-group-option-border-checked: #{$yellow300};
 	--select-group-option-background-checked: #{$yellow300};
@@ -147,7 +148,7 @@ $pink100: #ff33f1;
 	--animated-highlight-gradient: #{$yellow300};
 
 	@if $upgrade-to-yearly-button-form {
-		--upgrade-to-yearly-button-previous-color: #{$black};
+		--upgrade-to-yearly-button-previous-color: #{$white};
 	}
 
 	@if $select-group-image-label {
