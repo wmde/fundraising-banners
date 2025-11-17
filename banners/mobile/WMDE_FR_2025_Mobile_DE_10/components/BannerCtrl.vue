@@ -8,7 +8,7 @@
 			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
-				<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="7000" :withPagination="false">
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
