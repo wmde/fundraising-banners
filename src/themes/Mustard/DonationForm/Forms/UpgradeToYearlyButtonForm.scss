@@ -3,6 +3,10 @@ $font-size: 12px !default;
 .wmde-banner {
 	&-sub-form.wmde-banner-form-upgrade {
 		justify-content: normal;
+
+		border: 2px var( --form-border ) solid;
+		border-radius: 6px;
+		padding: 20px 20px 0 20px;
 	}
 
 	.previous {

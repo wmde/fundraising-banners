@@ -14,26 +14,26 @@ HTMLDialogElement.prototype.showModal = () => {};
 HTMLDialogElement.prototype.close = () => {};
 
 const expectShowsUseOfFunds = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '#application-of-funds-link' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'shown' ).length ).toBe( 1 );
 };
 
 const expectHidesUseOfFunds = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '#application-of-funds-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
 	expect( wrapper.findComponent( UseOfFundsModal ).emitted( 'hide' ).length ).toBe( 1 );
 };
 
 const expectEmitsModalOpenedEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '#application-of-funds-link' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'modalOpened' ).length ).toStrictEqual( 1 );
 };
 
 const expectEmitsModalClosedEvent = async ( wrapper: VueWrapper<any> ): Promise<any> => {
-	await wrapper.find( '.wmde-banner-footer-usage-link' ).trigger( 'click' );
+	await wrapper.find( '#application-of-funds-link' ).trigger( 'click' );
 	await wrapper.find( '.wmde-banner-funds-modal-close button' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );

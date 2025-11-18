@@ -7,5 +7,11 @@
 		color: var( --footer-color );
 		cursor: pointer;
 		text-decoration: none;
+		margin-left: 40px;
+
+		&-wrapper {
+			margin-top: 6px;
+			margin-bottom: 4px;
+		}
 	}
 }

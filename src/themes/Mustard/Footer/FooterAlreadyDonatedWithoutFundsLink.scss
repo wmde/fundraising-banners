@@ -12,6 +12,7 @@ $left-column-margin: 0 30px 0 0 !default;
 		color: var( --footer-color );
 		padding: 0;
 		margin-top: 0;
+		padding-right: 344px;
 
 		&-bank,
 		&-usage {
@@ -35,7 +36,6 @@ $left-column-margin: 0 30px 0 0 !default;
 		&-already-donated:visited {
 			margin-left: auto;
 			color: var( --footer-color );
-			margin-right: $right-column-width;
 		}
 	}
 }

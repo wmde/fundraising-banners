@@ -32,7 +32,7 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<div>
+				<div class="wmde-banner-usage-link-wrapper">
 					<a
 						id="application-of-funds-link"
 						class="wmde-banner-usage-link t-use-of-funds-link"

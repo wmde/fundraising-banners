@@ -58,8 +58,12 @@ $yellow700: #fcd53f;
 	--message-background: #{$beige200};
 	--message-border: #{$beige200};
 
+	--form-border: #{$orange500};
+
 	--info-icon-background: #{$orange500};
 	--info-icon-color: #{$white};
+
+	--form-background: #{$white};
 
 	--color-error: #{$red600};
 	--button-close-fill: #{$grey600};
@@ -174,8 +178,8 @@ $yellow700: #fcd53f;
 	}
 
 	@if $select-group-highlighted-interval {
-		--higlighted-interval-background: #{$beige200};
-		--higlighted-interval-color: #{$beige400};
+		--highlighted-interval-background: #{$beige200};
+		--highlighted-interval-color: #{$beige400};
 	}
 
 	/**
