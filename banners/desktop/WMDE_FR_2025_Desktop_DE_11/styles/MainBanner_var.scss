@@ -59,12 +59,7 @@ $form-width: 344px !default;
 		flex-direction: column;
 		width: $form-width;
 		padding: 0;
-		background: linear-gradient(
-						90deg,
-						var( --message-background ) 0,
-						var( --message-background ) 10%,
-						var( --form-background ) 10%,
-						var( --form-background ) 100%
-		);
+		margin-bottom: 30px;
+		background: linear-gradient( 90deg, var( --message-background ) 0, var( --message-background ) 10%, var( --form-background ) 10%, var( --form-background ) 100% );
 	}
 }
