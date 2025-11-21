@@ -1,0 +1,230 @@
+@use 'sass:color';
+
+$error: #dd3333;
+
+$white: #ffffff;
+$black: #000000;
+
+$grey50: #eeeeee;
+$grey65: #d7dac6;
+$grey75: #e8e8e8;
+$grey100: #eaecf0;
+$grey350: #c8ccd1;
+$grey400: #a2a9b1;
+$grey500: #7c8189;
+$grey700: #54595d;
+$grey750: #4d4d4d;
+$grey755: #41444b;
+$grey755: #3b3d43;
+$grey800: #202122;
+
+$blue300: #66cfff;
+$blue400: #5d9fd0;
+$blue500: #648196;
+$blue600: #386d94;
+$blue700: #3366cc;
+$blue750: color.adjust( $blue700, $lightness: -5% );
+
+$orange600: #da9000;
+$orange700: #bd7d00;
+
+$yellow100: #ffde67;
+$yellow200: #ffcc33;
+$yellow300: #fad138;
+$yellow350: #e9c334;
+$yellow250: color.adjust( $yellow200, $lightness: -5% );
+
+$green10: #f8faf9;
+$green20: #eaf0ec;
+$green30: #c8d1cc;
+$green100: #dcf3ec;
+$green350: #b7e8d9;
+$green400: #9eeacb;
+$green600: #6e9e00;
+$green500: color.adjust( $green600, $lightness: -5% );
+$green800: #1d865b;
+
+$grayish-yellow100: #ebece5;
+$red-orange500: #ff5a00;
+$red-orange550: #f05400;
+
+$purple10: #ebe2fc;
+$purple100: #6b4ba1;
+
+$red200: #f17678;
+$red300: #ff5233;
+
+$pink100: #ff33f1;
+
+@mixin swatch(
+	$upgrade-to-yearly-button-form: false,
+	$select-group-image-label: false,
+	$select-group-cheering: false,
+	$select-group-highlighted-interval: false,
+	$progress-bar: false,
+	$double-progress-bar: false,
+	$soft-close: false,
+	$subscription-form: false,
+	$thank-you-box: false,
+	$already-donated: true
+) {
+	--main-background: #{$white};
+	--main-color: #{$grey800};
+	--info-color: #{$white};
+	--color-error: #{$error};
+	--content-link-color: #{$blue600};
+	--content-link-color-hover: #{$blue400};
+
+	--mini-background: #{$black};
+	--mini-info-background: #{$grey750};
+	--mini-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+	--mini-close-background: #{$black};
+
+	--mini-headline-line: #{$red-orange500};
+	--mini-headline-background: #{$grey750};
+	--mini-headline-color: #{$black};
+	--mini-headline-color-white: #{$white};
+
+	--mini-button-color: #{$white}; // white
+	--mini-button-background: #{$yellow300};
+	--mini-button-background-hover: #{$yellow350};
+	--mini-button-alt-color: #{$black};
+	--mini-button-alt-background: #{$red-orange500};
+	--mini-button-alt-background-hover: #{$red-orange550};
+
+	--mini-smallprint-color: #{$grey700};
+
+	--full-background: #{$black};
+	--full-info-background: #{$grey755};
+	--full-content-below-info-background: #{$grey755};
+	--full-content-below-info-color: #{$white};
+	--full-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+	--full-cta-background: #{$yellow300};
+	--full-cta-color: #{$black};
+
+	--full-smallprint-color: #{$grey700};
+
+	--full-close-background: #{$black};
+
+	--slider-pagination-background: #{$grey400};
+	--slider-pagination-background-active: #{$grey100};
+	--slider-chevron: #{$grey800};
+
+	--donation-form-button-color: #{$white};
+	--donation-form-button-background: #{$red-orange500};
+	--donation-form-button-background-hover: #{$red-orange550};
+
+	--select-group-option-notice: #{$grey700};
+	--select-group-legend-color: #{$white};
+
+	--select-group-option-border: #{$black};
+	--select-group-option-background: #{$black};
+	--select-group-option-color: #{$white};
+
+	--select-group-option-background-hover: #{$black};
+	--select-group-option-border-hover: #{$black};
+
+	--select-group-option-border-active: #{$yellow300};
+	--select-group-option-background-active: #{$yellow300};
+
+	--select-group-option-border-checked: #{$yellow300};
+	--select-group-option-background-checked: #{$yellow300};
+	--select-group-option-color-checked: #{$black};
+
+	--footer-color: #{$white};
+	--selection-input-color: #{$black};
+	--selection-input-selection-color: #{$white};
+	--selection-input-selection-background: #{$blue600};
+
+	--animated-highlight-color: #{$black};
+
+	--mini-info-section-color: #{$grey100};
+	--mini-info-section-icon-color: #{$black};
+
+	--close-icon-fill: #{$grey50};
+
+	--animated-highlight-gradient: #{$yellow300};
+
+	@if $upgrade-to-yearly-button-form {
+		--upgrade-to-yearly-button-previous-color: #{$white};
+	}
+
+	@if $select-group-image-label {
+		--select-group-image-label-fill: #{$white};
+		--select-group-image-label-fill-highlight: #{$blue600};
+	}
+
+	@if $select-group-cheering {
+		--cheering-background: #{$red-orange500};
+		--cheering-color: #{$white};
+	}
+
+	@if $select-group-highlighted-interval {
+		--higlighted-interval-background: #{$green350};
+		--higlighted-interval-color: #{$red-orange500};
+	}
+
+	@if $progress-bar {
+		--progress-bar-border: #{$red-orange500};
+		--progress-bar-background: #{$red-orange500};
+		--progress-bar-color: #{$black};
+	}
+
+	@if $double-progress-bar {
+		--double-progress-color: #{$black};
+		--double-progress-time-background: #{$grey75};
+		--double-progress-time-fill-background: #{$yellow200};
+		--double-progress-difference-background: #{$red300};
+		--double-progress-difference-color: #{$white};
+
+		--double-progress-amount-background: #{$grey75};
+		--double-progress-amount-fill-background: #{$blue300};
+		--double-progress-right-text-color: #{$black};
+
+		--double-progress-hand-fill: #{$black};
+		--double-progress-timer-fill: #{$black};
+	}
+
+	@if $soft-close {
+		--soft-close-background: #{$white};
+		--soft-close-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+
+		--soft-close-prompt-color: #{$white};
+		--soft-close-prompt-background: #{$grayish-yellow100};
+
+		--soft-close-close-button-background: #{$grey50};
+
+		--soft-close-button-background: #{$red-orange500};
+		--soft-close-button-color: #{$white};
+
+		--soft-close-donated-button-background: #{$white};
+		--soft-close-donated-button-color: #{$red-orange500};
+		--soft-close-donated-button-border: #{$red-orange500};
+
+		--soft-close-countdown-fill: #{$yellow300};
+	}
+
+	@if $subscription-form {
+		--sub-form-link-color: #{$yellow300};
+		--sub-form-modal-background: #{$white};
+		--sub-form-input-border: #{$grey400};
+		--sub-form-checkbox-color: #{$grey800};
+
+		--sub-form-submit-color: #{$white};
+		--sub-form-submit-background: #{$yellow300};
+		--sub-form-submit-background-hover: #{$orange700};
+
+		--sub-form-submit-privacy-color: #{$grey400};
+	}
+
+	@if $thank-you-box {
+		--thank-you-box-background: #{$grey700};
+		--thank-you-box-color: #{$white};
+	}
+
+	@if $already-donated {
+		--already-donated-button-color: #{$white};
+	}
+}
