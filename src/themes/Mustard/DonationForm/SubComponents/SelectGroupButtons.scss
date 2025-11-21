@@ -1,0 +1,43 @@
+$font-size: 12px !default;
+$height: 30px !default;
+$padding: 0 4px 8px !default;
+
+.wmde-banner {
+	&-select-group {
+		&-option {
+			padding: $padding;
+
+			label {
+				display: block;
+				width: 100%;
+			}
+		}
+
+		&-label {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			background: var( --select-group-button-background );
+			border: 1px solid var( --select-group-button-border );
+			border-radius: 2px;
+			height: $height;
+			cursor: pointer;
+			text-align: center;
+			font-size: $font-size;
+			box-sizing: border-box;
+			transition: background-color 500ms;
+
+			&:hover,
+			&:focus {
+				background: var( --select-group-button-background-focused );
+			}
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			background: var( --select-group-button-background-checked );
+			border-color: var( --select-group-button-border-checked );
+			color: var( --select-group-button-color-checked );
+		}
+	}
+}
