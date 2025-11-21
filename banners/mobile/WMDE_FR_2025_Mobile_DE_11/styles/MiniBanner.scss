@@ -105,7 +105,7 @@ $height-l-up: 288px !default;
 
 			&-background {
 				position: relative;
-				text-align: left;
+				text-align: center;
 
 				@media ( min-width: 400px ) {
 					text-align: center;
@@ -168,7 +168,6 @@ $height-l-up: 288px !default;
 			border: none;
 			border-radius: 20px;
 			font-weight: bold;
-			color: var( --mini-button-color );
 			font-size: 14px;
 			white-space: nowrap;
 			margin: 0 6px;
@@ -184,6 +183,7 @@ $height-l-up: 288px !default;
 
 		&-button {
 			background: var( --mini-button-background );
+			color: var( --mini-button-alt-color );
 
 			&:hover,
 			&:focus {
@@ -193,6 +193,7 @@ $height-l-up: 288px !default;
 
 		&-button-preselect {
 			background: var( --mini-button-alt-background );
+			color: var( --mini-button-color );
 
 			&:hover,
 			&:focus {
