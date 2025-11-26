@@ -1,0 +1,58 @@
+<template>
+	<div class="wmde-banner-mini">
+		<div class="wmde-banner-mini-content">
+			<div class="wmde-banner-mini-close">
+				<button class="wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
+					<CloseIconCircle/>
+				</button>
+			</div>
+
+			<button @click="$emit( 'showUseOfFunds' )" class="wmde-banner-headline wmde-banner-mini-uof-link">
+				<span class="wmde-banner-headline-icon"><SimpleInfoIcon/></span> <span class="wmde-banner-headline-link">Why</span> even &euro;10 makes a difference
+			</button>
+
+			<div class="wmde-banner-mini-slideshow">
+				<slot name="banner-slides"/>
+			</div>
+
+			<div class="wmde-banner-mini-button-group">
+				<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselectedAmount' )">
+					Donate €10
+				</button>
+				<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
+					Different Amount
+				</button>
+			</div>
+
+			<div class="wmde-banner-mini-footer">
+				<div>
+					<button
+						class="wmde-banner-mini-already-donated-button"
+						@click.prevent="$emit( 'alreadyDonatedClicked' )"
+					>
+						<span class="wmde-banner-mini-already-donated-icon">&check;</span>
+						<span>{{ $translate( 'mini-banner-already-donated-button' ) }}</span>
+					</button>
+				</div>
+				<div class="wmde-banner-mini-footer-payment-icons">
+					<PayPalLogo/>
+					<VisaLogo/>
+					<MastercardLogo/>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</template>
+
+<script setup lang="ts">
+
+import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
+import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
+import SimpleInfoIcon from './SimpleInfoIcon.vue';
+
+defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close', 'showUseOfFunds', 'alreadyDonatedClicked' ] );
+
+</script>
