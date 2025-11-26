@@ -11,6 +11,9 @@
 				useful. The average donation is {{ averageDonation }}, but even €5 helps us. Has Wikipedia given you the value of a cup
 				of coffee this year? Then choose to be one of the rare exceptions and give something back. Thank you!
 			</p>
+			<p>
+				Jimmy Wales – Wikipedia Founder
+			</p>
 		</div>
 	</div>
 </template>
