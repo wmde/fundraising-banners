@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import Banner from './components/BannerCtrl.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -17,7 +17,7 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import { Locales } from '@src/domain/Locales';
-import messages from './messages_var';
+import messages from './messages';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { LocaleFactoryEn } from '@src/utils/LocaleFactory/LocaleFactoryEn';
 import { createFormItems } from './form_items';
@@ -68,7 +68,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.EN, ap: '0' } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( new Date(), page.getCampaignParameters() ) );

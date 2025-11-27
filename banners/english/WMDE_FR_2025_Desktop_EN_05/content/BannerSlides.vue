@@ -6,23 +6,22 @@
 			sold.&#8221; - An important update for readers in Germany.
 		</p>
 		<p>
-			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-			message will be up for only a few hours.
+			Please don't skip this 1-minute read. It's Wednesday and if you're like us, you've used Wikipedia countless
+			times. To settle an argument with a friend. To satisfy a curiosity. Whether it's 3 in the morning or the
+			afternoon, Wikipedia is useful in your life.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to give €5 back.
-			<AnimatedText :content="visitorsVsDonorsSentence"/>
-			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online information,
-			powering everything from your personal searches to emerging AI technologies.
+			We do not run ads – we rely on the support of everyday readers. {{ campaignDaySentence }}
+			<AnimatedText :content="visitorsVsDonorsSentence"/> But that small group makes a big difference.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if
-			you have given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate
-			today. If you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank&nbsp;you.
+			When you support Wikipedia, you're standing up for something simple but profound: that knowledge should
+			belong to everyone. If you agree, then this is your moment to give back. Even €5 or the price of a cup of
+			coffee make a difference. Help keep it going – for you, the next reader, and the next generation. Thank you.
 		</p>
 	</KeenSliderSlide>
 </template>
@@ -41,7 +40,11 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const {
+	getCurrentDateAndTime,
+	campaignDaySentence,
+	visitorsVsDonorsSentence
+}: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
