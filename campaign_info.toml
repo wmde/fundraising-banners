@@ -143,7 +143,7 @@ name = "English Desktop"
 icon = "desktop"
 campaign = "WMDE_FR_2025_Desktop_EN_05"
 description = "Based on VAR desktop-en-04"
-campaign_tracking = "en05-ba-251127"
+campaign_tracking = "en05-ba-251202"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
@@ -154,12 +154,12 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
 [english.banners.ctrl]
 filename = "./banners/english/WMDE_FR_2025_Desktop_EN_05/banner_ctrl.ts"
 pagename = "WMDE_FR_2025_Desktop_EN_05_ctrl"
-tracking = "org-en05-251127-ctrl"
+tracking = "org-en05-251202-ctrl"
 
 [english.banners.var]
 filename = "./banners/english/WMDE_FR_2025_Desktop_EN_05/banner_var.ts"
 pagename = "WMDE_FR_2025_Desktop_EN_05_var"
-tracking = "org-en05-251127-var"
+tracking = "org-en05-251202-var"
 
 [english.test_matrix]
 platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
