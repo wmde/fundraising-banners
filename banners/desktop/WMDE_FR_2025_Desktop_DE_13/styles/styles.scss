@@ -22,7 +22,7 @@
 @use 'src/themes/Mustard/ProgressBar/ProgressBar';
 @use 'src/themes/Mustard/DonationForm/DonationForm';
 @use 'src/themes/Mustard/DonationForm/MultiStepDonation';
-@use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroupHighlightedInterval' with (
+@use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroup' with (
 	$payment-option-width: 25%
 );
 @use 'src/themes/Mustard/DonationForm/SubComponents/SelectGroupRadios';
