@@ -1,0 +1,64 @@
+.wmde-b-slider {
+	--slider-chevron: var( --color-blue-600 );
+	--pagination-background: var(--color-blue-100);
+	--pagination-background-active: var(--color-blue-600);
+
+	position: relative;
+}
+
+.wmde-b-slider__slides {
+	display: flex;
+	width: 100%;
+}
+
+.wmde-b-slider__slide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-block: var(--space-s);
+	padding-inline: var(--space-l);
+}
+
+.wmde-b-slider__previous-slide,
+.wmde-b-slider__next-slide {
+	position: absolute;
+
+	width: var(--space-l);
+	top: 0;
+	bottom: var(--space-2xs);
+	border: 0;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.wmde-b-slider__previous-slide {
+	left: 0;
+}
+.wmde-b-slider__next-slide {
+	right: 0;
+}
+
+.wmde-b-slider__pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2xs);
+}
+
+.wmde-b-slider__pagination-item {
+	display: inline-block;
+	height: var(--space-2xs);
+	width: var(--space-2xs);
+	border-radius: calc( var(--space-2xs) / 2 );
+	border: 0;
+	background: var(--pagination-background);
+
+	transition: width 200ms ease-in-out;
+}
+
+.wmde-b-slider__pagination-item--active {
+	background: var(--pagination-background-active);
+	width: var(--space-m);
+}

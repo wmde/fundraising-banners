@@ -1,0 +1,15 @@
+.wmde-b-close {
+	--icon-stroke: var(--color-black);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: var(--space-l);
+	width: var(--space-l);
+	border: 0;
+	padding: 0;
+	background: transparent;
+}
