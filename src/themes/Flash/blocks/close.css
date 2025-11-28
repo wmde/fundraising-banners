@@ -1,0 +1,24 @@
+.wmde-b-close {
+	--icon-stroke: var(--color-black);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 2.5rem;
+	width: 2.5rem;
+	border: 0;
+	padding: 0;
+	background: transparent;
+}
+
+.wmde-b-close path {
+	transition: stroke 200ms ease-in-out;
+}
+
+.wmde-b-close:hover,
+.wmde-b-close:focus-visible {
+	--icon-stroke: var(--color-red-600);
+}

@@ -1,0 +1,10 @@
+.wmde-b-header {
+	--background: var(--color-red-100);
+	--icon-fill: var(--color-black);
+	--flow-space: var(--space-3xs);
+
+	background: var(--background);
+	padding-block: var(--space-xs);
+	padding-inline: var(--space-l);
+	text-align: center;
+}
