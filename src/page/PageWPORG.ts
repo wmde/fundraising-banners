@@ -64,6 +64,10 @@ class PageWPORG implements Page {
 			return BannerNotShownReasons.DisallowedNamespace;
 		}
 
+		if ( this._mediaWiki.isShowingTemporaryAccountBar() ) {
+			return BannerNotShownReasons.UserInteraction;
+		}
+
 		if ( this.hasSizeIssues( bannerDimensions ) ) {
 			return BannerNotShownReasons.SizeIssue;
 		}

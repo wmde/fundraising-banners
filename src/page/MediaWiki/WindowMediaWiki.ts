@@ -6,10 +6,14 @@ import { setCookie } from '@src/page/MediaWiki/setCookie';
 import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSetter';
 import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
+/**
+ * An interface that defines the parts of the huge Mediawiki object that are interesting for us
+ */
 interface MediaWikiTools {
 	config: { get: ( item: string ) => any };
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	centralNotice: { setBannerLoadedButHidden: () => void };
+	user: { isTemp: () => boolean };
 }
 
 interface MwWindow extends Window {
@@ -48,6 +52,12 @@ export class WindowMediaWiki implements MediaWiki {
 
 	public isShowingContentPage(): boolean {
 		return this.getConfigItem( 'wgAction' ) === 'view';
+	}
+
+	public isShowingTemporaryAccountBar(): boolean {
+		// We assume that the temporary account bar will be visible when the user is a temporary user.
+		// The (brittle) alternative would be to look for an element with `mw-temp-user-banner` class
+		return window.mw.user.isTemp();
 	}
 
 	public track( name: string, trackingData: LegacyBannerEvent | SizeIssue ): void {

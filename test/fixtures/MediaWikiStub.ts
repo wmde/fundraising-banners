@@ -13,6 +13,10 @@ export class MediaWikiStub implements MediaWiki {
 		return false;
 	}
 
+	public isShowingTemporaryAccountBar(): boolean {
+		return false;
+	}
+
 	public preventBannerDisplayForPeriod(): void {
 	}
 

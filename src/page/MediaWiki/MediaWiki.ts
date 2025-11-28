@@ -8,6 +8,7 @@ export interface MediaWiki {
 	isShowingContentPage: () => boolean;
 	isContentHiddenByLightbox: () => boolean;
 	isInArticleNamespace: () => boolean;
+	isShowingTemporaryAccountBar: () => boolean;
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	preventBannerDisplayForPeriod: ( bannerCategory: BannerCategory ) => void;
 	preventBannerDisplayUntilEndOfCampaign: ( bannerCategory: BannerCategory ) => void;

@@ -15,14 +15,19 @@ describe( 'PageWPORG', function () {
 	const bannerTestCategory = 'fundraising';
 
 	beforeEach( () => {
+		// the default booleans in the checking functions would all allow showing the banner.
+		// Individual tests can override them to test the functionality.
 		mediaWiki = {
 			isInArticleNamespace(): boolean {
 				return true;
 			},
 			isShowingContentPage(): boolean {
-				return false;
+				return true;
 			},
 			isContentHiddenByLightbox(): boolean {
+				return false;
+			},
+			isShowingTemporaryAccountBar(): boolean {
 				return false;
 			},
 			getConfigItem: vitest.fn(),
@@ -34,37 +39,34 @@ describe( 'PageWPORG', function () {
 		};
 	} );
 
-	it( 'shows when appropriate', function () {
-		mediaWiki.isInArticleNamespace = vitest.fn().mockReturnValue( true );
-		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
-		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
-
+	it( 'shows when mediawiki object returns appropriate values', function () {
 		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( null );
 	} );
 
 	it( 'hides when not in article namespace', function () {
 		mediaWiki.isInArticleNamespace = vitest.fn().mockReturnValue( false );
-		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
-		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
 		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.DisallowedNamespace );
 	} );
 
 	it( 'hides when not on content page', function () {
-		mediaWiki.isInArticleNamespace = vitest.fn().mockReturnValue( true );
 		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( false );
-		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( false );
 
 		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
 	} );
 
 	it( 'hides when content is hidden by lightbox', function () {
-		mediaWiki.isInArticleNamespace = vitest.fn().mockReturnValue( true );
-		mediaWiki.isShowingContentPage = vitest.fn().mockReturnValue( true );
 		mediaWiki.isContentHiddenByLightbox = vitest.fn().mockReturnValue( true );
+
+		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
+			.toBe( BannerNotShownReasons.UserInteraction );
+	} );
+
+	it( 'hides when showing a temporary account bar', function () {
+		mediaWiki.isShowingTemporaryAccountBar = vitest.fn().mockReturnValue( true );
 
 		expect( ( new PageWPORG( mediaWiki, new SkinStub(), new SizeIssueCheckerStub() ) ).getReasonToNotShowBanner( Vector2.ZERO ) )
 			.toBe( BannerNotShownReasons.UserInteraction );
