@@ -1,0 +1,21 @@
+.wmde-b-progress {
+	--track-background: var(--color-white);
+	--fill-background: var(--color-red-600);
+	--flow-space: var(--space-3xs);
+
+	height: var(--space-2xs);
+	border-radius: calc( var(--space-2xs) / 2 );
+	background: var(--track-background);
+}
+
+.wmde-b-progress__fill {
+	width: 10%;
+	border-radius: calc( var(--space-2xs) / 2 );
+	background: var(--fill-background);
+	height: 100%;
+	transition: width 3000ms ease-in-out;
+}
+
+.wmde-banner--visible .wmde-b-progress__fill {
+	width: var(--fill-percentage);
+}
