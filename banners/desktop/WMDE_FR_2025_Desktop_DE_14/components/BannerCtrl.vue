@@ -32,17 +32,6 @@
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
-				<div class="wmde-banner-usage-link-wrapper">
-					<a
-						id="application-of-funds-link"
-						class="wmde-banner-usage-link t-use-of-funds-link"
-						:title="$translate( 'use-of-funds-link-description' )"
-						@click.prevent="onModalOpened"
-					>
-						{{ $translate( 'use-of-funds-link' ) }}
-					</a>
-				</div>
-
 				<MultiStepDonation
 					:step-controllers="stepControllers"
 					@form-interaction="formInteraction"
@@ -106,7 +95,7 @@
 			</template>
 
 			<template #footer>
-				<FooterAlreadyDonatedWithoutFundsLink
+				<FooterAlreadyDonated
 					@showFundsModal="onModalOpened"
 					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
 				/>
@@ -146,7 +135,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import FooterAlreadyDonatedWithoutFundsLink from '@src/components/Footer/FooterAlreadyDonatedWithoutFundsLink.vue';
+import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
