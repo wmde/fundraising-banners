@@ -3,8 +3,7 @@
 		<div>
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
-				Seit 25 Jahren steht Wikipedia für ein Internet, das von Menschen erschaffen wird – nicht von Maschinen.
-				Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
+				Kein Konzern oder Milliardär finanziert Wikipedia, sondern eine gemeinnützige Organisation.
 				Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, die Unabhängigkeit von Wikipedia zu unterstützen.
 				{{ campaignDaySentence }}
 				<AnimatedText :content="visitorsVsDonorsSentence"/>
