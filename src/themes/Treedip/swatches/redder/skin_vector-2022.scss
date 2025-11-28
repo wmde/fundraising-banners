@@ -1,0 +1,90 @@
+@use 'color_dark';
+@use 'color_light';
+
+$slider: false !default;
+$progress-bar: false !default;
+$double-progress-bar: false !default;
+$select-group: false !default;
+$select-group-bubble: false !default;
+$select-group-button: false !default;
+$select-group-image-label: false !default;
+$select-group-cheering: false !default;
+$upgrade-to-yearly: false !default;
+$already-donated: false !default;
+$soft-close: false !default;
+$fallback-banner: false !default;
+$select-group-highlighted-interval: false !default;
+
+.skin-theme-clientpref-day .wmde-banner {
+	@include color_light.swatch(
+		$slider,
+		$progress-bar,
+		$double-progress-bar,
+		$select-group,
+		$select-group-bubble,
+		$select-group-button,
+		$select-group-image-label,
+		$select-group-cheering,
+		$select-group-highlighted-interval,
+		$upgrade-to-yearly,
+		$already-donated,
+		$soft-close,
+		$fallback-banner
+	);
+}
+
+.skin-theme-clientpref-night .wmde-banner {
+	@include color_dark.swatch(
+		$slider,
+		$progress-bar,
+		$double-progress-bar,
+		$select-group,
+		$select-group-bubble,
+		$select-group-button,
+		$select-group-image-label,
+		$select-group-cheering,
+		$select-group-highlighted-interval,
+		$upgrade-to-yearly,
+		$already-donated,
+		$soft-close,
+		$fallback-banner
+	);
+}
+
+.skin-theme-clientpref-os .wmde-banner {
+	@media ( prefers-color-scheme: dark ) {
+		@include color_dark.swatch(
+			$slider,
+			$progress-bar,
+			$double-progress-bar,
+			$select-group,
+			$select-group-bubble,
+			$select-group-button,
+			$select-group-image-label,
+			$select-group-cheering,
+			$select-group-highlighted-interval,
+			$upgrade-to-yearly,
+			$already-donated,
+			$soft-close,
+			$fallback-banner
+		);
+	}
+
+	@media ( prefers-color-scheme: light ) {
+		@include color_light.swatch(
+			$slider,
+			$progress-bar,
+			$double-progress-bar,
+			$select-group,
+			$select-group-bubble,
+			$select-group-button,
+			$select-group-image-label,
+			$select-group-cheering,
+			$select-group-highlighted-interval,
+			$upgrade-to-yearly,
+			$already-donated,
+			$soft-close,
+			$fallback-banner
+		);
+	}
+}
