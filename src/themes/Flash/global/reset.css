@@ -1,0 +1,102 @@
+#wmde-banner-app {
+	font-size: 16px;
+}
+
+/* Prevent font size inflation */
+.wmde-banner {
+	/* stylelint-disable */
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	/* stylelint-enable */
+	text-size-adjust: none;
+}
+
+/* Box sizing rules */
+.wmde-banner :where(
+	*,
+	*::before,
+	*::after
+) {
+	box-sizing: border-box;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+.wmde-banner :where(
+	h2,
+	h3,
+	p,
+	figure,
+	blockquote
+) {
+	margin-block: 0;
+	padding-block: 0;
+}
+
+/* Remove list styles on ul, ol elements with a class, which suggests default styling will be removed */
+.wmde-banner :where(
+	ul[ class ],
+	ol[ class ]
+) {
+	list-style: none;
+	margin-inline: 0;
+	padding: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+.wmde-banner :where(
+	h1,
+	h2,
+	h3,
+	h4,
+	button,
+	input,
+	label
+) {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+.wmde-banner :where(
+	h1,
+	h2,
+	h3,
+	h4
+) {
+	text-wrap: balance;
+	border: 0;
+}
+
+/* A elements that don't have a class get default styles */
+.wmde-banner a:not( [ class ] ) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+/* Make images easier to work with */
+.wmde-banner :where(
+	img,
+	picture
+) {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+.wmde-banner :where(
+	input,
+	button,
+	textarea,
+	select
+) {
+	font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+.wmde-banner textarea:not( [ rows ] ) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+.wmde-banner :target {
+	scroll-margin-block: 5ex;
+}
