@@ -1,6 +1,6 @@
 import { beforeEach, describe, test } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/english/WMDE_FR_2025_Desktop_EN_05/components/BannerCtrl.vue';
+import Banner from '@banners/english/WMDE_FR_2025_Desktop_EN_05/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
