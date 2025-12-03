@@ -27,7 +27,7 @@ describe( 'ConfigurableDoubleProgressBar.vue', () => {
 				donationTargetAmount: 'donationTargetAmount',
 				amountDonated: 'amountDonated',
 				amountNeeded: 'amountNeeded',
-				isLateProgress: false,
+				isLateProgress: true,
 				dramaText: 'alarm!'
 			},
 			visitorsVsDonorsSentence: '',

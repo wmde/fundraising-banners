@@ -20,7 +20,7 @@ describe( 'PageWPDE', function () {
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
 			startDate: '2023-11-01',
-			isLateProgress: false,
+			isLateProgress: true,
 			dramaTextIsVisible: false,
 			urgencyMessageDaysLeft: 10
 		};

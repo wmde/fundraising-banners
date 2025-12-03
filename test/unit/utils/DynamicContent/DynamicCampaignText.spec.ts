@@ -40,7 +40,7 @@ const campaignParameters: CampaignParameters = {
 	numberOfMembers: 200,
 	startDate: '2023-11-03',
 	urgencyMessageDaysLeft: 10,
-	isLateProgress: false,
+	isLateProgress: true,
 	dramaTextIsVisible: false
 };
 const impressionCount: ImpressionCount = {
