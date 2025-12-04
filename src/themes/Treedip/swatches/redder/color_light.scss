@@ -95,6 +95,7 @@ $yellow700: #fcd53f;
 		--progress-bar-fill-background: #{$red600};
 		--progress-bar-fill-color: #{$white};
 		--progress-bar-fill-color-right: #{$black};
+		--progress-bar-fill-color-right-late-progress: #{$white};
 	}
 
 	@if $double-progress-bar {

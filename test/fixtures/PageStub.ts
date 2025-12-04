@@ -69,7 +69,7 @@ export class PageStub implements Page {
 			millionImpressionsPerDay: 0,
 			numberOfMembers: 0,
 			startDate: '',
-			isLateProgress: false,
+			isLateProgress: true,
 			dramaTextIsVisible: false,
 			urgencyMessageDaysLeft: 0
 		};

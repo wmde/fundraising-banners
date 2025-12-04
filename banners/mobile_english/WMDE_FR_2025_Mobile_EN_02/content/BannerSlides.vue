@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0" class="wmde-banner-slide-content-with-progress-bar">
 		<p><strong>Wikipedia is not for sale</strong></p>
-		<ProgressBar amount-to-show-on-right="TARGET"/>
+		<ProgressBar amount-to-show-on-right="MISSING"/>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>

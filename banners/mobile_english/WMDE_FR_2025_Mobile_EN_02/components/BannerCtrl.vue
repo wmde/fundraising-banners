@@ -27,7 +27,7 @@
 			</template>
 
 			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<ProgressBar amount-to-show-on-right="MISSING"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
