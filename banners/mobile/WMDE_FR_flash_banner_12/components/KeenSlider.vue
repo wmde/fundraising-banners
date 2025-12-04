@@ -1,15 +1,17 @@
 <template>
 	<div class="wmde-b-slider" :class="sliderPlayingState" @mousedown="stopAutoplay" @touchstart="stopAutoplay">
-		<div ref="container" class="keen-slider wmde-b-slider__slides" :class="`wmde-b-slider__slides--current-${ currentSlide }`">
+		<div ref="container" class="keen-slider wmde-b-slider__slides">
 			<slot name="slides" :current-slide="currentSlide"/>
 		</div>
 
 		<button v-if="withNavigation" type="button" class="wmde-b-slider__previous-slide" @click.prevent="goToPreviousSlide">
+			<span class="visually-hidden">{{ $translate( 'previous-slide' ) }}</span>
 			<slot name="previous-slide-icon">
 				<ChevronLeftIcon/>
 			</slot>
 		</button>
 		<button v-if="withNavigation" type="button" class="wmde-b-slider__next-slide" @click.prevent="goToNextSlide">
+			<span class="visually-hidden">{{ $translate( 'next-slide' ) }}</span>
 			<slot name="next-slide-icon">
 				<ChevronRightIcon/>
 			</slot>
@@ -17,8 +19,15 @@
 
 		<ul role="tablist" class="wmde-b-slider__pagination" v-if="withPagination">
 			<li role="presentation" v-for="index in slider?.slides.length" :key="index">
-				<button role="tab" class="wmde-b-slider__pagination-item" :class="{ 'wmde-b-slider__pagination-item--active' : currentSlide === index - 1 }" @click="() => goToSlide( index - 1 )">
-					<span class="visually-hidden">{{ index }}</span>
+				<button
+					role="tab"
+					class="wmde-b-slider__pagination-item"
+					:class="{ 'wmde-b-slider__pagination-item--active' : currentSlide === index - 1 }"
+					@click="() => goToSlide( index - 1 )"
+					:aria-selected="currentSlide === index - 1"
+					:aria-controls="`wmde-banner-slide-${ index - 1 }`"
+				>
+					<span class="visually-hidden">{{ $translate( 'slide-page', { page: index, total: slider?.slides.length } ) }}</span>
 				</button>
 			</li>
 		</ul>

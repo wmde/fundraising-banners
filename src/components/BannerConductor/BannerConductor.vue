@@ -1,8 +1,12 @@
 <template>
-	<div ref="bannerRef" class="wmde-banner" :class="[
-		{ 't-banner-visible': bannerState.stateName === BannerStates.Visible },
-		bannerState.stateName
-	]">
+	<div
+		ref="bannerRef"
+		class="wmde-banner"
+		:class="[ { 't-banner-visible': bannerState.stateName === BannerStates.Visible }, bannerState.stateName ]"
+		role="region"
+		:aria-label="$translate( 'banner-label' )"
+		aria-live="polite"
+	>
 		<component
 			:is="banner"
 			v-bind="bannerProps"
