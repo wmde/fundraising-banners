@@ -42,20 +42,19 @@ $yellow700: #fcd53f;
 	$select-group-highlighted-interval: false,
 ) {
 	--main-background: #{$white};
-	--main-color: #{$grey700};
+	--main-color: #{$white};
 	--main-title-line-background: #{$red550};
 	--main-border-bottom: #{$grey200};
 	--main-box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
-	--message-background: #{$white};
-	--message-border: #{$red600};
+	--message-background: #{$blue700};
 
 	--info-icon-background: #{$red550};
 	--info-icon-color: #{$white};
 
 	--color-error: #{$red600};
 	--button-close-fill: #{$grey600};
-	--button-background: #{$blue400};
+	--button-background: #{$red600};
 	--button-color: #{$white};
 	--previous-button-fill: #{$grey600};
 
@@ -71,23 +70,23 @@ $yellow700: #fcd53f;
 
 	--sticky-color: #{$yellow700};
 
-	--animated-highlight-color: #{$grey700};
+	--animated-highlight-color: #{$white};
 	/* stylelint-disable */
 	--animated-highlight-gradient: linear-gradient(
 		270deg,
-		rgba( 255, 255, 255, 0 ) 0%,
-		rgba( 255, 255, 255, 0 ) 50%,
-		rgba( 255, 222, 103 ) 50%,
-		rgba( 255, 222, 103 ) 100%
+		#{$blue700} 0%,
+		#{$blue700} 50%,
+		#{$red600} 50%,
+		#{$red600} 100%
 	);
 	/* stylelint-enable */
 
 	@if $slider {
-		--slider-pagination-background: #{$grey150};
-		--slider-pagination-border: #{$white};
-		--slider-pagination-background-active: #{$white};
-		--slider-pagination-border-active: #{$red600};
-		--slider-chevron: #{$grey600};
+		--slider-pagination-background: #{$white};
+		--slider-pagination-border: #{$blue700};
+		--slider-pagination-background-active: #{$blue700};
+		--slider-pagination-border-active: #{$white};
+		--slider-chevron: #{$white};
 	}
 
 	@if $progress-bar {
