@@ -5,12 +5,14 @@
 	--color-grey-100: #eaecf0;
 	--color-grey-200: #cbcfd6;
 	--color-grey-400: #54595d;
+	--color-grey-800: #37383a;
 
 	--color-red-100: #fee7e6;
 	--color-red-600: #a80000;
 
 	--color-blue-100: #ebf1ff;
 	--color-blue-300: #9ab9fd;
+	--color-blue-350: #3366cc;
 	--color-blue-400: #155dfc;
 	--color-blue-600: #1f4c93;
 
@@ -64,4 +66,18 @@
 
 	--form-field-button-color: var(--color-white);
 	--form-field-button-background: var(--color-red-600);
+}
+
+.skin-theme-clientpref-night .wmde-banner {
+	--form-field-border-color: var(--color-grey-400);
+	--form-field-background-color: var(--color-black);
+	--form-field-color: var(--color-white);
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.skin-theme-clientpref-os .wmde-banner {
+		--form-field-border-color: var(--color-grey-400);
+		--form-field-background-color: var(--color-black);
+		--form-field-color: var(--color-white);
+	}
 }
