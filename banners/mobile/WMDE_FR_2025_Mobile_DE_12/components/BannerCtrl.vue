@@ -12,7 +12,7 @@
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress><ProgressBar amount-to-show-on-right="TARGET"/></template>
+							<template #progress><ProgressBar amount-to-show-on-right="MISSING"/></template>
 						</BannerSlides>
 					</template>
 
@@ -29,7 +29,7 @@
 			</template>
 
 			<template #progress>
-				<ProgressBar amount-to-show-on-right="TARGET"/>
+				<ProgressBar amount-to-show-on-right="MISSING"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">

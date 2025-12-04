@@ -63,10 +63,6 @@ $progress-bar-margin: 0 !default;
 			height: 60px;
 			margin-top: 0;
 
-			@include breakpoints.large-up {
-				margin-top: -30px;
-			}
-
 			.wmde-banner-progress-bar-text {
 				position: static;
 			}
@@ -78,6 +74,11 @@ $progress-bar-margin: 0 !default;
 					visibility: visible;
 				}
 			}
+
+			.wmde-banner-progress-bar-text-right {
+				color: var( --progress-bar-fill-color-right-late-progress );
+			}
+
 			.wmde-banner-progress-bar-fill {
 				min-width: 100px;
 			}
