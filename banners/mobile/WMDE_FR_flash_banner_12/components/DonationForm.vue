@@ -29,7 +29,7 @@
 
 		<div>
 			<label class="wmde-b-checkbox-toggle wmde-c-repel">
-				<span>{{ $translate( 'yearly-label' ) }}</span> <input type="checkbox" v-model="isYearly">
+				<span>{{ $translate( 'yearly-label' ) }} <HeartIcon/></span> <input type="checkbox" v-model="isYearly">
 			</label>
 		</div>
 
@@ -60,6 +60,7 @@ import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 import { Tracker } from '@src/tracking/Tracker';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
+import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 
 interface Props {
 	submitCallback?: () => void;
