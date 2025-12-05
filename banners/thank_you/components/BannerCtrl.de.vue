@@ -3,32 +3,22 @@
 		<MiniBanner
 			:progress-bar-fill-percentage="settings.progressBarPercentage"
 			:show-success-content="showSuccessContent"
+			:thank-you-content="thankYouContent"
 			@close="close"
 			@readMore="showModal"
-		>
-			<template #text>
-				<MiniBannerTextWin :number-of-donors="settings.numberOfDonors"/>
-			</template>
-		</MiniBanner>
+		/>
 
 		<BannerModal
 			:visible="contentState === ContentStates.Full"
 			:number-of-people="settings.numberOfMembers"
+			:thank-you-content="thankYouContent"
 			@close="hideModal"
 			@membership-with-amount="membershipWithAmount"
 			@membership-without-amount="membershipWithoutAmount"
 		>
-			<template #text>
-				<FullPageBannerTextWin :number-of-people="settings.numberOfMembers"/>
-			</template>
-
-			<template #benefits>
-				<MembershipBenefits/>
-			</template>
-
 			<template #subscribe>
-				<a :href="subscribeURL" @click.prevent="subscribe">{{ $translate( 'call-to-action-more-info' ) }}</a>
-				<a :href="useOfFundsURL" @click.prevent="useOfFunds">{{ $translate( 'use-of-funds' ) }}</a>
+				<a :href="subscribeURL" @click.prevent="subscribe">{{ thankYouContent[ 'more-info' ] }}</a>
+				<a :href="useOfFundsURL" @click.prevent="useOfFunds">{{ thankYouContent[ 'use-of-funds' ] }}</a>
 			</template>
 		</BannerModal>
 	</div>
@@ -45,11 +35,8 @@ import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShown
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import MiniBanner from '../components/MiniBanner.vue';
 import BannerModal from './BannerModal.vue';
-
-import MiniBannerTextWin from '../content/win/MiniBannerText.de.vue';
-import FullPageBannerTextWin from '../content/win/FullPageBannerText.de.vue';
-import MembershipBenefits from '../content/MembershipBenefits.de.vue';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
+import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -58,6 +45,7 @@ enum ContentStates {
 
 interface Props {
 	settings: ThankYouSettings;
+	thankYouContent: ThankYouContent;
 	subscribeURL: string;
 	useOfFundsURL: string;
 	membershipWithAmountURL: string;
