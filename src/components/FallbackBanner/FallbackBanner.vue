@@ -46,7 +46,7 @@
 
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import { computed, inject, ref } from 'vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
