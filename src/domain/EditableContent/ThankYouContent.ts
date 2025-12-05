@@ -1,9 +1,9 @@
-export interface Stat {
+export interface ThankYouStat {
 	number: string;
 	text: string;
 }
 
-export interface Content {
+export interface ThankYouContent {
 	'mini-thank-you': string;
 	'mini-message': string;
 	'mini-button': string;
@@ -24,7 +24,7 @@ export interface Content {
 	'help-subtitle': string;
 	'help-content': string[];
 	'help-thank-you': string;
-	stats: Stat[]
+	stats: ThankYouStat[]
 	'cta-donate-5': string;
 	'cta-donate-other': string;
 	'reasons': string[];

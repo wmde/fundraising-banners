@@ -1,5 +1,5 @@
 import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
-import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent } from '@src/domain/EditableContent/UseOfFundsContent';
 
 export class HtmlFundsContentLoader implements FundsContentLoader {
 	public getContent(): UseOfFundsContent {

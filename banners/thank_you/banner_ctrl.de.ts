@@ -21,6 +21,7 @@ import { createThankYouSettings } from './settings';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { WindowTimer } from '@src/utils/Timer';
+import { ThankYouContentFactoryDe } from '@src/utils/ThankYou/Factories/ThankYouContentFactoryDe';
 
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -28,6 +29,7 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
+const thankYouContentFactory = new ThankYouContentFactoryDe();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -38,6 +40,7 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
+		thankYouContent: thankYouContentFactory.getThankYouContentLoader().getContent(),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {

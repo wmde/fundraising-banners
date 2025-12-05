@@ -1,4 +1,4 @@
-import { UseOfFundsContent } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent } from '@src/domain/EditableContent/UseOfFundsContent';
 
 export const useOfFundsContent: UseOfFundsContent = {
 	title: '',
