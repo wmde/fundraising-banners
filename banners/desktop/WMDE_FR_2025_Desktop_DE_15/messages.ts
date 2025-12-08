@@ -35,6 +35,8 @@ const messages: TranslationMessages = {
 	'cheering-10000': 'Wow. So viel wird selten gespendet. Danke!',
 	'cheering-custom': 'Ihr Betrag, Ihre Wirkung! Herzlichen Dank.',
 	'interval-highlight': 'Dauerhaft etwas bewegen.',
+
+	'prefix-days-left': 'Noch',
 };
 
 export default messages;
