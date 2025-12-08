@@ -151,7 +151,7 @@ import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '../content/BannerTitle.vue';
+import BannerTitle from '../content/BannerTitleVar.vue';
 import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
 import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
 import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
