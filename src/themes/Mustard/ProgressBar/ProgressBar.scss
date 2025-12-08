@@ -63,10 +63,6 @@ $progress-bar-margin: 0 !default;
 			height: 60px;
 			margin-top: 0;
 
-			@include breakpoints.large-up {
-				margin-top: -30px;
-			}
-
 			.wmde-banner-progress-bar-text {
 				position: static;
 			}
