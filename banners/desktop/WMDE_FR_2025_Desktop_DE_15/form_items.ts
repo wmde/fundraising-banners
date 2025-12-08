@@ -10,6 +10,7 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 		.setIntervals(
 			Intervals.ONCE,
 			Intervals.MONTHLY,
+			Intervals.QUARTERLY,
 			Intervals.YEARLY
 		)
 		.setAmounts( 5, 10, 20, 25, 50, 100 )

@@ -157,7 +157,7 @@ import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
 import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
 import MasterCardIcon from '@src/components/PaymentLogos/MasterCardIcon.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
-import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroupHighlightedInterval.vue';
+import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
