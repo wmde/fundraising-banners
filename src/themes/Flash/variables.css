@@ -53,7 +53,7 @@
 	--banner-shadow: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
 	--info-icon-background: var(--color-grey-100);
 	--info-icon-color: var(--color-blue-400);
-	--focus-colour: var(--color-blue-600);
+	--focus-color: var(--color-blue-600);
 
 	--form-field-border-color: var(--color-grey-200);
 	--form-field-background-color: var(--color-white);

@@ -8,7 +8,10 @@
 
 		<KeenSlider :play="slideshowShouldPlay" :interval="7000">
 			<template #slides="{ currentSlide }: any">
-				<BannerSlides :current-slide="currentSlide"/>
+				<BannerSlides
+					:current-slide="currentSlide"
+					:play-live-text="true"
+				/>
 			</template>
 		</KeenSlider>
 

@@ -13,7 +13,9 @@
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="2">
 		<p>
-			<AnimatedText :is-visible="currentSlide === 0" :content="visitorsVsDonorsSentence" />
+			<AnimatedText :is-visible="currentSlide === 2">
+				{{ visitorsVsDonorsSentence }}
+			</AnimatedText>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="3">
@@ -38,7 +40,7 @@ import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTi
 
 interface Props {
 	playLiveText: boolean;
-	currentSlide: number
+	currentSlide: any;
 }
 
 const props = defineProps<Props>();
@@ -48,7 +50,6 @@ const {
 	getCurrentDateAndTime,
 	campaignDaySentence,
 	averageDonation,
-	goalDonationSum,
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 

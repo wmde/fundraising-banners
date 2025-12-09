@@ -9,8 +9,8 @@
 @use 'src/themes/Modo/defaults';
 @use 'Banner';
 @use 'MiniBanner' with (
-	$height: 336px,
-	$height-l-up: 306px
+	$height: 354px,
+	$height-l-up: 354px
 );
 @use 'FullPageBanner';
 @use 'src/themes/Modo/Footer/Footer';
