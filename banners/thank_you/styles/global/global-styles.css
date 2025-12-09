@@ -14,6 +14,7 @@
 }
 
 .wmde-banner :is(h2, h3) {
+	color: var(--font-colour);
 	line-height: var(--leading-fine);
 	text-wrap: balance;
 	font-weight: var(--font-normal);
@@ -104,7 +105,7 @@
 	a:not([class]):focus-visible,
 	a[aria-current]
 ) {
-	color: oklch(from var(--link-colour) 40% c h);
+	color: var(--link-colour-hover);
 }
 
 .wmde-banner :target {
@@ -113,13 +114,14 @@
 
 .wmde-banner ::selection {
 	color: var(--selection-colour, var(--colour-black));
-	background: var(--selection-background, var(--colour-primary));
+	background: var(--selection-background);
 }
 
 .wmde-banner hr {
 	border: none;
-	border-block-start: var(--hr-stroke, var(--stroke));
-	margin-block: var(--flow-space, var(--space-xl));
+	background-color: transparent;
+	border-block-start: 1px solid var(--hr-stroke);
+	margin-block: var(--space-m);
 }
 
 .wmde-banner svg:not([class]) {

@@ -1,14 +1,19 @@
 <template>
-	<dialog class="wmde-b-modal" ref="modal">
+	<dialog class="wmde-b-modal" ref="modal" aria-labelledby="wmde-banner-model-blurb" tabindex="-1">
 		<div class="wmde-c-wrapper">
-			<CloseButton :label="$translate( 'close-full-page' ) + '&nbsp;&nbsp;'" :thank-you-content="thankYouContent" @click="$emit( 'close' )"/>
+			<CloseButton
+				class="wmde-u-sticky"
+				:label="$translate( 'close-full-page' ) + '&nbsp;&nbsp;'"
+				:thank-you-content="thankYouContent"
+				@click="$emit( 'close' )"
+			/>
 			<div class="wmde-c-flow">
 				<div class="wmde-b-content-card">
 					<div class="wmde-b-icon-text">
 						<div class="wmde-b-icon-text__icon">
 							<HeartIcon/>
 						</div>
-						<div class="wmde-b-icon-text__text wmde-c-flow wmde-b-prose">
+						<div class="wmde-b-icon-text__text wmde-c-flow wmde-b-prose" id="wmde-banner-model-blurb">
 							<div>
 								<h2>{{ thankYouContent[ 'main-message-title' ] }}</h2>
 								<p>{{ thankYouContent[ 'main-message-content' ] }}</p>
@@ -30,7 +35,7 @@
 							<GlobeIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<Disclosure>
+							<Disclosure id="wmde-banner-knowledge">
 								<template #header>
 									<h2>{{ thankYouContent[ 'knowledge-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'knowledge-subtitle' ] }}</p>
@@ -46,10 +51,10 @@
 				<div class="wmde-b-content-card">
 					<div class="wmde-b-icon-text">
 						<div class="wmde-b-icon-text__icon">
-							<StarIcon/>
+							<MembersIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<Disclosure>
+							<Disclosure id="wmde-banner-help">
 								<template #header>
 									<h2>{{ thankYouContent[ 'help-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'help-subtitle' ] }}</p>
@@ -112,7 +117,7 @@ import GlobeIcon from './Icons/GlobeIcon.vue';
 import PeopleIcon from './Icons/PeopleIcon.vue';
 import AverageIcon from './Icons/AverageIcon.vue';
 import CoinIcon from './Icons/CoinIcon.vue';
-import StarIcon from './Icons/StarIcon.vue';
+import MembersIcon from './Icons/MembersIcon.vue';
 import TickIcon from './Icons/TickIcon.vue';
 import Disclosure from './Disclosure.vue';
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
@@ -130,6 +135,7 @@ const modal = ref<HTMLDialogElement>();
 watch( () => props.visible, ( newVisible: boolean ) => {
 	if ( newVisible ) {
 		modal.value.showModal();
+		modal.value.focus();
 	} else {
 		modal.value.close();
 	}

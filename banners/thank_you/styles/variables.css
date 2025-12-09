@@ -2,6 +2,7 @@
 	--colour-black: #000000;
 	--colour-white: #ffffff;
 
+	--colour-grey-200: #d0d0d0;
 	--colour-grey-300: #A1A1A1;
 	--colour-grey-700: #282828;
 	--colour-grey-800: #131313;
@@ -9,12 +10,11 @@
 	--colour-yellow-500: #FFC825;
 
 	--colour-blue-100: #DCE4E8;
+	--colour-blue-300: #6693ee;
 	--colour-blue-500: #3366CC;
 
 	--colour-blue-green-500: #0DA888;
 	--colour-blue-green-550: #14866D;
-
-	--colour-primary: var(--colour-grey-300);
 
 	--font-base: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
 	--font-normal: 400;
@@ -57,14 +57,13 @@
 
 	/* Global Variables */
 	--gutter: var(--space-xs);
-	--stroke-width: 1px;
-	--stroke-color: var(--colour-primary);
-	--stroke: var(--stroke-width) solid var(--stroke-color);
 	--easing: cubic-bezier(0.885, 0.09, 0.49, 0.85);
 	--border-radius: 8px;
 
 	--wrapper-max-width: 99.75rem; /* Match Vector 2022 */
 	--mini-banner-height: 294px;
+
+	--hr-stroke: var(--colour-grey-300);
 	--mini-banner-background: var(--colour-white);
 	--mini-banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 	--selection-background: var(--colour-blue-500);
@@ -73,6 +72,7 @@
 
 	--font-colour: var(--colour-black);
 	--link-colour: var(--colour-blue-500);
+	--link-colour-hover: oklch(from var(--colour-blue-500) 40% c h);
 
 	--close-icon-stroke: var(--colour-black);
 	--close-icon-color: var(--colour-black);
@@ -95,11 +95,41 @@
 	--tick-icon-fill: var(--colour-blue-500);
 	--heart-icon-fill: var(--colour-blue-green-500);
 	--globe-icon-fill: var(--colour-blue-500);
-	--star-icon-fill: var(--colour-blue-500);
+	--members-icon-fill: var(--colour-blue-500);
 	--chevron-down-icon-fill: var(--colour-blue-500);
 	--people-icon-fill: var(--colour-black);
 	--average-icon-fill: var(--colour-black);
 	--coin-icon-fill: var(--colour-black);
 
 	--profile-name-color: var(--colour-blue-green-500);
+}
+
+.skin-theme-clientpref-night .wmde-banner {
+	--font-colour: var(--colour-white);
+	--link-colour: var(--colour-blue-300);
+	--link-colour-hover: oklch(from var(--colour-blue-500) 80% c h);
+
+	--tick-icon-fill: var(--colour-blue-300);
+	--globe-icon-fill: var(--colour-blue-300);
+	--members-icon-fill: var(--colour-blue-300);
+	--chevron-down-icon-fill: var(--colour-blue-300);
+	--people-icon-fill: var(--colour-white);
+	--average-icon-fill: var(--colour-white);
+	--coin-icon-fill: var(--colour-white);
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.skin-theme-clientpref-os .wmde-banner {
+		--font-colour: var(--colour-white);
+		--link-colour: var(--colour-blue-300);
+		--link-colour-hover: oklch(from var(--colour-blue-500) 80% c h);
+
+		--tick-icon-fill: var(--colour-blue-300);
+		--globe-icon-fill: var(--colour-blue-300);
+		--members-icon-fill: var(--colour-blue-300);
+		--chevron-down-icon-fill: var(--colour-blue-300);
+		--people-icon-fill: var(--colour-white);
+		--average-icon-fill: var(--colour-white);
+		--coin-icon-fill: var(--colour-white);
+	}
 }

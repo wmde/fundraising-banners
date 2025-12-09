@@ -17,8 +17,8 @@
 			@membership-without-amount="membershipWithoutAmount"
 		>
 			<template #subscribe>
-				<a :href="subscribeURL" @click.prevent="subscribe">{{ thankYouContent[ 'more-info' ] }}</a>
-				<a :href="useOfFundsURL" @click.prevent="useOfFunds">{{ thankYouContent[ 'use-of-funds' ] }}</a>
+				<a :href="subscribeURL" @click.prevent="subscribe"><small>{{ thankYouContent[ 'more-info' ] }}</small></a>
+				<a :href="useOfFundsURL" @click.prevent="useOfFunds"><small>{{ thankYouContent[ 'use-of-funds' ] }}</small></a>
 			</template>
 		</BannerModal>
 	</div>
