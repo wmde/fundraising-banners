@@ -29,6 +29,8 @@ const messages: TranslationMessages = {
 	'soft-close-button-already-donated': 'Habe schon gespendet',
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': '',
+
+	'prefix-days-left': 'Noch',
 };
 
 export default messages;
