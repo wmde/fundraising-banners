@@ -18,7 +18,7 @@
 					<p>{{ thankYouContent[ 'mini-message' ] }}</p>
 				</div>
 
-				<ProgressBar :fill-percentage="progressBarFillPercentage" :show-success-content="showSuccessContent"/>
+				<ProgressBar :fill-percentage="progressBarFillPercentage" :thank-you-content="thankYouContent"/>
 
 				<div class="wmde-b-mini-cta">
 					<button class="wmde-b-button" @click="$emit( 'read-more' )">

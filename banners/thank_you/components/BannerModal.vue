@@ -48,6 +48,11 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="wmde-b-content-card-header wmde-c-cluster">
+					<BirthdayIcon/> <span>{{ thankYouContent[ 'birthday-blurb' ] }}</span>
+				</div>
+
 				<div class="wmde-b-content-card">
 					<div class="wmde-b-icon-text">
 						<div class="wmde-b-icon-text__icon">
@@ -98,7 +103,7 @@
 					</div>
 				</div>
 				<footer class="wmde-c-repel">
-					<p><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em></p>
+					<p><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em> <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
 					<p class="wmde-c-cluster">
 						<slot name="subscribe"/>
 					</p>
@@ -121,6 +126,7 @@ import MembersIcon from './Icons/MembersIcon.vue';
 import TickIcon from './Icons/TickIcon.vue';
 import Disclosure from './Disclosure.vue';
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import BirthdayIcon from './Icons/BirthdayIcon.vue';
 
 interface Props {
 	visible: boolean;
