@@ -1,6 +1,7 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/var/main.css';
+import './styles/var/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
@@ -16,10 +17,10 @@ import DynamicTextPlugin from '@src/DynamicTextPlugin';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
-import eventMappings from './event_map';
-import messages from './messages';
+import eventMappings from './event_map_var';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { WindowTimer } from '@src/utils/Timer';
@@ -63,7 +64,7 @@ app.use( DynamicTextPlugin, {
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '0' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( date, page.getCampaignParameters() ) );
