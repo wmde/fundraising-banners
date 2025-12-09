@@ -2,17 +2,43 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import Banner from '@banners/thank_you/components/BannerVar.en.vue';
-import MiniBannerTextWin from '@banners/thank_you/content/win/MiniBannerText.en.vue';
-import FullPageBannerTextWin from '@banners/thank_you/content/win/FullPageBannerTextVar.en.vue';
+import BannerVar from '@banners/thank_you/components/BannerVar.vue';
 import { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
+import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
-describe( 'BannerVar.en.vue', () => {
+const thankYouContent: ThankYouContent = {
+	'cta-donate-5': '',
+	'cta-donate-other': '',
+	'help-content': [],
+	'help-subtitle': '',
+	'help-thank-you': '',
+	'help-title': '',
+	'knowledge-content': [],
+	'knowledge-subtitle': '',
+	'knowledge-title': '',
+	'main-message-content': '',
+	'main-message-name': '',
+	'main-message-position': '',
+	'main-message-title': '',
+	'mini-button': '',
+	'mini-message': '',
+	'mini-thank-you': '',
+	'more-info': '',
+	'photo-credit': '',
+	'read-less': '',
+	'read-more': '',
+	'use-of-funds': '',
+	close: '',
+	reasons: [],
+	stats: []
+};
+
+describe( 'BannerVar.vue', () => {
 	let tracker: Tracker;
 	let showCallback: Mock;
 	let closeCallback: Mock;
@@ -26,7 +52,7 @@ describe( 'BannerVar.en.vue', () => {
 	} );
 
 	const getWrapper = ( progressBarPercentage: number = 80 ): VueWrapper<any> => {
-		return mount( Banner, {
+		return mount( BannerVar, {
 			props: {
 				bannerState: BannerStates.Pending,
 				settings: {
@@ -34,6 +60,7 @@ describe( 'BannerVar.en.vue', () => {
 					numberOfMembers: '23',
 					progressBarPercentage
 				},
+				thankYouContent,
 				subscribeURL: 'SUBSCRIBE URL',
 				useOfFundsURL: 'USE OF FUNDS',
 				membershipWithAmountURL: 'WITH_AMOUNT',
@@ -58,14 +85,6 @@ describe( 'BannerVar.en.vue', () => {
 
 		expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 		expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
-	} );
-
-	it( 'shows win content', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
-		const wrapper = getWrapper( 100 );
-
-		expect( wrapper.findComponent( MiniBannerTextWin ).exists() ).toBeTruthy();
-		expect( wrapper.findComponent( FullPageBannerTextWin ).exists() ).toBeTruthy();
 	} );
 
 	it( 'Shows and hides the full page modal', async () => {

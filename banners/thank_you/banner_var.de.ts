@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/OLD/styles_wporg.scss';
+import './styles/main.css';
 
 import PageWPORG from '@src/page/PageWPORG';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
@@ -12,7 +12,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import Banner from './components/BannerVar.de.vue';
+import BannerVar from './components/BannerVar.vue';
 import messages from './messages.de';
 import eventMappings from './event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
@@ -21,6 +21,7 @@ import { createThankYouSettings } from './settings';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { WindowTimer } from '@src/utils/Timer';
+import { ThankYouContentFactoryDe } from '@src/utils/ThankYou/Factories/ThankYouContentFactoryDe';
 
 const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
@@ -28,6 +29,7 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
+const thankYouContentFactory = new ThankYouContentFactoryDe();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -38,6 +40,7 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
 		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
+		thankYouContent: thankYouContentFactory.getThankYouContentLoader().getContent(),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
@@ -49,7 +52,7 @@ const app = createVueApp( BannerConductor, {
 		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: Banner,
+	banner: BannerVar,
 	impressionCount
 } );
 

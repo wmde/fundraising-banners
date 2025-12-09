@@ -12,7 +12,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import Banner from './components/BannerCtrl.de.vue';
+import BannerCtrl from './components/BannerCtrl.vue';
 import messages from './messages.de';
 import eventMappings from './event_map';
 import TranslationPlugin from '@src/TranslationPlugin';
@@ -52,7 +52,7 @@ const app = createVueApp( BannerConductor, {
 		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: Banner,
+	banner: BannerCtrl,
 	impressionCount
 } );
 
