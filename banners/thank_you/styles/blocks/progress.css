@@ -1,4 +1,10 @@
 .wmde-b-progress {
+	--progress-primary-color: var(--colour-blue-green-500);
+	--progress-text-color: var(--colour-white);
+	--progress-icon-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--progress-fill-icon-content: var(--colour-white);
+	--confetti-background: var(--colour-blue-500);
+
 	border: 2px solid var(--progress-primary-color);
 	height: var(--space-l);
 	border-radius: calc(var(--space-l)/2);

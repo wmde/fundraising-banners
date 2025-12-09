@@ -64,8 +64,6 @@
 	--mini-banner-height: 294px;
 
 	--hr-stroke: var(--colour-grey-300);
-	--mini-banner-background: var(--colour-white);
-	--mini-banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 	--selection-background: var(--colour-blue-500);
 	--selection-colour: var(--colour-white);
 	--focus-colour: var(--colour-blue-500);
@@ -73,24 +71,6 @@
 	--font-colour: var(--colour-black);
 	--link-colour: var(--colour-blue-500);
 	--link-colour-hover: oklch(from var(--colour-blue-500) 40% c h);
-
-	--close-icon-stroke: var(--colour-black);
-	--close-icon-color: var(--colour-black);
-
-	--progress-primary-color: var(--colour-blue-green-500);
-	--progress-text-color: var(--colour-white);
-	--progress-icon-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
-	--progress-fill-icon-content: var(--colour-white);
-	--confetti-background: var(--colour-blue-500);
-
-	--button-background: var(--colour-blue-500);
-	--button-border-focus: var(--colour-white);
-	--button-background-secondary: var(--colour-grey-300);
-	--button-color: var(--colour-white);
-
-	--modal-backdrop: var(--colour-blue-100);
-	--content-card-background: var(--colour-white);
-	--content-card-border: var(--colour-blue-500);
 
 	--tick-icon-fill: var(--colour-blue-500);
 	--heart-icon-fill: var(--colour-blue-green-500);
@@ -100,8 +80,7 @@
 	--people-icon-fill: var(--colour-black);
 	--average-icon-fill: var(--colour-black);
 	--coin-icon-fill: var(--colour-black);
-
-	--profile-name-color: var(--colour-blue-green-500);
+	--birthday-icon-fill: var(--colour-white);
 }
 
 .skin-theme-clientpref-night .wmde-banner {
