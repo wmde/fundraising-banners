@@ -15,7 +15,6 @@ const messages: TranslationMessages = {
 	...SoftCloseDe,
 
 	// custom messages here
-	'use-of-funds-link': 'Was Ihre Spende bewirkt',
 	'payment-bank-transfer': 'Überweisung',
 	'payment-sofort': 'Sofort',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',

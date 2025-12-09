@@ -1,5 +1,5 @@
 .wmde-banner {
-	color: var(--font-colour);
+	color: var(--font-color);
 	font-size: var(--type-step-0);
 	font-family: var(--font-base);
 	line-height: var(--leading-standard);
@@ -91,12 +91,12 @@
 }
 
 .wmde-banner a:not([class]) {
-	color: var(--link-colour);
+	color: var(--link-color);
 }
 
 .wmde-banner :focus-visible {
-	--form-field-border-color: var(--focus-colour);
-	outline: 2px solid var(--focus-colour, currentColor);
+	--form-field-border-color: var(--focus-color);
+	outline: 2px solid var(--focus-color, currentColor);
 }
 
 .wmde-banner :is(
@@ -104,7 +104,7 @@
 	a:not([class]):focus-visible,
 	a[aria-current]
 ) {
-	color: oklch(from var(--link-colour) 40% c h);
+	color: oklch(from var(--link-color) 40% c h);
 }
 
 .wmde-banner :target {
@@ -112,8 +112,8 @@
 }
 
 .wmde-banner ::selection {
-	color: var(--selection-colour, var(--colour-black));
-	background: var(--selection-background, var(--colour-primary));
+	color: var(--selection-color, var(--color-black));
+	background: var(--selection-background, var(--color-primary));
 }
 
 .wmde-banner hr {
@@ -129,7 +129,7 @@
 .wmde-banner svg[role='img'][width][height] {
 	width: revert;
 	height: revert;
-	background: var(--colour-white);
+	background: var(--color-white);
 	padding: var(--space-xs);
 }
 
@@ -208,6 +208,7 @@ label:has([type='radio']) {
 	background: var(--form-field-button-background);
 	color: var(--form-field-button-color);
 	transition: background-color 200ms ease-in-out;
+	font-weight: bold;
 }
 
 .wmde-banner form button:not([class]):hover,
