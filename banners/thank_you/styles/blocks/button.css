@@ -1,4 +1,9 @@
 .wmde-b-button {
+	--button-background: var(--colour-blue-500);
+	--button-border-focus: var(--colour-white);
+	--button-background-secondary: var(--colour-grey-300);
+	--button-color: var(--colour-white);
+
 	--button-bg: var(--button-background);
 
 	font-size: var(--type-step-0);

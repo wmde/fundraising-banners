@@ -12,6 +12,7 @@ import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHidd
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 const thankYouContent: ThankYouContent = {
+	'birthday-blurb': '',
 	'cta-donate-5': '',
 	'cta-donate-other': '',
 	'help-content': [],
@@ -27,9 +28,11 @@ const thankYouContent: ThankYouContent = {
 	'main-message-title': '',
 	'mini-button': '',
 	'mini-message': '',
+	'mini-progress-bar-text': '',
 	'mini-thank-you': '',
 	'more-info': '',
 	'photo-credit': '',
+	'photo-license': '',
 	'read-less': '',
 	'read-more': '',
 	'use-of-funds': '',
