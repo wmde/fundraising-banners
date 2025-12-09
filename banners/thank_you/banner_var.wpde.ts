@@ -1,13 +1,13 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/OLD/styles_wpde.scss';
+import './styles/main.css';
 
 import { Translator } from '@src/Translator';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import Banner from './components/BannerVar.de.vue';
+import BannerVar from './components/BannerVar.vue';
 import messages from './messages.de';
 import TranslationPlugin from '@src/TranslationPlugin';
 import { createTrackedURL, MEMBERSHIP_FORM_URL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
@@ -52,7 +52,7 @@ const app = createVueApp( BannerConductor, {
 		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: Banner,
+	banner: BannerVar,
 	impressionCount
 } );
 
