@@ -1,3 +1,4 @@
+/* stylelint-disable */
 #wmde-banner-app {
 	top: calc( -1 * var( --wmde-banner-height ) );
 }

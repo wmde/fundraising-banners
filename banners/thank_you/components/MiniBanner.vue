@@ -1,11 +1,11 @@
 <template>
-	<div class="wmde-b-mini">
+	<div class="wmde-b-mini" role="region" tabindex="-1" aria-live="polite" aria-label="wmde-mini-banner-text">
 
 		<div class="wmde-c-wrapper">
 			<CloseButton :hide-label="true" :thank-you-content="thankYouContent" @click="$emit( 'close' )"/>
 
 			<div class="wmde-c-flow">
-				<div class="wmde-b-mini-content">
+				<div class="wmde-b-mini-content" id="wmde-mini-banner-text">
 					<h2 class="wmde-b-animated-letters">
 						<span
 							v-for="( character, index ) in thankYouContent[ 'mini-thank-you' ].split( '' )"
@@ -37,7 +37,6 @@ import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
 	progressBarFillPercentage: number;
-	showSuccessContent: boolean;
 	thankYouContent: ThankYouContent;
 }
 

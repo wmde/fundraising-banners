@@ -1,16 +1,16 @@
 .wmde-b-progress {
-	--progress-primary-color: var(--colour-blue-green-500);
-	--progress-text-color: var(--colour-white);
+	--progress-primary-color: var( --colour-blue-green-500 );
+	--progress-text-color: var( --colour-white );
 	--progress-icon-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
-	--progress-fill-icon-content: var(--colour-white);
-	--confetti-background: var(--colour-blue-500);
+	--progress-fill-icon-content: var( --colour-white );
+	--confetti-background: var( --colour-blue-500 );
 
-	border: 2px solid var(--progress-primary-color);
-	height: var(--space-l);
-	border-radius: calc(var(--space-l)/2);
+	border: 2px solid var( --progress-primary-color );
+	height: var( --space-l );
+	border-radius: calc( var( --space-l ) / 2 );
 	line-height: 100%;
 	font-weight: bold;
-	color: var(--progress-text-color);
+	color: var( --progress-text-color );
 	margin-inline-end: 2.5rem;
 }
 
@@ -20,9 +20,9 @@
 	align-items: center;
 	width: 20rem;
 	height: 100%;
-	background: var(--progress-primary-color);
-	border-radius: calc(var(--space-l)/2 - 4px);
-	padding-inline-start: var(--space-2xs);
+	background: var( --progress-primary-color );
+	border-radius: calc( var( --space-l ) / 2 - 4px );
+	padding-inline-start: var( --space-2xs );
 	transition: width 3s ease-in-out;
 }
 
@@ -33,10 +33,10 @@
 	height: 100%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	padding: clamp(0.1rem, 0.8vw, 0.5rem);
-	background: var(--progress-primary-color);
-	box-shadow: var(--progress-icon-shadow);
-	transition: transform 500ms linear(0, 0.265 10.9%, 0.856 37.4%, 1 44.7%, 0.909 51.7%, 0.888 54.9%, 0.881 58.2%, 0.901 64.1%, 1 77.4%, 0.983 84.5%, 1);
+	padding: clamp( 0.1rem, 0.8vw, 0.5rem );
+	background: var( --progress-primary-color );
+	box-shadow: var( --progress-icon-shadow );
+	transition: transform 500ms linear( 0, 0.265 10.9%, 0.856 37.4%, 1 44.7%, 0.909 51.7%, 0.888 54.9%, 0.881 58.2%, 0.901 64.1%, 1 77.4%, 0.983 84.5%, 1 );
 	transition-delay: 3s;
 }
 
@@ -47,12 +47,12 @@
 }
 
 .wmde-banner--visible .wmde-b-progress-fill {
-	width: var(--wmde-b-progress-width);
+	width: var( --wmde-b-progress-width );
 }
 
 .wmde-banner--visible .wmde-b-progress-icon {
 	height: auto;
-	width: clamp(1lh, 3vw, 2rem);
+	width: clamp( 1lh, 3vw, 2rem );
 	transform: scale( 3 );
 }
 

@@ -6,7 +6,7 @@ Note: This is called `.content-wrapper` only because some ad-blockers target the
 .wmde-c-wrapper {
 	margin-inline: auto;
 	width: 100%;
-	max-width: var(--wrapper-max-width, 1200px);
-	padding-inline: var(--space-s);
+	max-width: var( --wrapper-max-width, 1200px );
+	padding-inline: var( --space-s );
 	position: relative;
 }

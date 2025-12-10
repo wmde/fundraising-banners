@@ -1,7 +1,7 @@
 .wmde-b-checkmark-list svg {
-	margin-inline-end: var(--space-3xs);
+	margin-inline-end: var( --space-3xs );
 }
 
 .wmde-b-checkmark-list > li + li {
-	margin-block-start: var(--space-2xs);
+	margin-block-start: var( --space-2xs );
 }
