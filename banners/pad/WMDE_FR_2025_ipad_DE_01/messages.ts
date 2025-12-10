@@ -19,6 +19,8 @@ const messages: TranslationMessages = {
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie 5 € jährlich!',
 	'already-donated-link': 'Habe schon gespendet',
+
+	'prefix-days-left': 'Noch',
 };
 
 export default messages;

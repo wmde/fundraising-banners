@@ -16,5 +16,7 @@ const messages: TranslationMessages = {
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
+
+	'prefix-days-left': 'Noch',
 };
 export default messages;

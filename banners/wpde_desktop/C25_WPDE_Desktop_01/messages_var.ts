@@ -17,7 +17,9 @@ const messages: TranslationMessages = {
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
 	'cover-transaction-costs': 'Ich übernehme gerne die Transaktionsgebühren von {{transactionCosts}}, damit 100 % meiner Spende ankommt.',
-	'recurring-interval-cheering': 'Dauerhaft etwas bewegen. '
+	'recurring-interval-cheering': 'Dauerhaft etwas bewegen. ',
+
+	'prefix-days-left': 'Noch',
 };
 
 export default messages;

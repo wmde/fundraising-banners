@@ -28,6 +28,8 @@ const messages: TranslationMessages = {
 	'payment-sofort': 'Sofort',
 	'payment-bank-transfer': 'Überweisung',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
+
+	'prefix-days-left': 'Noch',
 };
 
 export default messages;
