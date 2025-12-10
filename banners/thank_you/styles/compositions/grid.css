@@ -18,33 +18,33 @@ to change how empty grid tracks are handled */
 
 .wmde-c-grid {
 	display: grid;
-	grid-template-columns: repeat(var(--grid-placement, auto-fill), minmax(var(--grid-min-item-size, 16rem), 1fr));
-	gap: var(--gutter, var(--space-l));
+	grid-template-columns: repeat( var( --grid-placement, auto-fill ), minmax( var( --grid-min-item-size, 16rem ), 1fr ) );
+	gap: var( --gutter, var( --space-l ) );
 }
 
 /* A split 50/50 layout that sizes */
-.wmde-c-grid[data-layout='50-50'] {
+.wmde-c-grid[ data-layout='50-50' ] {
 	--grid-placement: auto-fit;
-	--grid-min-item-size: clamp(8rem, 50vw, 24rem);
+	--grid-min-item-size: clamp( 8rem, 50vw, 24rem );
 }
 
-.wmde-c-grid[data-layout='full'] {
+.wmde-c-grid[ data-layout='full' ] {
 	--grid-min-item-size: 100%;
 }
 
-.wmde-c-grid[data-layout='halves'] {
+.wmde-c-grid[ data-layout='halves' ] {
 	--grid-placement: auto-fit;
-	--grid-min-item-size: clamp(10rem, 40%, 24rem);
+	--grid-min-item-size: clamp( 10rem, 40%, 24rem );
 }
 
 /* Three column grid layout */
-.wmde-c-grid[data-layout='thirds'] {
+.wmde-c-grid[ data-layout='thirds' ] {
 	--grid-placement: auto-fit;
-	--grid-min-item-size: clamp(16rem, 33%, 20rem);
+	--grid-min-item-size: clamp( 16rem, 33%, 20rem );
 }
 
-.wmde-c-grid[data-layout='quarters'] {
-	--grid-min-item-size: clamp(5rem, 20%, 18rem);
+.wmde-c-grid[ data-layout='quarters' ] {
+	--grid-min-item-size: clamp( 5rem, 20%, 18rem );
 }
 
 .wmde-c-grid__item-full-width {

@@ -10,7 +10,6 @@ import { readFileSync } from 'fs';
  * @return {string[]}
  */
 export function getExcludedCampaignDirectories( campaignConfigPath ) {
-	console.log( readFileSync( campaignConfigPath, 'utf-8' ) );
 	const config = parseTOML( readFileSync( campaignConfigPath, 'utf-8' ) );
 	const activeCampaigns = new Set();
 	for ( const channelConfig of Object.values( config ) ) {

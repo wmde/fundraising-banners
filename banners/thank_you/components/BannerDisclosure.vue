@@ -1,5 +1,5 @@
 <template>
-	<details class="wmde-b-disclosure wmde-c-flow wmde-b-prose" :id="id" ref="dialogue" @toggle.prevent="onDialogueToggle">
+	<details class="wmde-b-disclosure wmde-c-flow wmde-b-prose" :id="id" ref="dialogue" @toggle="onDialogueToggle">
 		<summary class="wmde-c-repel" data-nowrap>
 			<hgroup>
 				<slot name="header"/>
@@ -17,10 +17,10 @@
 			@click="dialogue.open = !dialogue.open"
 		>
 			<template v-if="dialogueIsOpen">
-				<span>Weniger lesen</span><ChevronDownIcon class="wmde-u-flip"/>
+				<span>{{ thankYouContent[ 'read-less' ] }}</span><ChevronDownIcon class="wmde-u-flip"/>
 			</template>
 			<template v-else>
-				<span>Weiterlesen</span><ChevronDownIcon/>
+				<span>{{ thankYouContent[ 'read-more' ] }}</span><ChevronDownIcon/>
 			</template>
 		</button>
 	</div>
@@ -30,9 +30,11 @@
 
 import ChevronDownIcon from './Icons/ChevronDownIcon.vue';
 import { ref } from 'vue';
+import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
 	id: string;
+	thankYouContent: ThankYouContent;
 }
 
 defineProps<Props>();

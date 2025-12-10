@@ -1,38 +1,38 @@
 .wmde-b-button {
-	--button-background: var(--colour-blue-500);
-	--button-border-focus: var(--colour-white);
-	--button-background-secondary: var(--colour-grey-300);
-	--button-color: var(--colour-white);
+	--button-background: var( --colour-blue-500 );
+	--button-border-focus: var( --colour-white );
+	--button-background-secondary: var( --colour-grey-300 );
+	--button-color: var( --colour-white );
 
-	--button-bg: var(--button-background);
+	--button-bg: var( --button-background );
 
-	font-size: var(--type-step-0);
-	font-weight: var(--font-bold);
-	background: var(--button-bg);
-	color: var(--button-color);
-	border: 1px solid var(--button-border-color, var(--button-bg));
-	border-radius: var(--border-radius);
-	padding-block: var(--space-2xs);
-	padding-inline: var(--space-m);
+	font-size: var( --type-step-0 );
+	font-weight: var( --font-bold );
+	background: var( --button-bg );
+	color: var( --button-color );
+	border: 1px solid var( --button-border-color, var( --button-bg ) );
+	border-radius: var( --border-radius );
+	padding-block: var( --space-2xs );
+	padding-inline: var( --space-m );
 	transition: background-color 200ms ease-in-out;
 }
 
-.wmde-b-button[data-secondary] {
-	--button-bg: var(--button-background-secondary);
+.wmde-b-button[ data-secondary ] {
+	--button-bg: var( --button-background-secondary );
 }
 
 .wmde-b-button:hover,
 .wmde-b-button:focus-visible {
-	--button-bg: oklch(from var(--button-background) 60% c h);
-	--button-border-color: var(--button-border-focus);
-	box-shadow: 0 0 0 2px var(--button-bg);
+	--button-bg: oklch( from var( --button-background ) 60% c h );
+	--button-border-color: var( --button-border-focus );
+	box-shadow: 0 0 0 2px var( --button-bg );
 }
 
-.wmde-b-button[data-secondary]:hover,
-.wmde-b-button[data-secondary]:focus-visible {
-	--button-bg: oklch(from var(--button-background-secondary) 60% c h);
+.wmde-b-button[ data-secondary ]:hover,
+.wmde-b-button[ data-secondary ]:focus-visible {
+	--button-bg: oklch( from var( --button-background-secondary ) 60% c h );
 }
 
-.wmde-b-button[fill-width] {
+.wmde-b-button[ fill-width ] {
 	width: 100%;
 }

@@ -1,8 +1,8 @@
 .wmde-banner {
-	color: var(--font-colour);
-	font-size: var(--type-step-0);
-	font-family: var(--font-base);
-	line-height: var(--leading-standard);
+	color: var( --font-colour );
+	font-size: var( --type-step-0 );
+	font-family: var( --font-base );
+	line-height: var( --leading-standard );
 	font-size-adjust: from-font;
 	font-synthesis: none;
 	margin: 0;
@@ -13,36 +13,36 @@
 	/* stylelint-enable */
 }
 
-.wmde-banner :is(h2, h3) {
-	color: var(--font-colour);
-	line-height: var(--leading-fine);
+.wmde-banner :is( h2, h3 ) {
+	color: var( --font-colour );
+	line-height: var( --leading-fine );
 	text-wrap: balance;
-	font-weight: var(--font-normal);
+	font-weight: var( --font-normal );
 }
 
 .wmde-banner h2 {
-	font-size: var(--type-step-2);
+	font-size: var( --type-step-2 );
 }
 
 .wmde-banner h3 {
-	font-size: var(--type-step-1);
+	font-size: var( --type-step-1 );
 }
 
 .wmde-banner small {
-	font-size: var(--type-step-00);
+	font-size: var( --type-step-00 );
 }
 
-.wmde-banner ul:not([class]) {
+.wmde-banner ul:not( [ class ] ) {
 	padding-inline-start: 1.7ch;
 	list-style-type: disc;
 }
 
-.wmde-banner ul:not([class]) > li {
+.wmde-banner ul:not( [ class ] ) > li {
 	padding-inline-start: 0.9ch;
 }
 
-.wmde-banner ul:not([class]) li + * {
-	margin-block-start: var(--space-3xs);
+.wmde-banner ul:not( [ class ] ) li + * {
+	margin-block-start: var( --space-3xs );
 }
 
 .wmde-banner blockquote {
@@ -50,7 +50,7 @@
 }
 
 .wmde-banner blockquote footer {
-	margin-block-start: var(--space-s);
+	margin-block-start: var( --space-s );
 }
 
 .wmde-banner blockquote q {
@@ -62,12 +62,12 @@
 	font-style: italic;
 }
 
-.wmde-banner q:before {
-	content: "\201C";
+.wmde-banner q::before {
+	content: '\201C';
 }
 
-.wmde-banner q:after {
-	content: "\201D";
+.wmde-banner q::after {
+	content: '\201D';
 }
 
 .wmde-banner img {
@@ -82,30 +82,28 @@
 
 .wmde-banner figcaption {
 	padding-block-start: 0.5em;
-	font-size: var(--type-step-0);
+	font-size: var( --type-step-0 );
 	font-family: monospace;
 }
 
 .wmde-banner caption {
 	caption-side: bottom;
-	margin-block-start: var(--space-s);
+	margin-block-start: var( --space-s );
 }
 
-.wmde-banner a:not([class]) {
-	color: var(--link-colour);
+.wmde-banner a:not( [ class ] ) {
+	color: var( --link-colour );
 }
 
 .wmde-banner :focus-visible {
-	--form-field-border-color: var(--focus-colour);
-	outline: 2px solid var(--focus-colour, currentColor);
+	--form-field-border-color: var( --focus-colour );
+	outline: 2px solid var( --focus-colour, currentColor );
 }
 
-.wmde-banner :is(
-	a:not([class]):hover,
-	a:not([class]):focus-visible,
-	a[aria-current]
-) {
-	color: var(--link-colour-hover);
+.wmde-banner :is( a:not( [ class ] ):hover,
+a:not( [ class ] ):focus-visible,
+a[ aria-current ] ) {
+	color: var( --link-colour-hover );
 }
 
 .wmde-banner :target {
@@ -113,29 +111,29 @@
 }
 
 .wmde-banner ::selection {
-	color: var(--selection-colour, var(--colour-black));
-	background: var(--selection-background);
+	color: var( --selection-colour, var( --colour-black ) );
+	background: var( --selection-background );
 }
 
 .wmde-banner hr {
 	border: none;
 	background-color: transparent;
-	border-block-start: 1px solid var(--hr-stroke);
-	margin-block: var(--space-m);
+	border-block-start: 1px solid var( --hr-stroke );
+	margin-block: var( --space-m );
 }
 
-.wmde-banner svg:not([class]) {
+.wmde-banner svg:not( [ class ] ) {
 	flex-shrink: 0;
 }
 
-.wmde-banner svg[role='img'][width][height] {
+.wmde-banner svg[ role='img' ][ width ][ height ] {
 	width: revert;
 	height: revert;
-	background: var(--colour-white);
-	padding: var(--space-xs);
+	background: var( --colour-white );
+	padding: var( --space-xs );
 }
 
-.wmde-banner button:not([disabled]) {
+.wmde-banner button:not( [ disabled ] ) {
 	cursor: pointer;
 }
 

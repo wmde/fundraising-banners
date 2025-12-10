@@ -1,9 +1,8 @@
 <template>
-	<dialog class="wmde-b-modal" ref="modal" aria-labelledby="wmde-banner-model-blurb" tabindex="-1">
-		<div class="wmde-c-wrapper">
+	<dialog class="wmde-b-modal" ref="modal">
+		<div class="wmde-c-wrapper" tabindex="-1" aria-labelledby="wmde-banner-model-blurb" ref="focusable">
 			<CloseButton
 				class="wmde-u-sticky"
-				:label="$translate( 'close-full-page' ) + '&nbsp;&nbsp;'"
 				:thank-you-content="thankYouContent"
 				@click="$emit( 'close' )"
 			/>
@@ -35,7 +34,7 @@
 							<GlobeIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<Disclosure id="wmde-banner-knowledge">
+							<BannerDisclosure id="wmde-banner-knowledge" :thank-you-content="thankYouContent">
 								<template #header>
 									<h2>{{ thankYouContent[ 'knowledge-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'knowledge-subtitle' ] }}</p>
@@ -44,7 +43,7 @@
 								<template #content>
 									<p v-for="( paragraph, index ) in thankYouContent[ 'knowledge-content' ]" :key="index">{{ paragraph }}</p>
 								</template>
-							</Disclosure>
+							</BannerDisclosure>
 						</div>
 					</div>
 				</div>
@@ -59,7 +58,7 @@
 							<MembersIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<Disclosure id="wmde-banner-help">
+							<BannerDisclosure id="wmde-banner-help" :thank-you-content="thankYouContent">
 								<template #header>
 									<h2>{{ thankYouContent[ 'help-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'help-subtitle' ] }}</p>
@@ -89,11 +88,11 @@
 										</div>
 									</div>
 								</template>
-							</Disclosure>
+							</BannerDisclosure>
 
 							<div class="wmde-b-cta wmde-c-flow">
-								<div><button class="wmde-b-button" fill-width>{{ thankYouContent[ 'cta-donate-5' ] }}</button></div>
-								<div><button class="wmde-b-button" data-secondary fill-width>{{ thankYouContent[ 'cta-donate-other' ] }}</button></div>
+								<div><button class="wmde-b-button" fill-width @click="$emit( 'membershipWithAmount' )">{{ thankYouContent[ 'cta-donate-5' ] }}</button></div>
+								<div><button class="wmde-b-button" data-secondary fill-width @click="$emit( 'membershipWithoutAmount' )">{{ thankYouContent[ 'cta-donate-other' ] }}</button></div>
 							</div>
 
 							<ul class="wmde-b-checkmark-list">
@@ -124,7 +123,7 @@ import AverageIcon from './Icons/AverageIcon.vue';
 import CoinIcon from './Icons/CoinIcon.vue';
 import MembersIcon from './Icons/MembersIcon.vue';
 import TickIcon from './Icons/TickIcon.vue';
-import Disclosure from './Disclosure.vue';
+import BannerDisclosure from './BannerDisclosure.vue';
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 import BirthdayIcon from './Icons/BirthdayIcon.vue';
 
@@ -137,11 +136,12 @@ const props = defineProps<Props>();
 defineEmits( [ 'close', 'membershipWithAmount', 'membershipWithoutAmount' ] );
 
 const modal = ref<HTMLDialogElement>();
+const focusable = ref<HTMLDialogElement>();
 
 watch( () => props.visible, ( newVisible: boolean ) => {
 	if ( newVisible ) {
 		modal.value.showModal();
-		modal.value.focus();
+		focusable.value.focus();
 	} else {
 		modal.value.close();
 	}

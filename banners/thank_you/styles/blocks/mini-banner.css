@@ -1,17 +1,17 @@
 .wmde-b-mini {
-	--mini-banner-background: var(--colour-white);
+	--mini-banner-background: var( --colour-white );
 	--mini-banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
 
 	min-height: var( --mini-banner-height );
-	background: var(--mini-banner-background);
-	box-shadow: var(--mini-banner-shadow);
-	padding: var(--space-xs);
+	background: var( --mini-banner-background );
+	box-shadow: var( --mini-banner-shadow );
+	padding: var( --space-xs );
 }
 
 .wmde-b-mini-content {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--gutter);
+	gap: var( --gutter );
 	justify-content: center;
 	align-items: center;
 }
@@ -21,7 +21,7 @@
 }
 
 .wmde-b-mini-content > :first-child {
-	font-size: var(--type-step-5);
+	font-size: var( --type-step-5 );
 	flex-basis: 6ch;
 	flex-grow: 1;
 }
@@ -33,22 +33,22 @@
 }
 
 .wmde-b-mini-content h2 {
-	font-size: var(--type-step-5);
+	font-size: var( --type-step-5 );
 }
 
 .wmde-b-mini-content p {
 	text-wrap: balance;
-	font-size: var(--type-step-0-1);
+	font-size: var( --type-step-0-1 );
 }
 
 .skin-theme-clientpref-night .wmde-b-mini {
-	--mini-banner-background: var(--colour-grey-800);
+	--mini-banner-background: var( --colour-grey-800 );
 	--mini-banner-shadow: none;
 }
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-b-mini {
-		--mini-banner-background: var(--colour-grey-800);
+		--mini-banner-background: var( --colour-grey-800 );
 		--mini-banner-shadow: none;
 	}
 }
