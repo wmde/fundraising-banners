@@ -10,43 +10,43 @@
 
 .wmde-b-confetti > span {
 	display: block;
-	background: var(--confetti-background);
+	background: var( --confetti-background );
 	height: 1px;
 	width: 0;
-	offset-distance: clamp(0.8rem, 2vw, 1.4rem);
+	offset-distance: clamp( 0.8rem, 2vw, 1.4rem );
 
-	transition: width 3s linear(0, 0.03 1.1%, 0.125 2.4%, 0.906 9.8%, 1.046 12.3%, 1.11 15%, 1.116 16.3%, 1.11 17.8%, 1.014 25.8%, 0.987 31.2%, 1.001 47.2%, 1);
+	transition: width 3s linear( 0, 0.03 1.1%, 0.125 2.4%, 0.906 9.8%, 1.046 12.3%, 1.11 15%, 1.116 16.3%, 1.11 17.8%, 1.014 25.8%, 0.987 31.2%, 1.001 47.2%, 1 );
 	transition-delay: calc( 3000ms + 0.08s * var( --index ) );
 }
 
 .wmde-banner--visible .wmde-b-confetti > span {
-	width: clamp(0.2rem, 0.3vw, 1.5rem);
+	width: clamp( 0.2rem, 0.3vw, 1.5rem );
 }
 
 .wmde-b-confetti > span:first-child {
-	offset-path: ray(-45deg closest-corner);
+	offset-path: ray( -45deg closest-corner );
 }
 
-.wmde-b-confetti > span:nth-child(2) {
-	offset-path: ray(0deg closest-corner);
+.wmde-b-confetti > span:nth-child( 2 ) {
+	offset-path: ray( 0deg closest-corner );
 }
 
-.wmde-b-confetti > span:nth-child(3) {
-	offset-path: ray(45deg closest-corner);
+.wmde-b-confetti > span:nth-child( 3 ) {
+	offset-path: ray( 45deg closest-corner );
 }
 
-.wmde-b-confetti > span:nth-child(4) {
-	offset-path: ray(90deg closest-corner);
+.wmde-b-confetti > span:nth-child( 4 ) {
+	offset-path: ray( 90deg closest-corner );
 }
 
-.wmde-b-confetti > span:nth-child(5) {
-	offset-path: ray(135deg closest-corner);
+.wmde-b-confetti > span:nth-child( 5 ) {
+	offset-path: ray( 135deg closest-corner );
 }
 
-.wmde-b-confetti > span:nth-child(6) {
-	offset-path: ray(180deg closest-corner);
+.wmde-b-confetti > span:nth-child( 6 ) {
+	offset-path: ray( 180deg closest-corner );
 }
 
 .wmde-b-confetti > span:last-child {
-	offset-path: ray(225deg closest-corner);
+	offset-path: ray( 225deg closest-corner );
 }

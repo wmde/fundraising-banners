@@ -1,11 +1,11 @@
 .wmde-b-icon-text {
 	display: flex;
 	flex-wrap: wrap;
-	column-gap: var(--icon-text-gap, var(--space-s-l));
+	column-gap: var( --icon-text-gap, var( --space-s-l ) );
 }
 
 .wmde-b-icon-text__icon {
-	flex-basis: var(--icon-text-icon-target-width, 2.5rem);
+	flex-basis: var( --icon-text-icon-target-width, 2.5rem );
 	flex-grow: 1;
 	padding-block-start: 0.5rem;
 }
@@ -19,5 +19,5 @@
 .wmde-b-icon-text__text {
 	flex-basis: 0;
 	flex-grow: 999;
-	min-width: var(--icon-text-text-min-width, 30ch);
+	min-width: var( --icon-text-text-min-width, 30ch );
 }

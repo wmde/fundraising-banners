@@ -1,17 +1,17 @@
 .wmde-b-profile {
-	--profile-name-color: var(--colour-blue-green-500);
+	--profile-name-color: var( --colour-blue-green-500 );
 }
 
 .wmde-b-profile img {
 	max-width: 8rem;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: #ddd;
+	background: #dddddd;
 }
 
 .wmde-b-profile h3 {
-	color: var(--profile-name-color);
-	font-weight: var(--font-semi-bold);
+	color: var( --profile-name-color );
+	font-weight: var( --font-semi-bold );
 }
 
 .wmde-b-profile p {

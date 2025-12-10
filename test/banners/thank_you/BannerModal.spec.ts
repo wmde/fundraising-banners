@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import BannerModal from '@banners/thank_you/components/BannerModal.vue';
+import thankYouContent from '@test/fixtures/ThankYouContent';
 
-describe( 'FullPageBanner.vue', () => {
+describe( 'BannerModal.vue', () => {
 	let showCallback: Mock;
 	let closeCallback: Mock;
 
@@ -17,12 +18,7 @@ describe( 'FullPageBanner.vue', () => {
 		return mount( BannerModal, {
 			props: {
 				visible: false,
-				numberOfPeople: '23'
-			},
-			global: {
-				mocks: {
-					$translate: ( key: string ): string => key
-				}
+				thankYouContent
 			}
 		} );
 	};
@@ -39,12 +35,25 @@ describe( 'FullPageBanner.vue', () => {
 		expect( closeCallback ).toHaveBeenCalled();
 	} );
 
+	it( 'Focuses when shown', async () => {
+		const wrapper = getWrapper();
+
+		const focusable = wrapper.find<HTMLElement>( '.wmde-c-wrapper' );
+		focusable.element.focus = vi.fn();
+
+		await wrapper.setProps( { visible: true } );
+
+		expect( focusable.element.focus ).toHaveBeenCalled();
+	} );
+
 	it( 'Emits events', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
-		await wrapper.find( '.wmde-banner-full-cta-with' ).trigger( 'click' );
-		await wrapper.find( '.wmde-banner-full-cta-without' ).trigger( 'click' );
+		await wrapper.find( '.wmde-b-close-button button' ).trigger( 'click' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		await ctaFiveEuroAmount.trigger( 'click' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		await ctaOtherAmount.trigger( 'click' );
 
 		expect( wrapper.emitted( 'close' ).length ).toStrictEqual( 1 );
 		expect( wrapper.emitted( 'membershipWithAmount' ).length ).toStrictEqual( 1 );

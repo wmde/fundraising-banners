@@ -9,37 +9,7 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
-
-const thankYouContent: ThankYouContent = {
-	'birthday-blurb': '',
-	'cta-donate-5': '',
-	'cta-donate-other': '',
-	'help-content': [],
-	'help-subtitle': '',
-	'help-thank-you': '',
-	'help-title': '',
-	'knowledge-content': [],
-	'knowledge-subtitle': '',
-	'knowledge-title': '',
-	'main-message-content': '',
-	'main-message-name': '',
-	'main-message-position': '',
-	'main-message-title': '',
-	'mini-button': '',
-	'mini-message': '',
-	'mini-progress-bar-text': '',
-	'mini-thank-you': '',
-	'more-info': '',
-	'photo-credit': '',
-	'photo-license': '',
-	'read-less': '',
-	'read-more': '',
-	'use-of-funds': '',
-	close: '',
-	reasons: [],
-	stats: []
-};
+import thankYouContent from '@test/fixtures/ThankYouContent';
 
 describe( 'BannerCtrl.vue', () => {
 	let tracker: Tracker;
@@ -84,7 +54,7 @@ describe( 'BannerCtrl.vue', () => {
 	it( 'emits close event', () => {
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-close' ).trigger( 'click' );
+		wrapper.find( '.wmde-b-close-button button' ).trigger( 'click' );
 
 		expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 		expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
@@ -93,11 +63,11 @@ describe( 'BannerCtrl.vue', () => {
 	it( 'Shows and hides the full page modal', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-mini-read-more' ).trigger( 'click' );
+		await wrapper.find( '.wmde-b-mini-cta button' ).trigger( 'click' );
 
 		expect( showCallback ).toHaveBeenCalled();
 
-		await wrapper.find( '.wmde-banner-full .wmde-banner-close' ).trigger( 'click' );
+		await wrapper.find( '.wmde-b-modal .wmde-b-close-button button' ).trigger( 'click' );
 
 		expect( closeCallback ).toHaveBeenCalled();
 	} );
@@ -105,7 +75,7 @@ describe( 'BannerCtrl.vue', () => {
 	it( 'emits modal shown events', () => {
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-mini-read-more' ).trigger( 'click' );
+		wrapper.find( '.wmde-b-mini-cta button' ).trigger( 'click' );
 
 		expect( tracker.trackEvent ).toHaveBeenCalledOnce();
 		expect( tracker.trackEvent ).toHaveBeenCalledWith( new ThankYouModalShownEvent() );
@@ -115,25 +85,17 @@ describe( 'BannerCtrl.vue', () => {
 	it( 'emits modal hidden events', () => {
 		const wrapper = getWrapper();
 
-		wrapper.find( '.wmde-banner-full .wmde-banner-close' ).trigger( 'click' );
+		wrapper.find( '.wmde-b-modal .wmde-b-close-button button' ).trigger( 'click' );
 
 		expect( tracker.trackEvent ).toHaveBeenCalledOnce();
 		expect( tracker.trackEvent ).toHaveBeenCalledWith( new ThankYouModalHiddenEvent() );
 		expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );
 	} );
 
-	it( 'sets progress bar fill percentage on slider', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 750 } );
+	it( 'sets progress bar fill percentage', () => {
 		const wrapper = getWrapper();
 
-		expect( wrapper.find( '.wmde-banner-progress-bar' ).attributes( 'style' ) ).toStrictEqual( '--wmde-banner-progress-bar-width: 80%;' );
-	} );
-
-	it( 'sets progress bar fill percentage on text', () => {
-		Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: 751 } );
-		const wrapper = getWrapper();
-
-		expect( wrapper.find( '.wmde-banner-progress-bar' ).attributes( 'style' ) ).toStrictEqual( '--wmde-banner-progress-bar-width: 80%;' );
+		expect( wrapper.find( '.wmde-b-progress' ).attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 80%;' );
 	} );
 
 	it( 'redirects when membership buttons are clicked', async () => {
@@ -141,11 +103,13 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-cta-with' ).trigger( 'click' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		await ctaFiveEuroAmount.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'WITH_AMOUNT' );
 
-		await wrapper.find( '.wmde-banner-full-cta-without' ).trigger( 'click' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		await ctaOtherAmount.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'WITHOUT_AMOUNT' );
 	} );
@@ -154,8 +118,10 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: { href: '' } } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-full-cta-with' ).trigger( 'click' );
-		await wrapper.find( '.wmde-banner-full-cta-without' ).trigger( 'click' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		await ctaFiveEuroAmount.trigger( 'click' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		await ctaOtherAmount.trigger( 'click' );
 
 		expect( tracker.trackEvent ).toBeCalledTimes( 2 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'with-amount-5' ) );
@@ -167,7 +133,8 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-subscribe a:first-child' ).trigger( 'click' );
+		const subscribeLink = wrapper.find( 'footer p:last-child a:first-child' );
+		await subscribeLink.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'SUBSCRIBE URL' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
@@ -179,7 +146,8 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-banner-subscribe a:last-child' ).trigger( 'click' );
+		const useOfFundsLink = wrapper.find( 'footer p:last-child a:last-child' );
+		await useOfFundsLink.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'USE OF FUNDS' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );

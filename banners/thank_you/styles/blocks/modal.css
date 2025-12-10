@@ -1,20 +1,20 @@
 @keyframes fade-in {
 	0% {
 		opacity: 0;
-		transform: scale(1.1);
+		transform: scale( 1.1 );
 		display: none;
 	}
 	100% {
 		opacity: 1;
-		transform: scale(1);
+		transform: scale( 1 );
 		display: block;
 	}
 }
 
 .wmde-b-modal {
-	--modal-backdrop: var(--colour-blue-100);
+	--modal-backdrop: var( --colour-blue-100 );
 	--wrapper-max-width: 80rem;
-	--close-padding: var(--space-xs);
+	--close-padding: var( --space-xs );
 
 	border: 0;
 	padding-inline: 0;
@@ -23,7 +23,7 @@
 	inset: 0;
 }
 
-.wmde-b-modal[open] {
+.wmde-b-modal[ open ] {
 	width: 100vw;
 	max-width: 100vw;
 	height: 100vh;
@@ -34,20 +34,20 @@
 }
 
 .wmde-b-modal::backdrop {
-	background: var(--modal-backdrop);
+	background: var( --modal-backdrop );
 	opacity: 0.9;
 }
 
 .wmde-b-modal footer {
-	--gutter: var(--space-m);
+	--gutter: var( --space-m );
 }
 
 .skin-theme-clientpref-night .wmde-b-modal {
-	--modal-backdrop: var(--colour-grey-700);
+	--modal-backdrop: var( --colour-grey-700 );
 }
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-b-modal {
-		--modal-backdrop: var(--colour-grey-700);
+		--modal-backdrop: var( --colour-grey-700 );
 	}
 }
