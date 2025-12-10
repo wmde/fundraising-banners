@@ -1,6 +1,7 @@
 .wmde-b-close-button {
 	--close-icon-stroke: var( --colour-black );
 	--close-icon-color: var( --colour-black );
+	--close-button-background: var( --colour-blue-100 );
 
 	text-align: right;
 }
@@ -13,12 +14,18 @@
 	height: var( --space-l );
 	border: 0;
 	padding-inline: var( --close-padding, 0 );
+	margin-inline: var( --close-margin, 0 );
 	background: transparent;
 	transition: color 200ms ease-in-out;
 }
 
 .wmde-b-close-button path {
 	transition: fill 200ms ease-in-out;
+}
+
+.wmde-b-close-button[ data-with-background ] button {
+	background: var( --close-button-background );
+	border-radius: calc( var( --space-l ) / 2 );
 }
 
 .wmde-b-close-button button:hover,
