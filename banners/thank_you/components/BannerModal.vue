@@ -1,5 +1,5 @@
 <template>
-	<dialog class="wmde-b-modal" ref="modal">
+	<dialog class="wmde-b-modal" ref="modal" closedby="any">
 		<div class="wmde-c-wrapper" tabindex="-1" aria-labelledby="wmde-banner-model-blurb" ref="focusable">
 			<CloseButton
 				class="wmde-u-sticky"
