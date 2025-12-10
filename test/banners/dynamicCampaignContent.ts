@@ -21,7 +21,7 @@ export function newDynamicContent(): DynamicContent {
 			donationTargetAmount: 'donationTargetAmount',
 			amountDonated: 'amountDonated',
 			amountNeeded: 'amountNeeded',
-			isLateProgress: false,
+			isLateProgress: true,
 			dramaText: 'alarm!'
 		},
 		visitorsVsDonorsSentence: '',

@@ -27,7 +27,7 @@ const messages: TranslationMessages = {
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'payment-sofort': 'Sofort',
 	'payment-bank-transfer': 'Überweisung',
-	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!'
+	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
 };
 
 export default messages;

@@ -40,7 +40,7 @@ const campaignParameters: CampaignParameters = {
 	numberOfMembers: 200,
 	startDate: '2023-11-03',
 	urgencyMessageDaysLeft: 10,
-	isLateProgress: false,
+	isLateProgress: true,
 	dramaTextIsVisible: false
 };
 const impressionCount: ImpressionCount = {
@@ -127,7 +127,22 @@ describe( 'DynamicCampaignText', () => {
 		expect( dynamicCampaignText.progressBarContent.donationTarget ).toBe( 'Progress total €9.0M' );
 		expect( dynamicCampaignText.progressBarContent.donationTargetAmount ).toBe( '€9.0M' );
 		expect( dynamicCampaignText.progressBarContent.amountDonated ).toBe( '€0.1M' );
-		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 8,900,000 euro' );
+		expect( dynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing €8.9M' );
+	} );
+
+	it( 'Smaller missing amounts get formatted in thousands', () => {
+		let localCampaignParametersWithSmallTarget = campaignParameters;
+		localCampaignParametersWithSmallTarget.campaignProjection.donationTarget = 500_000;
+
+		const localDynamicCampaignText = new DynamicCampaignText(
+			new Date( 2023, 10, 10, 12, 0, 0 ),
+			translator,
+			formatters,
+			localCampaignParametersWithSmallTarget,
+			impressionCount
+		);
+
+		expect( localDynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 400,000 euro' );
 	} );
 
 	it( 'Gets the average donation', () => {
