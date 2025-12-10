@@ -4,6 +4,7 @@
 			<CloseButton
 				class="wmde-u-sticky"
 				:thank-you-content="thankYouContent"
+				data-with-background
 				@click="$emit( 'close' )"
 			/>
 			<div class="wmde-c-flow">

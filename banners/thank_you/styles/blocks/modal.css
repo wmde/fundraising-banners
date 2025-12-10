@@ -15,6 +15,7 @@
 	--modal-backdrop: var( --colour-blue-100 );
 	--wrapper-max-width: 80rem;
 	--close-padding: var( --space-xs );
+	--close-margin: var( --space-3xs );
 
 	border: 0;
 	padding-inline: 0;
