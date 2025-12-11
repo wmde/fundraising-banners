@@ -1,7 +1,7 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/var/main.css';
-import './styles/var/use-of-funds.scss';
+import './styles/Variant/main.css';
+import './styles/Variant/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import Banner from './components/BannerVar.vue';
