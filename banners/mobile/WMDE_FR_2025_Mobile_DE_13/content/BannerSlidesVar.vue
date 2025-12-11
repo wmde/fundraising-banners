@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import KeenSliderSlide from '../components/var/KeenSliderSlide.vue';
-import AnimatedText from '../components/var/AnimatedText.vue';
+import KeenSliderSlide from '../components/Variant/KeenSliderSlide.vue';
+import AnimatedText from '../components/Variant/AnimatedText.vue';
 import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';

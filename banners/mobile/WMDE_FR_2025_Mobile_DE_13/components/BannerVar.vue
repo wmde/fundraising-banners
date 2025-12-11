@@ -45,11 +45,11 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import CloseButton from './var/CloseButton.vue';
-import WikiLogo from './var/WikiLogo.vue';
-import ProgressBar from './var/ProgressBar.vue';
-import KeenSlider from './var/KeenSlider.vue';
-import DonationForm from './var/DonationForm.vue';
+import CloseButton from './Variant/CloseButton.vue';
+import WikiLogo from './Variant/WikiLogo.vue';
+import ProgressBar from './Variant/ProgressBar.vue';
+import KeenSlider from './Variant/KeenSlider.vue';
+import DonationForm from './Variant/DonationForm.vue';
 import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 import BannerSlides from '../content/BannerSlidesVar.vue';
 
