@@ -1,0 +1,82 @@
+@keyframes animate-amount-labels {
+	0% {
+		transform: translateY( 0 );
+	}
+	33% {
+		transform: translateY( -0.1lh );
+	}
+	66% {
+		transform: translateY( 0.1lh );
+	}
+	100% {
+		transform: translateY( 0 );
+	}
+}
+
+.wmde-b-field-amount {
+	display: flex;
+	gap: var(--space-2xs);
+}
+
+.wmde-b-field-amount__error {
+	text-align: center;
+	color: var(--color-red-600);
+}
+
+.wmde-b-field-amount label:has([type='text']) {
+	position: relative;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+.wmde-b-field-amount [type='text'] {
+	--form-field-placeholder-color: var(--form-field-color);
+
+	width: 100%;
+	min-width: 10ch;
+	text-align: center;
+}
+
+.wmde-b-field-amount [type='text']::placeholder {
+	color: var(--form-field-placeholder-color);
+}
+
+.wmde-b-field-amount [type='text']:focus,
+.wmde-b-field-amount--is-custom [type='text'] {
+	--form-field-background-color: var(--form-field-background-color-checked);
+	--form-field-border-color: var(--form-field-border-color-checked);
+	--form-field-placeholder-color: transparent;
+	--form-field-color: var(--form-field-color-checked);
+}
+
+.wmde-b-field-amount label:has([type='text']:focus):after,
+.wmde-b-field-amount--is-custom label:has([type='text']):after {
+	--euro-symbol-color: var(--form-field-placeholder-color);
+
+	content: '€';
+	position: absolute;
+	height: 100%;
+	width: 3ch;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--euro-symbol-color);
+}
+
+.wmde-b-field-amount label:has([type='text']:focus):after,
+.wmde-b-field-amount--is-custom label:has([type='text']):after {
+	--euro-symbol-color: var(--form-field-color-checked);
+}
+
+.wmde-b-field-amount [type='text']:focus-visible {
+	--form-field-border-color: var(--form-field-background-color-checked-focused);
+	box-shadow: 0 0 0 2px var(--form-field-border-color-checked);
+	outline: none;
+}
+
+.wmde-banner--visible .wmde-b-field-amount label {
+	animation: animate-amount-labels 1s ease-in-out;
+	animation-delay: calc( 0.08s * var( --index ) );
+}
