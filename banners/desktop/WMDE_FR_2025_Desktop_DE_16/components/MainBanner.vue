@@ -9,12 +9,12 @@
 					<slot name="banner-slides" v-else :play="slideshowShouldPlay"/>
 					<slot name="progress"/>
 				</div>
-				<slot name="footer"/>
 			</div>
 			<div class="wmde-banner-column-right">
 				<slot name="donation-form" :form-interaction="onFormInteraction"/>
 			</div>
 		</div>
+		<slot name="footer"/>
 	</div>
 </template>
 
