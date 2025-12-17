@@ -9,6 +9,7 @@ import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
 import { mapNotShownEvent } from '@src/tracking/LegacyEventTracking/mapNotShownEvent';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
+import { ThankYouSectionExpandedEvent } from '@src/tracking/events/ThankYouSectionExpandedEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
@@ -26,5 +27,9 @@ export default new Map<string, TrackingEventConverterFactory>( [
 	[
 		ThankYouModalHiddenEvent.EVENT_NAME,
 		( e: ThankYouModalHiddenEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName, 1 )
+	],
+	[
+		ThankYouSectionExpandedEvent.EVENT_NAME,
+		( e: ThankYouModalHiddenEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( `${e.eventName}-${e.userChoice}`, 1 )
 	]
 ] );

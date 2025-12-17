@@ -52,3 +52,16 @@
 		--mini-banner-shadow: none;
 	}
 }
+
+@media ( max-width: 500px ) {
+	.wmde-b-mini-content {
+		display: block;
+	}
+	.wmde-b-mini-content > :first-child {
+		font-size: var( --type-step-1 );
+	}
+	.wmde-b-mini-content > :last-child {
+		font-size: var( --type-step-00 );
+		margin-block-start: var( --gutter );
+	}
+}

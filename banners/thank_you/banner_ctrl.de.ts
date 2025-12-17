@@ -5,25 +5,19 @@ import './styles/main.css';
 import PageWPORG from '@src/page/PageWPORG';
 import { SkinFactory } from '@src/page/skin/SkinFactory';
 import { WindowSizeIssueChecker } from '@src/utils/SizeIssueChecker/WindowSizeIssueChecker';
-import { Translator } from '@src/Translator';
 import { WindowMediaWiki } from '@src/page/MediaWiki/WindowMediaWiki';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import BannerCtrl from './components/BannerCtrl.vue';
-import messages from './messages.de';
+import Banner from './components/BannerCtrl.vue';
 import eventMappings from './event_map';
-import TranslationPlugin from '@src/TranslationPlugin';
 import { createTrackedURL, MEMBERSHIP_FORM_URL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
-import { createThankYouSettings } from './settings';
-import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { WindowTimer } from '@src/utils/Timer';
 import { ThankYouContentFactoryDe } from '@src/utils/ThankYou/Factories/ThankYouContentFactoryDe';
 
-const translator = new Translator( messages );
 const mediaWiki = new WindowMediaWiki();
 const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(), new WindowSizeIssueChecker( 0 ) );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
@@ -39,7 +33,6 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
-		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
 		thankYouContent: thankYouContentFactory.getThankYouContentLoader().getContent(),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
@@ -47,16 +40,20 @@ const app = createVueApp( BannerConductor, {
 			locale: Locales.DE,
 			interval: '1',
 			fee: '500',
-			type: 'sustaining'
+			type: 'sustaining',
+			mf: '0'
 		} ),
-		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
+		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
+			locale: Locales.DE,
+			type: 'sustaining',
+			mf: '0'
+		} )
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: BannerCtrl,
+	banner: Banner,
 	impressionCount
 } );
 
-app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 
