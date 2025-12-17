@@ -1,0 +1,12 @@
+.wmde-b-foot {
+	padding-block: var(--space-2xs);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-s);
+}
+
+.wmde-b-foot button {
+	font-size: var(--type-step-00);
+}

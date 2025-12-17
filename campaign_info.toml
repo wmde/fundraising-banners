@@ -35,9 +35,9 @@ resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "WMDE_FR_2025_Mobile_DE_12"
+campaign = "WMDE_FR_2025_Mobile_DE_13"
 description = "based on CTRL of test 10, VAR - Submitting the banner form redirects users to the variant donation form (ap=2)."
-campaign_tracking = "mob-de-12-ba-251201"
+campaign_tracking = "mob-de-13-ba-251209"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
@@ -46,14 +46,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
 [mobile.banners.ctrl]
-filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_12/banner_ctrl.ts"
-pagename = "WMDE_FR_2025_Mobile_DE_12_ctrl"
-tracking = "org-mob12-251201-ctrl"
+filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_13/banner_ctrl.ts"
+pagename = "WMDE_FR_2025_Mobile_DE_13_ctrl"
+tracking = "org-mob13-251209-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_12/banner_var.ts"
-pagename = "WMDE_FR_2025_Mobile_DE_12_var"
-tracking = "org-mob12-251201-var"
+filename = "./banners/mobile/WMDE_FR_2025_Mobile_DE_13/banner_var.ts"
+pagename = "WMDE_FR_2025_Mobile_DE_13_var"
+tracking = "org-mob13-251209-var"
 
 [mobile.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
