@@ -18,7 +18,7 @@
 					<p>{{ thankYouContent[ 'mini-message' ] }}</p>
 				</div>
 
-				<ProgressBar :fill-percentage="progressBarFillPercentage" :thank-you-content="thankYouContent"/>
+				<ProgressBar :thank-you-content="thankYouContent"/>
 
 				<div class="wmde-b-mini-cta">
 					<button class="wmde-b-button" @click="$emit( 'read-more' )">
@@ -36,7 +36,6 @@ import ProgressBar from './ProgressBar.vue';
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
-	progressBarFillPercentage: number;
 	thankYouContent: ThankYouContent;
 }
 

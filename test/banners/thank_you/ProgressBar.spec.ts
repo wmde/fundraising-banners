@@ -7,7 +7,6 @@ describe( 'ProgressBar.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( ProgressBar, {
 			props: {
-				fillPercentage: 42,
 				thankYouContent
 			},
 		} );
@@ -16,6 +15,6 @@ describe( 'ProgressBar.vue', () => {
 	it( 'Sets the fill', () => {
 		const wrapper = getWrapper();
 
-		expect( wrapper.attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 42%;' );
+		expect( wrapper.attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 100%;' );
 	} );
 } );

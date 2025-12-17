@@ -1,4 +1,9 @@
+.wmde-b-checkmark-list li {
+	display: flex;
+}
+
 .wmde-b-checkmark-list svg {
+	margin-block-start: 0.2lh;
 	margin-inline-end: var( --space-3xs );
 }
 

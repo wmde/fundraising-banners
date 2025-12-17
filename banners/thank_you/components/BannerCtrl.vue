@@ -1,8 +1,6 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			:progress-bar-fill-percentage="settings.progressBarPercentage"
-			:show-success-content="showSuccessContent"
 			:thank-you-content="thankYouContent"
 			@close="close"
 			@readMore="showModal"
@@ -10,11 +8,11 @@
 
 		<BannerModal
 			:visible="contentState === ContentStates.Full"
-			:number-of-people="settings.numberOfMembers"
 			:thank-you-content="thankYouContent"
 			@close="hideModal"
 			@membership-with-amount="membershipWithAmount"
 			@membership-without-amount="membershipWithoutAmount"
+			@dialogue-opened="dialogueOpened"
 		>
 			<template #subscribe>
 				<a :href="subscribeURL" @click.prevent="subscribe"><small>{{ thankYouContent[ 'more-info' ] }}</small></a>
@@ -27,7 +25,6 @@
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import { ThankYouSettings } from '../settings';
 import { Tracker } from '@src/tracking/Tracker';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
@@ -37,6 +34,7 @@ import MiniBanner from '../components/MiniBanner.vue';
 import BannerModal from './BannerModal.vue';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
 import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import { ThankYouSectionExpandedEvent } from '@src/tracking/events/ThankYouSectionExpandedEvent';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
@@ -44,7 +42,6 @@ enum ContentStates {
 }
 
 interface Props {
-	settings: ThankYouSettings;
 	thankYouContent: ThankYouContent;
 	subscribeURL: string;
 	useOfFundsURL: string;
@@ -57,7 +54,6 @@ const emit = defineEmits( [ 'bannerClosed', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const showSuccessContent = props.settings.progressBarPercentage === 100;
 
 const close = (): void => {
 	emit( 'bannerClosed', new CloseEvent( 'MainBanner', CloseChoices.Close ) );
@@ -78,6 +74,10 @@ const hideModal = (): void => {
 const submit = ( url: string, userChoice: string ): void => {
 	tracker.trackEvent( new BannerSubmitEvent( 'ThankYouBanner', userChoice ) );
 	window.location.href = url;
+};
+
+const dialogueOpened = ( dialogueName: string ): void => {
+	tracker.trackEvent( new ThankYouSectionExpandedEvent( dialogueName ) );
 };
 
 const membershipWithAmount = (): void => {

@@ -42,4 +42,13 @@ describe( 'BannerDisclosure.vue', () => {
 
 		expect( wrapper.find<HTMLDetailsElement>( 'details' ).element.open ).toBeFalsy();
 	} );
+
+	it( 'emits when toggled', async () => {
+		const wrapper = getWrapper();
+
+		await wrapper.find( 'summary' ).trigger( 'toggle' );
+		await wrapper.find( 'summary' ).trigger( 'toggle' );
+
+		expect( wrapper.emitted( 'dialogueToggled' ).length ).toStrictEqual( 2 );
+	} );
 } );

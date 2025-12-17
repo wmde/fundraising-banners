@@ -1,5 +1,5 @@
 <template>
-	<dialog class="wmde-b-modal" ref="modal" closedby="any">
+	<dialog class="wmde-b-modal" ref="modal" closedby="any" @cancel="$emit( 'close' )">
 		<div class="wmde-c-wrapper" tabindex="-1" aria-labelledby="wmde-banner-model-blurb" ref="focusable">
 			<CloseButton
 				class="wmde-u-sticky"
@@ -35,7 +35,7 @@
 							<GlobeIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<BannerDisclosure id="wmde-banner-knowledge" :thank-you-content="thankYouContent">
+							<BannerDisclosure id="wmde-banner-knowledge" :thank-you-content="thankYouContent" @dialogue-toggled="( isOpen: boolean ) => dialogueToggled( 'knowledge', isOpen )">
 								<template #header>
 									<h2>{{ thankYouContent[ 'knowledge-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'knowledge-subtitle' ] }}</p>
@@ -59,7 +59,7 @@
 							<MembersIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<BannerDisclosure id="wmde-banner-help" :thank-you-content="thankYouContent">
+							<BannerDisclosure id="wmde-banner-help" :thank-you-content="thankYouContent" @dialogue-toggled="( isOpen: boolean ) => dialogueToggled( 'help', isOpen )">
 								<template #header>
 									<h2>{{ thankYouContent[ 'help-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'help-subtitle' ] }}</p>
@@ -103,10 +103,10 @@
 					</div>
 				</div>
 				<footer class="wmde-c-repel">
-					<p><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em> <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
 					<p class="wmde-c-cluster">
 						<slot name="subscribe"/>
 					</p>
+					<p><a href="https://commons.wikimedia.org/wiki/File:Franziska_Heine_Portrait_2025.jpg"><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em></a> <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
 				</footer>
 			</div>
 		</div>
@@ -134,10 +134,16 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-defineEmits( [ 'close', 'membershipWithAmount', 'membershipWithoutAmount' ] );
+const emit = defineEmits( [ 'close', 'membershipWithAmount', 'membershipWithoutAmount', 'dialogueOpened' ] );
 
 const modal = ref<HTMLDialogElement>();
 const focusable = ref<HTMLDialogElement>();
+
+const dialogueToggled = ( dialogueName: string, isOpen: boolean ): void => {
+	if ( isOpen ) {
+		emit( 'dialogueOpened', dialogueName );
+	}
+};
 
 watch( () => props.visible, ( newVisible: boolean ) => {
 	if ( newVisible ) {

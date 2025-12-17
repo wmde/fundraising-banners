@@ -18,7 +18,8 @@ Can be any acceptable flexbox alignment value.
 .wmde-c-cluster {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var( --gutter, var( --space-m ) );
+	column-gap: var( --gutter, var( --space-m ) );
+	row-gap: var( --space-3xs );
 	justify-content: var( --cluster-horizontal-alignment, flex-start );
 	align-items: var( --cluster-vertical-alignment, center );
 }

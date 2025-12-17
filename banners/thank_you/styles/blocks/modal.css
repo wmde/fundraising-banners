@@ -36,7 +36,6 @@
 
 .wmde-b-modal::backdrop {
 	background: var( --modal-backdrop );
-	opacity: 0.9;
 }
 
 .wmde-b-modal footer {
