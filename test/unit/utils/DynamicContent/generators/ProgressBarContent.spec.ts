@@ -31,6 +31,20 @@ describe( 'ProgressBarContent', function () {
 		expect( progressBarContent.amountDonated ).toBe( '€3.0M' );
 	} );
 
+	it( 'should return formatted amount donated below upper display amount cap', function () {
+		const farProgressedProgressBarContent = new ProgressBarContent(
+			9_000_000,
+			100,
+			9_000_000,
+			0,
+			new Translator( {} ),
+			new CurrencyEn(),
+			true,
+			'alarm!'
+		);
+		expect( farProgressedProgressBarContent.amountDonated ).toBe( '€8.9M' );
+	} );
+
 	it( 'should return amount needed sentence', function () {
 		expect( progressBarContent.amountNeeded ).toBe( 'amount-missing' );
 	} );

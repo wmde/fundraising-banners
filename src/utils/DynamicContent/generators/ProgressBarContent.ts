@@ -48,6 +48,10 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 	}
 
 	public get amountDonated(): string {
+		const upperDisplayLimitDeltaInEuro = 100_000;
+		if ( this._remainingDonationSum < upperDisplayLimitDeltaInEuro ) {
+			return this._currencyFormatter.millions( this._donationSum - upperDisplayLimitDeltaInEuro );
+		}
 		return this._currencyFormatter.millions( this._donationSum );
 	}
 
