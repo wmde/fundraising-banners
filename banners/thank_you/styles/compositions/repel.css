@@ -15,7 +15,8 @@ Can be any acceptable flexbox alignment value.
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: var( --repel-vertical-alignment, center );
-	gap: var( --gutter, var( --space-m ) );
+	column-gap: var( --gutter, var( --space-m ) );
+	row-gap: var( --space-3xs );
 }
 
 .wmde-c-repel[ data-nowrap ] {

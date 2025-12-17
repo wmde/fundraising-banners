@@ -10,6 +10,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
 import thankYouContent from '@test/fixtures/ThankYouContent';
+import { ThankYouSectionExpandedEvent } from '@src/tracking/events/ThankYouSectionExpandedEvent';
+import BannerDisclosure from '@banners/thank_you/components/BannerDisclosure.vue';
 
 describe( 'BannerCtrl.vue', () => {
 	let tracker: Tracker;
@@ -24,15 +26,10 @@ describe( 'BannerCtrl.vue', () => {
 		HTMLDialogElement.prototype.close = closeCallback;
 	} );
 
-	const getWrapper = ( progressBarPercentage: number = 80 ): VueWrapper<any> => {
+	const getWrapper = (): VueWrapper<any> => {
 		return mount( BannerCtrl, {
 			props: {
 				bannerState: BannerStates.Pending,
-				settings: {
-					numberOfDonors: '42',
-					numberOfMembers: '23',
-					progressBarPercentage
-				},
 				thankYouContent,
 				subscribeURL: 'SUBSCRIBE URL',
 				useOfFundsURL: 'USE OF FUNDS',
@@ -92,12 +89,6 @@ describe( 'BannerCtrl.vue', () => {
 		expect( wrapper.emitted( 'modalClosed' ).length ).toStrictEqual( 1 );
 	} );
 
-	it( 'sets progress bar fill percentage', () => {
-		const wrapper = getWrapper();
-
-		expect( wrapper.find( '.wmde-b-progress' ).attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 80%;' );
-	} );
-
 	it( 'redirects when membership buttons are clicked', async () => {
 		const location = { href: '' };
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
@@ -133,7 +124,7 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		const subscribeLink = wrapper.find( 'footer p:last-child a:first-child' );
+		const subscribeLink = wrapper.find( 'footer p:first-child a:first-child' );
 		await subscribeLink.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'SUBSCRIBE URL' );
@@ -146,11 +137,25 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		const useOfFundsLink = wrapper.find( 'footer p:last-child a:last-child' );
+		const useOfFundsLink = wrapper.find( 'footer p:first-child a:last-child' );
 		await useOfFundsLink.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'USE OF FUNDS' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'use-of-funds' ) );
+	} );
+
+	it( 'tracks when dialogues are opened', async () => {
+		const wrapper = getWrapper();
+
+		const disclosures = wrapper.findAllComponents( BannerDisclosure );
+		disclosures[ 0 ].vm.$emit( 'dialogueToggled', true );
+		disclosures[ 0 ].vm.$emit( 'dialogueToggled', false );
+		disclosures[ 1 ].vm.$emit( 'dialogueToggled', true );
+		disclosures[ 1 ].vm.$emit( 'dialogueToggled', false );
+
+		expect( tracker.trackEvent ).toBeCalledTimes( 2 );
+		expect( tracker.trackEvent ).toBeCalledWith( new ThankYouSectionExpandedEvent( 'knowledge' ) );
+		expect( tracker.trackEvent ).toBeCalledWith( new ThankYouSectionExpandedEvent( 'help' ) );
 	} );
 } );

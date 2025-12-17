@@ -18,12 +18,6 @@ describe( 'MiniBanner.vue', () => {
 		} );
 	};
 
-	it( 'Sets the progress bar width', async () => {
-		const wrapper = getWrapper();
-
-		expect( wrapper.find( '.wmde-b-progress' ).attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 42%;' );
-	} );
-
 	it( 'Emits events', async () => {
 		const wrapper = getWrapper();
 

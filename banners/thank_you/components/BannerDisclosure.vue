@@ -38,11 +38,13 @@ interface Props {
 }
 
 defineProps<Props>();
+const emit = defineEmits( [ 'dialogueToggled' ] );
 const dialogue = ref<HTMLDialogElement>();
 const dialogueIsOpen = ref<boolean>( false );
 
 const onDialogueToggle = (): void => {
 	dialogueIsOpen.value = dialogue.value.open;
+	emit( 'dialogueToggled', dialogue.value.open );
 };
 
 </script>

@@ -2,20 +2,15 @@ import { createVueApp } from '@src/createVueApp';
 
 import './styles/main.css';
 
-import { Translator } from '@src/Translator';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
-import BannerCtrl from './components/BannerCtrl.vue';
-import messages from './messages.de';
-import TranslationPlugin from '@src/TranslationPlugin';
+import Banner from './components/BannerCtrl.vue';
 import { createTrackedURL, MEMBERSHIP_FORM_URL, SUBSCRIBE_URL, USE_OF_FUNDS_URL } from './createTrackedURL';
 import PageWPDE from '@src/page/PageWPDE';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from './event_map.wpde';
-import { createThankYouSettings } from './settings';
-import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { WindowTimer } from '@src/utils/Timer';
 
@@ -26,7 +21,6 @@ const tracking = {
 	keyword: '!insert-keyword-here!'
 };
 
-const translator = new Translator( messages );
 const page = new PageWPDE( tracking );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
@@ -40,23 +34,26 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
-		settings: createThankYouSettings( new IntegerDe(), page.getThankYouCampaignParameters() ),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
 			locale: Locales.DE,
 			interval: '1',
 			fee: '500',
-			type: 'sustaining'
+			type: 'sustaining',
+			mf: '0'
 		} ),
-		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, { locale: Locales.DE, type: 'sustaining' } )
+		membershipWithoutAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {
+			locale: Locales.DE,
+			type: 'sustaining',
+			mf: '0'
+		} )
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: BannerCtrl,
+	banner: Banner,
 	impressionCount
 } );
 
-app.use( TranslationPlugin, translator );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 
