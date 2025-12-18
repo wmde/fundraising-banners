@@ -13,6 +13,7 @@ import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import eventMap from './event_map.wpde';
 import { Locales } from '@src/domain/Locales';
 import { WindowTimer } from '@src/utils/Timer';
+import { ThankYouContentFactoryWpDe } from '@src/utils/ThankYou/Factories/ThankYouContentFactoryWpDe';
 
 // Tracking placeholders will be replaced by webpack string-replace-loader
 // using the campaign configuration ( campaign_info.toml ) for the correct values
@@ -25,6 +26,7 @@ const page = new PageWPDE( tracking );
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new TrackerWPDE( 'FundraisingTracker', page.getTracking().keyword, eventMap, runtimeEnvironment );
+const thankYouContentFactory = new ThankYouContentFactoryWpDe();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -34,6 +36,7 @@ const app = createVueApp( BannerConductor, {
 	},
 	bannerCategory: 'fundraisingThankyou',
 	bannerProps: {
+		thankYouContent: thankYouContentFactory.getThankYouContentLoader().getContent(),
 		subscribeURL: createTrackedURL( SUBSCRIBE_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		useOfFundsURL: createTrackedURL( USE_OF_FUNDS_URL, page.getTracking(), impressionCount, { locale: Locales.DE } ),
 		membershipWithAmountURL: createTrackedURL( MEMBERSHIP_FORM_URL, page.getTracking(), impressionCount, {

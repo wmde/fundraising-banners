@@ -22,7 +22,7 @@
 
 .wmde-b-mini-content > :first-child {
 	font-size: var( --type-step-5 );
-	flex-basis: 6ch;
+	flex-basis: 7ch;
 	flex-grow: 1;
 }
 

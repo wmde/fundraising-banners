@@ -92,8 +92,8 @@
 							</BannerDisclosure>
 
 							<div class="wmde-b-cta wmde-c-flow">
-								<div><button class="wmde-b-button" fill-width @click="$emit( 'membershipWithAmount' )">{{ thankYouContent[ 'cta-donate-5' ] }}</button></div>
-								<div><button class="wmde-b-button" data-secondary fill-width @click="$emit( 'membershipWithoutAmount' )">{{ thankYouContent[ 'cta-donate-other' ] }}</button></div>
+								<div><a class="wmde-b-button" :href="membershipWithAmountUrl" fill-width @click.prevent="$emit( 'membershipWithAmount' )">{{ thankYouContent[ 'cta-donate-5' ] }}</a></div>
+								<div><a class="wmde-b-button" :href="membershipWithoutAmountUrl" data-secondary fill-width @click.prevent="$emit( 'membershipWithoutAmount' )">{{ thankYouContent[ 'cta-donate-other' ] }}</a></div>
 							</div>
 
 							<ul class="wmde-b-checkmark-list">
@@ -131,6 +131,8 @@ import BirthdayIcon from './Icons/BirthdayIcon.vue';
 interface Props {
 	visible: boolean;
 	thankYouContent: ThankYouContent;
+	membershipWithAmountUrl: string;
+	membershipWithoutAmountUrl: string;
 }
 
 const props = defineProps<Props>();
