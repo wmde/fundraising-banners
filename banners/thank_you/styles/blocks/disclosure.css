@@ -1,4 +1,5 @@
 .wmde-b-disclosure summary {
+	--flow-space: var( --space-2xs );
 	--repel-vertical-alignment: flex-start;
 }
 
@@ -18,6 +19,6 @@
 }
 
 .wmde-b-disclosure__read-more svg {
-	width: 1ch;
+	width: 1.5ch;
 	margin-block-start: 3px;
 }

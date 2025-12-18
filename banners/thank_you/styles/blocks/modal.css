@@ -18,16 +18,23 @@
 	--close-margin: var( --space-3xs );
 
 	border: 0;
-	padding-inline: 0;
+	padding: 0;
 	margin: 0;
 	background: transparent;
 	inset: 0;
 }
 
+.wmde-b-modal > div {
+	padding-block: var( --space-s );
+}
+
 .wmde-b-modal[ open ] {
 	width: 100vw;
-	max-width: 100vw;
+	/* stylelint-disable */
 	height: 100vh;
+	height: -webkit-fill-available;
+	/* stylelint-enable */
+	max-width: 100vw;
 	max-height: 100vh;
 	display: flex;
 	align-items: safe center;

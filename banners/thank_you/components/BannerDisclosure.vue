@@ -1,10 +1,9 @@
 <template>
 	<details class="wmde-b-disclosure wmde-c-flow wmde-b-prose" :id="id" ref="dialogue" @toggle="onDialogueToggle">
 		<summary class="wmde-c-repel" data-nowrap>
-			<hgroup>
+			<hgroup class="wmde-c-flow">
 				<slot name="header"/>
 			</hgroup>
-			<ChevronDownIcon/>
 		</summary>
 		<hr>
 		<slot name="content"/>

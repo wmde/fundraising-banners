@@ -14,13 +14,15 @@
 							<HeartIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow wmde-b-prose" id="wmde-banner-model-blurb">
-							<div>
+							<div class="wmde-c-flow wmde-b-prose__title">
 								<h2>{{ thankYouContent[ 'main-message-title' ] }}</h2>
 								<p>{{ thankYouContent[ 'main-message-content' ] }}</p>
 							</div>
 
-							<div class="wmde-b-profile wmde-c-cluster">
-								<img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Franziska_Heine.png" alt="Franziska Heine">
+							<div class="wmde-b-profile wmde-c-sidebar">
+								<div>
+									<img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Franziska_Heine.png" alt="Franziska Heine">
+								</div>
 								<div>
 									<h3>{{ thankYouContent[ 'main-message-name' ] }}</h3>
 									<p>{{ thankYouContent[ 'main-message-position' ] }}</p>
@@ -35,7 +37,7 @@
 							<GlobeIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<BannerDisclosure id="wmde-banner-knowledge" :thank-you-content="thankYouContent" @dialogue-toggled="( isOpen: boolean ) => dialogueToggled( 'knowledge', isOpen )">
+							<BannerDisclosure id="wmde-banner-knowledge" :thank-you-content="thankYouContent" @dialogue-toggled="toggleKnowledge">
 								<template #header>
 									<h2>{{ thankYouContent[ 'knowledge-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'knowledge-subtitle' ] }}</p>
@@ -59,7 +61,7 @@
 							<MembersIcon/>
 						</div>
 						<div class="wmde-b-icon-text__text wmde-c-flow">
-							<BannerDisclosure id="wmde-banner-help" :thank-you-content="thankYouContent" @dialogue-toggled="( isOpen: boolean ) => dialogueToggled( 'help', isOpen )">
+							<BannerDisclosure id="wmde-banner-help" :thank-you-content="thankYouContent" @dialogue-toggled="toggleHelp">
 								<template #header>
 									<h2>{{ thankYouContent[ 'help-title' ] }}</h2>
 									<p>{{ thankYouContent[ 'help-subtitle' ] }}</p>
@@ -146,6 +148,9 @@ const dialogueToggled = ( dialogueName: string, isOpen: boolean ): void => {
 		emit( 'dialogueOpened', dialogueName );
 	}
 };
+
+const toggleKnowledge = ( isOpen: boolean ): void => dialogueToggled( 'knowledge', isOpen );
+const toggleHelp = ( isOpen: boolean ): void => dialogueToggled( 'help', isOpen );
 
 watch( () => props.visible, ( newVisible: boolean ) => {
 	if ( newVisible ) {
