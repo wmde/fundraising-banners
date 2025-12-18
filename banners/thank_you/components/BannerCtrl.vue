@@ -9,6 +9,8 @@
 		<BannerModal
 			:visible="contentState === ContentStates.Full"
 			:thank-you-content="thankYouContent"
+			:membership-with-amount-url="membershipWithAmountURL"
+			:membership-without-amount-url="membershipWithoutAmountURL"
 			@close="hideModal"
 			@membership-with-amount="membershipWithAmount"
 			@membership-without-amount="membershipWithoutAmount"

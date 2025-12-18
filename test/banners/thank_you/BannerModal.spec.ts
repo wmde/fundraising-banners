@@ -19,7 +19,9 @@ describe( 'BannerModal.vue', () => {
 		return mount( BannerModal, {
 			props: {
 				visible: false,
-				thankYouContent
+				thankYouContent,
+				membershipWithAmountUrl: 'MEMBERSHIP_WITH_AMOUNT_URL',
+				membershipWithoutAmountUrl: 'MEMBERSHIP_WITHOUT_AMOUNT_URL'
 			}
 		} );
 	};
@@ -57,9 +59,9 @@ describe( 'BannerModal.vue', () => {
 		disclosures[ 1 ].vm.$emit( 'dialogueToggled', false );
 
 		await wrapper.find( '.wmde-b-close-button button' ).trigger( 'click' );
-		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child a' );
 		await ctaFiveEuroAmount.trigger( 'click' );
-		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child a' );
 		await ctaOtherAmount.trigger( 'click' );
 
 		expect( wrapper.emitted( 'dialogueOpened' ).length ).toStrictEqual( 2 );
