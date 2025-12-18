@@ -1,9 +1,9 @@
 import { ThankYouContentFactory } from '@src/utils/ThankYou/Factories/ThankYouContentFactory';
 import { ThankYouContentLoader } from '@src/utils/ThankYou/Loaders/ThankYouContentLoader';
-import { HTMLThankYouContentLoader } from '@src/utils/ThankYou/Loaders/HTMLThankYouContentLoader';
+import { DeJSONThankYouContentLoader } from '@src/utils/ThankYou/Loaders/DeJSONThankYouContentLoader';
 
 export class ThankYouContentFactoryWpDe implements ThankYouContentFactory {
 	public getThankYouContentLoader(): ThankYouContentLoader {
-		return new HTMLThankYouContentLoader();
+		return new DeJSONThankYouContentLoader();
 	}
 }

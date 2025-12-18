@@ -94,12 +94,12 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
-		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child a' );
 		await ctaFiveEuroAmount.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'WITH_AMOUNT' );
 
-		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child a' );
 		await ctaOtherAmount.trigger( 'click' );
 
 		expect( location.href ).toStrictEqual( 'WITHOUT_AMOUNT' );
@@ -109,9 +109,9 @@ describe( 'BannerCtrl.vue', () => {
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: { href: '' } } );
 		const wrapper = getWrapper();
 
-		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child button' );
+		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child a' );
 		await ctaFiveEuroAmount.trigger( 'click' );
-		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child button' );
+		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child a' );
 		await ctaOtherAmount.trigger( 'click' );
 
 		expect( tracker.trackEvent ).toBeCalledTimes( 2 );

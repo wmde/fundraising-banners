@@ -2,6 +2,6 @@
 	margin-block-start: var( --space-l );
 }
 
-.wmde-b-cta button {
+.wmde-b-cta a {
 	max-width: 26rem;
 }
