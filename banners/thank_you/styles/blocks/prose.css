@@ -1,4 +1,8 @@
+.wmde-b-prose__title {
+	--flow-space: var( --space-2xs );
+}
+
 .wmde-b-prose p {
 	max-width: 60ch;
-	text-wrap: pretty;
+	text-wrap: balance;
 }

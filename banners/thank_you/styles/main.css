@@ -12,6 +12,7 @@
 @import "compositions/flow.css";
 @import "compositions/grid.css";
 @import "compositions/repel.css";
+@import "compositions/sidebar.css";
 @import "compositions/wrapper.css";
 
 @import "blocks/animated-letters.css";

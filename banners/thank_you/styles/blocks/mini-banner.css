@@ -22,8 +22,9 @@
 
 .wmde-b-mini-content > :first-child {
 	font-size: var( --type-step-5 );
-	flex-basis: 7ch;
+	flex-basis: 6ch;
 	flex-grow: 1;
+	text-wrap: nowrap;
 }
 
 .wmde-b-mini-content > :last-child {
@@ -56,12 +57,10 @@
 @media ( max-width: 500px ) {
 	.wmde-b-mini-content {
 		display: block;
-	}
-	.wmde-b-mini-content > :first-child {
-		font-size: var( --type-step-1 );
+		margin-top: -1.5lh;
 	}
 	.wmde-b-mini-content > :last-child {
-		font-size: var( --type-step-00 );
-		margin-block-start: var( --gutter );
+		font-size: var( --type-step-0 );
+		margin-block-start: var( --space-3xs );
 	}
 }
