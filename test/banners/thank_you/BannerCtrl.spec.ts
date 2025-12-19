@@ -90,23 +90,28 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	it( 'redirects when membership buttons are clicked', async () => {
-		const location = { href: '' };
-		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
+		let location: string|URL = '';
+		window.open = ( url ) => {
+			location = url;
+			return this;
+		};
 		const wrapper = getWrapper();
 
 		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child a' );
 		await ctaFiveEuroAmount.trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'WITH_AMOUNT' );
+		expect( location ).toStrictEqual( 'WITH_AMOUNT' );
 
 		const ctaOtherAmount = wrapper.find( '.wmde-b-cta > div:last-child a' );
 		await ctaOtherAmount.trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'WITHOUT_AMOUNT' );
+		expect( location ).toStrictEqual( 'WITHOUT_AMOUNT' );
 	} );
 
 	it( 'tracks when membership buttons are clicked', async () => {
-		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: { href: '' } } );
+		window.open = () => {
+			return this;
+		};
 		const wrapper = getWrapper();
 
 		const ctaFiveEuroAmount = wrapper.find( '.wmde-b-cta > div:first-child a' );
@@ -120,27 +125,34 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	it( 'tracks and redirects when subscribe link is clicked', async () => {
-		const location = { href: '' };
-		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
+		let location: string|URL = '';
+		window.open = ( url ) => {
+			location = url;
+			return this;
+		};
 		const wrapper = getWrapper();
 
 		const subscribeLink = wrapper.find( 'footer p:first-child a:first-child' );
 		await subscribeLink.trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'SUBSCRIBE URL' );
+		expect( location ).toStrictEqual( 'SUBSCRIBE URL' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'subscribe' ) );
 	} );
 
 	it( 'tracks and redirects when use of funds link is clicked', async () => {
-		const location = { href: '' };
+		let location: string|URL = '';
+		window.open = ( url ) => {
+			location = url;
+			return this;
+		};
 		Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 		const wrapper = getWrapper();
 
 		const useOfFundsLink = wrapper.find( 'footer p:first-child a:last-child' );
 		await useOfFundsLink.trigger( 'click' );
 
-		expect( location.href ).toStrictEqual( 'USE OF FUNDS' );
+		expect( location ).toStrictEqual( 'USE OF FUNDS' );
 		expect( tracker.trackEvent ).toBeCalledTimes( 1 );
 		expect( tracker.trackEvent ).toBeCalledWith( new BannerSubmitEvent( 'ThankYouBanner', 'use-of-funds' ) );
 	} );
