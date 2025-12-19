@@ -25,6 +25,8 @@
 	flex-basis: 6ch;
 	flex-grow: 1;
 	text-wrap: nowrap;
+	min-width: 19%;
+	margin-right: 10px;
 }
 
 .wmde-b-mini-content > :last-child {
