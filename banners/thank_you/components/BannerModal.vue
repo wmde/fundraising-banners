@@ -94,8 +94,25 @@
 							</BannerDisclosure>
 
 							<div class="wmde-b-cta wmde-c-flow">
-								<div><a class="wmde-b-button" :href="membershipWithAmountUrl" fill-width @click.prevent="$emit( 'membershipWithAmount' )">{{ thankYouContent[ 'cta-donate-5' ] }}</a></div>
-								<div><a class="wmde-b-button" :href="membershipWithoutAmountUrl" data-secondary fill-width @click.prevent="$emit( 'membershipWithoutAmount' )">{{ thankYouContent[ 'cta-donate-other' ] }}</a></div>
+								<div>
+									<a
+										class="wmde-b-button"
+										:href="membershipWithAmountUrl"
+										fill-width
+										@click.prevent="$emit( 'membershipWithAmount' )">
+										{{ thankYouContent[ 'cta-donate-5' ] }}
+									</a>
+								</div>
+								<div>
+									<a
+										class="wmde-b-button"
+										:href="membershipWithoutAmountUrl"
+										data-secondary
+										fill-width
+										@click.prevent="$emit( 'membershipWithoutAmount' )">
+										{{ thankYouContent[ 'cta-donate-other' ] }}
+									</a>
+								</div>
 							</div>
 
 							<ul class="wmde-b-checkmark-list">
@@ -108,7 +125,13 @@
 					<p class="wmde-c-cluster">
 						<slot name="subscribe"/>
 					</p>
-					<p><a href="https://commons.wikimedia.org/wiki/File:Franziska_Heine_Portrait_2025.jpg"><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em></a> <a href="https://creativecommons.org/licenses/by/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
+					<p>
+						<a href="https://commons.wikimedia.org/wiki/File:Franziska_Heine_Portrait_2025.jpg" target="_blank">
+							<em> <small> {{ thankYouContent[ 'photo-credit' ] }}</small></em>
+						</a> <a href="https://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">
+							<em> <small> {{ thankYouContent[ 'photo-license' ] }}</small></em>
+						</a>
+					</p>
 				</footer>
 			</div>
 		</div>

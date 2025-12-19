@@ -17,8 +17,18 @@
 			@dialogue-opened="dialogueOpened"
 		>
 			<template #subscribe>
-				<a :href="subscribeURL" @click.prevent="subscribe"><small>{{ thankYouContent[ 'more-info' ] }}</small></a>
-				<a :href="useOfFundsURL" @click.prevent="useOfFunds"><small>{{ thankYouContent[ 'use-of-funds' ] }}</small></a>
+				<a
+					:href="subscribeURL"
+					@click.prevent="subscribe"
+					target="_blank">
+					<small>{{ thankYouContent[ 'more-info' ] }}</small>
+				</a>
+				<a
+					:href="useOfFundsURL"
+					@click.prevent="useOfFunds"
+					target="_blank">
+					<small>{{ thankYouContent[ 'use-of-funds' ] }}</small>
+				</a>
 			</template>
 		</BannerModal>
 	</div>
@@ -75,7 +85,7 @@ const hideModal = (): void => {
 
 const submit = ( url: string, userChoice: string ): void => {
 	tracker.trackEvent( new BannerSubmitEvent( 'ThankYouBanner', userChoice ) );
-	window.location.href = url;
+	window.open( url, '_blank' );
 };
 
 const dialogueOpened = ( dialogueName: string ): void => {
