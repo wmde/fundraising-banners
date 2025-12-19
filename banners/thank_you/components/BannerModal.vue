@@ -108,7 +108,7 @@
 					<p class="wmde-c-cluster">
 						<slot name="subscribe"/>
 					</p>
-					<p><a href="https://commons.wikimedia.org/wiki/File:Franziska_Heine_Portrait_2025.jpg"><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em></a> <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
+					<p><a href="https://commons.wikimedia.org/wiki/File:Franziska_Heine_Portrait_2025.jpg"><em><small>{{ thankYouContent[ 'photo-credit' ] }}</small></em></a> <a href="https://creativecommons.org/licenses/by/4.0/legalcode" target="_blank"><em><small>{{ thankYouContent[ 'photo-license' ] }}</small></em></a></p>
 				</footer>
 			</div>
 		</div>
