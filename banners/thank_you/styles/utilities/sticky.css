@@ -1,0 +1,5 @@
+.wmde-u-sticky {
+	position: sticky;
+	top: var( --space-s );
+	z-index: 1;
+}

@@ -1,0 +1,24 @@
+.wmde-b-disclosure summary {
+	--flow-space: var( --space-2xs );
+	--repel-vertical-alignment: flex-start;
+}
+
+.wmde-b-disclosure summary::marker,
+.wmde-b-disclosure summary::-webkit-details-marker {
+	display: none;
+}
+
+.wmde-b-disclosure[ open ] summary svg {
+	transform: scaleY( -1 );
+}
+
+.wmde-b-disclosure__read-more {
+	display: flex;
+	align-items: center;
+	gap: var( --space-2xs );
+}
+
+.wmde-b-disclosure__read-more svg {
+	width: 1.5ch;
+	margin-block-start: 3px;
+}

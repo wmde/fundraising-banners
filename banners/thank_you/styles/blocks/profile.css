@@ -1,0 +1,29 @@
+.wmde-b-profile {
+	--sidebar-target-width: 8rem;
+	--sidebar-content-min-width: 65%;
+
+	--profile-name-color: var( --colour-blue-green-500 );
+}
+
+.wmde-b-profile img {
+	max-width: 8rem;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: #dddddd;
+}
+
+.wmde-b-profile > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.wmde-b-profile h3 {
+	color: var( --profile-name-color );
+	font-weight: var( --font-semi-bold );
+}
+
+.wmde-b-profile p {
+	max-width: 30ch;
+	text-wrap: balance;
+}

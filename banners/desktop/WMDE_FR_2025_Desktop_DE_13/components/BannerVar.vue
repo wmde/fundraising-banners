@@ -115,7 +115,7 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { inject, ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import MainBanner from './MainBanner_var.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerText from '../content/BannerText.vue';

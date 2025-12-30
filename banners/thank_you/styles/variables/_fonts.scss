@@ -1,9 +1,0 @@
-/* These font stacks come from: https://github.com/system-fonts/modern-font-stacks */
-$-antique: 'Georgia Pro', georgia, superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', serif;
-$-neo-grotesque: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
-
-/* This is only used for the thank you text */
-$header: $-antique !default;
-
-/* This is all other content */
-$content: $-neo-grotesque !default;
