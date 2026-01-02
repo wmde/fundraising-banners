@@ -13,6 +13,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
@@ -42,6 +43,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
+preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode&minervanightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
@@ -70,6 +72,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
 
@@ -148,6 +151,7 @@ preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_proto
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
 
@@ -177,6 +181,7 @@ preview_link = "/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B25_
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B25_WMDE_local_prototype&minervanightmode=1"
 preview_link_offline = ""
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva'
+preview_url_darkmode = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva&minervanightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
 
@@ -206,6 +211,7 @@ preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_proto
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B25_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
 
