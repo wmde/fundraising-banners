@@ -14,8 +14,6 @@ updates:
 
     schedule:
       interval: "weekly"
-    # Turn off dependabot for HK25
-    open-pull-requests-limit: 0
     groups:
       minor-version-updates:
         update-types:
@@ -31,8 +29,6 @@ updates:
     schedule:
       interval: "monthly"
       day: "tuesday"
-    # Turn off dependabot for HK25
-    open-pull-requests-limit: 0
     groups:
       patch-updates:
         update-types:
