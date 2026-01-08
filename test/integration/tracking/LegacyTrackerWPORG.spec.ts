@@ -2,7 +2,7 @@ import { describe, expect, it, vi, test } from 'vitest';
 import { LegacyTrackerWPORG, TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
 import { MediaWikiStub } from '@test/fixtures/MediaWikiStub';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
-import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
+import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 
 describe( 'LegacyTrackerWPORG', function () {
 
@@ -12,13 +12,13 @@ describe( 'LegacyTrackerWPORG', function () {
 		const runtimeEnvironmentStub = { isInDevMode: false, runsInDevEnvironment: false };
 		const legacyWMDEBannerEvent = new WMDELegacyBannerEvent( 'eventName', 1 );
 		const trackingEventConverterFactory = vi.fn( () => legacyWMDEBannerEvent );
-		const clickAlreadyDonatedEvent = new ClickAlreadyDonatedEvent();
-		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverterFactory ] ] );
+		const fallbackBannerSubmitEvent = new FallbackBannerSubmitEvent();
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ FallbackBannerSubmitEvent.EVENT_NAME, trackingEventConverterFactory ] ] );
 		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap, runtimeEnvironmentStub );
 
-		tracker.trackEvent( clickAlreadyDonatedEvent );
+		tracker.trackEvent( fallbackBannerSubmitEvent );
 
-		expect( trackingEventConverterFactory ).toBeCalledWith( clickAlreadyDonatedEvent );
+		expect( trackingEventConverterFactory ).toBeCalledWith( FallbackBannerSubmitEvent );
 		expect( mediaWikiStub.track ).toBeCalledWith(
 			'event.WMDEBannerEvents',
 			{
@@ -38,7 +38,7 @@ describe( 'LegacyTrackerWPORG', function () {
 		const emptyEventMap = new Map<string, TrackingEventConverterFactory>();
 		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', emptyEventMap, runtimeEnvironmentStub );
 
-		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+		tracker.trackEvent( new FallbackBannerSubmitEvent() );
 
 		expect( mediaWikiStub.track ).not.toHaveBeenCalled();
 	} );
@@ -56,10 +56,10 @@ describe( 'LegacyTrackerWPORG', function () {
 		mediaWikiStub.track = vi.fn();
 		const runtimeEnvironmentStub = { isInDevMode: false, runsInDevEnvironment: false };
 		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', trackingRate ) );
-		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ FallbackBannerSubmitEvent.EVENT_NAME, trackingEventConverter ] ] );
 		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'somebannername', eventNameMap, runtimeEnvironmentStub );
 
-		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+		tracker.trackEvent( new FallbackBannerSubmitEvent() );
 
 		expect( mediaWikiStub.track ).toHaveBeenCalledTimes( wasTracked ? 1 : 0 );
 
@@ -71,10 +71,10 @@ describe( 'LegacyTrackerWPORG', function () {
 		mediaWikiStub.track = vi.fn();
 		const runtimeEnvironmentStub = { isInDevMode: true, runsInDevEnvironment: true };
 		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', 0.1 ) );
-		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ FallbackBannerSubmitEvent.EVENT_NAME, trackingEventConverter ] ] );
 		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'someotherweirdbannername05', eventNameMap, runtimeEnvironmentStub );
 
-		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+		tracker.trackEvent( new FallbackBannerSubmitEvent() );
 
 		expect( mediaWikiStub.track ).toHaveBeenCalled();
 	} );
@@ -84,10 +84,10 @@ describe( 'LegacyTrackerWPORG', function () {
 		mediaWikiStub.track = vi.fn();
 		const runtimeEnvironmentStub = { isInDevMode: true, runsInDevEnvironment: true };
 		const trackingEventConverter = vi.fn( () => new WMDELegacyBannerEvent( 'test', 0 ) );
-		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ ClickAlreadyDonatedEvent.EVENT_NAME, trackingEventConverter ] ] );
+		const eventNameMap = new Map<string, TrackingEventConverterFactory>( [ [ FallbackBannerSubmitEvent.EVENT_NAME, trackingEventConverter ] ] );
 		const tracker = new LegacyTrackerWPORG( mediaWikiStub, 'someotherweirdbannername05', eventNameMap, runtimeEnvironmentStub );
 
-		tracker.trackEvent( new ClickAlreadyDonatedEvent() );
+		tracker.trackEvent( new FallbackBannerSubmitEvent() );
 
 		expect( mediaWikiStub.track ).not.toHaveBeenCalled();
 	} );
