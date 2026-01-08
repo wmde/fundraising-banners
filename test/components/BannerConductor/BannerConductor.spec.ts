@@ -63,6 +63,9 @@ describe( 'BannerConductor.vue', () => {
 				bannerCategory: 'fundraising'
 			},
 			global: {
+				mocks: {
+					$translate: ( key: string ) => key
+				},
 				provide: {
 					tracker: new TrackerStub(),
 					timer: new TimerStub()

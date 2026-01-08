@@ -13,6 +13,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 
 [thank_you.banners.ctrl]
@@ -40,6 +41,7 @@ preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_proto
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 
 [thank_you_en.banners.ctrl]
@@ -67,6 +69,7 @@ preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=m
 preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&minervanightmode=1'
 wrapper_template = "wikipedia_org"
 
 [thank_you_mobile.banners.ctrl]
@@ -94,6 +97,7 @@ preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&b
 preview_link_darkmode = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
 preview_link_offline = ""
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&minervanightmode=1'
 wrapper_template = "wikipedia_org"
 
 [thank_you_mobile_en.banners.ctrl]
@@ -121,6 +125,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
+preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
 
 [thank_you_ipad.banners.ctrl]
