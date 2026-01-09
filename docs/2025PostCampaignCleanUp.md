@@ -92,7 +92,7 @@ the AlreadyDonated feature does not open a modal anymore but closes the banner d
 
 ### Files to look at:
 - `src/components/AlreadyDonatedModal/AlreadyDonatedModal.vue`
-- css styling + tracking events (close events of the buttons)
+- CSS styling + tracking events (close events of the buttons)
 
 
 ## Move translations for "transaction fee" into "MainDonationForm" messages
@@ -157,7 +157,7 @@ If `ProgressBar.vue` is no longer used, rename `ProgressBarAlternative.vue` to `
 
 ## Make all Fallback banner classes independent of non-fallback banners
 
-The fallback banner shares some class names with the other banners, leading to wrongly displayed progress bars and other issues. We should make sure that the classes of the fallback banner and the other banners are independent from each other and that the CSS of the fallback banner is self-contained.
+The fallback banner shares some class names with the other banners, leading to wrongly displayed progress bars and other issues. We should make sure that the classes of the fallback banner and the other banners are independent of each other and that the CSS of the fallback banner is self-contained.
 
 Since the fallback banner uses a progress bar, this means that we'll have to duplicate the progress bar component and its CSS for the fallback banner, to be able to give the progress bar elements different class names as well.
 

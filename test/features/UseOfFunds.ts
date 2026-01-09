@@ -6,7 +6,7 @@ import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { Tracker } from '@src/tracking/Tracker';
 
 /*
-The new 2024 use of funds component uses the html <dialog> element
+The new 2024 use of funds component uses the HTML <dialog> element
 which currently (2024) has no direct support from our testing library for visibility checking.
 JSDOM also doesn't implement the methods used to open and close native dialogues so we need to manually mock them
  */

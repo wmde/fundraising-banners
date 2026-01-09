@@ -65,7 +65,7 @@ describe( 'SoftClose', function () {
 		const wrapper = getWrapper( defaultTranslate, timer );
 		await wrapper.setProps( { showCloseIcon: true } );
 
-		wrapper.find( buttonClass ).trigger( 'click' );
+		await wrapper.find( buttonClass ).trigger( 'click' );
 
 		expect( timer.clearAllCalls ).toBe( 1 );
 	} );

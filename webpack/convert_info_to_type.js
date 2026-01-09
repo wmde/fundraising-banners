@@ -1,7 +1,7 @@
 const BannerConfigMap = {
 	pageName: 'pagename',
 	fileName: 'filename',
-	tracking: 'tracking'
+	tracking: 'tracking',
 };
 
 const CamapignConfigMap = {
@@ -14,7 +14,7 @@ const CamapignConfigMap = {
 	previewUrlDevDark: 'preview_link_darkmode',
 	previewUrlDevOffline: 'preview_link_offline',
 	previewUrlProd: 'preview_url',
-	wrapperTemplate: 'wrapper_template'
+	wrapperTemplate: 'wrapper_template',
 };
 
 function mapObjectWithNewKeys( sourceObj, keyMap ) {
@@ -46,5 +46,5 @@ function campaignInfoToCampaignConfig( campaignInfo ) {
 }
 
 module.exports = {
-	campaignInfoToCampaignConfig
+	campaignInfoToCampaignConfig,
 };

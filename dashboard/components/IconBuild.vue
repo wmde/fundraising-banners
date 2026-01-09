@@ -1,6 +1,6 @@
 <template>
 	<svg viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
+		style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-643,-72)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Build" transform="matrix(0.965517,0,0,0.965517,27,-503.034)">
@@ -11,7 +11,7 @@
 					<g clipPath="url(#_clip1)">
 						<g transform="matrix(0.732361,0.732361,-0.732361,0.732361,228.286,-442.712)">
 							<path d="M665,75L656.239,75L654,76.743L654,79L665,79L665,75Z"
-							style="fill: rgb( 136, 136, 136, 1 );"/>
+								style="fill: rgb( 136, 136, 136, 1 );"/>
 						</g>
 						<g transform="matrix(0.637363,-0.637363,0.969295,0.969295,152.969,434.281)">
 							<rect x="643" y="84" width="13" height="3" style="fill: rgb( 116, 73, 42, 1 );"/>

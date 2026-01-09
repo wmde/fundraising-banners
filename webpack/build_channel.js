@@ -40,6 +40,6 @@ console.log( statusMessage );
 webpack( config, ( err, stats ) => {
 	console.log( stats.toString( {
 		chunks: false,
-		colors: true
+		colors: true,
 	} ) );
 } );
