@@ -7,7 +7,7 @@
 				<DeviceDesktop v-else/>
 			</div>
 			<div :title="campaign.name">{{ campaign.name }}
-				<pre class="campaign-cn-link" v-if="campaign.banners.ctrl.pageName.includes('WPDE')">{{ campaign.campaign }}</pre>
+				<pre class="campaign-cn-link" v-if="campaign.banners.ctrl.pageName.includes( 'WPDE' )">{{ campaign.campaign }}</pre>
 				<a
 					v-else
 					class="campaign-cn-link"
@@ -17,7 +17,7 @@
 				>
 					{{ campaign.campaign }}
 				</a>
-				<a v-if="pullRequestUrl==='https://github.com/wmde/fundraising-banners/pulls'"
+				<a v-if="pullRequestUrl === 'https://github.com/wmde/fundraising-banners/pulls'"
 					class="pr-icon"
 					data-tooltip="Go to PR overview"
 					:href="pullRequestUrl"
@@ -52,7 +52,7 @@
 					href="#"
 					class="link-icon link-icon-large"
 					data-tooltip="Copy Shutterbug Command"
-					@click.prevent="$emit('doScreenshots', campaign.name)"
+					@click.prevent="$emit( 'doScreenshots', campaign.name )"
 				>
 					<IconCommand />
 				</a>
@@ -65,7 +65,7 @@
 						:campaign="campaign"
 						:banner="campaign.banners.ctrl"
 						:compileInfo="compileInfo"
-						:isWPDE="campaign.banners.ctrl.pageName.includes('WPDE')"
+						:isWPDE="campaign.banners.ctrl.pageName.includes( 'WPDE' )"
 					/>
 				</div>
 				<div class="campaign-banner" v-if="campaign.banners.var">
@@ -73,7 +73,7 @@
 						:campaign="campaign"
 						:banner="campaign.banners.var"
 						:compileInfo="compileInfo"
-						:isWPDE="campaign.banners.var.pageName.includes('WPDE')"
+						:isWPDE="campaign.banners.var.pageName.includes( 'WPDE' )"
 					/>
 				</div>
 			</div>

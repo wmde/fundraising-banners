@@ -31,8 +31,8 @@ function webpackBuildApiRoute( request, response ) {
 			err: null,
 			stats: {
 				// Maybe add more stats, see https://webpack.js.org/api/stats/
-				compileTime: compilationTime
-			}
+				compileTime: compilationTime,
+			},
 		} ) );
 	} );
 }

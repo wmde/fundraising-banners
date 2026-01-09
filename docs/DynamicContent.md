@@ -15,7 +15,7 @@ This content is used to generate sentences that are displayed as part of the ban
 These are for building the sentences and progress bar items. There is a single generator per dynamic text item.
 
 ### Formatters
-These are tools used by the generators for localising numbers depending on if the banners are in German or English.
+These are tools used by the generators for localizing numbers depending on if the banners are in German or English.
 
 ### Campaign Projection
 The campaign team measures the progress of the campaign and uploads the current measurements every few days. We use these measurements to project the numbers displayed in the dynamic text. The calculation starts at the last upload time up to the point in time when the user sees the banner. The CampaignProjection is responsible for doing the calculations for this projection.

@@ -178,7 +178,7 @@ style changes, different behavior)
 ## Banner themes
 
 Each component in `src/components` defines their "layout" style
-(positioning, flex, padding reset, etc) inside its `<style>` section.
+(positioning, flex, padding reset, etc.) inside its `<style>` section.
 
 You must put all other styling (colors, fonts, borders, etc.)in a theme
 file of the same name as the component.  

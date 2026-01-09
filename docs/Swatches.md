@@ -55,7 +55,7 @@ $blue700: #2a4b8d;
 --message-border: #{$red600};
 ```
 
-This means that rather than defining global colours to be used in our styles we now define css variables on a component/feature level.
+This means that rather than defining global colours to be used in our styles we now define CSS variables on a component/feature level.
 
 ### Using Swatches With Skins
 
@@ -73,7 +73,7 @@ This resulted in the swatch files being split up into colour definitions and imp
 
 The [`color_dark.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/dark.scss) and [`color_light.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/light.scss) files are the colour definitions. They contain all the variables to control all the colours in the banner. They provide these vars through a mixin.
 
-The [`skin_default.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/default.scss) and [`skin_vector-2022.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/vector-2022.scss) files are the per-skin implementations of the colours. They contain css selectors that target the light or dark mode skin and insert the variables from the colour definitions into them.
+The [`skin_default.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/default.scss) and [`skin_vector-2022.scss`](https://github.com/wmde/fundraising-banners/blob/main/src/themes/Treedip/swatches/vector-2022.scss) files are the per-skin implementations of the colours. They contain CSS selectors that target the light or dark mode skin and insert the variables from the colour definitions into them.
 
 Banners that are running on skins that don't have a dark mode toggle can include the `skin_default.scss` implementation. The variables are declared inside the `.wmde-banner` selector.
 
@@ -88,7 +88,7 @@ If/when another skin starts to implement dark mode we will need to create a new 
 
 ### Optional Variables
 
-Because all banners don't include all components/features, we define [default scss variables](https://sass-lang.com/documentation/at-rules/use/#configuration) as boolean flags in the swatch implementations that allow you to include only the variables for the features the banner uses. This helps keep the compiled css a little smaller, especially on banners that need to declare the variables 4 times.
+Because all banners don't include all components/features, we define [default scss variables](https://sass-lang.com/documentation/at-rules/use/#configuration) as boolean flags in the swatch implementations that allow you to include only the variables for the features the banner uses. This helps keep the compiled CSS a little smaller, especially on banners that need to declare the variables 4 times.
 
 Whenever you add a new component/feature, you'll have to add a section to `colors_light.scss` and `colors_dark.scss` where you define the new color names:
 
@@ -156,6 +156,6 @@ When you need to convert an existing theme to use the swatches you should follow
    1. Add a feature/component flag into the colour mixin and skin defaults.
    2. Replace the colours in the component styles with new variables that target that feature/component.
    3. Refresh the banner and make sure the feature/component still has it's colour.
-6. Go through every banner that uses the theme and update the imports and swap any color variables to the css vars in the banner stylesheets.
+6. Go through every banner that uses the theme and update the imports and swap any color variables to the CSS vars in the banner stylesheets.
 7. Once you've replaced all the colours in your theme you should rename the colour variables following the [semantic colour system](https://dev.to/ynab/a-semantic-color-system-the-theory-hk7). 
 8. Delete the old colours.scss, and check if the compiler is throwing errors due to missing imports and fix them.
