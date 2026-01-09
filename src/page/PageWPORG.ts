@@ -186,13 +186,11 @@ class PageWPORG implements Page {
 	public getThankYouCampaignParameters(): ThankYouCampaignParameters {
 		const data = this.getCampaignData();
 
-		const thankYouCampaignParameters = {
+		return {
 			numberOfDonors: Number( data.tyNumberOfDonors ),
 			numberOfMembers: Number( data.tyNumberOfMembers ),
 			progressBarPercentage: Number( data.tyProgressBarPercentage )
 		};
-
-		return thankYouCampaignParameters;
 	}
 
 	public getTracking(): TrackingParameters {

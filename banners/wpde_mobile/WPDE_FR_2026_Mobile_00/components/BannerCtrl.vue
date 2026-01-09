@@ -106,7 +106,6 @@ import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent'
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
 	FullPage = 'wmde-banner-wrapper--full-page',
-	SoftClosing = 'wmde-banner-wrapper--soft-closing'
 }
 
 enum FormStepNames {

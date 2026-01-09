@@ -3,7 +3,6 @@
 
 import type { CampaignConfig } from '../webpack/campaign_config_types';
 
-// eslint-disable-next-line no-var
 declare var CAMPAIGNS: CampaignConfig;
 
 function getTrackingForPage( pageName: string, config: CampaignConfig ): { campaign: string, keyword: string } {

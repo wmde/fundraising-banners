@@ -35,14 +35,14 @@ const optionalStyleLint = ( env ) => {
 	}
 	return [
 		new StyleLintPlugin( {
-			files: [ '**/*.{vue,css,sss,less,scss,sass}' ]
-		} )
+			files: [ '**/*.{vue,css,sss,less,scss,sass}' ],
+		} ),
 	];
 };
 
 module.exports = ( env ) => Promise.all( [
 	getBranch(),
-	readCampaignFile( env.campaign_info ?? 'campaign_info.toml' )
+	readCampaignFile( env.campaign_info ?? 'campaign_info.toml' ),
 ] ).then( ( [ currentBranch, campaignConfig ] ) => merge(
 	CommonConfig( env ),
 	{
@@ -50,19 +50,19 @@ module.exports = ( env ) => Promise.all( [
 		entry: {
 			dashboard: './dashboard/dashboard.ts',
 			// eslint-disable-next-line camelcase
-			inject_tracking: './dashboard/inject_tracking.ts'
+			inject_tracking: './dashboard/inject_tracking.ts',
 		},
 		resolve: {
 			alias: {
-				'@environment': path.resolve( __dirname, 'src/environment/dev/' )
-			}
+				'@environment': path.resolve( __dirname, 'src/environment/dev/' ),
+			},
 		},
 		plugins: [
 			new webpack.DefinePlugin( {
 				CAMPAIGNS: JSON.stringify( campaignInfoToCampaignConfig( campaignConfig ) ),
-				GIT_BRANCH: JSON.stringify( currentBranch )
+				GIT_BRANCH: JSON.stringify( currentBranch ),
 			} ),
-			...optionalStyleLint( env )
+			...optionalStyleLint( env ),
 		],
 		devServer: {
 			'port': 8084,
@@ -70,34 +70,34 @@ module.exports = ( env ) => Promise.all( [
 			'static': [
 				{
 					directory: path.resolve( __dirname, 'dist' ),
-					publicPath: '/compiled-banners/'
+					publicPath: '/compiled-banners/',
 				},
 				{
 					directory: path.resolve( __dirname, 'dashboard' ),
 					publicPath: '/',
-					serveIndex: false
-				}
+					serveIndex: false,
+				},
 			],
 			'headers': {
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': '*',
 			},
 			'proxy': [
 				{
 					context: [ '/wiki/Main_Page' ],
 					target: 'https://en.wikipedia.org',
-					changeOrigin: true
+					changeOrigin: true,
 				},
 				{
 					context: [ '/wikipedia.de', '/FundraisingBanners', '/img', '/js', '/style.css', '/suggest.js' ],
 					pathRewrite: { '^/wikipedia.de': '' },
 					target: 'https://www.wikipedia.de',
-					changeOrigin: true
+					changeOrigin: true,
 				},
 				{
 					context: [ '/wiki', '/w/', '/static' ],
 					target: 'https://de.wikipedia.org',
-					changeOrigin: true
-				}
+					changeOrigin: true,
+				},
 			],
 
 			'setupMiddlewares': ( middlewares, devServer ) => {
@@ -108,6 +108,6 @@ module.exports = ( env ) => Promise.all( [
 				devServer.app.get( '/compile-banner/:bannerName', webpackBuildApiRoute );
 
 				return middlewares;
-			}
-		}
+			},
+		},
 	} ) );

@@ -3,7 +3,7 @@ import { parseIntegerFromFormattedString } from '@src/utils/parseIntegerFromForm
 
 describe( 'parseIntegerFromFormattedString', () => {
 
-	// the expected output values use "_XX" separater to visually indicate the 2 digit cent values
+	// the expected output values use "_XX" separator to visually indicate the 2 digit cent values
 	test.each( [
 		[ '4,3', 4_30 ],
 		[ '0', 0 ],
