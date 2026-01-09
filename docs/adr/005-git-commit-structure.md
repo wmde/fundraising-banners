@@ -31,7 +31,7 @@ We structured our banner code into four parts:
         provide slots instead. All imports happen in the root component.
         In most A/B tests (except for style/design tests) we duplicate the root component.
         component (`BannerCtrl`, `BannerVar`)
-    - The content components with texts for the different banners (slides, main text, etc). When we
+    - The content components with texts for the different banners (slides, main text, etc.). When we
         A/B test texts, we duplicate the components and add `Ctrl` and
         `Var` suffixes.
     - The `style.scss` file for importing styles from the theme and
@@ -50,7 +50,7 @@ campaign. Ideally, each branch has three commits
 - The **prepare campaign** commit "resets" both Control and Variant files of the
     new banner to the Control *or* Variant files of the previous banner.
     If the previous banner introduced variant files in the channel folder 
-    (e.g. styles, additional components, etc), this commit will deleting and/or rename 
+    (e.g. styles, additional components, etc.), this commit will delete and/or rename 
     files (e.g. removing the `Ctrl` and `Var` suffixes)
 - The **implement variant** commit contains all the changes in
     `banners/CHANNELNAME` and `src` to fulfill the requirement of the
@@ -69,7 +69,7 @@ strategy for the following use cases:
 - When reviewing a pull request, check if the new Control banner was based on the
     previous Variant or the previous Control banner by looking at the "prepare campaign" commit.
     However, we have developed a good discipline mentioning the base of the new Control
-    banner in the commit message and it's easier to read the commit
+    banner in the commit message, and it's easier to read the commit
     message than to look at the diff.
 - Do code archaeology to see which banner (and which developer) introduced
     a certain feature in
@@ -124,7 +124,7 @@ the same channel, the workflow hits some snags:
 - We get merge and rebase conflicts when we force-push to an un-merged
     earlier branch. It's hard to rebase the "later" branch and resolve its
     conflicts.
-- If we merge branches in the wrong order (say Test_24, to able to work on
+- If we merge branches in the wrong order (say Test_24, to be able to work on
     Test_25, while Test_23 is still unmerged), it becomes impossible to
     merge earlier tests, because they would appear in the wrong order in
     the succession of merged branches and merging would also resolve the

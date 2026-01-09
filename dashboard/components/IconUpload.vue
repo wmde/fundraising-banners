@@ -1,6 +1,6 @@
 <template>
 	<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
+		style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-679,-13)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Upload" transform="matrix(0.363636,0,0,0.350136,294.273,-1420.93)">
@@ -19,7 +19,7 @@
 					1080,2696C1084.9,2696 1089.06,2699.55 1089.86,2704.33L1090.14,2706L1093.01,2706C1095.76,2706
 					1098,2708.24 1098,2711C1098,2713.76 1095.76,2716 1093.01,2716L1088,2716C1086.89,2716 1086,2716.89
 					1086,2718C1086,2719.11 1086.89,2720 1088,2720L1093.01,2720Z"
-					style="fill: #ffffff;"/>
+						style="fill: #ffffff;"/>
 				</g>
 			</g>
 		</g>

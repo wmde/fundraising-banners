@@ -6,7 +6,7 @@ They are used for:
 
 * Mounting the banners in the correct place.
 * Tracking events.
-* Passing the calculated banner height from our banner javascript to css.
+* Passing the calculated banner height from our banner JavaScript to CSS.
 
 In our entry points we give the BannerConductor one of these implementations to perform actions as needed.
 
@@ -17,7 +17,7 @@ This implementation is for interacting with wikipedia.org and is a little comple
 ikipedia.org provides the global `mw` JavaScript object. For PageOrg we wrap the object in a `MediaWiki` interface and use it for things like:
 
 * Discovering which skin the user has active.
-* Discovering the current namespace of the page the banner is being showed on.
+* Discovering the current namespace of the page the banner is being shown on.
 * Notifying Central Notice that a user has seen or interacted with a banner.
 * Tracking events with Wikipedia's tracking tools.
 

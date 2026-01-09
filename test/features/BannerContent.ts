@@ -158,7 +158,7 @@ const expectShowsAverageDonationInSlideshow = async ( getWrapper: ( dynamicConte
 
 const expectShowsLiveTimeInMiniBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
 	const localDynamicContent = newDynamicContent();
-	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialized twice
 	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
@@ -180,7 +180,7 @@ const expectShowsLiveTimeInMiniBanner = async ( getWrapper: ( dynamicContent: Dy
 
 const expectShowsLiveDateAndTimeInMiniBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
 	const localDynamicContent = newDynamicContent();
-	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialized twice
 	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
@@ -205,7 +205,7 @@ const expectShowsLiveDateAndTimeInMiniBanner = async ( getWrapper: ( dynamicCont
 
 const expectShowsLiveTimeInFullPageBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
 	const localDynamicContent = newDynamicContent();
-	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialized twice
 	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )
@@ -229,7 +229,7 @@ const expectShowsLiveTimeInFullPageBanner = async ( getWrapper: ( dynamicContent
 
 const expectShowsLiveDateAndTimeInFullPageBanner = async ( getWrapper: ( dynamicContent: DynamicContent, timer: Timer ) => VueWrapper<any> ): Promise<any> => {
 	const localDynamicContent = newDynamicContent();
-	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialised twice
+	// There are 2 live text elements mounted at the same time in the mobile banners meaning it will be initialized twice
 	localDynamicContent.getCurrentDateAndTime = vi.fn().mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Initial Date', currentTime: 'Initial Time' } )
 		.mockReturnValueOnce( { currentDate: 'Second Date', currentTime: 'Second Time' } )

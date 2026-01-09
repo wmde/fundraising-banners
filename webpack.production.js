@@ -28,10 +28,10 @@ module.exports = ( env ) => {
 			throw new Error( `${bannerName} not found in entry point list` );
 		}
 		entrypointRules = {
-			entry: { [ bannerName ]: singleEntry }
+			entry: { [ bannerName ]: singleEntry },
 		};
 		customizationRules.customizeObject = customizeObject( {
-			entry: 'replace'
+			entry: 'replace',
 		} );
 	}
 	// compile specific channel, usually requested on the CLI
@@ -43,10 +43,10 @@ module.exports = ( env ) => {
 			entry: bannerNames.reduce( ( entries, bannerName ) => {
 				entries[ bannerName ] = configuredEntryPonts[ bannerName ];
 				return entries;
-			}, {} )
+			}, {} ),
 		};
 		customizationRules.customizeObject = customizeObject( {
-			entry: 'replace'
+			entry: 'replace',
 		} );
 	}
 
@@ -57,17 +57,17 @@ module.exports = ( env ) => {
 			mode: 'production',
 			resolve: {
 				alias: {
-					'@environment': path.resolve( __dirname, 'src/environment/prod' )
-				}
+					'@environment': path.resolve( __dirname, 'src/environment/prod' ),
+				},
 			},
 			plugins: [
 				new MediaWikiTextWrapper( {
 					templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 					context: {
-						bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2025}}'
+						bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2025}}',
 					},
 					filePattern: '{B,WMDE}*.js',
-					campaignConfig: campaigns.getConfigForPages()
+					campaignConfig: campaigns.getConfigForPages(),
 				} ),
 				// TODO use wpde url instead
 				new LoadVueOnWpde( {
@@ -75,7 +75,7 @@ module.exports = ( env ) => {
 					vueURL: 'https://unpkg.com/vue@3/dist/vue.runtime.global.prod.js',
 					// Regex matching output names to wrap.
 					// Should match 'pagename' of WPDE banners in campaigns_info.toml
-					test: /B.*WPDE_.*\.js/
+					test: /B.*WPDE_.*\.js/,
 				} ),
 				// Remove generated license files
 				// See https://stackoverflow.com/a/72237744/130121
@@ -86,7 +86,7 @@ module.exports = ( env ) => {
 						} );
 					}
 				} )(),
-				new BannerSizeWarningPlugin( { limit: 250 * 1024 } ) // compiled banner size (in bytes)
+				new BannerSizeWarningPlugin( { limit: 250 * 1024 } ), // compiled banner size (in bytes)
 			],
 			externals: [
 				/**
@@ -105,15 +105,15 @@ module.exports = ( env ) => {
 						return;
 					}
 					callback();
-				}
+				},
 			],
 			performance: {
 				// Size limit in Bytes for the generated JS files
 				maxAssetSize: 310_000,
 				// Size limit in Bytes for the combined code of entry points
-				maxEntrypointSize: 310_000
-			}
+				maxEntrypointSize: 310_000,
+			},
 		},
-		entrypointRules
+		entrypointRules,
 	);
 };

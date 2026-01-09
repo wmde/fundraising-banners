@@ -18,7 +18,7 @@ describe( 'LegacyTrackerWPORG', function () {
 
 		tracker.trackEvent( fallbackBannerSubmitEvent );
 
-		expect( trackingEventConverterFactory ).toBeCalledWith( FallbackBannerSubmitEvent );
+		expect( trackingEventConverterFactory ).toBeCalledWith( fallbackBannerSubmitEvent );
 		expect( mediaWikiStub.track ).toBeCalledWith(
 			'event.WMDEBannerEvents',
 			{

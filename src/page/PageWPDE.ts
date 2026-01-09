@@ -25,14 +25,7 @@ class PageWPDE implements Page {
 		return '#WMDE-Banner-Container';
 	}
 
-	public shouldShowBanner(): boolean {
-		return true;
-	}
-
 	public trackEvent(): void {
-	}
-
-	public trackSizeIssue(): void {
 	}
 
 	public onPageEventThatShouldHideBanner(): void {
