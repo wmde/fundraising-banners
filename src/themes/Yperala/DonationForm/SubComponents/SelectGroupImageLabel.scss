@@ -24,14 +24,6 @@
 		.mastercard-logo {
 			transform: scale( 1.5 );
 		}
-
-		.amex-logo {
-			display: none;
-
-			@include breakpoints.phone-m-up {
-				display: inline;
-			}
-		}
 	}
 
 	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
@@ -59,11 +51,6 @@
 
 		.bank-transfer-logo {
 			--bank-transfer-fill: var( --bank-transfer-fill-active );
-		}
-
-		.amex-logo {
-			--amex-primary-fill: var( --amex-primary-fill-active );
-			--amex-text-fill: var( --amex-text-fill-active );
 		}
 	}
 }
