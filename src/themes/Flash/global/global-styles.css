@@ -1,0 +1,221 @@
+.wmde-banner {
+	color: var(--font-color);
+	font-size: var(--type-step-0);
+	font-family: var(--font-base);
+	line-height: var(--leading-standard);
+	font-size-adjust: from-font;
+	font-synthesis: none;
+	margin: 0;
+	padding: 0;
+	/* stylelint-disable */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* stylelint-enable */
+}
+
+.wmde-banner :is(h2, h3) {
+	line-height: var(--leading-fine);
+	text-wrap: balance;
+	font-weight: var(--font-normal);
+}
+
+.wmde-banner h2 {
+	font-size: var(--type-step-2);
+}
+
+.wmde-banner h3 {
+	font-size: var(--type-step-1);
+}
+
+.wmde-banner small {
+	font-size: var(--type-step-00);
+}
+
+.wmde-banner ul:not([class]) {
+	padding-inline-start: 1.7ch;
+	list-style-type: disc;
+}
+
+.wmde-banner ul:not([class]) > li {
+	padding-inline-start: 0.9ch;
+}
+
+.wmde-banner ul:not([class]) li + * {
+	margin-block-start: var(--space-3xs);
+}
+
+.wmde-banner blockquote {
+	margin-inline: 0;
+}
+
+.wmde-banner blockquote footer {
+	margin-block-start: var(--space-s);
+}
+
+.wmde-banner blockquote q {
+	font-style: normal;
+}
+
+.wmde-banner q {
+	display: inline-block;
+	font-style: italic;
+}
+
+.wmde-banner q:before {
+	content: "\201C";
+}
+
+.wmde-banner q:after {
+	content: "\201D";
+}
+
+.wmde-banner img {
+	height: auto;
+	max-width: 100%;
+	display: block;
+}
+
+.wmde-banner figure {
+	margin-inline: 0;
+}
+
+.wmde-banner figcaption {
+	padding-block-start: 0.5em;
+	font-size: var(--type-step-0);
+	font-family: monospace;
+}
+
+.wmde-banner caption {
+	caption-side: bottom;
+	margin-block-start: var(--space-s);
+}
+
+.wmde-banner a:not([class]) {
+	color: var(--link-color);
+}
+
+.wmde-banner :focus-visible {
+	--form-field-border-color: var(--focus-color);
+	outline: 2px solid var(--focus-color, currentColor);
+}
+
+.wmde-banner :is(
+	a:not([class]):hover,
+	a:not([class]):focus-visible,
+	a[aria-current]
+) {
+	color: oklch(from var(--link-color) 40% c h);
+}
+
+.wmde-banner :target {
+	scroll-margin-block: 5lh;
+}
+
+.wmde-banner ::selection {
+	color: var(--selection-color, var(--color-black));
+	background: var(--selection-background, var(--color-primary));
+}
+
+.wmde-banner hr {
+	border: none;
+	border-block-start: var(--hr-stroke, var(--stroke));
+	margin-block: var(--flow-space, var(--space-xl));
+}
+
+.wmde-banner svg:not([class]) {
+	flex-shrink: 0;
+}
+
+.wmde-banner svg[role='img'][width][height] {
+	width: revert;
+	height: revert;
+	background: var(--color-white);
+	padding: var(--space-xs);
+}
+
+.wmde-banner button:not([disabled]) {
+	cursor: pointer;
+}
+
+.wmde-banner summary {
+	cursor: pointer;
+}
+
+
+.wmde-banner fieldset {
+	border: 0;
+	padding: 0;
+}
+
+.wmde-banner label:has([type='radio']) {
+	inline-size: 100%;
+	white-space: nowrap;
+}
+
+.wmde-banner :where(
+	input:not([type='checkbox'], [type='radio'], [type='color']),
+	select,
+	textarea,
+	label:has([type='radio'])
+) {
+	padding: 0 0.5em;
+	border: 1px solid var(--form-field-border-color, var(--color-grey-200));
+	background-color: var(--form-field-background-color, var(--color-white));
+	color: var(--form-field-color, var(--color-black));
+	font-family: var(--font-base);
+	line-height: var(--leading-standard);
+	height: 2.5rem;
+	line-height: 2.5rem;
+	border-radius: calc( 2.5rem / 2 );
+}
+
+label:has([type='radio']) {
+	text-align: center;
+}
+
+.wmde-banner [type='radio'] {
+	appearance: none;
+}
+
+.wmde-banner label:has( [type='radio']:checked ) {
+	--form-field-background-color: var(--form-field-background-color-checked);
+	--form-field-border-color: var(--form-field-border-color-checked);
+	--form-field-color: var(--form-field-color-checked);
+}
+
+.wmde-banner label:has( [type='radio']:focus-visible ) {
+	--form-field-border-color: var(--form-field-border-color-checked);
+}
+
+.wmde-banner label:has( [type='radio']:focus-visible:checked ) {
+	--form-field-border-color: var(--form-field-background-color-checked-focused);
+	box-shadow: 0 0 0 2px var(--form-field-border-color-checked);
+}
+
+.wmde-banner label:has([type='checkbox'], [type='radio']):hover {
+	cursor: pointer;
+}
+
+.wmde-banner form button:not([class]) {
+	all: unset;
+	display: block;
+	cursor: pointer;
+	width: 100%;
+	font-size: var(--type-step-0);
+	text-align: center;
+	line-height: 2.6rem;
+	border-radius: calc( 2.6rem / 2 );
+	background: var(--form-field-button-background);
+	color: var(--form-field-button-color);
+	transition: background-color 200ms ease-in-out;
+	font-weight: bold;
+}
+
+.wmde-banner form button:not([class]):hover,
+.wmde-banner form button:not([class]):focus-visible {
+	background: oklch(from var(--form-field-button-background) 50% c h);
+}
+
+.wmde-banner form button:not([class]):focus-visible {
+	box-shadow: 0 0 0 2px oklch(from var(--form-field-button-background) 90% c h);
+}
