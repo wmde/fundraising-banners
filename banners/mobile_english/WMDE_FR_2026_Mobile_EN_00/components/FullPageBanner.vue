@@ -30,7 +30,7 @@
 <script setup lang="ts">
 
 import CloseIconChunky from '@src/components/Icons/CloseIconChunky.vue';
-import SimpleInfoIcon from './SimpleInfoIcon.vue';
+import SimpleInfoIcon from '@src/components/Icons/SimpleInfoIcon.vue';
 
 defineEmits( [ 'close', 'showUseOfFunds' ] );
 
