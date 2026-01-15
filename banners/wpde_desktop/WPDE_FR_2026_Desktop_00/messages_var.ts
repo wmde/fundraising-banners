@@ -16,7 +16,6 @@ const messages: TranslationMessages = {
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
-	'cover-transaction-costs': 'Ich übernehme gerne die Transaktionsgebühren von {{transactionCosts}}, damit 100 % meiner Spende ankommt.',
 	'recurring-interval-cheering': 'Dauerhaft etwas bewegen. '
 };
 
