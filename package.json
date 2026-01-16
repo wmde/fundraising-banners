@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.7.0",
-    "@stylistic/stylelint-config": "^3.0.1",
+    "@stylistic/stylelint-config": "^4.0.0",
     "@types/jsdom": "^27.0.0",
     "@typescript-eslint/eslint-plugin": "^8.51.0",
     "@vitejs/plugin-vue": "^6.0.3",
