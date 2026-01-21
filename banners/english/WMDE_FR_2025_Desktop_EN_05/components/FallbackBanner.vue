@@ -14,7 +14,7 @@
 <script setup lang="ts">
 
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import FallbackBanner from '@src/components/FallbackBanner/FallbackBanner.vue';
 import ProgressBar from '@src/components/FallbackBanner/ProgressBar.vue';
 import FallbackSlides from '../content/FallbackSlides.vue';

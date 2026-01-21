@@ -1,22 +1,22 @@
 .wmde-b-main {
-	--main-background: var(--color-white);
-	--main-border: var(--color-red-600);
-	--main-shadow: 0 4px 10px rgba( 0, 0, 0, 0.15 );
+	--main-background: var( --color-white );
+	--main-border: var( --color-red-600 );
+	--main-shadow: 0 4px 10px rgb( 0, 0, 0, 0.15 );
 
 	position: relative;
-	background: var(--main-background);
-	border: 2px solid var(--main-border);
-	box-shadow: var(--main-shadow);
+	background: var( --main-background );
+	border: 2px solid var( --main-border );
+	box-shadow: var( --main-shadow );
 }
 
 .skin-theme-clientpref-night .wmde-b-main {
-	--main-background: var(--color-black);
-	--main-border: var(--color-red-600);
+	--main-background: var( --color-black );
+	--main-border: var( --color-red-600 );
 }
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-b-main {
-		--main-background: var(--color-black);
-		--main-border: var(--color-red-600);
+		--main-background: var( --color-black );
+		--main-border: var( --color-red-600 );
 	}
 }

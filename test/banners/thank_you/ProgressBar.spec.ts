@@ -1,35 +1,20 @@
 import { describe, expect, it } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import ProgressBar from '@banners/thank_you/components/ProgressBar.vue';
+import thankYouContent from '@test/fixtures/ThankYouContent';
 
 describe( 'ProgressBar.vue', () => {
 	const getWrapper = (): VueWrapper<any> => {
 		return mount( ProgressBar, {
 			props: {
-				fillPercentage: 42,
-				showSuccessContent: true
+				thankYouContent
 			},
-			global: {
-				mocks: {
-					$translate: ( key: string ): string => key
-				}
-			}
 		} );
 	};
 
 	it( 'Sets the fill', () => {
 		const wrapper = getWrapper();
 
-		expect( wrapper.find( '.wmde-banner-progress-bar' ).attributes( 'style' ) ).toStrictEqual( '--wmde-banner-progress-bar-width: 42%;' );
-	} );
-
-	it( 'Sets win and lose items', async () => {
-		const wrapper = getWrapper();
-
-		expect( wrapper.find( '.wmde-banner-progress-bar-fill-text' ).text() ).toStrictEqual( 'progress-bar-inner-text-win' );
-
-		await wrapper.setProps( { showSuccessContent: false } );
-
-		expect( wrapper.find( '.wmde-banner-progress-bar-fill-text' ).text() ).toStrictEqual( 'progress-bar-inner-text-lose' );
+		expect( wrapper.attributes( 'style' ) ).toStrictEqual( '--wmde-b-progress-width: 100%;' );
 	} );
 } );

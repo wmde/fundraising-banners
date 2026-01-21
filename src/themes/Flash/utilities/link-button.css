@@ -3,13 +3,13 @@
  */
 .wmde-u-link-button {
 	all: unset;
-	color: var(--color-grey-700);
+	color: var( --color-grey-700 );
 	cursor: pointer;
 	text-decoration: none;
 }
 
 .wmde-u-link-button:hover,
 .wmde-u-link-button:focus-visible {
-	color: var(--color-blue-600);
+	color: var( --color-blue-600 );
 	text-decoration: underline;
 }

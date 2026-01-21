@@ -1,0 +1,7 @@
+.wmde-b-cta {
+	margin-block-start: var( --space-l );
+}
+
+.wmde-b-cta a {
+	max-width: 26rem;
+}

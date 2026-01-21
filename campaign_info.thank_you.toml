@@ -5,9 +5,9 @@
 # Thank You Campaign
 [thank_you]
 name = "Desktop"
-campaign = "C24_WMDE_Desktop_DE_ty"
+campaign = "WMDE_FR_2025_Desktop_DE_ty"
 icon = "desktop"
-campaign_tracking = "ty01-250101"
+campaign_tracking = "ty01-251219"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
@@ -15,16 +15,17 @@ preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
+thank_you_source = "MediaWiki:WMDE_Fundraising/Thank_You_Content_2025"
 
 [thank_you.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B24_WMDE_Desktop_DE_ty_ctrl"
-tracking = "org-ty-250101-ctrl"
+pagename = "WMDE_FR_2025_Desktop_DE_ty_ctrl"
+tracking = "org-ty-251219-ctrl"
 
 [thank_you.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B24_WMDE_Desktop_DE_ty_var"
-tracking = "org-ty-250101-var"
+pagename = "WMDE_FR_2025_Desktop_DE_ty_var"
+tracking = "org-ty-251219-var"
 
 [thank_you.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
@@ -33,9 +34,9 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 
 [thank_you_en]
 name = "English Desktop"
-campaign = "C24_WMDE_Desktop_EN_ty"
+campaign = "WMDE_FR_2025_Desktop_EN_ty"
 icon = "desktop"
-campaign_tracking = "ty01-250101"
+campaign_tracking = "ty01-251219"
 description = "Thank you banner"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
@@ -43,16 +44,17 @@ preview_link_offline = ""
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
+thank_you_source = "MediaWiki:WMDE_Fundraising/Thank_You_Content_2025_en"
 
 [thank_you_en.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.en.ts"
-pagename = "B24_WMDE_Desktop_EN_ty_ctrl"
-tracking = "org-ty-250101-en-ctrl"
+pagename = "WMDE_FR_2025_Desktop_EN_ty_ctrl"
+tracking = "org-ty-251219-en-ctrl"
 
 [thank_you_en.banners.var]
 filename = "./banners/thank_you/banner_var.en.ts"
-pagename = "B24_WMDE_Desktop_EN_ty_var"
-tracking = "org-ty-250101-en-var"
+pagename = "WMDE_FR_2025_Desktop_EN_ty_var"
+tracking = "org-ty-251219-en-var"
 
 [thank_you_en.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
@@ -61,26 +63,27 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 # Thank you campaign mobile wp.org
 [thank_you_mobile]
 name = "Mobile"
-campaign = "C24_WMDE_Mobile_DE_ty"
+campaign = "WMDE_FR_2025_Mobile_DE_ty"
 icon = "mobile"
-campaign_tracking = "ty01-mob-250101"
+campaign_tracking = "ty01-mob-251219"
 description = "Thank you banner"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
 preview_link_offline = ""
-preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
-preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&minervanightmode=1'
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&useskin=minerva'
+preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&useskin=minerva&minervanightmode=1'
 wrapper_template = "wikipedia_org"
+thank_you_source = "MediaWiki:WMDE_Fundraising/Thank_You_Content_2025"
 
 [thank_you_mobile.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B24_WMDE_Mobile_DE_ty_ctrl"
-tracking = "org-mob-ty-250101-ctrl"
+pagename = "WMDE_FR_2025_Mobile_DE_ty_ctrl"
+tracking = "org-mob-ty-251219-ctrl"
 
 [thank_you_mobile.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B24_WMDE_Mobile_DE_ty_var"
-tracking = "org-mob-ty-250101-var"
+pagename = "WMDE_FR_2025_Mobile_DE_ty_var"
+tracking = "org-mob-ty-251219-var"
 
 [thank_you_mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
@@ -89,26 +92,27 @@ orientation = [ "portrait", "landscape"]
 # English Thank you campaign mobile wp.org
 [thank_you_mobile_en]
 name = "English Mobile"
-campaign = "C24_WMDE_Mobile_EN_ty"
+campaign = "WMDE_FR_2025_Mobile_EN_ty"
 icon = "mobile"
-campaign_tracking = "ty01-mob-en-250101"
+campaign_tracking = "ty01-mob-en-251219"
 description = "Thank you banner"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
-preview_link_darkmode = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype"
+preview_link_darkmode = "/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&minervanightmode=1"
 preview_link_offline = ""
-preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
-preview_url_darkmode = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&minervanightmode=1'
+preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva'
+preview_url_darkmode = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva&minervanightmode=1'
 wrapper_template = "wikipedia_org"
+thank_you_source = "MediaWiki:WMDE_Fundraising/Thank_You_Content_2025_en"
 
 [thank_you_mobile_en.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.en.ts"
-pagename = "B24_WMDE_Mobile_EN_ty_ctrl"
-tracking = "org-mob-ty-250101-en-ctrl"
+pagename = "WMDE_FR_2025_Mobile_EN_ty_ctrl"
+tracking = "org-mob-ty-251219-en-ctrl"
 
 [thank_you_mobile_en.banners.var]
 filename = "./banners/thank_you/banner_var.en.ts"
-pagename = "B24_WMDE_Mobile_EN_ty_var"
-tracking = "org-mob-ty-250101-en-var"
+pagename = "WMDE_FR_2025_Mobile_EN_ty_var"
+tracking = "org-mob-ty-251219-en-var"
 
 [thank_you_mobile_en.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
@@ -117,9 +121,9 @@ orientation = [ "portrait", "landscape"]
 # Thank you campaign ipad wp.org
 [thank_you_ipad]
 name = "iPad"
-campaign = "C24_WMDE_ipad_DE_ty"
+campaign = "WMDE_FR_2025_iPad_DE_ty"
 icon = "pad"
-campaign_tracking = "ty01-ipad-250101"
+campaign_tracking = "ty01-ipad-251219"
 description = "Thank you banner"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&vectornightmode=1"
@@ -127,16 +131,17 @@ preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
+thank_you_source = "MediaWiki:WMDE_Fundraising/Thank_You_Content_2025"
 
 [thank_you_ipad.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.de.ts"
-pagename = "B24_WMDE_ipad_DE_ty_ctrl"
-tracking = "org-ipad-ty-250101-ctrl"
+pagename = "WMDE_FR_2025_iPad_DE_ty_ctrl"
+tracking = "org-ipad-ty-251219-ctrl"
 
 [thank_you_ipad.banners.var]
 filename = "./banners/thank_you/banner_var.de.ts"
-pagename = "B24_WMDE_ipad_DE_ty_var"
-tracking = "org-ipad-ty-250101-var"
+pagename = "WMDE_FR_2025_iPad_DE_ty_var"
+tracking = "org-ipad-ty-251219-var"
 
 [thank_you_ipad.test_matrix]
 device = [ 'ipad_mini', 'ipad', 'ipad_pro_9_7_inch', 'ipad_pro_12_inch' ]
@@ -145,9 +150,9 @@ orientation = [ "portrait", "landscape"]
 # Thank you campaign wp.de
 [thank_you_wpde]
 campaign = "WPDE Desktop"
-name = "C24_WPDE_Desktop_DE_ty"
+name = "C25_WPDE_Desktop_DE_ty"
 icon = "desktop"
-campaign_tracking = "ty01-wpde-250101"
+campaign_tracking = "ty01-wpde-251219"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
@@ -158,19 +163,19 @@ wrap_in_wikitext = false
 
 [thank_you_wpde.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.wpde.ts"
-pagename = "B24_WPDE_Desktop_DE_ty_ctrl"
-tracking = "de-wpde-ty-250101-ctrl"
+pagename = "B25_WPDE_Desktop_DE_ty_ctrl"
+tracking = "de-wpde-ty-251219-ctrl"
 
 [thank_you_wpde.banners.var]
 filename = "./banners/thank_you/banner_var.wpde.ts"
-pagename = "B24_WPDE_Desktop_DE_ty_var"
-tracking = "de-wpde-ty-250101-var"
+pagename = "B25_WPDE_Desktop_DE_ty_var"
+tracking = "de-wpde-ty-251219-var"
 
 [thank_you_wpde_mobile]
 campaign = "WPDE Mobile"
-name = "C24_WPDE_Mobile_DE_ty"
+name = "C25_WPDE_Mobile_DE_ty"
 icon = "mobile"
-campaign_tracking = "ty01-wpde-mob-250101"
+campaign_tracking = "ty01-wpde-mob-251219"
 description = "Thank you banner"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 preview_link_darkmode = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
@@ -181,10 +186,10 @@ wrap_in_wikitext = false
 
 [thank_you_wpde_mobile.banners.ctrl]
 filename = "./banners/thank_you/banner_ctrl.wpde.ts"
-pagename = "B24_WPDE_Mobile_DE_ty_ctrl"
-tracking = "de-wpde-mob-ty-250101-ctrl"
+pagename = "B25_WPDE_Mobile_DE_ty_ctrl"
+tracking = "de-wpde-mob-ty-251219-ctrl"
 
 [thank_you_wpde_mobile.banners.var]
 filename = "./banners/thank_you/banner_var.wpde.ts"
-pagename = "B24_WPDE_Mobile_DE_ty_var"
-tracking = "de-wpde-mob-ty-250101-var"
+pagename = "B25_WPDE_Mobile_DE_ty_var"
+tracking = "de-wpde-mob-ty-251219-var"

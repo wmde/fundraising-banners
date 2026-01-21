@@ -1,31 +1,31 @@
 .wmde-b-progress {
-	--track-background: var(--color-white);
-	--fill-background: var(--color-red-600);
-	--flow-space: var(--space-3xs);
+	--track-background: var( --color-white );
+	--fill-background: var( --color-red-600 );
+	--flow-space: var( --space-3xs );
 
-	height: var(--space-2xs);
-	border-radius: calc( var(--space-2xs) / 2 );
-	background: var(--track-background);
+	height: var( --space-2xs );
+	border-radius: calc( var( --space-2xs ) / 2 );
+	background: var( --track-background );
 }
 
 .wmde-b-progress__fill {
 	width: 10%;
-	border-radius: calc( var(--space-2xs) / 2 );
-	background: var(--fill-background);
+	border-radius: calc( var( --space-2xs ) / 2 );
+	background: var( --fill-background );
 	height: 100%;
 	transition: width 3000ms ease-in-out;
 }
 
 .wmde-banner--visible .wmde-b-progress__fill {
-	width: var(--fill-percentage);
+	width: var( --fill-percentage );
 }
 
 .skin-theme-clientpref-night .wmde-b-progress {
-	--track-background: var(--color-black);
+	--track-background: var( --color-black );
 }
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-b-progress {
-		--track-background: var(--color-black);
+		--track-background: var( --color-black );
 	}
 }

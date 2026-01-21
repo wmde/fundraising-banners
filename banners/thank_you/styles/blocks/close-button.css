@@ -1,0 +1,47 @@
+.wmde-b-close-button {
+	--close-icon-stroke: var( --colour-black );
+	--close-icon-color: var( --colour-black );
+	--close-button-background: var( --colour-blue-100 );
+
+	text-align: right;
+}
+
+.wmde-b-close-button button {
+	--gutter: var( --space-2xs );
+
+	color: var( --close-icon-color );
+	display: inline-flex;
+	height: var( --space-l );
+	border: 0;
+	padding-inline: var( --close-padding, 0 );
+	margin-inline: var( --close-margin, 0 );
+	background: transparent;
+	transition: color 200ms ease-in-out;
+}
+
+.wmde-b-close-button path {
+	transition: fill 200ms ease-in-out;
+}
+
+.wmde-b-close-button[ data-with-background ] button {
+	background: var( --close-button-background );
+	border-radius: calc( var( --space-l ) / 2 );
+}
+
+.wmde-b-close-button button:hover,
+.wmde-b-close-button button:focus-visible {
+	--close-icon-stroke: oklch( from var( --close-icon-color ) 60% c h );
+	color: oklch( from var( --close-icon-color ) 60% c h );
+}
+
+.skin-theme-clientpref-night .wmde-b-close-button {
+	--close-icon-stroke: var( --colour-grey-200 );
+	--close-icon-color: var( --colour-grey-200 );
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.skin-theme-clientpref-os .wmde-b-close-button {
+		--close-icon-stroke: var( --colour-grey-200 );
+		--close-icon-color: var( --colour-grey-200 );
+	}
+}

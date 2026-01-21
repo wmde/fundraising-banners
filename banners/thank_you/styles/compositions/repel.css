@@ -1,0 +1,24 @@
+/*
+REPEL
+Repel is used when you need 2 elements in a row that align to the left and right
+edges but will stack once there is not enough space for them.
+
+CUSTOM PROPERTIES AND CONFIGURATION
+--gutter (var(--space-m)): This defines the space
+between each item.
+
+--repel-vertical-alignment (center): How items should align vertically.
+Can be any acceptable flexbox alignment value.
+*/
+.wmde-c-repel {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: var( --repel-vertical-alignment, center );
+	column-gap: var( --gutter, var( --space-m ) );
+	row-gap: var( --space-3xs );
+}
+
+.wmde-c-repel[ data-nowrap ] {
+	flex-wrap: nowrap;
+}
