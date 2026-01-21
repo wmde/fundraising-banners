@@ -1,5 +1,5 @@
 /**
- * Wrap javascript assets in MediaWiki wikitext and script tags for inlining them in wiki pages
+ * Wrap JavaScript assets in MediaWiki wikitext and script tags for inlining them in wiki pages
  */
 
 const Minimatch = require( 'minimatch' ).Minimatch;
@@ -27,7 +27,7 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 		compilation.hooks.processAssets.tap(
 			{
 				name: pluginName,
-				stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING
+				stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
 			},
 			function ( assets ) {
 				const mm = new Minimatch( self.filePattern, { matchBase: true } );
@@ -60,17 +60,17 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 						thankYouTransclude: bannerConfig.thank_you_source ? '{{' + bannerConfig.thank_you_source + '}}' : '',
 						buildDate,
 						// BannerValues come from webpack.production config
-						...self.context
+						...self.context,
 					};
 					const wrappedFile = template( templateContext );
 
 					compilation.emitAsset(
 						filename + '.wikitext',
-						new RawSource( wrappedFile )
+						new RawSource( wrappedFile ),
 					);
 					compilation.deleteAsset( filename );
 				}
-			}
+			},
 		);
 	} );
 };

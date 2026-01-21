@@ -8,7 +8,7 @@ This module consists of the following parts:
 
 ## `MultiStepDonationForm.vue`
 
-This initialises and presents the form:
+This initializes and presents the form:
 1. It connects the individual form pages to the `StepController` instances to handle the flow of the submissions.
 2. It wraps the `FormStep` components in its slots in a `Slider` component and starts the slides at the first slide.
 3. From then on it acts as a bus between the `StepController` instances, `Slider` and the `FormSteps`.

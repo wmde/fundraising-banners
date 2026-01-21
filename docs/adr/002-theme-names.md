@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-A "theme" for a banner groups all the styling (colors, fonts, margins, etc) related to each
+A "theme" for a banner groups all the styling (colors, fonts, margins, etc.) related to each
 component in files named after the components. The theme (and its corresponding folder) needs to
 have a name.
 
@@ -33,7 +33,7 @@ at least relegated to "nice to have"):
 	or character names) it might become harder and harder to choose names
 	for similar-looking designs.
   - Require some world/cultural knowledge
-- Using the names outside of the dev team: Probably won't happen.
+- Using the names outside the dev team: Probably won't happen.
 
 Our experience from past campaigns shows that we need about 5-10 theme
 names (i.e. different designs) per campaign.

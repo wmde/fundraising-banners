@@ -3,7 +3,7 @@
 		<a
 			class="banner-actions-title"
 			data-tooltip="Preview in local environment"
-			:href="campaign.previewUrlDev.replace('{{banner}}', bannerPageName)"
+			:href="campaign.previewUrlDev.replace( '{{banner}}', bannerPageName )"
 			target="_blank"
 			title="Preview in local environment"
 		>
@@ -14,7 +14,7 @@
 				v-if="props.isWPDE"
 				class="banner-actions-icon"
 				data-tooltip="Preview in offline mode"
-				:href="campaign.previewUrlDevOffline.replace('{{banner}}', bannerPageName)"
+				:href="campaign.previewUrlDevOffline.replace( '{{banner}}', bannerPageName )"
 				target="_blank"
 				title="Preview in offline mode"
 			>
@@ -23,7 +23,7 @@
 			<a
 				class="banner-actions-icon"
 				data-tooltip="Preview in dark mode"
-				:href="campaign.previewUrlDevDark.replace('{{banner}}', bannerPageName)"
+				:href="campaign.previewUrlDevDark.replace( '{{banner}}', bannerPageName )"
 				target="_blank"
 				title="Preview in dark mode"
 			>
@@ -32,7 +32,7 @@
 			<a
 				class="banner-actions-icon"
 				data-tooltip="Preview in Production"
-				:href="campaign.previewUrlProd.replace('{{banner}}', bannerPageName)"
+				:href="campaign.previewUrlProd.replace( '{{banner}}', bannerPageName )"
 				target="_blank"
 				title="Preview in prod environment"
 			>

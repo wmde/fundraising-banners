@@ -1,7 +1,7 @@
 import { describe, beforeEach, it, expect, vi, test, afterEach } from 'vitest';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
 import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { ClickAlreadyDonatedEvent } from '@src/tracking/events/ClickAlreadyDonatedEvent';
+import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
@@ -117,7 +117,7 @@ describe( 'TrackerWPDE', function () {
 	} );
 
 	test.each( [
-		[ new ClickAlreadyDonatedEvent(), ClickAlreadyDonatedEvent.EVENT_NAME, ClickAlreadyDonatedEvent.EVENT_NAME ]
+		[ new FallbackBannerSubmitEvent(), FallbackBannerSubmitEvent.EVENT_NAME, FallbackBannerSubmitEvent.EVENT_NAME ]
 	] )( 'should generate event identifiers from tracking data, data set %#',
 		( trackingEvent: TrackingEvent<void>, allowedAction: string, expectedId: string ) => {
 			const tracker = new TrackerWPDE(

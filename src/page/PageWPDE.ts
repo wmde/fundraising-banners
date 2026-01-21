@@ -5,14 +5,13 @@ import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParamete
 import { TrackingParameters } from '@src/domain/TrackingParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
 
-export const bannerHeightCssVariable = '--wmde-banner-height';
-export const showBannerClass = 'wmde-show-banner';
-
 export interface WpdeWindow extends Window {
 	campaignParameters: CampaignParameters;
 	thankYouCampaignParameters: ThankYouCampaignParameters;
 }
 
+const showBannerClass = 'wmde-show-banner';
+const bannerHeightCssVariable = '--wmde-banner-height';
 declare let window: WpdeWindow;
 
 /* eslint-disable @typescript-eslint/no-empty-function */
@@ -25,14 +24,7 @@ class PageWPDE implements Page {
 		return '#WMDE-Banner-Container';
 	}
 
-	public shouldShowBanner(): boolean {
-		return true;
-	}
-
 	public trackEvent(): void {
-	}
-
-	public trackSizeIssue(): void {
 	}
 
 	public onPageEventThatShouldHideBanner(): void {

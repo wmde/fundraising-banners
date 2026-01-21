@@ -10,7 +10,7 @@ that are tracked include:
 
 If a new feature is added the performance of that feature is tested by adding it to a VAR banner and comparing it to a CTRL banner. We use
 tracking events to see if the feature is interacted with plus the overall performance of each banner is compared to see if there are changes
-in donor behaviour.
+in donor behavior.
 
 ## Domains
 

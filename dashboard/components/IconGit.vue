@@ -1,6 +1,6 @@
 <template>
 	<svg width="17px" height="22px" viewBox="0 0 17 22" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
+		style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-599,-12)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Git" transform="matrix(0.499886,0,0,0.499886,451.899,-1872.68)">
@@ -18,7 +18,7 @@
 					2818.62 306.705,2818.23 305.236,2817.63C300.923,2815.84 298.168,2812.5 298.007,2807.47C296.808,2806.78 296,
 					2805.48 296,2804C296,2801.79 297.791,2800 300,2800C302.209,2800 304,2801.79 304,2804C304,2805.48 303.2,
 					2806.77 302.01,2807.46Z"
-					style="fill: #ffffff;"/>
+						style="fill: #ffffff;"/>
 				</g>
 			</g>
 		</g>

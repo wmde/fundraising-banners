@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 /**
- * This footer contains a link (button behaviour) (#wmde-banner-footer-already-donated) that closes the banner
+ * This footer contains a link (button behavior) (#wmde-banner-footer-already-donated) that closes the banner
  */
 
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
