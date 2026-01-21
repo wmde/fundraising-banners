@@ -4,6 +4,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 describe( 'LocalImpressionCount', function () {
 
 	beforeEach( ()=> {
+		console.log( window.localStorage );
 		localStorage.clear();
 	} );
 

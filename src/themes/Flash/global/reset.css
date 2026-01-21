@@ -12,56 +12,46 @@
 }
 
 /* Box sizing rules */
-.wmde-banner :where(
-	*,
-	*::before,
-	*::after
-) {
+.wmde-banner :where( *,
+*::before,
+*::after ) {
 	box-sizing: border-box;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
-.wmde-banner :where(
-	h2,
-	h3,
-	p,
-	figure,
-	blockquote
-) {
+.wmde-banner :where( h2,
+h3,
+p,
+figure,
+blockquote ) {
 	margin-block: 0;
 	padding-block: 0;
 }
 
 /* Remove list styles on ul, ol elements with a class, which suggests default styling will be removed */
-.wmde-banner :where(
-	ul[ class ],
-	ol[ class ]
-) {
+.wmde-banner :where( ul[ class ],
+ol[ class ] ) {
 	list-style: none;
 	margin-inline: 0;
 	padding: 0;
 }
 
 /* Set shorter line heights on headings and interactive elements */
-.wmde-banner :where(
-	h1,
-	h2,
-	h3,
-	h4,
-	button,
-	input,
-	label
-) {
+.wmde-banner :where( h1,
+h2,
+h3,
+h4,
+button,
+input,
+label ) {
 	line-height: 1.1;
 }
 
 /* Balance text wrapping on headings */
-.wmde-banner :where(
-	h1,
-	h2,
-	h3,
-	h4
-) {
+.wmde-banner :where( h1,
+h2,
+h3,
+h4 ) {
 	text-wrap: balance;
 	border: 0;
 }
@@ -73,21 +63,17 @@
 }
 
 /* Make images easier to work with */
-.wmde-banner :where(
-	img,
-	picture
-) {
+.wmde-banner :where( img,
+picture ) {
 	max-width: 100%;
 	display: block;
 }
 
 /* Inherit fonts for inputs and buttons */
-.wmde-banner :where(
-	input,
-	button,
-	textarea,
-	select
-) {
+.wmde-banner :where( input,
+button,
+textarea,
+select ) {
 	font: inherit;
 }
 

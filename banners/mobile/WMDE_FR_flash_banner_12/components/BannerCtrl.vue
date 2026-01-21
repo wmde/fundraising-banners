@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/UseOfFunds/UseOfFundsContent';
+import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { computed, inject, ref } from 'vue';

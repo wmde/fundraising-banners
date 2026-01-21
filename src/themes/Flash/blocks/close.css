@@ -1,5 +1,5 @@
 .wmde-b-close {
-	--icon-stroke: var(--color-black);
+	--icon-stroke: var( --color-black );
 
 	position: absolute;
 	top: 0;
@@ -20,15 +20,15 @@
 
 .wmde-b-close:hover,
 .wmde-b-close:focus-visible {
-	--icon-stroke: var(--color-red-600);
+	--icon-stroke: var( --color-red-600 );
 }
 
-.skin-theme-clientpref-night .wmde-b-close:not(:hover, :focus-visible) {
-	--icon-stroke: var(--color-white);
+.skin-theme-clientpref-night .wmde-b-close:not( :hover, :focus-visible ) {
+	--icon-stroke: var( --color-white );
 }
 
 @media ( prefers-color-scheme: dark ) {
-	.skin-theme-clientpref-os .wmde-b-close:not(:hover, :focus-visible) {
-		--icon-stroke: var(--color-white);
+	.skin-theme-clientpref-os .wmde-b-close:not( :hover, :focus-visible ) {
+		--icon-stroke: var( --color-white );
 	}
 }

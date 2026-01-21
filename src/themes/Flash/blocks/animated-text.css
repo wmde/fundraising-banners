@@ -1,13 +1,7 @@
 .wmde-b-animated-text {
-	--animated-text-background: linear-gradient(
-		270deg,
-		transparent 0%,
-		transparent 50%,
-		var(--color-yellow-300) 50%,
-		var(--color-yellow-300) 100%
-	);
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-yellow-300 ) 50%, var( --color-yellow-300 ) 100% );
 
-	background: var(--animated-text-background);
+	background: var( --animated-text-background );
 	background-size: 201% 100%;
 	background-position: 100% 0;
 	transition: background-position 2s;
@@ -18,23 +12,11 @@
 }
 
 .skin-theme-clientpref-night .wmde-b-animated-text {
-	--animated-text-background: linear-gradient(
-		270deg,
-		transparent 0%,
-		transparent 50%,
-		var(--color-blue-350) 50%,
-		var(--color-blue-350) 100%
-	);
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-350 ) 50%, var( --color-blue-350 ) 100% );
 }
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-b-animated-text {
-		--animated-text-background: linear-gradient(
-			270deg,
-			transparent 0%,
-			transparent 50%,
-			var(--color-blue-350) 50%,
-			var(--color-blue-350) 100%
-		);
+		--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-350 ) 50%, var( --color-blue-350 ) 100% );
 	}
 }

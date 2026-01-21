@@ -2,36 +2,27 @@
 	top: calc( -1 * var( --wmde-banner-height ) );
 }
 
-.wmde-animate-banner :is(
-	#wmde-banner-app,
-	/* Vector */
-	#mw-panel,
-	#mw-head,
-	#mw-page-base,
-	/* Vector 2022 */
-	.vector-header-container,
-	/* Minerva */
-	#mw-mf-viewport,
-	#mw-mf-page-left
-) {
+.wmde-animate-banner :is( #wmde-banner-app,
+#mw-panel,
+#mw-head,
+#mw-page-base,
+.vector-header-container,
+#mw-mf-viewport,
+#mw-mf-page-left ) {
 	transition-timing-function: cubic-bezier( 0.555, 0.155, 0.14, 0.945 );
 	transition-duration: var( --wmde-banner-transition-duration );
 }
 
-.wmde-animate-banner :is(
-	#wmde-banner-app,
-	#mw-panel,
-	#mw-head,
-	#mw-mf-page-left
-) {
+.wmde-animate-banner :is( #wmde-banner-app,
+#mw-panel,
+#mw-head,
+#mw-mf-page-left ) {
 	transition-property: top;
 }
 
-.wmde-animate-banner :is(
-	#mw-page-base,
-	#mw-mf-viewport,
-	.vector-header-container
-) {
+.wmde-animate-banner :is( #mw-page-base,
+#mw-mf-viewport,
+.vector-header-container ) {
 	transition-property: padding-top;
 }
 
@@ -43,18 +34,14 @@
 	margin-top: var( --wmde-banner-height );
 }
 
-.wmde-show-banner :is(
-	#mw-panel,
-	#mw-head,
-	#mw-mf-page-left
-) {
+.wmde-show-banner :is( #mw-panel,
+#mw-head,
+#mw-mf-page-left ) {
 	top: var( --wmde-banner-height );
 }
 
-.wmde-show-banner :is(
-	#mw-page-base,
-	#mw-mf-viewport,
-	.vector-header-container
-) {
+.wmde-show-banner :is( #mw-page-base,
+#mw-mf-viewport,
+.vector-header-container ) {
 	padding-top: var( --wmde-banner-height );
 }
