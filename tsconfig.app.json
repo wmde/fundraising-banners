@@ -1,0 +1,24 @@
+{
+	"extends": "@vue/tsconfig/tsconfig.dom.json",
+	"include": [
+		"src/**/*",
+		"src/**/*.vue",
+		"banners/**/*",
+		"banners/**/*.vue"
+	],
+	"exclude": [ "test/**/*" ],
+	"compilerOptions": {
+		"target": "es6",
+		"skipLibCheck": true,
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"strictNullChecks": false,
+		"allowSyntheticDefaultImports": true,
+		"paths": {
+			"@src/*": [ "./src/*" ],
+			"@environment/*": [ "./src/environment/prod/*", "./src/environment/dev/*" ]
+		},
+	}
+}
