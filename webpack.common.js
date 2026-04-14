@@ -22,6 +22,7 @@ module.exports = ( env ) => {
 					loader: 'ts-loader',
 					options: {
 						appendTsSuffixTo: [ /\.vue$/ ],
+						configFile: path.resolve( __dirname, 'tsconfig.app.json' ),
 					},
 				},
 				// This is a "special" rule for all wikipedia.de banner entry points. It should be in sync with the rules for `.ts` files.
@@ -33,6 +34,7 @@ module.exports = ( env ) => {
 							loader: 'ts-loader',
 							options: {
 								appendTsSuffixTo: [ /\.vue$/ ],
+								configFile: path.resolve( __dirname, 'tsconfig.app.json' ),
 							},
 						},
 						{

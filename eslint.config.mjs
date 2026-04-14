@@ -31,6 +31,8 @@ export default [
 		rules: {
 			...typescriptStyle.rules,
 
+			'@typescript-eslint/consistent-type-imports': 'error',
+
 			// The following rules should be turned on again in the future (using the settings from typescriptStyle)
 			// We placed them here to avoid huge changes in our legacy codebase and to allow for slow migration
 			// See https://phabricator.wikimedia.org/T383409

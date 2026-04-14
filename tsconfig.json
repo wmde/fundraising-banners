@@ -1,22 +1,26 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"skipLibCheck": true,
-		"outDir": "./dist/",
-		"noImplicitAny": true,
-		"baseUrl": ".",
-		"resolveJsonModule": true,
-		"moduleResolution": "node",
-		"paths": {
-			"@src/*": [ "src/*" ],
-			"@test/*": [ "test/*" ],
-			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
 		},
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"es6",
-			"scripthost",
-		]
+		{
+			"path": "./tsconfig.test.json"
+		},
+		{
+			"path": "./tsconfig.node.json"
+		}
+	],
+	"ts-node": {
+		"transpileOnly": true,
+		"files": true,
+		"compilerOptions": {
+			"rootDir": "./",
+			"strict": false,
+			"module": "CommonJS",
+			"noEmit": true,
+			"target": "es6",
+			"types": [ "node" ]
+		}
 	}
 }

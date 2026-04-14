@@ -1,0 +1,26 @@
+{
+	"extends": "@vue/tsconfig/tsconfig.dom.json",
+	"include": [
+		"src/**/*",
+		"src/**/*.vue",
+		"banners/**/*",
+		"banners/**/*.vue",
+		"dashboard/**/*",
+		"dashboard/**/*.vue"
+	],
+	"exclude": [ "test/**/*", "tools/**/*" ],
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"strictNullChecks": false,
+		"allowSyntheticDefaultImports": true,
+		"target": "es6",
+		"resolveJsonModule": true,
+		"noEmit": false,
+		"rewriteRelativeImportExtensions": true,
+		"paths": {
+			"@src/*": [ "./src/*" ],
+			"@environment/*": [ "./src/environment/prod/*", "./src/environment/dev/*" ]
+		},
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
+	}
+}
