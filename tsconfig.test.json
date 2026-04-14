@@ -1,0 +1,19 @@
+{
+	"extends": "./tsconfig.app.json",
+	"include": [ "src/vue-shims.d.ts", "src/vue-type-definitions.d.ts", "test/**/*" ],
+	"exclude": [],
+	"compilerOptions": {
+		"strictNullChecks": false,
+		"noImplicitAny": false,
+		"strict": false,
+		"verbatimModuleSyntax": false,
+		"paths": {
+			"@src/*": [ "./src/*" ],
+			"@test/*": [ "./test/*" ],
+			"@banners/*": [ "./banners/*" ],
+			"@environment/*": [ "./src/environment/prod/*", "./src/environment/dev/*" ]
+		},
+		"lib": [],
+		"types": [ "node", "jsdom" ]
+	}
+}
