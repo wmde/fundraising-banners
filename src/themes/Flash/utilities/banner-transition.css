@@ -1,7 +1,7 @@
 #wmde-banner-app {
 	top: calc( -1 * var( --wmde-banner-height ) );
 }
-
+/* stylelint-disable */
 .wmde-animate-banner :is( #wmde-banner-app,
 #mw-panel,
 #mw-head,
@@ -45,3 +45,4 @@
 .vector-header-container ) {
 	padding-top: var( --wmde-banner-height );
 }
+/* stylelint-enable */

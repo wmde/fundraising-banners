@@ -52,7 +52,8 @@
 import type { Campaign, CampaignConfig } from '../../webpack/campaign_config_types';
 import IconGit from './IconGit.vue';
 import IconRefresh from './IconRefresh.vue';
-import { CompileInfo, parseCompileInfo } from '../util';
+import type { CompileInfo } from '../util';
+import { parseCompileInfo } from '../util';
 import { computed, onMounted, ref } from 'vue';
 import BannerCampaign from './BannerCampaign.vue';
 
@@ -62,7 +63,7 @@ const compileInfo = ref<Record<string, CompileInfo>>( {} );
 const gitFailurePrefix = /^UNKNOWN -/;
 
 const campaignList = computed( (): Campaign[] => Object.values( props.campaigns ) );
-const currentCampaign = computed( (): Campaign =>
+const currentCampaign = computed( (): Campaign | undefined =>
 	campaignList.value.find( ( c: Campaign ) => c.campaign === branchName.value ) );
 const filteredCampaignList = computed( (): Campaign[] =>
 	campaignList.value.filter( ( c: Campaign ) => c.campaign !== branchName.value ) );
@@ -93,7 +94,7 @@ const updatePullRequestInfo = async (): Promise<void> => {
 onMounted( async () => {
 	try {
 		await Promise.all( [ updateFileList(), updatePullRequestInfo() ] );
-	} catch ( error ) {
+	} catch ( error: any ) {
 		console.error( 'Error:', error.message );
 	}
 } );

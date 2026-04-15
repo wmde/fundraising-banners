@@ -5,7 +5,7 @@ import type { CampaignConfig } from '../webpack/campaign_config_types';
 
 declare var CAMPAIGNS: CampaignConfig;
 
-function getTrackingForPage( pageName: string, config: CampaignConfig ): { campaign: string, keyword: string } {
+function getTrackingForPage( pageName: string | null, config: CampaignConfig ): { campaign: string, keyword: string } {
 	for ( const campaignId in config ) {
 		for ( const bannerId in config[ campaignId ].banners ) {
 			if ( config[ campaignId ].banners[ bannerId ].pageName === pageName ) {

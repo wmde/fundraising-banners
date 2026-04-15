@@ -1,4 +1,4 @@
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export class ImpressionCountStub implements ImpressionCount {
 	public incrementImpressionCounts(): void {

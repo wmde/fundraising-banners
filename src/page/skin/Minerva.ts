@@ -1,4 +1,4 @@
-import { Skin } from '@src/page/skin/Skin';
+import type { Skin } from '@src/page/skin/Skin';
 
 class Minerva implements Skin {
 	private _searchField: HTMLInputElement;

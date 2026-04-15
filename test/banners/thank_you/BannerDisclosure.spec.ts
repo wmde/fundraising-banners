@@ -1,5 +1,6 @@
 import { expect, describe, it } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import BannerDisclosure from '@banners/thank_you/components/BannerDisclosure.vue';
 import thankYouContent from '@test/fixtures/ThankYouContent';
 

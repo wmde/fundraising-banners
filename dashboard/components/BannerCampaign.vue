@@ -90,8 +90,8 @@ import DeviceDesktop from './DeviceDesktop.vue';
 import IconCommand from './IconCommand.vue';
 import IconInfo from './IconInfo.vue';
 import DevicePad from './DevicePad.vue';
-import { Campaign } from '../../webpack/campaign_config_types';
-import { CompileInfo } from '../util';
+import type { Campaign } from '../../webpack/campaign_config_types';
+import type { CompileInfo } from '../util';
 import IconPullRequest from './IconPullRequest.vue';
 
 interface Props {

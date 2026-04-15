@@ -1,20 +1,20 @@
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { DayName } from '@src/utils/DynamicContent/generators/DayName';
-import { Translator } from '@src/Translator';
+import type { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { Formatters } from '@src/utils/DynamicContent/Formatters';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
 import TimeRange from '@src/utils/TimeRange';
 import { DaysLeftSentence } from '@src/utils/DynamicContent/generators/DaysLeftSentence';
 import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/CampaignDaySentence';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
 import { DonorsNeededSentence } from '@src/utils/DynamicContent/generators/DonorsNeededSentence';
 import { CampaignProjection } from '@src/utils/DynamicContent/CampaignProjection';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ProgressBarContent } from '@src/utils/DynamicContent/generators/ProgressBarContent';
-import { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
+import type { DynamicProgressBarContent } from '@src/utils/DynamicContent/DynamicProgressBarContent';
 import { CurrentTime } from '@src/utils/DynamicContent/generators/CurrentTime';
-import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
+import type { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
 import { DaysPassedSentence } from '@src/utils/DynamicContent/generators/DaysPassedSentence';
 
 export default class DynamicCampaignText implements DynamicContent {

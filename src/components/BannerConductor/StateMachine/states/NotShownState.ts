@@ -1,11 +1,11 @@
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { Page } from '@src/page/Page';
-import { Tracker } from '@src/tracking/Tracker';
+import type { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import type { Page } from '@src/page/Page';
+import type { Tracker } from '@src/tracking/Tracker';
 import { NotShownEvent } from '@src/tracking/events/NotShownEvent';
-import { ResizeHandler } from '@src/utils/ResizeHandler';
-import { Timer } from '@src/utils/Timer';
+import type { ResizeHandler } from '@src/utils/ResizeHandler';
+import type { Timer } from '@src/utils/Timer';
 
 export class NotShownState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.NotShown;

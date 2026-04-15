@@ -1,4 +1,4 @@
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { nextTick } from 'vue';
 
 export class TimerSpy implements Timer {

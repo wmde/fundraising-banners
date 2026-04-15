@@ -1,4 +1,5 @@
-import { EmitFn, onMounted, onUnmounted } from 'vue';
+import type { EmitFn } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 

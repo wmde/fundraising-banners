@@ -1,6 +1,6 @@
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import formatter from 'format-number';
-import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
+import type { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
 export class CurrencyEn implements Currency {
 	private readonly _euroAmountFormatter: NumberFormatter;

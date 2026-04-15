@@ -1,4 +1,4 @@
-import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 export class FallbackBannerSubmitEvent implements TrackingEvent {
 	public static readonly EVENT_NAME = 'fallback-banner-submitted';

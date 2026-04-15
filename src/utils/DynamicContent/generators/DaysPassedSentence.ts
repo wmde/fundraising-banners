@@ -1,6 +1,6 @@
-import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
-import TimeRange from '@src/utils/TimeRange';
-import { Translator } from '@src/Translator';
+import type { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
+import type TimeRange from '@src/utils/TimeRange';
+import type { Translator } from '@src/Translator';
 
 export class DaysPassedSentence implements TextGenerator {
 	private readonly _campaignDays: TimeRange;

@@ -1,5 +1,6 @@
 import { describe, expect, it, vi, test } from 'vitest';
-import { LegacyTrackerWPORG, TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import type { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import { MediaWikiStub } from '@test/fixtures/MediaWikiStub';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';

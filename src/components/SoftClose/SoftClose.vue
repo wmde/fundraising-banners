@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { inject, onMounted, ref } from 'vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 
 interface Props {
 	secondsTotal?: number;

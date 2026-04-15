@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import ProgressBar from '@banners/thank_you/components/ProgressBar.vue';
 import thankYouContent from '@test/fixtures/ThankYouContent';
 

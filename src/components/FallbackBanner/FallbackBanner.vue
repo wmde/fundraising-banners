@@ -46,7 +46,7 @@
 
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import { computed, inject, ref } from 'vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
@@ -56,7 +56,7 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import FallbackButton from '@src/components/FallbackBanner/FallbackButton.vue';
 import SmallFooter from '@src/components/FallbackBanner/SmallFooter.vue';
 import LargeFooter from '@src/components/FallbackBanner/LargeFooter.vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 
 interface Props {

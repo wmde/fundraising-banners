@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="onSubmit" class="wmde-banner-sub-form wmde-banner-form-upgrade">
+	<form @submit.prevent class="wmde-banner-sub-form wmde-banner-form-upgrade">
 		<div class="wmde-banner-form-upgrade-title">
 			<a tabIndex="-1" href="#" class="previous" @click.prevent="onPrevious">
 				<slot name="back">
@@ -15,6 +15,7 @@
 				type="submit"
 				tabIndex="-1"
 				class="wmde-banner-form-button t-annual-upgrade-no"
+				@click="() => onSubmit( Intervals.ONCE.value )"
 				:value="Intervals.ONCE.value"
 			>
 				{{ $translate( 'upgrade-to-yearly-no', { amount: secondPageAmount } ) }}
@@ -24,6 +25,7 @@
 				type="submit"
 				tabIndex="-1"
 				class="wmde-banner-form-button t-annual-upgrade-yes"
+				@click="() => onSubmit( Intervals.YEARLY.value )"
 				:value="Intervals.YEARLY.value"
 			>
 				{{ $translate( 'upgrade-to-yearly-yes', { amount: secondPageAmount } ) }}
@@ -36,9 +38,9 @@
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 
@@ -55,9 +57,7 @@ const interval = ref<string>( '' );
 
 useFormStepShownEvent( 'UpgradeToYearlyForm', tracker, props );
 
-const onSubmit = ( e: SubmitEvent ): void => {
-	const submitValue = ( e.submitter as HTMLInputElement ).value;
-
+const onSubmit = ( submitValue: string ): void => {
 	tracker.trackEvent( new UpgradeToYearlyEvent(
 		submitValue === Intervals.YEARLY.value ? 'upgraded-to-yearly' : 'not-upgraded-to-yearly'
 	) );

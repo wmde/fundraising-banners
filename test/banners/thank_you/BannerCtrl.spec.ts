@@ -1,9 +1,11 @@
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { Mock } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import BannerCtrl from '@banners/thank_you/components/BannerCtrl.vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
