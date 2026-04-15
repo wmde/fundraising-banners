@@ -1,4 +1,4 @@
-import { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import type { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { mapCloseEvent } from '@src/tracking/LegacyEventTracking/mapCloseEvent';

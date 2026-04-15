@@ -1,9 +1,9 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { expect, vi } from 'vitest';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { Timer } from '@src/utils/Timer';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 const expectSlideShowPlaysWhenBecomesVisible = async ( wrapper: VueWrapper<any> ): Promise<any> => {

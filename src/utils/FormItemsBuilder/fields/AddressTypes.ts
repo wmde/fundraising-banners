@@ -1,4 +1,4 @@
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 type AddressTypeKey = 'FULL' | 'EMAIL' | 'ANONYMOUS';
 

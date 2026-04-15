@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { DailyDonorStatsValues } from '@src/utils/DynamicContent/DailyDonorAverage';
+import type { DailyDonorStatsValues } from '@src/utils/DynamicContent/DailyDonorAverage';
 import { LinearDailyDonorAverage } from '@src/utils/DynamicContent/LinearDailyDonorAverage';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 

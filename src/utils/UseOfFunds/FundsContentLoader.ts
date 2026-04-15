@@ -1,4 +1,4 @@
-import { UseOfFundsContent } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { UseOfFundsContent } from '@src/domain/EditableContent/UseOfFundsContent';
 
 export interface FundsContentLoader {
 	getContent(): UseOfFundsContent;

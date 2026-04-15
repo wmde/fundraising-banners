@@ -1,5 +1,5 @@
-import { CampaignProjectionParameters } from '@src/domain/CampaignParameters';
-import TimeRange from '@src/utils/TimeRange';
+import type { CampaignProjectionParameters } from '@src/domain/CampaignParameters';
+import type TimeRange from '@src/utils/TimeRange';
 
 const DONORS_NEEDED_ROUNDING = 100_000;
 

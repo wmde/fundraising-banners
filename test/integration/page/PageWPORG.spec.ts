@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi, vitest } from 'vitest';
 import PageWPORG, { bannerAppId } from '@src/page/PageWPORG';
-import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { SkinStub } from '@test/fixtures/SkinStub';
 import { SizeIssueCheckerStub } from '@test/fixtures/SizeIssueCheckerStub';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';

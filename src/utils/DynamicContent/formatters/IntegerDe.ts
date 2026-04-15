@@ -1,5 +1,5 @@
-import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
-import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
+import type { Integer } from '@src/utils/DynamicContent/formatters/Integer';
+import type { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 import formatter from 'format-number';
 
 export class IntegerDe implements Integer {

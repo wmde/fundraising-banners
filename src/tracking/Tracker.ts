@@ -1,4 +1,4 @@
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 /**
  * Implementations of this interface will send tracking data to external

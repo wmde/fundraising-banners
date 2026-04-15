@@ -1,4 +1,4 @@
-import { Time } from '@src/utils/DynamicContent/formatters/Time';
+import type { Time } from '@src/utils/DynamicContent/formatters/Time';
 
 export class TimeDe implements Time {
 	public getFormatted( date: Date ): string {

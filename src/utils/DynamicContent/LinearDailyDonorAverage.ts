@@ -1,5 +1,5 @@
-import { DailyDonorAverage, DailyDonorStatsValues } from '@src/utils/DynamicContent/DailyDonorAverage';
-import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
+import type { DailyDonorAverage, DailyDonorStatsValues } from '@src/utils/DynamicContent/DailyDonorAverage';
+import type { Integer } from '@src/utils/DynamicContent/formatters/Integer';
 
 const MINUTES_IN_DAY = 1440;
 

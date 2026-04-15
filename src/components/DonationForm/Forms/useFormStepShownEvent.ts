@@ -1,7 +1,7 @@
 import { watch } from 'vue';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 interface Props {
 	isCurrent: boolean;

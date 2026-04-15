@@ -1,4 +1,4 @@
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 const COOKIE_NAME = 'centralnotice_hide_';
 

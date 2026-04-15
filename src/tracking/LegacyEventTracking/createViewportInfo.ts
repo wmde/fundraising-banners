@@ -1,4 +1,4 @@
-import { ViewportAndBannerSize } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
+import type { ViewportAndBannerSize } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 
 export function createViewportInfo(): ViewportAndBannerSize {
 	return {

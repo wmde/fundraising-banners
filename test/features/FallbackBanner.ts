@@ -1,6 +1,6 @@
-import { VueWrapper } from '@vue/test-utils';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { Tracker } from '@src/tracking/Tracker';
+import type { VueWrapper } from '@vue/test-utils';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { Tracker } from '@src/tracking/Tracker';
 import { expect, vi } from 'vitest';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
@@ -8,7 +8,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 

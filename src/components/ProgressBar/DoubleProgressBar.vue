@@ -29,7 +29,7 @@
 <script setup lang="ts">
 
 import { inject } from 'vue';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 const { progressBarContent, daysLeftSentence, daysPassedSentence } = inject<DynamicContent>( 'dynamicCampaignText' );
 const currentCampaignTimePercentage = inject<number>( 'currentCampaignTimePercentage' );

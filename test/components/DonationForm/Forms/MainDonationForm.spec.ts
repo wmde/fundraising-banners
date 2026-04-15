@@ -1,7 +1,8 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import DonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';

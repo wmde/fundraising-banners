@@ -93,22 +93,22 @@ import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import {
 	createSubmittableMainDonationForm
 } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
@@ -117,12 +117,12 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton
 	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
-import { Translator } from '@src/Translator';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Translator } from '@src/Translator';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 

@@ -1,11 +1,14 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
+		"alwaysStrict": false,
+		"strictNullChecks": false,
+		"noImplicitAny": false,
 		"paths": {
-			"@banners/*": [ "banners/*" ],
-			"@src/*": [ "src/*" ],
-			"@test/*": [ "test/*" ],
-			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]
+			"@banners/*": [ "../banners/*" ],
+			"@src/*": [ "../src/*" ],
+			"@test/*": [ "../test/*" ],
+			"@environment/*": [ "../src/environment/prod/*", "../src/environment/dev/*" ]
 		}
 	}
 }

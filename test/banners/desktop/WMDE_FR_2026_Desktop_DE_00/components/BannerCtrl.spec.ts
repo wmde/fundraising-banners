@@ -1,5 +1,6 @@
 import { beforeEach, describe, test, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
@@ -16,13 +17,13 @@ import {
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerAutoHideFeatures } from '@test/features/MainBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { StepAction } from '@src/components/DonationForm/StepNavigation';
+import type { StepAction } from '@src/components/DonationForm/StepNavigation';
 import { resetFormModel } from '@test/resetFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';

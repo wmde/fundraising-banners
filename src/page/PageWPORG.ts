@@ -1,17 +1,17 @@
-import { Page } from '@src/page/Page';
-import { Skin } from '@src/page/skin/Skin';
-import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { Page } from '@src/page/Page';
+import type { Skin } from '@src/page/skin/Skin';
+import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
+import type { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { Vector2 } from '@src/utils/Vector2';
-import { CampaignParameters } from '@src/domain/CampaignParameters';
-import { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { ThankYouCampaignParameters } from '@src/domain/ThankYouCampaignParameters';
 import { getCampaignParameterOverride } from '@environment/CampaignParameterOverride';
-import { TrackingParameters } from '@src/domain/TrackingParameters';
+import type { TrackingParameters } from '@src/domain/TrackingParameters';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { ChannelNameWPORG } from '@src/page/ChannelNameWPORG';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { ChannelNameWPORG } from '@src/page/ChannelNameWPORG';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export const bannerAppId = 'wmde-banner-app';
 const bannerHeightCssVariable = '--wmde-banner-height';

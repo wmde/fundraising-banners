@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import CloseButton from '@banners/thank_you/components/CloseButton.vue';
 import thankYouContent from '@test/fixtures/ThankYouContent';
 

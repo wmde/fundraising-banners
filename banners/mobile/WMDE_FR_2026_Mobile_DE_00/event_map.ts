@@ -1,4 +1,4 @@
-import { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import type { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
