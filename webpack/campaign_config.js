@@ -77,7 +77,7 @@ CampaignConfig.prototype.getCampaignTracking = function ( pageName ) {
 			if ( this.config[ campaign ].banners[ banner ].pagename === pageName ) {
 				trackingData = {
 					bannerTracking: this.config[ campaign ].banners[ banner ].tracking,
-					campaignTracking: this.config[ campaign ].campaign_tracking
+					campaignTracking: this.config[ campaign ].campaign_tracking,
 				};
 			}
 		}.bind( this ) );
@@ -101,7 +101,7 @@ CampaignConfig.prototype.getCampaignTrackingForEntryPoint = function ( entryPoin
 			if ( configFileName === entryPointPath || resolvedConfigFileName === resolvedPath ) {
 				trackingData = {
 					bannerTracking: this.config[ campaign ].banners[ banner ].tracking,
-					campaignTracking: this.config[ campaign ].campaign_tracking
+					campaignTracking: this.config[ campaign ].campaign_tracking,
 				};
 			}
 		}.bind( this ) );

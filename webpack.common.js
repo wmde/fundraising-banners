@@ -13,7 +13,7 @@ module.exports = ( env ) => {
 		output: {
 			filename: '[name].js',
 			path: path.resolve( __dirname, 'dist' ),
-			publicPath: '/'
+			publicPath: '/',
 		},
 		module: {
 			rules: [
@@ -21,8 +21,8 @@ module.exports = ( env ) => {
 					test: /\.ts$/,
 					loader: 'ts-loader',
 					options: {
-						appendTsSuffixTo: [ /\.vue$/ ]
-					}
+						appendTsSuffixTo: [ /\.vue$/ ],
+					},
 				},
 				// This is a "special" rule for all wikipedia.de banner entry points. It should be in sync with the rules for `.ts` files.
 				// It replaces tracking parameter placeholders with tracking parameters read from the campaign configuration.
@@ -32,8 +32,8 @@ module.exports = ( env ) => {
 						{
 							loader: 'ts-loader',
 							options: {
-								appendTsSuffixTo: [ /\.vue$/ ]
-							}
+								appendTsSuffixTo: [ /\.vue$/ ],
+							},
 						},
 						{
 							loader: 'string-replace-loader',
@@ -48,21 +48,21 @@ module.exports = ( env ) => {
 									const tracking = campaigns.getCampaignTrackingForEntryPoint( this.resource );
 									const placeholderToTrackingKeyMap = {
 										campaign: 'campaignTracking',
-										keyword: 'bannerTracking'
+										keyword: 'bannerTracking',
 									};
 									return tracking[ placeholderToTrackingKeyMap[ captureGroupMatch ] ];
-								}
-							}
-						}
-					]
+								},
+							},
+						},
+					],
 				},
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader'
+					loader: 'vue-loader',
 				},
 				{
 					test: /\.html$/,
-					use: 'html-loader'
+					use: 'html-loader',
 				},
 				{
 					test: /\.(scss|css)$/,
@@ -76,27 +76,27 @@ module.exports = ( env ) => {
 									// This option allows us to specify a project-relative path in our SCSS files
 									// see https://sass-lang.com/documentation/at-rules/import/#load-paths
 									loadPaths: [
-										path.resolve( __dirname )
-									]
-								}
-							}
-						}
-					]
-				}
-			]
+										path.resolve( __dirname ),
+									],
+								},
+							},
+						},
+					],
+				},
+			],
 		},
 		resolve: {
 			extensions: [ '.ts', '.js', '.json' ],
 			alias: {
-				'@src': path.resolve( __dirname, 'src' )
+				'@src': path.resolve( __dirname, 'src' ),
 			},
 			fallback: {
 				// Don't import node.js 'path' polyfill in compiled code. it shouldn't be used.
-				path: false
-			}
+				path: false,
+			},
 		},
 		plugins: [
-			new VueLoaderPlugin()
-		]
+			new VueLoaderPlugin(),
+		],
 	};
 };

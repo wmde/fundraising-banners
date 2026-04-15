@@ -1,6 +1,6 @@
 <template>
 	<svg width="100%" height="100%" viewBox="0 0 28 28" version="1.1"
-	style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
+		style="fill-rule: evenodd;clip-rule: evenodd;stroke-linejoin: round;stroke-miterlimit: 2;">
 		<g transform="matrix(1,0,0,1,-681,-72)">
 			<g transform="matrix(1,0,0,1,0,492)">
 				<g id="Copy" transform="matrix(0.965517,0,0,0.965517,65,-503.034)">

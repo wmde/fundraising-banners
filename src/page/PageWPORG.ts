@@ -14,10 +14,10 @@ import { ChannelNameWPORG } from '@src/page/ChannelNameWPORG';
 import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export const bannerAppId = 'wmde-banner-app';
-export const bannerAnimatedClass = 'wmde-animate-banner';
-export const showBannerClass = 'wmde-show-banner';
-export const bannerHeightCssVariable = '--wmde-banner-height';
-export const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
+const bannerHeightCssVariable = '--wmde-banner-height';
+const bannerTransitionDurationCssVariable = '--wmde-banner-transition-duration';
+const bannerAnimatedClass = 'wmde-animate-banner';
+const showBannerClass = 'wmde-show-banner';
 const centralNoticeBannerContainerId = 'WMDE-Banner-Container';
 const campaignParametersId = 'wmde-campaign-parameters';
 
@@ -186,13 +186,11 @@ class PageWPORG implements Page {
 	public getThankYouCampaignParameters(): ThankYouCampaignParameters {
 		const data = this.getCampaignData();
 
-		const thankYouCampaignParameters = {
+		return {
 			numberOfDonors: Number( data.tyNumberOfDonors ),
 			numberOfMembers: Number( data.tyNumberOfMembers ),
 			progressBarPercentage: Number( data.tyProgressBarPercentage )
 		};
-
-		return thankYouCampaignParameters;
 	}
 
 	public getTracking(): TrackingParameters {

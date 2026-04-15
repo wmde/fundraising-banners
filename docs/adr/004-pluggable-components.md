@@ -11,14 +11,14 @@ Accepted
 ## Context
 
 In the old banners we used a React-ish* way to make components pluggable for A/B tests. We want to replicate this
-but use patterns recommended by the Vue js team.
+but use patterns recommended by the Vue.js team.
 
 (*) Components are passed through the tree as props. 
 
 Patterns we considered:
 
 * Components as props similar to how we did it in React.
-* Top level component that defines the sub-components to be used in slots.
+* Top level component that defines the subcomponents to be used in slots.
 * Components that are registered globally in the entry point.
 
 ## Decision
