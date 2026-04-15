@@ -76,8 +76,8 @@ import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBannerVar.vue';
 import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import BannerText from '../content/BannerTextVar.vue';
@@ -86,7 +86,7 @@ import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/Upgrad
 import BannerSlides from '../content/BannerSlides.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
@@ -97,7 +97,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';

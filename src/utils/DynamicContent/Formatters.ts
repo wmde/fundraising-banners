@@ -1,7 +1,7 @@
-import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
-import { Time } from '@src/utils/DynamicContent/formatters/Time';
+import type { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Integer } from '@src/utils/DynamicContent/formatters/Integer';
+import type { Time } from '@src/utils/DynamicContent/formatters/Time';
 
 export interface Formatters {
 	currency: Currency;

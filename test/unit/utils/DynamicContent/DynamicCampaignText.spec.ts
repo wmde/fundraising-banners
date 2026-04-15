@@ -1,13 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import DynamicCampaignText from '@src/utils/DynamicContent/DynamicCampaignText';
 import { Translator } from '@src/Translator';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
+import type { Formatters } from '@src/utils/DynamicContent/Formatters';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { OrdinalEn } from '@src/utils/DynamicContent/formatters/OrdinalEn';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
-import { CampaignParameters } from '@src/domain/CampaignParameters';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 import { TimeEn } from '@src/utils/DynamicContent/formatters/TimeEn';
 
 const translator = new Translator( {

@@ -1,4 +1,4 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 

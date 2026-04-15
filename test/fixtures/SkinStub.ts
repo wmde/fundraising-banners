@@ -1,4 +1,4 @@
-import { Skin } from '@src/page/skin/Skin';
+import type { Skin } from '@src/page/skin/Skin';
 
 export class SkinStub implements Skin {
 	public addHideBannerListener(): void {

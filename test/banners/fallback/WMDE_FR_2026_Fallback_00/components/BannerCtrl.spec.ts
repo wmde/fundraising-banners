@@ -1,15 +1,16 @@
 import { describe, test } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import BannerCtrl from '@banners/fallback/WMDE_FR_2026_Fallback_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { Tracker } from '@src/tracking/Tracker';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { Tracker } from '@src/tracking/Tracker';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { dynamicContentFeatures, fallbackBannerFeatures, submitFeatures } from '@test/features/FallbackBanner';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 
 const translator = ( key: string ): string => key;
 

@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 const {

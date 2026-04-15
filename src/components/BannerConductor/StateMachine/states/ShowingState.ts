@@ -1,7 +1,7 @@
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { Page } from '@src/page/Page';
-import { Timer } from '@src/utils/Timer';
+import type { Page } from '@src/page/Page';
+import type { Timer } from '@src/utils/Timer';
 
 export class ShowingState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Showing;

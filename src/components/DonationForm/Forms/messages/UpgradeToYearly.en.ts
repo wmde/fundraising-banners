@@ -1,4 +1,4 @@
-import { TranslationMessages } from '@src/Translator';
+import type { TranslationMessages } from '@src/Translator';
 
 const Translations: TranslationMessages = {
 	'upgrade-to-yearly-header': 'Can you make it {{amount}} yearly?',

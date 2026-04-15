@@ -1,4 +1,4 @@
-import { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import type { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';

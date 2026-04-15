@@ -1,6 +1,6 @@
-import { Validity } from '@src/utils/FormModel/Validity';
-import { ComputedRef, Ref } from 'vue';
-import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
+import type { Validity } from '@src/utils/FormModel/Validity';
+import type { ComputedRef, Ref } from 'vue';
+import type { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 
 export interface FormModel {
 	interval: Ref<string>;

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import { TrackingParameters } from '@src/domain/TrackingParameters';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { TrackingParameters } from '@src/domain/TrackingParameters';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 
 export const SUBSCRIBE_URL = 'https://www.wikimedia.de/mitglieder/';
 export const USE_OF_FUNDS_URL = 'https://spenden.wikimedia.de/use-of-funds/';

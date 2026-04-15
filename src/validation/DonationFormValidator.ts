@@ -1,9 +1,9 @@
-import { FormModel } from '@src/utils/FormModel/FormModel';
+import type { FormModel } from '@src/utils/FormModel/FormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { validateAmount } from '@src/validation/validateAmount';
 import { validateStringIsNotEmpty } from '@src/validation/validateStringIsNotEmpty';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
-import { FormValidator } from '@src/validation/FormValidator';
+import type { FormValidator } from '@src/validation/FormValidator';
 
 export class DonationFormValidator implements FormValidator {
 	private _formModel: FormModel;

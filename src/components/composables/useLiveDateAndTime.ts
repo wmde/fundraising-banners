@@ -1,6 +1,7 @@
-import { inject, ref, Ref } from 'vue';
-import { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
-import { Timer } from '@src/utils/Timer';
+import type { Ref } from 'vue';
+import { inject, ref } from 'vue';
+import type { DateAndTime } from '@src/utils/DynamicContent/DateAndTime';
+import type { Timer } from '@src/utils/Timer';
 
 type ReturnType = {
 	liveDateAndTime: Ref<DateAndTime>;

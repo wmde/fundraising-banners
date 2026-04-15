@@ -1,4 +1,4 @@
-import { BannerType } from '@src/domain/BannerType';
+import type { BannerType } from '@src/domain/BannerType';
 
 /**
  * This interface represents an EventLogging schema on wikipedia.org domains

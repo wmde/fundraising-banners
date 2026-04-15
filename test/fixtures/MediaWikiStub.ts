@@ -1,4 +1,4 @@
-import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
 
 export class MediaWikiStub implements MediaWiki {
 	public isContentHiddenByLightbox(): boolean {

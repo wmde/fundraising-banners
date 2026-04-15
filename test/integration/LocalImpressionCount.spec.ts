@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
+import MockLocalStorage from '@test/fixtures/MockLocalStorage.ts';
 
 describe( 'LocalImpressionCount', function () {
 
-	beforeEach( ()=> {
-		console.log( window.localStorage );
-		localStorage.clear();
+	beforeEach( () => {
+		Object.defineProperty( window, 'localStorage', { writable: true, configurable: true, value: MockLocalStorage } );
 	} );
 
 	describe( '#overallCount', function () {

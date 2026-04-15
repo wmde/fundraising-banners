@@ -36,9 +36,9 @@
 import { computed, inject, ref } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { useFormStepShownEvent } from '@src/components/DonationForm/Forms/useFormStepShownEvent';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { UpgradeToYearlyEvent } from '@src/tracking/events/UpgradeToYearlyEvent';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 

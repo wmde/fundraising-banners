@@ -1,5 +1,5 @@
-import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
-import { Time } from '@src/utils/DynamicContent/formatters/Time';
+import type { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
+import type { Time } from '@src/utils/DynamicContent/formatters/Time';
 
 export class CurrentTime implements TextGenerator<Date> {
 	private _timeFormatter: Time;
