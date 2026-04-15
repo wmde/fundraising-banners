@@ -1,5 +1,5 @@
-import { StateMachineState } from '@src/domain/StateMachine/StateMachineState';
-import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import type { StateMachineState } from '@src/domain/StateMachine/StateMachineState';
+import type { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 
 export abstract class BannerState implements StateMachineState<BannerStates> {
 	public abstract stateName: BannerStates;

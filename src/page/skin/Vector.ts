@@ -1,4 +1,4 @@
-import { Skin } from '@src/page/skin/Skin';
+import type { Skin } from '@src/page/skin/Skin';
 
 class Vector implements Skin {
 	protected _searchFieldId: string = 'searchInput';

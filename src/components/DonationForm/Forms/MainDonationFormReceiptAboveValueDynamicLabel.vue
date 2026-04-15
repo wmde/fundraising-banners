@@ -91,13 +91,13 @@ export default {
 
 import { computed, inject, onMounted, ref, watch } from 'vue';
 import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
-import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import SelectCustomAmount from '@src/components/DonationForm/SubComponents/SelectCustomAmount.vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { newDonationFormValidator } from '@src/validation/DonationFormValidator';
 import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { isValidOrUnset } from '@src/components/DonationForm/Forms/isValidOrUnset';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormPaymentsAndReceiptButtonDynamicLabel.vue';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';

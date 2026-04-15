@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';

@@ -1,9 +1,10 @@
 import { describe, expect, it, afterEach, beforeEach, test, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 const defaultTranslate: ( key: string ) => string = ( key: string ) => key;

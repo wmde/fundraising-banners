@@ -1,9 +1,9 @@
-import { CampaignParameters } from '@src/domain/CampaignParameters';
-import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { Vector2 } from '@src/utils/Vector2';
-import { TrackingParameters } from '@src/domain/TrackingParameters';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import type { Vector2 } from '@src/utils/Vector2';
+import type { TrackingParameters } from '@src/domain/TrackingParameters';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export interface Page {
 	getReasonToNotShowBanner: ( bannerDimensions: Vector2 ) => BannerNotShownReasons|null;

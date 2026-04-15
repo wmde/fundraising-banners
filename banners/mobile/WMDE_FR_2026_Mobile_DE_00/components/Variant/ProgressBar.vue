@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 
 const { progressBarContent } = inject<DynamicContent>( 'dynamicCampaignText' );
 </script>

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import PageWPDE, { WpdeWindow } from '@src/page/PageWPDE';
+import type { WpdeWindow } from '@src/page/PageWPDE';
+import PageWPDE from '@src/page/PageWPDE';
 
 const tracking = { campaign: 'testCampaign', keyword: 'testKeyword' };
 

@@ -1,7 +1,7 @@
-import { Translator } from '@src/Translator';
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
-import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
-import { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
+import type { Translator } from '@src/Translator';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import type { NumberFormatter } from '@src/utils/DynamicContent/formatters/NumberFormatter';
 
 export default class FormItemsBuilder {
 	private readonly _formItems: DonationFormItems;

@@ -1,4 +1,4 @@
-import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';

@@ -1,4 +1,4 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';

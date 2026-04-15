@@ -1,4 +1,4 @@
-import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
+import type { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 export class OrdinalDe implements Ordinal {
 	public getFormatted( figures: number ): string {

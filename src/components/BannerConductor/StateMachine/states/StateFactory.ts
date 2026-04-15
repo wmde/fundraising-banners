@@ -1,19 +1,19 @@
-import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
+import type { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { PendingState } from '@src/components/BannerConductor/StateMachine/states/PendingState';
-import { Page } from '@src/page/Page';
+import type { Page } from '@src/page/Page';
 import { NotShownState } from '@src/components/BannerConductor/StateMachine/states/NotShownState';
-import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
-import { Tracker } from '@src/tracking/Tracker';
-import { ResizeHandler } from '@src/utils/ResizeHandler';
+import type { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { ResizeHandler } from '@src/utils/ResizeHandler';
 import { ShowingState } from '@src/components/BannerConductor/StateMachine/states/ShowingState';
-import { BannerConfig } from '@src/domain/BannerConfig';
+import type { BannerConfig } from '@src/domain/BannerConfig';
 import { VisibleState } from '@src/components/BannerConductor/StateMachine/states/VisibleState';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 import { ClosedState } from '@src/components/BannerConductor/StateMachine/states/ClosedState';
 import { InitialState } from '@src/components/BannerConductor/StateMachine/states/InitialState';
-import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import { Timer } from '@src/utils/Timer';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { Timer } from '@src/utils/Timer';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;

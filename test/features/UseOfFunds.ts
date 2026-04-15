@@ -1,9 +1,9 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 
 /*
 The new 2024 use of funds component uses the HTML <dialog> element

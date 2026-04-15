@@ -1,5 +1,5 @@
-import { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
+import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 
 export interface NotShownCustomData {
 	reason: BannerNotShownReasons;
@@ -11,10 +11,10 @@ export interface NotShownCustomData {
 export class NotShownEvent implements TrackingEvent<NotShownCustomData> {
 	public static readonly EVENT_NAME = 'not-shown';
 
-	public readonly eventName: string = NotShownEvent.EVENT_NAME;
-	public readonly customData: NotShownCustomData;
-	public readonly feature: TrackingFeatureName = 'Page';
-	public readonly userChoice: string = '';
+	public eventName: string = NotShownEvent.EVENT_NAME;
+	public customData: NotShownCustomData;
+	public feature: TrackingFeatureName = 'Page';
+	public userChoice: string = '';
 
 	public constructor( customData: NotShownCustomData ) {
 		this.customData = customData;

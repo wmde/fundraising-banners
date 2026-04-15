@@ -1,4 +1,4 @@
-import { TrackingParameters } from '@src/domain/TrackingParameters';
+import type { TrackingParameters } from '@src/domain/TrackingParameters';
 
 /**
  * This class encapsulates URL generation to an end point to the fundraising application and all parameters needed for

@@ -91,9 +91,9 @@
 </template>
 
 <script setup lang="ts">
-import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import type { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { nextTick, ref, watch } from 'vue';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import BannerSlides from '../content/BannerSlides.vue';
@@ -113,7 +113,7 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import SepaLogo from '@src/components/PaymentLogos/SepaLogo.vue';
 import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';

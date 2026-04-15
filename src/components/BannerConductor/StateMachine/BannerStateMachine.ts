@@ -1,6 +1,6 @@
-import { StateMachine } from '@src/domain/StateMachine/StateMachine';
-import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
-import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
+import type { StateMachine } from '@src/domain/StateMachine/StateMachine';
+import type { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
+import type { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
 
 export class BannerStateMachine implements StateMachine<BannerState> {
 	public currentState: ReactiveProperty<BannerState>;
@@ -8,7 +8,7 @@ export class BannerStateMachine implements StateMachine<BannerState> {
 	public constructor( stateRef: ReactiveProperty<BannerState> ) {
 		this.currentState = stateRef;
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		this.currentState.value.enter( null ).then( ()=>{} );
+		this.currentState.value.enter( null ).then( () => {} );
 	}
 
 	public async changeState( state: BannerState ): Promise<any> {

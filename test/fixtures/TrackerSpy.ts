@@ -1,5 +1,5 @@
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class TrackerSpy implements Tracker {
 

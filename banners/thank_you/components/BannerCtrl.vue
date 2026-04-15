@@ -37,7 +37,7 @@
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { ThankYouModalShownEvent } from '@src/tracking/events/ThankYouModalShownEvent';
@@ -45,7 +45,7 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import MiniBanner from '../components/MiniBanner.vue';
 import BannerModal from './BannerModal.vue';
 import { ThankYouModalHiddenEvent } from '@src/tracking/events/ThankYouModalHiddenEvent';
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 import { ThankYouSectionExpandedEvent } from '@src/tracking/events/ThankYouSectionExpandedEvent';
 
 enum ContentStates {

@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import CloseButton from './CloseButton.vue';
 import ProgressBar from './ProgressBar.vue';
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
 	thankYouContent: ThankYouContent;

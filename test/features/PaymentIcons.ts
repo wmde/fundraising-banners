@@ -1,4 +1,4 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { expect } from 'vitest';
 
 const expectShowsCreditCardLogos = ( wrapper: VueWrapper<any> ): void => {

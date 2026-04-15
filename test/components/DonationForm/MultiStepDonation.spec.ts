@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import SubFormStub from '@test/fixtures/SubFormStub.vue';
-import { StepController } from '@src/components/DonationForm/StepController';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { StepController } from '@src/components/DonationForm/StepController';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { StepControllerSpy } from '@test/fixtures/StepControllerSpy';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 import { TimerStub } from '@test/fixtures/TimerStub';

@@ -73,14 +73,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref } from 'vue';
+import { computed, type Ref, ref } from 'vue';
 import type { Banner, Campaign } from '../../webpack/campaign_config_types';
 import IconPreview from './IconPreview.vue';
 import IconEdit from './IconEdit.vue';
 import IconCopy from './IconCopy.vue';
 import IconBuild from './IconBuild.vue';
 import { relevantTime } from '../relevant_time';
-import { CompileInfo } from '../util';
+import type { CompileInfo } from '../util';
 import LoadingSpinner from './BuildingAnimation.vue';
 import CopyingAnimation from './CopyingAnimation.vue';
 import IconDarkMode from './IconDarkMode.vue';

@@ -34,12 +34,12 @@
 
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { computed, inject, ref } from 'vue';
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';

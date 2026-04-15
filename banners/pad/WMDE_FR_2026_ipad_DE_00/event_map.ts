@@ -1,4 +1,4 @@
-import { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
+import type { TrackingEventConverterFactory } from '@src/tracking/LegacyTrackerWPORG';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { mapFormStepShownEvent } from '@src/tracking/LegacyEventTracking/mapFormStepShownEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';

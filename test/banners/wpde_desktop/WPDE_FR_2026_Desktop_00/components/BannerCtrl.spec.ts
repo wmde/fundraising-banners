@@ -1,5 +1,6 @@
 import { beforeEach, describe, test } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Banner from '@banners/wpde_desktop/WPDE_FR_2026_Desktop_00/components/BannerCtrl.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
@@ -12,12 +13,12 @@ import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { bannerMainFeatures } from '@test/features/MainBanner';
 import { setCookieImageFeatures } from '@test/features/SetCookieImage';
 import { alreadyDonatedLinkFeatures } from '@test/features/AlreadyDonatedLink';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
 

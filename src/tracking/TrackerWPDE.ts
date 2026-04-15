@@ -1,8 +1,8 @@
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
-import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import type { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 
 interface Window {

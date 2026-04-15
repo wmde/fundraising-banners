@@ -1,6 +1,6 @@
 import DynamicCampaignText from '@src/utils/DynamicContent/messages/DynamicCampaignText.en';
 import CloseButtonTextEn from '@src/components/ButtonClose/messages/ButtonClose.en';
-import { TranslationMessages } from '@src/Translator';
+import type { TranslationMessages } from '@src/Translator';
 import SoftClose from '@src/components/SoftClose/messages/SoftClose.en';
 import Footer from '@src/components/Footer/messages/Footer.en';
 import MainDonationForm from '@src/components/DonationForm/Forms/messages/MainDonationForm.en';
