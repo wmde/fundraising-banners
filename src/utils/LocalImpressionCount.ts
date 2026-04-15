@@ -1,6 +1,6 @@
 import hasLocalStorage from './hasLocalStorage';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
-import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 
 export class LocalImpressionCount implements ImpressionCount {
 	private readonly _bannerName: string;

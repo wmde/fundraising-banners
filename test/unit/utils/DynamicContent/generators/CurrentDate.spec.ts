@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { Translator } from '@src/Translator';
 import { CurrentDate } from '@src/utils/DynamicContent/generators/CurrentDate';
-import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
+import type { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 const translator = new Translator( {
 	'date-month-1': 'Ick {{day}}',

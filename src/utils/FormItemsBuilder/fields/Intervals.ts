@@ -1,4 +1,4 @@
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
 type IntervalsKey = 'ONCE' | 'MONTHLY' | 'QUARTERLY' | 'BIANNUAL' | 'YEARLY';
 export const Intervals: Record<IntervalsKey, FormItem> = {

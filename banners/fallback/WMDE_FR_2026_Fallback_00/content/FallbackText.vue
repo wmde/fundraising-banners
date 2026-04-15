@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted } from 'vue';
-import { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import InfoIconItalic from '@src/components/Icons/InfoIconItalic.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 

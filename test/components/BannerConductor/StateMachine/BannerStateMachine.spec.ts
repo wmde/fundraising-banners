@@ -1,6 +1,6 @@
 import { describe, expect, it, vitest } from 'vitest';
 import { ref } from 'vue';
-import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
+import type { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 

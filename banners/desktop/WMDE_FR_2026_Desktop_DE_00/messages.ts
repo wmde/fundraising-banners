@@ -1,6 +1,6 @@
 import DynamicCampaignTextDe from '@src/utils/DynamicContent/messages/DynamicCampaignText.de';
 import CloseButtonTextDe from '@src/components/ButtonClose/messages/ButtonClose.de';
-import { TranslationMessages } from '@src/Translator';
+import type { TranslationMessages } from '@src/Translator';
 import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/UpgradeToYearly.de';
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';

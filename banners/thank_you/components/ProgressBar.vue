@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
 	thankYouContent: ThankYouContent;

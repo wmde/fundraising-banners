@@ -1,5 +1,7 @@
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { Mock } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import BannerModal from '@banners/thank_you/components/BannerModal.vue';
 import thankYouContent from '@test/fixtures/ThankYouContent';
 import BannerDisclosure from '@banners/thank_you/components/BannerDisclosure.vue';

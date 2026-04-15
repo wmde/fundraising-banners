@@ -1,7 +1,7 @@
-import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
-import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
-import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
+import type { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
+import type { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export interface MediaWiki {
 	getConfigItem( name: string ): any;

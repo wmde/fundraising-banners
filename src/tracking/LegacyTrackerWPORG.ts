@@ -1,9 +1,9 @@
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
-import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
-import { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
+import type { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
+import type { RuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 
 export type TrackingEventConverterFactory = ( event: TrackingEvent<any> ) => WMDELegacyBannerEvent|WMDESizeIssueEvent;
 

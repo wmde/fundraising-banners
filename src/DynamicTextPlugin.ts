@@ -1,8 +1,8 @@
-import { App } from 'vue';
-import { Translator } from '@src/Translator';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { CampaignParameters } from '@src/domain/CampaignParameters';
-import { ImpressionCount } from '@src/utils/ImpressionCount';
+import type { App } from 'vue';
+import type { Translator } from '@src/Translator';
+import type { Formatters } from '@src/utils/DynamicContent/Formatters';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { ImpressionCount } from '@src/utils/ImpressionCount';
 import DynamicCampaignText from '@src/utils/DynamicContent/DynamicCampaignText';
 
 interface DynamicCampaignTextOptions {

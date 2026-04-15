@@ -16,7 +16,7 @@
 import { computed, inject } from 'vue';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { useFormModel } from '@src/components/composables/useFormModel';
-import { Translator } from '@src/Translator';
+import type { Translator } from '@src/Translator';
 import { AddressTypes } from '@src/utils/FormItemsBuilder/fields/AddressTypes';
 interface Props {
 	paymentLabelsBelowCents: number;

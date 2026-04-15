@@ -59,15 +59,16 @@ export default {
 			'before': false,
 			'after': true,
 			'overrides': {
-				'arrow': {
-					'before': true,
-					'after': true,
-				},
+				'arrow': 'ignore',
 				'colon': {
 					'before': false,
 					'after': true,
 				},
 			},
+		} ],
+		'@stylistic/arrow-spacing': [ 'error', {
+			'before': true,
+			'after': true,
 		} ],
 		'@stylistic/wrap-iife': 'error',
 	},

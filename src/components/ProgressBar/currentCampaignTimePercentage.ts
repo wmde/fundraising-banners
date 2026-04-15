@@ -1,4 +1,4 @@
-import { CampaignParameters } from '@src/domain/CampaignParameters';
+import type { CampaignParameters } from '@src/domain/CampaignParameters';
 import TimeRange from '@src/utils/TimeRange';
 
 /**

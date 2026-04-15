@@ -1,6 +1,6 @@
 import { describe, beforeEach, it, expect, vi, test, afterEach } from 'vitest';
 import { TrackerWPDE } from '@src/tracking/TrackerWPDE';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { FallbackBannerSubmitEvent } from '@src/tracking/events/FallbackBannerSubmitEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';

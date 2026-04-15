@@ -1,4 +1,4 @@
-import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import type { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 
 /**

@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 
 interface Props {

@@ -1,4 +1,4 @@
-import { ResizeHandler } from '@src/utils/ResizeHandler';
+import type { ResizeHandler } from '@src/utils/ResizeHandler';
 
 export class ResizeHandlerStub implements ResizeHandler {
 	public callOnResize: () => void;

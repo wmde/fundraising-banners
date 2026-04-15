@@ -36,8 +36,9 @@
 
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted, ref, watch } from 'vue';
-import { KeenSliderOptions, useKeenSlider } from 'keen-slider/vue';
-import { Timer } from '@src/utils/Timer';
+import type { KeenSliderOptions } from 'keen-slider/vue';
+import { useKeenSlider } from 'keen-slider/vue';
+import type { Timer } from '@src/utils/Timer';
 import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import ChevronRightIcon from '@src/components/Icons/ChevronRightIcon.vue';
 
