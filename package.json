@@ -44,7 +44,7 @@
     "format-number": "^3.0.0",
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
     "keen-slider": "^6.8.6",
-    "vue": "^3.5.29"
+    "vue": "^3.5.33"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -52,9 +52,9 @@
     "@types/jsdom": "^28.0.0",
     "@typescript-eslint/eslint-plugin": "^8.59.1",
     "@vitejs/plugin-vue": "^6.0.3",
-    "@vitest/coverage-v8": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.5",
     "@vue/eslint-config-typescript": "^14.7.0",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.4.10",
     "@vue/tsconfig": "^0.9.0",
     "chalk": "^5.6.0",
     "css-loader": "^7.1.4",
@@ -86,8 +86,8 @@
     "vitest": "^4.1.0",
     "vue-eslint-parser": "^10.1.4",
     "vue-loader": "^17.4.2",
-    "vue-tsc": "^3.2.5",
-    "webpack": "^5.105.3",
+    "vue-tsc": "^3.2.7",
+    "webpack": "^5.106.2",
     "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2",
     "webpack-merge": "^6.0.1",
