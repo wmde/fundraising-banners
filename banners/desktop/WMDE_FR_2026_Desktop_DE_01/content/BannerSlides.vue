@@ -2,14 +2,12 @@
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
-			Seit 25 Jahren steht Wikipedia für ein Internet, das von Menschen erschaffen wird – nicht von Maschinen.
 			Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
 			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, diese Unabhängigkeit zu unterstützen.
-			{{ campaignDaySentence }}
 			<AnimatedText :content="visitorsVsDonorsSentence"/>
 		</p>
 	</KeenSliderSlide>
@@ -44,7 +42,6 @@ const {
 	currentDayName,
 	currentDate,
 	averageDonation,
-	campaignDaySentence,
 	visitorsVsDonorsSentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
