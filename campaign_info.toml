@@ -24,7 +24,7 @@ pagename = "WMDE_FR_2026_Desktop_DE_01_ctrl"
 tracking = "org-01-260701-ctrl"
 
 [desktop.banners.var]
-filename = "./banners/desktop/WMDE_FR_2026_Desktop_DE_01/banner_ctrl.ts"
+filename = "./banners/desktop/WMDE_FR_2026_Desktop_DE_01/banner_var.ts"
 pagename = "WMDE_FR_2026_Desktop_DE_01_var"
 tracking = "org-01-260701-var"
 
