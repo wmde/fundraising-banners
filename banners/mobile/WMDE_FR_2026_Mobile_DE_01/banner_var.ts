@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -38,7 +38,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 7500 ),
+		delay: runtimeEnvironment.getBannerDelay( 15000 ),
 		transitionDuration: 1000
 	},
 	bannerCategory: 'fundraising',

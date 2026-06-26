@@ -22,7 +22,6 @@ import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { fullPageBannerFeatures } from '@test/features/FullPageBanner';
 import { formActionSwitchFeatures } from '@test/features/form_action_switch/MainDonation_UpgradeToYearlyButton';
 import type { Tracker } from '@src/tracking/Tracker';
-import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures } from '@test/features/BannerContent';
 import type { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
@@ -94,22 +93,6 @@ describe( 'BannerCtrl.vue', () => {
 
 		return wrapper;
 	};
-
-	describe( 'Content', () => {
-		test.each( [
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInMessage' ],
-			[ 'expectShowsAnimatedVisitorsVsDonorsSentenceInSlideShow' ],
-			[ 'expectHidesAnimatedVisitorsVsDonorsSentenceInMessage' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentAnimatedTextFeatures[ testName ]( getWrapper );
-		} );
-
-		test.each( [
-			[ 'expectShowsLiveDateAndTimeInFullPageBanner' ]
-		] )( '%s', async ( testName: string ) => {
-			await bannerContentDateAndTimeFeatures[ testName ]( getWrapper );
-		} );
-	} );
 
 	describe( 'Donation Form Happy Paths', () => {
 		test.each( [

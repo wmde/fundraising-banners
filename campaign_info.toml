@@ -53,7 +53,7 @@ pagename = "WMDE_FR_2026_Mobile_DE_01_ctrl"
 tracking = "org-mob01-260701-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_01/banner_ctrl.ts"
+filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_01/banner_var.ts"
 pagename = "WMDE_FR_2026_Mobile_DE_01_var"
 tracking = "org-mob01-260701-var"
 

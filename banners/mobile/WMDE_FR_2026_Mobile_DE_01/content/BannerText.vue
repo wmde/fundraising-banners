@@ -6,11 +6,10 @@
 			</p>
 			<p>
 				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }}
-				bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
-				{{ campaignDaySentence }}
+				{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von
+				Wikipedia zu unterstützen.
 				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+				Die meisten spenden, weil sie Wikipedia nützlich finden.
 				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter.
 				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
@@ -35,9 +34,7 @@ const props = defineProps<Props>();
 const {
 	currentDayName,
 	getCurrentDateAndTime,
-	campaignDaySentence,
-	averageDonation,
-	visitorsVsDonorsSentence
+	averageDonation
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
