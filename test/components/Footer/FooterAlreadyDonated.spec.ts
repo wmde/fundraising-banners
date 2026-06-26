@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { shallowMount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
 

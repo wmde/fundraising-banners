@@ -1,4 +1,4 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { expect } from 'vitest';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';

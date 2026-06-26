@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue';
-import { FormModel } from '@src/utils/FormModel/FormModel';
+import type { FormModel } from '@src/utils/FormModel/FormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 import { Intervals, RecurringIntervals } from '@src/utils/FormItemsBuilder/fields/Intervals';

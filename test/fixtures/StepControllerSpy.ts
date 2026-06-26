@@ -1,6 +1,6 @@
-import { StepController } from '@src/components/DonationForm/StepController';
-import { StepAction } from '@src/components/DonationForm/StepNavigation';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { StepController } from '@src/components/DonationForm/StepController';
+import type { StepAction } from '@src/components/DonationForm/StepNavigation';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 
 export class StepControllerSpy implements StepController {
 	private _navigation: StepAction;

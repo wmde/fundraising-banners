@@ -1,10 +1,10 @@
-import { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
-import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
-import { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
-import { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
+import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
+import type { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
+import type { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import { setCookie } from '@src/page/MediaWiki/setCookie';
 import { createImageCookieSetter } from '@src/page/MediaWiki/createImageCookieSetter';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 /**
  * An interface that defines the parts of the huge Mediawiki object that are interesting for us
@@ -60,7 +60,7 @@ export class WindowMediaWiki implements MediaWiki {
 		return window.mw.user.isTemp();
 	}
 
-	public track( name: string, trackingData: LegacyBannerEvent | SizeIssue ): void {
+	public track( name: string, trackingData: BannerEvent | LegacyBannerEvent | SizeIssue ): void {
 		window.mw.track( name, trackingData );
 	}
 

@@ -52,13 +52,13 @@
 
 <script setup lang="ts">
 import { computed, inject, nextTick, onMounted, ref, watch } from 'vue';
-import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { useFormAction } from '@src/components/composables/useFormAction';
-import { FormActionCollection } from '@src/domain/FormActions';
+import type { FormActionCollection } from '@src/domain/FormActions';
 import { validateAmount } from '@src/validation/validateAmount';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
-import { Tracker } from '@src/tracking/Tracker';
+import type { Tracker } from '@src/tracking/Tracker';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 

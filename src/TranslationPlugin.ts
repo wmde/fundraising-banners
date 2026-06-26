@@ -1,5 +1,5 @@
-import { App } from 'vue';
-import { Translator } from '@src/Translator';
+import type { App } from 'vue';
+import type { Translator } from '@src/Translator';
 
 export default {
 	install( app: App, translator: Translator ): void {

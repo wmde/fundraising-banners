@@ -1,11 +1,11 @@
 import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { Page } from '@src/page/Page';
-import { Tracker } from '@src/tracking/Tracker';
-import { ResizeHandler } from '@src/utils/ResizeHandler';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
-import { Timer } from '@src/utils/Timer';
-import { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { Page } from '@src/page/Page';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { ResizeHandler } from '@src/utils/ResizeHandler';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { Timer } from '@src/utils/Timer';
+import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 
 export class ClosedState extends BannerState {
 	public readonly stateName: BannerStates = BannerStates.Closed;

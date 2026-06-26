@@ -1,5 +1,6 @@
-import { FormActionCollection } from '@src/domain/FormActions';
-import { computed, Ref } from 'vue';
+import type { FormActionCollection } from '@src/domain/FormActions';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 

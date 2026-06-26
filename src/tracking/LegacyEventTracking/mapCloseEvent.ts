@@ -1,4 +1,4 @@
-import { CloseEvent } from '@src/tracking/events/CloseEvent';
+import type { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
 
 export function mapCloseEvent( event: CloseEvent ): WMDELegacyBannerEvent {

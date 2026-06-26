@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { shallowMount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 import { TimerStub } from '@test/fixtures/TimerStub';
 

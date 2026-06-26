@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { VisitorsVsDonorsSentence } from '@src/utils/DynamicContent/generators/VisitorsVsDonorsSentence';
-import { TranslationMessages, Translator } from '@src/Translator';
+import type { TranslationMessages } from '@src/Translator';
+import { Translator } from '@src/Translator';
 import { IntegerEn } from '@src/utils/DynamicContent/formatters/IntegerEn';
 
 describe( 'VisitorsVsDonorsSentence', function () {

@@ -1,8 +1,8 @@
-import { LocaleFactory } from '@src/utils/LocaleFactory';
+import type { LocaleFactory } from '@src/utils/LocaleFactory';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
-import { Currency } from '@src/utils/DynamicContent/formatters/Currency';
-import { Formatters } from '@src/utils/DynamicContent/Formatters';
-import { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
+import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
+import type { Formatters } from '@src/utils/DynamicContent/Formatters';
+import type { FundsContentLoader } from '@src/utils/UseOfFunds/FundsContentLoader';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
 import { IntegerDe } from '@src/utils/DynamicContent/formatters/IntegerDe';
 import { DeJSONFundsContentLoader } from '@src/utils/UseOfFunds/DeJSONFundsContentLoader';

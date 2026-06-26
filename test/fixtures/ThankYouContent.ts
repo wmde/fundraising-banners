@@ -1,4 +1,4 @@
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 const thankYouContent: ThankYouContent = {
 	'birthday-blurb': 'birthday-blurb',

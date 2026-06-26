@@ -1,4 +1,4 @@
-import { FormModel } from '@src/utils/FormModel/FormModel';
+import type { FormModel } from '@src/utils/FormModel/FormModel';
 import { Validity } from '@src/utils/FormModel/Validity';
 import { AmountValidity } from '@src/utils/FormModel/AmountValidity';
 

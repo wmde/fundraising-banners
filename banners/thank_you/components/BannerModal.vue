@@ -150,7 +150,7 @@ import CoinIcon from './Icons/CoinIcon.vue';
 import MembersIcon from './Icons/MembersIcon.vue';
 import TickIcon from './Icons/TickIcon.vue';
 import BannerDisclosure from './BannerDisclosure.vue';
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 import BirthdayIcon from './Icons/BirthdayIcon.vue';
 
 interface Props {

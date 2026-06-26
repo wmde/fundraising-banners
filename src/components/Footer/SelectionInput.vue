@@ -17,7 +17,7 @@
 <script setup lang="ts">
 
 import { inject, ref } from 'vue';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 
 interface Props {
 	value: string;

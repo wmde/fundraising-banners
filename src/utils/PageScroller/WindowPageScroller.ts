@@ -1,4 +1,4 @@
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 
 export class WindowPageScroller implements PageScroller {
 	public scrollIntoView( classSelector: string ): void {

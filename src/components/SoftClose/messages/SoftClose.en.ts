@@ -1,4 +1,4 @@
-import { TranslationMessages } from '@src/Translator';
+import type { TranslationMessages } from '@src/Translator';
 
 const translations: TranslationMessages = {
 	'soft-close-prompt': 'Do you want to support Wikipedia later?',

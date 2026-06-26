@@ -1,4 +1,4 @@
-import { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
+import type { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 
 /**
  * @deprecated WMDELegacyBannerEvent is for an old tracking schema

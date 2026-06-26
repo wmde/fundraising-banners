@@ -1,4 +1,4 @@
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 
 export class TimerStub implements Timer {
 	public clearAll(): void {

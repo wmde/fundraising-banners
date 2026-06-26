@@ -3,7 +3,7 @@ import { CampaignDaySentence } from '@src/utils/DynamicContent/generators/Campai
 import TimeRange from '@src/utils/TimeRange';
 import { Translator } from '@src/Translator';
 import { OrdinalDe } from '@src/utils/DynamicContent/formatters/OrdinalDe';
-import { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
+import type { Ordinal } from '@src/utils/DynamicContent/formatters/Ordinal';
 
 const beforeStartDate = new Date( 2023, 10, 10 );
 const startDate = new Date( 2023, 10, 11 );

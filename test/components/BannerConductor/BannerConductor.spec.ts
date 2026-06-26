@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
 import { PageStub } from '@test/fixtures/PageStub';
 import { ResizeHandlerStub } from '@test/fixtures/ResizeHandlerStub';
@@ -8,13 +9,13 @@ import { defineComponent, markRaw, nextTick } from 'vue';
 import { newBannerStateMachine } from '@src/components/BannerConductor/StateMachine/BannerStateMachine';
 import { BannerStateMachineSpy } from '@test/fixtures/BannerStateMachineSpy';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { Page } from '@src/page/Page';
+import type { Page } from '@src/page/Page';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import { TrackerStub } from '@test/fixtures/TrackerStub';
-import { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
-import { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
+import type { ReactiveProperty } from '@src/domain/StateMachine/ReactiveProperty';
+import type { BannerState } from '@src/components/BannerConductor/StateMachine/states/BannerState';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { ResizeHandler } from '@src/utils/ResizeHandler';
+import type { ResizeHandler } from '@src/utils/ResizeHandler';
 import { TimerStub } from '@test/fixtures/TimerStub';
 
 vi.mock( '@src/components/BannerConductor/StateMachine/BannerStateMachine', async () => {

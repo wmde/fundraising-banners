@@ -24,13 +24,13 @@
 import { computed, inject, nextTick, onMounted, ref, useSlots } from 'vue';
 import { useKeenSlider } from 'keen-slider/vue';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
-import { StepController } from '@src/components/DonationForm/StepController';
-import { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import { Tracker } from '@src/tracking/Tracker';
-import { TrackingEvent } from '@src/tracking/TrackingEvent';
+import type { StepController } from '@src/components/DonationForm/StepController';
+import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
+import type { Tracker } from '@src/tracking/Tracker';
+import type { TrackingEvent } from '@src/tracking/TrackingEvent';
 import { useFormAction } from '@src/components/composables/useFormAction';
-import { FormActionCollection } from '@src/domain/FormActions';
-import { Timer } from '@src/utils/Timer';
+import type { FormActionCollection } from '@src/domain/FormActions';
+import type { Timer } from '@src/utils/Timer';
 
 interface Props {
 	stepControllers: StepController[];

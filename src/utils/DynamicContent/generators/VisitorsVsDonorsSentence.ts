@@ -1,6 +1,6 @@
-import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
-import { Translator } from '@src/Translator';
-import { Integer } from '@src/utils/DynamicContent/formatters/Integer';
+import type { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
+import type { Translator } from '@src/Translator';
+import type { Integer } from '@src/utils/DynamicContent/formatters/Integer';
 
 export class VisitorsVsDonorsSentence implements TextGenerator {
 	private readonly _translator: Translator;

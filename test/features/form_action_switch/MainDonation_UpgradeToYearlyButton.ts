@@ -1,6 +1,6 @@
-import { VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
-import { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
 const goToUpgradeStep = async ( wrapper: VueWrapper<any>, payment: FormItem ): Promise<any> => {

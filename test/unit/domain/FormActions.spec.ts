@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FormAction, FormActionCollection } from '@src/domain/FormActions';
 import { FakeTrackingParameters } from '@test/fixtures/FakeTrackingParameters';
-import { TrackingParameters } from '@src/domain/TrackingParameters';
+import type { TrackingParameters } from '@src/domain/TrackingParameters';
 
 describe( 'Form Actions', () => {
 	describe( 'actionUrl property', () => {

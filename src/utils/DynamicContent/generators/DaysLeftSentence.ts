@@ -1,6 +1,6 @@
-import TimeRange from '@src/utils/TimeRange';
-import { Translator } from '@src/Translator';
-import { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
+import type TimeRange from '@src/utils/TimeRange';
+import type { Translator } from '@src/Translator';
+import type { TextGenerator } from '@src/utils/DynamicContent/generators/TextGenerator';
 
 /**
  * Return a sentence that describes how many days are left in the campaign.

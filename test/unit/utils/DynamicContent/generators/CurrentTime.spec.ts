@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { Time } from '@src/utils/DynamicContent/formatters/Time';
+import type { Time } from '@src/utils/DynamicContent/formatters/Time';
 import { CurrentTime } from '@src/utils/DynamicContent/generators/CurrentTime';
 
 const staticTime: Time = {

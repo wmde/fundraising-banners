@@ -29,7 +29,7 @@
 
 import ChevronDownIcon from './Icons/ChevronDownIcon.vue';
 import { ref } from 'vue';
-import { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
+import type { ThankYouContent } from '@src/domain/EditableContent/ThankYouContent';
 
 interface Props {
 	id: string;

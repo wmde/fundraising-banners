@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { mount, VueWrapper } from '@vue/test-utils';
+import type { VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { nextTick } from 'vue';
 import { TimerStub } from '@test/fixtures/TimerStub';
-import { Timer } from '@src/utils/Timer';
+import type { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
 
 describe( 'KeenSlider', () => {
