@@ -12,7 +12,6 @@
 
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress><ProgressBar amount-to-show-on-right="MISSING"/></template>
 						</BannerSlides>
 					</template>
 
@@ -26,10 +25,6 @@
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
-			</template>
-
-			<template #progress>
-				<ProgressBar amount-to-show-on-right="MISSING"/>
 			</template>
 
 			<template #donation-form="{ formInteraction }: any">
@@ -124,7 +119,6 @@ import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import type { Translator } from '@src/Translator';
 import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
-import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-banner-wrapper--mini',
