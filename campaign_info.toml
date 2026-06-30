@@ -15,7 +15,7 @@ preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
@@ -45,7 +45,7 @@ preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode&minervanightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 [mobile.banners.ctrl]
 filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_00/banner_ctrl.ts"
@@ -74,7 +74,7 @@ preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_DE"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 [pad.banners.ctrl]
 filename = "./banners/pad/WMDE_FR_2026_ipad_DE_00/banner_ctrl.ts"
@@ -153,7 +153,7 @@ preview_link_offline = ""
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://en.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_EN"
 
 [english.banners.ctrl]
 filename = "./banners/english/WMDE_FR_2026_Desktop_EN_00/banner_ctrl.ts"
@@ -183,7 +183,7 @@ preview_link_offline = ""
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva'
 preview_url_darkmode = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{banner}}&devMode&useskin=minerva&minervanightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_EN"
 
 [mobile_english.banners.ctrl]
 filename = "./banners/mobile_english/WMDE_FR_2026_Mobile_EN_00/banner_ctrl.ts"
@@ -213,7 +213,7 @@ preview_link_offline = ""
 preview_url = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode'
 preview_url_darkmode = 'https://de.wikipedia.org/wiki/Hamster?banner={{banner}}&devMode&vectornightmode=1'
 wrapper_template = "wikipedia_org"
-use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2025_EN"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_EN"
 
 [fallback.banners.ctrl]
 filename = "./banners/fallback/WMDE_FR_2026_Fallback_00/banner_ctrl.ts"
