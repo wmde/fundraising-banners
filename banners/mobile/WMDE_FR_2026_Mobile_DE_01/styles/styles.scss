@@ -8,7 +8,7 @@
 @use 'src/themes/Modo/defaults';
 @use 'Banner';
 @use 'MiniBanner' with (
-	$height: 354px,
+	$height: 336px,
 	$height-l-up: 354px
 );
 @use 'FullPageBanner';
