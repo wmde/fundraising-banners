@@ -36,11 +36,11 @@ resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "WMDE_FR_2026_Mobile_DE_00"
-description = "based on CTRL of test 10, VAR - Submitting the banner form redirects users to the variant donation form (ap=2)."
-campaign_tracking = "mob-de-00-ba-260000"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva"
-preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B25_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
+campaign = "WMDE_FR_2026_Mobile_DE_01"
+description = "based on CTRL of mobile-de-00, CTRL and VAR both have copy change"
+campaign_tracking = "mob-de-01-ba-260701"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
 preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode&minervanightmode=1'
@@ -48,14 +48,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 [mobile.banners.ctrl]
-filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_00/banner_ctrl.ts"
-pagename = "WMDE_FR_2026_Mobile_DE_00_ctrl"
-tracking = "org-mob00-260000-ctrl"
+filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_01/banner_ctrl.ts"
+pagename = "WMDE_FR_2026_Mobile_DE_01_ctrl"
+tracking = "org-mob01-260701-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_00/banner_var.ts"
-pagename = "WMDE_FR_2026_Mobile_DE_00_var"
-tracking = "org-mob00-260000-var"
+filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_01/banner_var.ts"
+pagename = "WMDE_FR_2026_Mobile_DE_01_var"
+tracking = "org-mob01-260701-var"
 
 [mobile.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
