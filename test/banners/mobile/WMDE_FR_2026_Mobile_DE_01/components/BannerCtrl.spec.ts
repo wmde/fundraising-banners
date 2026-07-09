@@ -157,7 +157,8 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsFullPageWhenCallToActionIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
 			[ 'expectEmitsCloseEvent' ],
-			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ],
+			[ 'expectPageDoesNotScrollToTopOnClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
@@ -167,7 +168,8 @@ describe( 'BannerCtrl.vue', () => {
 		test.each( [
 			[ 'expectEmitsCloseEvent' ],
 			[ 'expectEmitsModalOpenedEvent' ],
-			[ 'expectEmitsModalClosedEvent' ]
+			[ 'expectEmitsModalClosedEvent' ],
+			[ 'expectPageDoesNotScrollToTopOnClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await fullPageBannerFeatures[ testName ]( getWrapper() );
 		} );

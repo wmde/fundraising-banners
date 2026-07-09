@@ -51,6 +51,21 @@ const expectsEmitsCloseEventOnAlreadyDonated = async ( wrapper: VueWrapper<any> 
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.AlreadyDonated ) );
 };
 
+const expectPageDoesNotScrollToTopOnClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+
+	const scrolledDownPixels = 200;
+
+	// user scrolls down wikipedia
+	window.scroll( {
+		top: scrolledDownPixels
+	} );
+
+	await wrapper.find( '.wmde-banner-mini-close' ).trigger( 'click' );
+
+	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+	expect( document.documentElement.scrollTop ).equal( scrolledDownPixels );
+};
+
 export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
@@ -58,5 +73,6 @@ export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => 
 	expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked,
 	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked,
 	expectEmitsCloseEvent,
-	expectsEmitsCloseEventOnAlreadyDonated
+	expectsEmitsCloseEventOnAlreadyDonated,
+	expectPageDoesNotScrollToTopOnClose
 };
