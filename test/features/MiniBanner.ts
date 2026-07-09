@@ -63,7 +63,9 @@ const expectPageDoesNotScrollToTopOnClose = async ( wrapper: VueWrapper<any> ): 
 	await wrapper.find( '.wmde-banner-mini-close' ).trigger( 'click' );
 
 	expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-	expect( document.documentElement.scrollTop ).equal( scrolledDownPixels );
+	expect( document.body.style.top ).equal( scrolledDownPixels );
+	//expect( document.documentElement.scrollTop ).equal( scrolledDownPixels );
+
 };
 
 export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {

@@ -1,11 +1,11 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			@close="() => onClose( 'MiniBanner', CloseChoices.Close )"
+			@close="() => onCloseBanner( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
+			@already-donated-clicked="onCloseWithModal( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
@@ -21,7 +21,7 @@
 
 		<FullPageBanner
 			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
+			@close="() => onCloseBanner( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
@@ -164,9 +164,21 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
+function onCloseBanner( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onCloseWithModal( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+
+	// TODO calling modalClosed here triggers a scroll (PageWPORG function)
+	emit( 'modalClosed' );
+}
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	emit( 'modalClosed' );
+
+	// TODO calling modalClosed here triggers a scroll (PageWPORG function)
+	//emit( 'modalClosed' );
 }
 
 const onSubmit = (): void => {

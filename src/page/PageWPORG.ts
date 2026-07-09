@@ -238,12 +238,14 @@ class PageWPORG implements Page {
 	 * they opened the modal.
 	 */
 	public setModalClosed(): void {
-		const scrollY = document.body.style.top;
+		const scrollY = window.scrollY;
+		//const scrollY = document.documentElement.scrollTop;
 		document.body.style.position = '';
 		document.body.style.top = '';
 		document.body.style.width = '';
 		document.body.style.overflowX = '';
-		window.scrollTo( 0, parseInt( scrollY || '0' ) * -1 );
+		window.scrollTo( 0, parseInt( String( scrollY ) || '0' ) );
+		//window.scrollTo( 0, parseInt( String( scrollY ) || '0' ) );
 	}
 }
 
