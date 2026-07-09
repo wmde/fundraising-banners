@@ -1,11 +1,11 @@
 <template>
 	<div class="wmde-banner-wrapper" :class="contentState">
 		<MiniBanner
-			@close="() => onClose( 'MiniBanner', CloseChoices.Close )"
+			@close="() => onMiniClose( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"
 			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
+			@already-donated-clicked="onMiniClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
 			<template #banner-slides>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
@@ -21,7 +21,7 @@
 
 		<FullPageBanner
 			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
-			@close="() => onClose( 'FullPageBanner', CloseChoices.Hide )"
+			@close="() => onFullPageClose( 'FullPageBanner', CloseChoices.Hide )"
 		>
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
@@ -164,7 +164,11 @@ watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+}
+
+function onFullPageClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 }
