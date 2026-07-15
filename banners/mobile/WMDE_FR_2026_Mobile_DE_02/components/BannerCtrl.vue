@@ -30,9 +30,11 @@
 			<template #donation-form="{ formInteraction }: any">
 				<MultiStepDonation
 					:step-controllers="stepControllers"
-					@form-interaction="formInteraction"
 					:page-scroller="pageScroller"
 					:submit-callback="onSubmit"
+					:submit-opens-in-new-tab="true"
+					@form-interaction="formInteraction"
+					@hide="$emit( 'bannerSubmitted' )"
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -138,7 +140,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 

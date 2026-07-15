@@ -102,7 +102,9 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
 			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
 			[ 'expectMainDonationFormUsesDefaultDynamicAmounts' ],
-			[ 'expectMainDonationFormUsesAlternativeDynamicAmounts' ]
+			[ 'expectMainDonationFormUsesAlternativeDynamicAmounts' ],
+			[ 'submitOpensInNewTab' ],
+			[ 'submitHidesBanner' ]
 		] )( '%s', async ( testName: string ) => {
 			await donationFormFeatures[ testName ]( getWrapper() );
 		} );
