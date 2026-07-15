@@ -21,6 +21,7 @@ export class VisibleState extends BannerState {
 		this._tracker = tracker;
 
 		this.canMoveToStates.push( BannerStates.Closed );
+		this.canMoveToStates.push( BannerStates.Submitted );
 	}
 
 	public enter(): Promise<any> {
