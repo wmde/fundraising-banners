@@ -13,6 +13,7 @@
 			:bannerState="bannerState.stateName"
 			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
+			@banner-submitted="submitedHandler"
 			@banner-content-changed="onContentChanged"
 			@modal-opened="page.setModalOpened"
 			@modal-closed="page.setModalClosed"
@@ -85,6 +86,10 @@ async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
 }
 
+async function submitedHandler(): Promise<any> {
+	await stateMachine.changeState( stateFactory.newSubmittedState() );
+}
+
 </script>
 
 <style lang="scss">
@@ -96,7 +101,8 @@ async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	z-index: 1000;
 }
 .wmde-banner--not-shown,
-.wmde-banner--closed {
+.wmde-banner--closed,
+.wmde-banner--submitted {
 	display: none;
 }
 </style>

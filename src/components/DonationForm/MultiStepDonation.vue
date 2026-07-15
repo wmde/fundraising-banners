@@ -14,7 +14,7 @@
 			/>
 		</div>
 	</div>
-	<form ref="submitFormRef" :action="formAction" class="wmde-banner-submit-form" method="post">
+	<form ref="submitFormRef" :action="formAction" class="wmde-banner-submit-form" method="post" :target="submitOpensInNewTab ? '_blank' : null">
 		<SubmitValues />
 	</form>
 </template>
@@ -39,14 +39,16 @@ interface Props {
 	formActionOverride?: string;
 	// This is to allow the banner to trigger side effects when the form is submitted
 	submitCallback?: () => void;
+	submitOpensInNewTab?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
 	showErrorScrollLink: false,
 	formActionOverride: '',
-	submitCallback: () => {} // eslint-disable-line @typescript-eslint/no-empty-function
+	submitCallback: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+	submitOpensInNewTab: false
 } );
-const emit = defineEmits( [ 'formInteraction' ] );
+const emit = defineEmits( [ 'formInteraction', 'hide' ] );
 
 const slots: object = useSlots();
 const usedSlotNames: string[] = Object.keys( slots );
@@ -91,6 +93,7 @@ const multistepCallbacks = {
 		props.submitCallback();
 		await nextTick();
 		submitFormRef.value.submit();
+		emit( 'hide' );
 	}
 };
 
