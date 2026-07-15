@@ -1,27 +1,27 @@
 <template>
 	<KeenSliderSlide :is-current="currentSlide === 0">
 		<p>
-			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
-			Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
+			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Da weniger
+			Menschen als früher Wikipedia nutzen, ist Ihr Engagement heute umso wichtiger.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, diese Unabhängigkeit zu unterstützen.
-			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
+			Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation. Am heutigen
+			{{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, die Unabhängigkeit von Wikipedia zu unterstützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
+			<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende beträgt
+			{{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 3">
 		<p>
-			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-			Vielen Dank!
+			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich,
+			eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück. Vielen Dank!
 		</p>
 	</KeenSliderSlide>
 </template>
