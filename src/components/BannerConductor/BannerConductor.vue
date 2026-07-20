@@ -13,7 +13,7 @@
 			:bannerState="bannerState.stateName"
 			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
-			@banner-submitted="submitedHandler"
+			@banner-submitted="submittedHandler"
 			@banner-content-changed="onContentChanged"
 			@modal-opened="page.setModalOpened"
 			@modal-closed="page.setModalClosed"
@@ -86,7 +86,7 @@ async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
 }
 
-async function submitedHandler(): Promise<any> {
+async function submittedHandler(): Promise<any> {
 	await stateMachine.changeState( stateFactory.newSubmittedState() );
 }
 
