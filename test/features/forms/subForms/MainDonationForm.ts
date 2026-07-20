@@ -2,7 +2,7 @@ import type { VueWrapper } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 
-const setMainDonationFormValues = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
+export const setMainDonationFormValues = async ( wrapper: VueWrapper<any>, interval: FormItem, amount: string, payment: FormItem ): Promise<void> => {
 	await wrapper.find( `.${interval.className} .wmde-banner-select-group-input` ).setValue();
 	await wrapper.find( `.amount-${amount} .wmde-banner-select-group-input` ).setValue();
 	await wrapper.find( `.${payment.className} .wmde-banner-select-group-input` ).setValue();
