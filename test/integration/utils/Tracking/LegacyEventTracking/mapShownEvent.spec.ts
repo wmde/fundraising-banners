@@ -20,11 +20,11 @@ describe( 'mapShownEvent', () => {
 		) );
 	} );
 
-	it( 'maps other reasons to legacy event without tracking', () => {
+	it( 'maps other reasons to legacy event', () => {
 		const legacyEvent = mapShownEvent( new ShownEvent( 'Page' ) );
 
 		expect( legacyEvent ).toStrictEqual(
-			new WMDELegacyBannerEvent( 'untracked-shown-event', 0 )
+			new WMDELegacyBannerEvent( 'banner-shown', 1 )
 		);
 	} );
 } );
