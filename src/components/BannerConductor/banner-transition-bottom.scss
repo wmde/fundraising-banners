@@ -1,0 +1,39 @@
+$transition-easing: cubic-bezier( 0.555, 0.155, 0.14, 0.945 ) !default;
+
+#wmde-banner-app {
+	bottom: calc( -1 * var( --wmde-banner-height ) );
+
+	@media print {
+		display: none !important;
+	}
+}
+
+.wmde-animate-banner {
+
+	#wmde-banner-app,
+	.mw-footer {
+		transition-timing-function: $transition-easing;
+		transition-duration: var( --wmde-banner-transition-duration );
+	}
+
+	.mw-footer {
+		transition-property: padding-bottom;
+	}
+}
+
+/**
+ * This class gets added to the <body> element when we show the banner.
+ * For themes with absolutely-positioned MediaWiki elements, we need to push down the by the banner height.
+ * We only do that on screens, so printing will be unaffected by banners
+ */
+.wmde-show-banner {
+	@media screen {
+		#wmde-banner-app {
+			bottom: 0;
+		}
+
+		.mw-footer {
+			padding-bottom: var( --wmde-banner-height );
+		}
+	}
+}
