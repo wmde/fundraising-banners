@@ -37,6 +37,7 @@ describe( 'BannerConductor.vue', () => {
 			},
 			emits: [
 				'bannerClosed',
+				'bannerSubmitted',
 				'bannerContentChanged',
 				'modalOpened',
 				'modalClosed'
@@ -44,11 +45,15 @@ describe( 'BannerConductor.vue', () => {
 			methods: {
 				onClose() {
 					this.$emit( 'bannerClosed', new CloseEvent( 'MainBanner', 'closed' ) );
+				},
+				onSubmit() {
+					this.$emit( 'bannerSubmitted' );
 				}
 			},
 			template: `<div class="test-banner" style="height: 100px">
 				Hello, world!
 				<button class="emit-banner-closed" @click="onClose"></button>
+				<button class="emit-banner-submitted" @click="onSubmit"></button>
 				<button class="emit-banner-content-changed" @click="$emit( 'bannerContentChanged' )"></button>
 				<button class="emit-banner-modal-open" @click="$emit( 'modalOpened' )"></button>
 				<button class="emit-banner-modal-closed" @click="$emit( 'modalClosed' )"></button>
@@ -214,6 +219,20 @@ describe( 'BannerConductor.vue', () => {
 		] );
 
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+	} );
+
+	it( 'moves to submitted state when donor submits banner', async () => {
+		const wrapper = await getShownBannerWrapper();
+		await wrapper.find( '.emit-banner-submitted' ).trigger( 'click' );
+
+		expect( stateMachineSpy.statesCalled ).toEqual( [
+			BannerStates.Pending,
+			BannerStates.Showing,
+			BannerStates.Visible,
+			BannerStates.Submitted
+		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.Submitted );
 	} );
 
 	it( 'tells the page that a modal was opened', async () => {

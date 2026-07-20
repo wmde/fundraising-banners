@@ -189,4 +189,30 @@ describe( 'MultistepDonation.vue', () => {
 		expect( wrapper.find( '.wmde-banner-submit-form' ).attributes( 'action' ) )
 			.toBe( 'https://example.com/withBellsAndWhistles' );
 	} );
+
+	it( 'sets submit form to open in new tab when required', async () => {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+
+		expect( submitForm.attributes( 'target' ) ).toBeUndefined();
+
+		await wrapper.setProps( { submitOpensInNewTab: true } );
+
+		expect( submitForm.attributes( 'target' ) ).toStrictEqual( '_blank' );
+	} );
+
+	it( 'emits submit event on submit when set to open in new tab', async () => {
+		const stepController = new StepControllerSpy();
+		const wrapper = getWrapper( { form: subFormEmitterTemplate }, [ stepController ] );
+		await wrapper.setProps( { submitOpensInNewTab: true } );
+		const submitForm = wrapper.find<HTMLFormElement>( '.wmde-banner-submit-form' );
+		submitForm.element.submit = vi.fn();
+
+		// We submit a sub form once to cache the navigation callbacks in the StepControllerSpy
+		await wrapper.find( '.emitting-sub-form' ).trigger( 'submit' );
+		await stepController.callSubmit( { customData: undefined, eventName: 'mushroom', feature: 'MainDonationForm', userChoice: 'badchoice' } );
+
+		expect( wrapper.emitted( 'hide' ).length ).toStrictEqual( 1 );
+	} );
 } );

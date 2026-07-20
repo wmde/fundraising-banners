@@ -14,6 +14,7 @@ import { InitialState } from '@src/components/BannerConductor/StateMachine/state
 import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import type { Timer } from '@src/utils/Timer';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import { SubmittedState } from '@src/components/BannerConductor/StateMachine/states/SubmittedState';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -62,6 +63,10 @@ export class StateFactory {
 
 	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
 		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer );
+	}
+
+	public newSubmittedState(): BannerState {
+		return new SubmittedState( this._page, this._resizeHandler, this._timer );
 	}
 }
 
