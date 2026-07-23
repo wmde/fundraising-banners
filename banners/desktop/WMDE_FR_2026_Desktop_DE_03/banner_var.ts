@@ -3,7 +3,7 @@ import { createVueApp } from '@src/createVueApp';
 import './styles/styles.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -42,7 +42,7 @@ formatters.integer = new RoundedIntegerDe();
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 20000 ),
+		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerCategory: 'fundraising',
