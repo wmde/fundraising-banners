@@ -2,7 +2,7 @@ import type { Mock } from 'vitest';
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
-import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_03/components/BannerCtrl.vue';
+import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_03/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';

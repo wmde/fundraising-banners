@@ -215,5 +215,17 @@ $height-l-up: 288px !default;
 				}
 			}
 		}
+
+		// if VAR wins, move following style-block to the theme (by wrapping it in a .wmde-banner-mini-info selector)
+		.wmde-banner-selection-input {
+			&-text,
+			&-input {
+				font-weight: bold;
+				font-size: 16px;
+			}
+			&-input {
+				font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
+			}
+		}
 	}
 }

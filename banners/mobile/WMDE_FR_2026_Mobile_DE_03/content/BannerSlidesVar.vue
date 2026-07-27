@@ -30,6 +30,12 @@
 		</p>
 	</KeenSliderSlide>
 
+	<KeenSliderSlide :is-current="currentSlide === 4">
+		<p> Spendenkonto: <SelectionInput :value="'Wikimedia e.V.'"/> </p>
+		<p> IBAN: <SelectionInput :value="'DE09 3702 0500 0003 2873 00'" :focusedValue="'DE09370205000003287300'"/> </p>
+		<p> BIC: <SelectionInput :value="'BFSWDE33XXX'"/> </p>
+		<p> Verwendungszweck: <SelectionInput :value="'Wikipedia 26'"/> </p>
+	</KeenSliderSlide>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +44,7 @@ import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import SelectionInput from '@src/components/Footer/SelectionInput.vue';
 
 interface Props {
 	playLiveText: boolean;
