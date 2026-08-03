@@ -64,7 +64,7 @@
     "eslint-plugin-vue": "^10.9.0",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
 	"knip": "^6.17.1",
     "nodemon": "^3.1.14",
     "npm-check-updates": "^23.0.0",
