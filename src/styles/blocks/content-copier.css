@@ -1,0 +1,32 @@
+.wmde-b-content-copier {
+	--font-size: var( --content-copier-font-size );
+
+	all: unset;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.5ch;
+	font-size: var( --font-size );
+	cursor: pointer;
+}
+
+.wmde-b-content-copier__popup {
+	position: absolute;
+	inset: 0;
+	visibility: hidden;
+	opacity: 0;
+	background: var( --copied-background, #dadada );
+	color: var( --copied-color, #000000 );
+	text-align: center;
+	border-radius: 3px;
+}
+
+.wmde-b-content-copier--copied > .wmde-b-content-copier__popup {
+	visibility: visible;
+	opacity: 1;
+}
+
+.wmde-b-content-copier > svg {
+	width: var( --font-size );
+	height: var( --font-size );
+}

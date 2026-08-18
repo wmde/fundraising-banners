@@ -1,13 +1,18 @@
 <template>
-	<div ref="bannerRef" class="wmde-banner" :class="[
-		{ 't-banner-visible': bannerState.stateName === BannerStates.Visible },
-		bannerState.stateName
-	]">
+	<div
+		ref="bannerRef"
+		class="wmde-banner"
+		:lang="$translate( 'lang' )"
+		:class="[ { 't-banner-visible': bannerState.stateName === BannerStates.Visible }, bannerState.stateName ]"
+		role="region"
+		:aria-label="$translate( 'banner-label' )"
+		:aria-hidden="bannerState.stateName !== BannerStates.Visible"
+	>
+		<div class="visually-hidden" aria-live="assertive"><template v-if="bannerState.stateName === BannerStates.Visible">{{ $translate( 'live-text' ) }}</template></div>
 		<component
 			:is="banner"
 			v-bind="bannerProps"
 			:bannerState="bannerState.stateName"
-			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
 			@banner-submitted="submitHandler"
 			@banner-content-changed="onContentChanged"
