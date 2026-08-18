@@ -1,0 +1,26 @@
+@use 'src/themes/Modo/variables/globals';
+@use 'src/themes/Modo/variables/breakpoints';
+
+.wmde-banner {
+	--form-background: var(--full-content-below-info-background);
+	--gutter: 10px;
+	--flow-space: 10px;
+	--copied-background: var(--full-content-below-info-background);
+}
+
+.wmde-banner-mini-donation-form {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	background: #fff;
+	z-index: 100;
+	padding: 10px;
+}
+
+.wmde-banner-form__footer {
+	--repel-vertical-alignment: flex-start;
+}

@@ -29,7 +29,11 @@ const messages: TranslationMessages = {
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': '',
 
-	'prefix-days-left': 'Noch',
+	'form-1-legend': 'Danke, dass Sie uns lorem ipusm',
+	'form-3-legend': 'Wie möchten Sie heute spenden?',
+	'form-button-next': 'Weiter',
+	'back-button': 'zurück',
+	'copy-popup': 'Copied!',
 };
 
 export default messages;
