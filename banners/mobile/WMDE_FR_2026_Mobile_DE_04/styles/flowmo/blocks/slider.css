@@ -1,0 +1,64 @@
+.wmde-b-slider {
+	--pagination-background: var( --slider-pagination-background );
+	--pagination-background-active: var( --slider-pagination-background-active );
+
+	height: auto;
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.wmde-b-slider__slides {
+	display: flex;
+	width: 100%;
+	height: auto;
+	flex: 1 1 auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.wmde-b-slider__slide {
+	display: flex;
+	text-wrap: balance;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding-inline: var( --space-l );
+	cursor: grab;
+	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	transform: translate3d( 0, 0, 0 );
+}
+
+.wmde-b-slider__pagination {
+	display: flex;
+	justify-content: center;
+	gap: var( --space-2xs );
+	height: var( --space-xl );
+}
+
+.wmde-b-slider__pagination li {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.wmde-b-slider__pagination-item {
+	display: block;
+	height: 0.6rem;
+	width: 0.6rem;
+	border-radius: calc( 0.6rem / 2 );
+	border: 0;
+	padding: 0;
+	background: var( --pagination-background );
+
+	transition: width 200ms ease-in-out;
+}
+
+.wmde-b-slider__pagination-item--active {
+	background: var( --pagination-background-active );
+	width: 1.3rem;
+}

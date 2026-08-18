@@ -1,0 +1,30 @@
+.wmde-b-heading {
+	--headline-line-color: var( --mini-headline-line-color );
+
+	font-weight: bold;
+	font-size: var( --type-step-1 );
+	overflow: hidden;
+	margin-inline: var( --space-xs );
+	padding-block: var( --space-s );
+}
+
+.wmde-b-heading::before,
+.wmde-b-heading::after {
+	background-color: var( --headline-line-color );
+	content: '';
+	display: inline-block;
+	height: 1px;
+	position: relative;
+	vertical-align: middle;
+	width: 50%;
+}
+
+.wmde-b-heading::before {
+	right: 0.5em;
+	margin-left: -50%;
+}
+
+.wmde-b-heading::after {
+	left: 0.5em;
+	margin-right: -50%;
+}

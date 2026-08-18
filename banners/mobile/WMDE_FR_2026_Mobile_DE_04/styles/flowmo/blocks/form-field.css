@@ -1,0 +1,62 @@
+.wmde-b-form-field {
+	--border: var( --form-field-border );
+	--background: var( --form-field-background );
+	--color: var( --form-field-color );
+
+	border: 1px solid var( --border );
+	background: var( --background );
+	color: var( --color );
+	border-radius: 4px;
+	cursor: pointer;
+	line-height: 40px;
+	text-align: center;
+	font-size: var( --type-step-00 );
+	width: 122px;
+}
+
+.wmde-b-form-field:has( input:focus-within ) {
+	--border: var( --form-field-border-hover );
+	--background: var( --form-field-background-hover );
+}
+
+.wmde-b-form-field input[ type='radio' ] {
+	all: unset;
+	appearance: none;
+}
+
+.wmde-b-form-field input[ type='text' ] {
+	all: unset;
+	width: 100%;
+}
+
+.wmde-b-form-field:is( .active, :has( input:checked ) ) {
+	--border: var( --form-field-border-checked );
+	--background: var( --form-field-background-checked );
+	--color: var( --form-field-color-checked );
+}
+
+.wmde-b-form-field:is( .active, :has( input:checked ) ):has( input:focus-within ) {
+	outline: solid 1px var( --form-field-border-hover );
+	outline-offset: 1px;
+}
+
+.skin-theme-clientpref-night .wmde-b-form-field {
+	--form-field-border: #299168;
+	--form-field-background: #1a8559;
+	--form-field-color: var( --color-white );
+
+	--form-field-border-hover: #1fa86f;
+	--form-field-background-hover: #2a9168;
+
+	--form-field-border-checked: #3366cc;
+	--form-field-background-checked: #3366cc;
+	--form-field-color-checked: var( --color-white );
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.skin-theme-clientpref-os .wmde-b-form-field {
+		--form-field-border: #299168;
+		--form-field-background: #1a8559;
+		--form-field-color: var( --color-white );
+	}
+}

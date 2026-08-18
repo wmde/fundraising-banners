@@ -1,9 +1,10 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/flowmo/styles.css';
+import './styles/styles_var.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -17,9 +18,9 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { WindowPageScroller } from '@src/utils/PageScroller/WindowPageScroller';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { createFormActions } from '@src/createFormActions';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { WindowTimer } from '@src/utils/Timer';
@@ -38,7 +39,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 15000 ),
+		delay: runtimeEnvironment.getBannerDelay( 7500 ),
 		transitionDuration: 1000
 	},
 	bannerCategory: 'fundraising',

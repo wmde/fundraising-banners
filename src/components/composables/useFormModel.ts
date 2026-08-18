@@ -21,7 +21,7 @@ const paymentMethodValidity = ref<Validity>( Validity.Unset );
 const addressType = ref<string>( '' );
 const addressTypeValidity = ref<Validity>( Validity.Unset );
 
-const receipt = ref<boolean|null>( null );
+const receipt = ref<boolean | null>( null );
 
 const disabledIntervals = computed( (): string[] => {
 	if ( paymentMethod.value === PaymentMethods.SOFORT.value ) {
@@ -73,7 +73,15 @@ watch( customAmount, ( newCustomAmount: string, oldCustomAmount: string ) => {
 	}
 } );
 
-export function useFormModel(): FormModel {
+export function useFormModel( customFormat: string = '{amount} €' ): FormModel {
+	const formatCustomAmount = (): void => {
+		if ( customAmount.value === '' ) {
+			return;
+		}
+
+		customAmount.value = customFormat.replace( '{amount}', ( amountInCents.value / 100 ).toString() );
+	};
+
 	return {
 		interval,
 		intervalValidity,
@@ -90,6 +98,8 @@ export function useFormModel(): FormModel {
 		addressType,
 		addressTypeValidity,
 
-		receipt
+		receipt,
+
+		formatCustomAmount
 	};
 }

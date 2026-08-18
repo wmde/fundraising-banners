@@ -50,6 +50,11 @@ describe( 'FallbackBannerConductor.vue', () => {
 					this.$emit( 'bannerSubmitted' );
 				}
 			},
+			global: {
+				mocks: {
+					$translate: ( key: string ): string => key,
+				},
+			},
 			template: `<div class="${containerClass}" style="height: 100px;">
 				Hello, world!
 				<button class="emit-banner-closed" @click="onClose"></button>
@@ -77,6 +82,9 @@ describe( 'FallbackBannerConductor.vue', () => {
 				bannerCategory: 'fundraising'
 			},
 			global: {
+				mocks: {
+					$translate: ( key: string ): string => key,
+				},
 				provide: {
 					tracker: new TrackerStub(),
 					timer: new TimerStub()

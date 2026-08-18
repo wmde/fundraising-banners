@@ -38,7 +38,7 @@ name = "Mobile"
 icon = "mobile"
 campaign = "WMDE_FR_2026_Mobile_DE_04"
 description = "VAR is the minimal flow banner"
-campaign_tracking = "mob-de-03-ba-260831"
+campaign_tracking = "mob-de-04-ba-260831"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
@@ -50,12 +50,12 @@ use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 [mobile.banners.ctrl]
 filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_04/banner_ctrl.ts"
 pagename = "WMDE_FR_2026_Mobile_DE_04_ctrl"
-tracking = "org-mob03-260831-ctrl"
+tracking = "org-mob04-260831-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_04/banner_var.ts"
 pagename = "WMDE_FR_2026_Mobile_DE_04_var"
-tracking = "org-mob03-260831-var"
+tracking = "org-mob04-260831-var"
 
 [mobile.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
