@@ -5,6 +5,7 @@ import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/Upgra
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
+import KeenSlider from '@src/components/Slider2026/messages/KeenSlider.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -13,6 +14,7 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...UpgradeToYearlyDe,
 	...SoftCloseDe,
+	...KeenSlider,
 
 	// custom messages here
 	'payment-bank-transfer': 'Überweisung',
@@ -28,6 +30,13 @@ const messages: TranslationMessages = {
 	'soft-close-button-already-donated': 'Habe schon gespendet',
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': '',
+
+	'form-1-legend': 'Danke, dass Sie uns lorem ipusm',
+	'form-3-legend': 'Wie möchten Sie heute spenden?',
+	'form-button-next': 'Weiter',
+	'back-button': 'zurück',
+	'copy-click-message': 'click to copy',
+	'copy-popup': 'Copied!',
 };
 
 export default messages;

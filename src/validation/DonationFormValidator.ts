@@ -12,18 +12,27 @@ export class DonationFormValidator implements FormValidator {
 		this._formModel = formModel;
 	}
 
-	public validate(): boolean {
-		this._formModel.intervalValidity.value = validateStringIsNotEmpty( this._formModel.interval.value );
-		this._formModel.paymentMethodValidity.value = validateStringIsNotEmpty( this._formModel.paymentMethod.value );
+	public validateAmount(): boolean {
 		this._formModel.amountValidity.value = validateAmount(
 			this._formModel.amountInCents.value,
 			this._formModel.selectedAmount.value,
 			this._formModel.customAmount.value
 		);
+		return this._formModel.amountValidity.value === AmountValidity.Valid;
+	}
 
-		return this._formModel.intervalValidity.value === Validity.Valid &&
-			this._formModel.paymentMethodValidity.value === Validity.Valid &&
-			this._formModel.amountValidity.value === AmountValidity.Valid;
+	public validatePaymentType(): boolean {
+		this._formModel.paymentMethodValidity.value = validateStringIsNotEmpty( this._formModel.paymentMethod.value );
+		return this._formModel.paymentMethodValidity.value === Validity.Valid;
+	}
+
+	public validateInterval(): boolean {
+		this._formModel.intervalValidity.value = validateStringIsNotEmpty( this._formModel.interval.value );
+		return this._formModel.intervalValidity.value === Validity.Valid;
+	}
+
+	public validate(): boolean {
+		return this.validateInterval() && this.validatePaymentType() && this.validateAmount();
 	}
 }
 

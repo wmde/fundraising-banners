@@ -1,0 +1,15 @@
+.wmde-b-mini-banner {
+	--step-content-background: var(--mini-background);
+	--step-color: var(--mini-color);
+	--content-flex-direction: column;
+}
+
+.wmde-b-mini-banner footer {
+	display: flex;
+	justify-content: stretch;
+	gap: var(--gutter);
+}
+
+.wmde-b-mini-banner footer > * {
+	flex: 1 1 auto;
+}

@@ -1,0 +1,42 @@
+.wmde-banner {
+	color: var( --font-color );
+	font-size: var( --type-step-1 );
+	font-family: var( --font-base );
+	line-height: var( --leading-standard );
+	font-size-adjust: from-font;
+	font-synthesis: none;
+	margin: 0;
+	padding: 0;
+	background: var(--banner-background);
+	box-shadow: var(--banner-shadow);
+	/* stylelint-disable */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* stylelint-enable */
+
+	min-height: var(--banner-height);
+	display: flex;
+	justify-content: stretch;
+}
+
+@media screen and (min-width: 568px) {
+	.wmde-banner {
+		min-height: var(--banner-height-large-up);
+	}
+}
+
+.wmde-banner__content {
+	width: 100%;
+}
+
+.wmde-banner h2 {
+	font-size: var( --type-step-1 );
+}
+
+.wmde-banner small {
+	font-size: var( --type-step-0 );
+}
+
+.wmde-banner button {
+	cursor: pointer;
+}

@@ -1,0 +1,27 @@
+.wmde-b-mini-donation-form {
+	--step-content-background: var(--form-background);
+	--button-height: 1.7lh;
+
+	background: var(--banner-background);
+	visibility: hidden;
+	opacity: 0;
+	transform: scale(0.9);
+	position: absolute;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	z-index: 100;
+	transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.wmde-b-mini-donation-form footer {
+	--repel-vertical-alignment: flex-start;
+	--gutter: 0;
+}
+
+.wmde-banner__content--full-page .wmde-b-mini-donation-form {
+	visibility: visible;
+	opacity: 1;
+	transform: scale(1);
+}
