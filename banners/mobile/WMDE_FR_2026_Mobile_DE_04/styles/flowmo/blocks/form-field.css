@@ -1,0 +1,34 @@
+.wmde-b-form-field {
+	
+
+	border: 1px solid var( --select-group-option-border );
+	border-radius: 4px;
+	background: var( --select-group-option-background );
+	color: var( --select-group-option-color );
+	cursor: pointer;
+	line-height: 40px;
+	text-align: center;
+	font-size: 12px;
+	width: 122px;
+}
+
+.wmde-b-form-field:where(:hover, :focus-visible, :has(input:focus-within)) {
+	background: var( --select-group-option-background-hover );
+	border-color: var( --select-group-option-border-active );
+}
+
+.wmde-b-form-field input[type="radio"] {
+	all: unset;
+	appearance: none;
+}
+
+.wmde-b-form-field input[type="text"] {
+	all: unset;
+	width: 100%;
+}
+
+.wmde-b-form-field:is(.active, :has(input:checked)) {
+	color: var( --select-group-option-color-checked );
+	border-color: var( --select-group-option-border-checked );
+	background: var( --select-group-option-background-checked );
+}

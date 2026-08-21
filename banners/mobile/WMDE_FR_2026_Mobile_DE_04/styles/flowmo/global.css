@@ -1,0 +1,16 @@
+.wmde-banner {
+	color: var( --font-color );
+	font-size: var( --type-step-0 );
+	font-family: var( --font-base );
+	line-height: var( --leading-standard );
+	font-size-adjust: from-font;
+	font-synthesis: none;
+	margin: 0;
+	padding: 0;
+	background: var(--banner-background);
+	box-shadow: var(--banner-shadow);
+	/* stylelint-disable */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* stylelint-enable */
+}

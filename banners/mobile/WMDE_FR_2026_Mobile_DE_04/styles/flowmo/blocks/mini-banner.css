@@ -1,0 +1,18 @@
+.wmde-b-mini-banner {
+	padding: var(--space-xs);
+}
+
+.wmde-b-mini-banner__content {
+	background: var(--mini-background);
+	border-radius: 1rem;
+}
+
+.wmde-b-mini-banner footer {
+	display: flex;
+	justify-content: stretch;
+	gap: var(--gutter);
+}
+
+.wmde-b-mini-banner footer > * {
+	flex: 1 1 auto;
+}
