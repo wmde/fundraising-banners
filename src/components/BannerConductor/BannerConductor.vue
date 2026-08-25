@@ -5,13 +5,11 @@
 		:class="[ { 't-banner-visible': bannerState.stateName === BannerStates.Visible }, bannerState.stateName ]"
 		role="region"
 		:aria-label="$translate( 'banner-label' )"
-		aria-live="polite"
 	>
 		<component
 			:is="banner"
 			v-bind="bannerProps"
 			:bannerState="bannerState.stateName"
-			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
 			@banner-submitted="submittedHandler"
 			@banner-content-changed="onContentChanged"

@@ -1,0 +1,36 @@
+.wmde-b-form-field {
+	--border: var(--form-field-border);
+	--background: var(--form-field-background);
+	--color: var(--form-field-color);
+
+	border: 1px solid var( --border );
+	background: var( --background );
+	color: var( --color );
+	border-radius: 4px;
+	cursor: pointer;
+	line-height: 40px;
+	text-align: center;
+	font-size: var(--type-step--1);
+	width: 122px;
+}
+
+.wmde-b-form-field:where(:hover, :focus-visible, :has(input:focus-within)) {
+	--border: var( --form-field-border-hover );
+	--background: var( --form-field-background-hover );
+}
+
+.wmde-b-form-field input[type="radio"] {
+	all: unset;
+	appearance: none;
+}
+
+.wmde-b-form-field input[type="text"] {
+	all: unset;
+	width: 100%;
+}
+
+.wmde-b-form-field:is(.active, :has(input:checked)) {
+	--border: var( --form-field-border-checked );
+	--background: var( --form-field-background-checked );
+	--color: var( --form-field-color-checked );
+}

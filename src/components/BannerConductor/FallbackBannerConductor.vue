@@ -7,7 +7,6 @@
 			:is="banner"
 			v-bind="bannerProps"
 			:bannerState="bannerState.stateName"
-			:bannerHeight="bannerRef?.offsetHeight"
 			@banner-closed="closeHandler"
 			@banner-submitted="submitHandler"
 			@banner-content-changed="onContentChanged"

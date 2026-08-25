@@ -1,0 +1,24 @@
+.wmde-b-nav button {
+	--hover-background: var(--nav-button-background-hover);
+
+	all: unset;
+	font-size: var( --type-step--1 );
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--space-2xs);
+	padding: var(--space-xs);
+	border-radius: 5px;
+	height: 100%;
+	transition: background-color 200ms ease-in-out;
+}
+
+.wmde-b-nav button:hover,
+.wmde-b-nav button:focus-visible {
+	background-color: var(--hover-background);
+}
+
+.wmde-b-nav button svg {
+	max-height: 16px;
+}

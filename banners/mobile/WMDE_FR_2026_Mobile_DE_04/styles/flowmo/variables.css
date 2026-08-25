@@ -1,0 +1,83 @@
+.wmde-banner {
+	/* @link https://utopia.fyi/type/calculator?c=360,14,1.125,1240,16,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--type-step--2: clamp(0.6914rem, 0.6901rem + 0.0056vw, 0.6944rem);
+	--type-step--1: clamp(0.7778rem, 0.7551rem + 0.101vw, 0.8333rem);
+	--type-step-0: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+	--type-step-1: clamp(0.9844rem, 0.8962rem + 0.392vw, 1.2rem);
+	--type-step-2: clamp(1.1074rem, 0.9714rem + 0.6047vw, 1.44rem);
+	--type-step-3: clamp(1.2458rem, 1.0486rem + 0.8766vw, 1.728rem);
+	--type-step-4: clamp(1.4016rem, 1.1267rem + 1.2219vw, 2.0736rem);
+	--type-step-5: clamp(1.5768rem, 1.2039rem + 1.6573vw, 2.4883rem);
+
+	/* @link https://utopia.fyi/space/calculator?c=360,14,1.125,1240,16,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--space-3xs: clamp(0.25rem, 0.25rem + 0vw, 0.25rem);
+	--space-2xs: clamp(0.4375rem, 0.4119rem + 0.1136vw, 0.5rem);
+	--space-xs: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
+	--space-s: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+	--space-m: clamp(1.3125rem, 1.2358rem + 0.3409vw, 1.5rem);
+	--space-l: clamp(1.75rem, 1.6477rem + 0.4545vw, 2rem);
+	--space-xl: clamp(2.625rem, 2.4716rem + 0.6818vw, 3rem);
+	--space-2xl: clamp(3.5rem, 3.2955rem + 0.9091vw, 4rem);
+	--space-3xl: clamp(5.25rem, 4.9432rem + 1.3636vw, 6rem);
+
+	--font-base: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
+	--font-normal: 400;
+	--font-semi-bold: 600;
+	--font-bold: 700;
+
+	--gutter: var(--space-s);
+	--flow-space: var(--space-s);
+
+	--color-white: #ffffff;
+	--color-black: #000000;
+
+	--color-grey-100: #eaecf0;
+	--color-grey-200: #c8ccd1;
+	--color-grey-400: #54595d;
+	--color-grey-800: #37383a;
+
+	--color-orange: #da9000;
+	--color-red: #990a00;
+	--color-yellow: #ffcc33;
+	--color-blue: #3366cc;
+	--color-green-20: #eaf0ec;
+	--color-green-100: #9eeacb;
+	--color-green-400: #6e9e00;
+	--color-green-500: #1d865b;
+
+	--banner-height: 336px;
+	--banner-height-large-up: 354px;
+
+	--banner-background: var(--color-white);
+	--banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--font-color: var(--color-black);
+
+	--nav-button-background-hover: var(--color-grey-100);
+	--info-icon-background: var(--color-green-500);
+	--info-icon-color: var(--color-white);
+
+	--mini-background: var(--color-green-500);
+	--mini-color: var(--color-white);
+	--mini-headline-line-color: var(--color-yellow);
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-red ) 50%, var( --color-red ) 100% );
+	--slider-pagination-background: var(--color-grey-200);
+	--slider-pagination-background-active: var(--color-white);
+
+	--button-background: var(--color-orange);
+	--button-background-secondary: var(--color-blue);
+	--button-background-teritary: var(--color-yellow);
+	--button-color: var(--color-white);
+	--button-color-teritary: var(--color-black);
+
+	--form-background: var(--color-green-100);
+	--form-field-border: var(--color-grey-200);
+	--form-field-background: var(--color-white);
+	--form-field-color: var(--color-black);
+	--form-field-border-hover: var(--color-green-400);
+	--form-field-background-hover: var(--color-green-20);
+	--form-field-border-checked: var(--color-green-400);
+	--form-field-background-checked: var(--color-green-500);
+	--form-field-color-checked: var(--color-white);
+
+	--copied-background: var(--color-yellow);
+}
