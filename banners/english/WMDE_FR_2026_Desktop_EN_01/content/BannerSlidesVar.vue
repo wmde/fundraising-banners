@@ -6,23 +6,22 @@
 			sold.&#8221; - An important update for readers in Germany.
 		</p>
 		<p>
-			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-			message will be up for only a few hours.
+			Today is the day. We're sorry to interrupt, but it's {{ currentDate }}, and this message will be up for only a few days.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
 		<p>
-			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to give €5 back.
-			<AnimatedText :content="visitorsVsDonorsSentence"/>
+			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to
+			give €5 back. <AnimatedText content="If everyone reading this gave just €5, we'd hit our goal in a few hours."/>
 			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online information,
 			powering everything from your personal searches to emerging AI technologies.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 2">
 		<p>
-			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if
-			you have given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate
-			today. If you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank&nbsp;you.
+			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if you have
+			given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate today. If you
+			are undecided, remember that any contribution helps, whether it's €5 or €25. Thank you.
 		</p>
 	</KeenSliderSlide>
 </template>
@@ -41,7 +40,7 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
