@@ -8,10 +8,9 @@
 			</p>
 			<p>
 				Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-				message will be up for only a few hours.
-				We ask you to reflect on the number of times you visited
+				message will be up for only a few hours. We ask you to reflect on the number of times you visited
 				Wikipedia in the past year and if you're able to give €5 back.
-				<AnimatedText :content="visitorsVsDonorsSentence"/>
+				<AnimatedText content="If everyone reading this gave just €5, we'd hit our goal in a few hours."/>
 			</p>
 			<p>
 				In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online
@@ -34,7 +33,7 @@ import InfoIcon from '@src/components/Icons/InfoIconStraight.vue';
 import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
-const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
