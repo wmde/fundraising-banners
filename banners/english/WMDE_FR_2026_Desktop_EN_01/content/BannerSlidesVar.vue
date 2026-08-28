@@ -6,7 +6,8 @@
 			sold.&#8221; - An important update for readers in Germany.
 		</p>
 		<p>
-			Today is the day. We're sorry to interrupt, but it's {{ currentDate }}, and this message will be up for only a few days.
+			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
+			message will be up for only a few hours.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :is-current="currentSlide === 1">
@@ -40,7 +41,7 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );

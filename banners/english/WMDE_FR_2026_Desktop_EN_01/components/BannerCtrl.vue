@@ -25,6 +25,8 @@
 					:step-controllers="stepControllers"
 					@form-interaction="formInteraction"
 					:submit-callback="onSubmit"
+					:submit-opens-in-new-tab="true"
+					@hide="$emit( 'bannerSubmitted' )"
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -117,7 +119,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed', 'bannerSubmitted' ] );
 useBannerHider( 800, emit );
 
 const tracker = inject<Tracker>( 'tracker' );
