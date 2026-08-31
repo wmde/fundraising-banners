@@ -122,7 +122,7 @@ const showsLiveTimeInLargeBanner = async ( getWrapperAtWidth: (
 };
 
 const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
-	const location = { href: '' };
+	window.open = vi.fn();
 	Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 	const trackerSpy = new TrackerSpy();
 	const wrapper = getWrapperAtWidth( 800, null, trackerSpy );
@@ -130,11 +130,11 @@ const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	await wrapper.find( '.wmde-fbb-large .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
-	expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );
+	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_blank' );
 };
 
 const submitsFromSmallBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
-	const location = { href: '' };
+	window.open = vi.fn();
 	Object.defineProperty( window, 'location', { writable: true, configurable: true, value: location } );
 	const trackerSpy = new TrackerSpy();
 	const wrapper = getWrapperAtWidth( 799, null, trackerSpy );
@@ -142,7 +142,7 @@ const submitsFromSmallBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	await wrapper.find( '.wmde-fbb-small .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
-	expect( location.href ).toStrictEqual( 'https://spenden.wikimedia.de' );
+	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_blank' );
 };
 
 export const fallbackBannerFeatures: Record<string, ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ) => Promise<any>> = {
