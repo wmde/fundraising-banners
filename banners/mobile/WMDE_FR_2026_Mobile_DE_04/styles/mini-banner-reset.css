@@ -1,0 +1,53 @@
+#wmde-banner-app {
+	font-size: 16px;
+}
+
+/* Prevent font size inflation */
+.wmde-b-mini-banner {
+	/* stylelint-disable */
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	/* stylelint-enable */
+	text-size-adjust: none;
+}
+
+/* Box sizing rules */
+.wmde-b-mini-banner :where( *,
+*::before,
+*::after ) {
+	box-sizing: border-box;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+.wmde-b-mini-banner :where( h2, p ) {
+	margin-block: 0;
+	padding-block: 0;
+}
+
+/* Remove list styles on ul, ol elements with a class, which suggests default styling will be removed */
+.wmde-b-mini-banner :where( ul[ class ], ol[ class ] ) {
+	list-style: none;
+	margin-inline: 0;
+	padding: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+.wmde-b-mini-banner :where( h2, button ) {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+.wmde-b-mini-banner h2 {
+	text-wrap: balance;
+	border: 0;
+}
+
+/* A elements that don't have a class get default styles */
+.wmde-b-mini-banner a:not( [ class ] ) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+.wmde-b-mini-banner :where( button ) {
+	font: inherit;
+}

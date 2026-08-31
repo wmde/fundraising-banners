@@ -7,12 +7,15 @@
 			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
 			@already-donated-clicked="onMiniClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
 		>
-			<template #banner-slides>
+			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-						</BannerSlides>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+					</template>
+
+					<template #text>
+						<BannerText :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
 				</KeenSlider>
@@ -31,7 +34,6 @@
 				<MultiStepDonation
 					:step-controllers="stepControllers"
 					:page-scroller="pageScroller"
-					:submit-callback="onSubmit"
 					:submit-opens-in-new-tab="true"
 					@form-interaction="formInteraction"
 					@hide="$emit( 'bannerSubmitted' )"
@@ -88,16 +90,16 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
 import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBanner.vue';
+import MiniBanner from './MiniBannerVar.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
-import KeenSlider from '@src/components/Slider/KeenSlider.vue';
+import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
 import { useFormModel } from '@src/components/composables/useFormModel';
@@ -114,8 +116,6 @@ import {
 } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import MainDonationFormButton
 	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import type { Translator } from '@src/Translator';
@@ -136,7 +136,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -174,13 +173,6 @@ function onFullPageClose( feature: TrackingFeatureName, userChoice: CloseChoices
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 }
-
-const onSubmit = (): void => {
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
 
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
