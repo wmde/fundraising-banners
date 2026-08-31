@@ -25,6 +25,8 @@
 	--font-semi-bold: 600;
 	--font-bold: 700;
 
+	--leading-standard: 1.4;
+
 	--gutter: var( --space-s );
 	--flow-space: var( --space-s );
 

@@ -1,0 +1,33 @@
+.wmde-banner {
+	--type-step-00: clamp( 0.7778rem, 0.7551rem + 0.101vw, 0.8333rem );
+	--type-step-0: clamp( 0.875rem, 0.8239rem + 0.2273vw, 1rem );
+	--type-step-1: clamp( 0.9844rem, 0.8962rem + 0.392vw, 1.2rem );
+
+	--space-3xs: clamp( 0.25rem, 0.25rem + 0vw, 0.25rem );
+	--space-2xs: clamp( 0.4375rem, 0.4119rem + 0.1136vw, 0.5rem );
+	--space-xs: clamp( 0.6875rem, 0.6619rem + 0.1136vw, 0.75rem );
+	--space-s: clamp( 0.875rem, 0.8239rem + 0.2273vw, 1rem );
+	--space-l: clamp( 1.75rem, 1.6477rem + 0.4545vw, 2rem );
+	--space-xl: clamp( 2.625rem, 2.4716rem + 0.6818vw, 3rem );
+
+	--gutter: var( --space-s );
+
+	--color-black: #000000;
+	--color-white: #ffffff;
+	--color-grey-100: #eaecf0;
+	--color-grey-800: #37383a;
+	--color-red: #990a00;
+
+	--info-icon-background: var( --mini-info-section-color );
+	--info-icon-color: var( --mini-info-section-icon-color );
+
+	--mini-color: var( --color-white );
+	--mini-headline-line-color: var( --mini-headline-line );
+
+	--button-background: var( --mini-button-background );
+	--button-background-secondary: var( --mini-button-alt-background );
+	--nav-button-color: var( --color-black );
+	--button-color: var( --color-white );
+
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-red ) 50%, var( --color-red ) 100% );
+}
