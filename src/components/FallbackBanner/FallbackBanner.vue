@@ -66,7 +66,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-defineEmits( [ 'bannerClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 const slideIndex = ref<number>( 0 );
@@ -84,6 +84,7 @@ function onSlideChange( newIndex: number, newSlideCount: number ): void {
 
 function onSubmit(): void {
 	tracker.trackEvent( new FallbackBannerSubmitEvent() );
-	window.location.href = props.donationLink;
+	window.open( props.donationLink, '_blank' );
+	emit( 'bannerSubmitted' );
 }
 </script>
