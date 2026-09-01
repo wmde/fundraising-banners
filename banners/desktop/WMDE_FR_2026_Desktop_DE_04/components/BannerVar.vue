@@ -31,7 +31,6 @@
 				<MultiStepDonation
 					:step-controllers="stepControllers"
 					@form-interaction="formInteraction"
-					:submit-callback="onSubmit"
 					:submit-opens-in-new-tab="true"
 					@hide="$emit( 'bannerSubmitted' )"
 				>
@@ -112,7 +111,7 @@
 
 <script setup lang="ts">
 import type { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
@@ -134,9 +133,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import type { Tracker } from '@src/tracking/Tracker';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import BannerTitle from '../content/BannerTitle.vue';
 import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
@@ -157,16 +153,13 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	localCloseTracker: LocalCloseTracker;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 useBannerHider( 800, emit );
-
-const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -180,14 +173,6 @@ const stepControllers = [
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
-
-const onSubmit = (): void => {
-	// special callback function: asking for previous close choices
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
 
 function onCloseMain(): void {
 	onClose( 'MainBanner', CloseChoices.Close );

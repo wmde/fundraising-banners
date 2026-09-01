@@ -1,4 +1,4 @@
-import { beforeEach, describe, test, vi } from 'vitest';
+import { beforeEach, describe, test, vi, expect, it } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_04/components/BannerCtrl.vue';
@@ -27,12 +27,19 @@ import type { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
 import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { setMainDonationFormValues } from '@test/features/forms/subForms/MainDonationForm';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 const formModel = useFormModel();
-const translator = ( key: string ): string => key;
 let tracker: Tracker;
+const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
+
+	let wrapper: VueWrapper<any>;
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -42,7 +49,7 @@ describe( 'BannerCtrl.vue', () => {
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
-		return mount( Banner, {
+		wrapper = mount( Banner, {
 			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
@@ -68,6 +75,7 @@ describe( 'BannerCtrl.vue', () => {
 				}
 			}
 		} );
+		return wrapper;
 	};
 
 	describe( 'Main Banner', () => {
@@ -140,7 +148,6 @@ describe( 'BannerCtrl.vue', () => {
 
 	describe( 'Track user choice on the previous soft-close banner', () => {
 		test.each( [
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
 			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
@@ -163,6 +170,37 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectEmitsModalClosedEvent' ]
 		] )( '%s', async ( testName: string ) => {
 			await desktopUseOfFundsFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close Return Tracking', () => {
+		it( 'Does not store a cookie on close', async () => {
+			const localCloseTracker: LocalCloseTracker = {
+				getItem: vi.fn(),
+				setItem: vi.fn()
+			};
+			getWrapper();
+			await wrapper.setProps( { localCloseTracker } );
+
+			const closeButton = wrapper.find( '.wmde-banner-main > .wmde-banner-close' );
+
+			await closeButton.trigger( 'click' );
+
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
+		} );
+
+		it( 'Does not fire submit on return event', async () => {
+			const localCloseTracker: LocalCloseTracker = {
+				getItem: () => 'I chose not to choose a close choice',
+				setItem: vi.fn()
+			};
+			getWrapper();
+			await wrapper.setProps( { localCloseTracker } );
+
+			await setMainDonationFormValues( wrapper, Intervals.YEARLY, '50', PaymentMethods.PAYPAL );
+			await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
+
+			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
 		} );
 	} );
 } );
