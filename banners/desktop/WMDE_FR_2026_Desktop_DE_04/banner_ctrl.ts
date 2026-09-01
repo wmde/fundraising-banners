@@ -18,7 +18,6 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
-import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
@@ -26,6 +25,7 @@ import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
+import { Locales } from '@src/domain/Locales';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -49,7 +49,6 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		localCloseTracker: new LocalStorageCloseTracker(),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
@@ -72,7 +71,7 @@ const currencyFormatter = localeFactory.getCurrencyFormatter();
 
 app.provide( 'currencyFormatter', currencyFormatter );
 app.provide( 'formItems', createFormItems( translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ) );
-app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { ap: '0' } ) );
+app.provide( 'formActions', createFormActions( page.getTracking(), impressionCount, { locale: Locales.DE } ) );
 app.provide( 'tracker', tracker );
 app.provide( 'timer', new WindowTimer() );
 app.provide( 'currentCampaignTimePercentage', currentCampaignTimePercentage( new Date(), page.getCampaignParameters() ) );
