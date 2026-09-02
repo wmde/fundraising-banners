@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from 'vitest';
+import { beforeEach, describe, test, expect, it, vi } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import Banner from '@banners/english/WMDE_FR_2026_Desktop_EN_01/components/BannerCtrl.vue';
@@ -9,7 +9,6 @@ import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { desktopUseOfFundsFeatures } from '@test/features/UseOfFunds';
 import { bannerContentAnimatedTextFeatures, bannerContentDateAndTimeFeatures, bannerContentDisplaySwitchFeatures, bannerContentFeatures } from '@test/features/BannerContent';
-import { TrackerStub } from '@test/fixtures/TrackerStub';
 import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -20,18 +19,30 @@ import type { Timer } from '@src/utils/Timer';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { paymentIconFeatures } from '@test/features/PaymentIcons';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { setMainDonationFormValues } from '@test/features/forms/subForms/MainDonationForm';
+import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
+import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { Tracker } from '@src/tracking/Tracker';
 
 const formModel = useFormModel();
+let tracker: Tracker;
 const translator = ( key: string ): string => key;
 
 describe( 'BannerCtrl.vue', () => {
 
+	let wrapper: VueWrapper<any>;
+
 	beforeEach( () => {
 		resetFormModel( formModel );
+		tracker = {
+			trackEvent: vi.fn()
+		};
 	} );
 
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): VueWrapper<any> => {
-		return mount( Banner, {
+		wrapper = mount( Banner, {
 			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
@@ -51,12 +62,13 @@ describe( 'BannerCtrl.vue', () => {
 					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
 					formItems,
-					tracker: new TrackerStub(),
+					tracker,
 					timer: timer ?? new TimerStub(),
 					currentCampaignTimePercentage: 42
 				}
 			}
 		} );
+		return wrapper;
 	};
 
 	describe( 'Main Banner', () => {
@@ -142,6 +154,37 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsCreditCardLogos' ]
 		] )( '%s', async ( testName: string ) => {
 			await paymentIconFeatures[ testName ]( getWrapper() );
+		} );
+	} );
+
+	describe( 'Soft Close Return Tracking', () => {
+		it( 'Does not store a cookie on close', async () => {
+			const localCloseTracker: LocalCloseTracker = {
+				getItem: vi.fn(),
+				setItem: vi.fn()
+			};
+			getWrapper();
+			await wrapper.setProps( { localCloseTracker } );
+
+			const closeButton = wrapper.find( '.wmde-banner-main > .wmde-banner-close' );
+
+			await closeButton.trigger( 'click' );
+
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
+		} );
+
+		it( 'Does not fire submit on return event', async () => {
+			const localCloseTracker: LocalCloseTracker = {
+				getItem: () => 'I chose not to choose a close choice',
+				setItem: vi.fn()
+			};
+			getWrapper();
+			await wrapper.setProps( { localCloseTracker } );
+
+			await setMainDonationFormValues( wrapper, Intervals.YEARLY, '50', PaymentMethods.PAYPAL );
+			await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
+
+			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
 		} );
 	} );
 } );
