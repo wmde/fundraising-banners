@@ -1,0 +1,22 @@
+@use 'src/themes/Treedip/variables/fonts';
+
+.wmde-banner {
+	&-wrapper {
+		font-size: 14px;
+		font-family: fonts.$ui;
+		box-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+		background-color: var( --main-background );
+	}
+
+	&--pending {
+		.wmde-banner-wrapper {
+			box-shadow: none;
+		}
+	}
+
+	&--closed {
+		.wmde-banner-wrapper {
+			display: none;
+		}
+	}
+}
