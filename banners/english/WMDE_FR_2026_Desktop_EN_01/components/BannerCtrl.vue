@@ -24,7 +24,6 @@
 				<MultiStepDonation
 					:step-controllers="stepControllers"
 					@form-interaction="formInteraction"
-					:submit-callback="onSubmit"
 					:submit-opens-in-new-tab="true"
 					@hide="$emit( 'bannerSubmitted' )"
 				>
@@ -74,7 +73,7 @@
 
 <script setup lang="ts">
 import type { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
@@ -85,7 +84,6 @@ import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationFor
 import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import {
 	createSubmittableMainDonationForm
@@ -100,8 +98,6 @@ import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import type { Tracker } from '@src/tracking/Tracker';
 
 enum ContentStates {
 	Main = 'wmde-banner-wrapper--main',
@@ -115,14 +111,11 @@ enum FormStepNames {
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	localCloseTracker: LocalCloseTracker;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits( [ 'bannerClosed', 'maybeLater', 'bannerContentChanged', 'modalOpened', 'modalClosed', 'bannerSubmitted' ] );
 useBannerHider( 800, emit );
-
-const tracker = inject<Tracker>( 'tracker' );
 
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
@@ -135,14 +128,6 @@ const stepControllers = [
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
-
-const onSubmit = (): void => {
-	// special callback function: asking for previous close choices
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
 
 function onOpenUseOfFunds(): void {
 	isFundsModalVisible.value = true;
@@ -160,7 +145,6 @@ function onCloseMain(): void {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	props.localCloseTracker.setItem( feature, userChoice );
 }
 
 </script>
