@@ -25,7 +25,7 @@
 					:campaign="currentCampaign"
 					:compile-info="compileInfo[ currentCampaign.banners.ctrl.pageName ]"
 					:pull-request-url="campaignUrlMap[ currentCampaign.campaign ]"
-					:style="{ '--index': 0 }"
+					:index="0"
 					@doScreenshots="onDoScreenshots"
 				/>
 				<BannerCampaign
@@ -35,7 +35,7 @@
 					:campaign="campaign"
 					:compile-info="compileInfo[ campaign.banners.ctrl.pageName ]"
 					:pull-request-url="campaignUrlMap[ campaign.campaign ]"
-					:style="{ '--index': Number( index ) + 1 }"
+					:index="Number( index ) + 1"
 					@doScreenshots="onDoScreenshots"
 				/>
 			</div>
