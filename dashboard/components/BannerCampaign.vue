@@ -1,5 +1,5 @@
 <template>
-	<div class="campaign">
+	<div class="campaign" :style="{ '--index': Number( index ) }">
 		<div class="campaign-title">
 			<div class="campaign-icon">
 				<DeviceMobile v-if="campaign.icon === 'mobile'"/>
@@ -14,12 +14,14 @@
 					:href="`https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${campaign.campaign}`"
 					target="_blank"
 					data-tooltip="View Central Notice Settings"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
 				>
 					{{ campaign.campaign }}
 				</a>
 				<a v-if="pullRequestUrl === 'https://github.com/wmde/fundraising-banners/pulls'"
 					class="pr-icon"
 					data-tooltip="Go to PR overview"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
 					:href="pullRequestUrl"
 					target="_blank"
 					title="Go to PR overview"
@@ -29,6 +31,7 @@
 				<a v-else
 					class="pr-icon"
 					data-tooltip="Go to GitHub PR"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
 					:href="pullRequestUrl"
 					target="_blank"
 					title="Go to GitHub PR"
@@ -37,7 +40,11 @@
 				</a>
 			</div>
 			<div class="campaign-title-icons">
-				<span :data-tooltip="campaign.description" class="link-icon link-icon-large">
+				<span
+					:data-tooltip="campaign.description"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
+					class="link-icon link-icon-large"
+				>
 					<IconInfo/>
 				</span>
 				<a
@@ -45,6 +52,7 @@
 					target="_blank"
 					class="link-icon link-icon-large"
 					data-tooltip="View in Shutterbug"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
 				>
 					<IconShutterbug />
 				</a>
@@ -52,6 +60,7 @@
 					href="#"
 					class="link-icon link-icon-large"
 					data-tooltip="Copy Shutterbug Command"
+					:class="{ 'tooltip-bottom': Number( index ) < 2 }"
 					@click.prevent="$emit( 'doScreenshots', campaign.name )"
 				>
 					<IconCommand />
@@ -97,7 +106,8 @@ import IconPullRequest from './IconPullRequest.vue';
 interface Props {
 	campaign: Campaign,
 	compileInfo?: CompileInfo,
-	pullRequestUrl?: string
+	pullRequestUrl?: string,
+	index: Number
 }
 
 defineProps<Props>();
