@@ -1,0 +1,89 @@
+.wmde-banner {
+	margin: 0;
+	padding: 0;
+	font-family: var( --font-base );
+	font-size: var( --type-step-0 );
+	color: var( --banner-color );
+	font-size-adjust: from-font;
+	font-synthesis: none;
+	background: var( --banner-background );
+	box-shadow: var( --banner-shadow );
+
+	/* stylelint-disable */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* stylelint-enable */
+}
+
+.wmde-banner h2 {
+	font-size: var( --type-step-2 );
+	font-weight: var( --font-bold );
+}
+
+.wmde-banner small {
+	font-size: var( --type-step-0 );
+}
+
+.wmde-banner hr {
+	margin-block: var( --space-3xs );
+	background-color: var( --color-grey-100 );
+}
+
+.wmde-banner fieldset {
+	border: unset;
+	margin: unset;
+	padding: unset;
+}
+
+.wmde-banner button {
+	cursor: pointer;
+}
+
+.wmde-banner input {
+	font-family: var( --font-base );
+}
+
+.wmde-banner [type="text"] {
+	width: 100%;
+}
+
+.wmde-banner label:has([type='checkbox'], [type='radio']):hover {
+	cursor: pointer;
+}
+
+.wmde-banner :is([type='radio'], [type='radio']:before) {
+	border-radius: 50%;
+}
+
+.wmde-banner [type="radio"] {
+	--radio-size: var( --space-s );
+
+	flex-shrink: 0;
+	appearance: none;
+	width: var( --radio-size );
+	height: var( --radio-size );
+	margin: 0.2ex 0 0;
+	border: 2px solid var( --form-field-border-color, var( --color-form-border ) );
+	position: relative;
+	background: var( --color-form-bg );
+	cursor: pointer;
+}
+
+.wmde-banner [type="radio"]:before {
+	content: '';
+	position: absolute;
+	background: var( --color-form-bg );
+	height: 60%;
+	width: 60%;
+	top: 20%;
+	left: 20%;
+	border-radius: 50%;
+}
+
+.wmde-banner [type='radio']:checked {
+	--form-field-border-color: var( --color-radio-checked );
+}
+
+.wmde-banner [type='radio']:checked:before {
+	background: var( --color-radio-checked );
+}

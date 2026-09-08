@@ -1,0 +1,19 @@
+.wmde-b-form-field {
+	display: flex;
+	align-items: center;
+	gap: var( --space-2xs );
+	padding: 4px;
+	text-wrap: nowrap;
+}
+
+.wmde-b-form-field:has( [type="radio"]:focus-visible ) {
+	outline: 2px solid;
+	outline-offset: -2px;
+}
+
+.wmde-b-form-field[data-stacked] {
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	font-size: var( --type-step-000 );
+}

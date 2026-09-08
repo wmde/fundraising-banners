@@ -1,0 +1,16 @@
+/*
+ * This is for styling a button that looks like a link
+ */
+.wmde-u-link-button {
+	border: 0;
+	background: transparent;
+	color: var( --banner-color );
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.wmde-u-link-button:hover,
+.wmde-u-link-button:focus-visible {
+	color: var( --link-color );
+	text-decoration: underline;
+}

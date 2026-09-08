@@ -1,0 +1,34 @@
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-grey-100: #eaecf0;
+	--color-grey-300: #c8ccd1;
+	--color-grey-500: #72777d;
+	--color-grey-700: #404244;
+	--color-grey-900: #202122;
+	--color-black: #000000;
+
+	--banner-color: var( --color-black );
+	--banner-background: var( --color-white );
+	--banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--link-color: var( --color-grey-700 );
+
+	--info-icon-background: var( --color-grey-700 );
+	--info-icon-color: var( --color-white );
+
+	--message-border-color: var( --color-grey-700 );
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-grey-300 ) 50%, var( --color-grey-300 ) 100% );
+
+	--slider-pagination-background: var( --color-grey-300 );
+	--slider-pagination-background-active: var( --color-grey-700 );
+	--slider-chevron-color: var( --color-grey-300 );
+
+	--color-form-border: var( --color-grey-300 );
+	--color-form-bg: var( --color-white );
+	--color-radio-checked: var( --color-black );
+
+	--button-background: var( --color-grey-700 );
+	--button-color: var( --color-white );
+
+	--color-callout-error-border: var( --color-black );
+	--color-callout-error-background: var( --color-grey-300 );
+}

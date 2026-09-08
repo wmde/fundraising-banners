@@ -1,0 +1,31 @@
+@import '@src/styles/variables/desktop/spacing.css';
+@import '@src/styles/variables/desktop/type.css';
+@import 'variables/colors.css';
+@import 'variables/payment-icons.css';
+@import 'variables/general.css';
+@import '@src/styles/global/reset.css';
+@import '@src/styles/global/global-styles.css';
+
+@import '@src/styles/utilities/animated-text.css';
+@import '@src/styles/utilities/banner-transition.css';
+@import '@src/styles/utilities/link-button.css';
+@import '@src/styles/utilities/visually-hidden.css';
+
+@import '@src/styles/compositions/cluster.css';
+@import '@src/styles/compositions/desktop-banner.css';
+@import '@src/styles/compositions/flow.css';
+@import '@src/styles/compositions/form-grid.css';
+@import '@src/styles/compositions/repel.css';
+
+@import '@src/styles/blocks/button.css';
+@import '@src/styles/blocks/callout.css';
+@import '@src/styles/blocks/content-copier.css';
+@import '@src/styles/blocks/footer.css';
+@import '@src/styles/blocks/field-container.css';
+@import '@src/styles/blocks/form-field.css';
+@import '@src/styles/blocks/icon-text.css';
+@import '@src/styles/blocks/message.css';
+@import '@src/styles/blocks/nav.css';
+@import '@src/styles/blocks/slider.css';
+@import '@src/styles/blocks/text-radio.css';
+@import 'blocks/donation-form.css';

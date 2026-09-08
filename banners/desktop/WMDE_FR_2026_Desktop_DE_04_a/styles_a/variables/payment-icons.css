@@ -1,0 +1,44 @@
+.wmde-banner {
+	--paypal-dark-blue: #253b80;
+	--paypal-light-blue: #179bd7;
+	--paypal-overlap-blue: #222d65;
+
+	--mastercard-dark-orange: #eb001b;
+	--mastercard-yellow: #f79e1b;
+	--mastercard-overlap-orange: #ff5a00;
+	--mastercard-text: #{$black};
+	--mastercard-background-white: #{$white};
+	--test: #74ee15;
+
+	--bank-transfer-blue: #005da0;
+
+	--direct-debit-card-fill: #aeb1bc;
+	--direct-debit-pen-fill: #4465a7;
+
+	--paypal-primary-fill: #003087;
+	--paypal-secondary-fill: #0070e0;
+	--paypal-overlap-fill: #001c64;
+	--paypal-primary-fill-active: #ffffff;
+	--paypal-secondary-fill-active: #ffffff;
+	--paypal-overlap-fill-active: transparent;
+
+	--visa-fill: #1434cb;
+	--visa-fill-active: #ffffff;
+
+	--mastercard-primary-fill: #eb001b;
+	--mastercard-secondary-fill: #f79e1b;
+	--mastercard-overlap-fill: #ff5a00;
+	--mastercard-text-fill: #2f292b;
+	--mastercard-primary-fill-active: #ffffff;
+	--mastercard-secondary-fill-active: #ffffff;
+	--mastercard-overlap-fill-active: transparent;
+	--mastercard-text-fill-active: #ffffff;
+
+	--sepa-primary-fill: #0366a6;
+	--sepa-secondary-fill: #a2aab5;
+	--sepa-primary-fill-active: #ffffff;
+	--sepa-secondary-fill-active: #ffffff;
+
+	--bank-transfer-fill: #222222;
+	--bank-transfer-fill-active: #ffffff;
+}

@@ -1,0 +1,43 @@
+.wmde-b-button {
+	--background: var( --button-background );
+	--background-hover: oklch( from var( --background ) calc( l/2 + 0.4 ) c h );
+	--color: var( --button-color );
+	--height: var( --button-height, 2lh );
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0;
+	height: var( --height );
+	border-radius: calc( var( --height ) / 2 );
+	font-weight: bold;
+	font-size: var( --type-step-0 );
+	color: var( --color );
+	padding: 0;
+	min-width: 8rem;
+	background: var( --background );
+	cursor: pointer;
+	transition: background-color 200ms ease-in-out;
+}
+
+.wmde-b-button:hover,
+.wmde-b-button:focus-visible {
+	background: var( --background-hover );
+}
+
+.wmde-b-button[ data-theme='secondary' ] {
+	--background: var( --button-background-secondary );
+}
+
+.wmde-b-button[ data-theme='teritary' ] {
+	--background: var( --button-background-teritary );
+	--color: var( --button-color-teritary );
+}
+
+.wmde-b-button[ data-fill ] {
+	width: 100%;
+}
+
+.wmde-b-button[ data-bigger ] {
+	width: clamp( 15rem, 50%, 20rem );
+}

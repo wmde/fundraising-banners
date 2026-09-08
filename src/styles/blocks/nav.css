@@ -1,0 +1,40 @@
+.wmde-b-nav {
+	display: flex;
+	align-items: center;
+	justify-content: var( --nav-horizontal-alignment, flex-start );
+}
+
+.wmde-b-nav button {
+	border: 0;
+	background: transparent;
+	font-size: var( --nav-font-size, var( --type-step-00 ) );
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var( --space-3xs );
+	border-radius: 5px;
+	height: 100%;
+	transition: background-color 200ms ease-in-out;
+}
+
+.wmde-b-nav button:hover,
+.wmde-b-nav button:focus-visible {
+	background-color: var( --nav-hover-background, var( --color-grey-100 ) );
+}
+
+.wmde-b-nav button svg {
+	max-height: 16px;
+}
+
+.wmde-b-nav button:not( [data-icon] ) {
+	padding-inline: var( --space-xs );
+}
+
+.wmde-b-nav button[data-icon] {
+	aspect-ratio: 1;
+}
+
+.wmde-b-nav[data-right] {
+	--nav-horizontal-alignment: flex-end;
+}

@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-b-slider" :class="sliderPlayingState" @mousedown="stopAutoplay" @touchstart="stopAutoplay" :aria-hidden="!showToScreenReader">
+	<div class="wmde-b-slider" :class="sliderPlayingState" @mousedown="stopAutoplay" @touchstart="stopAutoplay" aria-hidden="true">
 		<div ref="container" class="keen-slider wmde-b-slider__slides">
 			<slot name="slides" :current-slide="currentSlide"/>
 		</div>
@@ -32,9 +32,6 @@
 			</li>
 		</ul>
 	</div>
-	<div class="visually-hidden" v-if="!showToScreenReader">
-		<slot name="text"/>
-	</div>
 </template>
 
 <script setup lang="ts">
@@ -57,7 +54,6 @@ interface Props {
 	withPagination?: boolean;
 	sliderOptions?: KeenSliderOptions;
 	play?: boolean;
-	showToScreenReader?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -67,7 +63,6 @@ const props = withDefaults( defineProps<Props>(), {
 	withPagination: true,
 	withNavigation: true,
 	play: false,
-	showToScreenReader: false,
 } );
 
 const emit = defineEmits( [ 'slide-changed' ] );

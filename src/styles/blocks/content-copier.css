@@ -1,7 +1,8 @@
 .wmde-b-content-copier {
 	--font-size: var( --content-copier-font-size );
 
-	all: unset;
+	border: 0;
+	background: transparent;
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -27,6 +28,6 @@
 }
 
 .wmde-b-content-copier > svg {
-	width: var( --font-size );
-	height: var( --font-size );
+	width: 1lh;
+	height: 1lh;
 }

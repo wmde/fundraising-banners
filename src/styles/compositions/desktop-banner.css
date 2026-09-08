@@ -1,0 +1,56 @@
+/*
+DESKTOP BANNER
+This composition is the ususal way we lay out a desktop banner, using flexible content
+on the left and a fixed width right column.
+
+Note: The widths are set in pixels because of a testing requirement, banners in a test
+      must always be the same height. 357px is a magic number that comes from 100s of
+      test iterations.
+ */
+.wmde-c-desktop-banner {
+	--height: var( --banner-height, 357px );
+	--form-width: var( --banner-form-width, clamp( 20rem, 25vw, 26rem ) );
+	--header-height: var( --banner-header-height, 1.8lh );
+	--footer-height: var( --banner-footer-height, 1.5lh );
+
+	display: grid;
+	padding-block-start: var( --gutter );
+	padding-inline: var( --gutter );
+	column-gap: var( --gutter );
+	min-height: var( --height );
+
+	grid-auto-columns: 1fr;
+	grid-template-columns: minmax( 0, 1fr ) calc( var( --form-width ) / 2 ) calc( var( --form-width ) / 2 );
+	grid-template-rows: var( --header-height ) 1fr var( --footer-height );
+	grid-template-areas:
+		"message back header"
+		"message form form"
+		"footer-left footer-right footer-right";
+}
+
+.wmde-c-desktop-banner__message {
+	grid-area: message;
+}
+
+.wmde-c-desktop-banner__header {
+	grid-area: header;
+}
+
+.wmde-c-desktop-banner__back {
+	grid-area: back;
+}
+
+.wmde-c-desktop-banner__form {
+	grid-area: form;
+}
+
+.wmde-c-desktop-banner__footer-left {
+	grid-area: footer-left;
+}
+
+.wmde-c-desktop-banner__footer-right {
+	grid-area: footer-right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -1,0 +1,13 @@
+.wmde-b-callout {
+	--border-color: var( --color-callout-border );
+	--background-color: var( --color-callout-background );
+
+	background: var( --background-color );
+	padding: var( --space-xs );
+	border: 2px solid var( --border-color );
+}
+
+.wmde-b-callout[data-error] {
+	--border-color: var( --color-callout-error-border );
+	--background-color: var( --color-callout-error-background );
+}

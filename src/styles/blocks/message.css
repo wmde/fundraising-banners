@@ -1,0 +1,50 @@
+.wmde-b-message {
+	font-family: var( --message-font-family, var( --font-serif ) );
+	border-radius: var( --message-border-radius, 0.5rem );
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-block: var( --text-padding, var( --space-xs ) );
+}
+
+.wmde-b-message__title,
+.wmde-b-message__text,
+.wmde-b-message__slideshow {
+	display: flex;
+}
+
+.wmde-b-message__title,
+.wmde-b-message__text {
+	padding-inline: var( --text-padding, var( --space-xs ) );
+	flex-direction: column;
+	align-items: center;
+}
+
+.wmde-b-message__text,
+.wmde-b-message__slideshow {
+	height: auto;
+	flex-grow: 1;
+}
+
+.wmde-b-message__title {
+	--flow-space: var( --space-2xs );
+}
+
+.wmde-b-message__text {
+	justify-content: center;
+}
+
+.wmde-b-message__slideshow {
+	width: 100%;
+}
+
+.wmde-b-message[data-filled] {
+	background: var( --message-background );
+}
+
+.wmde-b-message[data-bordered] {
+	border: var( --message-border-width, 5px ) solid var( --message-border-color );
+}
