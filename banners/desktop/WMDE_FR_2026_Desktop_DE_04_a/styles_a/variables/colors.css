@@ -1,0 +1,114 @@
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-grey-100: #eaecf0;
+	--color-grey-300: #c8ccd1;
+	--color-grey-500: #72777d;
+	--color-grey-700: #404244;
+	--color-grey-900: #202122;
+	--color-black: #000000;
+
+	--color-red-100: #ffe8e8;
+	--color-red-200: #ff8888;
+	--color-red-600: #990a00;
+	--color-blue-400: #3366cc;
+	--color-yellow-700: #fcd53f;
+
+	--banner-color: var( --color-grey-900 );
+	--banner-background: var( --color-white );
+	--banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--link-color: var( --color-blue-400 );
+	--nav-hover-background: var( --color-grey-100 );
+
+	--info-icon-background: var( --color-red-600 );
+	--info-icon-color: var( --color-white );
+
+	--message-border-color: var( --color-red-600 );
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-yellow-700 ) 50%, var( --color-yellow-700 ) 100% );
+
+	--slider-pagination-background: var( --color-grey-300 );
+	--slider-pagination-background-active: var( --color-red-600 );
+	--slider-chevron-color: var( --color-grey-300 );
+
+	--form-field-border: var( --color-grey-300 );
+	--form-field-background: var( --color-white );
+	--form-field-checked-fill: var( --color-blue-400 );
+	--form-field-checked-border: var( --color-blue-400 );
+	--form-field-checked-background: var( --color-white );
+
+	--button-background: var( --color-blue-400 );
+	--button-color: var( --color-white );
+
+	--color-error: var( --color-red-600 );
+	--color-callout-error-border: var( --color-red-600 );
+	--color-callout-error-background: var( --color-red-100 );
+}
+
+.skin-theme-clientpref-night .wmde-banner {
+	--color-red-600: #e60f00;
+	--color-blue-600: #2a4b8d;
+
+	--banner-color: var( --color-white );
+	--banner-background: var( --color-grey-900 );
+	--banner-shadow: none;
+	--link-color: var( --color-blue-400 );
+	--nav-hover-background: var( --color-grey-700 );
+
+	--info-icon-background: var( --color-red-600 );
+	--info-icon-color: var( --color-white );
+
+	--message-border-color: var( --color-red-600 );
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-600 ) 50%, var( --color-blue-600 ) 100% );
+
+	--slider-pagination-background: var( --color-grey-300 );
+	--slider-pagination-background-active: var( --color-red-600 );
+	--slider-chevron-color: var( --color-grey-300 );
+
+	--form-field-border: var( --color-white );
+	--form-field-background: var( --color-grey-900 );
+	--form-field-checked-fill: var( --color-white );
+	--form-field-checked-border: var( --color-white );
+	--form-field-checked-background: var( --color-blue-400 );
+
+	--button-background: var( --color-blue-400 );
+	--button-color: var( --color-white );
+
+	--color-error: var( --color-red-200 );
+	--color-callout-error-border: var( --color-red-600 );
+	--color-callout-error-background: var( --color-grey-900 );
+}
+
+@media (prefers-color-scheme: dark) {
+	.skin-theme-clientpref-os .wmde-banner {
+		--color-red-600: #e60f00;
+		--color-blue-600: #2a4b8d;
+
+		--banner-color: var( --color-white );
+		--banner-background: var( --color-grey-900 );
+		--banner-shadow: none;
+		--link-color: var( --color-blue-400 );
+		--nav-hover-background: var( --color-grey-700 );
+
+		--info-icon-background: var( --color-red-600 );
+		--info-icon-color: var( --color-white );
+
+		--message-border-color: var( --color-red-600 );
+		--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-600 ) 50%, var( --color-blue-600 ) 100% );
+
+		--slider-pagination-background: var( --color-grey-300 );
+		--slider-pagination-background-active: var( --color-red-600 );
+		--slider-chevron-color: var( --color-grey-300 );
+
+		--form-field-border: var( --color-white );
+		--form-field-background: var( --color-grey-900 );
+		--form-field-checked-fill: var( --color-white );
+		--form-field-checked-border: var( --color-white );
+		--form-field-checked-background: var( --color-blue-400 );
+
+		--button-background: var( --color-blue-400 );
+		--button-color: var( --color-white );
+
+		--color-error: var( --color-red-200 );
+		--color-callout-error-border: var( --color-red-600 );
+		--color-callout-error-background: var( --color-grey-900 );
+	}
+}

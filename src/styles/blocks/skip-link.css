@@ -1,0 +1,25 @@
+.wmde-b-skip-link {
+	background-color: var( --banner-skip-link-background, #FFCC33 );
+	color: var( --banner-skip-link-color, #000000 );
+	font-family: var( --font-base );
+	position: fixed;
+	padding: 5px 10px;
+	top: 16px;
+	left: 16px;
+	font-weight: bold;
+	display: block;
+	z-index: 99;
+	border-radius: 5px;
+}
+
+.wmde-b-skip-link:visited {
+	color: var( --banner-skip-link-color, #000000 );
+}
+
+.wmde-b-skip-link:not(:focus):not(:active) {
+	clip-path: inset( 50% );
+	height: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 1px;
+}
