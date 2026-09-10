@@ -37,4 +37,7 @@ export class MediaWikiStub implements MediaWiki {
 	public getMaxBannerImpressions(): number {
 		return 10;
 	}
+
+	public newPopupWidget(): any {
+	}
 }

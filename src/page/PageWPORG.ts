@@ -1,6 +1,6 @@
 import type { Page } from '@src/page/Page';
 import type { Skin } from '@src/page/skin/Skin';
-import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { MediaWiki, PopupWidgetConfig } from '@src/page/MediaWiki/MediaWiki';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import type { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { Vector2 } from '@src/utils/Vector2';
@@ -244,6 +244,61 @@ class PageWPORG implements Page {
 		document.body.style.width = '';
 		document.body.style.overflowX = '';
 		window.scrollTo( 0, parseInt( scrollY || '0' ) * -1 );
+	}
+
+	/** https://meta.wikimedia.org/w/index.php?title=MediaWiki:FundraisingBanners/CoreJS-2025.js&oldid=30935269 */
+	public async showDonateLinkTooltip(): Promise<void> {
+		for ( const donateLink of document.querySelectorAll(
+			'#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a'
+		) ) {
+			const url = new URL( ( donateLink as HTMLAnchorElement ).href, 'https://donate.wikimedia.org' ); // base needed because some links are protocol relative
+			url.searchParams.delete( 'utm_source' );
+			url.searchParams.set( 'wmde_source', 'tooltipOnBannerClose' ); // TODO
+			( donateLink as HTMLAnchorElement ).href = url.toString();
+		}
+
+		const config: PopupWidgetConfig = {
+			$content: $( '<p>You can donate at any time from this menu.</p>' ), // TODO i18n
+			padded: true,
+			autoClose: true,
+			align: 'forwards',
+			autoFlip: false,
+		};
+
+		if ( document.querySelector( '#p-donation a, .navigation-drawer .donate-banner a' ) ) {
+			// Minerva
+			config.$floatableContainer = $( '.navigation-drawer' );
+			config.position = 'below';
+		} else if ( $( '#pt-sitesupport-2 a:visible' ).length > 0 ) {
+			// Vector 2022 user tools
+			config.$floatableContainer = $( '#pt-sitesupport-2 a' );
+			config.position = 'below';
+		} else if ( document.querySelector( '#pt-sitesupport a' ) ) {
+			// Vector 2022 user tools collapsed in menu
+			config.$floatableContainer = $( '#vector-user-links-dropdown' );
+			config.position = 'below';
+		} else if ( document.querySelector( '#vector-main-menu-dropdown #n-sitesupport a' ) ) {
+			// Vector 2022 main menu (only when logged in, so mostly here for testing)
+			config.$floatableContainer = $( '#vector-main-menu-dropdown' );
+			config.position = 'below';
+		} else if ( document.querySelector( '#n-sitesupport a' ) ) {
+			// Legacy Vector (sidebar)
+			config.$floatableContainer = $( '#n-sitesupport a' );
+			config.position = 'after';
+		} else {
+			console.log( 'No donate link element found for tooltip' ); // TODO
+			return;
+		}
+
+		const popup = await this._mediaWiki.newPopupWidget( config );
+
+		popup.$element.css('z-index', 5); // Fix so it shows above header
+		$( document.body ).append( popup.$element );
+		popup.toggle( true );
+
+		setTimeout( () => {
+			popup.$element.fadeOut();
+		}, 5000 ); // TODO
 	}
 }
 
