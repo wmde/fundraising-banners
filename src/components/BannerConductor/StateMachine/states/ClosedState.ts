@@ -15,6 +15,10 @@ export class ClosedState extends BannerState {
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
 	private _timer: Timer;
+	private readonly _popupMessages: {
+		linkMessage: string;
+		menuMessage: string;
+	} | null;
 
 	public constructor(
 		closeEvent: TrackingEvent<void>,
@@ -22,7 +26,11 @@ export class ClosedState extends BannerState {
 		page: Page,
 		tracker: Tracker,
 		resizeHandler: ResizeHandler,
-		timer: Timer
+		timer: Timer,
+		popupMessages: {
+			linkMessage: string;
+			menuMessage: string;
+		} | null = null
 	) {
 		super();
 		this._closeEvent = closeEvent;
@@ -31,6 +39,7 @@ export class ClosedState extends BannerState {
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._timer = timer;
+		this._popupMessages = popupMessages;
 	}
 
 	public enter(): Promise<any> {
@@ -42,7 +51,11 @@ export class ClosedState extends BannerState {
 			.removePageEventListeners();
 		this._resizeHandler.onClose();
 		this._timer.clearAll();
-		return Promise.resolve();
+		if ( this._popupMessages !== null ) {
+			return this._page.showDonateLinkTooltip( this._popupMessages );
+		} else {
+			return Promise.resolve();
+		}
 	}
 
 	public exit(): Promise<any> {

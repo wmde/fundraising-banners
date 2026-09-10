@@ -61,8 +61,11 @@ export class StateFactory {
 		return new VisibleState( shownEventFeature, this._page, this._impressionCount, this._tracker );
 	}
 
-	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
-		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer );
+	public newClosedState( closeEvent: TrackingEvent<void>, popupMessages: {
+		linkMessage: string;
+		menuMessage: string;
+	} | null ): BannerState {
+		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer, popupMessages );
 	}
 
 	public newSubmittedState(): BannerState {
