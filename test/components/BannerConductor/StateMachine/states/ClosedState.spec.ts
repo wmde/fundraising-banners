@@ -18,7 +18,8 @@ describe( 'ClosedState', function () {
 			new PageStub(),
 			tracker,
 			new ResizeHandlerStub(),
-			new TimerStub()
+			new TimerStub(),
+			null
 		);
 
 		state.enter();
@@ -36,7 +37,8 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			new TimerStub()
+			new TimerStub(),
+			null
 		);
 
 		state.enter();
@@ -55,7 +57,8 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			new TimerStub()
+			new TimerStub(),
+			null
 		);
 
 		state.enter();
@@ -75,7 +78,8 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			resizeHandler,
-			new TimerStub()
+			new TimerStub(),
+			null
 		);
 
 		state.enter();
@@ -92,7 +96,8 @@ describe( 'ClosedState', function () {
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			timer
+			timer,
+			null
 		);
 
 		state.enter();
@@ -107,7 +112,8 @@ describe( 'ClosedState', function () {
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			new TimerStub()
+			new TimerStub(),
+			null
 		);
 
 		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );
