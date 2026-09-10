@@ -97,6 +97,9 @@ class PageWPDE implements Page {
 
 	public setModalClosed(): void {
 	}
+
+	public showDonateLinkTooltip(): void {
+	}
 }
 
 export default PageWPDE;

@@ -35,7 +35,8 @@ describe( 'PageWPORG', function () {
 			preventBannerDisplayForPeriod: vitest.fn(),
 			preventBannerDisplayForHours: vitest.fn(),
 			preventBannerDisplayUntilEndOfCampaign: vitest.fn(),
-			setBannerLoadedButHidden: vitest.fn()
+			setBannerLoadedButHidden: vitest.fn(),
+			newPopupWidget: vitest.fn()
 		};
 	} );
 
