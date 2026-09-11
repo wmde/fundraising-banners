@@ -250,6 +250,10 @@ class PageWPORG implements Page {
 
 	/** https://meta.wikimedia.org/w/index.php?title=MediaWiki:FundraisingBanners/CoreJS-2025.js&oldid=30935269 */
 	public async showDonateLinkTooltip(): Promise<void> {
+		if ( this.getCampaignData().bannerClosePopup === 'false' ) {
+			return;
+		}
+
 		// eslint-disable-next-line no-undef
 		const $ = ( window as unknown as { $: JQueryStatic } ).$;
 
