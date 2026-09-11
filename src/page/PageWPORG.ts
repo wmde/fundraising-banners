@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../../node_modules/@types/jquery/JQueryStatic.d.ts" />
 import type { Page } from '@src/page/Page';
 import type { Skin } from '@src/page/skin/Skin';
 import type { MediaWiki, PopupWidgetConfig } from '@src/page/MediaWiki/MediaWiki';
@@ -248,6 +250,9 @@ class PageWPORG implements Page {
 
 	/** https://meta.wikimedia.org/w/index.php?title=MediaWiki:FundraisingBanners/CoreJS-2025.js&oldid=30935269 */
 	public async showDonateLinkTooltip(): Promise<void> {
+		// eslint-disable-next-line no-undef
+		const $ = ( window as unknown as { $: JQueryStatic } ).$;
+
 		for ( const donateLink of document.querySelectorAll(
 			'#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a'
 		) ) {
@@ -286,13 +291,14 @@ class PageWPORG implements Page {
 			config.$floatableContainer = $( '#n-sitesupport a' );
 			config.position = 'after';
 		} else {
+			// eslint-disable-next-line no-console
 			console.log( 'No donate link element found for tooltip' ); // TODO
 			return;
 		}
 
 		const popup = await this._mediaWiki.newPopupWidget( config );
 
-		popup.$element.css('z-index', 5); // Fix so it shows above header
+		popup.$element.css( 'z-index', 5 ); // Fix so it shows above header
 		$( document.body ).append( popup.$element );
 		popup.toggle( true );
 
