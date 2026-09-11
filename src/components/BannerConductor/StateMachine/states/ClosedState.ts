@@ -35,6 +35,7 @@ export class ClosedState extends BannerState {
 
 	public enter(): Promise<any> {
 		this._tracker.trackEvent( this._closeEvent );
+		this._page.showDonateLinkTooltip(); // leak promise, we care not when it resolves
 		this._page
 			.unsetAnimated()
 			.setSpace( 0 )
