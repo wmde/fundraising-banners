@@ -30,7 +30,11 @@ describe( 'BannerConductor.vue', () => {
 
 	let stateMachineSpy: BannerStateMachineSpy;
 
-	async function getShownBannerWrapper( page: Page|null = null, resizeHandler: ResizeHandler|null = null ): Promise<VueWrapper<any>> {
+	async function getShownBannerWrapper(
+		page: Page|null = null,
+		resizeHandler: ResizeHandler|null = null,
+		showDonateLinkTooltip: boolean = false
+	): Promise<VueWrapper<any>> {
 		const banner = defineComponent( {
 			props: {
 				bannerState: String
@@ -66,7 +70,8 @@ describe( 'BannerConductor.vue', () => {
 				resizeHandler: resizeHandler ?? new ResizeHandlerStub(),
 				banner: markRaw( banner ),
 				impressionCount: new ImpressionCountStub(),
-				bannerCategory: 'fundraising'
+				bannerCategory: 'fundraising',
+				showDonateLinkTooltip
 			},
 			global: {
 				mocks: {
@@ -197,6 +202,25 @@ describe( 'BannerConductor.vue', () => {
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 
+	it( 'moves to donate link popup state after close-click when enabled', async () => {
+		const wrapper = await getShownBannerWrapper( null, null, true );
+		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
+
+		await nextTick();
+		await nextTick();
+		await nextTick();
+
+		expect( stateMachineSpy.statesCalled ).toEqual( [
+			BannerStates.Pending,
+			BannerStates.Showing,
+			BannerStates.Visible,
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
+		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
+	} );
+
 	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
 		const page = new PageStub();
 		page.setCloseCookieIfNecessary = vi.fn().mockReturnValue( page );
@@ -220,6 +244,23 @@ describe( 'BannerConductor.vue', () => {
 		] );
 
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+	} );
+
+	it( 'moves to donate link popup state after hide-event when enabled', async () => {
+		const page = new PageStub();
+		const wrapper = await getShownBannerWrapper( page, null, true );
+
+		await page.hideBannerCallback();
+
+		expect( stateMachineSpy.statesCalled ).toEqual( [
+			BannerStates.Pending,
+			BannerStates.Showing,
+			BannerStates.Visible,
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
+		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
 	} );
 
 	it( 'moves to submitted state when donor submits banner', async () => {
