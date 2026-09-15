@@ -21,5 +21,5 @@ export interface Page {
 	getTracking: () => TrackingParameters;
 	setModalOpened: () => void;
 	setModalClosed: () => void;
-	showDonateLinkTooltip: () => void;
+	showDonateLinkTooltip: ( message: string ) => Promise<void>;
 }
