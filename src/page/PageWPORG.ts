@@ -254,9 +254,6 @@ class PageWPORG implements Page {
 			return;
 		}
 
-		// eslint-disable-next-line no-undef
-		const $ = ( window as unknown as { $: JQueryStatic } ).$;
-
 		for ( const donateLink of document.querySelectorAll(
 			'#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a'
 		) ) {

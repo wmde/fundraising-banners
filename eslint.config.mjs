@@ -17,6 +17,7 @@ export default [
 			globals: {
 				...globals.node,
 				...globals.browser,
+				...globals.jquery,
 			},
 			parser: parser,
 			ecmaVersion: 7,
