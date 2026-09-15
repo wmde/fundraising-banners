@@ -5,5 +5,6 @@ export enum BannerStates {
 	Showing = 'wmde-banner--showing',
 	Visible = 'wmde-banner--visible',
 	Closed = 'wmde-banner--closed',
-	Submitted = 'wmde-banner--submitted'
+	Submitted = 'wmde-banner--submitted',
+	DonateLinkPopup = 'wmde-banner--donate-link-popup'
 }
