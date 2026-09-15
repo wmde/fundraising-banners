@@ -4,13 +4,13 @@
 		"skipLibCheck": true,
 		"outDir": "./dist/",
 		"noImplicitAny": true,
-		"baseUrl": ".",
+		// "baseUrl": ".",
 		"resolveJsonModule": true,
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"paths": {
-			"@src/*": [ "src/*" ],
-			"@test/*": [ "test/*" ],
-			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]
+			"@src/*": [ "./src/*" ],
+			"@test/*": [ "./test/*" ],
+			"@environment/*": [ "./src/environment/prod/*", "./src/environment/dev/*" ]
 		},
 		"lib": [
 			"dom",
