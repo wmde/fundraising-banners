@@ -9,7 +9,8 @@
 		color: var( --main-color );
 	}
 
-	&--closed {
+	&--closed,
+	&--donate-link-popup {
 		.wmde-banner-wrapper {
 			display: none;
 		}

@@ -18,8 +18,7 @@ describe( 'ClosedState', function () {
 			new PageStub(),
 			tracker,
 			new ResizeHandlerStub(),
-			new TimerStub(),
-			null
+			new TimerStub()
 		);
 
 		state.enter();
@@ -37,8 +36,7 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			new TimerStub(),
-			null
+			new TimerStub()
 		);
 
 		state.enter();
@@ -57,8 +55,7 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			new TimerStub(),
-			null
+			new TimerStub()
 		);
 
 		state.enter();
@@ -78,8 +75,7 @@ describe( 'ClosedState', function () {
 			page,
 			new TrackerStub(),
 			resizeHandler,
-			new TimerStub(),
-			null
+			new TimerStub()
 		);
 
 		state.enter();
@@ -96,26 +92,11 @@ describe( 'ClosedState', function () {
 			new PageStub(),
 			new TrackerStub(),
 			new ResizeHandlerStub(),
-			timer,
-			null
+			timer
 		);
 
 		state.enter();
 
 		expect( timer.clearAllCalls ).toStrictEqual( 1 );
-	} );
-
-	it( 'throws error on exit', function () {
-		const state = new ClosedState(
-			new CloseEvent( 'MainBanner', CloseChoices.Close ),
-			'fundraising',
-			new PageStub(),
-			new TrackerStub(),
-			new ResizeHandlerStub(),
-			new TimerStub(),
-			null
-		);
-
-		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );
 	} );
 } );
