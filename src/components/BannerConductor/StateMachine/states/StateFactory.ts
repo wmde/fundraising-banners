@@ -15,6 +15,7 @@ import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingE
 import type { Timer } from '@src/utils/Timer';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 import { SubmittedState } from '@src/components/BannerConductor/StateMachine/states/SubmittedState';
+import { DonateLinkPopupState } from '@src/components/BannerConductor/StateMachine/states/DonateLinkPopupState';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -61,15 +62,19 @@ export class StateFactory {
 		return new VisibleState( shownEventFeature, this._page, this._impressionCount, this._tracker );
 	}
 
-	public newClosedState( closeEvent: TrackingEvent<void>, popupMessages: {
-		linkMessage: string;
-		menuMessage: string;
-	} | null ): BannerState {
-		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer, popupMessages );
+	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {
+		return new ClosedState( closeEvent, this._bannerCategory, this._page, this._tracker, this._resizeHandler, this._timer );
 	}
 
 	public newSubmittedState(): BannerState {
 		return new SubmittedState( this._page, this._resizeHandler, this._timer );
+	}
+
+	public newDonateLinkPopupState( messages: {
+		linkMessage: string;
+		menuMessage: string;
+	} ): BannerState {
+		return new DonateLinkPopupState( this._page, messages );
 	}
 }
 

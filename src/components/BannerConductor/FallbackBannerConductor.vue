@@ -95,7 +95,12 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ), props.showDonateLinkTooltip ? popupMessages : null ) ) );
+props.page.onPageEventThatShouldHideBanner( async () => {
+	await stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) );
+	if ( props.showDonateLinkTooltip ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( popupMessages ) );
+	}
+} );
 
 function onContentChanged(): void {
 	// Wait a tick in order to let the content re-render before updating the size
@@ -105,7 +110,10 @@ function onContentChanged(): void {
 }
 
 async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
-	await stateMachine.changeState( stateFactory.newClosedState( closeEvent, props.showDonateLinkTooltip ? popupMessages : null ) );
+	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
+	if ( props.showDonateLinkTooltip ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( popupMessages ) );
+	}
 }
 
 async function submitHandler(): Promise<any> {
@@ -124,7 +132,8 @@ async function submitHandler(): Promise<any> {
 }
 .wmde-banner--not-shown,
 .wmde-banner--closed,
-.wmde-banner--submitted {
+.wmde-banner--submitted,
+.wmde-banner--donate-link-popup {
 	display: none;
 }
 </style>
