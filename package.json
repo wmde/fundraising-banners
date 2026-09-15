@@ -47,6 +47,7 @@
     "vue": "^3.5.42"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@stylistic/stylelint-config": "^3.0.1",
     "@types/jsdom": "^30.0.0",
@@ -63,6 +64,7 @@
     "eslint-plugin-unicorn": "^64.0.0",
     "eslint-plugin-vue": "^10.11.0",
     "fast-glob": "^3.3.3",
+    "globals": "^17.12.0",
     "handlebars": "^4.7.8",
     "jsdom": "^30.0.1",
     "knip": "^6.35.0",
