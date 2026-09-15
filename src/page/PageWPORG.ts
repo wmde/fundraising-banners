@@ -249,7 +249,7 @@ class PageWPORG implements Page {
 	}
 
 	/** https://meta.wikimedia.org/w/index.php?title=MediaWiki:FundraisingBanners/CoreJS-2025.js&oldid=30935269 */
-	public async showDonateLinkTooltip(): Promise<void> {
+	public async showDonateLinkTooltip( message: string ): Promise<void> {
 		if ( this.getCampaignData().bannerClosePopup === 'false' ) {
 			return;
 		}
@@ -264,7 +264,7 @@ class PageWPORG implements Page {
 		}
 
 		const config: PopupWidgetConfig = {
-			$content: $( '<p>You can donate at any time from this menu.</p>' ), // TODO i18n
+			$content: $( message ),
 			padded: true,
 			autoClose: true,
 			align: 'forwards',

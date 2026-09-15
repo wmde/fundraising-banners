@@ -15,6 +15,7 @@ export class ClosedState extends BannerState {
 	private _tracker: Tracker;
 	private _resizeHandler: ResizeHandler;
 	private _timer: Timer;
+	private readonly _donateLinkTooltipMessage: string|null;
 
 	public constructor(
 		closeEvent: TrackingEvent<void>,
@@ -22,7 +23,8 @@ export class ClosedState extends BannerState {
 		page: Page,
 		tracker: Tracker,
 		resizeHandler: ResizeHandler,
-		timer: Timer
+		timer: Timer,
+		donateLinkTooltipMessage: string|null = null
 	) {
 		super();
 		this._closeEvent = closeEvent;
@@ -31,11 +33,11 @@ export class ClosedState extends BannerState {
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._timer = timer;
+		this._donateLinkTooltipMessage = donateLinkTooltipMessage;
 	}
 
 	public enter(): Promise<any> {
 		this._tracker.trackEvent( this._closeEvent );
-		this._page.showDonateLinkTooltip(); // leak promise, we care not when it resolves
 		this._page
 			.unsetAnimated()
 			.setSpace( 0 )
@@ -43,7 +45,11 @@ export class ClosedState extends BannerState {
 			.removePageEventListeners();
 		this._resizeHandler.onClose();
 		this._timer.clearAll();
-		return Promise.resolve();
+		if ( this._donateLinkTooltipMessage !== null ) {
+			return this._page.showDonateLinkTooltip( this._donateLinkTooltipMessage );
+		} else {
+			return Promise.resolve();
+		}
 	}
 
 	public exit(): Promise<any> {
