@@ -157,9 +157,9 @@ const localTranslator = inject<Translator>( 'translator' );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 
 const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFormatter.euroAmount.bind( currencyFormatter ) );
-const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
+const amountOptionsForPreselectedAmountChoice = localFormItemsBuilder.setAmounts( 3, 15, 20, 30, 50 ).getItems().amounts;
+const amountOptionsForAndererBetragChoice = localFormItemsBuilder.setAmounts( 3, 10, 20, 30, 50 ).getItems().amounts;
+const amountOptionsForForm = ref<FormItem[]>( amountOptionsForAndererBetragChoice );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -179,7 +179,7 @@ function onshowFullPageBanner(): void {
 	contentState.value = ContentStates.FullPage;
 	emit( 'modalOpened' );
 
-	amountOptionsForForm.value = amountOptionsFive;
+	amountOptionsForForm.value = amountOptionsForPreselectedAmountChoice;
 
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 }
@@ -187,7 +187,7 @@ function onshowFullPageBanner(): void {
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
 
-	amountOptionsForForm.value = amountOptionsTen;
+	amountOptionsForForm.value = amountOptionsForAndererBetragChoice;
 
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
