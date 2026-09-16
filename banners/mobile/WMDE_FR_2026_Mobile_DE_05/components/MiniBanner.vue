@@ -1,46 +1,42 @@
 <template>
-	<div class="wmde-banner-mini">
+	<div class="wmde-b-step-container wmde-b-mini-banner">
 
-		<div class="wmde-banner-mini-info-section">
-			<button
-				class="wmde-banner-mini-uof-link wmde-banner-footer-usage-link"
-				@click.prevent="$emit( 'showFundsModal' )"
-				:title="$translate( 'use-of-funds-link-description' )"
-			>
-				<InfoIconStraight/> Warum spenden?
-			</button>
+		<header class="wmde-c-repel wmde-b-nav" role="none" data-nowrap>
+			<div class="wmde-c-cluster">
+				<button @click.prevent="$emit( 'showFundsModal' )" :title="$translate( 'use-of-funds-link-description' )">
+					<InfoIconStraight/> Warum spenden?
+				</button>
 
-			<button
-				class="wmde-banner-mini-already-donated-button"
-				@click.prevent="$emit( 'alreadyDonatedClicked' )"
-			>
-				<TickIcon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
-			</button>
-		</div>
-
-		<div class="wmde-banner-mini-info">
-			<button class="wmde-banner-mini-close wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
-				<CloseIconMobile/>
-			</button>
-
-			<header class="wmde-banner-mini-headline">
-				<div class="wmde-banner-mini-headline-background">
-					<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
-				</div>
-			</header>
-
-			<div class="wmde-banner-mini-slideshow">
-				<slot name="banner-slides"/>
+				<button @click.prevent="$emit( 'alreadyDonatedClicked' )">
+					<TickIcon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+				</button>
 			</div>
+
+			<div>
+				<button @click.prevent="$emit( 'close' )">
+					<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
+					<CloseIconMobile/>
+				</button>
+			</div>
+		</header>
+
+		<div class="wmde-b-step-container__content">
+			<h2 class="wmde-b-heading">Wikipedia ist unverkäuflich</h2>
+			<slot name="banner-slider"/>
 		</div>
-		<div class="wmde-banner-mini-button-group">
-			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
-				Jetzt 10 &euro; spenden
-			</button>
-			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
-				Anderen Betrag
-			</button>
-		</div>
+
+		<footer role="none">
+			<div>
+				<button class="wmde-b-button" data-theme="secondary" data-fill @click="$emit( 'showFullPageBannerPreselected' )">
+					Jetzt 10 &euro; spenden
+				</button>
+			</div>
+			<div>
+				<button class="wmde-b-button" data-fill @click="$emit( 'showFullPageBanner' )">
+					Anderen Betrag
+				</button>
+			</div>
+		</footer>
 
 	</div>
 </template>

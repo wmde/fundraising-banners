@@ -1,29 +1,30 @@
 <template>
-	<div class="wmde-banner-message">
-		<div>
-			<p class="banner-text-title">
-				<strong>Hi,</strong>
-			</p>
-			<p>
-				vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-				{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von
-				Wikipedia zu unterstützen.
-				<AnimatedText content="Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf."/>
-				Die meisten spenden, weil sie Wikipedia nützlich finden.
-				Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter.
-				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-				Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-				Vielen Dank!
-			</p>
-		</div>
-	</div>
+	<p>
+		Hi, vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
+		{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
+		zu unterstützen.
+	</p>
+
+	<p>
+		Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.
+		Die meisten spenden, weil sie Wikipedia nützlich finden.
+	</p>
+
+	<p>
+		Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
+		Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+	</p>
+
+	<p>
+		Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
+		<strong> Vielen Dank!</strong>
+	</p>
 </template>
 
 <script setup lang="ts">
-import { inject, watch } from 'vue';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
-import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 
 interface Props {
 	playLiveText: boolean;
@@ -31,20 +32,16 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const {
-	currentDayName,
-	getCurrentDateAndTime,
-	averageDonation
-}: DynamicContent = inject( 'dynamicCampaignText' );
-
+const { currentDayName, getCurrentDateAndTime, averageDonation }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
-	if ( shouldPlay ) {
-		startTimer();
-	} else {
+	if ( !shouldPlay ) {
 		stopTimer();
 	}
 } );
+
+onMounted( startTimer );
+onUnmounted( stopTimer );
 
 </script>
