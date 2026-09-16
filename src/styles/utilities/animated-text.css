@@ -1,0 +1,10 @@
+.wmde-b-animated-text {
+	background: var( --animated-text-background );
+	background-size: 201% 100%;
+	background-position: 100% 0;
+	transition: background-position 2s;
+}
+
+.wmde-banner--visible .wmde-b-animated-text--visible {
+	background-position: 0 0;
+}

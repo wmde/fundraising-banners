@@ -1,0 +1,38 @@
+.wmde-b-donation-form {
+	display: flex;
+	width: 100%;
+	height: auto;
+	flex: 1 1 auto;
+	overflow: hidden;
+}
+
+.wmde-b-donation-form__step {
+	all: unset;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-wrap: balance;
+}
+
+.wmde-b-donation-form__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var( --gutter );
+}
+
+.wmde-b-donation-form__error {
+	color: var( --color-error );
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.wmde-b-donation-form__error:focus {
+	outline: 2px solid var( --color-error );
+	outline-offset: 5px;
+}
+
+.wmde-b-donation-form p {
+	font-size: var( --type-step-00 );
+	padding-inline: var( --gutter );
+}

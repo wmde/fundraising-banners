@@ -11,6 +11,8 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { TrackerSpy } from '@test/fixtures/TrackerSpy';
+import failingValidator from '@test/fixtures/FailingValidator';
+import succeedingValidator from '@test/fixtures/SucceedingValidator';
 
 const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.ANONYMOUS, AddressTypes.EMAIL ],
@@ -87,7 +89,7 @@ describe( 'MainDonationFormAmountCheering.vue', () => {
 	} );
 
 	it( 'shows invalid fields on submit when fields are invalid', async () => {
-		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( failingValidator );
 		const wrapper = getWrapper();
 
 		await wrapper.trigger( 'submit' );
@@ -98,7 +100,7 @@ describe( 'MainDonationFormAmountCheering.vue', () => {
 	} );
 
 	it( 'shows the error scroll link when form fields are invalid', async () => {
-		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( failingValidator );
 		const wrapper = getWrapper( true );
 
 		await wrapper.trigger( 'submit' );
@@ -107,7 +109,7 @@ describe( 'MainDonationFormAmountCheering.vue', () => {
 	} );
 
 	it( 'emits an event on submit when fields are valid', () => {
-		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => true } );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( succeedingValidator );
 		const wrapper = getWrapper();
 
 		wrapper.trigger( 'submit' );
@@ -116,7 +118,7 @@ describe( 'MainDonationFormAmountCheering.vue', () => {
 	} );
 
 	it( 'does not emit our own submit event when form fields are invalid', () => {
-		vi.mocked( newDonationFormValidator ).mockReturnValue( { validate: () => false } );
+		vi.mocked( newDonationFormValidator ).mockReturnValue( failingValidator );
 		const wrapper = getWrapper();
 
 		wrapper.trigger( 'submit' );
