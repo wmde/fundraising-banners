@@ -2,14 +2,13 @@ import { expect, it, Mock } from 'vitest';
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
-import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_05/components/BannerCtrl.vue';
+import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_05/components/BannerVar.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
 import { formItems } from '@test/banners/formItems';
-import { donationFormFeatures } from '@test/features/forms/MainDonation_UpgradeToYearlyButton';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -24,15 +23,25 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { setMainDonationFormValues } from '@test/features/forms/subForms/MainDonationForm';
+import {
+	expectMainDonationFormGoesToPageOnSubmit,
+	expectMainDonationFormSubmits,
+	setMainDonationFormValues, submitMainDonationForm
+} from '@test/features/forms/subForms/MainDonationForm';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
+import { expectUpgradeToYearlyFormSubmits } from '@test/features/forms/subForms/UpgradeToYearlyButtonForm';
+
+enum Pages {
+	MainDonation = 1,
+	UpgradeToYearly = 2
+}
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
-describe( 'BannerCtrl.vue', () => {
+describe( 'BannerVar.vue', () => {
 	let showCallback: Mock;
 	let closeCallback: Mock;
 
@@ -92,16 +101,46 @@ describe( 'BannerCtrl.vue', () => {
 	};
 
 	describe( 'Donation Form Happy Paths', () => {
-		test.each( [
-			[ 'expectMainDonationFormSubmitsWhenSofortIsSelected' ],
-			[ 'expectMainDonationFormSubmitsWhenYearlyIsSelected' ],
-			[ 'expectMainDonationFormGoesToUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsUpgrade' ],
-			[ 'expectUpgradeToYearlyFormSubmitsDontUpgrade' ],
-			[ 'submitOpensInNewTab' ],
-			[ 'submitHidesBanner' ]
-		] )( '%s', async ( testName: string ) => {
-			await donationFormFeatures[ testName ]( getWrapper() );
+
+		it( 'submits when Sofort is selected', async () => {
+			await expectMainDonationFormSubmits( getWrapper(), Intervals.ONCE, PaymentMethods.SOFORT, '10' );
+		} );
+
+		it( 'submits when yearly is selected', async () => {
+			await expectMainDonationFormSubmits( getWrapper(), Intervals.YEARLY, PaymentMethods.PAYPAL, '10' );
+		} );
+
+		it( 'goes to upgrade page', async () => {
+			await expectMainDonationFormGoesToPageOnSubmit(
+				getWrapper(), Pages.UpgradeToYearly, Intervals.ONCE, PaymentMethods.PAYPAL, '20'
+			);
+		} );
+
+		it( 'submits the upgrade form when "yes" is chosen', async () => {
+			const donationFormWrapper = getWrapper();
+			await submitMainDonationForm( donationFormWrapper, Intervals.ONCE, '10', PaymentMethods.PAYPAL );
+			await expectUpgradeToYearlyFormSubmits( donationFormWrapper, 'yes' );
+		} );
+
+		it( 'submits without upgrading when "no" is chosen', async () => {
+			const donationFormWrapper = getWrapper();
+			await submitMainDonationForm( donationFormWrapper, Intervals.ONCE, '20', PaymentMethods.PAYPAL );
+			await expectUpgradeToYearlyFormSubmits( donationFormWrapper, 'no' );
+		} );
+
+		it( 'submits to a new tab', async () => {
+			const donationFormWrapper = getWrapper();
+			await setMainDonationFormValues( donationFormWrapper, Intervals.YEARLY, '10', PaymentMethods.PAYPAL );
+
+			expect( donationFormWrapper.find( '.wmde-banner-submit-form' ).attributes( 'target' ) ).toStrictEqual( '_blank' );
+		} );
+
+		it( 'hides the banner on submit', async () => {
+			const donationFormWrapper = getWrapper();
+			await setMainDonationFormValues( donationFormWrapper, Intervals.YEARLY, '10', PaymentMethods.PAYPAL );
+			await donationFormWrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
+
+			expect( donationFormWrapper.emitted( 'bannerSubmitted' ).length ).toStrictEqual( 1 );
 		} );
 
 		it( 'Uses the default amounts when the donate button is clicked', async () => {
@@ -110,11 +149,11 @@ describe( 'BannerCtrl.vue', () => {
 
 			await miniButton.trigger( 'click' );
 
-			expect( wrapper.find( '.amount-5' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.amount-3' ).exists() ).toBeTruthy();
 			expect( wrapper.find( '.amount-15' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.amount-25' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.amount-20' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.amount-30' ).exists() ).toBeTruthy();
 			expect( wrapper.find( '.amount-50' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.amount-100' ).exists() ).toBeTruthy();
 		} );
 
 		it( 'Uses the alternate amounts when the donate with amount button is clicked', async () => {
@@ -123,11 +162,11 @@ describe( 'BannerCtrl.vue', () => {
 
 			await miniButtonPreselect.trigger( 'click' );
 
+			expect( wrapper.find( '.amount-3' ).exists() ).toBeTruthy();
 			expect( wrapper.find( '.amount-10' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.amount-15' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.amount-25' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.amount-20' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.amount-30' ).exists() ).toBeTruthy();
 			expect( wrapper.find( '.amount-50' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.amount-100' ).exists() ).toBeTruthy();
 		} );
 
 		test.each( [
@@ -280,7 +319,7 @@ describe( 'BannerCtrl.vue', () => {
 			getWrapper();
 			await wrapper.setProps( { localCloseTracker } );
 
-			await setMainDonationFormValues( wrapper, Intervals.YEARLY, '15', PaymentMethods.PAYPAL );
+			await setMainDonationFormValues( wrapper, Intervals.YEARLY, '50', PaymentMethods.PAYPAL );
 			await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
 
 			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
