@@ -23,6 +23,9 @@
 		<div class="wmde-b-step-container__content">
 			<h2 class="wmde-b-heading">Wikipedia ist unverkäuflich</h2>
 			<slot name="banner-slider"/>
+			<div class="visually-hidden">
+				<slot name="banner-text"/>
+			</div>
 		</div>
 
 		<footer role="none">

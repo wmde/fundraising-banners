@@ -1,0 +1,5 @@
+.wmde-banner {
+	--gutter: var( --space-xs );
+	--flow-space: var( --space-xs );
+	--form-grid-gap: 0 var( --gutter );
+}
