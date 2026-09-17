@@ -1,0 +1,18 @@
+.wmde-c-form-grid {
+	--gap: var( --form-grid-gap, var( --gutter ) );
+
+	display: grid;
+	gap: var( --gap );
+}
+
+.wmde-c-form-grid[data-layout="halves"] {
+	grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+}
+
+.wmde-c-form-grid[data-layout="quarters"] {
+	grid-template-columns: repeat( 4, minmax( 0, 1fr ) );
+}
+
+.wmde-c-form-grid__double {
+	grid-column-end: span 2;
+}

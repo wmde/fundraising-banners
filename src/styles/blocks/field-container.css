@@ -1,0 +1,16 @@
+.wmde-b-field-container {
+	--font-size: var( --form-font-size, var( --type-step-00 ) );
+	--font-weight: var( --form-font-weight, var( --font-bold ) );
+
+	font-size: var( --font-size );
+	font-weight: var( --font-weight );
+}
+
+.wmde-b-field-container__error {
+	text-align: center;
+	color: var( --color-error );
+}
+
+.wmde-b-field-container:not( [data-error] ) .wmde-b-field-container__error {
+	display: none;
+}
