@@ -101,13 +101,14 @@
 
 		</MainBanner>
 
-		<FundsModal
-			:content="useOfFundsContent"
-			:visible="isFundsModalVisible"
-			@hide="onHideFundsModal"
-			@call-to-action="onHideFundsModal"
-		/>
 	</div>
+
+	<FundsModal
+		:content="useOfFundsContent"
+		:visible="isFundsModalVisible"
+		@hide="onHideFundsModal"
+		@call-to-action="onHideFundsModal"
+	/>
 </template>
 
 <script setup lang="ts">

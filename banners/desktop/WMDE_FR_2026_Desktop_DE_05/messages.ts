@@ -6,6 +6,8 @@ import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
+import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -15,6 +17,9 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...FallbackBanner,
 	...SoftCloseDe,
+	...ContentCopier,
+	...BannerConductor,
+
 	'already-donated-link': 'Habe schon gespendet',
 	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
 	'upgrade-to-yearly-copy': `<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns besonders und ermöglichen langfristige Weiterentwicklungen.</p>
@@ -37,6 +42,10 @@ const messages: TranslationMessages = {
 	'prefix-days-left': 'Noch',
 
 	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur rund {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
+	'payment-bank-transfer': 'Überweisung',
+	'skip-link': 'Weiter zum Formular',
+	'form-label': 'Spenden Formular',
+	'form-error': 'Bitte Formular vervollständigen',
 };
 
 export default messages;
