@@ -1,0 +1,8 @@
+.wmde-b-icon-text {
+	--gutter: var( --space-2xs );
+}
+
+.wmde-b-icon-text svg {
+	height: 0.8lh;
+	width: 0.8lh;
+}

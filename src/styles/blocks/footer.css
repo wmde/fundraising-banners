@@ -1,0 +1,3 @@
+.wmde-b-footer {
+	font-size: var( --banner-footer-font-size, var( --type-step-00 ) );
+}

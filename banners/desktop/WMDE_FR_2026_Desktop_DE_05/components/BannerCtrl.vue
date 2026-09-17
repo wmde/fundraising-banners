@@ -1,153 +1,96 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState">
-		<MainBanner
-			@form-interaction="$emit( 'bannerContentChanged' )"
-			v-if="contentState === ContentStates.Main"
-			:bannerState="bannerState"
-		>
-			<template #close-button>
-				<ButtonClose @close="onCloseMain"/>
-			</template>
+	<div class="wmde-c-desktop-banner">
 
-			<template #banner-title>
-				<BannerTitle/>
-			</template>
+		<header role="none" class="wmde-c-desktop-banner__header wmde-b-nav" data-right>
+			<button @click.prevent="() => onClose( 'MainBanner', CloseChoices.Close )" data-icon>
+				<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
+				<CloseIconMobile/>
+			</button>
+		</header>
 
-			<template #banner-text>
-				<BannerText/>
-			</template>
+		<div class="wmde-c-desktop-banner__message">
+			<div class="wmde-b-message wmde-c-flow" data-bordered>
+				<button class="wmde-b-skip-link" @click="onFocusMainForm">
+					{{ $translate( 'skip-link' ) }}
+				</button>
 
-			<template #banner-slides="{ play }: any">
-				<KeenSlider :with-navigation="true" :play="play" :interval="10000" :delay="2000" :navigation-color="'#ffffff'">
+				<div class="wmde-b-message__title wmde-c-flow">
+					<BannerTitle/>
+				</div>
+				<div v-if="!onLargeScreen" class="wmde-b-message__slideshow">
+					<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="10000" :delay="2000">
+						<template #slides="{ currentSlide }: any">
+							<BannerSlides :currentSlide="currentSlide"/>
+						</template>
+					</KeenSlider>
+				</div>
+				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }">
+					<BannerText :banner-state="bannerState"/>
+				</div>
+			</div>
+		</div>
 
-					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide"/>
-					</template>
+		<header role="none" class="wmde-c-desktop-banner__back wmde-b-nav">
+			<button @click.prevent="onBack" data-icon v-if="formStep > 0">
+				<span class="visually-hidden">{{ $translate( 'back-button' ) }}</span>
+				<FormPreviousIcon/>
+			</button>
+		</header>
 
-				</KeenSlider>
-			</template>
+		<div class="wmde-c-desktop-banner__form wmde-c-flow">
+			<DonationForm ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
+		</div>
 
-			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation
-					:step-controllers="stepControllers"
-					@form-interaction="formInteraction"
-					:submit-opens-in-new-tab="true"
-					@hide="$emit( 'bannerSubmitted' )"
-				>
+		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-repel wmde-b-footer">
+			<div class="wmde-c-cluster">
+				<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
+				<ContentCopier label="BIC" value="BFSWDE33XXX"/>
+				<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
+			</div>
+			<button class="wmde-u-link-button" @click="() => onClose( 'MainBanner', CloseChoices.AlreadyDonated )">
+				<TickIcon/> {{ $translate( 'already-donated-link' ) }}
+			</button>
+		</footer>
 
-					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-						>
-							<template #label-payment-ppl>
-								<span class="wmde-banner-select-group-label with-logos paypal">
-									<PayPalIcon/><span>Paypal</span>
-								</span>
-							</template>
-
-							<template #interval-select-group="{ fieldName, selectionItems, isValid, errorMessage, disabledOptions }: any">
-								<SelectGroup
-									:field-name="fieldName"
-									:selectionItems="selectionItems"
-									:isValid="isValid"
-									:errorMessage="errorMessage"
-									v-model:inputValue="interval"
-									:disabledOptions="disabledOptions"
-								/>
-							</template>
-
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<MasterCardIcon/><span>Kreditkarte</span>
-								</span>
-							</template>
-
-							<template #label-payment-ueb>
-								<span class="wmde-banner-select-group-label with-logos bank-transfer">
-									<BankTransferIcon/><span>Überweisung</span>
-								</span>
-							</template>
-
-							<template #label-payment-bez>
-								<span class="wmde-banner-select-group-label with-logos bank-transfer">
-									<DirectDebitIcon/><span>Lastschrift</span>
-								</span>
-							</template>
-						</MainDonationForm>
-					</template>
-
-					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-						/>
-					</template>
-
-				</MultiStepDonation>
-			</template>
-
-			<template #footer>
-				<FooterAlreadyDonated
-					@showFundsModal="onModalOpened"
-					@clickedAlreadyDonatedLink="onClose( 'MainBanner', CloseChoices.AlreadyDonated )"
-				/>
-			</template>
-
-		</MainBanner>
+		<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-b-footer">
+			<button class="wmde-u-link-button" @click="onShowFundsModal">
+				{{ $translate( 'use-of-funds-link' ) }}
+			</button>
+		</footer>
 
 		<FundsModal
 			:content="useOfFundsContent"
 			:visible="isFundsModalVisible"
 			@hide="onHideFundsModal"
 			@call-to-action="onHideFundsModal"
+			:aria-hidden="!isFundsModalVisible"
 		/>
 	</div>
+
 </template>
 
 <script setup lang="ts">
-import type { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import { ref, watch } from 'vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+import { computed, ref, watch } from 'vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
-import MainBanner from './MainBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
+import BannerTitle from '../content/BannerTitle.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import { useFormModel } from '@src/components/composables/useFormModel';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
-import FooterAlreadyDonated from '@src/components/Footer/FooterAlreadyDonated.vue';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
-import BannerTitle from '../content/BannerTitle.vue';
-import BankTransferIcon from '@src/components/PaymentLogos/BankTransferIcon.vue';
-import PayPalIcon from '@src/components/PaymentLogos/PayPalIcon.vue';
-import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
-import MasterCardIcon from '@src/components/PaymentLogos/MasterCardIcon.vue';
-import SelectGroup from '@src/components/DonationForm/SubComponents/SelectGroup.vue';
+import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
+import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
+import TickIcon from '@src/components/Icons/TickIcon.vue';
+import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
+import DonationForm from './DonationForm.vue';
 
 enum ContentStates {
-	Main = 'wmde-banner-wrapper--main',
-}
-
-enum FormStepNames {
-	MainDonationFormStep = 'MainDonationForm',
-	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+	Main = 'wmde-banner__content--main',
 }
 
 interface Props {
@@ -155,28 +98,23 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 useBannerHider( 800, emit );
 
+const donationForm = ref<any>( null );
 const isFundsModalVisible = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
-const formModel = useFormModel();
-const { interval } = formModel;
-const stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
-];
+const onLargeScreen = useDisplaySwitch( 1300 );
+const slideShowStopped = ref<boolean>( false );
+const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
+const formStep = computed<number>( () => donationForm.value?.step );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
-
-function onCloseMain(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
-}
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
@@ -187,9 +125,17 @@ function onHideFundsModal(): void {
 	emit( 'modalClosed' );
 }
 
-function onModalOpened(): void {
+function onShowFundsModal(): void {
 	isFundsModalVisible.value = true;
 	emit( 'modalOpened' );
 }
+
+const onFormInteraction = (): void => {
+	slideShowStopped.value = true;
+	emit( 'bannerContentChanged' );
+};
+
+const onBack = (): void => donationForm.value.onBack();
+const onFocusMainForm = (): void => donationForm.value.focusMainForm();
 
 </script>

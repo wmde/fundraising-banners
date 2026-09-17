@@ -1,10 +1,8 @@
 <template>
-	<div class="wmde-banner-message-header">
-		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich</h2>
-		<p class="headline">
-			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen
-		</p>
-	</div>
+	<h2 class="wmde-b-icon-text wmde-c-cluster"><InfoIconItalic/> Wikipedia ist unverkäuflich</h2>
+	<p class="headline">
+		<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }} - An alle, die Wikipedia in Deutschland nutzen</strong>
+	</p>
 </template>
 
 <script setup lang="ts">
