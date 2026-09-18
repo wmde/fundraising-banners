@@ -30,6 +30,15 @@ const messages: TranslationMessages = {
 	'custom-amount-placeholder': 'Wahlbetrag',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
 
+	'cheering-500': 'Kleiner Betrag, große Wirkung. Danke!',
+	'cheering-1000': 'Gute Wahl. Eine der häufigsten Spenden.',
+	'cheering-2000': 'Ein starker Beitrag, der viel bewirkt. Toll',
+	'cheering-2500': 'Mehr als durchschnittlich gespendet wird!',
+	'cheering-5000': 'Wenige Menschen spenden so viel. Danke!',
+	'cheering-10000': 'Wow. So viel wird selten gespendet. Danke!',
+	'cheering-custom': 'Ihr Betrag, Ihre Wirkung! Herzlichen Dank.',
+	'interval-highlight': 'Dauerhaft etwas bewegen.',
+
 	'prefix-days-left': 'Noch',
 
 	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur rund {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
