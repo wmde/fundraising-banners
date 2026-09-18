@@ -5,7 +5,7 @@ import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -20,7 +20,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
