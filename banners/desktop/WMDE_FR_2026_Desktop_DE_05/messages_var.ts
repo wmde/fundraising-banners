@@ -37,6 +37,9 @@ const messages: TranslationMessages = {
 	'skip-link': 'Weiter zum Formular',
 	'form-label': 'Spenden Formular',
 	'form-error': 'Bitte Formular vervollständigen',
+	'main-form-amount': 'Betrag',
+	'main-form-yearly-no': '{{amount}} <strong>einmalig</strong> spenden',
+	'main-form-yearly-yes': '{{amount}} <strong>jährlich</strong> spenden',
 };
 
 export default messages;

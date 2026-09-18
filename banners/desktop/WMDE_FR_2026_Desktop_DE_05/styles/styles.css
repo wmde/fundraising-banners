@@ -1,7 +1,7 @@
 @import '@src/styles/variables/desktop/spacing.css';
 @import '@src/styles/variables/desktop/type.css';
 @import 'variables/colors.css';
-@import '../../../../src/styles/variables/payment-icons.css';
+@import '@src/styles/variables/payment-icons.css';
 @import 'variables/general.css';
 @import '@src/styles/global/reset.css';
 @import '@src/styles/global/global-styles.css';
