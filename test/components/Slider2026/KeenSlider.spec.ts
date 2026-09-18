@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
-import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
+import KeenSlider from '@src/components/Slider/KeenSlider.vue';
 import { nextTick } from 'vue';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import type { Timer } from '@src/utils/Timer';
@@ -36,9 +36,6 @@ describe( 'KeenSlider', () => {
 				</template>`
 			},
 			global: {
-				mocks: {
-					$translate: ( key: string ) => key
-				},
 				provide: {
 					timer: timer ?? new TimerStub()
 				}
@@ -97,10 +94,10 @@ describe( 'KeenSlider', () => {
 		const wrapper = getWrapper();
 
 		await nextTick();
-		const paginationElements = wrapper.findAll( '.wmde-b-slider__pagination-item' );
+		const paginationElements = wrapper.findAll( '.wmde-banner-slider-pagination-dot' );
 
 		expect( paginationElements.length ).toBe( 2 );
-		expect( paginationElements[ 0 ].attributes().class ).toContain( 'wmde-b-slider__pagination-item--active' );
+		expect( paginationElements[ 0 ].attributes().class ).toContain( 'is-active' );
 	} );
 
 	it( 'should render navigation', async function () {
@@ -108,13 +105,13 @@ describe( 'KeenSlider', () => {
 
 		await wrapper.setProps( { withNavigation: false } );
 
-		expect( wrapper.find( '.wmde-b-slider__previous-slide' ).exists() ).toBe( false );
-		expect( wrapper.find( '.wmde-b-slider__next-slide' ).exists() ).toBe( false );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-previous' ).exists() ).toBe( false );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( false );
 
 		await wrapper.setProps( { withNavigation: true } );
 
-		expect( wrapper.find( '.wmde-b-slider__previous-slide' ).exists() ).toBe( true );
-		expect( wrapper.find( '.wmde-b-slider__next-slide' ).exists() ).toBe( true );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-previous' ).exists() ).toBe( true );
+		expect( wrapper.find( '.wmde-banner-slider-navigation-next' ).exists() ).toBe( true );
 	} );
 
 	it( 'should render pagination', async function () {
@@ -122,55 +119,55 @@ describe( 'KeenSlider', () => {
 
 		await wrapper.setProps( { withPagination: false } );
 
-		expect( wrapper.find( '.wmde-b-slider__pagination' ).exists() ).toBeFalsy();
+		expect( wrapper.find( '.wmde-banner-slider-pagination' ).exists() ).toBeFalsy();
 
 		await wrapper.setProps( { withPagination: true } );
 
-		expect( wrapper.find( '.wmde-b-slider__pagination' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider-pagination' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when the slider is clicked', async () => {
 		const wrapper = getWrapper();
 
-		await wrapper.find( '.wmde-b-slider' ).trigger( 'mousedown' );
+		await wrapper.find( '.wmde-banner-slider-container' ).trigger( 'mousedown' );
 
-		expect( wrapper.find( '.wmde-b-slider--stopped' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when the slider is touched', async () => {
 		const wrapper = getWrapper();
 		await wrapper.setProps( { play: true } );
 
-		await wrapper.find( '.wmde-b-slider' ).trigger( 'touchstart' );
+		await wrapper.find( '.wmde-banner-slider-container' ).trigger( 'touchstart' );
 
-		expect( wrapper.find( '.wmde-b-slider--stopped' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when a pagination dot is clicked', async () => {
 		const wrapper = getWrapper();
 		await wrapper.setProps( { play: true } );
 
-		await wrapper.find( '.wmde-b-slider__pagination li:nth-child(2) button' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-slider-pagination button:nth-child(2)' ).trigger( 'click' );
 
-		expect( wrapper.find( '.wmde-b-slider--stopped' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when previous is clicked', async () => {
 		const wrapper = getWrapper();
 		await wrapper.setProps( { play: true } );
 
-		await wrapper.find( '.wmde-b-slider__previous-slide' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-slider-navigation-previous' ).trigger( 'click' );
 
-		expect( wrapper.find( '.wmde-b-slider--stopped' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when next is clicked', async () => {
 		const wrapper = getWrapper();
 		await wrapper.setProps( { play: true } );
 
-		await wrapper.find( '.wmde-b-slider__next-slide' ).trigger( 'click' );
+		await wrapper.find( '.wmde-banner-slider-navigation-next' ).trigger( 'click' );
 
-		expect( wrapper.find( '.wmde-b-slider--stopped' ).exists() ).toBeTruthy();
+		expect( wrapper.find( '.wmde-banner-slider--stopped' ).exists() ).toBeTruthy();
 	} );
 
 	it( 'should stop the auto play when unmounted', async () => {
