@@ -74,7 +74,8 @@ describe( 'BannerConductor.vue', () => {
 				},
 				provide: {
 					tracker: new TrackerStub(),
-					timer: new TimerStub()
+					timer: new TimerStub(),
+					translator: { translate: ( key: string ) => key }
 				}
 			}
 		} );

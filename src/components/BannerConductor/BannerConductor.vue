@@ -49,7 +49,7 @@ interface Props {
 	bannerProps?: object,
 	impressionCount: ImpressionCount,
 	bannerCategory: BannerCategory,
-	showDonateLinkTooltip: boolean
+	showDonateLinkTooltip?: boolean
 }
 
 const props = withDefaults( defineProps<Props>(), {
