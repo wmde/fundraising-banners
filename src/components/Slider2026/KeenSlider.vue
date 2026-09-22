@@ -122,6 +122,8 @@ const goToSlide = ( idx: number ): void => {
 	slider.value.moveToIdx( idx );
 };
 
+defineExpose( { goToPreviousSlide, goToNextSlide, goToSlide } );
+
 onMounted( () => {
 	emit( 'slide-changed', currentSlide.value, slider.value.slides.length );
 } );

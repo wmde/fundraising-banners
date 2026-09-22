@@ -1,0 +1,56 @@
+.wmde-b-form-field {
+	--background-hover: oklch( from var( --form-field-background ) calc( l/2 + 0.3 ) c h );
+
+	border: 1px solid var( --form-field-border );
+	background: var( --form-field-background );
+	border-radius: 4px;
+	display: flex;
+	line-height: 2lh;
+	font-size: var( --form-field-font-size, var( --type-step-00 ) );
+	font-weight: bold;
+
+	transition: background var( --transition-time ) var( --transition-type );
+}
+
+.wmde-b-form-field:has( [ type='radio' ] ) {
+	align-items: center;
+	justify-content: center;
+}
+
+.wmde-b-form-field:has( [ type='text' ] ) {
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+.wmde-b-form-field [ type='radio' ] {
+	all: unset;
+	appearance: none;
+}
+
+.wmde-b-form-field [ type='text' ] {
+	all: unset;
+	width: 100%;
+	text-align: center;
+}
+
+.wmde-b-form-field [ type='text' ]::placeholder {
+	color: currentColor;
+}
+
+.wmde-b-form-field [ type='text' ]:focus::placeholder {
+	color: transparent;
+}
+
+.wmde-b-form-field:is( :hover, :focus-visible ) {
+	background: var( --background-hover );
+}
+
+.wmde-b-form-field:is( .wmde-b-form-field--checked, :has( input:checked ) ) {
+	background: var( --form-field-background-active );
+	border: var( --form-field-border-active );
+}
+
+.wmde-b-form-field:has( input:focus-within ) {
+	outline: solid 2px var( --form-field-border-hover );
+	outline-offset: 2px;
+}

@@ -1,5 +1,6 @@
 .wmde-banner {
 	--gutter: var( --space-xs );
 	--flow-space: var( --space-xs );
-	--form-grid-gap: 0 var( --gutter );
+	--form-grid-gap: var( --space-2xs ) var( --gutter );
+	--prose-padding: var( --space-l );
 }

@@ -9,9 +9,7 @@ Note: There's a load of extra rules in here to ensure that the slides are laid o
  */
 
 .wmde-b-slider {
-	--pagination-height: var( --space-xl );
-	--pagination-background: var( --slider-pagination-background );
-	--pagination-background-active: var( --slider-pagination-background-active );
+	--pagination-height: var( --slider-pagination-height, var( --space-xl ) );
 	--slider-chevron: var( --slider-chevron-color );
 
 	width: 100%;
@@ -31,13 +29,6 @@ Note: There's a load of extra rules in here to ensure that the slides are laid o
 }
 
 .wmde-b-slider__slide {
-	display: flex;
-	text-wrap: balance;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	padding-inline: var( --space-l );
 	cursor: grab;
 	width: 100%;
 	min-height: 100%;
@@ -67,6 +58,10 @@ Note: There's a load of extra rules in here to ensure that the slides are laid o
 }
 
 .wmde-b-slider__pagination {
+	--pagination-height: var( --slider-pagination-height, var( --space-xl ) );
+	--pagination-background: var( --slider-pagination-background );
+	--pagination-background-active: var( --slider-pagination-background-active );
+
 	display: flex;
 	justify-content: center;
 	gap: var( --space-2xs );

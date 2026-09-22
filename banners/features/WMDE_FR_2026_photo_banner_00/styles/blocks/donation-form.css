@@ -1,7 +1,11 @@
 .wmde-b-donation-form {
+	background: var( --form-background );
+	margin: var( --space-xs );
+	border-radius: var( --space-m );
+}
+
+.wmde-b-donation-form .keen-slider {
 	display: flex;
-	width: 100%;
-	height: 100%;
 	overflow: hidden;
 }
 
@@ -16,15 +20,20 @@
 	justify-content: stretch;
 }
 
+.wmde-b-donation-form__nav {
+	--nav-button-font-size: var( --type-step-1 );
+
+	height: var( --header-height );
+}
+
 .wmde-b-donation-form__step {
-	all: unset;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: var( --content-alignment, flex-start );
 	gap: var( --space-2xs );
 	text-wrap: balance;
-	padding-block-start: var( --space-2xs );
-	padding-inline: var( --space-2xs );
+	padding: var( --space-xs );
 }
 
 .wmde-b-donation-form__step[ data-vertical-alignment='space' ] {
@@ -33,6 +42,10 @@
 
 .wmde-b-donation-form__step[ data-vertical-alignment='center' ] {
 	--content-alignment: center;
+}
+
+.wmde-b-donation-form__step[ data-text-alignment='center' ] {
+	text-align: center;
 }
 
 .wmde-b-donation-form__grid {
@@ -44,7 +57,6 @@
 .wmde-b-donation-form__error {
 	color: var( --color-error );
 	font-weight: bold;
-	font-size: 14px;
 }
 
 .wmde-b-donation-form__error:focus {
@@ -52,7 +64,24 @@
 	outline-offset: 5px;
 }
 
+.wmde-b-donation-form legend {
+	width: 100%;
+}
+
 .wmde-b-donation-form h2,
 .wmde-b-donation-form p {
-	font-size: var( --type-step-00 );
+	font-size: var( --type-step-1 );
+}
+
+.wmde-b-donation-form [ type='radio' ] {
+	appearance: none;
+}
+
+.wmde-b-donation-form footer {
+	--repel-vertical-alignment: flex-start;
+	--gutter: 0;
+
+	padding-inline: var( --space-xs );
+	padding-block-end: var( --space-xs );
+	color: var( --footer-color );
 }

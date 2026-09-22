@@ -1,0 +1,60 @@
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-grey-100: #eaecf0;
+	--color-grey-300: #c8ccd1;
+	--color-grey-700: #404244;
+	--color-grey-900: #202122;
+	--color-black: #000000;
+
+	--color-yellow-500: #ffcc33;
+	--color-blue-500: #3366cc;
+	--color-green-400: #6e9e00;
+	--color-green-450: #299168;
+	--color-green-500: #1a8559;
+	--color-green-600: #145a3f;
+	--color-red-500: #dd3333;
+
+	--banner-color: var( --color-white );
+	--banner-background: var( --color-black );
+
+	--info-icon-background: var( --color-green-500 );
+	--info-icon-color: var( --color-white );
+	--nav-hover-background: var( --color-grey-900 );
+
+	--slider-pagination-background: rgb( 255, 255, 255, 0.5 );
+	--slider-pagination-background-active: var( --color-white );
+	--slider-pagination-chevron: var( --color-white );
+
+	--button-background: var( --color-blue-500 );
+	--button-color: var( --color-white );
+	--button-background-secondary: var( --color-yellow-500 );
+	--button-color-secondary: var( --color-black );
+
+	--tag-colour: var( --color-white );
+	--tag-colour-warning: var( --color-black );
+	--tag-background: var( --color-blue-500 );
+	--tag-background-success: var( --color-green-500 );
+	--tag-background-warning: var( --color-yellow-500 );
+	--tag-background-error: var( --color-red-500 );
+
+	--progress-bar-track-background: var( --color-white );
+	--progress-bar-fill-color: var( --color-black );
+	--progress-bar-fill-background: var( --color-yellow-500 );
+	--progress-bar-text-color: var( --color-yellow-500 );
+
+	--form-background: var( --color-green-600 );
+	--form-field-background: var( --color-green-500 );
+	--form-field-border: var( --color-green-450 );
+	--form-field-border-hover: var( --color-green-400 );
+	--form-field-color: var( --color-white );
+	--form-field-background-active: var( --color-blue-500 );
+	--form-field-border-active: var( --color-blue-500 );
+
+	--color-error: var( --color-yellow-500 );
+	--color-callout-error: var( --color-black );
+	--color-callout-error-background: var( --color-yellow-500 );
+	--color-callout-error-border: var( --color-yellow-500 );
+
+	--footer-color: var( --color-white );
+	--content-copier-copied-background: var( --color-yellow-500 );
+}
