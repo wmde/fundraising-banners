@@ -3,6 +3,7 @@
 	--background-hover: oklch( from var( --background ) calc( l/2 + 0.4 ) c h );
 	--color: var( --button-color );
 	--height: var( --button-height, 2lh );
+	--padding: var( --button-padding, 0 1rem );
 
 	display: flex;
 	justify-content: center;
@@ -13,7 +14,7 @@
 	font-weight: bold;
 	font-size: var( --type-step-0 );
 	color: var( --color );
-	padding: 0;
+	padding: var( --padding );
 	min-width: 8rem;
 	background: var( --background );
 	cursor: pointer;

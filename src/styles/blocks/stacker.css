@@ -1,0 +1,32 @@
+/**
+STACKER
+
+This is for when you have an element with multiple children
+stacked on top of each other and want to show and hide them
+
+Make sure you manage focus and aria visibility for this in javascript
+
+NOTE: This currently supports 2 elements if you need more
+      you need to add the rules for them
+ */
+.wmde-b-stacker {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr );
+}
+
+.wmde-b-stacker > * {
+	grid-row-start: 1;
+	grid-column-start: 1;
+
+	transition: var( --stacker-transition, opacity 200ms ease-in-out );
+}
+
+.wmde-b-stacker[ data-index="0" ] > *:not( :nth-child( 1 ) ) {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.wmde-b-stacker[ data-index="1" ] > *:not( :nth-child( 2 ) ) {
+	opacity: 0;
+	pointer-events: none;
+}

@@ -1,0 +1,27 @@
+.wmde-b-tag {
+	--color: var( --tag-colour );
+	--background: var( --tag-background );
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	padding: var( --space-3xs ) var( --space-2xs );
+	color: var( --color );
+	background: var( --background );
+}
+
+.wmde-b-tag[ data-success ] {
+	--color: var( --tag-colour-success, var( --tag-colour ) );
+	--background: var( --tag-background-success );
+}
+
+.wmde-b-tag[ data-warning ] {
+	--color: var( --tag-colour-warning, var( --tag-colour ) );
+	--background: var( --tag-background-warning );
+}
+
+.wmde-b-tag[ data-error ] {
+	--color: var( --tag-colour-error, var( --tag-colour ) );
+	--background: var( --tag-background-error );
+}

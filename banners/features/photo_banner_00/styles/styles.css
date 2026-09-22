@@ -1,5 +1,5 @@
-@import '@src/styles/variables/desktop/spacing.css';
-@import '@src/styles/variables/desktop/type.css';
+@import '@src/styles/variables/mobile/spacing.css';
+@import '@src/styles/variables/mobile/type.css';
 @import 'variables/colors.css';
 @import '@src/styles/variables/payment-icons.css';
 @import 'variables/general.css';
@@ -20,17 +20,17 @@
 @import '@src/styles/compositions/repel.css';
 
 /* Blocks */
+@import 'blocks/background-image.css';
+@import 'blocks/full-banner.css';
+@import 'blocks/mini-banner.css';
+@import 'blocks/mobile-banner.css';
+@import 'blocks/progress.css';
+@import 'blocks/slider-pagination-chevron.css';
+@import 'blocks/donation-form.css';
 @import '@src/styles/blocks/button.css';
-@import '@src/styles/blocks/callout.css';
-@import '@src/styles/blocks/content-copier.css';
-@import '@src/styles/blocks/footer.css';
-@import '@src/styles/blocks/field-container.css';
 @import '@src/styles/blocks/form-field.css';
-@import '@src/styles/blocks/icon-text.css';
-@import '@src/styles/blocks/message.css';
 @import '@src/styles/blocks/nav-button.css';
 @import '@src/styles/blocks/prose.css';
-@import '@src/styles/blocks/skip-link.css';
 @import '@src/styles/blocks/slider.css';
-@import '@src/styles/blocks/text-radio.css';
-@import 'blocks/donation-form.css';
+@import '@src/styles/blocks/stacker.css';
+@import '@src/styles/blocks/tag.css';

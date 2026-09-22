@@ -1,81 +1,59 @@
 <template>
-	<div class="wmde-banner-wrapper" :class="contentState">
+	<div class="wmde-b-mobile-banner" :class="contentState">
+		<header class="wmde-b-mobile-banner__header wmde-c-repel" role="none" data-nowrap>
+			<div class="wmde-c-cluster">
+				<button class="wmde-b-nav-button" @click.prevent="onShowFundsModal" :title="$translate( 'use-of-funds-link-description' )">
+					<InfoIconStraight data-icon/> Warum spenden?
+				</button>
+
+				<button class="wmde-b-nav-button" @click.prevent="onClose( CloseChoices.AlreadyDonated )">
+					<TickIcon data-icon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+				</button>
+			</div>
+
+			<div class="wmde-c-cluster" data-right>
+				<button class="wmde-b-nav-button" @click.prevent="onClose( CloseChoices.Close )" data-icon>
+					<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
+					<CloseIconMobile/>
+				</button>
+			</div>
+		</header>
+
 		<MiniBanner
-			@close="() => onMiniClose( 'MiniBanner', CloseChoices.Close )"
-			@show-full-page-banner="onshowFullPageBanner"
-			@show-full-page-banner-preselected="onshowFullPageBannerPreselected"
-			@showFundsModal="onShowFundsModal( 'MiniBanner' )"
-			@already-donated-clicked="onMiniClose( 'MiniBanner', CloseChoices.AlreadyDonated )"
+			@show-full-banner="onshowFullBanner"
+			:current-slide="sliderPage"
+			:form-is-visible="contentState === ContentStates.Full"
 		>
 			<template #banner-slider>
-				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
-
+				<KeenSlider
+					ref="slider"
+					:with-navigation="false"
+					:with-pagination="false"
+					:play="slideshowShouldPlay"
+					:interval="7000"
+					@slide-changed="onSlideChanged"
+				>
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide"/>
 					</template>
-
-					<template #text>
-						<BannerText :play-live-text="contentState === ContentStates.Mini"/>
-					</template>
-
 				</KeenSlider>
 			</template>
+
+			<template #banner-text>
+				<BannerText/>
+			</template>
+
+			<template #form-text>
+				<FormText/>
+			</template>
+
+			<template #slider-pagination>
+				<SliderPagination :slides-count="4" :current-slide="sliderPage" @previous="sliderPrevious" @next="sliderNext" @go-to-slide="sliderGoToSlide"/>
+			</template>
+
 		</MiniBanner>
 
-		<FullPageBanner
-			@showFundsModal="onShowFundsModal( 'FullPageBanner' )"
-			@close="() => onFullPageClose( 'FullPageBanner', CloseChoices.Hide )"
-		>
-			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
-			</template>
-
-			<template #donation-form="{ formInteraction }: any">
-				<MultiStepDonation
-					:step-controllers="stepControllers"
-					:page-scroller="pageScroller"
-					:submit-opens-in-new-tab="true"
-					@form-interaction="formInteraction"
-					@hide="$emit( 'bannerSubmitted' )"
-				>
-
-					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<MainDonationForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-							:dynamic-amounts="amountOptionsForForm"
-						>
-
-							<template #button>
-								<MainDonationFormButton/>
-							</template>
-
-						</MainDonationForm>
-					</template>
-
-					<template #[FormStepNames.UpgradeToYearlyFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
-						<UpgradeToYearlyButtonForm
-							:page-index="pageIndex"
-							@submit="submit"
-							:is-current="isCurrent"
-							@previous="previous"
-						>
-							<template #back>
-								<ChevronLeftIcon/>
-								{{ $translate( 'back-button' ) }}
-							</template>
-						</UpgradeToYearlyButtonForm>
-					</template>
-
-				</MultiStepDonation>
-			</template>
-
-			<template #footer>
-				<BannerFooter :show-funds-link="false"/>
-			</template>
-		</FullPageBanner>
+		<DonationForm ref="donationForm" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
 
 		<FundsModal
 			:content="useOfFundsContent"
@@ -89,47 +67,29 @@
 <script setup lang="ts">
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { computed, inject, ref, watch } from 'vue';
-import FullPageBanner from './FullPageBanner.vue';
-import MiniBanner from './MiniBannerVar.vue';
+import MiniBanner from './MiniBanner.vue';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import MainDonationForm from '@src/components/DonationForm/Forms/MainDonationForm.vue';
-import MultiStepDonation from '@src/components/DonationForm/MultiStepDonation.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
-import BannerFooter from '@src/components/Footer/BannerFooter.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
-import { useFormModel } from '@src/components/composables/useFormModel';
-import UpgradeToYearlyButtonForm from '@src/components/DonationForm/Forms/UpgradeToYearlyButtonForm.vue';
-import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton
-	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
-import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
-import type { Translator } from '@src/Translator';
-import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
+import SliderPagination from './SliderPagination.vue';
+import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
+import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
+import TickIcon from '@src/components/Icons/TickIcon.vue';
+import FormText from '../content/FormText.vue';
+import DonationForm from './DonationForm.vue';
 
 enum ContentStates {
-	Mini = 'wmde-banner-wrapper--mini',
-	FullPage = 'wmde-banner-wrapper--full-page'
-}
-
-enum FormStepNames {
-	MainDonationFormStep = 'MainDonationForm',
-	UpgradeToYearlyFormStep = 'UpgradeToYearlyForm'
+	Mini = 'wmde-b-mobile-banner--mini',
+	Full = 'wmde-b-mobile-banner--full'
 }
 
 interface Props {
@@ -143,55 +103,40 @@ const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentCha
 
 const tracker = inject<Tracker>( 'tracker' );
 
+const slider = ref<any>( null );
+const sliderPage = ref<number>( 0 );
+const donationForm = ref<any>( null );
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
-const formModel = useFormModel();
-const stepControllers = [
-	createSubmittableMainDonationForm( formModel, FormStepNames.UpgradeToYearlyFormStep ),
-	createSubmittableUpgradeToYearly( formModel, FormStepNames.MainDonationFormStep, FormStepNames.MainDonationFormStep )
-];
-
-const localTranslator = inject<Translator>( 'translator' );
-const currencyFormatter = inject<Currency>( 'currencyFormatter' );
-
-const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFormatter.euroAmount.bind( currencyFormatter ) );
-const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
+const contentStateFeature = computed<TrackingFeatureName>( () => contentState.value === ContentStates.Mini ? 'MiniBanner' : 'FullPageBanner' );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
 
-function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+const onSlideChanged = ( newIndex: number ): void => {
+	sliderPage.value = newIndex;
+};
+
+const sliderPrevious = (): void => slider.value.goToPreviousSlide();
+const sliderNext = (): void => slider.value.goToNextSlide();
+const sliderGoToSlide = ( idx: number ): void => slider.value.goToSlide( idx );
+
+function onClose( userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( contentStateFeature.value, userChoice ) );
+
+	if ( contentState.value === ContentStates.Full ) {
+		emit( 'modalClosed' );
+	}
 }
 
-function onFullPageClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
-	emit( 'modalClosed' );
-}
-
-function onshowFullPageBanner(): void {
+function onshowFullBanner(): void {
 	slideShowStopped.value = true;
-	contentState.value = ContentStates.FullPage;
+	contentState.value = ContentStates.Full;
 	emit( 'modalOpened' );
-
-	amountOptionsForForm.value = amountOptionsFive;
-
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
-}
-
-function onshowFullPageBannerPreselected(): void {
-	slideShowStopped.value = true;
-
-	amountOptionsForForm.value = amountOptionsTen;
-
-	formModel.selectedAmount.value = '10';
-	contentState.value = ContentStates.FullPage;
-	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );
 }
 
 const onHideFundsModal = (): void => {
@@ -201,14 +146,14 @@ const onHideFundsModal = (): void => {
 		emit( 'modalClosed' );
 	}
 
-	if ( contentState.value === ContentStates.FullPage ) {
+	if ( contentState.value === ContentStates.Full ) {
 		props.pageScroller.scrollIntoView( '.wmde-banner-form' );
 	}
 };
 
-const onShowFundsModal = ( feature: TrackingFeatureName ): void => {
+const onShowFundsModal = (): void => {
 	isFundsModalVisible.value = true;
-	tracker.trackEvent( new UseOfFundsShownEvent( feature ) );
+	tracker.trackEvent( new UseOfFundsShownEvent( contentStateFeature.value ) );
 
 	if ( contentState.value === ContentStates.Mini ) {
 		emit( 'modalOpened' );
@@ -219,7 +164,7 @@ const onFundsModalCallToAction = (): void => {
 	isFundsModalVisible.value = false;
 
 	if ( contentState.value === ContentStates.Mini ) {
-		onshowFullPageBanner();
+		onshowFullBanner();
 	}
 
 	props.pageScroller.scrollIntoView( '.wmde-banner-form' );

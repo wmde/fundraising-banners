@@ -1,45 +1,34 @@
 <template>
-	<div class="wmde-banner-mini">
+	<div class="wmde-b-mini-banner" :class="`wmde-b-mini-banner--slide-${currentSlide}`">
+		<BackgroundImage :visible="!formIsVisible && currentSlide == 0" image="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/VST_images_the_Lagoon_Nebula.jpg/960px-VST_images_the_Lagoon_Nebula.jpg"/>
+		<BackgroundImage :visible="!formIsVisible && currentSlide == 1" image="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Banana-Sitia-Crete.jpg/960px-Banana-Sitia-Crete.jpg"/>
+		<BackgroundImage :visible="!formIsVisible && currentSlide == 2" image="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Papaul_Tshibamba-4.jpg/960px-Papaul_Tshibamba-4.jpg"/>
+		<BackgroundImage :visible="!formIsVisible && currentSlide == 3" image="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Wikipedia_mini_globe_handheld.jpg/960px-Wikipedia_mini_globe_handheld.jpg"/>
+		<BackgroundImage :visible="formIsVisible" image="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/960px-A_small_cup_of_coffee.JPG"/>
 
-		<div class="wmde-banner-mini-info-section">
-			<button
-				class="wmde-banner-mini-uof-link wmde-banner-footer-usage-link"
-				@click.prevent="$emit( 'showFundsModal' )"
-				:title="$translate( 'use-of-funds-link-description' )"
-			>
-				<InfoIconStraight/> Warum spenden?
-			</button>
+		<div class="wmde-b-mini-banner__foreground">
+			<div class="wmde-b-mini-banner__content wmde-b-stacker" :data-index="formIsVisible ? 1 : 0">
 
-			<button
-				class="wmde-banner-mini-already-donated-button"
-				@click.prevent="$emit( 'alreadyDonatedClicked' )"
-			>
-				<TickIcon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
-			</button>
-		</div>
+				<div>
+					<slot name="banner-slider"/>
+					<slot name="banner-text"/>
 
-		<div class="wmde-banner-mini-info">
-			<button class="wmde-banner-mini-close wmde-banner-mini-close-button t-close-main-banner" @click.prevent="$emit( 'close' )">
-				<CloseIconMobile/>
-			</button>
-
-			<header class="wmde-banner-mini-headline">
-				<div class="wmde-banner-mini-headline-background">
-					<span class="wmde-banner-mini-headline-content">Wikipedia ist unverkäuflich</span>
+					<footer role="none" class="wmde-c-flow">
+						<div>
+							<button class="wmde-b-button" @click.prevent="$emit( 'showFullBanner' )">
+								Jetzt Wikipedia unterstützten
+							</button>
+						</div>
+						<slot name="slider-pagination"/>
+					</footer>
 				</div>
-			</header>
 
-			<div class="wmde-banner-mini-slideshow">
-				<slot name="banner-slides"/>
+				<div class="wmde-b-mini-banner__form-text">
+					<slot name="form-text"/>
+				</div>
+
 			</div>
-		</div>
-		<div class="wmde-banner-mini-button-group">
-			<button class="wmde-banner-mini-button-preselect" @click="$emit( 'showFullPageBannerPreselected' )">
-				Jetzt 10 &euro; spenden
-			</button>
-			<button class="wmde-banner-mini-button" @click="$emit( 'showFullPageBanner' )">
-				Anderen Betrag
-			</button>
+
 		</div>
 
 	</div>
@@ -47,10 +36,16 @@
 
 <script setup lang="ts">
 
-import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
-import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
-import TickIcon from '@src/components/Icons/TickIcon.vue';
+import BackgroundImage from './BackgroundImage.vue';
 
-defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselected', 'close', 'showFundsModal', 'alreadyDonatedClicked' ] );
+interface Props {
+	currentSlide?: number;
+	formIsVisible: boolean;
+}
+
+withDefaults( defineProps<Props>(), {
+	currentSlide: 0,
+} );
+defineEmits( [ 'showFullBanner', 'close', 'showFundsModal', 'alreadyDonatedClicked' ] );
 
 </script>

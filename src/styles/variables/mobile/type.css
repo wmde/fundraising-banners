@@ -1,0 +1,25 @@
+.wmde-banner {
+	--font-base: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial Nova', 'Liberation Sans', 'Arial', sans-serif;
+	--font-serif: 'Iowan Old Style', 'Bitstream Charter', 'Sitka Text', 'Cambria', serif;
+	--font-normal: 400;
+	--font-semi-bold: 600;
+	--font-bold: 700;
+	--font-black: 800;
+
+	/* Type Leading */
+	--leading-micro: 0.85;
+	--leading-flat: 1;
+	--leading-fine: 1.2;
+	--leading-standard: 1.4;
+	--leading-loose: 1.7;
+
+	/* @link https://utopia.fyi/type/calculator?c=360,14,1.125,1240,16,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--type-step-000: clamp( 0.6914rem, 0.6901rem + 0.0056vw, 0.6944rem );
+	--type-step-00: clamp( 0.7778rem, 0.7551rem + 0.101vw, 0.8333rem );
+	--type-step-0: clamp( 0.875rem, 0.8239rem + 0.2273vw, 1rem );
+	--type-step-1: clamp( 0.9844rem, 0.8962rem + 0.392vw, 1.2rem );
+	--type-step-2: clamp( 1.1074rem, 0.9714rem + 0.6047vw, 1.44rem );
+	--type-step-3: clamp( 1.2458rem, 1.0486rem + 0.8766vw, 1.728rem );
+	--type-step-4: clamp( 1.4016rem, 1.1267rem + 1.2219vw, 2.0736rem );
+	--type-step-5: clamp( 1.5768rem, 1.2039rem + 1.6573vw, 2.4883rem );
+}

@@ -29,7 +29,7 @@ const messages: TranslationMessages = {
 	'soft-close-prompt': 'Wikipedia später unterstützen?',
 	'soft-close-button-already-donated': 'Habe schon gespendet',
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
-	'amount-total': '',
+	'amount-total': 'Spendenziel {{amount}} Millionen Euro',
 };
 
 export default messages;

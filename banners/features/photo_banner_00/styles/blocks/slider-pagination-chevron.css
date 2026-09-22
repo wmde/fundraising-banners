@@ -1,0 +1,24 @@
+.wmde-b-slider__pagination-chevron {
+	--slider-chevron: var( --slider-pagination-chevron );
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	height: 0.6rem;
+	width: 0.6rem;
+	padding: 0;
+	border: 0;
+}
+
+.wmde-b-slider__pagination-chevron svg {
+	height: 0.6rem;
+}
+
+.wmde-b-slider__pagination li:first-child:has(.wmde-b-slider__pagination-chevron) {
+	padding-inline-end: 0.5rem;
+}
+
+.wmde-b-slider__pagination li:last-child:has(.wmde-b-slider__pagination-chevron) {
+	padding-inline-start: 0.5rem;
+}

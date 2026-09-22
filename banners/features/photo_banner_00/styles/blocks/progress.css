@@ -1,0 +1,76 @@
+.wmde-b-progress {
+	--height: var( --progress-bar-height, var( --space-m ) );
+	--track-background: var( --progress-bar-track-background );
+	--fill-background: var( --progress-bar-fill-background );
+	--fill-color: var( --progress-bar-fill-color );
+	--text-color: var( --progress-bar-text-color );
+
+	width: 100%;
+	font-weight: bold;
+}
+
+.wmde-b-progress p {
+	color: var( --progress-bar-text-color );
+}
+
+.wmde-b-progress > * + * {
+	margin-block-start: var( --space-2xs );
+}
+
+.wmde-b-progress__track,
+.wmde-b-progress__fill {
+	height: var( --height );
+	border-radius: calc( var( --height ) / 2 );
+}
+
+.wmde-b-progress__track {
+	width: clamp( 16rem, 80%, 40rem );
+	background-color: var( --track-background );
+}
+
+.wmde-b-progress__fill {
+	--width: var( --progress-precentage );
+
+	width: var( --width );
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: var( --fill-color );
+	background-color: var( --fill-background );
+	padding-inline: var( --space-2xs );
+
+	transition: width 2s ease-in-out;
+	transition-delay: 2s;
+
+	@starting-style {
+		width: 4rem;
+	}
+}
+
+.wmde-b-progress__counter::after {
+	content: var( --progress-int );
+}
+
+@supports ( counter-reset: num ) {
+	@property --num {
+		syntax: '<integer>';
+		initial-value: 0;
+		inherits: false;
+	}
+
+	.wmde-b-progress__counter {
+		--num: var( --progress-int );
+		counter-reset: num var( --num );
+		transition: --num 2s ease-in-out;
+		transition-delay: 2s;
+		@starting-style {
+			--num: 0;
+		}
+	}
+
+	.wmde-b-progress__counter::after {
+		content: counter( num );
+	}
+}
+
+

@@ -230,7 +230,7 @@ platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrom
 resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 
 [photo_banner_feature]
-name = "Mobile"
+name = "Photo Banner"
 icon = "mobile"
 campaign = "photo_banner_00"
 description = "This is a feature banner for the new photo banner"
@@ -244,12 +244,12 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 [photo_banner_feature.banners.ctrl]
-filename = "./banners/mobile/WMDE_FR_2026_photo_banner_00/banner_ctrl.ts"
+filename = "./banners/features/photo_banner_00/banner_ctrl.ts"
 pagename = "WMDE_FR_2026_photo_banner_00_ctrl"
 tracking = "org-photo-banner-261116-ctrl"
 
 [photo_banner_feature.banners.var]
-filename = "./banners/mobile/WMDE_FR_2026_photo_banner_00/banner_var.ts"
+filename = "./banners/features/photo_banner_00/banner_var.ts"
 pagename = "WMDE_FR_2026_photo_banner_00_var"
 tracking = "org-photo-banner-261116-var"
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-banner-full">
+	<div class="wmde-b-full">
 		<button class="wmde-banner-full-close t-close-full-banner" @click.prevent="$emit( 'close' )">
 			<CloseIconMobile/>
 		</button>
