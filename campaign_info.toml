@@ -228,3 +228,31 @@ tracking = "org-fbb00-260000-ctrl"
 [fallback.test_matrix]
 platform = ["edge", "firefox_windows", "chrome_windows", "firefox_linux", "chrome_linux", "chrome_macos", "firefox_macos", "safari" ]
 resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
+
+[photo_banner_feature]
+name = "Mobile"
+icon = "mobile"
+campaign = "photo_banner_00"
+description = "This is a feature banner for the new photo banner"
+campaign_tracking = "photo-banner-ba-261116"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
+preview_link_offline = ""
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
+preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode&minervanightmode=1'
+wrapper_template = "wikipedia_org"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
+
+[photo_banner_feature.banners.ctrl]
+filename = "./banners/mobile/WMDE_FR_2026_photo_banner_00/banner_ctrl.ts"
+pagename = "WMDE_FR_2026_photo_banner_00_ctrl"
+tracking = "org-photo-banner-261116-ctrl"
+
+[photo_banner_feature.banners.var]
+filename = "./banners/mobile/WMDE_FR_2026_photo_banner_00/banner_var.ts"
+pagename = "WMDE_FR_2026_photo_banner_00_var"
+tracking = "org-photo-banner-261116-var"
+
+[photo_banner_feature.test_matrix]
+device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
+orientation = [ "portrait", "landscape"]

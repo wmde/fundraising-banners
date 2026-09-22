@@ -1,0 +1,44 @@
+@use 'src/themes/Modo/variables/globals';
+@use 'src/themes/Modo/variables/breakpoints';
+
+$height: 336px !default;
+$height-l-up: 288px !default;
+
+.wmde-b-mini-banner {
+	--step-content-background: var( --mini-info-background );
+	--step-color: var( --mini-color );
+	--content-flex-direction: column;
+
+	background: var( --mini-background );
+	color: var( --nav-button-color );
+	min-height: $height;
+	font-size: var( --type-step-1 );
+
+	@include breakpoints.phone-l-up {
+		min-height: $height-l-up;
+	}
+}
+
+.wmde-b-mini-banner h2 {
+	font-size: var( --type-step-1 );
+}
+
+.wmde-b-mini-banner footer {
+	display: flex;
+	justify-content: stretch;
+	gap: var( --gutter );
+}
+
+.wmde-b-mini-banner footer > * {
+	flex: 1 1 auto;
+}
+
+.skin-theme-clientpref-night .wmde-b-mini-banner {
+	--nav-button-color: var( --color-white );
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.skin-theme-clientpref-os .wmde-b-mini-banner {
+		--nav-button-color: var( --color-white );
+	}
+}
