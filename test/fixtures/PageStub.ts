@@ -100,4 +100,8 @@ export class PageStub implements Page {
 	public setModalClosed(): void {
 	}
 
+	public showDonateLinkTooltip(): Promise<void> {
+		return Promise.resolve();
+	}
+
 }

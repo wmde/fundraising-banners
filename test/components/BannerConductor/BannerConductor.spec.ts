@@ -74,7 +74,8 @@ describe( 'BannerConductor.vue', () => {
 				},
 				provide: {
 					tracker: new TrackerStub(),
-					timer: new TimerStub()
+					timer: new TimerStub(),
+					translator: { translate: ( key: string ) => key }
 				}
 			}
 		} );
@@ -186,14 +187,19 @@ describe( 'BannerConductor.vue', () => {
 		const wrapper = await getShownBannerWrapper();
 		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
 
+		await nextTick();
+		await nextTick();
+		await nextTick();
+
 		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible,
-			BannerStates.Closed
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
 		] );
 
-		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
 	} );
 
 	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
@@ -215,10 +221,11 @@ describe( 'BannerConductor.vue', () => {
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible,
-			BannerStates.Closed
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
 		] );
 
-		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
 	} );
 
 	it( 'moves to submitted state when donor submits banner', async () => {

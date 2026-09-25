@@ -6,6 +6,7 @@ import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
+import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -15,6 +16,7 @@ const messages: TranslationMessages = {
 	...MainDonationFormDe,
 	...FallbackBanner,
 	...SoftCloseDe,
+	...BannerConductor,
 	'already-donated-link': 'Habe schon gespendet',
 	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
 	'upgrade-to-yearly-copy': `<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns besonders und ermöglichen langfristige Weiterentwicklungen.</p>

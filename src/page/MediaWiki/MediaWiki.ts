@@ -1,7 +1,26 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../../../node_modules/@types/jquery/JQuery.d.ts" />
+/* global JQuery */
 import type { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import type { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 import type { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+
+export interface PopupWidgetConfig {
+	$content?: JQuery;
+	$floatableContainer?: JQuery;
+	padded?: boolean;
+	autoClose?: boolean;
+	align?: 'forwards' | 'backwards' | 'center' | 'force-left' | 'force-right';
+	autoFlip?: boolean;
+	position?: 'above' | 'below' | 'before' | 'after';
+}
+
+/** https://doc.wikimedia.org/oojs-ui/master/js/OO.ui.PopupWidget.html */
+export interface PopupWidgetInstance {
+	$element: JQuery;
+	toggle: ( show?: boolean ) => this;
+}
 
 export interface MediaWiki {
 	getConfigItem( name: string ): any;
@@ -14,4 +33,5 @@ export interface MediaWiki {
 	preventBannerDisplayUntilEndOfCampaign: ( bannerCategory: BannerCategory ) => void;
 	preventBannerDisplayForHours: ( hours: number, bannerCategory: BannerCategory ) => void;
 	setBannerLoadedButHidden: () => void;
+	newPopupWidget: ( config: PopupWidgetConfig ) => Promise<PopupWidgetInstance>;
 }

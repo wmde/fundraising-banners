@@ -1,4 +1,4 @@
-import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { MediaWiki, PopupWidgetConfig, PopupWidgetInstance } from '@src/page/MediaWiki/MediaWiki';
 import type { LegacyBannerEvent } from '@src/page/MediaWiki/LegacyBannerEvent';
 import type { SizeIssue } from '@src/page/MediaWiki/SizeIssue';
 import type { BannerEvent } from '@src/page/MediaWiki/BannerEvent';
@@ -14,10 +14,12 @@ interface MediaWikiTools {
 	track: ( name: string, trackingData: BannerEvent|LegacyBannerEvent|SizeIssue ) => void;
 	centralNotice: { setBannerLoadedButHidden: () => void };
 	user: { isTemp: () => boolean };
+	loader: { using: ( dependencies: string[] ) => Promise<void> };
 }
 
 interface MwWindow extends Window {
 	mw: MediaWikiTools;
+	OO: { ui: { PopupWidget: new( config?: PopupWidgetConfig ) => PopupWidgetInstance } };
 }
 
 declare let window: MwWindow;
@@ -88,5 +90,10 @@ export class WindowMediaWiki implements MediaWiki {
 	private hideBanner( reason: string, durationInSeconds: number, bannerCategory: BannerCategory ): void {
 		setCookie( reason, new Date(), durationInSeconds, bannerCategory );
 		createImageCookieSetter( reason, durationInSeconds, this.getConfigItem( 'wgNoticeHideUrls' )[ 0 ] );
+	}
+
+	public async newPopupWidget( config: PopupWidgetConfig ): Promise<PopupWidgetInstance> {
+		await window.mw.loader.using( [ 'oojs-ui-core' ] );
+		return new window.OO.ui.PopupWidget( config );
 	}
 }

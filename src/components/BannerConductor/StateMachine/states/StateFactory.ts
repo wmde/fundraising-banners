@@ -15,6 +15,7 @@ import type { TrackingEvent, TrackingFeatureName } from '@src/tracking/TrackingE
 import type { Timer } from '@src/utils/Timer';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 import { SubmittedState } from '@src/components/BannerConductor/StateMachine/states/SubmittedState';
+import { DonateLinkPopupState } from '@src/components/BannerConductor/StateMachine/states/DonateLinkPopupState';
 
 export class StateFactory {
 	private readonly _bannerConfig: BannerConfig;
@@ -67,6 +68,10 @@ export class StateFactory {
 
 	public newSubmittedState(): BannerState {
 		return new SubmittedState( this._page, this._resizeHandler, this._timer );
+	}
+
+	public newDonateLinkPopupState( message: string ): BannerState {
+		return new DonateLinkPopupState( this._page, message );
 	}
 }
 
