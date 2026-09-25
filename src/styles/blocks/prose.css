@@ -1,0 +1,20 @@
+/**
+PROSE
+
+This is for handling the layout of banner the banner message content
+ */
+.wmde-b-prose {
+	display: flex;
+	text-wrap: balance;
+	flex-direction: column;
+	justify-content: var( --prose-vertical-alignment, flex-start );
+	align-items: var( --prose-horizontal-alignment, flex-start );
+	text-align: var( --prose-text-align, left );
+	padding-inline: var( --prose-padding, var( --space-s ) );
+}
+
+.wmde-b-prose[ data-align='centered' ] {
+	--prose-vertical-alignment: center;
+	--prose-horizontal-alignment: center;
+	--prose-text-align: center;
+}

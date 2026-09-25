@@ -1,0 +1,42 @@
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-grey-100: #eaecf0;
+	--color-grey-300: #c8ccd1;
+	--color-grey-700: #404244;
+	--color-grey-900: #202122;
+	--color-black: #000000;
+
+	--color-yellow-500: #ffcc33;
+	--color-blue-500: #3366cc;
+	--color-green-500: #1d865b;
+	--color-red-500: #dd3333;
+;
+
+	--banner-color: var( --color-white );
+	--banner-background: var( --color-black );
+
+	--info-icon-background: var( --color-green-500 );
+	--info-icon-color: var( --color-white );
+	--nav-hover-background: var( --color-grey-900 );
+
+	--slider-pagination-background: rgba( 255, 255, 255, 0.50 );
+	--slider-pagination-background-active: var( --color-white );
+	--slider-pagination-chevron: var( --color-white );
+
+	--button-background: var( --color-blue-500 );
+	--button-background-secondary: var( --color-yellow-500 );
+	--button-color: var( --color-white );
+	--button-color-teritary: var( --color-black );
+
+	--tag-colour: var( --color-white );
+	--tag-colour-warning: var( --color-black );
+	--tag-background: var( --color-blue-500 );
+	--tag-background-success: var( --color-green-500 );
+	--tag-background-warning: var( --color-yellow-500 );
+	--tag-background-error: var( --color-red-500 );
+
+	--progress-bar-track-background: var( --color-white );
+	--progress-bar-fill-color: var( --color-black );
+	--progress-bar-fill-background: var( --color-yellow-500 );
+	--progress-bar-text-color: var( --color-yellow-500 );
+}

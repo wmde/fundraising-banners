@@ -1,0 +1,14 @@
+.wmde-b-background-image {
+	z-index: 0;
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	opacity: 0;
+	transition: opacity var( --transition-time ) var( --transition-type );
+	background-image: var( --image );
+}
+
+.wmde-b-background-image--visible {
+	opacity: 1;
+}

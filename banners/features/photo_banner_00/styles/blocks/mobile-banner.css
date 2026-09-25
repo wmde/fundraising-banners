@@ -1,0 +1,32 @@
+.wmde-b-mobile-banner {
+	min-height: var( --banner-height );
+	border: var( --stroke-size ) solid var( --border-color, var( --color-yellow-500 ) );
+	transition: min-height 500ms ease-in-out, border var( --transition-time ) var( --transition-type );;
+	display: flex;
+	flex-direction: column;
+}
+
+.wmde-b-mobile-banner__header {
+	--repel-vertical-alignment: stretch;
+	--cluster-vertical-alignment: stretch;
+	--gutter: 0;
+
+	min-height: var( --header-height );
+}
+
+.wmde-b-mobile-banner--full {
+	min-height: 100svh;
+}
+
+.wmde-b-mobile-banner:has( .wmde-b-mini-banner--slide-1 ) {
+	--border-color: var( --color-blue-500 );
+}
+
+.wmde-b-mobile-banner:has( .wmde-b-mini-banner--slide-2 ) {
+	--border-color: var( --color-green-500 );
+}
+
+.wmde-b-mobile-banner.wmde-b-mobile-banner--full,
+.wmde-b-mobile-banner:has( .wmde-b-mini-banner--slide-3 ) {
+	--border-color: var( --color-red-500 );
+}
