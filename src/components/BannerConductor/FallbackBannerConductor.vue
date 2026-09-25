@@ -25,7 +25,7 @@
 <script setup lang="ts">
 
 import type { Page } from '@src/page/Page';
-import { inject, nextTick, onMounted, ref, shallowRef } from 'vue';
+import { computed, inject, nextTick, onMounted, ref, shallowRef } from 'vue';
 import type { BannerConfig } from '@src/domain/BannerConfig';
 import type { ResizeHandler } from '@src/utils/ResizeHandler';
 import { newStateFactory } from '@src/components/BannerConductor/StateMachine/states/StateFactory';
@@ -68,6 +68,12 @@ const bannerRef = ref( null );
 const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer, props.bannerCategory );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
+const donateLinkTooltipMessage = computed( () => {
+	if ( !props.showDonateLinkTooltip ) {
+		return null;
+	}
+	return `<p>${ translator.translate( 'donate-link-tooltip' ) }</p>`;
+} );
 
 onMounted( async () => {
 	await stateMachine.changeState( stateFactory.newPendingState( bannerRef.value.offsetHeight ) );
@@ -91,7 +97,12 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) ) );
+props.page.onPageEventThatShouldHideBanner( async () => {
+	stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) );
+	if ( donateLinkTooltipMessage.value !== null ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( donateLinkTooltipMessage.value ) );
+	}
+} );
 
 function onContentChanged(): void {
 	// Wait a tick in order to let the content re-render before updating the size
@@ -102,8 +113,8 @@ function onContentChanged(): void {
 
 async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
-	if ( props.showDonateLinkTooltip ) {
-		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( `<p>${ translator.translate( 'donate-link-tooltip' ) }</p>` ) );
+	if ( donateLinkTooltipMessage.value !== null ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( donateLinkTooltipMessage.value ) );
 	}
 }
 
