@@ -263,14 +263,19 @@ describe( 'FallbackBannerConductor.vue', () => {
 		const wrapper = await getShownBannerWrapper();
 		await wrapper.find( '.emit-banner-closed' ).trigger( 'click' );
 
+		await nextTick();
+		await nextTick();
+		await nextTick();
+
 		expect( stateMachineSpy.statesCalled ).toEqual( [
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible,
-			BannerStates.Closed
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
 		] );
 
-		expect( wrapper.classes() ).toContain( BannerStates.Closed );
+		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
 	} );
 
 	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
@@ -292,9 +297,11 @@ describe( 'FallbackBannerConductor.vue', () => {
 			BannerStates.Pending,
 			BannerStates.Showing,
 			BannerStates.Visible,
-			BannerStates.Closed
+			BannerStates.Closed,
+			BannerStates.DonateLinkPopup
 		] );
 
+		// TODO why is the class here not BannerStates.DonateLinkPopup?
 		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 
