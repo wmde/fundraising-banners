@@ -15,11 +15,10 @@
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
 					</template>
 
-					<template #text>
-						<BannerText :play-live-text="contentState === ContentStates.Mini"/>
-					</template>
-
 				</KeenSlider>
+			</template>
+			<template #banner-text>
+				<BannerText :play-live-text="contentState === ContentStates.Mini"/>
 			</template>
 		</MiniBanner>
 
