@@ -44,6 +44,7 @@
 
 	--form-background: var( --color-green-600 );
 	--form-field-background: var( --color-green-500 );
+	--form-field-background-hover: var( --color-green-450 );
 	--form-field-border: var( --color-green-450 );
 	--form-field-border-hover: var( --color-green-400 );
 	--form-field-color: var( --color-white );

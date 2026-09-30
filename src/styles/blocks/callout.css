@@ -17,6 +17,10 @@
 	--color-callout: var( --color-callout-error );
 }
 
+.wmde-b-callout[ data-radius ] {
+	border-radius: var( --space-2xs );
+}
+
 .wmde-b-callout:focus,
 .wmde-b-callout:focus-visible {
 	--background-color: oklch( from var( --color-callout-border ) calc( l/2 + 0.8 ) c h );

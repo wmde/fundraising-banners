@@ -1,15 +1,14 @@
-.wmde-b-heading {
-	--headline-line-color: var( --mini-headline-line-color );
-
+.wmde-b-lined-heading {
 	font-weight: bold;
 	font-size: var( --type-step-1 );
 	overflow: hidden;
 	margin-inline: var( --space-xs );
 	padding-block: var( --space-s );
+	text-align: center;
 }
 
-.wmde-b-heading::before,
-.wmde-b-heading::after {
+.wmde-b-lined-heading::before,
+.wmde-b-lined-heading::after {
 	background-color: var( --headline-line-color );
 	content: '';
 	display: inline-block;
@@ -19,12 +18,12 @@
 	width: 50%;
 }
 
-.wmde-b-heading::before {
+.wmde-b-lined-heading::before {
 	right: 0.5em;
 	margin-left: -50%;
 }
 
-.wmde-b-heading::after {
+.wmde-b-lined-heading::after {
 	left: 0.5em;
 	margin-right: -50%;
 }

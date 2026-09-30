@@ -3,6 +3,7 @@
 	padding: 0;
 	font-family: var( --font-base );
 	font-size: var( --type-step-0 );
+	line-height: var( --leading-standard );
 	color: var( --banner-color );
 	font-size-adjust: from-font;
 	font-synthesis: none;

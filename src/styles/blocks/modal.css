@@ -1,0 +1,12 @@
+.wmde-b-modal {
+	visibility: hidden;
+	opacity: 0;
+	transform: scale( 1.1 );
+	transition: opacity var( --modal-time, 300ms ) var( --modal-easing, ease-in-out ), transform var( --modal-time, 300ms ) var( --modal-easing, ease-in-out );
+}
+
+.wmde-b-modal--visible {
+	visibility: visible;
+	opacity: 1;
+	transform: scale( 1 );
+}

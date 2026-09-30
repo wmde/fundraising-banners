@@ -1,6 +1,4 @@
 .wmde-b-form-field {
-	--background-hover: oklch( from var( --form-field-background ) calc( l/2 + 0.3 ) c h );
-
 	border: 1px solid var( --form-field-border );
 	background: var( --form-field-background );
 	border-radius: 4px;
@@ -42,12 +40,13 @@
 }
 
 .wmde-b-form-field:is( :hover, :focus-visible ) {
-	background: var( --background-hover );
+	background: var( --form-field-background-hover );
 }
 
 .wmde-b-form-field:is( .wmde-b-form-field--checked, :has( input:checked ) ) {
 	background: var( --form-field-background-active );
 	border: var( --form-field-border-active );
+	color: var( --form-field-color-active );
 }
 
 .wmde-b-form-field:has( input:focus-within ) {
