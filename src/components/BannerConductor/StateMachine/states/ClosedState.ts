@@ -31,6 +31,8 @@ export class ClosedState extends BannerState {
 		this._tracker = tracker;
 		this._resizeHandler = resizeHandler;
 		this._timer = timer;
+
+		this.canMoveToStates.push( BannerStates.DonateLinkPopup );
 	}
 
 	public enter(): Promise<any> {
@@ -46,7 +48,7 @@ export class ClosedState extends BannerState {
 	}
 
 	public exit(): Promise<any> {
-		throw new Error( 'This state will never be exited' );
+		return Promise.resolve();
 	}
 
 }
