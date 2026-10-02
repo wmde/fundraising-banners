@@ -1,22 +1,16 @@
 <template>
 	<div class="wmde-b-prose wmde-c-flow">
 		<p>
-			Hi, vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
+			<strong>Hi,</strong>
+		</p>
+		<p>
+			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
 			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
 			zu unterstützen.
-		</p>
-
-		<p>
-			Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.
+			<AnimatedText :is-visible="isVisible">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
-		</p>
-
-		<p>
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
 			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-		</p>
-
-		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
 		</p>
@@ -27,9 +21,11 @@
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 
 interface Props {
 	playLiveText: boolean;
+	isVisible: boolean;
 }
 
 const props = defineProps<Props>();

@@ -17,7 +17,7 @@
 			</template>
 
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.Mini"/>
+				<BannerText :play-live-text="contentState === ContentStates.Mini" :is-visible="false"/>
 			</template>
 		</MiniBanner>
 
@@ -27,7 +27,7 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage"/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #donation-form>
