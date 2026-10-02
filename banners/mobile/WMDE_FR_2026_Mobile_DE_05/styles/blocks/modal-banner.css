@@ -1,4 +1,6 @@
 .wmde-b-modal-banner {
+	--header-height: 1.7lh;
+
 	background: var( --modal-background );
 	position: fixed;
 	top: 0;
@@ -15,11 +17,11 @@
 	--cluster-vertical-alignment: stretch;
 	--cluster-horizontal-alignment: flex-end;
 
-	min-height: 1.7lh;
+	min-height: var( --header-height );
 }
 
 .wmde-b-modal-banner__content {
-	height: 100%;
+	height: calc( 100% - var( --header-height ) );
 	overflow: auto;
 }
 
