@@ -1,8 +1,8 @@
 <template>
 	<div class="wmde-c-desktop-banner">
 
-		<header role="none" class="wmde-c-desktop-banner__header wmde-b-nav" data-right>
-			<button @click.prevent="() => onClose( 'MainBanner', CloseChoices.Close )" data-icon>
+		<header role="none" class="wmde-c-desktop-banner__header wmde-c-cluster" data-right>
+			<button class="wmde-b-nav-button" @click.prevent="() => onClose( 'MainBanner', CloseChoices.Close )" data-icon>
 				<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
 				<CloseIconMobile/>
 			</button>
@@ -30,8 +30,8 @@
 			</div>
 		</div>
 
-		<header role="none" class="wmde-c-desktop-banner__back wmde-b-nav">
-			<button @click.prevent="onBack" data-icon v-if="formStep > 0">
+		<header role="none" class="wmde-c-desktop-banner__back wmde-c-cluster">
+			<button class="wmde-b-nav-button" @click.prevent="onBack" data-icon v-if="formStep > 0">
 				<span class="visually-hidden">{{ $translate( 'back-button' ) }}</span>
 				<FormPreviousIcon/>
 			</button>

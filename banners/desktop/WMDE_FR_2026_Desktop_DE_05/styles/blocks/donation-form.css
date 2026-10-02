@@ -5,6 +5,17 @@
 	overflow: hidden;
 }
 
+.wmde-b-donation-form .keen-slider__slide {
+	/* This is for the slider */
+	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	transform: translate3d( 0, 0, 0 );
+	display: flex;
+	justify-content: stretch;
+}
+
 .wmde-b-donation-form__step {
 	all: unset;
 	display: flex;
@@ -12,14 +23,8 @@
 	justify-content: var( --content-alignment, flex-start );
 	gap: var( --space-2xs );
 	text-wrap: balance;
-
-	/* This is for the slider */
-	width: 100%;
-	min-height: 100%;
-	min-width: 100%;
-	max-width: 100%;
-	padding-block-end: 0.1rem;
-	transform: translate3d( 0, 0, 0 );
+	padding-block-start: var( --space-2xs );
+	padding-inline: var( --space-2xs );
 }
 
 .wmde-b-donation-form__step[ data-vertical-alignment='space' ] {

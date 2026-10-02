@@ -1,6 +1,6 @@
 <template>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="0">
+	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
 		<p><strong>Hi,</strong></p>
 		<p>
 			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
@@ -9,21 +9,21 @@
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="1">
+	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
 			<AnimatedText :is-visible="currentSlide === 1">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="2">
+	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
 			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="3">
+	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>

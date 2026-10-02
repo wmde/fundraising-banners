@@ -5,6 +5,7 @@
 @import 'variables/general.css';
 @import '@src/styles/global/reset.css';
 @import '@src/styles/global/global-styles.css';
+@import '@src/styles/global/radio.css';
 
 /* Utilities */
 @import '@src/styles/utilities/animated-text.css';
@@ -28,7 +29,8 @@
 @import '@src/styles/blocks/form-field.css';
 @import '@src/styles/blocks/icon-text.css';
 @import '@src/styles/blocks/message.css';
-@import '@src/styles/blocks/nav.css';
+@import '@src/styles/blocks/nav-button.css';
+@import '@src/styles/blocks/prose.css';
 @import '@src/styles/blocks/skip-link.css';
 @import '@src/styles/blocks/slider.css';
 @import '@src/styles/blocks/text-radio.css';

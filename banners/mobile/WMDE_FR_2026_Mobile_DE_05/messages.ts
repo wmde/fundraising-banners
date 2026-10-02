@@ -6,6 +6,7 @@ import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -15,6 +16,7 @@ const messages: TranslationMessages = {
 	...UpgradeToYearlyDe,
 	...SoftCloseDe,
 	...BannerConductor,
+	...ContentCopier,
 
 	// custom messages here
 	'payment-bank-transfer': 'Überweisung',
@@ -30,6 +32,7 @@ const messages: TranslationMessages = {
 	'soft-close-button-already-donated': 'Habe schon gespendet',
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': '',
+	'form-error': 'Bitte Formular vervollständigen',
 };
 
 export default messages;

@@ -17,6 +17,8 @@
 	--link-color: var( --color-blue-400 );
 	--nav-hover-background: var( --color-grey-100 );
 
+	--color-outline: var( --color-blue-400 );
+
 	--info-icon-background: var( --color-red-600 );
 	--info-icon-color: var( --color-white );
 

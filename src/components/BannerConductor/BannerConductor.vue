@@ -8,7 +8,6 @@
 		:aria-label="$translate( 'banner-label' )"
 		:aria-hidden="bannerState.stateName !== BannerStates.Visible"
 	>
-		<div class="visually-hidden" aria-live="assertive"><template v-if="bannerState.stateName === BannerStates.Visible">{{ $translate( 'live-text' ) }}</template></div>
 		<component
 			:is="banner"
 			v-bind="bannerProps"
@@ -19,6 +18,7 @@
 			@modal-opened="page.setModalOpened"
 			@modal-closed="page.setModalClosed"
 		/>
+		<div class="visually-hidden" aria-live="assertive"><template v-if="bannerState.stateName === BannerStates.Visible">{{ $translate( 'live-text' ) }}</template></div>
 	</div>
 </template>
 
