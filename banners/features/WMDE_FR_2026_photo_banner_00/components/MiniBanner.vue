@@ -36,7 +36,7 @@
 					<footer role="none" class="wmde-c-flow">
 						<div>
 							<button class="wmde-b-button" @click.prevent="$emit( 'showFullBanner' )" :tabindex="formIsVisible ? -1 : null">
-								Jetzt Wikipedia unterstützten
+								Jetzt Wikipedia unterstützen
 							</button>
 						</div>
 						<slot name="slider-pagination"/>
