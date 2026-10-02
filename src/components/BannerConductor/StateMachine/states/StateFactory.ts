@@ -57,8 +57,8 @@ export class StateFactory {
 		return new ShowingState( this._page, this._bannerConfig.transitionDuration, this._timer );
 	}
 
-	public newVisibleState( shownEventFeature: TrackingFeatureName ): BannerState {
-		return new VisibleState( shownEventFeature, this._page, this._impressionCount, this._tracker );
+	public newVisibleState( shownEventFeature: TrackingFeatureName, bannerHeight: number = 0 ): BannerState {
+		return new VisibleState( shownEventFeature, this._page, this._impressionCount, this._tracker, bannerHeight );
 	}
 
 	public newClosedState( closeEvent: TrackingEvent<void> ): BannerState {

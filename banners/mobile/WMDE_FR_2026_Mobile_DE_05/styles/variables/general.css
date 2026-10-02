@@ -1,6 +1,6 @@
 .wmde-banner {
-	--banner-height: 336px;
-	--banner-height-large-up: 354px;
+	/* @link https://utopia.fyi/clamp/calculator?a=568,1240,336—354 */
+	--banner-height: clamp( 21rem, 20.0491rem + 2.6786vw, 22.125rem );
 	--gutter: var( --space-2xs );
 	--flow-space: var( --space-s );
 	--nav-button-padding: var( --space-3xs );

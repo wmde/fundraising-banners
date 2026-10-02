@@ -66,9 +66,13 @@ const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
 
 onMounted( async () => {
+	// Wait a tick to give subcomponents time to render and hopefully reduce size issues
+	await nextTick();
+
 	await stateMachine.changeState( stateFactory.newPendingState( bannerRef.value.offsetHeight ) );
 	let bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 	let shownEventFeature: TrackingFeatureName = 'Page';
+	const originalBannerHeight = bannerRef.value.offsetHeight;
 
 	if ( bannerRef.value.offsetWidth < props.minWidthForMainBanner || bannerNotShownReason === BannerNotShownReasons.SizeIssue ) {
 		banner.value = props.fallbackBanner;
@@ -82,7 +86,7 @@ onMounted( async () => {
 		await stateMachine.changeState( stateFactory.newNotShownState( bannerNotShownReason, bannerRef.value.offsetHeight ) );
 	} else {
 		await stateMachine.changeState( stateFactory.newShowingState() );
-		await stateMachine.changeState( stateFactory.newVisibleState( shownEventFeature ) );
+		await stateMachine.changeState( stateFactory.newVisibleState( shownEventFeature, originalBannerHeight ) );
 	}
 } );
 
