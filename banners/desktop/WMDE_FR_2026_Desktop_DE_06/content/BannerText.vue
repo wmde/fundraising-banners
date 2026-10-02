@@ -5,7 +5,8 @@
 		Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, die Unabhängigkeit von Wikipedia zu unterstützen.
 		{{ campaignDaySentence }}
 		<AnimatedText :is-visible="bannerState === BannerStates.Visible">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
-		Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+		Die meisten Menschen spenden, weil sie Wikipedia nützlich finden
+		und einen kostenfreien Zugang zu Wissen für alle unbedingt erhalten möchten.
 		Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 		Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
