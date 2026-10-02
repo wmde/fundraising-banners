@@ -1,12 +1,11 @@
 .wmde-b-content-copier {
-	--font-size: var( --content-copier-font-size );
-
-	all: unset;
+	border: 0;
+	background: transparent;
 	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 0.5ch;
-	font-size: var( --font-size );
+	font-size: var( --content-copier-font-size );
 	cursor: pointer;
 }
 
@@ -15,8 +14,8 @@
 	inset: 0;
 	visibility: hidden;
 	opacity: 0;
-	background: var( --copied-background, #dadada );
-	color: var( --copied-color, #000000 );
+	background: var( --content-copier-copied-background, #dadada );
+	color: var( --content-copier-copied-color, #000000 );
 	text-align: center;
 	border-radius: 3px;
 }
@@ -27,6 +26,6 @@
 }
 
 .wmde-b-content-copier > svg {
-	width: var( --font-size );
-	height: var( --font-size );
+	width: 1lh;
+	height: 1lh;
 }

@@ -29,7 +29,8 @@
 		background-position: 0 0;
 	}
 
-	.is-sr-only {
+	.is-sr-only,
+	.visually-hidden {
 		border: none !important;
 		clip-path: inset( 50% ) !important;
 		height: 0.01em !important;

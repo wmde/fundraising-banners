@@ -5,6 +5,6 @@
 	transition: background-position 2s;
 }
 
-.wmde-banner--visible .wmde-b-animated-text--visible {
+.wmde-b-animated-text--visible {
 	background-position: 0 0;
 }
