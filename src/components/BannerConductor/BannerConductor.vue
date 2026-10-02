@@ -70,6 +70,9 @@ const popupMessages = {
 };
 
 onMounted( async () => {
+	// Wait a tick to give subcomponents time to render and hopefully reduce size issues
+	await nextTick();
+
 	await stateMachine.changeState( stateFactory.newPendingState( bannerRef.value.offsetHeight ) );
 	const bannerNotShownReason = props.page.getReasonToNotShowBanner( new Vector2( bannerRef.value.offsetWidth, bannerRef.value.offsetHeight ) );
 
