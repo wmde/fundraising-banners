@@ -13,13 +13,15 @@ import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { WMDELegacyBannerEvent } from '@src/tracking/WPORG/WMDELegacyBannerEvent';
+import FallbackBannerShownEvent from '@src/tracking/events/FallbackBannerShownEvent';
+import { mapFallbackShownEvent } from '@src/tracking/LegacyEventTracking/mapFallbackShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
-
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
+	[ FallbackBannerShownEvent.EVENT_NAME, mapFallbackShownEvent ],
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
 			case 'UpgradeToYearlyForm':
