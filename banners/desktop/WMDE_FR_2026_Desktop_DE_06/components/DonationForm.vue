@@ -33,7 +33,7 @@
 					<fieldset class="wmde-b-field-container" :data-error="[ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity ) ? null : true">
 						<legend class="visually-hidden" id="wmde-b-amount-label">{{ $translate( 'amounts-header' ) }}</legend>
 						<div class="wmde-c-form-grid" data-layout="quarters">
-							<label class="wmde-b-form-field" v-for="formItem in formItems.amounts" :key="formItem.value">
+							<label class="wmde-b-form-field" v-for="formItem in amounts" :key="formItem.value">
 								<input type="radio" name="amount" :value="formItem.value" v-model="selectedAmount" :tabindex="tabIndex( 0 )">{{ formItem.label }}
 							</label>
 							<div class="wmde-c-form-grid__double wmde-b-form-field" :class="{ 'wmde-b-text-radio__radio--checked' : customAmount !== '' }">
@@ -146,19 +146,21 @@ import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
+const formItems = inject<DonationFormItems>( 'formItems' );
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const { selectedAmount, customAmount, amountInCents, amountValidity, paymentMethod, paymentMethodValidity, interval, intervalValidity, formatCustomAmount } = formModel;
+const amounts = useDynamicAmounts( formModel, formItems.dynamicAmounts );
 const formattedAmount = computed( (): string => currencyFormatter.euroAmountFromCents( amountInCents.value ) );
 const stepOneIsValid = computed( (): boolean => [ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity.value )
 	&& intervalValidity.value !== Validity.Invalid
 	&& paymentMethodValidity.value !== Validity.Invalid
 );
-const formItems = inject<DonationFormItems>( 'formItems' );
 const timer = inject<Timer>( 'timer' );
 const tracker = inject<Tracker>( 'tracker' );
 const [ container, slider ] = useKeenSlider( {
