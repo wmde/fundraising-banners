@@ -33,7 +33,7 @@
 					<fieldset class="wmde-b-field-container" :data-error="[ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity ) ? null : true">
 						<legend class="visually-hidden" id="wmde-b-amount-label">{{ $translate( 'amounts-header' ) }}</legend>
 						<div class="wmde-c-form-grid" data-layout="quarters">
-							<label class="wmde-b-form-field" v-for="formItem in formItems.amounts" :key="formItem.value">
+							<label class="wmde-b-form-field" v-for="formItem in amounts" :key="formItem.value">
 								<input type="radio" name="amount" :value="formItem.value" v-model="selectedAmount" :tabindex="tabIndex( 0 )">{{ formItem.label }}
 							</label>
 							<div class="wmde-c-form-grid__double wmde-b-form-field" :class="{ 'wmde-b-text-radio__radio--checked' : customAmount !== '' }">
@@ -146,6 +146,9 @@ import { amountValidityMessageKey } from '@src/utils/amountValidityMessageKey';
 import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
+import type { Translator } from '@src/Translator';
+import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
@@ -176,6 +179,21 @@ const errorMessage = ref<HTMLElement>( null );
 const { formAction } = useFormAction( inject<FormActionCollection>( 'formActions' ) );
 const submitButtonLabel = computed( (): string => interval.value === Intervals.ONCE.value ? 'submit-label-short' : 'submit-label' );
 const secondPageWasSeen = ref<boolean>( false );
+
+const localTranslator = inject<Translator>( 'translator' );
+const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFormatter.euroAmount.bind( currencyFormatter ) );
+const amountOptionsMonthly = localFormItemsBuilder.setAmounts( 2, 5, 10, 15, 20 ).getItems().amounts;
+const amountOptionsQuarterly = localFormItemsBuilder.setAmounts( 5, 10, 15, 25, 50 ).getItems().amounts;
+const amountOptionsOther = localFormItemsBuilder.setAmounts( 5, 10, 20, 25, 50, 100 ).getItems().amounts;
+const amounts = useDynamicAmounts( formModel, () => {
+	if ( interval.value === Intervals.MONTHLY.value ) {
+		return amountOptionsMonthly;
+	} else if ( interval.value === Intervals.QUARTERLY.value ) {
+		return amountOptionsQuarterly;
+	} else {
+		return amountOptionsOther;
+	}
+} );
 
 watch( step, ( newStep: number ) => {
 	if ( slider.value.track.details.rel !== newStep ) {
