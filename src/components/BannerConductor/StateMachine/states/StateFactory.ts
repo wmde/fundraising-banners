@@ -74,7 +74,7 @@ export class StateFactory {
 		linkMessage: string;
 		menuMessage: string;
 	} ): BannerState {
-		return new DonateLinkPopupState( this._page, messages );
+		return new DonateLinkPopupState( this._page, messages, this._tracker );
 	}
 }
 

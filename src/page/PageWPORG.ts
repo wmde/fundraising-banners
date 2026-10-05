@@ -256,17 +256,10 @@ class PageWPORG implements Page {
 	public async showDonateLinkTooltip( messages: {
 		linkMessage: string;
 		menuMessage: string;
-	} ): Promise<void> {
-		/*
-		for ( const donateLink of document.querySelectorAll(
-			'#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a'
-		) ) {
-			const url = new URL( ( donateLink as HTMLAnchorElement ).href, 'https://donate.wikimedia.org' ); // base needed because some links are protocol relative
-			url.searchParams.delete( '...' );
-			url.searchParams.set( '...', '...' );
-			( donateLink as HTMLAnchorElement ).href = url.toString();
-		}
-		*/
+	}, clickCallback: () => void ): Promise<void> {
+
+		document.querySelectorAll( '#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a' )
+			.forEach( x => x.addEventListener( 'click', clickCallback ) );
 
 		const config: PopupWidgetConfig = {
 			padded: true,

@@ -24,5 +24,5 @@ export interface Page {
 	showDonateLinkTooltip: ( messages: {
 		linkMessage: string;
 		menuMessage: string;
-	} ) => Promise<void>;
+	}, clickCallback: () => void ) => Promise<void>;
 }
