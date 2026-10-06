@@ -14,10 +14,6 @@
 				<slot name="banner-text"/>
 			</div>
 
-			<div class="wmde-b-modal-banner__separator">
-				Jetzt sind Sie gefragt.
-			</div>
-
 			<div class="wmde-b-modal-banner__form">
 				<slot name="donation-form"/>
 				<slot name="footer"/>
