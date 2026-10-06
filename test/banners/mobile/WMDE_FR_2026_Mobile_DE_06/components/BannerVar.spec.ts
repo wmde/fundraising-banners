@@ -108,12 +108,12 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 			intervalOnce: () => wrapper.find( '[name="interval"][value="0"]' ),
 			intervalMonthly: () => wrapper.find( '[name="interval"][value="1"]' ),
 			intervalYearly: () => wrapper.find( '[name="interval"][value="12"]' ),
-			amount3: () => wrapper.find( '[name="amount"][value="3"]' ),
+			amount5: () => wrapper.find( '[name="amount"][value="5"]' ),
 			amount10: () => wrapper.find( '[name="amount"][value="10"]' ),
 			amount15: () => wrapper.find( '[name="amount"][value="15"]' ),
-			amount20: () => wrapper.find( '[name="amount"][value="20"]' ),
-			amount30: () => wrapper.find( '[name="amount"][value="30"]' ),
+			amount25: () => wrapper.find( '[name="amount"][value="25"]' ),
 			amount50: () => wrapper.find( '[name="amount"][value="50"]' ),
+			amount100: () => wrapper.find( '[name="amount"][value="100"]' ),
 			amountCustom: () => wrapper.find( '[name="custom-amount"]' ),
 			paymentMethodPPL: () => wrapper.find( '[name="paymentMethod"][value="PPL"]' ),
 			paymentMethodBEZ: () => wrapper.find( '[name="paymentMethod"][value="BEZ"]' ),
@@ -183,11 +183,11 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 
 			await bannerElements.donateOtherButton().trigger( 'click' );
 
-			expect( bannerElements.amount3().exists() ).toBeTruthy();
+			expect( bannerElements.amount5().exists() ).toBeTruthy();
 			expect( bannerElements.amount15().exists() ).toBeTruthy();
-			expect( bannerElements.amount20().exists() ).toBeTruthy();
-			expect( bannerElements.amount30().exists() ).toBeTruthy();
+			expect( bannerElements.amount25().exists() ).toBeTruthy();
 			expect( bannerElements.amount50().exists() ).toBeTruthy();
+			expect( bannerElements.amount100().exists() ).toBeTruthy();
 		} );
 
 		it( 'Uses the alternate amounts when the donate with amount button is clicked', async () => {
@@ -195,11 +195,11 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 
 			await bannerElements.donate10Button().trigger( 'click' );
 
-			expect( bannerElements.amount3().exists() ).toBeTruthy();
 			expect( bannerElements.amount10().exists() ).toBeTruthy();
-			expect( bannerElements.amount20().exists() ).toBeTruthy();
-			expect( bannerElements.amount30().exists() ).toBeTruthy();
+			expect( bannerElements.amount15().exists() ).toBeTruthy();
+			expect( bannerElements.amount25().exists() ).toBeTruthy();
 			expect( bannerElements.amount50().exists() ).toBeTruthy();
+			expect( bannerElements.amount100().exists() ).toBeTruthy();
 		} );
 
 		it( 'emits the modal opened event', async () => {
@@ -264,8 +264,8 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 			it( 'sets values amounts in the submit form', async () => {
 				const { bannerElements } = getWrapper();
 
-				await bannerElements.amount10().trigger( 'click' );
-				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '1000' );
+				await bannerElements.amount15().trigger( 'click' );
+				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '1500' );
 
 				await bannerElements.amount50().trigger( 'click' );
 				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '5000' );
@@ -306,7 +306,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				expect( bannerElements.paymentMethodField().attributes( 'data-error' ) ).toBeTruthy();
 
 				await bannerElements.intervalMonthly().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 
 				expect( bannerElements.mainErrorMessage().exists() ).toBeFalsy();
@@ -322,7 +322,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalMonthly().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -338,7 +338,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -354,7 +354,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -375,7 +375,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalYearly().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -394,7 +394,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalYearly().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -415,7 +415,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -431,7 +431,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -450,7 +450,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				expect( bannerElements.secondForm().attributes( 'aria-hidden' ) ).toStrictEqual( 'true' );
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 
@@ -473,7 +473,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				submitForm.element.submit = vi.fn();
 
 				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.amount10().attributes( 'tabindex' ) ).toBeUndefined();
+				expect( bannerElements.amount15().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.backButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
@@ -481,13 +481,13 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				expect( bannerElements.yearlyButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 
 				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount10().trigger( 'click' );
+				await bannerElements.amount15().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
 				await vitest.runAllTimersAsync();
 
 				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.amount10().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
+				expect( bannerElements.amount15().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.backButton().attributes( 'tabindex' ) ).toBeUndefined();
@@ -498,7 +498,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_var', () => {
 				await vitest.runAllTimersAsync();
 
 				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.amount10().attributes( 'tabindex' ) ).toBeUndefined();
+				expect( bannerElements.amount15().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.backButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
