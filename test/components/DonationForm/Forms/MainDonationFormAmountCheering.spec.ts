@@ -24,6 +24,7 @@ const formItems: DonationFormItems = {
 		{ value: '50', label: '€50', className: 'amount-50' },
 		{ value: '100', label: '€100', className: 'amount-100' }
 	],
+	dynamicAmounts: [],
 	intervals: [ Intervals.ONCE, Intervals.MONTHLY ],
 	paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD ]
 };

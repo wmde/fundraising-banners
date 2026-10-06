@@ -4,6 +4,7 @@ import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
 import { resetFormModel } from '@test/resetFormModel';
+import { DynamicFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 
 const model = useFormModel( '{amount} €' );
 
@@ -25,20 +26,33 @@ const formItems = {
 	},
 };
 
+const dynamicAmounts: DynamicFormItems[] = [
+	{
+		interval: Intervals.ONCE.value,
+		amounts: [ formItems.ONE ]
+	},
+	{
+		interval: Intervals.MONTHLY.value,
+		amounts: [ formItems.TWO ]
+	},
+	{
+		interval: Intervals.QUARTERLY.value,
+		amounts: [ formItems.TWO, formItems.THREE ]
+	},
+	{
+		interval: Intervals.YEARLY.value,
+		amounts: [ formItems.THREE ]
+	}
+];
+
 describe( 'useDynamicAmounts', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( model ) );
 
 	it( 'should move selected amount into custom amount when necessary', async () => {
-		model.interval.value = Intervals.MONTHLY.value;
-		useDynamicAmounts( model, ( { interval } ) => {
-			if ( interval.value === Intervals.MONTHLY.value ) {
-				return [ formItems.ONE ];
-			} else {
-				return [ formItems.TWO ];
-			}
-		} );
+		model.interval.value = Intervals.ONCE.value;
+		useDynamicAmounts( model, dynamicAmounts );
 		model.selectedAmount.value = formItems.ONE.value;
 
 		model.interval.value = Intervals.YEARLY.value;
@@ -50,15 +64,7 @@ describe( 'useDynamicAmounts', () => {
 
 	it( 'should not touch the amount when not necessary', async () => {
 		model.interval.value = Intervals.MONTHLY.value;
-		useDynamicAmounts( model, ( { interval } ) => {
-			if ( interval.value === Intervals.MONTHLY.value ) {
-				return [ formItems.ONE, formItems.TWO ];
-			} else if ( interval.value === Intervals.QUARTERLY.value ) {
-				return [ formItems.TWO, formItems.THREE ];
-			} else {
-				return [ formItems.THREE ];
-			}
-		} );
+		useDynamicAmounts( model, dynamicAmounts );
 		model.selectedAmount.value = formItems.TWO.value;
 
 		model.interval.value = Intervals.QUARTERLY.value;
@@ -70,13 +76,7 @@ describe( 'useDynamicAmounts', () => {
 
 	it( 'should not move customAmount back into selected amount', async () => {
 		model.interval.value = Intervals.MONTHLY.value;
-		useDynamicAmounts( model, ( { interval } ) => {
-			if ( interval.value === Intervals.MONTHLY.value ) {
-				return [ formItems.ONE ];
-			} else {
-				return [ formItems.TWO ];
-			}
-		} );
+		useDynamicAmounts( model, dynamicAmounts );
 		model.customAmount.value = formItems.TWO.value;
 
 		model.interval.value = Intervals.YEARLY.value;

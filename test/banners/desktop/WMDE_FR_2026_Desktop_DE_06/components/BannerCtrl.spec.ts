@@ -1,10 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_06/components/BannerCtrl.vue';
+import { createFormItems } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_06/form_items';
+import { formItems as defaultFormItems } from '@test/banners/formItems';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
-import { formItems } from '@test/banners/formItems';
 import { CurrencyEn } from '@src/utils/DynamicContent/formatters/CurrencyEn';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
@@ -19,6 +20,8 @@ import { TimerSpy } from '@test/fixtures/TimerSpy';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import { Translator } from '@src/Translator';
 
 const formModel = useFormModel();
 let tracker: Tracker;
@@ -52,7 +55,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 		vitest.useRealTimers();
 	} );
 
-	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): { wrapper: VueWrapper<any>, bannerElements: any } => {
+	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null, formItems: DonationFormItems = null ): { wrapper: VueWrapper<any>, bannerElements: any } => {
 		const wrapper = mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -69,7 +72,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 					currentCampaignTimePercentage: 42,
 					formActions: fakeFormActions,
 					currencyFormatter: new CurrencyEn(),
-					formItems,
+					formItems: formItems ?? defaultFormItems,
 					tracker,
 					timer: timer ?? new TimerStub()
 				}
@@ -302,7 +305,8 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 			} );
 
 			it( 'varies amounts depending on interval', async () => {
-				const { wrapper, bannerElements } = getWrapper();
+				const realBannerFormItems = createFormItems( new Translator( {} ), ( amount: number ) => String( amount ) );
+				const { wrapper, bannerElements } = getWrapper( null, null, realBannerFormItems );
 				function amounts(): number[] {
 					return wrapper.findAll( '.wmde-b-donation-form [name="amount"]' )
 						.map( e => Number( e.attributes( 'value' ) ) );
