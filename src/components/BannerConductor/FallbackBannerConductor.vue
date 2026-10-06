@@ -40,6 +40,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import type { Timer } from '@src/utils/Timer';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
+import type { Translator } from '@src/Translator';
 
 interface Props {
 	page: Page,
@@ -50,20 +51,27 @@ interface Props {
 	minWidthForMainBanner: number,
 	bannerProps?: object,
 	impressionCount: ImpressionCount,
-	bannerCategory: BannerCategory
+	bannerCategory: BannerCategory,
+	showDonateLinkTooltip?: boolean
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	bannerProps: (): any => ( {} )
+	bannerProps: (): any => ( {} ),
+	showDonateLinkTooltip: () => false
 } );
 const tracker = inject<Tracker>( 'tracker' );
 const timer = inject<Timer>( 'timer' );
+const translator = inject<Translator>( 'translator' );
 
 const banner = shallowRef<Object>( props.banner );
 const bannerRef = ref( null );
 const stateFactory = newStateFactory( props.bannerConfig, props.page, tracker, props.resizeHandler, props.impressionCount, timer, props.bannerCategory );
 const bannerState = ref<BannerState>( stateFactory.newInitialState() );
 const stateMachine = newBannerStateMachine( bannerState );
+const popupMessages = {
+	linkMessage: `<p>${ translator.translate( 'donate-link-tooltip' ) }</p>`,
+	menuMessage: `<p>${ translator.translate( 'donate-menu-tooltip' ) }</p>`,
+};
 
 onMounted( async () => {
 	await stateMachine.changeState( stateFactory.newPendingState( bannerRef.value.offsetHeight ) );
@@ -87,7 +95,12 @@ onMounted( async () => {
 } );
 
 props.resizeHandler.onResize( () => stateMachine.currentState.value.onResize( bannerRef.value.offsetHeight ) );
-props.page.onPageEventThatShouldHideBanner( () => stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) ) );
+props.page.onPageEventThatShouldHideBanner( async () => {
+	await stateMachine.changeState( stateFactory.newClosedState( new CloseEvent( 'Page', 'page-interaction' ) ) );
+	if ( props.showDonateLinkTooltip ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( popupMessages ) );
+	}
+} );
 
 function onContentChanged(): void {
 	// Wait a tick in order to let the content re-render before updating the size
@@ -98,6 +111,9 @@ function onContentChanged(): void {
 
 async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
+	if ( props.showDonateLinkTooltip ) {
+		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( popupMessages ) );
+	}
 }
 
 async function submitHandler(): Promise<any> {
@@ -116,7 +132,8 @@ async function submitHandler(): Promise<any> {
 }
 .wmde-banner--not-shown,
 .wmde-banner--closed,
-.wmde-banner--submitted {
+.wmde-banner--submitted,
+.wmde-banner--donate-link-popup {
 	display: none;
 }
 </style>

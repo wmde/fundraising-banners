@@ -14,7 +14,8 @@
 		}
 	}
 
-	&--closed {
+	&--closed,
+	&--donate-link-popup {
 		.wmde-banner-wrapper {
 			display: none;
 		}

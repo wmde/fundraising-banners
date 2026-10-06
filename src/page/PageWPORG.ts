@@ -1,6 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../../node_modules/@types/jquery/JQueryStatic.d.ts" />
 import type { Page } from '@src/page/Page';
 import type { Skin } from '@src/page/skin/Skin';
-import type { MediaWiki } from '@src/page/MediaWiki/MediaWiki';
+import type { MediaWiki, PopupWidgetConfig } from '@src/page/MediaWiki/MediaWiki';
 import { BannerNotShownReasons } from '@src/page/BannerNotShownReasons';
 import type { SizeIssueChecker } from '@src/utils/SizeIssueChecker/SizeIssueChecker';
 import { Vector2 } from '@src/utils/Vector2';
@@ -244,6 +246,68 @@ class PageWPORG implements Page {
 		document.body.style.width = '';
 		document.body.style.overflowX = '';
 		window.scrollTo( 0, parseInt( scrollY || '0' ) * -1 );
+	}
+
+	/**
+	 * This method, based on
+	 * https://meta.wikimedia.org/w/index.php?title=MediaWiki:FundraisingBanners/CoreJS-2025.js&oldid=30935269 ,
+	 * is published under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+	 */
+	public async showDonateLinkTooltip( messages: {
+		linkMessage: string;
+		menuMessage: string;
+	}, clickCallback: () => void ): Promise<void> {
+
+		document.querySelectorAll( '#pt-sitesupport-2 a, #pt-sitesupport a, #n-sitesupport a, #p-donation a, .navigation-drawer .donate-banner a' )
+			.forEach( x => x.addEventListener( 'click', clickCallback ) );
+
+		const config: PopupWidgetConfig = {
+			padded: true,
+			autoClose: true,
+			align: 'forwards',
+			autoFlip: false,
+		};
+
+		if ( document.querySelector( '#p-donation a, .navigation-drawer .donate-banner a' ) ) {
+			// Minerva
+			config.$floatableContainer = $( '.navigation-drawer' );
+			config.position = 'below';
+			config.$content = $( messages.menuMessage );
+		} else if ( $( '#pt-sitesupport-2 a:visible' ).length > 0 ) {
+			// Vector 2022 user tools
+			config.$floatableContainer = $( '#pt-sitesupport-2 a' );
+			config.position = 'below';
+			config.$content = $( messages.linkMessage );
+		} else if ( document.querySelector( '#pt-sitesupport a' ) ) {
+			// Vector 2022 user tools collapsed in menu
+			config.$floatableContainer = $( '#vector-user-links-dropdown' );
+			config.position = 'below';
+			config.$content = $( messages.menuMessage );
+		} else if ( document.querySelector( '#vector-main-menu-dropdown #n-sitesupport a' ) ) {
+			// Vector 2022 main menu (only when logged in, so mostly here for testing)
+			config.$floatableContainer = $( '#vector-main-menu-dropdown' );
+			config.position = 'below';
+			config.$content = $( messages.menuMessage );
+		} else if ( document.querySelector( '#n-sitesupport a' ) ) {
+			// Legacy Vector (sidebar)
+			config.$floatableContainer = $( '#n-sitesupport a' );
+			config.position = 'after';
+			config.$content = $( messages.linkMessage );
+		} else {
+			// eslint-disable-next-line no-console
+			console.log( 'No donate link element found for tooltip' );
+			return;
+		}
+
+		const popup = await this._mediaWiki.newPopupWidget( config );
+
+		popup.$element.css( 'z-index', 5 ); // Fix so it shows above header
+		$( document.body ).append( popup.$element );
+		popup.toggle( true );
+
+		setTimeout( () => {
+			popup.$element.fadeOut();
+		}, 5000 );
 	}
 }
 

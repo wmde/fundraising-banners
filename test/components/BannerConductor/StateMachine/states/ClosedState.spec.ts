@@ -99,17 +99,4 @@ describe( 'ClosedState', function () {
 
 		expect( timer.clearAllCalls ).toStrictEqual( 1 );
 	} );
-
-	it( 'throws error on exit', function () {
-		const state = new ClosedState(
-			new CloseEvent( 'MainBanner', CloseChoices.Close ),
-			'fundraising',
-			new PageStub(),
-			new TrackerStub(),
-			new ResizeHandlerStub(),
-			new TimerStub()
-		);
-
-		expect( () => state.exit() ).toThrowError( 'This state will never be exited' );
-	} );
 } );
