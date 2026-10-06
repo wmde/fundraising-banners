@@ -27,7 +27,7 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
+				<BannerTextModalVar :is-visible="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #donation-form>
@@ -67,6 +67,7 @@ import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domai
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import DonationForm from './DonationForm.vue';
 import BannerText from '../content/BannerText.vue';
+import BannerTextModalVar from '../content/BannerTextModalVar.vue';
 import BannerSlides from '../content/BannerSlides.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import type { Tracker } from '@src/tracking/Tracker';
