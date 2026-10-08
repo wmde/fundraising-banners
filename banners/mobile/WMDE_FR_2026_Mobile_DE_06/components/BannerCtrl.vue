@@ -31,7 +31,7 @@
 			</template>
 
 			<template #donation-form>
-				<DonationForm ref="donationForm" :amounts="amountOptionsForForm" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
+				<DonationForm ref="donationForm" :amounts="amounts" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
 			</template>
 
 			<template #footer>
@@ -75,13 +75,11 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
-import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
-import type { Translator } from '@src/Translator';
-import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
+import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
+import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
@@ -105,14 +103,7 @@ const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
-
-const localTranslator = inject<Translator>( 'translator' );
-const currencyFormatter = inject<Currency>( 'currencyFormatter' );
-
-const localFormItemsBuilder = new FormItemsBuilder( localTranslator, currencyFormatter.euroAmount.bind( currencyFormatter ) );
-const amountOptionsFive = localFormItemsBuilder.setAmounts( 5, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsTen = localFormItemsBuilder.setAmounts( 10, 15, 25, 50, 100 ).getItems().amounts;
-const amountOptionsForForm = ref<FormItem[]>( amountOptionsTen );
+const amounts = useDynamicAmounts( formModel, inject<DonationFormItems>( 'formItems' ).dynamicAmounts );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -132,7 +123,7 @@ function onshowFullPageBanner(): void {
 	contentState.value = ContentStates.FullPage;
 	emit( 'modalOpened' );
 
-	amountOptionsForForm.value = amountOptionsFive;
+	formModel.initialAmount.value = '';
 
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent() );
 
@@ -142,8 +133,7 @@ function onshowFullPageBanner(): void {
 function onshowFullPageBannerPreselected(): void {
 	slideShowStopped.value = true;
 
-	amountOptionsForForm.value = amountOptionsTen;
-
+	formModel.initialAmount.value = '10';
 	formModel.selectedAmount.value = '10';
 	contentState.value = ContentStates.FullPage;
 	tracker.trackEvent( new MobileMiniBannerExpandedEvent( 'preselected' ) );

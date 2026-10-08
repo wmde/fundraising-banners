@@ -7,7 +7,7 @@ import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import { useOfFundsContent } from '@test/banners/useOfFundsContent';
 import { newDynamicContent } from '@test/banners/dynamicCampaignContent';
 import { CurrencyDe } from '@src/utils/DynamicContent/formatters/CurrencyDe';
-import { formItems } from '@test/banners/formItems';
+import { createFormItems } from '@banners/mobile/WMDE_FR_2026_Mobile_DE_06/form_items';
 import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
@@ -20,6 +20,7 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import type { Translator } from '@src/Translator';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -61,6 +62,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_ctrl', () => {
 	const getWrapper = ( dynamicContent: DynamicContent = null, timer: Timer = null ): { wrapper: VueWrapper<any>, bannerElements: any } => {
 		// attachTo the document body to fix an issue with Vue Test Utils where
 		// clicking a submit button in a form does not fire the submit event
+		const currencyFormatter = new CurrencyDe();
 		const wrapper = mount( Banner, {
 			attachTo: document.body,
 			props: {
@@ -77,8 +79,8 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_ctrl', () => {
 					translator: { translate: translator },
 					dynamicCampaignText: dynamicContent ?? newDynamicContent(),
 					formActions: fakeFormActions,
-					currencyFormatter: new CurrencyDe(),
-					formItems,
+					currencyFormatter,
+					formItems: createFormItems( { translate: translator } as Translator, currencyFormatter.euroAmount.bind( currencyFormatter ) ),
 					tracker,
 					timer: timer ?? new TimerStub(),
 					currentCampaignTimePercentage: 42
@@ -107,6 +109,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_ctrl', () => {
 			paymentMethodField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-payment-type-error)' ),
 			intervalOnce: () => wrapper.find( '[name="interval"][value="0"]' ),
 			intervalMonthly: () => wrapper.find( '[name="interval"][value="1"]' ),
+			intervalQuarterly: () => wrapper.find( '[name="interval"][value="3"]' ),
 			intervalYearly: () => wrapper.find( '[name="interval"][value="12"]' ),
 			amount5: () => wrapper.find( '[name="amount"][value="5"]' ),
 			amount10: () => wrapper.find( '[name="amount"][value="10"]' ),
@@ -176,30 +179,6 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_ctrl', () => {
 			await bannerElements.donateOtherButton().trigger( 'click' );
 
 			expect( bannerElements.slider().classes() ).toContain( 'wmde-b-slider--stopped' );
-		} );
-
-		it( 'Uses the default amounts when the donate button is clicked', async () => {
-			const { bannerElements } = getWrapper();
-
-			await bannerElements.donateOtherButton().trigger( 'click' );
-
-			expect( bannerElements.amount5().exists() ).toBeTruthy();
-			expect( bannerElements.amount15().exists() ).toBeTruthy();
-			expect( bannerElements.amount25().exists() ).toBeTruthy();
-			expect( bannerElements.amount50().exists() ).toBeTruthy();
-			expect( bannerElements.amount100().exists() ).toBeTruthy();
-		} );
-
-		it( 'Uses the alternate amounts when the donate with amount button is clicked', async () => {
-			const { bannerElements } = getWrapper();
-
-			await bannerElements.donate10Button().trigger( 'click' );
-
-			expect( bannerElements.amount10().exists() ).toBeTruthy();
-			expect( bannerElements.amount15().exists() ).toBeTruthy();
-			expect( bannerElements.amount25().exists() ).toBeTruthy();
-			expect( bannerElements.amount50().exists() ).toBeTruthy();
-			expect( bannerElements.amount100().exists() ).toBeTruthy();
 		} );
 
 		it( 'emits the modal opened event', async () => {
@@ -313,6 +292,62 @@ describe( 'WMDE_FR_2026_Mobile_DE_06_ctrl', () => {
 				expect( bannerElements.intervalField().attributes( 'data-error' ) ).toBeUndefined();
 				expect( bannerElements.amountField().attributes( 'data-error' ) ).toBeUndefined();
 				expect( bannerElements.paymentMethodField().attributes( 'data-error' ) ).toBeUndefined();
+			} );
+
+			it( 'varies amounts depending on interval after 10€ selected', async () => {
+				const { wrapper, bannerElements } = getWrapper();
+				function amounts(): number[] {
+					return wrapper.findAll( '#wmde-banner-form [name="amount"]' )
+						.map( e => Number( e.attributes( 'value' ) ) );
+				}
+
+				await bannerElements.donate10Button().trigger( 'click' );
+
+				expect( amounts() ).toEqual( [ 10, 15, 25, 50, 100 ] );
+
+				await bannerElements.intervalOnce().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 10, 15, 25, 50, 100 ] );
+
+				await bannerElements.intervalMonthly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 2, 5, 10, 15, 25 ] );
+
+				await bannerElements.intervalQuarterly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 5, 10, 15, 25, 50 ] );
+
+				await bannerElements.intervalYearly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 10, 15, 25, 50, 100 ] );
+
+				await bannerElements.amount50().trigger( 'click' );
+				await bannerElements.intervalMonthly().trigger( 'click' );
+				expect( bannerElements.submitAmount().element.value ).toEqual( '0' );
+			} );
+
+			it( 'varies amounts depending on interval after other selected', async () => {
+				const { wrapper, bannerElements } = getWrapper();
+				function amounts(): number[] {
+					return wrapper.findAll( '#wmde-banner-form [name="amount"]' )
+						.map( e => Number( e.attributes( 'value' ) ) );
+				}
+
+				await bannerElements.donateOtherButton().trigger( 'click' );
+
+				expect( amounts() ).toEqual( [ 5, 15, 25, 50, 100 ] );
+
+				await bannerElements.intervalOnce().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 5, 15, 25, 50, 100 ] );
+
+				await bannerElements.intervalMonthly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 2, 5, 10, 15, 25 ] );
+
+				await bannerElements.intervalQuarterly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 5, 10, 15, 25, 50 ] );
+
+				await bannerElements.intervalYearly().trigger( 'click' );
+				expect( amounts() ).toEqual( [ 5, 15, 25, 50, 100 ] );
+
+				await bannerElements.amount50().trigger( 'click' );
+				await bannerElements.intervalMonthly().trigger( 'click' );
+				expect( bannerElements.submitAmount().element.value ).toEqual( '0' );
 			} );
 
 			it( 'submits to the donation form when a recurring interval is selected', async () => {

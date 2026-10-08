@@ -47,9 +47,15 @@ export default class FormItemsBuilder {
 		return this;
 	}
 
-	public setDynamicAmounts( dynamicAmounts: { interval: string, amounts: number[] }[] ): FormItemsBuilder {
+	public setDynamicAmounts(
+		dynamicAmounts: { interval: string, initialAmount?: string, amounts: number[] }[]
+	): FormItemsBuilder {
 		this._formItems.dynamicAmounts = dynamicAmounts.map( x => {
-			return { interval: x.interval, amounts: x.amounts.map( this.formatAmounts, this ) };
+			return {
+				interval: x.interval,
+				initialAmount: x.initialAmount,
+				amounts: x.amounts.map( this.formatAmounts, this )
+			};
 		} );
 		return this;
 	}

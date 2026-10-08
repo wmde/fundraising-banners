@@ -13,6 +13,30 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			Intervals.QUARTERLY,
 			Intervals.YEARLY
 		)
+		.setDynamicAmounts( [
+			{ interval: Intervals.MONTHLY.value, amounts: [ 2, 5, 10, 15, 25 ] },
+			{ interval: Intervals.QUARTERLY.value, amounts: [ 5, 10, 15, 25, 50 ] },
+			{
+				interval: Intervals.ONCE.value,
+				initialAmount: '10',
+				amounts: [ 10, 15, 25, 50, 100 ]
+			},
+			{
+				interval: Intervals.ONCE.value,
+				initialAmount: '',
+				amounts: [ 5, 15, 25, 50, 100 ]
+			},
+			{
+				interval: Intervals.YEARLY.value,
+				initialAmount: '10',
+				amounts: [ 10, 15, 25, 50, 100 ]
+			},
+			{
+				interval: Intervals.YEARLY.value,
+				initialAmount: '',
+				amounts: [ 5, 15, 25, 50, 100 ]
+			}
+		] )
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
 			PaymentMethods.DIRECT_DEBIT,
