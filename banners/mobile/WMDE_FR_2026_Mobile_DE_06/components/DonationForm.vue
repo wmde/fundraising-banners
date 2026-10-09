@@ -83,7 +83,6 @@
 					:aria-labelledby="`wmde-banner-interval-label ${intervalValidity === Validity.Invalid ? 'wmde-b-interval-error' : ''}`"
 					:aria-hidden="step === 0 ? true : null"
 					class="wmde-b-donation-form__step wmde-c-flow"
-					data-vertical-alignment="center"
 					@submit.prevent
 				>
 					<div class="wmde-b-donation-form__nav">
