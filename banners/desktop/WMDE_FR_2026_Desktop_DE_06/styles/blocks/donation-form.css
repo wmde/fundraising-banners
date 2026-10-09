@@ -1,3 +1,8 @@
+.wmde-b-donation-form__wrapper {
+	/* counteract padding-inline on the __step (below) */
+	margin-inline: calc( var( --space-2xs ) * -1 );
+}
+
 .wmde-b-donation-form {
 	display: flex;
 	width: 100%;

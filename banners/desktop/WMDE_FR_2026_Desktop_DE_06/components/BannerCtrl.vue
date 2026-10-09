@@ -37,7 +37,7 @@
 			</button>
 		</header>
 
-		<div class="wmde-c-desktop-banner__form wmde-c-flow">
+		<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
 			<DonationForm ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
 		</div>
 
