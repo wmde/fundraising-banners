@@ -36,9 +36,9 @@ resolution = ["800x600", "1280x720", "1536x864", "1920x1080", "2560x1440"]
 [mobile]
 name = "Mobile"
 icon = "mobile"
-campaign = "WMDE_FR_2026_Mobile_DE_05"
-description = "Basen on CTRL of #4, VAR: the fullpage banner will show different amounts, depending on the button the user clicked on the minibanner:"
-campaign_tracking = "mob-de-05-ba-260921"
+campaign = "WMDE_FR_2026_Mobile_DE_06"
+description = "Basen on CTRL of #5, VAR: new transactional copy in the modal above the donation form"
+campaign_tracking = "mob-de-06-ba-261012"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva"
 preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
 preview_link_offline = ""
@@ -48,14 +48,14 @@ wrapper_template = "wikipedia_org"
 use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
 
 [mobile.banners.ctrl]
-filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_05/banner_ctrl.ts"
-pagename = "WMDE_FR_2026_Mobile_DE_05_ctrl"
-tracking = "org-mob05-260921-ctrl"
+filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_06/banner_ctrl.ts"
+pagename = "WMDE_FR_2026_Mobile_DE_06_ctrl"
+tracking = "org-mob06-261012-ctrl"
 
 [mobile.banners.var]
-filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_05/banner_var.ts"
-pagename = "WMDE_FR_2026_Mobile_DE_05_var"
-tracking = "org-mob05-260921-var"
+filename = "./banners/mobile/WMDE_FR_2026_Mobile_DE_06/banner_var.ts"
+pagename = "WMDE_FR_2026_Mobile_DE_06_var"
+tracking = "org-mob06-261012-var"
 
 [mobile.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]

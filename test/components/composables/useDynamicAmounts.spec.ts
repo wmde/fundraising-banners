@@ -29,19 +29,28 @@ const formItems = {
 const dynamicAmounts: DynamicFormItems[] = [
 	{
 		interval: Intervals.ONCE.value,
+		initialAmount: undefined,
 		amounts: [ formItems.ONE ]
 	},
 	{
 		interval: Intervals.MONTHLY.value,
+		initialAmount: undefined,
 		amounts: [ formItems.TWO ]
 	},
 	{
 		interval: Intervals.QUARTERLY.value,
+		initialAmount: undefined,
 		amounts: [ formItems.TWO, formItems.THREE ]
 	},
 	{
 		interval: Intervals.YEARLY.value,
+		initialAmount: '',
 		amounts: [ formItems.THREE ]
+	},
+	{
+		interval: Intervals.YEARLY.value,
+		initialAmount: '2',
+		amounts: [ formItems.TWO, formItems.THREE ]
 	}
 ];
 
@@ -49,6 +58,23 @@ describe( 'useDynamicAmounts', () => {
 
 	// The model values are in the global scope, and they need to be reset before each test
 	beforeEach( () => resetFormModel( model ) );
+
+	it( 'should select correct amount based on form model', () => {
+		const amounts = useDynamicAmounts( model, dynamicAmounts );
+
+		model.interval.value = Intervals.ONCE.value;
+		expect( amounts.value ).toEqual( [ formItems.ONE ] );
+
+		model.interval.value = Intervals.MONTHLY.value;
+		expect( amounts.value ).toEqual( [ formItems.TWO ] );
+
+		model.interval.value = Intervals.YEARLY.value;
+		model.initialAmount.value = '';
+		expect( amounts.value ).toEqual( [ formItems.THREE ] );
+
+		model.initialAmount.value = '2';
+		expect( amounts.value ).toEqual( [ formItems.TWO, formItems.THREE ] );
+	} );
 
 	it( 'should clear selected amount when interval changes', async () => {
 		model.interval.value = Intervals.MONTHLY.value;

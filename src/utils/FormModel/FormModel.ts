@@ -32,4 +32,10 @@ export interface FormModel {
 	addressTypeValidity: Ref<Validity>;
 	receipt: Ref<boolean|null>;
 	formatCustomAmount: () => void;
+
+	/**
+	 * An initial amount string in Euros, selected by the user before the full form is shown.
+	 * Only used by some banners.
+	 */
+	initialAmount: Ref<string>;
 }
