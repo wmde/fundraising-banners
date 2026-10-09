@@ -27,6 +27,9 @@
    https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B22_WMDE_local_prototype
     - Change the start date and end date in this file as needed - src/environment/dev/CampaignParameterOverride.ts
 
+3. Use the latest campaign parameters (Ex. `Campaign_Parameters_2026`) for banner builds
+    - Affected file: https://github.com/wmde/fundraising-banners/blob/0d6a5796200d7675c8ebb7c406fdf358cb07826c/webpack.production.js#L67
+
 
 ## Try lowering the maximum asset size and entry point size
 
