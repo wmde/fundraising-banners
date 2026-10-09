@@ -28,7 +28,7 @@
 	justify-content: var( --content-alignment, flex-start );
 	gap: var( --space-2xs );
 	text-wrap: balance;
-	padding-block-start: var( --space-2xs );
+	padding-block-start: var( --space-3xs );
 	padding-inline: var( --space-2xs );
 }
 
