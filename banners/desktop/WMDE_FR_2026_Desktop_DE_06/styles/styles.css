@@ -33,5 +33,6 @@
 @import '@src/styles/blocks/prose.css';
 @import '@src/styles/blocks/skip-link.css';
 @import '@src/styles/blocks/slider.css';
+@import '@src/styles/blocks/stacker.css';
 @import '@src/styles/blocks/text-radio.css';
 @import 'blocks/donation-form.css';
