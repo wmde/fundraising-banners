@@ -37,7 +37,7 @@
 			<template #footer>
 				<footer role="none" class="wmde-c-flow">
 					<div class="wmde-b-callout wmde-b-icon-text wmde-c-cluster" data-radius>
-						<HeartIcon/> Vielen Dank, dass Sie dabei sind
+						<HeartIcon/> Thank you for being with us
 					</div>
 					<div class="wmde-c-cluster">
 						<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>

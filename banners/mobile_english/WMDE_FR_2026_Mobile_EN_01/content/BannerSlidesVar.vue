@@ -3,30 +3,29 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
 		<p><strong>Hi,</strong></p>
 		<p>
-			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
-			zu unterstützen.
+			we may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
+			{{ liveDateAndTime.currentDate }}, we're asking you to support Wikipedia's independence.
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
-			<AnimatedText :is-visible="currentSlide === 1">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
-			Die meisten spenden, weil sie Wikipedia nützlich finden.
+			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
+			Most people donate because they find Wikipedia useful.
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
-			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			The average donation is {{ averageDonation }}, but even €5 helps us.
+			Has Wikipedia given you the value of a cup of coffee this year?
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
 		<p>
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-			<strong> Vielen Dank!</strong>
+			Then choose to be one of the rare exceptions and give something back.
+			<strong> Thank you!</strong>
 		</p>
 	</KeenSliderSlide>
 
@@ -49,7 +48,8 @@ const props = defineProps<Props>();
 const {
 	currentDayName,
 	getCurrentDateAndTime,
-	averageDonation
+	averageDonation,
+	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

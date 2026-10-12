@@ -4,15 +4,12 @@
 			<strong>Hi,</strong>
 		</p>
 		<p>
-			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
-			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
-			zu unterstützen.
-			<AnimatedText :is-visible="isVisible">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
-			Die meisten spenden, weil sie Wikipedia nützlich finden.
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
-			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
-			<strong> Vielen Dank!</strong>
+			we may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
+			{{ liveDateAndTime.currentDate }}, we're asking you to support Wikipedia's independence.
+			<AnimatedText :is-visible="isVisible">{{ visitorsVsDonorsSentence }}</AnimatedText>
+			Most people donate because they find Wikipedia
+			useful. The average donation is {{ averageDonation }}, but even €5 helps us. Has Wikipedia given you the value of a cup
+			of coffee this year? Then choose to be one of the rare exceptions and give something back. <strong> Thank you!</strong>
 		</p>
 	</div>
 </template>
@@ -30,7 +27,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { currentDayName, getCurrentDateAndTime, averageDonation }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, getCurrentDateAndTime, averageDonation, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
