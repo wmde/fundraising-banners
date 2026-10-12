@@ -14,8 +14,8 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			Intervals.YEARLY
 		)
 		.setDynamicAmounts( [
-			{ interval: Intervals.MONTHLY.value, amounts: [ 2, 5, 10, 15, 25 ] },
-			{ interval: Intervals.QUARTERLY.value, amounts: [ 5, 10, 15, 25, 50 ] },
+			{ interval: Intervals.MONTHLY.value, amounts: [ 2, 3, 5, 10, 15 ] },
+			{ interval: Intervals.QUARTERLY.value, amounts: [ 5, 10, 15, 20, 25 ] },
 			{
 				interval: Intervals.ONCE.value,
 				initialAmount: '10',
