@@ -4,7 +4,7 @@
 		<header class="wmde-c-repel" role="none" data-nowrap>
 			<div class="wmde-c-cluster">
 				<button class="wmde-b-nav-button" @click.prevent="$emit( 'showFundsModal' )" :title="$translate( 'use-of-funds-link-description' )" :tabindex="tabIndex">
-					<InfoIconStraight/> Warum spenden?
+					<InfoIconStraight/> Why donate?
 				</button>
 
 				<button class="wmde-b-nav-button" @click.prevent="$emit( 'alreadyDonatedClicked' )" :tabindex="tabIndex">
@@ -21,7 +21,7 @@
 		</header>
 
 		<div class="wmde-b-mini-banner__content">
-			<h2 class="wmde-b-lined-heading">Wikipedia ist unverkäuflich</h2>
+			<h2 class="wmde-b-lined-heading">Wikipedia is not for sale</h2>
 			<slot name="banner-slider"/>
 			<div class="visually-hidden">
 				<slot name="banner-text"/>
@@ -31,12 +31,12 @@
 		<footer role="none">
 			<div>
 				<button class="wmde-b-button" data-theme="secondary" data-fill @click="$emit( 'showFullPageBannerPreselected' )" :tabindex="tabIndex">
-					Jetzt 10 &euro; spenden
+					Donate &euro;10 now
 				</button>
 			</div>
 			<div>
 				<button class="wmde-b-button" data-fill @click="$emit( 'showFullPageBanner' )" :tabindex="tabIndex">
-					Anderen Betrag
+					Other amount
 				</button>
 			</div>
 		</footer>
