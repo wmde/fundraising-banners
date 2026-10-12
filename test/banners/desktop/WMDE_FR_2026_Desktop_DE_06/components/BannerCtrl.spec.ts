@@ -89,13 +89,14 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
 			hideUseOfFundsButton: () => wrapper.find( '.wmde-banner-funds-modal-close button' ),
-			firstForm: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form' ),
-			secondForm: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form' ),
+			formContainer: () => wrapper.find( '.wmde-b-donation-form' ),
+			firstForm: () => wrapper.find( '.wmde-b-donation-form form:first-child' ),
+			secondForm: () => wrapper.find( '.wmde-b-donation-form form:last-child' ),
 			submitForm: () => wrapper.find<HTMLFormElement>( '.wmde-b-donation-form + form' ),
 			submitAmount: () => wrapper.find( '.wmde-b-donation-form + form [name="amount"]' ),
 			submitInterval: () => wrapper.find( '.wmde-b-donation-form + form [name="interval"]' ),
 			submitPaymentType: () => wrapper.find( '.wmde-b-donation-form + form [name="paymentType"]' ),
-			mainErrorMessage: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form > .wmde-b-callout:first-child' ),
+			mainErrorMessage: () => wrapper.find( '.wmde-b-donation-form form:first-child > .wmde-b-callout:first-child' ),
 			intervalField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-interval-error)' ),
 			amountField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-amount-error)' ),
 			paymentMethodField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-payment-type-error)' ),
@@ -109,9 +110,9 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 			amountCustom: () => wrapper.find( '[name="custom-amount"]' ),
 			paymentMethodPPL: () => wrapper.find( '[name="paymentMethod"][value="PPL"]' ),
 			paymentMethodBEZ: () => wrapper.find( '[name="paymentMethod"][value="BEZ"]' ),
-			submitButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form > button' ),
-			onceButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:first-child' ),
-			yearlyButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:last-child' ),
+			submitButton: () => wrapper.find( '.wmde-b-donation-form form:first-child > button' ),
+			onceButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:first-child' ),
+			yearlyButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:last-child' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -220,6 +221,23 @@ describe( 'WMDE_FR_2026_Desktop_DE_06_ctrl', () => {
 	} );
 
 	describe( 'Donation Form', () => {
+		it( 'Shows and hides the form steps', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '0' );
+
+			await bannerElements.intervalOnce().trigger( 'click' );
+			await bannerElements.amount5().trigger( 'click' );
+			await bannerElements.paymentMethodPPL().trigger( 'click' );
+			await bannerElements.firstForm().trigger( 'submit' );
+
+			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '1' );
+
+			await bannerElements.backButton().trigger( 'click' );
+
+			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '0' );
+		} );
+
 		it( 'Shows and hides the back button', async () => {
 			const { bannerElements } = getWrapper();
 

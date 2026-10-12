@@ -1,122 +1,119 @@
 <template>
-	<div class="wmde-b-donation-form keen-slider" ref="container" @click="onClick">
-		<div class="keen-slider__slide">
-			<form
-				ref="mainForm"
-				tabindex="-1"
-				:aria-label="$translate( 'form-label' )"
-				:aria-hidden="step === 1 ? true : null"
-				class="wmde-b-donation-form__step"
-				data-vertical-alignment="space"
-				@submit.prevent="() => validateStep( 0 )"
-				id="wmde-banner-form"
-			>
-				<div class="wmde-b-callout" ref="errorMessage" data-error tabindex="-1" v-if="!stepOneIsValid">
-					<small>{{ $translate( 'form-error' ) }}</small>
-				</div>
+	<div class="wmde-b-donation-form wmde-b-stacker" @click="onClick" :data-index="step">
+		<form
+			ref="mainForm"
+			tabindex="-1"
+			:aria-label="$translate( 'form-label' )"
+			:aria-hidden="step === 1 ? true : null"
+			class="wmde-b-donation-form__step wmde-c-flow"
+			data-vertical-alignment="space"
+			@submit.prevent="() => validateStep( 0 )"
+			id="wmde-banner-form"
+		>
+			<div class="wmde-b-callout" ref="errorMessage" data-error tabindex="-1" v-if="!stepOneIsValid">
+				<small>{{ $translate( 'form-error' ) }}</small>
+			</div>
 
-				<div>
-					<fieldset class="wmde-b-field-container" id="wmde-b-interval-field" :data-error="intervalValidity === Validity.Invalid ? true : null">
-						<legend class="visually-hidden" id="wmde-b-interval-label">{{ $translate( 'intervals-header' ) }}</legend>
-						<div class="wmde-c-form-grid" data-layout="halves">
-							<label class="wmde-b-form-field" v-for="formItem in formItems.intervals" :key="formItem.value">
-								<input type="radio" name="interval" :value="formItem.value" v-model="interval" :tabindex="tabIndex( 0 )">{{ formItem.label }}
-							</label>
-						</div>
-						<div tabindex="-1" id="wmde-b-interval-error" class="wmde-b-field-container__error">
-							{{ $translate( 'no-interval-message' ) }}
-						</div>
-					</fieldset>
-				</div>
+			<div>
+				<fieldset class="wmde-b-field-container" id="wmde-b-interval-field" :data-error="intervalValidity === Validity.Invalid ? true : null">
+					<legend class="visually-hidden" id="wmde-b-interval-label">{{ $translate( 'intervals-header' ) }}</legend>
+					<div class="wmde-c-form-grid" data-layout="halves">
+						<label class="wmde-b-form-field" v-for="formItem in formItems.intervals" :key="formItem.value">
+							<input type="radio" name="interval" :value="formItem.value" v-model="interval" :tabindex="tabIndex( 0 )">{{ formItem.label }}
+						</label>
+					</div>
+					<div tabindex="-1" id="wmde-b-interval-error" class="wmde-b-field-container__error">
+						{{ $translate( 'no-interval-message' ) }}
+					</div>
+				</fieldset>
+			</div>
 
-				<div>
-					<fieldset class="wmde-b-field-container" :data-error="[ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity ) ? null : true">
-						<legend class="visually-hidden" id="wmde-b-amount-label">{{ $translate( 'amounts-header' ) }}</legend>
-						<div class="wmde-c-form-grid" data-layout="quarters">
-							<label class="wmde-b-form-field" v-for="formItem in amounts" :key="formItem.value">
-								<input type="radio" name="amount" :value="formItem.value" v-model="selectedAmount" :tabindex="tabIndex( 0 )">{{ formItem.label }}
-							</label>
-							<div class="wmde-c-form-grid__double wmde-b-form-field" :class="{ 'wmde-b-text-radio__radio--checked' : customAmount !== '' }">
-								<label class="visually-hidden" for="wmde-b-custom-amount">{{ $translate( 'custom-amount-placeholder' ) }}</label>
-								<div class="wmde-b-text-radio">
-									<span class="wmde-b-text-radio__radio"></span>
-									<input
-										type="text"
-										name="custom-amount"
-										class="wmde-b-text-radio__text"
-										id="wmde-b-custom-amount"
-										:placeholder="$translate( 'custom-amount-placeholder' )"
-										v-model="customAmount"
-										:tabindex="tabIndex( 0 )"
-										@blur="formatCustomAmount"
-									>
-								</div>
+			<div>
+				<fieldset class="wmde-b-field-container" :data-error="[ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity ) ? null : true">
+					<legend class="visually-hidden" id="wmde-b-amount-label">{{ $translate( 'amounts-header' ) }}</legend>
+					<div class="wmde-c-form-grid" data-layout="quarters">
+						<label class="wmde-b-form-field" v-for="formItem in amounts" :key="formItem.value">
+							<input type="radio" name="amount" :value="formItem.value" v-model="selectedAmount" :tabindex="tabIndex( 0 )">{{ formItem.label }}
+						</label>
+						<div class="wmde-c-form-grid__double wmde-b-form-field" :class="{ 'wmde-b-text-radio__radio--checked' : customAmount !== '' }">
+							<label class="visually-hidden" for="wmde-b-custom-amount">{{ $translate( 'custom-amount-placeholder' ) }}</label>
+							<div class="wmde-b-text-radio">
+								<span class="wmde-b-text-radio__radio"></span>
+								<input
+									type="text"
+									name="custom-amount"
+									class="wmde-b-text-radio__text"
+									id="wmde-b-custom-amount"
+									:placeholder="$translate( 'custom-amount-placeholder' )"
+									v-model="customAmount"
+									:tabindex="tabIndex( 0 )"
+									@blur="formatCustomAmount"
+								>
 							</div>
 						</div>
-						<div tabindex="-1" id="wmde-b-amount-error" class="wmde-b-field-container__error">
-							{{ $translate( amountValidityMessageKey( amountValidity ) ) }}
-						</div>
-					</fieldset>
-				</div>
+					</div>
+					<div tabindex="-1" id="wmde-b-amount-error" class="wmde-b-field-container__error">
+						{{ $translate( amountValidityMessageKey( amountValidity ) ) }}
+					</div>
+				</fieldset>
+			</div>
 
-				<div>
-					<fieldset class="wmde-b-field-container" :data-error="paymentMethodValidity === Validity.Invalid ? true : null">
-						<legend class="visually-hidden" id="wmde-b-payment-type-label">{{ $translate( 'payments-header' ) }}</legend>
-						<div class="wmde-c-form-grid" data-layout="quarters">
-							<label class="wmde-b-form-field" v-for="formItem in formItems.paymentMethods" :key="formItem.value" data-stacked>
-								<PaymentMethodIcon :payment-method="formItem.value"/>
-								{{ formItem.label }}
-								<input type="radio" name="paymentMethod" :value="formItem.value" v-model="paymentMethod" :tabindex="tabIndex( 0 )">
-							</label>
-						</div>
-						<div tabindex="-1" id="wmde-b-payment-type-error" class="wmde-b-field-container__error">
-							{{ $translate( 'no-payment-type-message' ) }}
-						</div>
-					</fieldset>
-				</div>
+			<div>
+				<fieldset class="wmde-b-field-container" :data-error="paymentMethodValidity === Validity.Invalid ? true : null">
+					<legend class="visually-hidden" id="wmde-b-payment-type-label">{{ $translate( 'payments-header' ) }}</legend>
+					<div class="wmde-c-form-grid" data-layout="quarters">
+						<label class="wmde-b-form-field" v-for="formItem in formItems.paymentMethods" :key="formItem.value" data-stacked>
+							<PaymentMethodIcon :payment-method="formItem.value"/>
+							{{ formItem.label }}
+							<input type="radio" name="paymentMethod" :value="formItem.value" v-model="paymentMethod" :tabindex="tabIndex( 0 )">
+						</label>
+					</div>
+					<div tabindex="-1" id="wmde-b-payment-type-error" class="wmde-b-field-container__error">
+						{{ $translate( 'no-payment-type-message' ) }}
+					</div>
+				</fieldset>
+			</div>
 
-				<button class="wmde-b-button" data-fill type="submit" :tabindex="tabIndex( 0 )">{{ $translate( submitButtonLabel ) }}</button>
-			</form>
-		</div>
-		<div class="keen-slider__slide">
-			<form
-				ref="intervalForm"
-				tabindex="-1"
-				:aria-labelledby="`wmde-banner-interval-label ${intervalValidity === Validity.Invalid ? 'wmde-b-interval-error' : ''}`"
-				:aria-hidden="step === 0 ? true : null"
-				class="wmde-b-donation-form__step wmde-c-flow"
-				data-vertical-alignment="center"
-				@submit.prevent
-			>
-				<h2 id="wmde-banner-interval-label">{{ $translate( 'upgrade-to-yearly-header', { amount: formattedAmount } ) }}</h2>
-				<div class="wmde-c-flow" v-html="$translate( 'upgrade-to-yearly-copy' )"/>
+			<button class="wmde-b-button" data-fill type="submit" :tabindex="tabIndex( 0 )">{{ $translate( submitButtonLabel ) }}</button>
+		</form>
 
-				<div class="wmde-c-flow">
-					<button
-						class="wmde-b-button"
-						type="submit"
-						data-fill
-						@click.prevent="() => selectInterval( Intervals.ONCE.value )"
-						:value="Intervals.ONCE.value"
-						:tabindex="tabIndex( 1 )"
-					>
-						{{ $translate( 'upgrade-to-yearly-no', { amount: formattedAmount } ) }}
-					</button>
+		<form
+			ref="intervalForm"
+			tabindex="-1"
+			:aria-labelledby="`wmde-banner-interval-label ${intervalValidity === Validity.Invalid ? 'wmde-b-interval-error' : ''}`"
+			:aria-hidden="step === 0 ? true : null"
+			class="wmde-b-donation-form__step wmde-c-flow"
+			data-vertical-alignment="center"
+			@submit.prevent
+		>
+			<h2 id="wmde-banner-interval-label">{{ $translate( 'upgrade-to-yearly-header', { amount: formattedAmount } ) }}</h2>
+			<div class="wmde-c-flow" v-html="$translate( 'upgrade-to-yearly-copy' )"/>
 
-					<button
-						class="wmde-b-button"
-						type="submit"
-						data-fill
-						@click.prevent="() => selectInterval( Intervals.YEARLY.value )"
-						:value="Intervals.YEARLY.value"
-						:tabindex="tabIndex( 1 )"
-					>
-						{{ $translate( 'upgrade-to-yearly-yes', { amount: formattedAmount } ) }}
-					</button>
-				</div>
+			<div class="wmde-c-flow">
+				<button
+					class="wmde-b-button"
+					type="submit"
+					data-fill
+					@click.prevent="() => selectInterval( Intervals.ONCE.value )"
+					:value="Intervals.ONCE.value"
+					:tabindex="tabIndex( 1 )"
+				>
+					{{ $translate( 'upgrade-to-yearly-no', { amount: formattedAmount } ) }}
+				</button>
 
-			</form>
-		</div>
+				<button
+					class="wmde-b-button"
+					type="submit"
+					data-fill
+					@click.prevent="() => selectInterval( Intervals.YEARLY.value )"
+					:value="Intervals.YEARLY.value"
+					:tabindex="tabIndex( 1 )"
+				>
+					{{ $translate( 'upgrade-to-yearly-yes', { amount: formattedAmount } ) }}
+				</button>
+			</div>
+
+		</form>
 	</div>
 
 	<form ref="submitForm" :action="formAction" style="display: none;" method="post" target="_blank">
@@ -135,7 +132,6 @@ import type { Currency } from '@src/utils/DynamicContent/formatters/Currency';
 import type { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import type { Timer } from '@src/utils/Timer';
 import type { Tracker } from '@src/tracking/Tracker';
-import { useKeenSlider } from 'keen-slider/vue';
 import SubmitValues from '@src/components/DonationForm/SubComponents/SubmitValues.vue';
 import { useFormAction } from '@src/components/composables/useFormAction';
 import type { FormActionCollection } from '@src/domain/FormActions';
@@ -163,11 +159,6 @@ const stepOneIsValid = computed( (): boolean => [ AmountValidity.Unset, AmountVa
 );
 const timer = inject<Timer>( 'timer' );
 const tracker = inject<Tracker>( 'tracker' );
-const [ container, slider ] = useKeenSlider( {
-	initial: 0,
-	drag: false,
-	loop: false
-} );
 const step = ref<number>( 0 );
 
 const forms = ref<HTMLFormElement[]>( null );
@@ -180,9 +171,7 @@ const submitButtonLabel = computed( (): string => interval.value === Intervals.O
 const secondPageWasSeen = ref<boolean>( false );
 
 watch( step, ( newStep: number ) => {
-	if ( slider.value.track.details.rel !== newStep ) {
-		slider.value.moveToIdx( newStep );
-	}
+	forms.value[ newStep ]?.focus();
 } );
 
 const onClick = (): void => {
@@ -268,14 +257,7 @@ const focusMainForm = (): void => {
 };
 
 onMounted( () => {
-	// This fixes Keen Slider rendering a little early and not having the correct width
-	timer.nextTick( () => slider.value.update() );
-
 	forms.value = [ mainForm.value, intervalForm.value ];
-
-	slider.value.on( 'animationEnded', () => {
-		forms.value[ step.value ]?.focus();
-	} );
 } );
 
 defineExpose( { onBack, step, focusMainForm } );
