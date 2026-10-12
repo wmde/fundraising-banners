@@ -2,8 +2,8 @@
 @use '@src/themes/Yperala/variables/breakpoints';
 @use '@src/themes/Treedip/variables/fonts';
 
-$height-small: 358px !default;
-$height-large: 288px !default;
+$height-small: 336px !default;
+$height-large: 354px !default;
 
 .wmde-banner {
 	&-mini {
@@ -11,7 +11,7 @@ $height-large: 288px !default;
 		min-height: $height-small;
 		display: flex;
 
-		@include breakpoints.phone-m-up {
+		@include breakpoints.phone-l-up {
 			min-height: $height-large;
 		}
 
