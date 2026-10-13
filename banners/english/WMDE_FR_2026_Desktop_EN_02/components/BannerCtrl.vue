@@ -24,6 +24,8 @@
 				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
 					<BannerText :banner-state="bannerState"/>
 				</div>
+
+				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
 			</div>
 		</div>
 
@@ -84,6 +86,7 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
+import ProgressBar from './ProgressBar.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
