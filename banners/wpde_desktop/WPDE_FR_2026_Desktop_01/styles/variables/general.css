@@ -4,4 +4,6 @@
 	--form-grid-gap: var( --space-2xs ) var( --gutter );
 	--prose-padding: var( --space-l );
 	--form-font-weight: var( --font-normal );
+	--message-text-font-size: var( --type-step-00 );
+	--slider-pagination-height: var( --space-m );
 }

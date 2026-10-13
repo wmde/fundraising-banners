@@ -4,6 +4,9 @@ import type { TranslationMessages } from '@src/Translator';
 import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/UpgradeToYearly.de';
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
+import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.de';
+import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -11,6 +14,9 @@ const messages: TranslationMessages = {
 	...UpgradeToYearlyDe,
 	...FooterDe,
 	...MainDonationFormDe,
+	...ProgressBar,
+	...BannerConductor,
+	...ContentCopier,
 	'already-donated-link': 'Habe schon gespendet',
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf Menschen wie Sie angewiesen. Jährliche Spenden helfen uns' +
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
