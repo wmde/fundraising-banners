@@ -21,7 +21,7 @@
 	border: 1px solid var( --form-field-border );
 	background: var( --form-field-background, transparent );
 	border-radius: 0.5rem;
-	height: 2rem;
+	height: var( --form-field-height, 2rem );
 	padding-inline: var( --space-3xs );
 }
 

@@ -37,6 +37,7 @@
 
 .wmde-b-message__text {
 	justify-content: center;
+	font-size: var( --message-text-font-size, var( --type-step-0 ) );
 }
 
 .wmde-b-message__text[ data-align='left' ] {

@@ -1,10 +1,8 @@
 <template>
-	<div class="wmde-banner-message-header">
-		<InfoIconItalic/> <h2>Wikipedia ist unverkäuflich</h2>
-		<p class="headline">
-			An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} sind Sie gefragt:
-		</p>
-	</div>
+	<h2 class="wmde-b-icon-text wmde-c-cluster"><InfoIconItalic/> Wikipedia ist unverkäuflich</h2>
+	<p class="headline">
+		An diesem {{ currentDayName }}, den {{ liveDateAndTime.currentDate }}, um {{ liveDateAndTime.currentTime }} sind Sie gefragt:
+	</p>
 </template>
 
 <script setup lang="ts">

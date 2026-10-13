@@ -16,5 +16,8 @@ const messages: TranslationMessages = {
 		' besonders und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
 	'upgrade-to-yearly-header': 'Bitte spenden Sie {{amount}} jährlich!',
+	'skip-link': 'Weiter zum Formular',
+	'form-label': 'Spenden Formular',
+	'form-error': 'Bitte Formular vervollständigen',
 };
 export default messages;
