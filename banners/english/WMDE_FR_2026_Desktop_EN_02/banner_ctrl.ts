@@ -27,6 +27,7 @@ import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
+import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -46,7 +47,8 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } ),
+		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', 'without_soft_close' ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
