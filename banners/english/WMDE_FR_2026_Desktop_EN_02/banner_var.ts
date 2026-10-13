@@ -1,6 +1,8 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.scss';
+import './styles/styles.css';
+import './styles/fallback-banner.scss';
+import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
 import Banner from './components/BannerCtrl.vue';

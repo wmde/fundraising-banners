@@ -1,24 +1,26 @@
 <template>
-	<KeenSliderSlide :is-current="currentSlide === 0">
-		<p class="headline">
-			<InfoIcon fill="#990a00"/>
-			{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still can't be
-			sold.&#8221; - An important update for readers in Germany.
+	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose wmde-c-flow" data-align="centered" data-balance>
+		<p>
+			<InfoIcon fill="#990a00"/>&nbsp;
+			<strong>
+				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still can't be
+				sold.&#8221; - An important update for readers in Germany.
+			</strong>
 		</p>
 		<p>
 			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
 			message will be up for only a few hours.
 		</p>
 	</KeenSliderSlide>
-	<KeenSliderSlide :is-current="currentSlide === 1">
+	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
 			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to give €5 back.
-			<AnimatedText content="If everyone reading this gave just €5, we'd hit our goal in a few hours."/>
+			<AnimatedText :is-visible="currentSlide === 1">If everyone reading this gave just €5, we'd hit our goal in a few hours.</AnimatedText>
 			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online information,
 			powering everything from your personal searches to emerging AI technologies.
 		</p>
 	</KeenSliderSlide>
-	<KeenSliderSlide :is-current="currentSlide === 2">
+	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
 			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if
 			you have given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate
@@ -30,18 +32,18 @@
 <script setup lang="ts">
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted } from 'vue';
+import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
+import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import InfoIcon from '@src/components/Icons/InfoIconStraight.vue';
-import KeenSliderSlide from '@src/components/Slider/KeenSliderSlide.vue';
-import AnimatedText from '@src/components/AnimatedText/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
-	currentSlide: number
+	currentSlide: number;
 }
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, currentDate, getCurrentDateAndTime } = inject<DynamicContent>( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );
