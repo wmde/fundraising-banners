@@ -63,7 +63,7 @@
     "globals": "^17.12.0",
     "@eslint/js": "^10.0.0",
     "eslint-plugin-security": "^4.2.0",
-    "eslint-plugin-unicorn": "^64.0.0",
+    "eslint-plugin-unicorn": "^77.0.0",
     "eslint-plugin-vue": "^10.11.1",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",
