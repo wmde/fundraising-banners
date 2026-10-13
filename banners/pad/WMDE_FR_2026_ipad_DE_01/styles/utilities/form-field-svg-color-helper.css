@@ -1,0 +1,17 @@
+/* stylelint-disable */
+.wmde-u-svg-field-helper__PPL:has( input:checked ) {
+	--paypal-primary-fill: #ffffff;
+	--paypal-secondary-fill: #ffffff;
+	--paypal-overlap-fill: transparent;
+}
+
+.wmde-u-svg-field-helper__MCP:has( input:checked ) {
+	--visa-fill: #ffffff;
+
+	--mastercard-text: #ffffff;
+	--mastercard-primary-fill: #ffffff;
+	--mastercard-secondary-fill: #ffffff;
+	--mastercard-overlap-fill: transparent;
+	--mastercard-text-fill: #ffffff;
+}
+/* stylelint-enable */
