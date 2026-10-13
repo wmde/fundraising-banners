@@ -1,0 +1,48 @@
+// This is the file where we import the theme-specific component styles
+@use '../../../../src/themes/Treedip/swatches/skin_default' with (
+	$slider: true,
+	$progress-bar: true,
+	$select-group: true,
+	$select-group-bubble: true,
+	$select-group-image-label: true,
+	$select-group-cheering: true,
+	$upgrade-to-yearly: true,
+	$soft-close: false,
+	$fallback-banner: true,
+);
+@use '@src/themes/Treedip/variables/breakpoints';
+@use '@src/components/BannerConductor/banner-transition';
+@use 'Banner';
+@use 'MainBanner' with (
+	$banner-height: 394px,
+	$form-width: 300px
+);
+@use '../../../../src/components/UseOfFunds/styles/swatches/skin_default' as uof-default;
+@use '../../../../src/components/UseOfFunds/styles/styles';
+@use '@src/themes/Treedip/defaults';
+@use '@src/themes/Treedip/ButtonClose/ButtonClose';
+@use '@src/themes/Treedip/ProgressBar/ProgressBar' with (
+	$progress-bar-margin: 0 15px
+);
+@use '@src/themes/Treedip/DonationForm/DonationForm';
+@use '@src/themes/Treedip/DonationForm/MultiStepDonation';
+@use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubble' with (
+	$interval-option-width: 33%
+);
+@use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupRadioBubbles' with (
+	$height: 38px
+);
+@use '@src/themes/Treedip/DonationForm/BubbleForm/SelectCustomAmountRadioBubble' with (
+	$height: 38px
+);
+@use '@src/themes/Treedip/DonationForm/BubbleForm/SelectGroupBubbleImageLabel';
+@use '@src/themes/Treedip/DonationForm/Forms/MainDonationForm' with (
+	$padding: 0
+);
+@use '@src/themes/Treedip/DonationForm/Forms/UpgradeToYearlyButtonForm';
+@use '@src/themes/Treedip/Footer/FooterAlreadyDonated';
+@use '@src/themes/Treedip/Footer/SelectionInput';
+@use '@src/themes/Treedip/Message/Message' with (
+	$font-sizes: ( breakpoints.$extra-small: 16px, breakpoints.$extra-large + 100px: 18px )
+);
+@use '@src/themes/Treedip/Slider/KeenSlider';
