@@ -18,7 +18,6 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
-import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import messages from './messages';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
@@ -49,7 +48,6 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		localCloseTracker: new LocalStorageCloseTracker(),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
 	},
 	resizeHandler: new WindowResizeHandler(),
