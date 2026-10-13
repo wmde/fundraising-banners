@@ -46,6 +46,10 @@
 	--color-callout-error-background: var( --color-red-100 );
 
 	--headline-line-color: var( --color-red-600 );
+
+	--progress-track-border-color: var( --color-red-600 );
+	--progress-fill-background: var( --color-red-600 );
+	--progress-fill-color: var( --color-white );
 }
 
 .skin-theme-clientpref-night .wmde-banner {

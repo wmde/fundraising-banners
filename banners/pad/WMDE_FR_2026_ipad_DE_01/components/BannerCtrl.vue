@@ -29,6 +29,8 @@
 					<BannerText/>
 				</div>
 
+				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
+
 			</div>
 		</div>
 
@@ -87,6 +89,7 @@ import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 import DonationForm from './DonationForm.vue';
+import ProgressBar from './ProgressBar.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
