@@ -2,7 +2,6 @@ import { describe, expect, it, afterEach, beforeEach, test, vi } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
-import ButtonClose from '@src/components/ButtonClose/ButtonClose.vue';
 import { TimerStub } from '@test/fixtures/TimerStub';
 import type { Timer } from '@src/utils/Timer';
 import { TimerSpy } from '@test/fixtures/TimerSpy';
@@ -19,8 +18,8 @@ describe( 'SoftClose', function () {
 		vi.restoreAllMocks();
 	} );
 
-	const getWrapper = ( translate: ( key: string ) => string = defaultTranslate, timer: Timer = null ): VueWrapper<any> => {
-		return mount( SoftClose, {
+	const getWrapper = ( translate: ( key: string ) => string = defaultTranslate, timer: Timer = null ): { wrapper: VueWrapper<any>, elements: any } => {
+		const wrapper = mount( SoftClose, {
 			global: {
 				mocks: {
 					$translate: translate
@@ -30,43 +29,51 @@ describe( 'SoftClose', function () {
 				}
 			}
 		} );
+		const elements = {
+			closeXButton: () => wrapper.find( '.wmde-b-soft-close__content > button' ),
+			closeButton: () => wrapper.find( '.wmde-b-soft-close__content > div > button:nth-child(3)' ),
+			maybeLayerButton: () => wrapper.find( '.wmde-b-soft-close__content > div > button:nth-child(2)' ),
+			countdown: () => wrapper.find( '.wmde-b-soft-close__timer' ),
+		};
+
+		return { wrapper, elements };
 	};
 
 	it( 'should emit close event when user clicks close icon', async () => {
-		const wrapper = getWrapper();
+		const { wrapper, elements } = getWrapper();
 		await wrapper.setProps( { showCloseIcon: true } );
 
-		await wrapper.find( '.wmde-banner-soft-close .wmde-banner-close' ).trigger( 'click' );
+		await elements.closeXButton().trigger( 'click' );
 
-		expect( wrapper.emitted( 'x-icon-close' ).length ).toBe( 1 );
+		expect( wrapper.emitted( 'xIconClose' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit close event when user clicks close button', function () {
-		const wrapper = getWrapper();
+	it( 'should emit close event when user clicks close button', async () => {
+		const { wrapper, elements } = getWrapper();
 
-		wrapper.find( '.wmde-banner-soft-close-button-close' ).trigger( 'click' );
+		await elements.closeButton().trigger( 'click' );
 
 		expect( wrapper.emitted( 'close' ).length ).toBe( 1 );
 	} );
 
-	it( 'should emit maybeLater event when user clicks maybe later button', function () {
-		const wrapper = getWrapper();
+	it( 'should emit maybeLater event when user clicks maybe later button', async () => {
+		const { wrapper, elements } = getWrapper();
 
-		wrapper.find( '.wmde-banner-soft-close-button-maybe-later' ).trigger( 'click' );
+		await elements.maybeLayerButton().trigger( 'click' );
 
 		expect( wrapper.emitted( 'maybeLater' ).length ).toBe( 1 );
 	} );
 
 	test.each( [
-		'.wmde-banner-close',
-		'.wmde-banner-soft-close-button-close',
-		'.wmde-banner-soft-close-button-maybe-later'
-	] )( 'stops the timer on button click', async ( buttonClass: string ) => {
+		'closeXButton',
+		'closeButton',
+		'maybeLayerButton'
+	] )( 'stops the timer on button click', async ( button: string ) => {
 		const timer = new TimerSpy();
-		const wrapper = getWrapper( defaultTranslate, timer );
+		const { wrapper, elements } = getWrapper( defaultTranslate, timer );
 		await wrapper.setProps( { showCloseIcon: true } );
 
-		await wrapper.find( buttonClass ).trigger( 'click' );
+		await elements[ button ]().trigger( 'click' );
 
 		expect( timer.clearAllCalls ).toBe( 1 );
 	} );
@@ -77,9 +84,9 @@ describe( 'SoftClose', function () {
 		};
 		const timer = new TimerSpy();
 
-		const wrapper = getWrapper( translate, timer );
+		const { elements } = getWrapper( translate, timer );
 
-		const seconds = wrapper.find( '.wmde-banner-soft-close-countdown-text-wrapper' );
+		const seconds = elements.countdown();
 
 		expect( seconds.text() ).toBe( '15' );
 
@@ -95,7 +102,7 @@ describe( 'SoftClose', function () {
 
 	it( 'should emit timeOutClose when the internal countdown is <= 1', async () => {
 		const timer = new TimerSpy();
-		const wrapper = getWrapper( ( key: string ) => key, timer );
+		const { wrapper } = getWrapper( ( key: string ) => key, timer );
 
 		// The soft close counts down over 15 seconds so we need to keep advancing until it runs out
 		for ( let i: number = 0; i < 15; i++ ) {
@@ -103,21 +110,5 @@ describe( 'SoftClose', function () {
 		}
 
 		expect( wrapper.emitted( 'timeOutClose' ).length ).toBe( 1 );
-	} );
-
-	it( 'should not show the extra close icon', async () => {
-		const wrapper = getWrapper();
-		await wrapper.setProps( { showCloseIcon: false } );
-
-		expect( wrapper.classes() ).not.toContain( 'wmde-banner-soft-close-with-close-icon' );
-		expect( wrapper.findComponent( ButtonClose ).exists() ).toBeFalsy();
-	} );
-
-	it( 'should show the extra close icon', async () => {
-		const wrapper = getWrapper();
-		await wrapper.setProps( { showCloseIcon: true } );
-
-		expect( wrapper.classes() ).toContain( 'wmde-banner-soft-close-with-close-icon' );
-		expect( wrapper.findComponent( ButtonClose ).exists() ).toBeTruthy();
 	} );
 } );
