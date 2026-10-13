@@ -8,6 +8,7 @@
 		"resolveJsonModule": true,
 		"moduleResolution": "node",
 		"paths": {
+			"@banners/*": [ "banners/*" ],
 			"@src/*": [ "src/*" ],
 			"@test/*": [ "test/*" ],
 			"@environment/*": [ "src/environment/prod/*", "src/environment/dev/*" ]

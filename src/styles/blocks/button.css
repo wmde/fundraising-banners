@@ -2,7 +2,7 @@
 	--background: var( --button-background );
 	--background-hover: oklch( from var( --background ) calc( l/2 + 0.4 ) c h );
 	--color: var( --button-color );
-	--height: var( --button-height, 2lh );
+	--height: var( --button-height, 2.5rem );
 	--padding: var( --button-padding, 0 1rem );
 
 	display: flex;

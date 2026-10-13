@@ -14,6 +14,7 @@ export default class FormItemsBuilder {
 		this._formItems = {
 			intervals: [],
 			amounts: [],
+			dynamicAmounts: [],
 			paymentMethods: [],
 			addressType: []
 		};
@@ -43,6 +44,13 @@ export default class FormItemsBuilder {
 
 	public setAmounts( ...amounts: number[] ): FormItemsBuilder {
 		this._formItems.amounts = amounts.map( this.formatAmounts, this );
+		return this;
+	}
+
+	public setDynamicAmounts( dynamicAmounts: { interval: string, amounts: number[] }[] ): FormItemsBuilder {
+		this._formItems.dynamicAmounts = dynamicAmounts.map( x => {
+			return { interval: x.interval, amounts: x.amounts.map( this.formatAmounts, this ) };
+		} );
 		return this;
 	}
 
