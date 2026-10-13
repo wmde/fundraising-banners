@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, test, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/english/WMDE_FR_2026_Desktop_EN_02/components/BannerCtrl.vue';
 import BannerSlides from '@banners/english/WMDE_FR_2026_Desktop_EN_02/content/BannerSlides.vue';
@@ -23,6 +23,8 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Translator } from '@src/Translator';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 const formModel = useFormModel();
 let tracker: Tracker;
@@ -36,6 +38,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_ctrl', () => {
 	let wrapperCache: VueWrapper<any>;
 	let showCallback: Mock;
 	let closeCallback: Mock;
+	let localCloseTracker: LocalCloseTracker;
 
 	beforeEach( () => {
 		resetFormModel( formModel );
@@ -49,6 +52,11 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_ctrl', () => {
 		closeCallback = vi.fn();
 		HTMLDialogElement.prototype.showModal = showCallback;
 		HTMLDialogElement.prototype.close = closeCallback;
+
+		localCloseTracker = {
+			getItem: vi.fn(),
+			setItem: vi.fn(),
+		};
 	} );
 
 	afterEach( () => {
@@ -65,7 +73,8 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_ctrl', () => {
 			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
-				useOfFundsContent
+				useOfFundsContent,
+				localCloseTracker
 			},
 			global: {
 				mocks: {
@@ -634,9 +643,29 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not have the local close tracker', async () => {
-			const { wrapper } = getWrapper();
-			expect( wrapper.props().localCloseTracker ).toBeUndefined();
+		test.each( [
+			'closeButton',
+			'donatedButton',
+		] )( 'Stores a local storage item on close', async ( button: string ) => {
+			const { bannerElements } = getWrapper();
+
+			await bannerElements[ button ]().trigger( 'click' );
+
+			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'fires an event if a local storage item exists', async () => {
+			localCloseTracker.getItem = vi.fn().mockReturnValue( 'without_soft_close' );
+
+			const { bannerElements } = getWrapper();
+			bannerElements.submitForm().element.submit = vi.fn();
+
+			await bannerElements.intervalMonthly().trigger( 'click' );
+			await bannerElements.amount5().trigger( 'click' );
+			await bannerElements.paymentMethodPPL().trigger( 'click' );
+			await bannerElements.firstForm().trigger( 'submit' );
+
+			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'without_soft_close' ) );
 		} );
 	} );
 } );

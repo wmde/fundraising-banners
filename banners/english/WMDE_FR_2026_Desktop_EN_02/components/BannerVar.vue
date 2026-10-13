@@ -38,7 +38,7 @@
 			</header>
 
 			<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
-				<DonationForm ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
+				<DonationForm ref="donationForm" :local-close-tracker="localCloseTracker" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
 			</div>
 
 			<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-repel wmde-b-footer">
@@ -100,6 +100,7 @@ import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
@@ -110,6 +111,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	remainingImpressions: number;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -139,6 +141,7 @@ function onCloseMain( closeChoice: CloseChoices ): void {
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	props.localCloseTracker.setItem();
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
