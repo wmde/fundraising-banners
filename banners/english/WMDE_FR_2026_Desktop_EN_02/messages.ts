@@ -6,7 +6,7 @@ import SoftCloseEn from '@src/components/SoftClose/messages/SoftClose.en';
 import FooterEn from '@src/components/Footer/messages/Footer.en';
 import MainDonationFormEn from '@src/components/DonationForm/Forms/messages/MainDonationForm.en';
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.en';
-import DoubleProgressBarEn from '@src/components/ProgressBar/messages/DoubleProgressBar.en';
+import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.en';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.en';
 
 const messages: TranslationMessages = {
@@ -17,7 +17,7 @@ const messages: TranslationMessages = {
 	...FooterEn,
 	...MainDonationFormEn,
 	...FallbackBanner,
-	...DoubleProgressBarEn,
+	...ProgressBar,
 	...BannerConductor,
 	'already-donated-link': 'I\'ve already donated',
 	'upgrade-to-yearly-copy': '<p>Every year we are dependent on the support of people like you. Yearly donations ' +
