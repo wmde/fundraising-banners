@@ -18,10 +18,10 @@ export const formItems: DonationFormItems = {
 	addressType: [ AddressTypes.FULL, AddressTypes.ANONYMOUS, AddressTypes.EMAIL ],
 	amounts,
 	dynamicAmounts: [
-		{ interval: Intervals.ONCE.value, amounts: [ ...amounts ] },
-		{ interval: Intervals.MONTHLY.value, amounts: [ amounts[ 0 ], amounts[ 1 ], amounts[ 2 ], amounts[ 3 ] ] },
-		{ interval: Intervals.QUARTERLY.value, amounts: [ amounts[ 0 ], amounts[ 1 ], amounts[ 2 ], amounts[ 3 ] ] },
-		{ interval: Intervals.YEARLY.value, amounts: [ amounts[ 1 ], amounts[ 4 ], amounts[ 5 ], amounts[ 6 ], amounts[ 7 ] ] },
+		{ interval: Intervals.ONCE.value, initialAmount: undefined, amounts: [ ...amounts ] },
+		{ interval: Intervals.MONTHLY.value, initialAmount: undefined, amounts: [ amounts[ 0 ], amounts[ 1 ], amounts[ 2 ], amounts[ 3 ] ] },
+		{ interval: Intervals.QUARTERLY.value, initialAmount: undefined, amounts: [ amounts[ 0 ], amounts[ 1 ], amounts[ 2 ], amounts[ 3 ] ] },
+		{ interval: Intervals.YEARLY.value, initialAmount: undefined, amounts: [ amounts[ 1 ], amounts[ 4 ], amounts[ 5 ], amounts[ 6 ], amounts[ 7 ] ] },
 	],
 	intervals: [ Intervals.ONCE, Intervals.MONTHLY, Intervals.QUARTERLY, Intervals.YEARLY ],
 	paymentMethods: [ PaymentMethods.PAYPAL, PaymentMethods.CREDIT_CARD, PaymentMethods.SOFORT, PaymentMethods.DIRECT_DEBIT, PaymentMethods.BANK_TRANSFER ]

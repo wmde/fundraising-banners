@@ -39,6 +39,8 @@ const disabledPaymentMethods = computed( (): string[] => {
 	}
 } );
 
+const initialAmount = ref<string>( '' );
+
 watch( interval, ( newInterval: string ) => {
 	if ( intervalValidity.value === Validity.Invalid && newInterval !== '' ) {
 		intervalValidity.value = Validity.Valid;
@@ -100,6 +102,8 @@ export function useFormModel( customFormat: string = '{amount} €' ): FormModel
 
 		receipt,
 
-		formatCustomAmount
+		formatCustomAmount,
+
+		initialAmount
 	};
 }
