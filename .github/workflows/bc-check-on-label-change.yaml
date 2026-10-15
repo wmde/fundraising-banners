@@ -16,7 +16,7 @@ jobs:
         # Node version should be in sync with the version in the package.json and build.yml
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
