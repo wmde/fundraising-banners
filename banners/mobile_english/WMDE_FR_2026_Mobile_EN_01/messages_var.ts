@@ -7,6 +7,7 @@ import MainDonationFormEn from '@src/components/DonationForm/Forms/messages/Main
 import SoftCloseEn from '@src/components/SoftClose/messages/SoftClose.en';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.en';
 import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.en';
+import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.en';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextEn,
@@ -17,6 +18,7 @@ const messages: TranslationMessages = {
 	...SoftCloseEn,
 	...BannerConductor,
 	...ContentCopier,
+	...ProgressBar,
 
 	// custom messages here
 	'upgrade-to-yearly-header': 'Please make it {{amount}} yearly!',

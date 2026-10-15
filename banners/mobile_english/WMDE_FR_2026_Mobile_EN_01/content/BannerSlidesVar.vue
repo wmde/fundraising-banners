@@ -1,6 +1,11 @@
 <template>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-c-flow wmde-b-prose" data-align="centered">
+		<p><strong>Our donation target: €{{ goalDonationSum }} million</strong></p>
+		<ProgressBar :is-visible="playLiveText" amount-to-show-on-right="MISSING"/>
+	</KeenSliderSlide>
+
+	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p><strong>Hi,</strong></p>
 		<p>
 			we may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
@@ -8,21 +13,21 @@
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
+			<AnimatedText :is-visible="currentSlide === 2">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Most people donate because they find Wikipedia useful.
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
 		<p>
 			The average donation is {{ averageDonation }}, but even €5 helps us.
 			Has Wikipedia given you the value of a cup of coffee this year?
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="4" class="wmde-b-prose" data-align="centered">
 		<p>
 			Then choose to be one of the rare exceptions and give something back.
 			<strong> Thank you!</strong>
@@ -37,6 +42,7 @@ import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import ProgressBar from '../components/ProgressBarVar.vue';
 
 interface Props {
 	playLiveText: boolean;
@@ -47,9 +53,10 @@ const props = defineProps<Props>();
 
 const {
 	currentDayName,
-	getCurrentDateAndTime,
+	goalDonationSum,
 	averageDonation,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	getCurrentDateAndTime
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
