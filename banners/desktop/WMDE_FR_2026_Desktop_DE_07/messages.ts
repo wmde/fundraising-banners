@@ -8,6 +8,7 @@ import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBann
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
+import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -19,6 +20,7 @@ const messages: TranslationMessages = {
 	...SoftCloseDe,
 	...ContentCopier,
 	...BannerConductor,
+	...ProgressBar,
 
 	'already-donated-link': 'Habe schon gespendet',
 	'soft-close-prompt': 'Dürfen wir später nochmal fragen?',
