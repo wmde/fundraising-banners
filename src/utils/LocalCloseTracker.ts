@@ -1,24 +1,30 @@
-import type { CloseChoices } from '@src/domain/CloseChoices';
 import hasLocalStorage from '@src/utils/hasLocalStorage';
-import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 
 export interface LocalCloseTracker {
-	setItem( feature: TrackingFeatureName, closeChoice: CloseChoices ): void;
+	setItem(): void;
 	getItem(): string;
 }
 
 export class LocalStorageCloseTracker implements LocalCloseTracker {
-	public setItem( feature: TrackingFeatureName, closeChoice: CloseChoices ): void {
+	private readonly _key: 'deDesktop' | 'deMobile' | 'enDesktop';
+	private readonly _value: 'with_soft_close' | 'without_soft_close';
+
+	public constructor( key: 'deDesktop' | 'deMobile' | 'enDesktop', value: 'with_soft_close' | 'without_soft_close' ) {
+		this._key = key;
+		this._value = value;
+	}
+
+	public setItem(): void {
 		if ( !hasLocalStorage() ) {
 			return;
 		}
-		window.localStorage.setItem( 'fundraising.closeChoice2025', `${feature}_${closeChoice}` );
+		window.localStorage.setItem( `fundraising.closeChoice2026.${this._key}`, this._value );
 	}
 
 	public getItem(): string {
 		if ( !hasLocalStorage() ) {
 			return '';
 		}
-		return window.localStorage.getItem( 'fundraising.closeChoice2025' ) || '';
+		return window.localStorage.getItem( `fundraising.closeChoice2026.${this._key}` ) || '';
 	}
 }
