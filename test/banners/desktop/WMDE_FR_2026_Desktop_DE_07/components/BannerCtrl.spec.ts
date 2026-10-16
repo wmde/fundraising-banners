@@ -113,6 +113,8 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 			submitButton: () => wrapper.find( '.wmde-b-donation-form form:first-child > button' ),
 			onceButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:first-child' ),
 			yearlyButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:last-child' ),
+			progressBarTrack: () => wrapper.find( '.wmde-b-progress__track' ),
+			progressBarFill: () => wrapper.find( '.wmde-b-progress__fill' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -217,6 +219,15 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 
 			expect( wrapper.find( '.wmde-b-message__title' ).text() ).toContain( 'Third Date' );
 			expect( wrapper.find( '.wmde-b-message__title' ).text() ).toContain( 'Third Time' );
+		} );
+	} );
+
+	describe( 'Progress Bar', () => {
+		it( 'shows current amount and target in the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBarFill().text() ).toStrictEqual( 'amountDonated' );
+			expect( bannerElements.progressBarTrack().text() ).toStrictEqual( 'donationTargetAmount' );
 		} );
 	} );
 
