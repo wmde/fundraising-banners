@@ -37,7 +37,6 @@
 					:step-controllers="stepControllers"
 					@form-interaction="formInteraction"
 					:page-scroller="pageScroller"
-					:submit-callback="onSubmit"
 				>
 
 					<template #[FormStepNames.MainDonationFormStep]="{ pageIndex, submit, isCurrent, previous }: any">
@@ -109,16 +108,9 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
-import {
-	createSubmittableMainDonationForm
-} from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
-import {
-	createSubmittableUpgradeToYearly
-} from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
-import MainDonationFormButton
-	from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
+import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
+import MainDonationFormButton from '@src/components/DonationForm/SubComponents/SubmitButtons/MainDonationFormButton.vue';
 import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
 import FormItemsBuilder from '@src/utils/FormItemsBuilder/FormItemsBuilder';
 import type { Translator } from '@src/Translator';
@@ -140,7 +132,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -174,13 +165,6 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 }
-
-const onSubmit = (): void => {
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
 
 function onshowFullPageBanner(): void {
 	slideShowStopped.value = true;
