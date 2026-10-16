@@ -20,7 +20,7 @@
 .wmde-b-message__text {
 	padding-inline: var( --text-padding, var( --space-xs ) );
 	flex-direction: column;
-	align-items: center;
+	align-items: var( --horizontal-alignment, center );
 }
 
 .wmde-b-message__text,
@@ -37,6 +37,10 @@
 
 .wmde-b-message__text {
 	justify-content: center;
+}
+
+.wmde-b-message__text[ data-align='left' ] {
+	--horizontal-alignment: flex-start;
 }
 
 .wmde-b-message__slideshow {
