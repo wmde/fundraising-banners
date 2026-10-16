@@ -1,0 +1,5 @@
+@use 'src/components/FallbackBanner/styles/swatches/skin_vector-2022';
+@use 'src/components/FallbackBanner/styles/styles';
+@use 'src/themes/Treedip/Slider/KeenSlider' with (
+	$slider-padding: 0
+);
