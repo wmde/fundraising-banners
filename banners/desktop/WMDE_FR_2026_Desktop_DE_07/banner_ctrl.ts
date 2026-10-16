@@ -28,6 +28,7 @@ import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
 import { Locales } from '@src/domain/Locales';
+import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -51,7 +52,8 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
-		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount )
+		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
+		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', 'without_soft_close' ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

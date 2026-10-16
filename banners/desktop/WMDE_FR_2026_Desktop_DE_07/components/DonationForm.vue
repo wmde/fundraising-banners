@@ -143,7 +143,14 @@ import { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
+interface Props {
+	localCloseTracker: LocalCloseTracker
+}
+
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
 const formItems = inject<DonationFormItems>( 'formItems' );
@@ -192,6 +199,13 @@ const submit = async ( feature: TrackingFeatureName ): Promise<void> => {
 	await nextTick();
 	emit( 'submit' );
 	tracker.trackEvent( new BannerSubmitEvent( feature, formModel.interval.value !== Intervals.ONCE.value ? 'recurring' : 'non-recurring' ) );
+
+	// Fire an event if the donor has previously closed a banner from the soft close test
+	const bannerType = props.localCloseTracker.getItem();
+	if ( bannerType !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( bannerType ) );
+	}
+
 	submitForm.value.submit();
 };
 
