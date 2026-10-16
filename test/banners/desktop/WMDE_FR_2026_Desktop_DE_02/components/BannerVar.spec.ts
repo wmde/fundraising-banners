@@ -26,7 +26,6 @@ import { TimerStub } from '@test/fixtures/TimerStub';
 import type { Timer } from '@src/utils/Timer';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import { softCloseFeatures } from '@test/features/SoftCloseDesktop';
-import { softCloseSubmitTrackingFeaturesDesktop } from '@test/features/SoftCloseSubmitTrackingDesktop';
 
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
@@ -47,10 +46,6 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {
@@ -135,15 +130,6 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectDoesNotShowSoftClose' ]
 		] )( '%s', async ( testName: string ) => {
 			await softCloseFeatures[ testName ]( getWrapper );
-		} );
-	} );
-
-	describe( 'Track user choice on the previous soft-close banner', () => {
-		test.each( [
-			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
-			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
-		] )( '%s', async ( testName: string ) => {
-			await softCloseSubmitTrackingFeaturesDesktop[ testName ]( getWrapper(), tracker );
 		} );
 	} );
 

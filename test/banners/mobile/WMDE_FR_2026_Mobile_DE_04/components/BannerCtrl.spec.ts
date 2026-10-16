@@ -22,11 +22,6 @@ import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { setMainDonationFormValues } from '@test/features/forms/subForms/MainDonationForm';
-import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
-import { PaymentMethods } from '@src/utils/FormItemsBuilder/fields/PaymentMethods';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -253,37 +248,6 @@ describe( 'BannerCtrl.vue', () => {
 			await wrapper.find( '.wmde-banner-full-close' ).trigger( 'click' );
 
 			expect( wrapper.emitted( 'modalClosed' ).length ).toBe( 1 );
-		} );
-	} );
-
-	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not store a cookie on close', async () => {
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: vi.fn(),
-				setItem: vi.fn()
-			};
-			getWrapper();
-			await wrapper.setProps( { localCloseTracker } );
-
-			const closeButton = wrapper.find( '.wmde-b-mini-banner header > div:last-child button' );
-
-			await closeButton.trigger( 'click' );
-
-			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
-		} );
-
-		it( 'Does not fire submit on return event', async () => {
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: () => 'I chose not to choose a close choice',
-				setItem: vi.fn()
-			};
-			getWrapper();
-			await wrapper.setProps( { localCloseTracker } );
-
-			await setMainDonationFormValues( wrapper, Intervals.YEARLY, '15', PaymentMethods.PAYPAL );
-			await wrapper.find( '.wmde-banner-sub-form-donation' ).trigger( 'submit' );
-
-			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
 		} );
 	} );
 } );

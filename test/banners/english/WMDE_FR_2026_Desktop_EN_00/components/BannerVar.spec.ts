@@ -36,10 +36,6 @@ describe( 'BannerCtrl.vue', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {

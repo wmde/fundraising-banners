@@ -69,10 +69,6 @@ describe( 'BannerVar.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {
