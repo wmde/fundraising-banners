@@ -12,15 +12,15 @@
 	margin: 0;
 	width: var( --radio-size );
 	height: var( --radio-size );
-	border: 2px solid var( --form-field-border );
-	background: var( --form-field-background );
+	border: 2px solid var( --radio-field-border );
+	background: var( --radio-field-background );
 	border-radius: 50%;
 }
 
 .wmde-b-text-radio__radio::before {
 	content: '';
 	position: absolute;
-	background: var( --form-field-background );
+	background: var( --radio-field-background );
 	height: 60%;
 	width: 60%;
 	top: 20%;
@@ -29,10 +29,10 @@
 }
 
 .wmde-b-text-radio__radio--checked {
-	--form-field-border-color: var( --form-field-checked-background );
-	--form-field-background: var( --form-field-checked-background );
+	--radio-field-border: var( --form-field-border-active );
+	--radio-field-background: var( --radio-field-checked-background );
 }
 
 .wmde-b-text-radio__radio--checked .wmde-b-text-radio__radio::before {
-	background: var( --form-field-checked-fill );
+	background: var( --radio-field-checked-fill );
 }

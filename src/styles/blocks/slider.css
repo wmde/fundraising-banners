@@ -66,6 +66,7 @@ Note: There's a load of extra rules in here to ensure that the slides are laid o
 	justify-content: center;
 	gap: var( --space-2xs );
 	height: var( --pagination-height );
+	margin: 0;
 }
 
 .wmde-b-slider__pagination li {
