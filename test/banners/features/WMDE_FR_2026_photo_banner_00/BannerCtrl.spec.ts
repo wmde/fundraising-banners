@@ -68,10 +68,6 @@ describe( 'WMDE_FR_2026_photo_banner_00_ctrl', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {

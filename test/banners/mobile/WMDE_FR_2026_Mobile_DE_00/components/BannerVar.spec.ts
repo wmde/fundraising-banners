@@ -16,8 +16,6 @@ import { useFormModel } from '@src/components/composables/useFormModel';
 import { resetFormModel } from '@test/resetFormModel';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { nextTick } from 'vue';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 
@@ -62,10 +60,6 @@ describe( 'BannerVar.vue', () => {
 				useOfFundsContent,
 				pageScroller,
 				remainingImpressions: 10,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {
@@ -131,40 +125,6 @@ describe( 'BannerVar.vue', () => {
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', 'already-donated' ) );
-		} );
-	} );
-
-	describe( 'Soft Close return test tracking', () => {
-		it( 'Tracks the submit on return event', async () => {
-			const wrapper = getWrapper();
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: () => 'I chose not to choose a close choice',
-				setItem: vi.fn()
-			};
-			await wrapper.setProps( { localCloseTracker } );
-			const submitForm = wrapper.find<HTMLFormElement>( '.wmde-b-form + form' );
-			submitForm.element.submit = vi.fn();
-
-			await wrapper.find( '.wmde-b-field-amount [value="10"]' ).trigger( 'change' );
-			await wrapper.find( '.wmde-b-form button' ).trigger( 'click' );
-
-			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
-		} );
-
-		it( 'Does not track the submit on return event if the local storage item is missing', async () => {
-			const wrapper = getWrapper();
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: () => '',
-				setItem: vi.fn()
-			};
-			await wrapper.setProps( { localCloseTracker } );
-			const submitForm = wrapper.find<HTMLFormElement>( '.wmde-b-form + form' );
-			submitForm.element.submit = vi.fn();
-
-			await wrapper.find( '.wmde-b-field-amount [value="10"]' ).trigger( 'change' );
-			await wrapper.find( '.wmde-b-form button' ).trigger( 'click' );
-
-			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( '' ) );
 		} );
 	} );
 
