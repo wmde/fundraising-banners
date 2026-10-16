@@ -37,6 +37,8 @@
 
 	--button-background: var( --color-blue-400 );
 	--button-color: var( --color-white );
+	--button-background-secondary: var( --color-red-600 );
+	--button-color-secondary: var( --color-white );
 
 	--color-error: var( --color-red-600 );
 	--color-callout-error-border: var( --color-red-600 );
@@ -45,6 +47,8 @@
 	--progress-track-border-color: var( --color-red-600 );
 	--progress-fill-background: var( --color-red-600 );
 	--progress-fill-color: var( --color-white );
+
+	--soft-close-countdown: var( --color-red-600 );
 }
 
 .skin-theme-clientpref-night .wmde-banner {

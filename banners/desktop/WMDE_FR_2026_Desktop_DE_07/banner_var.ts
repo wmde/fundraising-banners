@@ -5,7 +5,7 @@ import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
