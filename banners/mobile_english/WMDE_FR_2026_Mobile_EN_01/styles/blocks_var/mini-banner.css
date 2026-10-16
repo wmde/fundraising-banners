@@ -1,0 +1,52 @@
+.wmde-b-mini-banner {
+	--content-flex-direction: column;
+
+	background: var( --mini-background );
+	padding-inline: var( --gutter );
+	flex: 1 1 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	font-size: var( --type-step-1 );
+}
+
+.wmde-b-mini-banner header,
+.wmde-b-mini-banner footer {
+	flex: 0 0 auto;
+}
+
+.wmde-b-mini-banner header {
+	--repel-vertical-alignment: stretch;
+	--cluster-vertical-alignment: stretch;
+	--gutter: 0;
+
+	min-height: 1.7lh;
+}
+
+.wmde-b-mini-banner__content {
+	flex: 1 1 auto;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+
+	background: var( --mini-content-background );
+	border-radius: 1rem;
+	color: var( --mini-color );
+	text-wrap: balance;
+}
+
+.wmde-b-mini-banner h2 {
+	font-size: var( --type-step-1 );
+}
+
+.wmde-b-mini-banner footer {
+	display: flex;
+	justify-content: stretch;
+	gap: var( --gutter );
+	padding-block: var( --gutter );
+	font-weight: var( --font-bold );
+}
+
+.wmde-b-mini-banner footer > * {
+	flex: 1 1 50%;
+}
