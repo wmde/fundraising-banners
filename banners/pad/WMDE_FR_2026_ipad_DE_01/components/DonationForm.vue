@@ -39,6 +39,7 @@
 							<label class="visually-hidden" for="wmde-b-custom-amount">{{ $translate( 'custom-amount-placeholder' ) }}</label>
 							<input
 								type="text"
+								class="noime"
 								name="custom-amount"
 								id="wmde-b-custom-amount"
 								:placeholder="$translate( 'custom-amount-placeholder' )"
