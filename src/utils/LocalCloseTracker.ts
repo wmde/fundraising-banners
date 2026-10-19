@@ -5,11 +5,14 @@ export interface LocalCloseTracker {
 	getItem(): string;
 }
 
-export class LocalStorageCloseTracker implements LocalCloseTracker {
-	private readonly _key: 'deDesktop' | 'deMobile' | 'enDesktop';
-	private readonly _value: 'with_soft_close' | 'without_soft_close';
+type keyType = 'deDesktop' | 'deMobile' | 'enDesktop';
+type valueType = 'with_soft_close' | 'with_soft_close_final_impression' | 'without_soft_close';
 
-	public constructor( key: 'deDesktop' | 'deMobile' | 'enDesktop', value: 'with_soft_close' | 'without_soft_close' ) {
+export class LocalStorageCloseTracker implements LocalCloseTracker {
+	private readonly _key: keyType;
+	private readonly _value: valueType;
+
+	public constructor( key: keyType, value: valueType ) {
 		this._key = key;
 		this._value = value;
 	}
