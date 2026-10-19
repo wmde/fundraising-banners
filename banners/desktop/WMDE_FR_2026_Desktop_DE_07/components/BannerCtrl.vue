@@ -43,15 +43,10 @@
 			<DonationForm :local-close-tracker="localCloseTracker" ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
 		</div>
 
-		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-repel wmde-b-footer">
-			<div class="wmde-c-cluster">
-				<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
-				<ContentCopier label="BIC" value="BFSWDE33XXX"/>
-				<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
-			</div>
-			<button class="wmde-u-link-button" @click="() => onClose( 'MainBanner', CloseChoices.AlreadyDonated )">
-				<TickIcon/> {{ $translate( 'already-donated-link' ) }}
-			</button>
+		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-cluster wmde-b-footer">
+			<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
+			<ContentCopier label="BIC" value="BFSWDE33XXX"/>
+			<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
 		</footer>
 
 		<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-b-footer">
@@ -87,7 +82,6 @@ import { useBannerHider } from '@src/components/composables/useBannerHider';
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
-import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';

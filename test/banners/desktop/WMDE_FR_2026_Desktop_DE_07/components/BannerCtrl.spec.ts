@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, Mock, test, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_07/components/BannerCtrl.vue';
 import { createFormItems } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_07/form_items';
@@ -150,15 +150,6 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
-		} );
-
-		it( 'closes banner when the donor hits the already donated button', async () => {
-			const { wrapper, bannerElements } = getWrapper();
-
-			await bannerElements.donatedButton().trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.AlreadyDonated ) );
 		} );
 	} );
 
@@ -600,13 +591,10 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		test.each( [
-			'closeButton',
-			'donatedButton',
-		] )( 'Stores a local storage item on close', async ( button: string ) => {
+		it( 'Stores a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 
-			await bannerElements[ button ]().trigger( 'click' );
+			await bannerElements.closeButton().trigger( 'click' );
 
 			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
 		} );
