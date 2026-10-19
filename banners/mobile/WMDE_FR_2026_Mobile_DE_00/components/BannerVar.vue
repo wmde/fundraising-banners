@@ -15,7 +15,7 @@
 			</template>
 		</KeenSlider>
 
-		<DonationForm :submit-callback="onSubmit"/>
+		<DonationForm/>
 
 		<footer class="wmde-b-foot">
 			<button class="wmde-u-link-button" type="button" @click.prevent="onClose( 'MainBanner', CloseChoices.AlreadyDonated )">{{ $translate( 'already-donated-button' ) }}</button>
@@ -36,13 +36,11 @@
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { computed, inject, ref } from 'vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import CloseButton from './Variant/CloseButton.vue';
@@ -57,7 +55,6 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
-	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -74,13 +71,6 @@ function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 	emit( 'modalClosed' );
 }
-
-const onSubmit = (): void => {
-	const closeChoice = props.localCloseTracker.getItem();
-	if ( closeChoice !== '' ) {
-		tracker.trackEvent( new BannerSubmitOnReturnEvent( closeChoice ) );
-	}
-};
 
 const onHideFundsModal = (): void => {
 	isFundsModalVisible.value = false;

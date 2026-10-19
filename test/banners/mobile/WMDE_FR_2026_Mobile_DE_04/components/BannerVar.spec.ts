@@ -18,9 +18,6 @@ import { TimerStub } from '@test/fixtures/TimerStub';
 import { fakeFormActions } from '@test/fixtures/FakeFormActions';
 import UseOfFundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
-import type { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
-import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import MiniDonationForm from '@banners/mobile/WMDE_FR_2026_Mobile_DE_04/components/MiniDonationForm.vue';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 
@@ -70,10 +67,6 @@ describe( 'BannerVar.vue', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				localCloseTracker: {
-					getItem: () => '',
-					setItem: () => {}
-				}
 			},
 			global: {
 				mocks: {
@@ -464,33 +457,4 @@ describe( 'BannerVar.vue', () => {
 		} );
 	} );
 
-	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not store a cookie on close', async () => {
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: vi.fn(),
-				setItem: vi.fn()
-			};
-			getWrapper();
-			await wrapper.setProps( { localCloseTracker } );
-
-			const closeButton = wrapper.find( '.wmde-b-mini-banner header > div:last-child button' );
-
-			await closeButton.trigger( 'click' );
-
-			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
-		} );
-
-		it( 'Does not fire submit on return event', async () => {
-			const localCloseTracker: LocalCloseTracker = {
-				getItem: () => 'I chose not to choose a close choice',
-				setItem: vi.fn()
-			};
-			getWrapper();
-			await wrapper.setProps( { localCloseTracker } );
-
-			wrapper.findComponent( MiniDonationForm ).vm.$emit( 'submit' );
-
-			expect( tracker.trackEvent ).not.toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'I chose not to choose a close choice' ) );
-		} );
-	} );
 } );
