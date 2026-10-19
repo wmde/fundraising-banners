@@ -8,7 +8,8 @@
 @use 'src/themes/Mikings/defaults';
 @use './Banner';
 @use './MiniBanner' with (
-	$height: 267px
+	$banner-height: 336px,
+	$banner-height-large-up: 354px
 );
 @use './FullPageBanner';
 @use 'src/themes/Mikings/Footer/Footer';

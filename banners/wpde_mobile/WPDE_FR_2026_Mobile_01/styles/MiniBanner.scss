@@ -1,16 +1,21 @@
 @use '@src/themes/Mikings/variables/globals';
 
-$height: 267px !default;
+$banner-height: 336px !default;
+$banner-height-large-up: 354px !default;
 
 .wmde-banner {
 	&-mini {
 		display: flex;
 		flex-direction: column;
-		min-height: $height;
+		min-height: $banner-height;
 		padding: 6px 16px 16px;
 		position: relative;
 		border: 2px solid var( --mini-border );
 		background: var( --mini-background );
+
+		@media screen and ( min-width: 568px ) {
+			min-height: $banner-height-large-up;
+		}
 
 		&-info-section {
 			display: flex;
