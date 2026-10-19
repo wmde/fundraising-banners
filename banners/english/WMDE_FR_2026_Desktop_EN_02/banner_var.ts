@@ -37,6 +37,8 @@ const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 
+const remainingImpressions = impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) );
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -46,9 +48,9 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
+		remainingImpressions,
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } ),
-		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', 'with_soft_close' ),
+		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', remainingImpressions > 0 ? 'with_soft_close' : 'with_soft_close_final_impression' ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

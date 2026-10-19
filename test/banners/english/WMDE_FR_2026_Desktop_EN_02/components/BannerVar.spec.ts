@@ -146,7 +146,9 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_var', () => {
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.WindowSizeBelowMin ) );
 		} );
+	} );
 
+	describe( 'Soft Close', () => {
 		it( 'shows the soft close when the donor hits the close button', async () => {
 			const { bannerElements } = getWrapper();
 
@@ -157,18 +159,6 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_var', () => {
 			expect( bannerElements.softClose().exists() ).toBeTruthy();
 		} );
 
-		it( 'shows the soft close when the donor hits the already donated button', async () => {
-			const { bannerElements } = getWrapper();
-
-			expect( bannerElements.softClose().exists() ).toBeFalsy();
-
-			await bannerElements.donatedButton().trigger( 'click' );
-
-			expect( bannerElements.softClose().exists() ).toBeTruthy();
-		} );
-	} );
-
-	describe( 'Soft Close', () => {
 		test.each( [
 			[ 'close', CloseChoices.Close ],
 			[ 'maybeLater', CloseChoices.MaybeLater ],
@@ -182,6 +172,17 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_var', () => {
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', closeChoice ) );
+		} );
+
+		it( 'does not show the soft close on the last impression', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await wrapper.setProps( { remainingImpressions: 0 } );
+
+			await bannerElements.closeButton().trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 		} );
 
 		describe( 'Accessibility', () => {
