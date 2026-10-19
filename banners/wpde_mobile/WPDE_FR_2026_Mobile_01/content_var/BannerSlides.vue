@@ -1,6 +1,11 @@
 <template>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-c-flow wmde-b-prose" data-align="centered">
+		<p><strong>Our donation target: €{{ goalDonationSum }} million</strong></p>
+		<ProgressBar :is-visible="playLiveText" amount-to-show-on-right="MISSING"/>
+	</KeenSliderSlide>
+
+	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p><strong>Hi,</strong></p>
 		<p>
 			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
@@ -9,21 +14,21 @@
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			<AnimatedText :is-visible="currentSlide === 1">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
+			<AnimatedText :is-visible="currentSlide === 2">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
 		<p>
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
 			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		</p>
 	</KeenSliderSlide>
 
-	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
+	<KeenSliderSlide :current-slide="currentSlide" :index="4" class="wmde-b-prose" data-align="centered">
 		<p>
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
@@ -38,6 +43,7 @@ import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import ProgressBar from '../components_var/ProgressBar.vue';
 
 interface Props {
 	playLiveText: boolean;
@@ -49,7 +55,8 @@ const props = defineProps<Props>();
 const {
 	currentDayName,
 	getCurrentDateAndTime,
-	averageDonation
+	averageDonation,
+	goalDonationSum
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );

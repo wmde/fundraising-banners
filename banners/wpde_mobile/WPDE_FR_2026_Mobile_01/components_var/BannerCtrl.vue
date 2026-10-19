@@ -11,7 +11,7 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
 					</template>
 				</KeenSlider>
 			</template>

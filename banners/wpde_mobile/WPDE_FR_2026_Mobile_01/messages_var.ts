@@ -7,6 +7,7 @@ import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/Main
 import SoftCloseDe from '@src/components/SoftClose/messages/SoftClose.de';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
 import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
+import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -17,6 +18,7 @@ const messages: TranslationMessages = {
 	...SoftCloseDe,
 	...BannerConductor,
 	...ContentCopier,
+	...ProgressBar,
 
 	// custom messages here
 	'payment-bank-transfer': 'Überweisung',
