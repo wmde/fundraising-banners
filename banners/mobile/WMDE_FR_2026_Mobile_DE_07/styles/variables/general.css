@@ -1,0 +1,11 @@
+.wmde-banner {
+	--banner-height: 336px;
+	--banner-height-large-up: 354px;
+	--gutter: var( --space-2xs );
+	--flow-space: var( --space-s );
+	--nav-button-padding: var( --space-3xs );
+	--prose-padding: var( --space-l );
+	--form-font-size: var( --type-step-0 );
+	--form-font-weight: var( --font-normal );
+	--content-copier-font-size: var( --type-step-00 );
+}

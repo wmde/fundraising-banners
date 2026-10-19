@@ -1,0 +1,51 @@
+.wmde-b-modal-banner {
+	--header-height: 1.7lh;
+
+	background: var( --modal-background );
+	position: fixed;
+	top: 0;
+	z-index: 1000;
+	height: 100svh;
+	height: -webkit-fill-available;
+	width: 100%;
+	padding-block-end: var( --space-2xs );
+	padding-inline: var( --space-2xs );
+	font-size: var( --type-step-0 );
+}
+
+.wmde-b-modal-banner header {
+	--cluster-vertical-alignment: stretch;
+	--cluster-horizontal-alignment: flex-end;
+
+	min-height: var( --header-height );
+}
+
+.wmde-b-modal-banner__content {
+	height: calc( 100% - var( --header-height ) );
+	overflow: auto;
+}
+
+.wmde-b-modal-banner footer {
+	--cluster-horizontal-alignment: center;
+
+	padding-block-end: var( --space-s );
+	padding-inline: var( --space-2xs );
+}
+
+.wmde-b-modal-banner__form-message,
+.wmde-b-modal-banner__form {
+	border-radius: 1rem;
+}
+
+.wmde-b-modal-banner__form-message {
+	--prose-padding: 0;
+	--prose-font-size: var( --type-step-1 );
+
+	background: var( --modal-content-background );
+	color: var( --modal-content-color );
+	padding: var( --space-l ) var( --gutter );
+}
+
+.wmde-b-modal-banner__form {
+	background: var( --form-background );
+}

@@ -1,0 +1,12 @@
+.wmde-b-mobile-banner {
+	min-height: var( --banner-height );
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+@media screen and ( min-width: 568px ) {
+	.wmde-b-mobile-banner {
+		min-height: var( --banner-height-large-up );
+	}
+}
