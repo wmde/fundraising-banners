@@ -75,7 +75,7 @@ module.exports = ( env ) => {
 					vueURL: 'https://unpkg.com/vue@3/dist/vue.runtime.global.prod.js',
 					// Regex matching output names to wrap.
 					// Should match 'pagename' of WPDE banners in campaigns_info.toml
-					test: /B.*WPDE_.*\.js/,
+					test: /WPDE_.*\.js/,
 				} ),
 				// Remove generated license files
 				// See https://stackoverflow.com/a/72237744/130121
