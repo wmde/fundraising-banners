@@ -42,7 +42,7 @@
 								<input
 									type="text"
 									name="custom-amount"
-									class="wmde-b-text-radio__text"
+									class="wmde-b-text-radio__text noime"
 									id="wmde-b-custom-amount"
 									:placeholder="$translate( 'custom-amount-placeholder' )"
 									v-model="customAmount"
