@@ -1,5 +1,6 @@
 .wmde-b-donation-form {
 	--nav-hover-background: var( --form-back-background );
+	--button-height: 3rem;
 }
 
 .wmde-b-donation-form .keen-slider {

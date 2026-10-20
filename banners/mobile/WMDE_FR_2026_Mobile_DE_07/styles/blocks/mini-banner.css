@@ -1,5 +1,6 @@
 .wmde-b-mini-banner {
 	--content-flex-direction: column;
+	--prose-padding: var( --space-s );
 
 	background: var( --mini-background );
 	padding-inline: var( --gutter );
@@ -8,6 +9,12 @@
 	display: flex;
 	flex-direction: column;
 	font-size: var( --type-step-1 );
+}
+
+@media (max-width: 360px ) {
+	.wmde-b-mini-banner {
+		--button-font-size: var( --type-step-00 );
+	}
 }
 
 .wmde-b-mini-banner header,
@@ -20,7 +27,7 @@
 	--cluster-vertical-alignment: stretch;
 	--gutter: 0;
 
-	min-height: 1.7lh;
+	min-height: 1.5lh;
 }
 
 .wmde-b-mini-banner__content {
@@ -45,6 +52,8 @@
 	gap: var( --gutter );
 	padding-block: var( --gutter );
 	font-weight: var( --font-bold );
+	width: 100%;
+	flex: 0 0 100%;
 }
 
 .wmde-b-mini-banner footer > * {

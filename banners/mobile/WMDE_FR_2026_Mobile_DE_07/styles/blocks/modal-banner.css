@@ -13,6 +13,12 @@
 	font-size: var( --type-step-0 );
 }
 
+@media (min-width: 360px ) {
+	.wmde-b-modal-banner {
+		--button-font-size: var( --type-step-1 );
+	}
+}
+
 .wmde-b-modal-banner header {
 	--cluster-vertical-alignment: stretch;
 	--cluster-horizontal-alignment: flex-end;
@@ -38,7 +44,7 @@
 }
 
 .wmde-b-modal-banner__form-message {
-	--prose-padding: 0;
+	--prose-padding: var( --space-2xs );
 	--prose-font-size: var( --type-step-1 );
 
 	background: var( --modal-content-background );

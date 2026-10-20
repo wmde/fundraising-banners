@@ -3,10 +3,10 @@
 	<KeenSliderSlide
 		:current-slide="currentSlide"
 		:index="0"
-		class="wmde-b-prose"
+		class="wmde-b-prose wmde-c-flow"
 		data-align="centered">
 		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
-		<slot name="progress"/>
+		<ProgressBar :is-visible="playLiveText"></ProgressBar>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
@@ -47,6 +47,7 @@ import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import ProgressBar from '../components/ProgressBar.vue';
 
 interface Props {
 	playLiveText: boolean;

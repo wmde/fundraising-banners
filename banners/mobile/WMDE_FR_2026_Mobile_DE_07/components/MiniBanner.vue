@@ -6,10 +6,6 @@
 				<button class="wmde-b-nav-button" @click.prevent="$emit( 'showFundsModal' )" :title="$translate( 'use-of-funds-link-description' )" :tabindex="tabIndex">
 					<InfoIconStraight/> Warum spenden?
 				</button>
-
-				<button class="wmde-b-nav-button" @click.prevent="$emit( 'alreadyDonatedClicked' )" :tabindex="tabIndex">
-					<TickIcon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
-				</button>
 			</div>
 
 			<div>
@@ -48,7 +44,6 @@
 
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
-import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { computed } from 'vue';
 
 interface Props {

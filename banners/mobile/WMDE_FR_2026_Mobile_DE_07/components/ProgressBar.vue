@@ -1,5 +1,9 @@
 <template>
-	<ProgressBar :progress-percentage="progressBarContent.percentageTowardsTarget" :is-visible="isVisible">
+	<ProgressBar
+		:progress-percentage="progressBarContent.percentageTowardsTarget"
+		:is-visible="isVisible"
+		class="wmde-c-flow"
+	>
 		<template #left-text>
 			{{ progressBarContent.amountDonated }}
 		</template>

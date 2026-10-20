@@ -24,6 +24,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
+import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -35,6 +36,8 @@ const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, e
 const date = new Date();
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 
+const remainingImpressions = impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) );
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -44,7 +47,13 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller()
+		pageScroller: new WindowPageScroller(),
+		remainingImpressions,
+		localCloseTracker:
+			new LocalStorageCloseTracker(
+				'deMobile',
+				remainingImpressions > 0 ? 'with_soft_close' : 'with_soft_close_final_impression'
+			),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

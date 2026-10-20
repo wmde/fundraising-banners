@@ -24,6 +24,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
+import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -44,7 +45,12 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller()
+		pageScroller: new WindowPageScroller(),
+		localCloseTracker:
+			new LocalStorageCloseTracker(
+				'deMobile',
+				'without_soft_close'
+			),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

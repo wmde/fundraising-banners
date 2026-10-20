@@ -154,11 +154,14 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 import type { FormItem } from '@src/utils/FormItemsBuilder/FormItem';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 interface Props {
 	amounts: FormItem[];
+	localCloseTracker: LocalCloseTracker
 }
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
 const formModel = useFormModel();
@@ -212,7 +215,20 @@ const onBack = (): void => {
 const submit = async ( feature: TrackingFeatureName ): Promise<void> => {
 	await nextTick();
 	emit( 'submit' );
-	tracker.trackEvent( new BannerSubmitEvent( feature, formModel.interval.value !== Intervals.ONCE.value ? 'recurring' : 'non-recurring' ) );
+	tracker.trackEvent(
+		new BannerSubmitEvent(
+			feature,
+			formModel.interval.value !== Intervals.ONCE.value ? 'recurring' : 'non-recurring'
+		)
+	);
+
+	// Fire an event if the donor has previously closed a banner from the soft close test
+	// TODO find out if this is needed for CTRL or VAR or both
+	const bannerType = props.localCloseTracker.getItem();
+	if ( bannerType !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( bannerType ) );
+	}
+
 	submitForm.value.submit();
 };
 

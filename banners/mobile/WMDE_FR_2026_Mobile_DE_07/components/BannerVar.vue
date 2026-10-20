@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-b-mobile-banner" :class="contentState">
+	<div class="wmde-b-mobile-banner" :class="contentState" v-if="contentState !== ContentStates.SoftClosing" >
 		<MiniBanner
 			@close="() => onMiniClose( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"
@@ -11,11 +11,7 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress>
-								<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
-							</template>
-						</BannerSlides>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
 					</template>
 				</KeenSlider>
 			</template>
@@ -31,15 +27,17 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage">
-					<template #progress>
-						<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
-					</template>
-				</BannerText>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #donation-form>
-				<DonationForm ref="donationForm" :amounts="amounts" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
+				<DonationForm
+					ref="donationForm"
+					:amounts="amounts"
+					:local-close-tracker="props.localCloseTracker"
+					@form-interaction="$emit( 'bannerContentChanged' );"
+					@submit="$emit( 'bannerSubmitted' )"
+				/>
 			</template>
 
 			<template #footer>
@@ -63,6 +61,14 @@
 			@callToAction="onFundsModalCallToAction"
 		/>
 	</div>
+
+	<SoftClose
+		v-if="contentState === ContentStates.SoftClosing"
+		@close="() => onClose( 'SoftClose', CloseChoices.Close )"
+		@x-icon-close="() => onClose( 'SoftClose', CloseChoices.XIconClose )"
+		@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
+		@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+	/>
 </template>
 
 <script setup lang="ts">
@@ -88,17 +94,21 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
-import ProgressBar2026 from './ProgressBar.vue';
+import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
-	FullPage = 'wmde-b-mobile-banner--full-page'
+	FullPage = 'wmde-b-mobile-banner--full-page',
+	SoftClosing = 'wmde-banner__content--soft-closing',
 }
 
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
+	remainingImpressions: number;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -119,12 +129,27 @@ watch( contentState, async () => {
 } );
 
 function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem();
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( feature, userChoice );
+	}
 }
 
 function onFullPageClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+	props.localCloseTracker.setItem();
+	if ( props.remainingImpressions > 0 ) {
+		contentState.value = ContentStates.SoftClosing;
+	} else {
+		onClose( feature, userChoice );
+	}
+
 	emit( 'modalClosed' );
+}
+
+function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
 function onshowFullPageBanner(): void {

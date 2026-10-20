@@ -11,11 +11,7 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
-							<template #progress>
-								<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
-							</template>
-						</BannerSlides>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
 					</template>
 				</KeenSlider>
 			</template>
@@ -31,15 +27,17 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage">
-					<template #progress>
-						<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
-					</template>
-				</BannerText>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
 			</template>
 
 			<template #donation-form>
-				<DonationForm ref="donationForm" :amounts="amounts" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
+				<DonationForm
+					ref="donationForm"
+					:amounts="amounts"
+					:local-close-tracker="props.localCloseTracker"
+					@form-interaction="$emit( 'bannerContentChanged' );"
+					@submit="$emit( 'bannerSubmitted' )"
+				/>
 			</template>
 
 			<template #footer>
@@ -88,7 +86,7 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
-import ProgressBar2026 from './ProgressBar.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
@@ -99,6 +97,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();
@@ -119,6 +118,7 @@ watch( contentState, async () => {
 } );
 
 function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
+	props.localCloseTracker.setItem();
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 
