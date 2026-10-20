@@ -26,7 +26,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	border-radius: calc( var( --height ) / 2 );
-	padding-inline: var( --bar-badding, var( --space-xs ) );
+	padding-inline: var( --bar-padding, var( --space-xs ) );
 }
 
 .wmde-b-progress__track {

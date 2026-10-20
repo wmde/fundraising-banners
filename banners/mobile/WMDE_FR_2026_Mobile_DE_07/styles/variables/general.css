@@ -8,4 +8,47 @@
 	--form-font-size: var( --type-step-0 );
 	--form-font-weight: var( --font-normal );
 	--content-copier-font-size: var( --type-step-00 );
+
+	.wmde-b-modal-banner__form-message {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.wmde-b-nav-button {
+		margin-right: 20px;
+	}
+
+	.wmde-b-slider p {
+		font-size: 16px !important;
+	}
+
+	.wmde-b-prose p {
+		font-size: 16px !important;
+	}
+
+	.wmde-b-button {
+		font-size: 16px;
+	}
+
+	.wmde-b-button[data-theme="teritary"] {
+		font-size: 18px;
+		height: 50px;
+	}
+
+	.wmde-b-progress {
+		margin-top: 12px;
+	}
+
+	.wmde-b-progress__text{
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.wmde-b-progress__bar {
+		margin-top: 5px;
+	}
+
+	.wmde-b-mini-banner h2 {
+		color: var( --color-white );
+	}
 }

@@ -75,6 +75,22 @@
 	--color-error: var( --color-red-600 );
 	--color-callout-error-border: var( --color-red-600 );
 	--color-callout-error-background: var( --color-red-100 );
+
+	--progress-height: 20px;
+
+	--progress-color: var( --color-white );
+
+	--progress-padding: 0;
+	--progress-font-size: 14px;
+	--bar-padding: 10px;
+	--progress-track-border-width: 2px;
+
+	--progress-track-border-color: var( --color-yellow );
+	--progress-fill-color: white;
+	--progress-fill-background: var( --color-yellow );
+
+	--progress-percentage: 10%;
+
 }
 
 .skin-theme-clientpref-night .wmde-banner {

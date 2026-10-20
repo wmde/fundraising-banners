@@ -14,6 +14,7 @@
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
 		</p>
+		<slot name="progress"/>
 	</div>
 </template>
 
