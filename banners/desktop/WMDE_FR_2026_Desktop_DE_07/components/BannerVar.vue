@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-c-desktop-banner" v-if="contentState === ContentStates.Main">
+	<div class="wmde-c-desktop-banner" v-if="contentState === ContentStates.Main" :data-max-height="bannerState === BannerStates.Pending ? true : null">
 
 		<header role="none" class="wmde-c-desktop-banner__header wmde-c-cluster" data-right>
 			<button class="wmde-b-nav-button" @click.prevent="() => onCloseMain( CloseChoices.Close )" data-icon>
