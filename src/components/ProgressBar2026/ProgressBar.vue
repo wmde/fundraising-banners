@@ -1,12 +1,12 @@
 <template>
 	<div class="wmde-b-progress" :class="{ 'wmde-b-progress--visible' : isVisible }" :style="{ '--progress-percentage': progressPercentage + '%' }">
 		<div class="wmde-b-progress__text wmde-c-repel" v-if="$slots['left-text'] || $slots['right-text']" aria-hidden="true">
-			<div>
+			<span>
 				<slot name="left-text"/>
-			</div>
-			<div>
+			</span>
+			<span>
 				<slot name="right-text"/>
-			</div>
+			</span>
 		</div>
 
 		<div class="wmde-b-progress__bar" aria-hidden="true">
