@@ -6,6 +6,7 @@ import Footer from '@src/components/Footer/messages/Footer.de';
 import MainDonationForm from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.de';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignText,
@@ -15,6 +16,7 @@ const messages: TranslationMessages = {
 	...MainDonationForm,
 	...ProgressBar,
 	...BannerConductor,
+	...ContentCopier,
 	'upgrade-to-yearly-copy': '<p>Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen. ' +
 		'Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.</p>' +
 		'<p>Sie gehen kein Risiko ein: Jederzeit formlos zu sofort kündbar.</p>',
