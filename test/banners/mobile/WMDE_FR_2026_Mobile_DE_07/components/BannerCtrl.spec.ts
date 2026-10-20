@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, test, vi, vitest } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_07/components/BannerCtrl.vue';
@@ -21,6 +21,7 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import type { Translator } from '@src/Translator';
+import { softCloseFeatures } from '@test/features/SoftCloseMobile';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -562,6 +563,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 		} );
 	} );
 
+	// TODO needs to be worked on
 	describe( 'Soft Close Return Tracking', () => {
 		it( 'Does not have the local close tracker', async () => {
 			const { wrapper } = getWrapper();
