@@ -8,6 +8,7 @@ import MainDonationFormEn from '@src/components/DonationForm/Forms/messages/Main
 import FallbackBanner from '@src/components/FallbackBanner/messages/FallbackBanner.en';
 import ProgressBar from '@src/components/ProgressBar2026/messages/ProgressBar.en';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.en';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.en';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextEn,
@@ -19,6 +20,7 @@ const messages: TranslationMessages = {
 	...FallbackBanner,
 	...ProgressBar,
 	...BannerConductor,
+	...ContentCopier,
 	'already-donated-link': 'I\'ve already donated',
 	'upgrade-to-yearly-copy': '<p>Every year we are dependent on the support of people like you. Yearly donations ' +
 		'help sustainably and enable long term development.</p>' +
