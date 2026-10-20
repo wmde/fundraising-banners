@@ -12,6 +12,10 @@
 		<div class="wmde-b-modal-banner__content wmde-c-flow">
 			<div class="wmde-b-modal-banner__form-message">
 				<slot name="banner-text"/>
+
+				<div>
+					<slot name="progress"/>
+				</div>
 			</div>
 
 			<div class="wmde-b-modal-banner__form">

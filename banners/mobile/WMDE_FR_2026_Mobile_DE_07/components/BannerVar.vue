@@ -11,7 +11,11 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="contentState === ContentStates.Mini">
+							<template #progress>
+								<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
+							</template>
+						</BannerSlides>
 					</template>
 				</KeenSlider>
 			</template>
@@ -27,7 +31,11 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage">
+					<template #progress>
+						<ProgressBar2026 :is-visible="true" :progress-percentage="20"/>
+					</template>
+				</BannerText>
 			</template>
 
 			<template #donation-form>
@@ -80,6 +88,7 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import ProgressBar2026 from './ProgressBar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
