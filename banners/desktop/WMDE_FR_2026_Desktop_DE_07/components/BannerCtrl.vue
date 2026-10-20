@@ -98,6 +98,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+defineOptions( { inheritAttrs: false } );
 
 const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 

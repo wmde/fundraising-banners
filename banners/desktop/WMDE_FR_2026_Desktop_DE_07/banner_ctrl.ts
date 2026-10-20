@@ -51,7 +51,6 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) ),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
 		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', 'without_soft_close' ),
 	},
