@@ -9,6 +9,7 @@
 .wmde-b-field-container__error {
 	text-align: center;
 	color: var( --color-error );
+	margin-block-start: var( --space-3xs );
 }
 
 .wmde-b-field-container:not( [ data-error ] ) .wmde-b-field-container__error {
