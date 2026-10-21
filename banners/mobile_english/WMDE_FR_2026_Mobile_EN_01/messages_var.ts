@@ -26,6 +26,9 @@ const messages: TranslationMessages = {
 		'<p>No risks attached, you can tell us to stop at any time.</p>',
 	'mini-banner-already-donated-button': 'I already donated',
 	'form-error': 'Please complete the form',
+	'intervals-header': 'Select frequency',
+	'amounts-header': 'Select amount',
+	'payments-header': 'Select payment method',
 };
 
 export default messages;
