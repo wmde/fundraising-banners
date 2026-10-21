@@ -50,6 +50,8 @@
 	--progress-track-border-color: var( --color-red-600 );
 	--progress-fill-background: var( --color-red-600 );
 	--progress-fill-color: var( --color-white );
+
+	--title-arrows-color: var( --color-blue-400 );
 }
 
 .skin-theme-clientpref-night .wmde-banner {
