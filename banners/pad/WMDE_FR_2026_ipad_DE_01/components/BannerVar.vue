@@ -15,7 +15,7 @@
 				</button>
 
 				<div class="wmde-b-message__title">
-					<h2 class="wmde-b-lined-heading">Sie haben die Wahl</h2>
+					<h2 class="wmde-b-lined-heading">Wikipedia ist unverkäuflich</h2>
 				</div>
 
 				<div class="wmde-b-message__slideshow">
@@ -88,7 +88,7 @@ import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
-import DonationForm from './DonationForm.vue';
+import DonationForm from './DonationFormVar.vue';
 import ProgressBar from './ProgressBar.vue';
 
 enum ContentStates {
