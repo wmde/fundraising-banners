@@ -11,6 +11,8 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
+import { ClickedDonateLink } from '@src/tracking/events/ClickedDonateLink';
+import { mapClickedDonateLinkEvent } from '@src/tracking/LegacyEventTracking/mapClickedDonateLinkEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
@@ -18,6 +20,7 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
+	[ ClickedDonateLink.EVENT_NAME, mapClickedDonateLinkEvent ],
 
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {

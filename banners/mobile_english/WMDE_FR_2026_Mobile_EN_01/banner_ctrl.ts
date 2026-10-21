@@ -47,7 +47,8 @@ const app = createVueApp( BannerConductor, {
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true
 } );
 
 app.use( TranslationPlugin, translator );
