@@ -15,7 +15,7 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
 			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to give €5 back.
-			<AnimatedText :is-visible="currentSlide === 1">If everyone reading this gave just €5, we'd hit our goal in a few hours.</AnimatedText>
+			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online information,
 			powering everything from your personal searches to emerging AI technologies.
 		</p>
@@ -43,7 +43,7 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime } = inject<DynamicContent>( 'dynamicCampaignText' );
+const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence } = inject<DynamicContent>( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 onMounted( startTimer );
 onUnmounted( stopTimer );

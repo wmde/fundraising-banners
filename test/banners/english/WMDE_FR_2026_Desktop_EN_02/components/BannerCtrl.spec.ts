@@ -187,7 +187,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_ctrl', () => {
 			expect( wrapper.find( '.wmde-b-message__text' ).exists() ).toBeTruthy();
 		} );
 
-		it.skip( 'shows the animated visitors vs donors sentence in the message and slide show', async () => {
+		it( 'shows the animated visitors vs donors sentence in the message and slide show', async () => {
 			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: widthForSmallScreen } );
 			const localDynamicContent = newDynamicContent();
 			localDynamicContent.visitorsVsDonorsSentence = 'Visitors vs donors sentence';
