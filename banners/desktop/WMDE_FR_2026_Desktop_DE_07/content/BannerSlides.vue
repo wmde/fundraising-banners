@@ -8,7 +8,8 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
 			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, diese Unabhängigkeit zu unterstützen.
-			<AnimatedText :is-visible="currentSlide === 1">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
+			{{ campaignDaySentence }}
+			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
@@ -42,7 +43,9 @@ defineProps<Props>();
 const {
 	currentDayName,
 	currentDate,
-	averageDonation
+	averageDonation,
+	campaignDaySentence,
+	visitorsVsDonorsSentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>

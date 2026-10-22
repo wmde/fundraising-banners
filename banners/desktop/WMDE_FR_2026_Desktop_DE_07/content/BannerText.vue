@@ -4,7 +4,7 @@
 		Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
 		Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, die Unabhängigkeit von Wikipedia zu unterstützen.
 		{{ campaignDaySentence }}
-		<AnimatedText :is-visible="bannerState === BannerStates.Visible">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
+		<AnimatedText :is-visible="bannerState === BannerStates.Visible">{{ visitorsVsDonorsSentence }}</AnimatedText>
 		Die meisten Menschen spenden, weil sie Wikipedia nützlich finden
 		und einen kostenfreien Zugang zu Wissen für alle unbedingt erhalten möchten.
 		Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
@@ -31,6 +31,7 @@ const {
 	currentDate,
 	averageDonation,
 	campaignDaySentence,
+	visitorsVsDonorsSentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
