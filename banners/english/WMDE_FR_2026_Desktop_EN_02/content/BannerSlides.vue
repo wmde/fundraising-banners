@@ -9,7 +9,7 @@
 		</p>
 		<p>
 			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-			message will be up for only a few hours.
+			message will be up for only a few days.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">

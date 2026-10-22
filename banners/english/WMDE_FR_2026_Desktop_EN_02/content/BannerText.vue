@@ -6,7 +6,7 @@
 
 	<p>
 		Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-		message will be up for only a few hours. We ask you to reflect on the number of times you visited
+		message will be up for only a few days. We ask you to reflect on the number of times you visited
 		Wikipedia in the past year and if you're able to give €5 back.
 		<AnimatedText :is-visible="bannerState === BannerStates.Visible">{{ visitorsVsDonorsSentence }}</AnimatedText>
 		In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online
