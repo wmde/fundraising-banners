@@ -10,8 +10,11 @@ import { WMDESizeIssueEvent } from '@src/tracking/WPORG/WMDEBannerSizeIssue';
 import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createViewportInfo';
 import { ClickedDonateLink } from '@src/tracking/events/ClickedDonateLink';
 import { mapClickedDonateLinkEvent } from '@src/tracking/LegacyEventTracking/mapClickedDonateLinkEvent';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
+import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
+	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
