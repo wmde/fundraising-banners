@@ -69,13 +69,12 @@ module.exports = ( env ) => {
 					filePattern: '{B,WMDE}*.js',
 					campaignConfig: campaigns.getConfigForPages(),
 				} ),
-				// TODO use wpde url instead
 				new LoadVueOnWpde( {
 					// URL where Vue will be loaded from. Should have only the minified runtime version
-					vueURL: 'https://unpkg.com/vue@3/dist/vue.runtime.global.prod.js',
+					vueURL: '/js/vue.runtime.global.prod.js',
 					// Regex matching output names to wrap.
 					// Should match 'pagename' of WPDE banners in campaigns_info.toml
-					test: /B.*WPDE_.*\.js/,
+					test: /WPDE_.*\.js/,
 				} ),
 				// Remove generated license files
 				// See https://stackoverflow.com/a/72237744/130121
