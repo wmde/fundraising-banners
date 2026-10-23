@@ -11,13 +11,21 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible">
+							<template #progress>
+								<ProgressBar :is-visible="bannerState === BannerStates.Visible" amount-to-show-on-right="MISSING"/>
+							</template>
+						</BannerSlides>
 					</template>
 				</KeenSlider>
 			</template>
 
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.Mini" :is-visible="false"/>
+				<BannerText :play-live-text="contentState === ContentStates.Mini" :is-visible="false">
+					<template #progress>
+						<ProgressBar :is-visible="contentState === ContentStates.Mini" amount-to-show-on-right="MISSING"/>
+					</template>
+				</BannerText>
 			</template>
 		</MiniBanner>
 
@@ -27,7 +35,11 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage">
+					<template #progress>
+						<ProgressBar :is-visible="contentState === ContentStates.FullPage" amount-to-show-on-right="MISSING"/>
+					</template>
+				</BannerText>
 			</template>
 
 			<template #donation-form>
@@ -80,6 +92,7 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import ProgressBar from './ProgressBarVar.vue';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
