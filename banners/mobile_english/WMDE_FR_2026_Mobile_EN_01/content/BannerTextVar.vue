@@ -4,7 +4,7 @@
 			<strong>Hi,</strong>
 		</p>
 		<p>
-			we may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
+			We may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
 			{{ liveDateAndTime.currentDate }}, we're asking you to support Wikipedia's independence. {{ campaignDaySentence }}
 			<AnimatedText :is-visible="isVisible">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Most people donate because they find Wikipedia

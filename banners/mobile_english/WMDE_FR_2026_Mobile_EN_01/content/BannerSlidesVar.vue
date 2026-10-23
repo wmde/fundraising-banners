@@ -8,7 +8,7 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p><strong>Hi,</strong></p>
 		<p>
-			we may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
+			We may be coming at an inopportune moment, but please don't click away! On this {{ currentDayName }}, at
 			{{ liveDateAndTime.currentDate }}, we're asking you to support Wikipedia's independence.
 		</p>
 	</KeenSliderSlide>
