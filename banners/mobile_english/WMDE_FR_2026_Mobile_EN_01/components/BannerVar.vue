@@ -13,7 +13,7 @@
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible">
 							<template #progress>
-								<ProgressBar :is-visible="bannerState === BannerStates.Visible" amount-to-show-on-right="MISSING"/>
+								<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
 							</template>
 						</BannerSlides>
 					</template>
@@ -23,7 +23,7 @@
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.Mini" :is-visible="false">
 					<template #progress>
-						<ProgressBar :is-visible="contentState === ContentStates.Mini" amount-to-show-on-right="MISSING"/>
+						<ProgressBar :is-visible="contentState === ContentStates.Mini"/>
 					</template>
 				</BannerText>
 			</template>
@@ -37,7 +37,7 @@
 			<template #banner-text>
 				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage">
 					<template #progress>
-						<ProgressBar :is-visible="contentState === ContentStates.FullPage" amount-to-show-on-right="MISSING"/>
+						<ProgressBar :is-visible="contentState === ContentStates.FullPage"/>
 					</template>
 				</BannerText>
 			</template>
