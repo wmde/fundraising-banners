@@ -76,8 +76,8 @@
 	--color-callout-error-border: var( --color-red-600 );
 	--color-callout-error-background: var( --color-red-100 );
 
-	--progress-track-border-color: var( --color-red-600 );
-	--progress-fill-background: var( --color-red-600 );
+	--progress-track-border-color: var( --color-yellow );
+	--progress-fill-background: var( --color-yellow );
 	--progress-fill-color: var( --color-white );
 }
 

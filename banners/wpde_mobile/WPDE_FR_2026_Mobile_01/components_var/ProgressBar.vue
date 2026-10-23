@@ -1,7 +1,7 @@
 <template>
 	<Progress :progress-percentage="progressBarContent.percentageTowardsTarget" :is-visible="isVisible">
-		<template #fill-text>{{ progressBarContent.amountDonated }}</template>
-		<template #target-text>{{ progressBarContent.donationTargetAmount }}</template>
+		<template #left-text>{{ progressBarContent.amountDonated }}</template>
+		<template #right-text>{{ progressBarContent.donationTargetAmount }}</template>
 		<template #screen-reader-text>{{ $translate( 'progress-bar-screen-reader-text', { current: progressBarContent.amountDonated, target: progressBarContent.donationTargetAmount } ) }}</template>
 	</Progress>
 </template>
