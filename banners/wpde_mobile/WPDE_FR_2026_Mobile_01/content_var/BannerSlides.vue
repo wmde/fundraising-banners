@@ -1,7 +1,7 @@
 <template>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-c-flow wmde-b-prose" data-align="centered">
-		<p><strong>Our donation target: €{{ goalDonationSum }} million</strong></p>
+		<p><strong>Unser Spendenziel: {{ goalDonationSum }} Millionen Euro</strong></p>
 		<ProgressBar :is-visible="playLiveText" amount-to-show-on-right="MISSING"/>
 	</KeenSliderSlide>
 
