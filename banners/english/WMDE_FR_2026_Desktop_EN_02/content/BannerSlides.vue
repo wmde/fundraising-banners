@@ -1,5 +1,5 @@
 <template>
-	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose wmde-c-flow" data-align="centered" data-balance>
+	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose wmde-c-flow" data-align="centered">
 		<p>
 			<InfoIcon fill="#990a00"/>&nbsp;
 			<strong>
