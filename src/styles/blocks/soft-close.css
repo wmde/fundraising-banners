@@ -31,6 +31,7 @@
 	padding: var( --space-2xs );
 	display: flex;
 	gap: var( --gutter );
+	background: var( --soft-close-background );
 }
 
 .wmde-b-soft-close__content > :first-child {
