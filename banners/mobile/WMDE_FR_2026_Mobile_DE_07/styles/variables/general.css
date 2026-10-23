@@ -1,0 +1,22 @@
+.wmde-banner {
+	--progress-height: 1rem;
+	--progress-font-size: var( --type-step-00 );
+	--progress-min-width: 0;
+	--progress-padding: 0;
+
+	/* @link https://utopia.fyi/clamp/calculator?a=568,1240,336—354 */
+	--banner-height: clamp( 21rem, 20.0491rem + 2.6786vw, 22.125rem );
+	--gutter: var( --space-2xs );
+	--flow-space: var( --space-s );
+
+	--nav-button-padding: var( --space-3xs );
+	-nav-button-font-size: var( --type-step-000 );
+
+	--form-font-size: var( --type-step-0 );
+	--form-font-weight: var( --font-normal );
+	--content-copier-font-size: var( --type-step-00 );
+
+	.wmde-b-mini-banner h2 {
+		color: var( --color-white );
+	}
+}

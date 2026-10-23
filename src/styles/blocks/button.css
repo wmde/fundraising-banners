@@ -12,7 +12,8 @@
 	height: var( --height );
 	border-radius: calc( var( --height ) / 2 );
 	font-weight: bold;
-	font-size: var( --type-step-0 );
+	font-size: var( --button-font-size, var( --type-step-0 ) );
+	white-space: nowrap;
 	color: var( --color );
 	padding: var( --padding );
 	min-width: 8rem;
