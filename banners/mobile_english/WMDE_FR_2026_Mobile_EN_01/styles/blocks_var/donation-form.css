@@ -30,7 +30,6 @@
 	flex-direction: column;
 	justify-content: var( --content-alignment, flex-start );
 	gap: var( --space-2xs );
-	text-wrap: balance;
 	padding: var( --space-m ) var( --space-2xs );
 }
 

@@ -32,7 +32,6 @@
 	background: var( --mini-content-background );
 	border-radius: 1rem;
 	color: var( --mini-color );
-	text-wrap: balance;
 }
 
 .wmde-b-mini-banner h2 {
