@@ -70,7 +70,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				localCloseTracker:
 			},
 			global: {
 				mocks: {
@@ -563,11 +563,10 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 		} );
 	} );
 
-	// TODO needs to be worked on
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not have the local close tracker', async () => {
+		it( 'Does have the local close tracker', async () => {
 			const { wrapper } = getWrapper();
-			expect( wrapper.props().localCloseTracker ).toBeUndefined();
+			expect( wrapper.props().localCloseTracker ).toBeDefined();
 		} );
 	} );
 } );

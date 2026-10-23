@@ -22,6 +22,7 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import type { Translator } from '@src/Translator';
 import { softCloseFeatures } from '@test/features/SoftCloseMobile';
+import { softCloseSubmitTrackingFeatures } from '@test/features/SoftCloseSubmitTracking';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -70,7 +71,8 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				remainingImpressions: 10
+				remainingImpressions: 10,
+				localCloseTracker:
 			},
 			global: {
 				mocks: {
@@ -580,11 +582,29 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 		} );
 	} );
 
-	// TODO should be changed
+	//TODO fix this
+	describe( 'Soft Close Submit Tracking', () => {
+		const { wrapper } = getWrapper();
+		test.each( [
+			[ 'expectStoresCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectStoresMaybeLateCloseChoice'],
+			[ 'expectStoresXCloseChoice' ],
+			[ 'expectStoresCloseCloseChoice' ],
+			[ 'expectStoresAlreadyDonatedCloseChoice' ],
+			[ 'expectStoresAlreadyDonatedCloseChoiceInBannerWithoutSoftClose' ],
+			[ 'expectEmitsBannerSubmitOnReturnEvent' ],
+			[ 'expectDoesNotEmitsBannerSubmitOnReturnEventWhenLocalStorageItemIsMissing' ]
+
+		] )( '%s', async ( testName: string ) => {
+			await softCloseSubmitTrackingFeatures[ testName ]( () => [ wrapper, props.localCloseTracker ] );
+		} )
+
+	} );
+
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not have the local close tracker', async () => {
+		it( 'Does have the local close tracker', async () => {
 			const { wrapper } = getWrapper();
-			expect( wrapper.props().localCloseTracker ).toBeUndefined();
+			expect( wrapper.props().localCloseTracker ).toBeDefined();
 		} );
 	} );
 } );
