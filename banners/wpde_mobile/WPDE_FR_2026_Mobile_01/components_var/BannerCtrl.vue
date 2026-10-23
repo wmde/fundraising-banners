@@ -54,6 +54,9 @@
 			@hide="onHideFundsModal"
 			@callToAction="onFundsModalCallToAction"
 		/>
+
+		<SetCookieImage v-if="showSetCookieImage"/>
+		<SetAlreadyDonatedCookieImage v-if="showAlreadyDonatedCookieImage"/>
 	</div>
 </template>
 
@@ -80,6 +83,8 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
+import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
+import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
@@ -101,6 +106,8 @@ const donationForm = ref<any>( null );
 const isFundsModalVisible = ref<boolean>( false );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
+const showSetCookieImage = ref<boolean>( false );
+const showAlreadyDonatedCookieImage = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Mini );
 const formModel = useFormModel();
 const amounts = useDynamicAmounts( formModel, inject<DonationFormItems>( 'formItems' ).dynamicAmounts );
@@ -111,6 +118,15 @@ watch( contentState, async () => {
 
 function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+
+	switch ( userChoice ) {
+		case CloseChoices.Close:
+			showSetCookieImage.value = true;
+			break;
+		case CloseChoices.AlreadyDonated:
+			showAlreadyDonatedCookieImage.value = true;
+			break;
+	}
 }
 
 function onFullPageClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {

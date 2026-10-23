@@ -188,6 +188,22 @@ describe( 'WPDE_FR_2026_Mobile_01', () => {
 			expect( wrapper.emitted( 'modalOpened' ).length ).toBe( 1 );
 		} );
 
+		it( 'sets the cookie when the donor hits the close button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.miniCloseButton().trigger( 'click' );
+
+			expect( wrapper.find( '[src="https://bruce.wikipedia.de/close-banner?c=fundraising"]' ).exists() ).toBeTruthy();
+		} );
+
+		it( 'sets the cookie when the donor hits the already donated button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.alreayDonated().trigger( 'click' );
+
+			expect( wrapper.find( '[src="https://bruce.wikipedia.de/already-donated?c=fundraising"]' ).exists() ).toBeTruthy();
+		} );
+
 		describe( 'Accessibility', () => {
 			it( 'removes interactables from the tabbing order when the full banner is opened', async () => {
 				const { bannerElements } = getWrapper();

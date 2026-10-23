@@ -156,7 +156,9 @@ describe( 'BannerCtrl.vue', () => {
 			[ 'expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked' ],
 			[ 'expectEmitsBannerContentChangedEventWhenCallToActionIsClicked' ],
 			[ 'expectEmitsCloseEvent' ],
-			[ 'expectsEmitsCloseEventOnAlreadyDonated' ]
+			[ 'expectsEmitsCloseEventOnAlreadyDonated' ],
+			[ 'expectSetsCookieOnClose' ],
+			[ 'expectSetsCookieOnAlreadyDonated' ]
 		] )( '%s', async ( testName: string ) => {
 			await miniBannerFeatures[ testName ]( getWrapper() );
 		} );
