@@ -151,6 +151,22 @@ describe( 'WPDE_FR_2026_Desktop_01_var', () => {
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.AlreadyDonated ) );
 		} );
+
+		it( 'sets the cookie when the donor hits the close button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.closeButton().trigger( 'click' );
+
+			expect( wrapper.find( '[src="https://bruce.wikipedia.de/close-banner?c=fundraising"]' ).exists() ).toBeTruthy();
+		} );
+
+		it( 'sets the cookie when the donor hits the already donated button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.donatedButton().trigger( 'click' );
+
+			expect( wrapper.find( '[src="https://bruce.wikipedia.de/already-donated?c=fundraising"]' ).exists() ).toBeTruthy();
+		} );
 	} );
 
 	describe( 'Content', () => {

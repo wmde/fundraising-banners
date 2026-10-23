@@ -69,6 +69,9 @@
 		/>
 	</div>
 
+	<SetCookieImage v-if="showSetCookieImage"/>
+	<SetAlreadyDonatedCookieImage v-if="showAlreadyDonatedCookieImage"/>
+
 </template>
 
 <script setup lang="ts">
@@ -91,6 +94,8 @@ import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
+import SetAlreadyDonatedCookieImage from '@src/components/SetWPDECookieImage/SetAlreadyDonatedCookieImage.vue';
+import SetCookieImage from '@src/components/SetWPDECookieImage/SetCookieImage.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
@@ -109,6 +114,8 @@ useBannerHider( 800, emit );
 
 const donationForm = ref<any>( null );
 const isFundsModalVisible = ref<boolean>( false );
+const showSetCookieImage = ref<boolean>( false );
+const showAlreadyDonatedCookieImage = ref<boolean>( false );
 const contentState = ref<ContentStates>( ContentStates.Main );
 const onLargeScreen = useDisplaySwitch( 1300 );
 const slideShowStopped = ref<boolean>( false );
@@ -121,6 +128,15 @@ watch( contentState, async () => {
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
+
+	switch ( userChoice ) {
+		case CloseChoices.Close:
+			showSetCookieImage.value = true;
+			break;
+		case CloseChoices.AlreadyDonated:
+			showAlreadyDonatedCookieImage.value = true;
+			break;
+	}
 }
 
 function onHideFundsModal(): void {
