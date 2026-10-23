@@ -11,6 +11,7 @@
 			useful. The average donation is {{ averageDonation }}, but even €5 helps us. Has Wikipedia given you the value of a cup
 			of coffee this year? Then choose to be one of the rare exceptions and give something back. <strong> Thank you!</strong>
 		</p>
+		<ProgressBar :is-visible="playLiveText" amount-to-show-on-right="MISSING"/>
 	</div>
 </template>
 
@@ -19,6 +20,7 @@ import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
+import ProgressBar from '../components/ProgressBarVar.vue';
 
 interface Props {
 	playLiveText: boolean;
