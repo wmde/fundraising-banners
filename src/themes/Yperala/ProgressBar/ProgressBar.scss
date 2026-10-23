@@ -37,7 +37,6 @@
 
 		&-fill {
 			background: var( --progress-bar-fill-background );
-			min-width: 5em;
 			height: 100%;
 			border-radius: 5px 16px 16px 5px;
 			transition: width 3000ms globals.$banner-easing;

@@ -8,4 +8,5 @@
 	--form-font-weight: var( --font-normal );
 	--content-copier-font-size: var( --type-step-00 );
 	--progress-height: 1rem;
+	--progress-min-width: 0;
 }

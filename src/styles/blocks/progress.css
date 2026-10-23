@@ -36,8 +36,8 @@
 .wmde-b-progress__fill {
 	background: var( --progress-fill-background );
 	color: var( --progress-fill-color );
-	width: 10ch;
-	min-width: 10ch;
+	width: var( --progress-min-width, 10ch );
+	min-width: var( --progress-min-width, 10ch );
 	max-width: 100%;
 
 	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
