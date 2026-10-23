@@ -86,10 +86,10 @@ describe( 'WMDE_FR_2026_ipad_DE_01_ctrl', () => {
 		} );
 		const bannerElements = {
 			closeButton: () => wrapper.find( '.wmde-c-desktop-banner__header button' ),
-			donatedButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-left > button:last-child' ),
+			donatedButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right > button:first-child' ),
 			backButton: () => wrapper.find( '.wmde-c-desktop-banner__back button' ),
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
-			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
+			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right > button:last-child' ),
 			hideUseOfFundsButton: () => wrapper.find( '.wmde-banner-funds-modal-close button' ),
 			formContainer: () => wrapper.find( '.wmde-b-donation-form' ),
 			firstForm: () => wrapper.find( '.wmde-b-donation-form form:first-child' ),

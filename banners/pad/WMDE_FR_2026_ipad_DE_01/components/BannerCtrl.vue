@@ -45,18 +45,16 @@
 			<DonationForm ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
 		</div>
 
-		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-repel wmde-b-footer">
-			<div class="wmde-c-cluster">
-				<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
-				<ContentCopier label="BIC" value="BFSWDE33XXX"/>
-				<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
-			</div>
+		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-cluster wmde-b-footer">
+			<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
+			<ContentCopier label="BIC" value="BFSWDE33XXX"/>
+			<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
+		</footer>
+
+		<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-c-cluster wmde-b-footer">
 			<button class="wmde-u-link-button" @click="() => onClose( 'MainBanner', CloseChoices.AlreadyDonated )">
 				<TickIcon/> {{ $translate( 'already-donated-link' ) }}
 			</button>
-		</footer>
-
-		<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-b-footer">
 			<button class="wmde-u-link-button" @click="onShowFundsModal">
 				{{ $translate( 'use-of-funds-link' ) }}
 			</button>
