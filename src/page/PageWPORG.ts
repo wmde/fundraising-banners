@@ -129,6 +129,7 @@ class PageWPORG implements Page {
 		switch ( closeEvent.userChoice ) {
 			case CloseChoices.Close:
 			case CloseChoices.TimeOut:
+			case CloseChoices.XIconClose:
 				this._mediaWiki.preventBannerDisplayForPeriod( bannerCategory );
 				break;
 			case CloseChoices.NoMoreBannersForCampaign:
@@ -141,6 +142,7 @@ class PageWPORG implements Page {
 				this._mediaWiki.preventBannerDisplayForHours( 4 * 7 * 24, bannerCategory );
 				break;
 			case CloseChoices.Hide:
+			case CloseChoices.WindowSizeBelowMin:
 				// Don't add cookie
 				break;
 		}

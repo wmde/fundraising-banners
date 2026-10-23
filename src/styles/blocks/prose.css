@@ -5,7 +5,6 @@ This is for handling the layout of banner the banner message content
  */
 .wmde-b-prose {
 	display: flex;
-	text-wrap: balance;
 	flex-direction: column;
 	justify-content: var( --prose-vertical-alignment, flex-start );
 	align-items: var( --prose-horizontal-alignment, flex-start );
@@ -18,4 +17,8 @@ This is for handling the layout of banner the banner message content
 	--prose-vertical-alignment: center;
 	--prose-horizontal-alignment: center;
 	--prose-text-align: center;
+}
+
+.wmde-b-prose[ data-balance ] {
+	text-wrap: balance;
 }
