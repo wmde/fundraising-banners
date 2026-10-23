@@ -48,8 +48,7 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		pageScroller: new WindowPageScroller(),
-		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions() )
+		pageScroller: new WindowPageScroller()
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

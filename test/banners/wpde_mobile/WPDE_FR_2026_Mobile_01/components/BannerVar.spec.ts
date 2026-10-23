@@ -68,8 +68,7 @@ describe( 'WPDE_FR_2026_Mobile_01', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				pageScroller,
-				remainingImpressions: 10
+				pageScroller
 			},
 			global: {
 				mocks: {
