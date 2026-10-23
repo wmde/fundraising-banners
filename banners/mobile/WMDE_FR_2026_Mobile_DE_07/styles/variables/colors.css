@@ -80,6 +80,7 @@
 	--progress-fill-background: var( --color-yellow );
 
 	--soft-close-countdown: var( --color-blue );
+	--soft-close-background: var( --color-white );
 }
 
 .skin-theme-clientpref-night .wmde-banner {
