@@ -68,6 +68,7 @@
 		@x-icon-close="() => onClose( 'SoftClose', CloseChoices.XIconClose )"
 		@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
 		@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
+		:showTimerText="false"
 	/>
 </template>
 

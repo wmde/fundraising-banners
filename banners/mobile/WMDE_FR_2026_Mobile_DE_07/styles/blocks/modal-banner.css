@@ -13,7 +13,7 @@
 	font-size: var( --type-step-0 );
 }
 
-@media (min-width: 360px ) {
+@media ( min-width: 360px ) {
 	.wmde-b-modal-banner {
 		--button-font-size: var( --type-step-1 );
 	}

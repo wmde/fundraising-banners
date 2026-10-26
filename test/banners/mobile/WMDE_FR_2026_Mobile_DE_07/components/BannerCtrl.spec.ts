@@ -21,7 +21,8 @@ import { CloseChoices } from '@src/domain/CloseChoices';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import type { Translator } from '@src/Translator';
-import { softCloseFeatures } from '@test/features/SoftCloseMobile';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -32,6 +33,9 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 	let closeCallback: Mock;
 
 	let wrapperCache: VueWrapper<any>;
+
+	let localCloseTracker: LocalCloseTracker;
+
 	beforeEach( () => {
 		resetFormModel( formModel );
 
@@ -49,6 +53,11 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 		closeCallback = vi.fn();
 		HTMLDialogElement.prototype.showModal = showCallback;
 		HTMLDialogElement.prototype.close = closeCallback;
+
+		localCloseTracker = {
+			getItem: vi.fn(),
+			setItem: vi.fn(),
+		};
 	} );
 
 	beforeEach( () => {
@@ -70,7 +79,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				localCloseTracker:
+				localCloseTracker
 			},
 			global: {
 				mocks: {
@@ -567,6 +576,33 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 		it( 'Does have the local close tracker', async () => {
 			const { wrapper } = getWrapper();
 			expect( wrapper.props().localCloseTracker ).toBeDefined();
+		} );
+	} );
+
+	describe( 'Soft Close Return Tracking', () => {
+		test.each( [
+			'closeButton',
+			'donatedButton',
+		] )( 'Stores a local storage item on close', async ( button: string ) => {
+			const { bannerElements } = getWrapper();
+
+			await bannerElements[ button ]().trigger( 'click' );
+
+			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+		} );
+
+		it( 'fires an event if a local storage item exists', async () => {
+			localCloseTracker.getItem = vi.fn().mockReturnValue( 'without_soft_close' );
+
+			const { bannerElements } = getWrapper();
+			bannerElements.submitForm().element.submit = vi.fn();
+
+			await bannerElements.intervalMonthly().trigger( 'click' );
+			await bannerElements.amount5().trigger( 'click' );
+			await bannerElements.paymentMethodPPL().trigger( 'click' );
+			await bannerElements.firstForm().trigger( 'submit' );
+
+			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'without_soft_close' ) );
 		} );
 	} );
 } );

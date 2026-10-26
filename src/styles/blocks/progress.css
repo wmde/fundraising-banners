@@ -11,13 +11,14 @@
 }
 
 .wmde-b-progress__text {
-	padding-inline: calc( var(--height) / 2 );
+	padding-inline: calc( var( --height ) / 2 );
 }
 
 .wmde-b-progress__bar {
 	height: var( --height );
 	display: grid;
 	grid-template-columns: minmax( 0, 1fr );
+	clip-path: inset( 0 0 0 0 round calc( var( --height ) / 2 ) );
 
 	--flow-space: var( --space-3xs );
 }
@@ -32,7 +33,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	border-radius: calc( var( --height ) / 2 );
-	padding-inline: var( --bar-padding, var( --space-xs ) );
+	padding-inline: var( --progress-bar-padding, var( --space-xs ) );
 }
 
 .wmde-b-progress__track {
@@ -42,23 +43,22 @@
 .wmde-b-progress__fill {
 	background: var( --progress-fill-background );
 	color: var( --progress-fill-color );
-	width: var( --progress-min-width, 10ch );
-	min-width: var( --progress-min-width, 10ch );
+	width: 0;
 	max-width: 100%;
 
 	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 }
 
-:is(.wmde-b-progress__bar, .wmde-b-progress__text) span {
+:is( .wmde-b-progress__bar, .wmde-b-progress__text ) span {
 	opacity: 0;
 	transition: opacity 300ms ease-in-out;
 	transition-delay: var( --transition-time );
 }
 
 .wmde-b-progress--visible .wmde-b-progress__fill {
-	width: var( --progress-percentage );
+	width: max( var( --progress-percentage ), var( --progress-min-width, 10ch ) );
 }
 
-.wmde-b-progress--visible :is(.wmde-b-progress__bar, .wmde-b-progress__text) span {
+.wmde-b-progress--visible :is( .wmde-b-progress__bar, .wmde-b-progress__text ) span {
 	opacity: 1;
 }

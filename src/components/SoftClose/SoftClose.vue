@@ -1,5 +1,9 @@
 <template>
-	<div class="wmde-b-soft-close" :style="{ '--seconds': secondsTotal + 's' }" aria-labelledby="wmde-soft-close-label wmde-soft-close-timer" tabindex="-1" ref="softClose">
+	<div
+		class="wmde-b-soft-close"
+		:style="{ '--seconds': secondsTotal + 's' }"
+		:aria-labelledby="'wmde-soft-close-label' + ( showTimerText ?  ' wmde-soft-close-timer' : '' )"
+		tabindex="-1" ref="softClose">
 
 		<div class="wmde-b-soft-close__countdown">
 			<div/>
@@ -14,15 +18,22 @@
 			<div class="wmde-c-cluster">
 				<p id="wmde-soft-close-label">{{ $translate( 'soft-close-prompt' ) }}</p>
 
-				<button class="wmde-b-button" @click="onMaybeLaterClick" data-theme="secondary">
-					{{ $translate( 'soft-close-button-maybe-later' ) }}
-				</button>
+				<div class="wmde-c-cluster">
+					<button class="wmde-b-button" @click="onMaybeLaterClick" data-theme="secondary">
+						{{ $translate( 'soft-close-button-maybe-later' ) }}
+					</button>
 
-				<button class="wmde-b-button" @click="onCloseClick" data-theme="secondary">
-					{{ $translate( 'soft-close-button-close' ) }}
-				</button>
+					<button class="wmde-b-button" @click="onCloseClick" data-theme="secondary">
+						{{ $translate( 'soft-close-button-close' ) }}
+					</button>
+				</div>
 
-				<div class="wmde-b-soft-close__timer" id="wmde-soft-close-timer" v-html="$translate( 'soft-close-countdown-text', { seconds: secondsRemaining } )"/>
+				<div
+					v-if="showTimerText"
+					class="wmde-b-soft-close__timer"
+					id="wmde-soft-close-timer"
+					v-html="$translate( 'soft-close-countdown-text', { seconds: secondsRemaining } )"
+				/>
 			</div>
 
 		</div>
@@ -37,10 +48,12 @@ import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 
 interface Props {
 	secondsTotal?: number;
+	showTimerText?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
-	secondsTotal: 15
+	secondsTotal: 15,
+	showTimerText: true
 } );
 
 const softClose = ref<HTMLElement>( null );
