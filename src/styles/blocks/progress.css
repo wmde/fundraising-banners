@@ -36,9 +36,9 @@
 .wmde-b-progress__fill {
 	background: var( --progress-fill-background );
 	color: var( --progress-fill-color );
-	width: 10ch;
-	min-width: 10ch;
+	width: 0;
 	max-width: 100%;
+	white-space: nowrap;
 
 	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 }
@@ -50,7 +50,7 @@
 }
 
 .wmde-b-progress--visible .wmde-b-progress__fill {
-	width: var( --progress-percentage );
+	width: max( var( --progress-percentage ), var( --progress-min-width, 10ch ) );
 }
 
 .wmde-b-progress--visible .wmde-b-progress__bar span {
