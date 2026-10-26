@@ -45,7 +45,7 @@ formatters.integer = new RoundedIntegerDe();
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
-		delay: runtimeEnvironment.getBannerDelay( 7500 ),
+		delay: runtimeEnvironment.getBannerDelay( 2000 ),
 		transitionDuration: 1000
 	},
 	bannerCategory: 'fundraising',
