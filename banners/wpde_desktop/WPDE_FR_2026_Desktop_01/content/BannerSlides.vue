@@ -1,7 +1,7 @@
 <template>
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
 		<p>
-			Wikipedia wird durch Spenden von durchschnittlich {{ averageDonation }} finanziert, aber 99&nbsp;% der
+			{{ campaignDaySentence }} Wikipedia wird durch Spenden von durchschnittlich {{ averageDonation }} finanziert, aber 99&nbsp;% der
 			Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
 				Spendenziel bereits heute erreicht.</strong>
 		</p>
@@ -45,7 +45,8 @@ defineProps<Props>();
 const {
 	currentDayName,
 	averageDonation,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	campaignDaySentence
 } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
