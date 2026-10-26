@@ -152,7 +152,7 @@ watch( contentState, async () => {
 } );
 
 function onCloseMiniBanner(): void {
-	onClose( 'MainBanner', CloseChoices.Close );
+	onClose( 'MiniBanner', CloseChoices.Close );
 }
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
