@@ -13,8 +13,11 @@ import { createViewportInfo } from '@src/tracking/LegacyEventTracking/createView
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import { ClickedDonateLink } from '@src/tracking/events/ClickedDonateLink';
 import { mapClickedDonateLinkEvent } from '@src/tracking/LegacyEventTracking/mapClickedDonateLinkEvent';
+import { ShownEvent } from '@src/tracking/events/ShownEvent';
+import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
+	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ MobileMiniBannerExpandedEvent.EVENT_NAME,
 		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
