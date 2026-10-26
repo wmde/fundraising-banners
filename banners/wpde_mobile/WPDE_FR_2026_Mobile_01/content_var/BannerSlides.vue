@@ -16,6 +16,7 @@
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
+			{{ campaignDaySentence }}
 			<AnimatedText :is-visible="currentSlide === 2">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
 		</p>
@@ -57,7 +58,8 @@ const {
 	getCurrentDateAndTime,
 	averageDonation,
 	goalDonationSum,
-	visitorsVsDonorsSentence
+	visitorsVsDonorsSentence,
+	campaignDaySentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
