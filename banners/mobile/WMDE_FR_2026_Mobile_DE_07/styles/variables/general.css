@@ -1,8 +1,9 @@
 .wmde-banner {
 	--progress-height: 1rem;
 	--progress-font-size: var( --type-step-00 );
-	--progress-min-width: 0;
+	--progress-min-width: 0%;
 	--progress-padding: 0;
+	--progress-bar-padding: 3px;
 
 	/* @link https://utopia.fyi/clamp/calculator?a=568,1240,336—354 */
 	--banner-height: clamp( 21rem, 20.0491rem + 2.6786vw, 22.125rem );

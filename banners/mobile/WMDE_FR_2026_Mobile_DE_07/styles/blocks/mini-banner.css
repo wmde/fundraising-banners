@@ -11,7 +11,7 @@
 	font-size: var( --type-step-1 );
 }
 
-@media (max-width: 360px ) {
+@media ( max-width: 360px ) {
 	.wmde-b-mini-banner {
 		--button-font-size: var( --type-step-00 );
 	}

@@ -12,7 +12,7 @@
 }
 
 .wmde-b-progress__text {
-	padding-inline: calc( var(--height) / 2 );
+	padding-inline: calc( var( --height ) / 2 );
 }
 
 .wmde-b-progress__bar {
@@ -34,7 +34,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	border-radius: calc( var( --height ) / 2 );
-	padding-inline: var( --bar-padding, var( --space-xs ) );
+	padding-inline: var( --progress-bar-padding, var( --space-xs ) );
 }
 
 .wmde-b-progress__track {
@@ -44,8 +44,7 @@
 .wmde-b-progress__fill {
 	background: var( --progress-fill-background );
 	color: var( --progress-fill-color );
-	width: var( --progress-min-width, 10ch );
-	min-width: var( --progress-min-width, 10ch );
+	width: 0;
 	max-width: 100%;
 	white-space: nowrap;
 
