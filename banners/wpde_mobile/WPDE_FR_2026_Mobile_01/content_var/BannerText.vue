@@ -8,7 +8,7 @@
 			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
 			zu unterstützen.
 			{{ campaignDaySentence }}
-			<AnimatedText :is-visible="isVisible">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen Aufruf.</AnimatedText>
+			<AnimatedText :is-visible="isVisible">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
 			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
@@ -31,7 +31,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { currentDayName, getCurrentDateAndTime, averageDonation, campaignDaySentence }: DynamicContent = inject( 'dynamicCampaignText' );
+const { currentDayName, getCurrentDateAndTime, averageDonation, campaignDaySentence, visitorsVsDonorsSentence }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
 
 watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
