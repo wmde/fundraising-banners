@@ -9,4 +9,5 @@
 	--content-copier-font-size: var( --type-step-00 );
 	--progress-height: 1rem;
 	--progress-min-width: 0%;
+	--bar-badding: 0px;
 }
