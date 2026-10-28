@@ -1,0 +1,19 @@
+@keyframes cluster-animation {
+	0% {
+		transform: translateY( 0 );
+	}
+	33% {
+		transform: translateY( -0.1lh );
+	}
+	66% {
+		transform: translateY( 0.1lh );
+	}
+	100% {
+		transform: translateY( 0 );
+	}
+}
+
+[data-play-cluster-animation] > * {
+	animation: cluster-animation 1s ease-in-out;
+	animation-delay: calc( 0.08s * var( --index ) );
+}
