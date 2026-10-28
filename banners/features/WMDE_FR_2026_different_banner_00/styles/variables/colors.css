@@ -1,0 +1,53 @@
+.wmde-banner {
+	--color-white: #ffffff;
+	--color-black: #000000;
+
+	--color-grey-100: #eaecf0;
+	--color-grey-200: #CBCFD6;
+	--color-grey-400: #54595d;
+	--color-grey-800: #37383a;
+	--color-grey-900: #202122;
+
+	--color-red-200: #FEE7E6;
+	--color-red-600: #A80000;
+
+	--color-yellow: #FFDD4C;
+
+	--color-blue-100: #EBF1FF;
+	--color-blue-300: #9AB9FD;
+	--color-blue-600: #1F4C93;
+
+	--banner-background: var( --color-white );
+	--banner-border-color: var( --color-red-600 );
+	--banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
+	--font-color: var( --color-black );
+
+	--header-background: var( --color-red-200 );
+
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-yellow ) 50%, var( --color-yellow ) 100% );
+
+	--slider-pagination-background: var( --color-blue-300 );
+	--slider-pagination-background-active: var( --color-blue-600 );
+	--slider-chevron-color: var( --color-blue-600 );
+
+	--button-background: var( --color-red-600 );
+	--button-background-secondary: var( --color-blue-600 );
+	--button-color: var( --color-white );
+
+	--progress-track-border-color: transparent;
+	--progress-track-background: var( --color-white );
+	--progress-fill-background: var( --color-red-600 );
+
+	--form-field-border: var( --color-grey-200 );
+	--form-field-background: var( --color-white );
+	--form-field-color: var( --color-black );
+	--form-field-border-hover: var( --color-blue-600 );
+	--form-field-background-hover: var( --color-white );
+	--form-field-border-active: var( --color-blue-600 );
+	--form-field-background-active: var( --color-blue-600 );
+	--form-field-color-active: var( --color-white );
+
+	--checkbox-toggle-background: var( --color-blue-100 );
+	--checkbox-toggle-icon-color: var( --color-blue-600 );
+	--checkbox-toggle-input-background: var( --color-grey-200 );
+}
