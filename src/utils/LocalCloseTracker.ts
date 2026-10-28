@@ -19,9 +19,10 @@ export class LocalStorageCloseTracker implements LocalCloseTracker {
 
 	public setItem(): void {
 		if ( this._value === null ) {
+			// eslint-disable-next-line no-console
+			console.error( 'LocalCloseTracker.setItem() should not be called in this banner' );
 			return;
 		}
-
 		if ( !hasLocalStorage() ) {
 			return;
 		}
