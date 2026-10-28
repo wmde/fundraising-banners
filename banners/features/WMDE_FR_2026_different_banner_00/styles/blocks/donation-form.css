@@ -1,0 +1,11 @@
+.wmde-b-donation-form {
+	padding-inline: var( --space-xs );
+}
+
+.wmde-b-donation-form fieldset > label {
+	flex-grow: 1;
+}
+
+.wmde-b-donation-form label:has( [type='text'] ) {
+	flex-basis: 7.8ch;
+}

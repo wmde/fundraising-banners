@@ -26,3 +26,7 @@ Can be any acceptable flexbox alignment value.
 .wmde-c-cluster[ data-right ] {
 	--cluster-horizontal-alignment: flex-end;
 }
+
+.wmde-c-cluster[ data-nowrap ] {
+	flex-wrap: nowrap;
+}

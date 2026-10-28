@@ -1,0 +1,44 @@
+.wmde-b-mobile-banner {
+	min-height: var( --banner-height );
+	border: var( --stroke-size ) solid var( --banner-border-color );
+	transition: border var( --transition-time ) var( --transition-type );
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	box-shadow: var( --banner-shadow );
+	background: var( --banner-background );
+}
+
+.wmde-b-mobile-banner__header {
+	height: var( --header-height );
+	display: flex;
+	flex-direction: row-reverse;
+	background: var( --header-background );
+}
+
+.wmde-b-mobile-banner__header figure {
+	height: 100%;
+}
+
+.wmde-b-mobile-banner__header :last-child {
+	height: 100%;
+	aspect-ratio: 1;
+}
+
+.wmde-b-mobile-banner__progress {
+	--flow-space: var( --space-3xs );
+	background: var( --header-background );
+	padding-block-end: var( --space-2xs );
+}
+
+.wmde-b-mobile-banner__content {
+	height: 100%;
+	overflow: auto;
+}
+
+.wmde-b-mobile-banner__footer {
+	--cluster-horizontal-alignment: center;
+
+	padding-block: var( --space-2xs );
+	font-size: var( --type-step-00 );
+}
