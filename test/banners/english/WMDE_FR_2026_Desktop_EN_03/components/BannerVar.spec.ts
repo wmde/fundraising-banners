@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, Mock, test, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
 import Banner from '@banners/english/WMDE_FR_2026_Desktop_EN_03/components/BannerVar.vue';
 import BannerSlides from '@banners/english/WMDE_FR_2026_Desktop_EN_03/content/BannerSlides.vue';
@@ -23,7 +23,6 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { Translator } from '@src/Translator';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
@@ -75,7 +74,6 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				remainingImpressions: 42,
 				localCloseTracker
 			},
 			global: {
@@ -96,7 +94,6 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 		} );
 		const bannerElements = {
 			closeButton: () => wrapper.find( '.wmde-c-desktop-banner__header button' ),
-			donatedButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-left > button:last-child' ),
 			backButton: () => wrapper.find( '.wmde-c-desktop-banner__back button' ),
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
@@ -127,7 +124,6 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			yearlyButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:last-child' ),
 			progressBarTrack: () => wrapper.find( '.wmde-b-progress__track' ),
 			progressBarFill: () => wrapper.find( '.wmde-b-progress__fill' ),
-			softClose: () => wrapper.find( '.wmde-b-soft-close' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -146,53 +142,14 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MainBanner', CloseChoices.WindowSizeBelowMin ) );
 		} );
-	} );
 
-	describe( 'Soft Close', () => {
-		it( 'shows the soft close when the donor hits the close button', async () => {
-			const { bannerElements } = getWrapper();
-
-			expect( bannerElements.softClose().exists() ).toBeFalsy();
-
-			await bannerElements.closeButton().trigger( 'click' );
-
-			expect( bannerElements.softClose().exists() ).toBeTruthy();
-		} );
-
-		test.each( [
-			[ 'close', CloseChoices.Close ],
-			[ 'maybeLater', CloseChoices.MaybeLater ],
-			[ 'xIconClose', CloseChoices.XIconClose ],
-			[ 'timeOutClose', CloseChoices.TimeOut ],
-		] )( 'emits the soft close events', async ( eventName: string, closeChoice: CloseChoices ) => {
+		it( 'closes banner when the donor hits the close button', async () => {
 			const { wrapper, bannerElements } = getWrapper();
-
-			await bannerElements.closeButton().trigger( 'click' );
-			wrapper.findComponent( SoftClose ).vm.$emit( eventName );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', closeChoice ) );
-		} );
-
-		it( 'does not show the soft close on the last impression', async () => {
-			const { wrapper, bannerElements } = getWrapper();
-
-			await wrapper.setProps( { remainingImpressions: 0 } );
 
 			await bannerElements.closeButton().trigger( 'click' );
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
-		} );
-
-		describe( 'Accessibility', () => {
-			it( 'focuses the soft close when it becomes visible', async () => {
-				const { bannerElements } = getWrapper();
-
-				await bannerElements.closeButton().trigger( 'click' );
-
-				expect( document.activeElement ).toStrictEqual( bannerElements.softClose().element );
-			} );
 		} );
 	} );
 
@@ -676,22 +633,16 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		test.each( [
-			'close',
-			'maybeLater',
-			'xIconClose',
-			'timeOutClose',
-		] )( 'Stores a local storage item on close', async ( eventName: string ) => {
-			const { wrapper, bannerElements } = getWrapper();
+		it( 'Does not store a local storage item on close', async () => {
+			const { bannerElements } = getWrapper();
 
 			await bannerElements.closeButton().trigger( 'click' );
-			wrapper.findComponent( SoftClose ).vm.$emit( eventName );
 
-			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
 		} );
 
 		it( 'fires an event if a local storage item exists', async () => {
-			localCloseTracker.getItem = vi.fn().mockReturnValue( 'with_soft_close' );
+			localCloseTracker.getItem = vi.fn().mockReturnValue( 'without_soft_close' );
 
 			const { bannerElements } = getWrapper();
 			bannerElements.submitForm().element.submit = vi.fn();
@@ -701,7 +652,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			await bannerElements.paymentMethodPPL().trigger( 'click' );
 			await bannerElements.firstForm().trigger( 'submit' );
 
-			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'with_soft_close' ) );
+			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'without_soft_close' ) );
 		} );
 	} );
 } );
