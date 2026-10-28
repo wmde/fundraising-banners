@@ -633,12 +633,12 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Stores a local storage item on close', async () => {
+		it( 'Does not store a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 
 			await bannerElements.closeButton().trigger( 'click' );
 
-			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
 		} );
 
 		it( 'fires an event if a local storage item exists', async () => {

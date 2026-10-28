@@ -1,75 +1,64 @@
 <template>
-	<div>
-		<div class="wmde-c-desktop-banner" :data-max-height="bannerState === BannerStates.Pending ? true : null" v-if="contentState === ContentStates.Main">
+	<div class="wmde-c-desktop-banner" :data-max-height="bannerState === BannerStates.Pending ? true : null">
 
-			<header role="none" class="wmde-c-desktop-banner__header wmde-c-cluster" data-right>
-				<button class="wmde-b-nav-button" @click.prevent="() => onCloseMain( CloseChoices.Close )" data-icon>
-					<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
-					<CloseIconMobile/>
+		<header role="none" class="wmde-c-desktop-banner__header wmde-c-cluster" data-right>
+			<button class="wmde-b-nav-button" @click.prevent="() => onClose( 'MainBanner', CloseChoices.Close )" data-icon>
+				<span class="visually-hidden">{{ $translate( 'close' ) }}</span>
+				<CloseIconMobile/>
+			</button>
+		</header>
+
+		<div class="wmde-c-desktop-banner__message">
+			<div class="wmde-b-message wmde-c-flow" data-bordered>
+				<button class="wmde-b-skip-link" @click="onFocusMainForm">
+					{{ $translate( 'skip-link' ) }}
 				</button>
-			</header>
 
-			<div class="wmde-c-desktop-banner__message">
-				<div class="wmde-b-message wmde-c-flow" data-bordered>
-					<button class="wmde-b-skip-link" @click="onFocusMainForm">
-						{{ $translate( 'skip-link' ) }}
-					</button>
-
-					<div v-if="!onLargeScreen" class="wmde-b-message__slideshow">
-						<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="10000" :delay="2000">
-							<template #slides="{ currentSlide }: any">
-								<BannerSlides :currentSlide="currentSlide"/>
-							</template>
-						</KeenSlider>
-					</div>
-					<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
-						<BannerText :banner-state="bannerState"/>
-					</div>
-
-					<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
+				<div v-if="!onLargeScreen" class="wmde-b-message__slideshow">
+					<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="10000" :delay="2000">
+						<template #slides="{ currentSlide }: any">
+							<BannerSlides :currentSlide="currentSlide"/>
+						</template>
+					</KeenSlider>
 				</div>
+				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
+					<BannerText :banner-state="bannerState"/>
+				</div>
+
+				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
 			</div>
-
-			<header role="none" class="wmde-c-desktop-banner__back wmde-c-cluster">
-				<button class="wmde-b-nav-button" @click.prevent="onBack" data-icon v-if="formStep > 0">
-					<span class="visually-hidden">{{ $translate( 'back-button' ) }}</span>
-					<FormPreviousIcon/>
-				</button>
-			</header>
-
-			<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
-				<DonationForm ref="donationForm" :local-close-tracker="localCloseTracker" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
-			</div>
-
-			<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-cluster wmde-b-footer">
-				<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
-				<ContentCopier label="BIC" value="BFSWDE33XXX"/>
-				<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
-			</footer>
-
-			<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-b-footer">
-				<button class="wmde-u-link-button" @click="onShowFundsModal">
-					{{ $translate( 'use-of-funds-link' ) }}
-				</button>
-			</footer>
-
-			<FundsModal
-				:content="useOfFundsContent"
-				:visible="isFundsModalVisible"
-				@hide="onHideFundsModal"
-				@call-to-action="onHideFundsModal"
-				:aria-hidden="!isFundsModalVisible"
-			/>
 		</div>
 
-		<SoftClose
-			v-if="contentState === ContentStates.SoftClosing"
-			@close="() => onClose( 'SoftClose', CloseChoices.Close )"
-			@x-icon-close="() => onClose( 'SoftClose', CloseChoices.XIconClose )"
-			@maybe-later="() => onClose( 'SoftClose', CloseChoices.MaybeLater )"
-			@time-out-close="() => onClose( 'SoftClose', CloseChoices.TimeOut )"
-		/>
+		<header role="none" class="wmde-c-desktop-banner__back wmde-c-cluster">
+			<button class="wmde-b-nav-button" @click.prevent="onBack" data-icon v-if="formStep > 0">
+				<span class="visually-hidden">{{ $translate( 'back-button' ) }}</span>
+				<FormPreviousIcon/>
+			</button>
+		</header>
 
+		<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
+			<DonationForm :local-close-tracker="localCloseTracker" ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
+		</div>
+
+		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-cluster wmde-b-footer">
+			<ContentCopier :label="$translate( 'donation-account' )" value="Wikimedia e. V."/>
+			<ContentCopier label="BIC" value="BFSWDE33XXX"/>
+			<ContentCopier label="IBAN" value="DE09 3702 0500 0003 2873 00" copy-value="DE09370205000003287300"/>
+		</footer>
+
+		<footer role="none" class="wmde-c-desktop-banner__footer-right wmde-b-footer">
+			<button class="wmde-u-link-button" @click="onShowFundsModal">
+				{{ $translate( 'use-of-funds-link' ) }}
+			</button>
+		</footer>
+
+		<FundsModal
+			:content="useOfFundsContent"
+			:visible="isFundsModalVisible"
+			@hide="onHideFundsModal"
+			@call-to-action="onHideFundsModal"
+			:aria-hidden="!isFundsModalVisible"
+		/>
 	</div>
 
 </template>
@@ -92,18 +81,15 @@ import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
-import SoftClose from '@src/components/SoftClose/SoftClose.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
-	SoftClosing = 'wmde-banner__content--soft-closing',
 }
 
 interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
-	remainingImpressions: number;
 	localCloseTracker: LocalCloseTracker;
 }
 
@@ -124,15 +110,6 @@ const formStep = computed<number>( () => donationForm.value?.step );
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
 } );
-
-function onCloseMain( closeChoice: CloseChoices ): void {
-	props.localCloseTracker.setItem();
-	if ( props.remainingImpressions > 0 ) {
-		contentState.value = ContentStates.SoftClosing;
-	} else {
-		onClose( 'MainBanner', closeChoice );
-	}
-}
 
 function onClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
