@@ -48,7 +48,7 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } ),
-		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', 'this should never happen' as 'without_soft_close' ),
+		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', null ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
