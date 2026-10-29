@@ -54,7 +54,8 @@ const app = createVueApp( BannerConductor, {
 	banner: Banner,
 	fallbackBanner: FallbackBanner,
 	minWidthForMainBanner: 800,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true
 } );
 
 app.use( TranslationPlugin, translator );
