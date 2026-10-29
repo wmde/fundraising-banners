@@ -29,11 +29,11 @@
 	--slider-pagination-background-active: var( --color-red-600 );
 	--slider-chevron-color: var( --color-grey-300 );
 
-	--form-field-border: var( --color-grey-300 );
-	--form-field-background: var( --color-white );
-	--form-field-checked-fill: var( --color-blue-400 );
-	--form-field-checked-border: var( --color-blue-400 );
-	--form-field-checked-background: var( --color-white );
+	--radio-field-border: var( --color-grey-300 );
+	--radio-field-background: var( --color-white );
+	--radio-field-checked-fill: var( --color-blue-400 );
+	--radio-field-checked-border: var( --color-blue-400 );
+	--radio-field-checked-background: var( --color-white );
 
 	--button-background: var( --color-blue-400 );
 	--button-color: var( --color-white );
@@ -55,11 +55,11 @@
 
 	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-600 ) 50%, var( --color-blue-600 ) 100% );
 
-	--form-field-border: var( --color-white );
-	--form-field-background: var( --color-grey-900 );
-	--form-field-checked-fill: var( --color-white );
-	--form-field-checked-border: var( --color-white );
-	--form-field-checked-background: var( --color-blue-400 );
+	--radio-field-border: var( --color-white );
+	--radio-field-background: var( --color-grey-900 );
+	--radio-field-checked-fill: var( --color-white );
+	--radio-field-checked-border: var( --color-white );
+	--radio-field-checked-background: var( --color-blue-400 );
 
 	--button-background: var( --color-blue-400 );
 	--button-color: var( --color-white );
@@ -81,11 +81,11 @@
 
 		--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-blue-600 ) 50%, var( --color-blue-600 ) 100% );
 
-		--form-field-border: var( --color-white );
-		--form-field-background: var( --color-grey-900 );
-		--form-field-checked-fill: var( --color-white );
-		--form-field-checked-border: var( --color-white );
-		--form-field-checked-background: var( --color-blue-400 );
+		--radio-field-border: var( --color-white );
+		--radio-field-background: var( --color-grey-900 );
+		--radio-field-checked-fill: var( --color-white );
+		--radio-field-checked-border: var( --color-white );
+		--radio-field-checked-background: var( --color-blue-400 );
 
 		--button-background: var( --color-blue-400 );
 		--button-color: var( --color-white );
