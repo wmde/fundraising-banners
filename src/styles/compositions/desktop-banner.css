@@ -20,7 +20,6 @@ Note: The widths are set in pixels because of a testing requirement, banners in 
 	padding-inline: var( --gutter );
 	column-gap: var( --gutter );
 	min-height: var( --height );
-	max-height: var( --max-height );
 
 	grid-auto-columns: 1fr;
 	grid-template-columns: minmax( 0, 1fr ) calc( var( --form-width ) / 2 ) calc( var( --form-width ) / 2 );
@@ -29,6 +28,10 @@ Note: The widths are set in pixels because of a testing requirement, banners in 
 		'message back header'
 		'message form form'
 		'footer-left footer-right footer-right';
+}
+
+.wmde-c-desktop-banner[ data-max-height ] {
+	max-height: var( --max-height );
 }
 
 .wmde-c-desktop-banner__message {
