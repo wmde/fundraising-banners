@@ -40,6 +40,7 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import type { Timer } from '@src/utils/Timer';
 import type { BannerCategory } from '@src/components/BannerConductor/BannerCategory';
 import type { Translator } from '@src/Translator';
+import { CloseChoices } from '@src/domain/CloseChoices';
 
 interface Props {
 	page: Page,
@@ -101,7 +102,7 @@ function onContentChanged(): void {
 
 async function closeHandler( closeEvent: TrackingEvent<void> ): Promise<any> {
 	await stateMachine.changeState( stateFactory.newClosedState( closeEvent ) );
-	if ( props.showDonateLinkTooltip ) {
+	if ( props.showDonateLinkTooltip && closeEvent.userChoice !== CloseChoices.AlreadyDonated ) {
 		await stateMachine.changeState( stateFactory.newDonateLinkPopupState( popupMessages ) );
 	}
 }
