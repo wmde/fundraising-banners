@@ -94,6 +94,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 		} );
 		const bannerElements = {
 			closeButton: () => wrapper.find( '.wmde-c-desktop-banner__header button' ),
+			donatedButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-left > button:last-child' ),
 			backButton: () => wrapper.find( '.wmde-c-desktop-banner__back button' ),
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
@@ -150,6 +151,15 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
+		} );
+
+		it( 'closes banner when the donor hits the already donated button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.donatedButton().trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.AlreadyDonated ) );
 		} );
 	} );
 
