@@ -52,12 +52,16 @@ describe( 'BannerConductor.vue', () => {
 				},
 				onSubmit() {
 					this.$emit( 'bannerSubmitted' );
+				},
+				onAlreadyDonated() {
+					this.$emit( 'bannerClosed', new CloseEvent( 'MainBanner', 'already-donated' ) );
 				}
 			},
 			template: `<div class="test-banner" style="height: 100px">
 				Hello, world!
 				<button class="emit-banner-closed" @click="onClose"></button>
 				<button class="emit-banner-submitted" @click="onSubmit"></button>
+				<button class="emit-banner-already-donated" @click="onAlreadyDonated"></button>
 				<button class="emit-banner-content-changed" @click="$emit( 'bannerContentChanged' )"></button>
 				<button class="emit-banner-modal-open" @click="$emit( 'modalOpened' )"></button>
 				<button class="emit-banner-modal-closed" @click="$emit( 'modalClosed' )"></button>
@@ -219,6 +223,24 @@ describe( 'BannerConductor.vue', () => {
 		] );
 
 		expect( wrapper.classes() ).toContain( BannerStates.DonateLinkPopup );
+	} );
+
+	it( 'does not move to donate link popup state on already-donated click', async () => {
+		const wrapper = await getShownBannerWrapper( null, null, true );
+		await wrapper.find( '.emit-banner-already-donated' ).trigger( 'click' );
+
+		await nextTick();
+		await nextTick();
+		await nextTick();
+
+		expect( stateMachineSpy.statesCalled ).toEqual( [
+			BannerStates.Pending,
+			BannerStates.Showing,
+			BannerStates.Visible,
+			BannerStates.Closed
+		] );
+
+		expect( wrapper.classes() ).toContain( BannerStates.Closed );
 	} );
 
 	it( 'asks the page to set the close cookie when the donor closes banner', async () => {
