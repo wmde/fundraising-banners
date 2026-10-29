@@ -43,7 +43,7 @@
 			</template>
 
 			<template #donation-form>
-				<DonationForm ref="donationForm" :amounts="amounts" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
+				<DonationForm ref="donationForm" :amounts="amounts" @form-interaction="$emit( 'bannerContentChanged' );"/>
 			</template>
 
 			<template #footer>
@@ -106,7 +106,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 

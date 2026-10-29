@@ -124,7 +124,7 @@
 			</div>
 		</div>
 
-		<form ref="submitForm" :action="formAction" style="display: none;" method="post" target="_blank">
+		<form ref="submitForm" :action="formAction" style="display: none;" method="post">
 			<SubmitValues/>
 		</form>
 	</div>
