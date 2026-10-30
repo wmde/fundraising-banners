@@ -351,12 +351,12 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_var', () => {
 			expect( bannerElements.backButton().exists() ).toBeFalsy();
 		} );
 
-		it( 'submits opens in a new tab', async () => {
+		it( 'submits do not open in a new tab', async () => {
 			const { bannerElements } = getWrapper();
-			expect( bannerElements.submitForm().attributes( 'target' ) ).toStrictEqual( '_blank' );
+			expect( bannerElements.submitForm().attributes( 'target' ) ).toBeUndefined();
 		} );
 
-		it( 'submits hides the banner', async () => {
+		it( 'submits do not hide the banner', async () => {
 			const { wrapper, bannerElements } = getWrapper();
 
 			await bannerElements.intervalMonthly().trigger( 'click' );
@@ -364,7 +364,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_02_var', () => {
 			await bannerElements.paymentMethodPPL().trigger( 'click' );
 			await bannerElements.firstForm().trigger( 'submit' );
 
-			expect( wrapper.emitted( 'bannerSubmitted' ).length ).toStrictEqual( 1 );
+			expect( wrapper.emitted( 'bannerSubmitted' ) ).toBeUndefined();
 		} );
 
 		describe( 'First Page', () => {
