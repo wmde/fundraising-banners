@@ -46,13 +46,6 @@
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
 							</template>
 
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
-								</span>
-							</template>
-
 						</MainDonationForm>
 					</template>
 
@@ -101,8 +94,6 @@ import BannerSlides from '../content/BannerSlides.vue';
 import ProgressBar from '@src/components/ProgressBar/ProgressBar.vue';
 import BannerFooter from '@src/components/Footer/BannerFooter.vue';
 import KeenSlider from '@src/components/Slider/KeenSlider.vue';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
