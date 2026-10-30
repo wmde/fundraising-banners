@@ -5,6 +5,7 @@
 	margin-inline: var( --space-xs );
 	padding-block: var( --space-s );
 	text-align: center;
+	width: 100%;
 }
 
 .wmde-b-lined-heading::before,

@@ -14,6 +14,7 @@
 .wmde-b-message__text,
 .wmde-b-message__slideshow {
 	display: flex;
+	width: 100%;
 }
 
 .wmde-b-message__title,

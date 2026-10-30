@@ -8,6 +8,7 @@
 	font-family: var( --font-base );
 	font-size: var( --progress-font-size, var( --type-step-00 ) );
 	font-weight: var( --font-bold );
+	white-space: nowrap;
 }
 
 .wmde-b-progress__bar {

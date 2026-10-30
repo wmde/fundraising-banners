@@ -3,11 +3,11 @@
 	background: var( --form-field-background );
 	border-radius: 4px;
 	display: flex;
-	line-height: 2lh;
+	height: var( --form-field-height, 2.5rem );
 	font-size: var( --form-field-font-size, var( --type-step-00 ) );
 	font-weight: bold;
 
-	transition: background var( --transition-time ) var( --transition-type );
+	transition: background var( --transition-time, 300ms ) var( --transition-type, ease-in-out );
 }
 
 .wmde-b-form-field:has( [ type='radio' ] ) {
@@ -52,4 +52,15 @@
 .wmde-b-form-field:has( input:focus-within ) {
 	outline: solid 2px var( --form-field-border-hover );
 	outline-offset: 2px;
+}
+
+.wmde-b-form-field:has( svg ) {
+	padding: var( --space-2xs );
+	display: flex;
+	gap: var( --space-2xs );
+}
+
+.wmde-b-form-field svg {
+	height: 100%;
+	width: auto;
 }
