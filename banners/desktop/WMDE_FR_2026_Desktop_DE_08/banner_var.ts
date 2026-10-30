@@ -5,7 +5,7 @@ import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import Banner from './components/BannerCtrl.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -42,8 +42,6 @@ const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, e
 const formatters = localeFactory.getFormatters();
 formatters.integer = new RoundedIntegerDe();
 
-const remainingImpressions = impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'desktop' ) );
-
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -53,15 +51,15 @@ const app = createVueApp( BannerConductor, {
 	bannerCategory: 'fundraising',
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
-		remainingImpressions,
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
-		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', remainingImpressions > 0 ? 'with_soft_close' : 'with_soft_close_final_impression' ),
+		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', null ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
 	fallbackBanner: FallbackBanner,
 	minWidthForMainBanner: 800,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true,
 } );
 
 app.use( TranslationPlugin, translator );

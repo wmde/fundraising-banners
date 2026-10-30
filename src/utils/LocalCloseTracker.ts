@@ -10,14 +10,18 @@ type valueType = 'with_soft_close' | 'with_soft_close_final_impression' | 'witho
 
 export class LocalStorageCloseTracker implements LocalCloseTracker {
 	private readonly _key: keyType;
-	private readonly _value: valueType;
+	private readonly _value: valueType | null;
 
-	public constructor( key: keyType, value: valueType ) {
+	public constructor( key: keyType, value: valueType | null ) {
 		this._key = key;
 		this._value = value;
 	}
 
 	public setItem(): void {
+		if ( this._value === null ) {
+			return;
+		}
+
 		if ( !hasLocalStorage() ) {
 			return;
 		}

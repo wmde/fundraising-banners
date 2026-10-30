@@ -52,13 +52,14 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
-		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', 'without_soft_close' ),
+		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', null ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
 	fallbackBanner: FallbackBanner,
 	minWidthForMainBanner: 800,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true,
 } );
 
 app.use( TranslationPlugin, translator );

@@ -151,6 +151,15 @@ describe( 'WMDE_FR_2026_Desktop_DE_08_ctrl', () => {
 			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.Close ) );
 		} );
+
+		it( 'closes banner when the donor hits the already donated button', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.donatedButton().trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MainBanner', CloseChoices.AlreadyDonated ) );
+		} );
 	} );
 
 	describe( 'Content', () => {
@@ -591,12 +600,12 @@ describe( 'WMDE_FR_2026_Desktop_DE_08_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Stores a local storage item on close', async () => {
+		it( 'Does not store a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 
 			await bannerElements.closeButton().trigger( 'click' );
 
-			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
 		} );
 
 		it( 'fires an event if a local storage item exists', async () => {
