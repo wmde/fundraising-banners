@@ -1,7 +1,7 @@
 .wmde-b-form-field {
 	border: 1px solid var( --form-field-border );
 	background: var( --form-field-background );
-	border-radius: 4px;
+	border-radius: var( --form-field-border-radius, 4px );
 	display: flex;
 	line-height: 2lh;
 	font-size: var( --form-field-font-size, var( --type-step-00 ) );
