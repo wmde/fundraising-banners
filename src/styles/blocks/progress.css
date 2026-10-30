@@ -45,7 +45,7 @@
 	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 }
 
-.wmde-b-progress__bar span {
+:is( .wmde-b-progress__bar, .wmde-b-progress__text ) span {
 	opacity: 0;
 	transition: opacity 300ms ease-in-out;
 	transition-delay: var( --transition-time );
@@ -55,6 +55,6 @@
 	width: max( var( --progress-percentage ), var( --progress-min-width, 10ch ) );
 }
 
-.wmde-b-progress--visible .wmde-b-progress__bar span {
+.wmde-b-progress--visible :is( .wmde-b-progress__bar, .wmde-b-progress__text ) span {
 	opacity: 1;
 }
