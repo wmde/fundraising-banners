@@ -5,7 +5,8 @@
 	text-wrap: nowrap;
 }
 
-.wmde-b-form-field:has( input:focus-visible ) {
+.wmde-b-form-field:has( input[type="radio"]:focus-visible ),
+.wmde-b-form-field[ data-bordered ]:has( input[type="text"]:focus-visible ) {
 	outline-style: solid;
 	outline-width: 2px;
 }

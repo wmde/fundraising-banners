@@ -29,7 +29,7 @@
 }
 
 .wmde-b-text-radio__radio--checked {
-	--radio-field-border: var( --form-field-border-active );
+	--radio-field-border: var( --radio-field-checked-border );
 	--radio-field-background: var( --radio-field-checked-background );
 }
 

@@ -86,8 +86,8 @@
 					@submit.prevent
 				>
 					<div class="wmde-b-donation-form__nav">
-						<button class="wmde-b-nav-button wmde-b-icon-text" @click.prevent="onBack" :tabindex="tabIndex( 1 )">
-							<FormPreviousIcon/> <strong>{{ $translate( 'back-button' ) }}</strong>
+						<button class="wmde-b-nav-button" @click.prevent="onBack" :tabindex="tabIndex( 1 )">
+							<FormPreviousIcon/>&nbsp;<strong>{{ $translate( 'back-button' ) }}</strong>
 						</button>
 					</div>
 
