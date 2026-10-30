@@ -51,6 +51,18 @@ const expectsEmitsCloseEventOnAlreadyDonated = async ( wrapper: VueWrapper<any> 
 	expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.AlreadyDonated ) );
 };
 
+const expectSetsCookieOnClose = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-close' ).trigger( 'click' );
+
+	expect( wrapper.find( '[src="https://bruce.wikipedia.de/close-banner?c=fundraising"]' ).exists() ).toBeTruthy();
+};
+
+const expectSetsCookieOnAlreadyDonated = async ( wrapper: VueWrapper<any> ): Promise<any> => {
+	await wrapper.find( '.wmde-banner-mini-already-donated-button' ).trigger( 'click' );
+
+	expect( wrapper.find( '[src="https://bruce.wikipedia.de/already-donated?c=fundraising"]' ).exists() ).toBeTruthy();
+};
+
 export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => Promise<any>> = {
 	expectSlideShowPlaysWhenMiniBannerBecomesVisible,
 	expectSlideShowStopsWhenFullBannerBecomesVisible,
@@ -58,5 +70,7 @@ export const miniBannerFeatures: Record<string, ( wrapper: VueWrapper<any> ) => 
 	expectShowsFullPageWithPreselectedAmountWhenPreselectButtonIsClicked,
 	expectEmitsBannerContentChangedEventWhenCallToActionIsClicked,
 	expectEmitsCloseEvent,
-	expectsEmitsCloseEventOnAlreadyDonated
+	expectsEmitsCloseEventOnAlreadyDonated,
+	expectSetsCookieOnClose,
+	expectSetsCookieOnAlreadyDonated
 };
