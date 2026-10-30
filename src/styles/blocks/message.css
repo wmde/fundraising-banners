@@ -8,6 +8,7 @@
 	align-items: center;
 	justify-content: center;
 	padding-block: var( --text-padding, var( --space-xs ) );
+	font-size: var( --message-font-size, 1rem );
 }
 
 .wmde-b-message__title,
