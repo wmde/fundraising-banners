@@ -1,16 +1,8 @@
 .wmde-b-icon-text {
-	display: flex;
-	align-items: var( --icon-text-vertical-alignment, flex-start );
-	justify-content: var( --icon-text-horizontal-alignment, flex-start );
 	gap: var( --space-2xs );
-	width: 100%;
 }
 
 .wmde-b-icon-text svg {
-	height: 1lh;
-	width: 1lh;
-}
-
-.wmde-b-icon-text[ data-align='centered' ] {
-	--icon-text-horizontal-alignment: center;
+	height: 0.75lh;
+	width: 0.75lh;
 }

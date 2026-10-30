@@ -24,6 +24,10 @@
 		.mastercard-logo {
 			transform: scale( 1.5 );
 		}
+
+		&.direct-debit svg {
+			--direct-debit-pen-fill: var( --bank-transfer-fill );
+		}
 	}
 
 	&-select-group-input:checked + .wmde-banner-select-group-label.with-logos {
@@ -52,5 +56,17 @@
 		.bank-transfer-logo {
 			--bank-transfer-fill: var( --bank-transfer-fill-active );
 		}
+
+		&.direct-debit svg {
+			--direct-debit-pen-fill: var( --paypal-primary-fill-active );
+		}
 	}
+}
+
+.wmde-banner .wmde-banner-select-group-container.select-payment-method .wmde-banner-select-group .wmde-banner-select-group-label.direct-debit {
+	line-height: inherit;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 }
