@@ -46,10 +46,9 @@
 								<span class="wmde-banner-select-group-label with-logos paypal"><PayPalLogo/></span>
 							</template>
 
-							<template #label-payment-mcp>
-								<span class="wmde-banner-select-group-label with-logos credit-cards">
-									<VisaLogo/>
-									<MastercardLogo/>
+							<template #label-payment-bez>
+								<span class="wmde-banner-select-group-label with-logos direct-debit">
+									<DirectDebitIcon/> Überweisung
 								</span>
 							</template>
 
@@ -115,6 +114,7 @@ import ChevronLeftIcon from '@src/components/Icons/ChevronLeftIcon.vue';
 import { createSubmittableMainDonationForm } from '@src/components/DonationForm/StepControllers/SubmittableMainDonationForm';
 import { createSubmittableUpgradeToYearly } from '@src/components/DonationForm/StepControllers/SubmittableUpgradeToYearly';
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
+import DirectDebitIcon from '@src/components/PaymentLogos/DirectDebitIcon.vue';
 const formModel = useFormModel();
 
 enum ContentStates {

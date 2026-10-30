@@ -36,8 +36,6 @@
 				</div>
 				<div class="wmde-banner-mini-footer-payment-icons">
 					<PayPalLogo/>
-					<VisaLogo/>
-					<MastercardLogo/>
 				</div>
 			</div>
 

@@ -48,7 +48,7 @@
 
 			<template #footer>
 				<footer role="none" class="wmde-c-flow">
-					<div class="wmde-b-callout wmde-b-icon-text wmde-c-cluster" data-radius>
+					<div class="wmde-b-callout wmde-c-cluster" data-radius>
 						<HeartIcon/> Thank you for being with us
 					</div>
 					<div class="wmde-c-cluster">
