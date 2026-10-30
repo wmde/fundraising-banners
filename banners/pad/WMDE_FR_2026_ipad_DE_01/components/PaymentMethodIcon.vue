@@ -5,7 +5,7 @@
 		<MastercardLogo/>
 	</template>
 	<template v-if="paymentMethod === 'BEZ'">
-		<DirectDebitIcon/> <span>Direct Debit</span>
+		<DirectDebitIcon/> <span>Lastschrift</span>
 	</template>
 </template>
 
