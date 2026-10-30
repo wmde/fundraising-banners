@@ -15,8 +15,11 @@ import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import FallbackBannerShownEvent from '@src/tracking/events/FallbackBannerShownEvent';
 import { mapFallbackShownEvent } from '@src/tracking/LegacyEventTracking/mapFallbackShownEvent';
+import { mapClickedDonateLinkEvent } from '@src/tracking/LegacyEventTracking/mapClickedDonateLinkEvent';
+import { ClickedDonateLink } from '@src/tracking/events/ClickedDonateLink';
 
 export default new Map<string, TrackingEventConverterFactory>( [
+	[ ClickedDonateLink.EVENT_NAME, mapClickedDonateLinkEvent ],
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
 	[ CloseEvent.EVENT_NAME, mapCloseEvent ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
