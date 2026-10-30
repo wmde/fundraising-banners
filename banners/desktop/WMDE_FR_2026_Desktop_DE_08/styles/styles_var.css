@@ -2,7 +2,7 @@
 @import '@src/styles/variables/desktop/type.css';
 @import 'variables/colors.css';
 @import '@src/styles/variables/payment-icons.css';
-@import 'variables/general.css';
+@import 'variables/general_var.css';
 @import '@src/styles/global/reset.css';
 @import '@src/styles/global/global-styles.css';
 @import '@src/styles/global/radio.css';

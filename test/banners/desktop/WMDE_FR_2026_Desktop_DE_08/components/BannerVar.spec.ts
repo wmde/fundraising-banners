@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_08/components/BannerCtrl.vue';
+import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_08/components/BannerVar.vue';
 import { createFormItems } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_08/form_items';
 import { formItems as defaultFormItems } from '@test/banners/formItems';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
