@@ -1,5 +1,9 @@
 <template>
-	<div class="wmde-b-mobile-banner" :class="contentState">
+	<div
+		class="wmde-b-mobile-banner"
+		:data-max-height="bannerState === BannerStates.Pending ? true : null"
+		:class="contentState"
+	>
 		<MiniBanner
 			@close="() => onMiniClose( 'MiniBanner', CloseChoices.Close )"
 			@show-full-page-banner="onshowFullPageBanner"

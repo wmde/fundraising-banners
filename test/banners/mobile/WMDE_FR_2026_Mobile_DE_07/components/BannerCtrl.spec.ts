@@ -100,7 +100,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 		const bannerElements = {
 			miniCloseButton: () => wrapper.find( '.wmde-b-mini-banner header > div:last-child button' ),
 			modalCloseButton: () => wrapper.find( '.wmde-b-modal-banner header button' ),
-			alreayDonated: () => wrapper.find( '.wmde-b-mini-banner header > div:first-child button:last-child' ),
+			alreadyDonated: () => wrapper.find( '.wmde-b-mini-banner header > div:first-child button:last-child' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-b-mini-banner header > div:first-child button:first-child' ),
 			hideUseOfFundsButton: () => wrapper.find( '.wmde-banner-funds-modal-close button' ),
 			donate10Button: () => wrapper.find( '.wmde-b-mini-banner footer > div:first-child button' ),
@@ -165,13 +165,11 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 		} );
 
-		it( 'emits the already donated close event', async () => {
-			const { wrapper, bannerElements } = getWrapper();
+		it( 'Does only show one button in the mini banner header', async () => {
+			const { wrapper } = getWrapper();
 
-			await bannerElements.alreayDonated().trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.AlreadyDonated ) );
+			const buttons = wrapper.findAll( '.wmde-b-mini-banner header > div:first-child button' );
+			expect( buttons.length ).toStrictEqual( 1 );
 		} );
 
 		it( 'plays the slideshow once the banner becomes visible', async () => {
@@ -205,7 +203,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 
 				expect( bannerElements.miniCloseButton().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.showUseOfFundsButton().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.alreayDonated().attributes( 'tabindex' ) ).toBeUndefined();
+				expect( bannerElements.alreadyDonated().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.donate10Button().attributes( 'tabindex' ) ).toBeUndefined();
 				expect( bannerElements.donateOtherButton().attributes( 'tabindex' ) ).toBeUndefined();
 
@@ -213,7 +211,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 
 				expect( bannerElements.miniCloseButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.showUseOfFundsButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.alreayDonated().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
+				expect( bannerElements.alreadyDonated().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.donate10Button().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.donateOtherButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 			} );
@@ -580,13 +578,10 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		test.each( [
-			'closeButton',
-			'donatedButton',
-		] )( 'Stores a local storage item on close', async ( button: string ) => {
+		it( 'Stores a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 
-			await bannerElements[ button ]().trigger( 'click' );
+			await bannerElements.miniCloseButton().trigger( 'click' );
 
 			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
 		} );
