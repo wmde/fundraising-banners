@@ -14,4 +14,9 @@
 	--mastercard-overlap-fill: transparent;
 	--mastercard-text-fill: #ffffff;
 }
+
+.wmde-u-svg-field-helper__BEZ:has( input:checked ) {
+	--direct-debit-card-fill: #ffffff;
+	--direct-debit-pen-fill: #ffffff;
+}
 /* stylelint-enable */
