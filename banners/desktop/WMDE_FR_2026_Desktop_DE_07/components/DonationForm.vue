@@ -61,7 +61,7 @@
 			<div>
 				<fieldset class="wmde-b-field-container" :data-error="paymentMethodValidity === Validity.Invalid ? true : null">
 					<legend class="visually-hidden" id="wmde-b-payment-type-label">{{ $translate( 'payments-header' ) }}</legend>
-					<div class="wmde-c-form-grid" data-layout="quarters">
+					<div class="wmde-c-form-grid" data-layout="thirds">
 						<label class="wmde-b-form-field" v-for="formItem in formItems.paymentMethods" :key="formItem.value" data-stacked>
 							<PaymentMethodIcon :payment-method="formItem.value"/>
 							{{ formItem.label }}
