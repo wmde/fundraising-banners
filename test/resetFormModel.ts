@@ -8,6 +8,7 @@ export function resetFormModel( formModel: FormModel ): void {
 	formModel.selectedAmount.value = '';
 	formModel.amountValidity.value = AmountValidity.Unset;
 	formModel.customAmount.value = '';
+	formModel.freezeAmount.value = false;
 	formModel.paymentMethod.value = '';
 	formModel.paymentMethodValidity.value = Validity.Unset;
 	formModel.addressType.value = '';
