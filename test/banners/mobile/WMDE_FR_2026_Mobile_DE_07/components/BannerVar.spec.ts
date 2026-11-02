@@ -24,6 +24,7 @@ import type { Translator } from '@src/Translator';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 import SoftClose from '@src/components/SoftClose/SoftClose.vue';
+import { nextTick } from 'vue';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -99,6 +100,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 			}
 		} );
 		const bannerElements = {
+			banner: () => wrapper.find( '.wmde-b-mobile-banner' ),
 			miniCloseButton: () => wrapper.find( '.wmde-b-mini-banner header > div:last-child button' ),
 			modalCloseButton: () => wrapper.find( '.wmde-b-modal-banner header button' ),
 			alreadyDonated: () => wrapper.find( '.wmde-b-mini-banner header > div:first-child button:last-child' ),
@@ -134,6 +136,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 			submitButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form > button' ),
 			onceButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:first-child' ),
 			yearlyButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:last-child' ),
+			softClose: () => wrapper.find( '.wmde-b-soft-close' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -142,11 +145,13 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 	describe( 'Mini Banner', () => {
 
 		it( 'shows the donation form', async () => {
-			const { wrapper, bannerElements } = getWrapper();
+			const { bannerElements } = getWrapper();
 
 			await bannerElements.donate10Button().trigger( 'click' );
 
-			expect( wrapper.classes() ).toContain( 'wmde-b-mobile-banner--full-page' );
+			await nextTick();
+
+			expect( bannerElements.banner().classes() ).toContain( 'wmde-b-mobile-banner--full-page' );
 		} );
 
 		it( 'emits a content changed event when the donation form is shown', async () => {
@@ -155,15 +160,6 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 			await bannerElements.donate10Button().trigger( 'click' );
 
 			expect( wrapper.emitted( 'bannerContentChanged' ).length ).toBe( 1 );
-		} );
-
-		it( 'emits a close event', async () => {
-			const { wrapper, bannerElements } = getWrapper();
-
-			await bannerElements.miniCloseButton().trigger( 'click' );
-
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 		} );
 
 		it( 'Does only show one button in the mini banner header', async () => {
@@ -227,16 +223,65 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 		} );
 	} );
 
-	describe( 'Full Page Banner', () => {
-		it( 'emits the close event', async () => {
-			const { wrapper, bannerElements } = getWrapper();
+	describe( 'Soft Close', () => {
+		it( 'shows the soft close when the donor closes the mini banner', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.softClose().exists() ).toBeFalsy();
+
+			await bannerElements.miniCloseButton().trigger( 'click' );
+
+			expect( bannerElements.softClose().exists() ).toBeTruthy();
+		} );
+
+		it( 'shows the soft close when the donor closes the full page banner', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.softClose().exists() ).toBeFalsy();
 
 			await bannerElements.modalCloseButton().trigger( 'click' );
 
-			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
-			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.Hide ) );
+			expect( bannerElements.softClose().exists() ).toBeTruthy();
 		} );
 
+		test.each( [
+			[ 'close', CloseChoices.Close ],
+			[ 'maybeLater', CloseChoices.MaybeLater ],
+			[ 'xIconClose', CloseChoices.XIconClose ],
+			[ 'timeOutClose', CloseChoices.TimeOut ],
+		] )( 'emits the soft close events', async ( eventName: string, closeChoice: CloseChoices ) => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await bannerElements.miniCloseButton().trigger( 'click' );
+			wrapper.findComponent( SoftClose ).vm.$emit( eventName );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'SoftClose', closeChoice ) );
+		} );
+
+		it( 'does not show the soft close on the last impression', async () => {
+			const { wrapper, bannerElements } = getWrapper();
+
+			await wrapper.setProps( { remainingImpressions: 0 } );
+
+			await bannerElements.miniCloseButton().trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toStrictEqual( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toStrictEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
+		} );
+
+		describe( 'Accessibility', () => {
+			it( 'focuses the soft close when it becomes visible', async () => {
+				const { bannerElements } = getWrapper();
+
+				await bannerElements.miniCloseButton().trigger( 'click' );
+
+				expect( document.activeElement ).toStrictEqual( bannerElements.softClose().element );
+			} );
+		} );
+	} );
+
+	describe( 'Full Page Banner', () => {
 		it( 'emits the modal closed event', async () => {
 			const { wrapper, bannerElements } = getWrapper();
 
@@ -580,7 +625,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_07_var', () => {
 		] )( 'Stores a local storage item on close', async ( eventName: string ) => {
 			const { wrapper, bannerElements } = getWrapper();
 
-			await bannerElements.closeButton().trigger( 'click' );
+			await bannerElements.miniCloseButton().trigger( 'click' );
 			wrapper.findComponent( SoftClose ).vm.$emit( eventName );
 
 			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();

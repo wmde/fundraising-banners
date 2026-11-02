@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, Mock, test, vi, vitest } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import Banner from '@banners/mobile/WMDE_FR_2026_Mobile_DE_07/components/BannerCtrl.vue';
