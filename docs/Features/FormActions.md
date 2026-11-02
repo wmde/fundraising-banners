@@ -38,7 +38,7 @@ To choose one action (and potentially changing parameters) means our form action
     - `useFormActionWithReceipt.ts`
     - `FormActions.ts`
     - `createFormActions.ts`
-    - `BannerCtrl.vue` / `BannerVar.vue` (sets result of custom form action composable to `form-action-override` of `MultiStepDonation` component )
+    - `BannerVar.vue` / `BannerVar.vue` (sets result of custom form action composable to `form-action-override` of `MultiStepDonation` component )
 - **description:**
   - See [Show Donation Receipt checkbox only below a certain amount threshold with different submit button labels](DonationForms.md)
 - **used in (banner name):**

@@ -1,6 +1,6 @@
 # Multi Step Donation Form and Form Controllers
 
-Since the 2022 campaign, a lot of tests had multistep forms, each one with a different flow. These tests are different enough functionally that they would require a new `DonationForm` component for each.
+Since the 2022 campaign, a lot of tests had multistep forms, each one with a different flow. These tests are different enough functionally that they would require a new `DonationFormVar` component for each.
 
 In order to avoid duplicating components per-test we opted to instead create a flexible `MultiStepDonationForm` that gets each form step as a named slot. Each named slot also gets an implementation of a `StepController`, which contains the logic that determines which form page to show, based on the user interaction with the current form page.
 
