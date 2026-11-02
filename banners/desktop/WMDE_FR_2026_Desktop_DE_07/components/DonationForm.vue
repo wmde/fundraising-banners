@@ -153,12 +153,13 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
+const step = ref<number>( 0 );
 const formItems = inject<DonationFormItems>( 'formItems' );
 const formModel = useFormModel();
 const validator = newDonationFormValidator( formModel );
 const currencyFormatter = inject<Currency>( 'currencyFormatter' );
 const { selectedAmount, customAmount, amountInCents, amountValidity, paymentMethod, paymentMethodValidity, interval, intervalValidity, formatCustomAmount } = formModel;
-const amounts = useDynamicAmounts( formModel, formItems.dynamicAmounts );
+const amounts = useDynamicAmounts( formModel, formItems.dynamicAmounts, step );
 const formattedAmount = computed( (): string => currencyFormatter.euroAmountFromCents( amountInCents.value ) );
 const stepOneIsValid = computed( (): boolean => [ AmountValidity.Unset, AmountValidity.Valid ].includes( amountValidity.value )
 	&& intervalValidity.value !== Validity.Invalid
@@ -166,7 +167,6 @@ const stepOneIsValid = computed( (): boolean => [ AmountValidity.Unset, AmountVa
 );
 const timer = inject<Timer>( 'timer' );
 const tracker = inject<Tracker>( 'tracker' );
-const step = ref<number>( 0 );
 
 const forms = ref<HTMLFormElement[]>( null );
 const mainForm = ref<HTMLFormElement>( null );

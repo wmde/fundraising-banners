@@ -395,6 +395,24 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 				expect( submitForm.element.submit ).not.toHaveBeenCalled();
 			} );
 
+			it( 'clears the amount when interval is changed', async () => {
+				const { bannerElements } = getWrapper();
+				const submitForm = bannerElements.submitForm();
+				submitForm.element.submit = vi.fn();
+
+				await bannerElements.amount5().trigger( 'click' );
+
+				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '500' );
+
+				await bannerElements.intervalOnce().trigger( 'click' );
+
+				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '500' );
+
+				await bannerElements.intervalMonthly().trigger( 'click' );
+
+				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '0' );
+			} );
+
 		} );
 
 		describe( 'Second Page', () => {
@@ -423,7 +441,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 				const submitForm = bannerElements.submitForm();
 				submitForm.element.submit = vi.fn();
 
-				await bannerElements.intervalYearly().trigger( 'click' );
+				await bannerElements.intervalOnce().trigger( 'click' );
 				await bannerElements.amount5().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
@@ -441,7 +459,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 				const submitForm = bannerElements.submitForm();
 				submitForm.element.submit = vi.fn();
 
-				await bannerElements.intervalYearly().trigger( 'click' );
+				await bannerElements.intervalOnce().trigger( 'click' );
 				await bannerElements.amount5().trigger( 'click' );
 				await bannerElements.paymentMethodPPL().trigger( 'click' );
 				await bannerElements.firstForm().trigger( 'submit' );
@@ -452,6 +470,20 @@ describe( 'WMDE_FR_2026_Desktop_DE_07_ctrl', () => {
 				expect( submitForm.element.submit ).toHaveBeenCalled();
 				expect( submitForm.attributes( 'action' ) ).contains( 'with-address' );
 				expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitEvent( 'UpgradeToYearlyForm', 'recurring' ) );
+			} );
+
+			it( 'does not clear the amount when a button is clicked', async () => {
+				const { bannerElements } = getWrapper();
+				const submitForm = bannerElements.submitForm();
+				submitForm.element.submit = vi.fn();
+
+				await bannerElements.intervalOnce().trigger( 'click' );
+				await bannerElements.amount5().trigger( 'click' );
+				await bannerElements.paymentMethodPPL().trigger( 'click' );
+				await bannerElements.firstForm().trigger( 'submit' );
+				await bannerElements.yearlyButton().trigger( 'click' );
+
+				expect( bannerElements.submitAmount().element.value ).toStrictEqual( '500' );
 			} );
 		} );
 
