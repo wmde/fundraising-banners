@@ -49,12 +49,13 @@ const app = createVueApp( BannerConductor, {
 		localCloseTracker:
 			new LocalStorageCloseTracker(
 				'deMobile',
-				'without_soft_close'
+				null
 			),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true,
 } );
 
 app.use( TranslationPlugin, translator );

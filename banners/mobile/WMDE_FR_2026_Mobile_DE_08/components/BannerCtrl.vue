@@ -122,7 +122,6 @@ watch( contentState, async () => {
 } );
 
 function onMiniClose( feature: TrackingFeatureName, userChoice: CloseChoices ): void {
-	props.localCloseTracker.setItem();
 	emit( 'bannerClosed', new CloseEvent( feature, userChoice ) );
 }
 

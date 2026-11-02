@@ -11,7 +11,7 @@
 	--flow-space: var( --space-s );
 
 	--nav-button-padding: var( --space-3xs );
-	-nav-button-font-size: var( --type-step-000 );
+	--nav-button-font-size: var( --type-step-000 );
 
 	--form-font-size: var( --type-step-0 );
 	--form-font-weight: var( --font-normal );

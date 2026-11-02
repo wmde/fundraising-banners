@@ -4,7 +4,7 @@ import './styles/styles.css';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/BannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import Banner from './components/BannerCtrl.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
 import PageWPORG from '@src/page/PageWPORG';
@@ -36,8 +36,6 @@ const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, e
 const date = new Date();
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 
-const remainingImpressions = impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'mobile' ) );
-
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -48,16 +46,16 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		remainingImpressions,
 		localCloseTracker:
 			new LocalStorageCloseTracker(
 				'deMobile',
-				remainingImpressions > 0 ? 'with_soft_close' : 'with_soft_close_final_impression'
+				null
 			),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
-	impressionCount
+	impressionCount,
+	showDonateLinkTooltip: true,
 } );
 
 app.use( TranslationPlugin, translator );

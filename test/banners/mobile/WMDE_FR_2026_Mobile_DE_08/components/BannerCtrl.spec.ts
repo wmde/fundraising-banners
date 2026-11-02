@@ -165,11 +165,13 @@ describe( 'WMDE_FR_2026_Mobile_DE_08_ctrl', () => {
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.Close ) );
 		} );
 
-		it( 'Does only show one button in the mini banner header', async () => {
-			const { wrapper } = getWrapper();
+		it( 'emits the already donated close event', async () => {
+			const { wrapper, bannerElements } = getWrapper();
 
-			const buttons = wrapper.findAll( '.wmde-b-mini-banner header > div:first-child button' );
-			expect( buttons.length ).toStrictEqual( 1 );
+			await bannerElements.alreadyDonated().trigger( 'click' );
+
+			expect( wrapper.emitted( 'bannerClosed' ).length ).toBe( 1 );
+			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'MiniBanner', CloseChoices.AlreadyDonated ) );
 		} );
 
 		it( 'plays the slideshow once the banner becomes visible', async () => {
@@ -578,12 +580,12 @@ describe( 'WMDE_FR_2026_Mobile_DE_08_ctrl', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Stores a local storage item on close', async () => {
+		it( 'Does not store a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 
 			await bannerElements.miniCloseButton().trigger( 'click' );
 
-			expect( localCloseTracker.setItem ).toHaveBeenCalledOnce();
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
 		} );
 
 		it( 'fires an event if a local storage item exists', async () => {
