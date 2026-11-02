@@ -13,7 +13,7 @@ import { Intervals } from '@src/utils/FormItemsBuilder/fields/Intervals';
  * clear the amount, to avoid any risk of the donor regularly donating more than they intended.
  */
 export function useDynamicAmounts( formModel: FormModel, dynamicAmounts: DynamicFormItems[] ): Ref<FormItem[]> {
-	const { customAmount, initialAmount, interval, selectedAmount } = formModel;
+	const { customAmount, initialAmount, freezeAmount, interval, selectedAmount } = formModel;
 
 	const amounts = computed<FormItem[]>( () => {
 		const intervalWithDefault = interval.value !== '' ? interval.value : Intervals.ONCE.value;
@@ -32,13 +32,14 @@ export function useDynamicAmounts( formModel: FormModel, dynamicAmounts: Dynamic
 	watch( amounts, () => {
 		if (
 			selectedAmount.value !== '' &&
-			!amounts.value.some( ( { value } ) => value === selectedAmount.value )
+			!amounts.value.some( ( { value } ) => value === selectedAmount.value ) &&
+			!freezeAmount.value
 		) {
 			selectedAmount.value = '';
 		}
 	} );
 	watch( interval, ( _, previousInterval ) => {
-		if ( previousInterval !== '' ) {
+		if ( previousInterval !== '' && !freezeAmount.value ) {
 			selectedAmount.value = '';
 			customAmount.value = '';
 		}

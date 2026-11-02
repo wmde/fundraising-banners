@@ -124,4 +124,30 @@ describe( 'useDynamicAmounts', () => {
 		expect( model.customAmount.value ).toEqual( '' );
 	} );
 
+	it( 'should not touch the selected amount when frozen', async () => {
+		model.interval.value = Intervals.ONCE.value;
+		useDynamicAmounts( model, dynamicAmounts );
+		model.selectedAmount.value = formItems.ONE.value;
+		model.freezeAmount.value = true;
+
+		model.interval.value = Intervals.QUARTERLY.value;
+		await nextTick();
+
+		expect( model.selectedAmount.value ).toEqual( formItems.ONE.value );
+		expect( model.customAmount.value ).toEqual( '' );
+	} );
+
+	it( 'should not touch the custom amount when frozen', async () => {
+		model.interval.value = Intervals.ONCE.value;
+		useDynamicAmounts( model, dynamicAmounts );
+		model.customAmount.value = '5';
+		model.freezeAmount.value = true;
+
+		model.interval.value = Intervals.QUARTERLY.value;
+		await nextTick();
+
+		expect( model.customAmount.value ).toEqual( '5' );
+		expect( model.selectedAmount.value ).toEqual( '' );
+	} );
+
 } );
