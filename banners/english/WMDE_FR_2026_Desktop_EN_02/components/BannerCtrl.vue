@@ -37,7 +37,7 @@
 		</header>
 
 		<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
-			<DonationForm :local-close-tracker="localCloseTracker" ref="donationForm" @form-interaction="onFormInteraction" @submit="$emit( 'bannerSubmitted' )"/>
+			<DonationForm :local-close-tracker="localCloseTracker" ref="donationForm" @form-interaction="onFormInteraction"/>
 		</div>
 
 		<footer role="none" class="wmde-c-desktop-banner__footer-left wmde-c-cluster wmde-b-footer">
@@ -95,7 +95,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 useBannerHider( 800, emit );
 
