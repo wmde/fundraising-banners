@@ -14,7 +14,7 @@ export class CurrencyEn implements Currency {
 		this._customAmountInputFormatter = formatter( { round: 2, integerSeparator: '', padRight: 2 } );
 		this._millionsFormatter = formatter( { round: 1, decimal: '.', suffix: 'M', prefix: '€', padRight: 1 } );
 		this._millionsNumericFormatter = formatter( { round: 1, decimal: '.', padRight: 1 } );
-		this._euroAmountWithThousandSeparatorFormatter = formatter( { round: 2, integerSeparator: ',', suffix: ' euro' } );
+		this._euroAmountWithThousandSeparatorFormatter = formatter( { round: 2, integerSeparator: ',', suffix: '\u00a0euro' } );
 	}
 
 	public euroAmount( amount: number ): string {

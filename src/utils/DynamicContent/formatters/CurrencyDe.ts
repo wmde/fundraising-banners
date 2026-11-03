@@ -11,11 +11,11 @@ export class CurrencyDe implements Currency {
 	private readonly _euroAmountWithThousandSeparatorFormatter: ( amount: number ) => string;
 
 	public constructor() {
-		this._euroAmountFormatter = formatter( { round: 2, suffix: ' €', decimal: ',', integerSeparator: '', padRight: 2 } );
+		this._euroAmountFormatter = formatter( { round: 2, suffix: '\u00a0€', decimal: ',', integerSeparator: '', padRight: 2 } );
 		this._customAmountInputFormatter = formatter( { round: 2, decimal: ',', integerSeparator: '', padRight: 2 } );
-		this._millionsFormatter = formatter( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
+		this._millionsFormatter = formatter( { round: 1, decimal: ',', suffix: '\u00a0Mio.\u00a0€', padRight: 1 } );
 		this._millionsNumericFormatter = formatter( { round: 1, decimal: ',', padRight: 1 } );
-		this._euroAmountWithThousandSeparatorFormatter = formatter( { truncate: 0, integerSeparator: '.', suffix: ' Euro' } );
+		this._euroAmountWithThousandSeparatorFormatter = formatter( { truncate: 0, integerSeparator: '.', suffix: '\u00a0Euro' } );
 	}
 
 	// TODO: investigate if we need rounding behaviour or can do 'truncate':0 instead of replace( ',00', '' )

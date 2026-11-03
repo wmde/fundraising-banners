@@ -115,7 +115,7 @@ describe( 'DynamicCampaignText', () => {
 	} );
 
 	it( 'Gets the current donation sum', () => {
-		expect( dynamicCampaignText.remainingDonationSum ).toBe( '8,900,000 euro' );
+		expect( dynamicCampaignText.remainingDonationSum ).toBe( '8,900,000\u00a0euro' );
 	} );
 
 	it( 'Gets the visitors vs donors sentence', () => {
@@ -142,7 +142,7 @@ describe( 'DynamicCampaignText', () => {
 			impressionCount
 		);
 
-		expect( localDynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 400,000 euro' );
+		expect( localDynamicCampaignText.progressBarContent.amountNeeded ).toBe( 'Progress missing 400,000\u00a0euro' );
 	} );
 
 	it( 'Gets the average donation', () => {
