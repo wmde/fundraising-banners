@@ -5,6 +5,7 @@ import UpgradeToYearlyDe from '@src/components/DonationForm/Forms/messages/Upgra
 import FooterDe from '@src/components/Footer/messages/Footer.de';
 import MainDonationFormDe from '@src/components/DonationForm/Forms/messages/MainDonationForm.de';
 import BannerConductor from '@src/components/BannerConductor/messages/BannerConductor.de';
+import ContentCopier from '@src/components/ContentCopier/messages/ContentCopier.de';
 
 const messages: TranslationMessages = {
 	...DynamicCampaignTextDe,
@@ -13,6 +14,7 @@ const messages: TranslationMessages = {
 	...FooterDe,
 	...MainDonationFormDe,
 	...BannerConductor,
+	...ContentCopier,
 
 	// custom messages here
 	'address-type-notice-full': 'Nur so können wir Ihnen eine Spendenquittung per Post zusenden. Außerdem erhalten ' +

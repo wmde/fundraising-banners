@@ -7,4 +7,6 @@
 	--form-font-weight: var( --font-normal );
 	--message-text-font-size: var( --type-step-00 );
 	--slider-pagination-height: var( --space-m );
+
+	--icon-text-vertical-alignment: center;
 }

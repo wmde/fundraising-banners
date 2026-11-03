@@ -48,10 +48,10 @@
 <script setup lang="ts">
 
 import PayPalLogo from '@src/components/PaymentLogos/PayPalLogo.vue';
-import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
-import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 import CloseIconCircle from '@src/components/Icons/CloseIconCircle.vue';
 import SimpleInfoIcon from '@src/components/Icons/SimpleInfoIcon.vue';
+import VisaLogo from '@src/components/PaymentLogos/VisaLogo.vue';
+import MastercardLogo from '@src/components/PaymentLogos/MastercardLogo.vue';
 
 defineEmits( [ 'showFullPageBanner', 'showFullPageBannerPreselectedAmount', 'close', 'showUseOfFunds', 'alreadyDonatedClicked' ] );
 
