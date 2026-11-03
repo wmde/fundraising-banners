@@ -11,11 +11,17 @@
 	white-space: nowrap;
 }
 
+.wmde-b-progress__text {
+	padding-inline: calc( var( --height ) / 2 );
+}
+
 .wmde-b-progress__bar {
 	height: var( --height );
 	display: grid;
 	grid-template-columns: minmax( 0, 1fr );
 	clip-path: inset( 0 0 0 0 round calc( var( --height ) / 2 ) );
+
+	--flow-space: var( --space-3xs );
 }
 
 .wmde-b-progress__track,
@@ -28,7 +34,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	border-radius: calc( var( --height ) / 2 );
-	padding-inline: var( --bar-badding, var( --space-xs ) );
+	padding-inline: var( --progress-bar-padding, var( --space-xs ) );
 }
 
 .wmde-b-progress__track {

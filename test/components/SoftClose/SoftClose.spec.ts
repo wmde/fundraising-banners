@@ -31,8 +31,8 @@ describe( 'SoftClose', function () {
 		} );
 		const elements = {
 			closeXButton: () => wrapper.find( '.wmde-b-soft-close__content > button' ),
-			closeButton: () => wrapper.find( '.wmde-b-soft-close__content > div > button:nth-child(3)' ),
-			maybeLayerButton: () => wrapper.find( '.wmde-b-soft-close__content > div > button:nth-child(2)' ),
+			closeButton: () => wrapper.find( '.wmde-b-soft-close__content > div > div:nth-child(2) > button:nth-child(2)' ),
+			maybeLayerButton: () => wrapper.find( '.wmde-b-soft-close__content > div > div:nth-child(2) > button:nth-child(1)' ),
 			countdown: () => wrapper.find( '.wmde-b-soft-close__timer' ),
 		};
 
