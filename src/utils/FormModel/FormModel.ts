@@ -25,6 +25,7 @@ export interface FormModel {
 	 */
 	amountInCents: ComputedRef<number>;
 	amountValidity: Ref<AmountValidity>;
+	freezeAmount: Ref<boolean>;
 	paymentMethod: Ref<string>;
 	paymentMethodValidity: Ref<Validity>;
 	disabledPaymentMethods: ComputedRef<string[]>;

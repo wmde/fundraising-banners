@@ -172,6 +172,7 @@ const secondPageWasSeen = ref<boolean>( false );
 
 watch( step, ( newStep: number ) => {
 	forms.value[ newStep ]?.focus();
+	formModel.freezeAmount.value = newStep === 1;
 } );
 
 const onClick = (): void => {

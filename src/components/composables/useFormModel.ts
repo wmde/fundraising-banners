@@ -14,6 +14,7 @@ const selectedAmount = ref<string>( '' );
 const amountValidity = ref<AmountValidity>( AmountValidity.Unset );
 const customAmount = ref<string>( '' );
 const amountInCents = computed( () => parseIntegerFromFormattedString( selectedAmount.value || customAmount.value ) );
+const freezeAmount = ref<boolean>( false );
 
 const paymentMethod = ref<string>( '' );
 const paymentMethodValidity = ref<Validity>( Validity.Unset );
@@ -93,6 +94,7 @@ export function useFormModel( customFormat: string = '{amount} €' ): FormModel
 		customAmount,
 		amountInCents,
 		amountValidity,
+		freezeAmount,
 
 		paymentMethod,
 		paymentMethodValidity,
