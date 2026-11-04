@@ -8,20 +8,29 @@
 			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
 			zu unterstützen.
 			{{ campaignDaySentence }}
-			{{ visitorsVsDonorsSentence }}
+			<AnimatedText :is-visible="playLiveText">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Die meisten spenden, weil sie Wikipedia nützlich finden.
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
 			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
 		</p>
+		<ProgressBar :is-visible="playLiveText"/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
+import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
+import ProgressBar from '../components/ProgressBar.vue';
+
+interface Props {
+	playLiveText: boolean;
+}
+
+const props = defineProps<Props>();
 
 const {
 	currentDayName,
@@ -31,6 +40,12 @@ const {
 	visitorsVsDonorsSentence
 }: DynamicContent = inject( 'dynamicCampaignText' );
 const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
+
+watch( () => props.playLiveText, ( shouldPlay: boolean ) => {
+	if ( !shouldPlay ) {
+		stopTimer();
+	}
+} );
 
 onMounted( startTimer );
 onUnmounted( stopTimer );
