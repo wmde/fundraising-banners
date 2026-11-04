@@ -14,6 +14,8 @@ import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnRe
 import { UseOfFundsShownEvent } from '@src/tracking/events/UseOfFundsShownEvent';
 import { ShownEvent } from '@src/tracking/events/ShownEvent';
 import { mapShownEvent } from '@src/tracking/LegacyEventTracking/mapShownEvent';
+import { ClickedDonateLink } from '@src/tracking/events/ClickedDonateLink';
+import { mapClickedDonateLinkEvent } from '@src/tracking/LegacyEventTracking/mapClickedDonateLinkEvent';
 
 export default new Map<string, TrackingEventConverterFactory>( [
 	[ ShownEvent.EVENT_NAME, mapShownEvent ],
@@ -22,6 +24,7 @@ export default new Map<string, TrackingEventConverterFactory>( [
 		( e: MobileMiniBannerExpandedEvent ): WMDELegacyBannerEvent => new WMDELegacyBannerEvent( e.eventName + ( e.userChoice !== '' ? `-${e.userChoice}` : '' ), 1 ) ],
 	[ FormStepShownEvent.EVENT_NAME, mapFormStepShownEvent ],
 	[ NotShownEvent.EVENT_NAME, mapNotShownEvent ],
+	[ ClickedDonateLink.EVENT_NAME, mapClickedDonateLinkEvent ],
 
 	[ BannerSubmitEvent.EVENT_NAME, ( e: BannerSubmitEvent ): WMDESizeIssueEvent => {
 		switch ( e.feature ) {
