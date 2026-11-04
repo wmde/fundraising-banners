@@ -40,7 +40,6 @@
 					:amounts="amounts"
 					:local-close-tracker="props.localCloseTracker"
 					@form-interaction="$emit( 'bannerContentChanged' );"
-					@submit="$emit( 'bannerSubmitted' )"
 				/>
 			</template>
 
@@ -105,7 +104,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 

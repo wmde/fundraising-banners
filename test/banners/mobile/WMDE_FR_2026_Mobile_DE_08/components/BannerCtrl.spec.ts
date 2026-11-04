@@ -389,6 +389,22 @@ describe( 'WMDE_FR_2026_Mobile_DE_08_ctrl', () => {
 
 				expect( submitForm.element.submit ).not.toHaveBeenCalled();
 			} );
+
+			it( 'submits do not open in a new tab', async () => {
+				const { bannerElements } = getWrapper();
+				expect( bannerElements.submitForm().attributes( 'target' ) ).toBeUndefined();
+			} );
+
+			it( 'submits do not hide the banner', async () => {
+				const { wrapper, bannerElements } = getWrapper();
+
+				await bannerElements.intervalMonthly().trigger( 'click' );
+				await bannerElements.amount5().trigger( 'click' );
+				await bannerElements.paymentMethodPPL().trigger( 'click' );
+				await bannerElements.firstForm().trigger( 'submit' );
+
+				expect( wrapper.emitted( 'bannerSubmitted' ) ).toBeUndefined();
+			} );
 		} );
 
 		describe( 'Second Page', () => {

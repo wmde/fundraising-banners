@@ -40,7 +40,6 @@
 					:amounts="amounts"
 					:local-close-tracker="props.localCloseTracker"
 					@form-interaction="$emit( 'bannerContentChanged' );"
-					@submit="$emit( 'bannerSubmitted' )"
 				/>
 			</template>
 
@@ -76,8 +75,8 @@ import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import DonationForm from './DonationForm.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
@@ -105,7 +104,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits( [ 'bannerClosed', 'bannerSubmitted', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
+const emit = defineEmits( [ 'bannerClosed', 'bannerContentChanged', 'modalOpened', 'modalClosed' ] );
 
 const tracker = inject<Tracker>( 'tracker' );
 

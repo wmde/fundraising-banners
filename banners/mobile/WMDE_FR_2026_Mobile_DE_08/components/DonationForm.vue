@@ -124,7 +124,7 @@
 			</div>
 		</div>
 
-		<form ref="submitForm" :action="formAction" style="display: none;" method="post" target="_blank">
+		<form ref="submitForm" :action="formAction" style="display: none;" method="post">
 			<SubmitValues/>
 		</form>
 	</div>
@@ -196,6 +196,7 @@ watch( step, ( newStep: number ) => {
 	if ( slider.value.track.details.rel !== newStep ) {
 		slider.value.moveToIdx( newStep );
 	}
+	formModel.freezeAmount.value = newStep === 1;
 } );
 
 const onClick = (): void => {
