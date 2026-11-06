@@ -22,7 +22,7 @@
 		<p>
 			An unprecedented rise in hardware costs is making the essential equipment
 			needed to keep Wikipedia available to everyone much more expensive.
-			Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.
+			<AnimatedText :is-visible="currentSlide === 2">Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.</AnimatedText>
 			Please donate €5 today.
 			Thank you.
 		</p>
@@ -35,6 +35,7 @@ import { inject, onMounted, onUnmounted } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import InfoIconItalic from '@src/components/Icons/InfoIconItalic.vue';
+import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 
 interface Props {
 	currentSlide: number;

@@ -197,6 +197,17 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			expect( wrapper.find( '.wmde-b-message__text' ).exists() ).toBeTruthy();
 		} );
 
+		it( 'shows the animated sentence in the message and slide show', async () => {
+			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: widthForSmallScreen } );
+			const { wrapper } = getWrapper();
+			const animatedSentence = 'Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.';
+
+			expect( wrapper.find( '.wmde-b-slider .wmde-b-animated-text' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.wmde-b-message__text .wmde-b-animated-text' ).exists() ).toBeTruthy();
+			expect( wrapper.find( '.wmde-b-slider .wmde-b-animated-text' ).text() ).toStrictEqual( animatedSentence );
+			expect( wrapper.find( '.wmde-b-message__text .wmde-b-animated-text' ).text() ).toStrictEqual( animatedSentence );
+		} );
+
 		it( 'shows the live date and time in the message', async () => {
 			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: widthForLargeScreen } );
 			const localDynamicContent = newDynamicContent();

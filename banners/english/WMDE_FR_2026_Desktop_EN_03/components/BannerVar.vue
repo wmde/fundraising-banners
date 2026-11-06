@@ -25,7 +25,7 @@
 					<BannerTitle/>
 				</div>
 				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
-					<BannerText/>
+					<BannerText :banner-state="bannerState"/>
 				</div>
 
 				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>

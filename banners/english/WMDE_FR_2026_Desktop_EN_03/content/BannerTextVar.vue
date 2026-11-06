@@ -10,7 +10,7 @@
 			Wikipedia is free to use, but not free to provide.
 			An unprecedented rise in hardware costs is making the essential equipment
 			needed to keep Wikipedia available to everyone much more expensive.
-			Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.
+			<AnimatedText :is-visible="bannerState === BannerStates.Visible">Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.</AnimatedText>
 			Please donate €5 today.
 			Thank you.
 		</small>
@@ -20,6 +20,14 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
+import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
+import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
+
+interface Props {
+	bannerState: BannerStates;
+}
+
+defineProps<Props>();
 
 const { currentDayName, currentDate } = inject<DynamicContent>( 'dynamicCampaignText' );
 
