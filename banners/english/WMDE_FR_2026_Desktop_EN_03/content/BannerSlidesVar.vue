@@ -1,9 +1,5 @@
 <template>
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose wmde-c-flow" data-align="centered">
-		<h2 class="wmde-b-icon-text wmde-c-cluster"><InfoIconItalic/> The internet is changing.</h2>
-		<p class="headline">
-			<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: An important update for readers in Germany.</strong>
-		</p>
 		<p>
 			Thank you for visiting Wikipedia this {{ currentDayName }}, {{ currentDate }}.
 			This year, Wikipedia has seen fewer visitors and fewer new readers, so your visit today means a lot.
@@ -31,10 +27,8 @@
 
 <script setup lang="ts">
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
-import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
-import InfoIconItalic from '@src/components/Icons/InfoIconItalic.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 
 interface Props {
@@ -43,9 +37,6 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime } = inject<DynamicContent>( 'dynamicCampaignText' );
-const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
-onMounted( startTimer );
-onUnmounted( stopTimer );
+const { currentDayName, currentDate } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
