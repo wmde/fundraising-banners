@@ -21,8 +21,11 @@
 						</template>
 					</KeenSlider>
 				</div>
+				<div class="wmde-b-message__title wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }">
+					<BannerTitle/>
+				</div>
 				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
-					<BannerText :banner-state="bannerState"/>
+					<BannerText/>
 				</div>
 
 				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
@@ -68,8 +71,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { computed, ref, watch } from 'vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
@@ -82,6 +85,7 @@ import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import BannerTitle from '../content/BannerTitleVar.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',

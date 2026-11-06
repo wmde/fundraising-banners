@@ -187,18 +187,6 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			expect( wrapper.find( '.wmde-b-message__text' ).exists() ).toBeTruthy();
 		} );
 
-		it( 'shows the animated visitors vs donors sentence in the message and slide show', async () => {
-			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: widthForSmallScreen } );
-			const localDynamicContent = newDynamicContent();
-			localDynamicContent.visitorsVsDonorsSentence = 'Visitors vs donors sentence';
-			const { wrapper } = getWrapper( localDynamicContent );
-
-			expect( wrapper.find( '.wmde-b-slider .wmde-b-animated-text' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.wmde-b-message__text .wmde-b-animated-text' ).exists() ).toBeTruthy();
-			expect( wrapper.find( '.wmde-b-slider .wmde-b-animated-text' ).text() ).toStrictEqual( 'Visitors vs donors sentence' );
-			expect( wrapper.find( '.wmde-b-message__text .wmde-b-animated-text' ).text() ).toStrictEqual( 'Visitors vs donors sentence' );
-		} );
-
 		it( 'shows the live date and time in the message', async () => {
 			Object.defineProperty( window, 'innerWidth', { writable: true, configurable: true, value: widthForLargeScreen } );
 			const localDynamicContent = newDynamicContent();
@@ -209,7 +197,7 @@ describe( 'WMDE_FR_2026_Desktop_EN_03_var', () => {
 			const timerSpy = new TimerSpy();
 			const { wrapper } = getWrapper( localDynamicContent, timerSpy );
 
-			const selector = '.wmde-b-message__text p:first-child';
+			const selector = '.wmde-b-message .headline';
 
 			expect( wrapper.find( selector ).text() ).toContain( 'Initial Date' );
 			expect( wrapper.find( selector ).text() ).toContain( 'Initial Time' );
