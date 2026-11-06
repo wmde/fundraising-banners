@@ -14,15 +14,15 @@
 					{{ $translate( 'skip-link' ) }}
 				</button>
 
+				<div class="wmde-b-message__title wmde-c-flow">
+					<BannerTitle/>
+				</div>
 				<div v-if="!onLargeScreen" class="wmde-b-message__slideshow">
 					<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="10000" :delay="2000">
 						<template #slides="{ currentSlide }: any">
 							<BannerSlides :currentSlide="currentSlide"/>
 						</template>
 					</KeenSlider>
-				</div>
-				<div class="wmde-b-message__title wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }">
-					<BannerTitle/>
 				</div>
 				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }" data-align="left">
 					<BannerText :banner-state="bannerState"/>
