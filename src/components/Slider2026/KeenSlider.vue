@@ -4,13 +4,13 @@
 			<slot name="slides" :current-slide="currentSlide"/>
 		</div>
 
-		<button v-if="withNavigation" type="button" class="wmde-b-slider__previous-slide" @click.prevent="goToPreviousSlide">
+		<button v-if="withNavigation" type="button" class="wmde-b-slider__previous-slide" @click.prevent="goToPreviousSlide" :tabindex="tabIndex()">
 			<span class="visually-hidden">{{ $translate( 'previous-slide' ) }}</span>
 			<slot name="previous-slide-icon">
 				<ChevronLeftIcon/>
 			</slot>
 		</button>
-		<button v-if="withNavigation" type="button" class="wmde-b-slider__next-slide" @click.prevent="goToNextSlide">
+		<button v-if="withNavigation" type="button" class="wmde-b-slider__next-slide" @click.prevent="goToNextSlide" :tabindex="tabIndex()">
 			<span class="visually-hidden">{{ $translate( 'next-slide' ) }}</span>
 			<slot name="next-slide-icon">
 				<ChevronRightIcon/>
@@ -26,6 +26,7 @@
 					@click="() => goToSlide( index - 1 )"
 					:aria-selected="currentSlide === index - 1"
 					:aria-controls="`wmde-banner-slide-${ index - 1 }`"
+					:tabindex="tabIndex()"
 				>
 					<span class="visually-hidden">{{ $translate( 'slide-page', { page: index, total: slider?.slides.length } ) }}</span>
 				</button>
@@ -54,6 +55,7 @@ interface Props {
 	withPagination?: boolean;
 	sliderOptions?: KeenSliderOptions;
 	play?: boolean;
+	tabbable?: boolean;
 }
 
 const props = withDefaults( defineProps<Props>(), {
@@ -63,6 +65,7 @@ const props = withDefaults( defineProps<Props>(), {
 	withPagination: true,
 	withNavigation: true,
 	play: false,
+	tabbable: true,
 } );
 
 const emit = defineEmits( [ 'slide-changed' ] );
@@ -121,6 +124,8 @@ const goToSlide = ( idx: number ): void => {
 	stopAutoplay();
 	slider.value.moveToIdx( idx );
 };
+
+const tabIndex = (): number | null => props.tabbable ? null : -1;
 
 defineExpose( { goToPreviousSlide, goToNextSlide, goToSlide } );
 

@@ -17,6 +17,8 @@ This is for handling the layout of banner the banner message content
 	--prose-vertical-alignment: center;
 	--prose-horizontal-alignment: center;
 	--prose-text-align: center;
+
+	text-wrap: balance;
 }
 
 .wmde-b-prose[ data-balance ] {
