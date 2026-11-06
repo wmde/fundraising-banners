@@ -7,39 +7,39 @@ describe( 'CurrencyDe', () => {
 	describe( '#euroAmount', () => {
 
 		it( 'returns single integer euro when cents are zero', () => {
-			expect( formatter.euroAmount( 1 ) ).toBe( '1 €' );
-			expect( formatter.euroAmount( 1.0 ) ).toBe( '1 €' );
-			expect( formatter.euroAmount( 24.00 ) ).toBe( '24 €' );
-			expect( formatter.euroAmount( 24.000001 ) ).toBe( '24 €' );
-			expect( formatter.euroAmount( 100 ) ).toBe( '100 €' );
+			expect( formatter.euroAmount( 1 ) ).toBe( '1\u00a0€' );
+			expect( formatter.euroAmount( 1.0 ) ).toBe( '1\u00a0€' );
+			expect( formatter.euroAmount( 24.00 ) ).toBe( '24\u00a0€' );
+			expect( formatter.euroAmount( 24.000001 ) ).toBe( '24\u00a0€' );
+			expect( formatter.euroAmount( 100 ) ).toBe( '100\u00a0€' );
 		} );
 
 		it( 'returns euro amount with 2 decimal places, 0-padding if needed', () => {
-			expect( formatter.euroAmount( 1.23 ) ).toBe( '1,23 €' );
-			expect( formatter.euroAmount( 1.20 ) ).toBe( '1,20 €' );
-			expect( formatter.euroAmount( 1.2 ) ).toBe( '1,20 €' );
+			expect( formatter.euroAmount( 1.23 ) ).toBe( '1,23\u00a0€' );
+			expect( formatter.euroAmount( 1.20 ) ).toBe( '1,20\u00a0€' );
+			expect( formatter.euroAmount( 1.2 ) ).toBe( '1,20\u00a0€' );
 		} );
 
 		it( 'rounds cents to two digits', () => {
-			expect( formatter.euroAmount( 1.594 ) ).toBe( '1,59 €' );
-			expect( formatter.euroAmount( 1.595 ) ).toBe( '1,60 €' );
-			expect( formatter.euroAmount( 1.599 ) ).toBe( '1,60 €' );
-			expect( formatter.euroAmount( 1.201 ) ).toBe( '1,20 €' );
+			expect( formatter.euroAmount( 1.594 ) ).toBe( '1,59\u00a0€' );
+			expect( formatter.euroAmount( 1.595 ) ).toBe( '1,60\u00a0€' );
+			expect( formatter.euroAmount( 1.599 ) ).toBe( '1,60\u00a0€' );
+			expect( formatter.euroAmount( 1.201 ) ).toBe( '1,20\u00a0€' );
 		} );
 	} );
 
 	describe( '#euroAmountFromCents', () => {
 
 		it( 'returns single integer euro when cents are zero', () => {
-			expect( formatter.euroAmountFromCents( 1 ) ).toBe( '0,01 €' );
-			expect( formatter.euroAmountFromCents( 100 ) ).toBe( '1 €' );
-			expect( formatter.euroAmountFromCents( 1000_00 ) ).toBe( '1000 €' );
-			expect( formatter.euroAmountFromCents( 999_999_99 ) ).toBe( '999999,99 €' );
+			expect( formatter.euroAmountFromCents( 1 ) ).toBe( '0,01\u00a0€' );
+			expect( formatter.euroAmountFromCents( 100 ) ).toBe( '1\u00a0€' );
+			expect( formatter.euroAmountFromCents( 1000_00 ) ).toBe( '1000\u00a0€' );
+			expect( formatter.euroAmountFromCents( 999_999_99 ) ).toBe( '999999,99\u00a0€' );
 
 			// the following inputs would be domain/logic errors and should ideally never happen
-			expect( formatter.euroAmountFromCents( 1.1 ) ).toBe( '0,01 €' );
-			expect( formatter.euroAmountFromCents( 1.99 ) ).toBe( '0,01 €' );
-			expect( formatter.euroAmountFromCents( 1.999999 ) ).toBe( '0,01 €' );
+			expect( formatter.euroAmountFromCents( 1.1 ) ).toBe( '0,01\u00a0€' );
+			expect( formatter.euroAmountFromCents( 1.99 ) ).toBe( '0,01\u00a0€' );
+			expect( formatter.euroAmountFromCents( 1.999999 ) ).toBe( '0,01\u00a0€' );
 		} );
 	} );
 
@@ -65,13 +65,13 @@ describe( 'CurrencyDe', () => {
 
 	describe( '#millions', () => {
 		it( 'creates a fractional amount and adds suffix and currency', () => {
-			expect( formatter.millions( 8_000_000 ) ).toBe( '8,0 Mio. €' );
+			expect( formatter.millions( 8_000_000 ) ).toBe( '8,0\u00a0Mio.\u00a0€' );
 		} );
 
 		it( 'rounds numbers', () => {
-			expect( formatter.millions( 90_000 ) ).toBe( '0,1 Mio. €' );
-			expect( formatter.millions( 8_100_000 ) ).toBe( '8,1 Mio. €' );
-			expect( formatter.millions( 8_040_000 ) ).toBe( '8,0 Mio. €' );
+			expect( formatter.millions( 90_000 ) ).toBe( '0,1\u00a0Mio.\u00a0€' );
+			expect( formatter.millions( 8_100_000 ) ).toBe( '8,1\u00a0Mio.\u00a0€' );
+			expect( formatter.millions( 8_040_000 ) ).toBe( '8,0\u00a0Mio.\u00a0€' );
 		} );
 	} );
 
