@@ -14,6 +14,7 @@
 
 	--slider-pagination-height: var( --space-m );
 	--prose-padding: var( --space-l );
+	--prose-font-size: clamp( 0.75rem, 0.1346rem + 3.0769vw, 1rem );
 
 	--form-font-size: var( --type-step-0 );
 	--form-font-weight: var( --font-normal );
