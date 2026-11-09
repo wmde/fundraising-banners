@@ -32,8 +32,8 @@
 }
 
 .wmde-b-mobile-banner__content {
-	height: 100%;
-	overflow: auto;
+	display: flex;
+	flex-direction: column;
 }
 
 .wmde-b-mobile-banner__footer {
