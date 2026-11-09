@@ -20,7 +20,7 @@
 		</header>
 
 		<div class="wmde-b-stacker" :data-index="formStep">
-			<div>
+			<div class="wmde-b-mobile-banner__content">
 				<header class="wmde-b-mobile-banner__progress">
 					<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
 				</header>
