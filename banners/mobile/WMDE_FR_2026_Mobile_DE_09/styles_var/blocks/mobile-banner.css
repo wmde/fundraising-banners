@@ -42,3 +42,7 @@
 	padding-block: var( --space-2xs );
 	font-size: var( --type-step-00 );
 }
+
+.wmde-b-mobile-banner[ data-max-height ] {
+	max-height: var( --banner-max-height );
+}

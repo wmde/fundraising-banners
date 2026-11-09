@@ -1,5 +1,6 @@
 .wmde-banner {
-	--banner-height: 354px;
+	--banner-height: 393px;
+	--banner-max-height: 393px;
 	--header-height: 2.5rem;
 	--gutter: var( --space-2xs );
 	--flow-space: var( --space-2xs );
