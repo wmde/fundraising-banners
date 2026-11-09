@@ -28,4 +28,6 @@
 	--form-field-border-radius: 0.85lh;
 
 	--content-copier-font-size: var( --type-step-00 );
+
+	--progress-track-background: #ffffff;
 }

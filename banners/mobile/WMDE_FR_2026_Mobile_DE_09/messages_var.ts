@@ -38,6 +38,7 @@ const messages: TranslationMessages = {
 	'amount-total': 'Spendenziel {{amount}} Millionen Euro',
 	'form-error': 'Bitte Formular vervollständigen',
 	'photo-credit': 'Photo Credit: {{name}}',
+	'use-of-funds-link-description': 'Warum spenden?',
 };
 
 export default messages;

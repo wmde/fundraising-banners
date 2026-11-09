@@ -13,7 +13,7 @@ export function createFormItems( translations: Translator, amountFormatter: Numb
 			Intervals.QUARTERLY,
 			Intervals.YEARLY
 		)
-		.setAmounts( 5, 10, 20, 50 )
+		.setAmounts( 5, 15, 25, 50 )
 		.setPaymentMethods(
 			PaymentMethods.PAYPAL,
 			PaymentMethods.DIRECT_DEBIT,

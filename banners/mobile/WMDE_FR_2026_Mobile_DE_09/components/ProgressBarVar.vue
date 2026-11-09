@@ -8,7 +8,7 @@
 			{{ progressBarContent.amountDonated }}
 		</template>
 		<template #right-text>
-			{{ progressBarContent.percentageTowardsTarget.toFixed( 2 ) }}%
+			{{ progressBarContent.percentageTowardsTarget.toFixed( 0 ) }}%
 		</template>
 		<template #screen-reader-text>
 			{{
