@@ -47,6 +47,8 @@
 	--progress-track-border-color: var( --color-red-600 );
 	--progress-fill-background: var( --color-red-600 );
 	--progress-fill-color: var( --color-white );
+	--time-progress-track-border-color: var( --color-blue-400 );
+	--time-progress-fill-background: var( --color-blue-400 );
 
 	--soft-close-countdown: var( --color-red-600 );
 }
