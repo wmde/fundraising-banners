@@ -29,6 +29,7 @@
 				</div>
 
 				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
+				<TimeProgressBar :is-visible="bannerState === BannerStates.Visible"/>
 			</div>
 		</div>
 
@@ -92,6 +93,7 @@ import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
+import TimeProgressBar from './TimeProgressBar.vue';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',

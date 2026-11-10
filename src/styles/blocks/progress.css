@@ -11,6 +11,10 @@
 	white-space: nowrap;
 }
 
+.wmde-b-progress[data-progress-time] {
+	color: var( --time-progress-color, var( --progress-color ) );
+}
+
 .wmde-b-progress__text {
 	padding-inline: calc( var( --height ) / 2 );
 }
@@ -41,6 +45,10 @@
 	border: var( --progress-track-border-width, 3px ) solid var( --progress-track-border-color );
 }
 
+.wmde-b-progress[data-progress-time] .wmde-b-progress__track {
+	border-color: var( --time-progress-track-border-color, var( --progress-track-border-color ) );
+}
+
 .wmde-b-progress__fill {
 	background: var( --progress-fill-background );
 	color: var( --progress-fill-color );
@@ -49,6 +57,11 @@
 	white-space: nowrap;
 
 	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+}
+
+.wmde-b-progress[data-progress-time] .wmde-b-progress__fill {
+	background: var( --time-progress-fill-background, var( --progress-fill-background ) );
+	color: var( --time-progress-fill-color, var( --progress-fill-color ) );
 }
 
 :is( .wmde-b-progress__bar, .wmde-b-progress__text ) span {
