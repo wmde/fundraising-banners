@@ -19,7 +19,7 @@
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			<AnimatedText :is-visible="currentSlide === 3">{{ visitorsVsDonorsSentence }}</AnimatedText>
+			<AnimatedText :is-visible="currentSlide === 2">{{ visitorsVsDonorsSentence }}</AnimatedText>
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>
