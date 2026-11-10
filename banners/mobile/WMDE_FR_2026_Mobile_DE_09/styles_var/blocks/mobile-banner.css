@@ -40,7 +40,7 @@
 	--cluster-horizontal-alignment: center;
 
 	padding-block: var( --space-2xs );
-	font-size: var( --type-step-00 );
+	font-size: var( --type-step-000 );
 }
 
 .wmde-b-mobile-banner[ data-max-height ] {
