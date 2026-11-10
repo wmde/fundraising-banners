@@ -88,7 +88,7 @@ import DonationForm from './DonationFormVar.vue';
 import UpsellForm from './UpsellFormVar.vue';
 import InfoIconStraight from '@src/components/Icons/InfoIconStraight.vue';
 import BannerSlides from '../content/BannerSlidesVar.vue';
-import BannerText from '../content/BannerTextVar.vue';
+import BannerText from '../content/BannerText.vue';
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';

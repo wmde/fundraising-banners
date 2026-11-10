@@ -1,33 +1,32 @@
 <template>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose" data-align="centered">
-		<p><strong>Wikipedia ist unverkäuflich</strong></p>
-		<p>Hi, vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
+		<p><strong>Hi,</strong></p>
+		<p>
+			vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am heutigen
+			{{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia
+			zu unterstützen.
+		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
-			Am heutigen {{ currentDayName }}, um {{ liveDateAndTime.currentTime }} bitten wir Sie, die Unabhängigkeit von Wikipedia zu unterstützen.
+			{{ campaignDaySentence }}
+			Die meisten spenden, weil sie Wikipedia nützlich finden.
+			Dieses Jahr spenden jedoch weniger Menschen als sonst, dabei steigen auch unsere Kosten.
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			{{ campaignDaySentence }}
-			<AnimatedText :is-visible="currentSlide === 2">{{ visitorsVsDonorsSentence }}</AnimatedText>
-			Die meisten spenden, weil sie Wikipedia nützlich finden.
+			<AnimatedText :is-visible="currentSlide === 3">{{ visitorsVsDonorsSentence }}</AnimatedText>
+			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-b-prose" data-align="centered">
 		<p>
-			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 10&nbsp;€ helfen uns weiter. Hat
-			Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-		</p>
-	</KeenSliderSlide>
-
-	<KeenSliderSlide :current-slide="currentSlide" :index="4" class="wmde-b-prose" data-align="centered">
-		<p>
+			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
 		</p>
