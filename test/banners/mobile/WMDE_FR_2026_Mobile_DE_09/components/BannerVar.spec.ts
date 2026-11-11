@@ -27,7 +27,7 @@ let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
-describe( 'WMDE_FR_2026_Mobile_DE_09', () => {
+describe( 'WMDE_FR_2026_Mobile_DE_09_var', () => {
 	let showCallback: Mock;
 	let closeCallback: Mock;
 	let localCloseTracker: LocalCloseTracker;
