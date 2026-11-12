@@ -20,7 +20,7 @@
 	--banner-background: var( --color-white );
 	--banner-border-color: var( --color-red-600 );
 	--banner-shadow: 0 3px 0.6em rgb( 60 60 60 / 40% );
-	--font-color: var( --color-black );
+	--banner-color: var( --color-black );
 
 	--header-background: var( --color-red-200 );
 
