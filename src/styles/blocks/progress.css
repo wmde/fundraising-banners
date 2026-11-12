@@ -39,7 +39,7 @@
 
 .wmde-b-progress__track {
 	border: var( --progress-track-border-width, 3px ) solid var( --progress-track-border-color );
-	background: var( --progress-track-background );
+	background: var( --progress-track-background, transparent );
 }
 
 .wmde-b-progress__fill {
