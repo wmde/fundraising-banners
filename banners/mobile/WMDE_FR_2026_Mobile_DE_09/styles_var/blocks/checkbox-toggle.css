@@ -44,7 +44,7 @@
 }
 
 .wmde-b-checkbox-toggle:has( input:checked ) {
-	--input-background: var( --color-blue-600 );
+	--input-background: var( --checkbox-toggle-input-background-active );
 }
 
 .wmde-b-checkbox-toggle input:checked {
