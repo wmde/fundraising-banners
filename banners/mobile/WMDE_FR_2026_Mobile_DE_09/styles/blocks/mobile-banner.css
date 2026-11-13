@@ -1,0 +1,10 @@
+.wmde-b-mobile-banner {
+	min-height: var( --banner-height );
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.wmde-b-mobile-banner[ data-max-height ] {
+	max-height: var( --banner-max-height );
+}
