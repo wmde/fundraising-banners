@@ -28,6 +28,7 @@ import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import { RoundedIntegerEn } from '@src/utils/DynamicContent/formatters/RoundedIntegerEn';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -36,6 +37,9 @@ const page = new PageWPORG( mediaWiki, ( new SkinFactory( mediaWiki ) ).getSkin(
 const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
+
+const formatters = localeFactory.getFormatters();
+formatters.integer = new RoundedIntegerEn();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -62,7 +66,7 @@ app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
 	date: new Date(),
-	formatters: localeFactory.getFormatters(),
+	formatters: formatters,
 	impressionCount,
 	translator
 } );

@@ -29,6 +29,8 @@ const messages: TranslationMessages = {
 	'skip-link': 'Skip to Form',
 	'form-label': 'Donation Form',
 	'form-error': 'Please fix the errors below',
+	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million' +
+		' times a day, but currently only ca. {{totalNumberOfDonors}} people have donated.'
 };
 
 export default messages;
