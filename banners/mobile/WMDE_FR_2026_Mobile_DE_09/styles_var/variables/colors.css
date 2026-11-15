@@ -68,14 +68,14 @@
 .skin-theme-clientpref-night .wmde-banner {
 	--color-grey-800: #37383a;
 
-	--banner-background: var(--color-black );
+	--banner-background: var( --color-black );
 	--banner-shadow: none;
 	--banner-color: var( --color-white );
 
 	--header-background: var( --color-grey-800 );
 	--form-field-background: transparent;
 
-	--checkbox-toggle-background:  var( --color-grey-800 );
+	--checkbox-toggle-background: var( --color-grey-800 );
 	--checkbox-toggle-icon-color: var( --color-blue-300 );
 	--checkbox-toggle-input-background: var( --color-black );
 	--checkbox-toggle-input-background-active: var( --color-blue-300 );
@@ -86,5 +86,6 @@
 
 @media ( prefers-color-scheme: dark ) {
 	.skin-theme-clientpref-os .wmde-banner {
+		/* Empty block */
 	}
 }
