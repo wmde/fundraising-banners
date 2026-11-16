@@ -1,0 +1,35 @@
+.wmde-banner {
+	--banner-height: 393px;
+	--banner-max-height: 393px;
+	--header-height: 2.5rem;
+	--gutter: var( --space-2xs );
+	--flow-space: var( --space-2xs );
+	--stroke-size: 1px;
+
+	--transition-time: 200ms;
+	--transition-type: ease-in-out;
+	--stacker-transition-time: var( --transition-time );
+
+	--nav-button-padding: var( --space-xs );
+
+	--slider-pagination-height: var( --space-m );
+	--prose-padding: var( --space-l );
+	--prose-font-size: clamp( 0.75rem, 0.1346rem + 3.0769vw, 1rem );
+
+	--form-font-size: var( --type-step-0 );
+	--form-font-weight: var( --font-normal );
+	--form-field-padding: var( --space-2xs );
+	--form-field-line-height: 1.7lh;
+	--form-field-font-weight: var( --font-normal );
+
+	--progress-height: 0.6rem;
+	--progress-padding: var( --space-l );
+	--progress-min-width: 0%;
+	--progress-bar-padding: 0;
+
+	--form-field-border-radius: 0.85lh;
+
+	--content-copier-font-size: var( --type-step-00 );
+
+	--progress-track-background: #ffffff;
+}
