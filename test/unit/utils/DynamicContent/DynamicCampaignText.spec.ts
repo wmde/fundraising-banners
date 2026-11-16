@@ -119,7 +119,7 @@ describe( 'DynamicCampaignText', () => {
 	} );
 
 	it( 'Gets the visitors vs donors sentence', () => {
-		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-7,305' );
+		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-8,000' );
 	} );
 
 	it( 'Gets the progress bar content', () => {
