@@ -1,0 +1,28 @@
+.wmde-banner {
+	/* Banner height is set in pixels because it makes it match up to previous tests */
+	--banner-height: 336px;
+	--header-height: 1.6lh;
+	--content-height: calc( var( --banner-height ) - var( --header-height ) );
+
+	--gutter: var( --space-s );
+	--flow-space: var( --space-s );
+	--slider-text-align: left;
+	--stroke-size: 4px;
+
+	--transition-time: 200ms;
+	--transition-type: ease-in-out;
+	--stacker-transition-time: var( --transition-time );
+
+	--tag-font-size: var( --type-step-00 );
+
+	--prose-vertical-alignment: flex-end;
+	--prose-horizontal-alignment: flex-start;
+
+	--slider-pagination-height: var( --space-l );
+
+	--progress-bar-height: 0.9lh;
+
+	--form-font-size: var( --type-step-0 );
+	--form-font-weight: var( --font-normal );
+	--content-copier-font-size: var( --type-step-00 );
+}

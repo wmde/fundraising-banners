@@ -1,0 +1,21 @@
+.wmde-b-background-image {
+	z-index: 0;
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: right center;
+	opacity: 0;
+	transition: opacity var( --transition-time ) var( --transition-type );
+	background-image: var( --image );
+	writing-mode: vertical-rl;
+	text-align: right;
+	padding-inline: 1ch;
+}
+
+.wmde-b-background-image--visible {
+	opacity: 1;
+}
+
+.wmde-b-background-image figcaption {
+	opacity: 0.8;
+}
