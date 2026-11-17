@@ -12,6 +12,7 @@ NOTE: This currently supports 2 elements if you need more
 .wmde-b-stacker {
 	display: grid;
 	grid-template-columns: minmax( 0, 1fr );
+	flex-grow: 1;
 }
 
 .wmde-b-stacker > * {

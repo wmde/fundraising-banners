@@ -1,0 +1,10 @@
+.wmde-b-tag {
+	background: var( --tag-background );
+	color: var( --tag-color );
+	padding-inline: var( --space-2xs );
+	border-radius: calc( 1.1lh / 2 );
+	text-transform: uppercase;
+	font-size: var( --type-step-000 );
+	padding-block: 0.05lh;
+	margin-block: -0.05lh;
+}
