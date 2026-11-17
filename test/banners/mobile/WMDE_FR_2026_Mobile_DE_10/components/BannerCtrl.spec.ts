@@ -593,9 +593,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_ctrl', () => {
 			const { wrapper } = getWrapper();
 			expect( wrapper.props().localCloseTracker ).toBeDefined();
 		} );
-	} );
 
-	describe( 'Soft Close Return Tracking', () => {
 		it( 'Does not store a local storage item on close', async () => {
 			const { bannerElements } = getWrapper();
 

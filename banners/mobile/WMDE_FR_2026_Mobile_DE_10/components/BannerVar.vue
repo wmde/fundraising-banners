@@ -56,7 +56,11 @@
 
 			</MiniBanner>
 
-			<DonationForm v-if="contentState === ContentStates.Full" @form-interaction="$emit( 'bannerContentChanged' );" @submit="$emit( 'bannerSubmitted' )"/>
+			<DonationForm
+				v-if="contentState === ContentStates.Full"
+				@form-interaction="$emit( 'bannerContentChanged' );"
+				:local-close-tracker="props.localCloseTracker"
+			/>
 		</div>
 
 		<FundsModal
@@ -90,6 +94,7 @@ import BannerSlides from '../content/BannerSlidesVar.vue';
 import SliderPagination from './SliderPaginationVar.vue';
 import FormText from '../content/FormTextVar.vue';
 import DonationForm from './DonationFormVar.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
@@ -100,6 +105,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
+	localCloseTracker: LocalCloseTracker;
 }
 
 const props = defineProps<Props>();

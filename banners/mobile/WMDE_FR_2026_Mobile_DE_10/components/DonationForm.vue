@@ -224,7 +224,6 @@ const submit = async ( feature: TrackingFeatureName ): Promise<void> => {
 	);
 
 	// Fire an event if the donor has previously closed a banner from the soft close test
-	// TODO find out if this is needed for CTRL or VAR or both
 	const bannerType = props.localCloseTracker.getItem();
 	if ( bannerType !== '' ) {
 		tracker.trackEvent( new BannerSubmitOnReturnEvent( bannerType ) );

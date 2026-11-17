@@ -21,6 +21,8 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
@@ -29,6 +31,8 @@ const translator = ( key: string ): string => key;
 describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 	let showCallback: Mock;
 	let closeCallback: Mock;
+
+	let localCloseTracker: LocalCloseTracker;
 
 	let wrapperCache: VueWrapper<any>;
 	beforeEach( () => {
@@ -48,6 +52,11 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 		closeCallback = vi.fn();
 		HTMLDialogElement.prototype.showModal = showCallback;
 		HTMLDialogElement.prototype.close = closeCallback;
+
+		localCloseTracker = {
+			getItem: vi.fn(),
+			setItem: vi.fn(),
+		};
 	} );
 
 	beforeEach( () => {
@@ -68,6 +77,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
+				localCloseTracker,
 			},
 			global: {
 				mocks: {
@@ -95,7 +105,7 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 			formMessage: () => wrapper.find( '.wmde-b-mini-banner__form-text' ),
 			firstForm: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form' ),
 			secondForm: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form' ),
-			submitForm: () => wrapper.find<HTMLFormElement>( '.wmde-b-donation-form > form' ),
+			submitForm: () => wrapper.find<HTMLFormElement>( '.wmde-b-donation-form > form:last-child' ),
 			submitAmount: () => wrapper.find( '.wmde-b-donation-form > form [name="amount"]' ),
 			submitInterval: () => wrapper.find( '.wmde-b-donation-form > form [name="interval"]' ),
 			submitPaymentType: () => wrapper.find( '.wmde-b-donation-form > form [name="paymentType"]' ),
@@ -213,12 +223,12 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 			expect( wrapper.emitted( 'bannerClosed' )[ 0 ][ 0 ] ).toEqual( new CloseEvent( 'FullPageBanner', CloseChoices.Hide ) );
 		} );
 
-		it( 'submits opens in a new tab', async () => {
+		it( 'submits does not open in a new tab', async () => {
 			const { bannerElements } = getWrapper();
 
 			await bannerElements.miniButton().trigger( 'click' );
 
-			expect( bannerElements.submitForm().attributes( 'target' ) ).toStrictEqual( '_blank' );
+			expect( bannerElements.submitForm().attributes( 'target' ) ).toBeUndefined();
 		} );
 
 		it( 'submits hides the banner', async () => {
@@ -517,9 +527,34 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 	} );
 
 	describe( 'Soft Close Return Tracking', () => {
-		it( 'Does not have the local close tracker', async () => {
+		it( 'Does have the local close tracker', async () => {
 			const { wrapper } = getWrapper();
-			expect( wrapper.props().localCloseTracker ).toBeUndefined();
+			expect( wrapper.props().localCloseTracker ).toBeDefined();
+		} );
+
+		it( 'Does not store a local storage item on close', async () => {
+			const { bannerElements } = getWrapper();
+
+			await bannerElements.closeButton().trigger( 'click' );
+
+			expect( localCloseTracker.setItem ).not.toHaveBeenCalled();
+		} );
+
+		it( 'fires an event if a local storage item exists', async () => {
+			localCloseTracker.getItem = vi.fn().mockReturnValue( 'without_soft_close' );
+
+			const { bannerElements } = getWrapper();
+
+			await bannerElements.miniButton().trigger( 'click' );
+
+			bannerElements.submitForm().element.submit = vi.fn();
+
+			await bannerElements.intervalMonthly().trigger( 'click' );
+			await bannerElements.amount15().trigger( 'click' );
+			await bannerElements.paymentMethodPPL().trigger( 'click' );
+			await bannerElements.firstForm().trigger( 'submit' );
+
+			expect( tracker.trackEvent ).toHaveBeenCalledWith( new BannerSubmitOnReturnEvent( 'without_soft_close' ) );
 		} );
 	} );
 } );

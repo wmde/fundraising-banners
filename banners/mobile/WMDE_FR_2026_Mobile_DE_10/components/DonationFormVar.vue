@@ -135,7 +135,7 @@
 			</div>
 		</footer>
 
-		<form ref="submitForm" :action="formAction" style="display: none;" method="post" target="_blank">
+		<form ref="submitForm" :action="formAction" style="display: none;" method="post">
 			<SubmitValues/>
 		</form>
 	</div>
@@ -165,6 +165,13 @@ import { BannerSubmitEvent } from '@src/tracking/events/BannerSubmitEvent';
 import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
+import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+
+interface Props {
+	localCloseTracker: LocalCloseTracker
+}
+const props = defineProps<Props>();
 
 const emit = defineEmits( [ 'close', 'formInteraction', 'submit' ] );
 
@@ -220,6 +227,12 @@ const submit = async ( feature: TrackingFeatureName ): Promise<void> => {
 	await nextTick();
 	emit( 'submit' );
 	tracker.trackEvent( new BannerSubmitEvent( feature, formModel.interval.value !== Intervals.ONCE.value ? 'recurring' : 'non-recurring' ) );
+
+	// Fire an event if the donor has previously closed a banner from the soft close test
+	const bannerType = props.localCloseTracker.getItem();
+	if ( bannerType !== '' ) {
+		tracker.trackEvent( new BannerSubmitOnReturnEvent( bannerType ) );
+	}
 	submitForm.value.submit();
 };
 
