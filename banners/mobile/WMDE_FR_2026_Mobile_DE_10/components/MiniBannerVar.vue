@@ -3,27 +3,27 @@
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 0"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/VST_images_the_Lagoon_Nebula.jpg/960px-VST_images_the_Lagoon_Nebula.jpg"
-			:credit="$translate( 'photo-credit', { name: 'ESO, VST images the Lagoon Nebula, CC BY 4.0' } )"
+			:credit="'ESO, CC BY 4.0'"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 1"
-			:credit="$translate( 'photo-credit', { name: 'Patricia Costillo, Wikimania 2019 Group Photo 2, CC BY-SA 4.0' } )"
+			:credit="'Patricia Costillo, CC BY-SA 4.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Wikimania_2019_Group_Photo_2.jpg/960px-Wikimania_2019_Group_Photo_2.jpg"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 2"
-			:credit="$translate( 'photo-credit', { name: 'VGrigas (WMF), Papaul Tshibamba 4, CC BY-SA 3.0' } )"
+			:credit="'VGrigas (WMF), CC BY-SA 3.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Papaul_Tshibamba-4.jpg/960px-Papaul_Tshibamba-4.jpg"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 3"
-			:credit="$translate( 'photo-credit', { name: 'Wikimedia Foundation, Wikipedia mini globe handheld, CC BY-SA 3.0' } )"
+			:credit="'Wikimedia Foundation, CC BY-SA 3.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Wikipedia_mini_globe_handheld.jpg/960px-Wikipedia_mini_globe_handheld.jpg"
 		/>
 		<BackgroundImage
 			:visible="formIsVisible"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/960px-A_small_cup_of_coffee.JPG"
-			:credit="$translate( 'photo-credit', { name: 'Julius Schorzman, A small cup of coffee, CC BY-SA 2.0' } )"
+			:credit="'Julius Schorzman, CC BY-SA 2.0'"
 		/>
 
 		<div class="wmde-b-mini-banner__foreground">
