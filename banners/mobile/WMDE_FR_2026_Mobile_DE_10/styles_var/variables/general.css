@@ -1,6 +1,5 @@
 .wmde-banner {
-	/* Banner height is set in pixels because it makes it match up to previous tests */
-	--banner-height: 369px;
+	--banner-height: 387px;
 	--header-height: 1.6lh;
 	--content-height: calc( var( --banner-height ) - var( --header-height ) );
 

@@ -12,8 +12,13 @@
 	display: flex;
 	flex-direction: column;
 	flex: 1 0 auto;
-	background-image: linear-gradient( 250deg, rgb( 0, 0, 0, 0 ) 29.88%, #000000 59.52% );
+	background-image: linear-gradient( 223deg, rgb( 0, 0, 0, 0 ) 27.9%, rgb( 0, 0, 0, 0.8 ) 47.16% );
 	padding-block-start: var( --gutter );
+}
+
+.wmde-b-mini-banner__content {
+	display: flex;
+	flex-direction: column;
 }
 
 .wmde-b-mini-banner__form-text {
@@ -21,6 +26,10 @@
 	flex-direction: column;
 	justify-content: flex-end;
 	padding-block-end: var( --gutter );
+}
+
+.wmde-b-mini-banner :is( p, h2 ):not( :has( .wmde-b-tag ) ) {
+	text-shadow: 1px 1px 2px var( --text-shadow );
 }
 
 .wmde-b-mini-banner h2 {

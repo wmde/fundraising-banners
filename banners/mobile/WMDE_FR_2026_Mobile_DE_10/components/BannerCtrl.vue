@@ -13,7 +13,7 @@
 			:is-visible="contentState === ContentStates.Mini"
 		>
 			<template #banner-slider>
-				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000">
+				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000" :start-delay="3000">
 					<template #slides="{ currentSlide }: any">
 						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
 					</template>

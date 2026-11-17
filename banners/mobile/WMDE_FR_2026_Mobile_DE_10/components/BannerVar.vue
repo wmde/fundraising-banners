@@ -33,6 +33,7 @@
 						:with-pagination="false"
 						:play="slideshowShouldPlay"
 						:interval="7000"
+						:start-delay="3000"
 						@slide-changed="onSlideChanged"
 					>
 						<template #slides="{ currentSlide }: any">

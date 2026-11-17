@@ -1,26 +1,15 @@
 .wmde-b-background-image {
 	z-index: 0;
 	position: absolute;
-	inset: 0;
-	margin: 0;
-	overflow: hidden;
+	inset: 0 0 0 clamp( 2.5rem, -2.5rem + 25vw, 10rem );
+	background-size: cover;
+	background-position: left center;
 	opacity: 0;
 	transition: opacity var( --transition-time ) var( --transition-type );
+	background-image: linear-gradient( 90deg, rgb( 0, 0, 0, 1 ) 0%, rgb( 0, 0, 0, 0 ) 10% ), var( --image );
 	writing-mode: vertical-rl;
 	text-align: right;
 	padding-inline: 1ch;
-}
-
-.wmde-b-background-image::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background-image: var( --image );
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: var( --position, 50% 50% );
-	transform: translateY( var( --offset-y, 0% ) ) scale( var( --zoom, 1 ) );
-	transform-origin: var( --position, 50% 50% );
 }
 
 .wmde-b-background-image--visible {
@@ -28,6 +17,6 @@
 }
 
 .wmde-b-background-image figcaption {
-	opacity: 0.8;
-	font-size: 0.5rem;
+	font-size: 0.8rem;
+	text-shadow: 1px 1px 2px var( --text-shadow );
 }

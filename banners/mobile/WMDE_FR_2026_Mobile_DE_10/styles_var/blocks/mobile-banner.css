@@ -8,6 +8,10 @@
 	box-shadow: 0 4px 10px 0 rgb( 0, 0, 0, 0.5 );
 }
 
+.wmde-b-mobile-banner--pending {
+	opacity: 0;
+}
+
 .wmde-b-mobile-banner__header {
 	--repel-vertical-alignment: stretch;
 	--cluster-vertical-alignment: stretch;

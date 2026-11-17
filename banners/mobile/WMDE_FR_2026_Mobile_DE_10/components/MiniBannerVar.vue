@@ -3,36 +3,33 @@
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 0"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/VST_images_the_Lagoon_Nebula.jpg/960px-VST_images_the_Lagoon_Nebula.jpg"
-			:credit="'ESO, CC BY 4.0'"
+			credit="ESO, CC BY 4.0"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 1"
-			:credit="'Patricia Costillo, CC BY-SA 4.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Wikimania_2019_Group_Photo_2.jpg/960px-Wikimania_2019_Group_Photo_2.jpg"
+			credit="Patricia Costillo, CC BY-SA 4.0"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 2"
-			:credit="'VGrigas (WMF), CC BY-SA 3.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Papaul_Tshibamba-4.jpg/960px-Papaul_Tshibamba-4.jpg"
-			position="40% 50%"
-			:zoom="1.5"
-			offset-y="-15%"
+			credit="VGrigas (WMF), CC BY-SA 3.0"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 3"
-			:credit="'Wikimedia Foundation, CC BY-SA 3.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Wikipedia_mini_globe_handheld.jpg/960px-Wikipedia_mini_globe_handheld.jpg"
+			credit="Wikimedia Foundation, CC BY-SA 3.0"
 		/>
 		<BackgroundImage
 			:visible="formIsVisible"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/960px-A_small_cup_of_coffee.JPG"
-			:credit="'Julius Schorzman, CC BY-SA 2.0'"
+			credit="Julius Schorzman, CC BY-SA 2.0"
 		/>
 
 		<div class="wmde-b-mini-banner__foreground">
-			<div class="wmde-b-mini-banner__content wmde-b-stacker" :data-index="formIsVisible ? 1 : 0">
+			<div class="wmde-b-stacker" :data-index="formIsVisible ? 1 : 0">
 
-				<div>
+				<div class="wmde-b-mini-banner__content">
 					<slot name="banner-slider"/>
 					<slot name="banner-text"/>
 
