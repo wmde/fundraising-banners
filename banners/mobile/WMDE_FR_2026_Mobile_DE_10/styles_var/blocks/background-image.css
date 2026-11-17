@@ -2,14 +2,25 @@
 	z-index: 0;
 	position: absolute;
 	inset: 0;
-	background-size: cover;
-	background-position: right center;
+	margin: 0;
+	overflow: hidden;
 	opacity: 0;
 	transition: opacity var( --transition-time ) var( --transition-type );
-	background-image: var( --image );
 	writing-mode: vertical-rl;
 	text-align: right;
 	padding-inline: 1ch;
+}
+
+.wmde-b-background-image::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: var( --image );
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: var( --position, 50% 50% );
+	transform: translateY( var( --offset-y, 0% ) ) scale( var( --zoom, 1 ) );
+	transform-origin: var( --position, 50% 50% );
 }
 
 .wmde-b-background-image--visible {

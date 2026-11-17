@@ -14,6 +14,9 @@
 			:visible="!formIsVisible && currentSlide == 2"
 			:credit="'VGrigas (WMF), CC BY-SA 3.0'"
 			image="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Papaul_Tshibamba-4.jpg/960px-Papaul_Tshibamba-4.jpg"
+			position="40% 50%"
+			:zoom="1.5"
+			offset-y="-15%"
 		/>
 		<BackgroundImage
 			:visible="!formIsVisible && currentSlide == 3"
