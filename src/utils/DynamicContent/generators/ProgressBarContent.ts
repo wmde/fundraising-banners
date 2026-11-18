@@ -55,6 +55,10 @@ export class ProgressBarContent implements DynamicProgressBarContent {
 		return this._currencyFormatter.millions( this._donationSum );
 	}
 
+	public get amountDonatedInCents(): number {
+		return Math.floor( this._donationSum );
+	}
+
 	public get amountNeeded(): string {
 		let amountToShow = this._currencyFormatter.millions( this._remainingDonationSum );
 		if ( this._remainingDonationSum < 1_000_000 ) {
