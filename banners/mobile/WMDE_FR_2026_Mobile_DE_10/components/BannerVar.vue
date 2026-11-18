@@ -6,7 +6,7 @@
 					<InfoIconStraight data-icon/> Warum spenden?
 				</button>
 
-				<button class="wmde-b-nav-button" @click.prevent="onClose( CloseChoices.AlreadyDonated )">
+				<button class="wmde-b-nav-button wmde-b-nav-button__already-donated" @click.prevent="onClose( CloseChoices.AlreadyDonated )">
 					<TickIcon data-icon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
 				</button>
 			</div>

@@ -29,3 +29,9 @@
 .wmde-b-nav-button[ data-icon ] {
 	aspect-ratio: 1;
 }
+
+@media ( max-width: 394px ) {
+	.wmde-b-nav-button.wmde-b-nav-button__already-donated {
+		display: none;
+	}
+}
