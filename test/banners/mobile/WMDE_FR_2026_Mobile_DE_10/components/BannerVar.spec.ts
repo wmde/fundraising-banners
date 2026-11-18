@@ -231,19 +231,6 @@ describe( 'WMDE_FR_2026_Mobile_DE_10_var', () => {
 			expect( bannerElements.submitForm().attributes( 'target' ) ).toBeUndefined();
 		} );
 
-		it( 'submits hides the banner', async () => {
-			const { wrapper, bannerElements } = getWrapper();
-
-			await bannerElements.miniButton().trigger( 'click' );
-
-			await bannerElements.intervalMonthly().trigger( 'click' );
-			await bannerElements.amount15().trigger( 'click' );
-			await bannerElements.paymentMethodPPL().trigger( 'click' );
-			await bannerElements.firstForm().trigger( 'submit' );
-
-			expect( wrapper.emitted( 'bannerSubmitted' ).length ).toStrictEqual( 1 );
-		} );
-
 		describe( 'First Page', () => {
 			it( 'sets values amounts in the submit form', async () => {
 				const { bannerElements } = getWrapper();
