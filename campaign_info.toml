@@ -256,3 +256,31 @@ tracking = "org-photobanner00-261116-var"
 [photo_banner_feature.test_matrix]
 device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
 orientation = [ "portrait", "landscape"]
+
+[drama_progress_feature]
+name = "Drama Progress Bar"
+icon = "mobile"
+campaign = "WMDE_FR_2026_drama_progress_00"
+description = "This is a feature banner for the new photo banner"
+campaign_tracking = "dramaprogress00-ba-261120"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva"
+preview_link_darkmode = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B26_WMDE_local_prototype&useskin=minerva&minervanightmode=1"
+preview_link_offline = ""
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode'
+preview_url_darkmode = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{banner}}&useskin=minerva&devMode&minervanightmode=1'
+wrapper_template = "wikipedia_org"
+use_of_funds_source = "MediaWiki:WMDE_Fundraising/UseOfFunds_2026_DE"
+
+[drama_progress_feature.banners.ctrl]
+filename = "./banners/features/WMDE_FR_2026_drama_progress_00/banner_ctrl.ts"
+pagename = "WMDE_FR_2026_drama_progress_00_ctrl"
+tracking = "org-dramaprogress00-261120-ctrl"
+
+[drama_progress_feature.banners.var]
+filename = "./banners/features/WMDE_FR_2026_drama_progress_00/banner_var.ts"
+pagename = "WMDE_FR_2026_drama_progress_00_var"
+tracking = "org-dramaprogress00-261120-var"
+
+[drama_progress_feature.test_matrix]
+device = [ "android_old_chrome", "android_new_chrome", "iphone_old", "iphone_small", "iphone_new" ]
+orientation = [ "portrait", "landscape"]

@@ -1,0 +1,3 @@
+.wmde-u-highlighted-text[ data-error ] {
+	color: var( --color-error );
+}
