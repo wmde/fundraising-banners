@@ -32,7 +32,7 @@ const translator = ( key: string ): string => key;
 const widthForLargeScreen = 1301;
 const widthForSmallScreen = 1300;
 
-describe( 'WMDE_FR_2026_Desktop_DE_11_var', () => {
+describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 
 	let wrapperCache: VueWrapper<any>;
 	let showCallback: Mock;
@@ -121,6 +121,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_var', () => {
 			submitButton: () => wrapper.find( '.wmde-b-donation-form form:first-child > button' ),
 			onceButton: () => wrapper.find( '.wmde-b-upsell-modal form > div:last-child .wmde-b-button:first-child' ),
 			yearlyButton: () => wrapper.find( '.wmde-b-upsell-modal form > div:last-child .wmde-b-button:last-child' ),
+			progressBar: () => wrapper.find( '.wmde-b-progress' ),
 			progressBarTrack: () => wrapper.find( '.wmde-b-progress__track' ),
 			progressBarFill: () => wrapper.find( '.wmde-b-progress__fill' ),
 		};
@@ -236,6 +237,12 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_var', () => {
 
 			expect( bannerElements.progressBarFill().text() ).toStrictEqual( 'amountDonated' );
 			expect( bannerElements.progressBarTrack().text() ).toStrictEqual( 'donationTargetAmount' );
+		} );
+
+		it( 'passes the progress to the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBar().attributes( 'style' ) ).toStrictEqual( '--progress-percentage: 42%;' );
 		} );
 	} );
 
