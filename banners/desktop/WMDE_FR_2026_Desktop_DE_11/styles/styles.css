@@ -37,4 +37,5 @@
 @import '@src/styles/blocks/soft-close.css';
 @import '@src/styles/blocks/stacker.css';
 @import '@src/styles/blocks/text-radio.css';
-@import 'blocks/donation-form.css';
+@import 'blocks/donation-form_var.css';
+@import 'blocks/upsell-modal.css';

@@ -1,11 +1,11 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles_var.css';
+import './styles/styles.css';
 import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import Banner from './components/BannerVar.vue';
+import BannerCtrl from './components/BannerCtrl.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -55,7 +55,7 @@ const app = createVueApp( BannerConductor, {
 		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', null ),
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: Banner,
+	banner: BannerCtrl,
 	fallbackBanner: FallbackBanner,
 	minWidthForMainBanner: 800,
 	impressionCount,
