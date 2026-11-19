@@ -27,3 +27,15 @@
 	--color: var( --tag-colour-error, var( --tag-colour ) );
 	--background: var( --tag-background-error );
 }
+
+.wmde-b-prose .wmde-b-photo-credit,
+.wmde-b-prose .wmde-b-photo-credit:visited,
+.wmde-b-prose .wmde-b-photo-credit:hover,
+.wmde-b-prose .wmde-b-photo-credit:focus-visible {
+	color: white;
+	display: block;
+	width: fit-content;
+	margin-top: 5px;
+	margin-bottom: 0;
+	font-size: 0.5rem;
+}

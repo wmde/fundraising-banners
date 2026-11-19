@@ -1,5 +1,5 @@
 .wmde-banner {
-	--banner-height: 387px;
+	--banner-height: 350px;
 	--header-height: 1.6lh;
 	--content-height: calc( var( --banner-height ) - var( --header-height ) );
 

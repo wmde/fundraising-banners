@@ -14,7 +14,7 @@
 interface Props {
 	image: string;
 	visible: boolean;
-	credit: string;
+	credit?: string;
 }
 
 defineProps<Props>();
