@@ -1,0 +1,45 @@
+.wmde-b-donation-form {
+	height: 100%;
+}
+
+.wmde-b-donation-form__step {
+	display: flex;
+	flex-direction: column;
+	justify-content: var( --content-alignment, flex-start );
+	gap: var( --space-2xs );
+	text-wrap: balance;
+}
+
+.wmde-b-donation-form__step:first-child {
+	--flow-space: var( --space-3xs );
+}
+
+.wmde-b-donation-form__step[ data-vertical-alignment='space' ] {
+	--content-alignment: space-between;
+}
+
+.wmde-b-donation-form__step[ data-vertical-alignment='center' ] {
+	--content-alignment: center;
+}
+
+.wmde-b-donation-form__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var( --gutter );
+}
+
+.wmde-b-donation-form__error {
+	color: var( --color-error );
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.wmde-b-donation-form__error:focus {
+	outline: 2px solid var( --color-error );
+	outline-offset: 5px;
+}
+
+.wmde-b-donation-form h2,
+.wmde-b-donation-form p {
+	font-size: var( --type-step-00 );
+}
