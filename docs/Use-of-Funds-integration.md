@@ -15,16 +15,26 @@ To fulfill that requirement, we have implemented 3 styles/solutions to import Uo
   We might replace the direct import with a different solution if people edit the "use of funds" content multiple times
   during the campaign and the frequent re-deployments become too cumbersome.
 
-## Changing the "Use of Funds" page at the beginning of the campaign
+## Changing the "Use of Funds" page
 
-Each yearly campaign has two pages on meta.wikipedia.org that contain the "Use of Funds" data. You can generate this data with a script in the
-[fundraising-frontent-content](https://github.com/wmde/fundraising-frontend-content) repository.
-Each year, create two new pages on meta.wikipedia.org, one for English and one for German. Example pages from 2023 are:
+Whenever there is a 'content' change or 'structure' change for UoF, we do changes on meta.wikipedia.org.  
+CentralNotice or meta.wikipedia.org contains the "Use of Funds" data. Please follow given below 
+steps to get the UoF content successfully running for the fundraising banners:
+
+<ins>**Note:** </ins> Unlike 'Use of Funds' pages, the `Campaign Parameters` on CentralNotice change every year.
+
+1. Create two new pages on meta.wikipedia.org, one for English and one for German. Example pages from 2023 are:
 
 * https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/UseOfFunds_2023_DE
 * https://meta.wikimedia.org/wiki/MediaWiki:WMDE_Fundraising/UseOfFunds_2023_EN
 
-To use different pages, change the setting `use_of_funds_source` in the file [`campaigns_info.toml`](../campaign_info.toml).
+2. Generate the content for the above-given pages using the `Extracting "Use of funds" content for banners` guide 
+from [fundraising-frontend-content](https://github.com/wmde/fundraising-frontend-content/blob/test/README.md)
+repository.
+
+3. Upload the generated content from step 2 to the respective pages on CentralNotice.
+
+4. To use the new UoF pages, change the setting `use_of_funds_source` in the file [`campaigns_info.toml`](../campaign_info.toml).
 
 ## Initializing the loader class in the entry points
 
