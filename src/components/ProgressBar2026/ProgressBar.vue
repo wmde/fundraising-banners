@@ -1,5 +1,5 @@
 <template>
-	<div class="wmde-b-progress" :class="{ 'wmde-b-progress--visible' : isVisible }" :style="{ '--progress-percentage': progressPercentage + '%' }">
+	<div class="wmde-b-progress" :class="{ 'wmde-b-progress--visible' : isVisible }" :style="{ '--progress-percentage': progressPercentage + '%' }" :data-progress-time="kind === 'time' ? '' : null">
 		<div class="wmde-b-progress__text wmde-c-repel" v-if="$slots['left-text'] || $slots['right-text']" aria-hidden="true">
 			<span>
 				<slot name="left-text"/>
@@ -33,7 +33,10 @@
 interface Props {
 	isVisible: boolean;
 	progressPercentage: number;
+	kind?: 'amount' | 'time';
 }
 
-defineProps<Props>();
+withDefaults( defineProps<Props>(), {
+	kind: 'amount',
+} );
 </script>
