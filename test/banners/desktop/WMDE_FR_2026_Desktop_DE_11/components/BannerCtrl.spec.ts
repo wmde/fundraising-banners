@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_11/components/BannerCtrl.vue';
+import BannerCtrl from '@banners/desktop/WMDE_FR_2026_Desktop_DE_11/components/BannerCtrl.vue';
 import { createFormItems } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_11/form_items';
 import { formItems as defaultFormItems } from '@test/banners/formItems';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -32,7 +32,7 @@ const translator = ( key: string ): string => key;
 const widthForLargeScreen = 1301;
 const widthForSmallScreen = 1300;
 
-describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
+describe( 'WMDE_FR_2026_Desktop_DE_11_var', () => {
 
 	let wrapperCache: VueWrapper<any>;
 	let showCallback: Mock;
@@ -46,7 +46,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 			trackEvent: vi.fn()
 		};
 
-		// for use of funds dialogue
+		// for dialogues
 		showCallback = vi.fn();
 		closeCallback = vi.fn();
 		HTMLDialogElement.prototype.showModal = showCallback;
@@ -68,7 +68,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 		timer: Timer = null,
 		formItems: DonationFormItems = null
 	): { wrapper: VueWrapper<any>, bannerElements: any } => {
-		const wrapper = mount( Banner, {
+		const wrapper = mount( BannerCtrl, {
 			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
@@ -94,18 +94,17 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 		const bannerElements = {
 			closeButton: () => wrapper.find( '.wmde-c-desktop-banner__header button' ),
 			donatedButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-left > button:last-child' ),
-			backButton: () => wrapper.find( '.wmde-c-desktop-banner__back button' ),
+			backButton: () => wrapper.find( '.wmde-b-upsell-modal__heading button' ),
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
 			hideUseOfFundsButton: () => wrapper.find( '.wmde-banner-funds-modal-close button' ),
-			formContainer: () => wrapper.find( '.wmde-b-donation-form' ),
-			firstForm: () => wrapper.find( '.wmde-b-donation-form form:first-child' ),
-			secondForm: () => wrapper.find( '.wmde-b-donation-form form:last-child' ),
+			firstForm: () => wrapper.find( '.wmde-b-donation-form' ),
+			upsellModalContent: () => wrapper.find<HTMLDialogElement>( '.wmde-b-upsell-modal > div' ),
 			submitForm: () => wrapper.find<HTMLFormElement>( '.wmde-b-donation-form + form' ),
 			submitAmount: () => wrapper.find( '.wmde-b-donation-form + form [name="amount"]' ),
 			submitInterval: () => wrapper.find( '.wmde-b-donation-form + form [name="interval"]' ),
 			submitPaymentType: () => wrapper.find( '.wmde-b-donation-form + form [name="paymentType"]' ),
-			mainErrorMessage: () => wrapper.find( '.wmde-b-donation-form form:first-child > .wmde-b-callout:first-child' ),
+			mainErrorMessage: () => wrapper.find( '.wmde-b-donation-form > .wmde-b-callout:first-child' ),
 			intervalField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-interval-error)' ),
 			amountField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-amount-error)' ),
 			paymentMethodField: () => wrapper.find( '.wmde-b-field-container:has(#wmde-b-payment-type-error)' ),
@@ -120,8 +119,8 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 			paymentMethodPPL: () => wrapper.find( '[name="paymentMethod"][value="PPL"]' ),
 			paymentMethodBEZ: () => wrapper.find( '[name="paymentMethod"][value="BEZ"]' ),
 			submitButton: () => wrapper.find( '.wmde-b-donation-form form:first-child > button' ),
-			onceButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:first-child' ),
-			yearlyButton: () => wrapper.find( '.wmde-b-donation-form form:last-child .wmde-b-button:last-child' ),
+			onceButton: () => wrapper.find( '.wmde-b-upsell-modal form > div:last-child .wmde-b-button:first-child' ),
+			yearlyButton: () => wrapper.find( '.wmde-b-upsell-modal form > div:last-child .wmde-b-button:last-child' ),
 			progressBarTrack: () => wrapper.find( '.wmde-b-progress__track' ),
 			progressBarFill: () => wrapper.find( '.wmde-b-progress__fill' ),
 		};
@@ -241,38 +240,22 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 	} );
 
 	describe( 'Donation Form', () => {
-		it( 'Shows and hides the form steps', async () => {
+		it( 'Shows and hides the dialog', async () => {
 			const { bannerElements } = getWrapper();
 
-			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '0' );
+			expect( showCallback ).not.toHaveBeenCalled();
+			expect( closeCallback ).not.toHaveBeenCalled();
 
 			await bannerElements.intervalOnce().trigger( 'click' );
 			await bannerElements.amount5().trigger( 'click' );
 			await bannerElements.paymentMethodPPL().trigger( 'click' );
 			await bannerElements.firstForm().trigger( 'submit' );
 
-			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '1' );
+			expect( showCallback ).toHaveBeenCalled();
 
 			await bannerElements.backButton().trigger( 'click' );
 
-			expect( bannerElements.formContainer().attributes( 'data-index' ) ).toStrictEqual( '0' );
-		} );
-
-		it( 'Shows and hides the back button', async () => {
-			const { bannerElements } = getWrapper();
-
-			expect( bannerElements.backButton().exists() ).toBeFalsy();
-
-			await bannerElements.intervalOnce().trigger( 'click' );
-			await bannerElements.amount5().trigger( 'click' );
-			await bannerElements.paymentMethodPPL().trigger( 'click' );
-			await bannerElements.firstForm().trigger( 'submit' );
-
-			expect( bannerElements.backButton().exists() ).toBeTruthy();
-
-			await bannerElements.backButton().trigger( 'click' );
-
-			expect( bannerElements.backButton().exists() ).toBeFalsy();
+			expect( closeCallback ).toHaveBeenCalled();
 		} );
 
 		it( 'submits do not open in a new tab', async () => {
@@ -472,20 +455,6 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 				expect( document.activeElement ).toStrictEqual( bannerElements.firstForm().element );
 			} );
 
-			it( 'Focuses the second form when the skip link is clicked', async () => {
-				const { bannerElements } = getWrapper();
-
-				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount5().trigger( 'click' );
-				await bannerElements.paymentMethodPPL().trigger( 'click' );
-				await bannerElements.firstForm().trigger( 'submit' );
-
-				await vitest.runAllTimersAsync();
-
-				await bannerElements.skipLink().trigger( 'click' );
-				expect( document.activeElement ).toStrictEqual( bannerElements.secondForm().element );
-			} );
-
 			it( 'Focuses the second form when it becomes visible', async () => {
 				const { bannerElements } = getWrapper();
 				const submitForm = bannerElements.submitForm();
@@ -498,7 +467,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 
 				await vitest.runAllTimersAsync();
 
-				expect( document.activeElement ).toStrictEqual( bannerElements.secondForm().element );
+				expect( document.activeElement ).toStrictEqual( bannerElements.upsellModalContent().element );
 			} );
 
 			it( 'Focuses the first form when the back button is clicked', async () => {
@@ -517,65 +486,6 @@ describe( 'WMDE_FR_2026_Desktop_DE_11_ctrl', () => {
 				await vitest.runAllTimersAsync();
 
 				expect( document.activeElement ).toStrictEqual( bannerElements.firstForm().element );
-			} );
-
-			it( 'Handles showing and hiding the form steps from screen readers', async () => {
-				const { bannerElements } = getWrapper();
-
-				expect( bannerElements.firstForm().attributes( 'aria-hidden' ) ).toBeUndefined();
-				expect( bannerElements.secondForm().attributes( 'aria-hidden' ) ).toStrictEqual( 'true' );
-
-				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount5().trigger( 'click' );
-				await bannerElements.paymentMethodPPL().trigger( 'click' );
-				await bannerElements.firstForm().trigger( 'submit' );
-
-				await vitest.runAllTimersAsync();
-
-				expect( bannerElements.firstForm().attributes( 'aria-hidden' ) ).toStrictEqual( 'true' );
-				expect( bannerElements.secondForm().attributes( 'aria-hidden' ) ).toBeUndefined();
-
-				await bannerElements.backButton().trigger( 'click' );
-				await vitest.runAllTimersAsync();
-
-				expect( bannerElements.firstForm().attributes( 'aria-hidden' ) ).toBeUndefined();
-				expect( bannerElements.secondForm().attributes( 'aria-hidden' ) ).toStrictEqual( 'true' );
-			} );
-
-			it( 'Handles tabindexes on step change', async () => {
-				const { bannerElements } = getWrapper();
-				const submitForm = bannerElements.submitForm();
-				submitForm.element.submit = vi.fn();
-
-				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.amount5().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.onceButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.yearlyButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-
-				await bannerElements.intervalOnce().trigger( 'click' );
-				await bannerElements.amount5().trigger( 'click' );
-				await bannerElements.paymentMethodPPL().trigger( 'click' );
-				await bannerElements.firstForm().trigger( 'submit' );
-				await vitest.runAllTimersAsync();
-
-				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.amount5().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.onceButton().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.yearlyButton().attributes( 'tabindex' ) ).toBeUndefined();
-
-				await bannerElements.backButton().trigger( 'click' );
-				await vitest.runAllTimersAsync();
-
-				expect( bannerElements.intervalOnce().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.amount5().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.paymentMethodPPL().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.submitButton().attributes( 'tabindex' ) ).toBeUndefined();
-				expect( bannerElements.onceButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
-				expect( bannerElements.yearlyButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 			} );
 		} );
 	} );

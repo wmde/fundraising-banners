@@ -38,7 +38,7 @@ To choose one action (and potentially changing parameters) means our form action
     - `useFormActionWithReceipt.ts`
     - `FormActions.ts`
     - `createFormActions.ts`
-    - `BannerVar.vue` / `BannerVar.vue` (sets result of custom form action composable to `form-action-override` of `MultiStepDonation` component )
+    - `BannerCtrl.vue` / `BannerCtrl.vue` (sets result of custom form action composable to `form-action-override` of `MultiStepDonation` component )
 - **description:**
   - See [Show Donation Receipt checkbox only below a certain amount threshold with different submit button labels](DonationForms.md)
 - **used in (banner name):**
@@ -58,5 +58,5 @@ app.provide( 'formActions', createFormActions( page.getTracking(), impressionCou
 ```
 
 ## Creating a new behavior, based on form state
-Create a new `useFormActionZZZ` composable (see default `useFormAction.ts` for reference), use it in `BannerVar.vue`. Set `formAction.value` of custom form action composable to `form-action-override` of `MultiStepDonation` component
+Create a new `useFormActionZZZ` composable (see default `useFormAction.ts` for reference), use it in `BannerCtrl.vue`. Set `formAction.value` of custom form action composable to `form-action-override` of `MultiStepDonation` component
 

@@ -32,14 +32,7 @@
 			</div>
 		</div>
 
-		<header role="none" class="wmde-c-desktop-banner__back wmde-c-cluster">
-			<button class="wmde-b-nav-button" @click.prevent="onBack" data-icon v-if="formStep > 0">
-				<span class="visually-hidden">{{ $translate( 'back-button' ) }}</span>
-				<FormPreviousIcon/>
-			</button>
-		</header>
-
-		<div class="wmde-c-desktop-banner__form wmde-c-flow wmde-b-donation-form__wrapper">
+		<div class="wmde-c-desktop-banner__form wmde-b-donation-form__wrapper">
 			<DonationForm :local-close-tracker="localCloseTracker" ref="donationForm" @form-interaction="onFormInteraction"/>
 		</div>
 
@@ -85,7 +78,6 @@ import { CloseEvent } from '@src/tracking/events/CloseEvent';
 import type { TrackingFeatureName } from '@src/tracking/TrackingEvent';
 import { useBannerHider } from '@src/components/composables/useBannerHider';
 import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
-import FormPreviousIcon from '@src/components/Icons/FormPreviousIcon.vue';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
@@ -116,7 +108,6 @@ const contentState = ref<ContentStates>( ContentStates.Main );
 const onLargeScreen = useDisplaySwitch( 1300 );
 const slideShowStopped = ref<boolean>( false );
 const slideshowShouldPlay = computed( () => props.bannerState === BannerStates.Visible && !slideShowStopped.value );
-const formStep = computed<number>( () => donationForm.value?.step );
 
 watch( contentState, async () => {
 	emit( 'bannerContentChanged' );
@@ -141,7 +132,6 @@ const onFormInteraction = (): void => {
 	emit( 'bannerContentChanged' );
 };
 
-const onBack = (): void => donationForm.value.onBack();
 const onFocusMainForm = (): void => donationForm.value.focusMainForm();
 
 </script>
