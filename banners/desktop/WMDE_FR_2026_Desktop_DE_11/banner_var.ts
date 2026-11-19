@@ -1,11 +1,11 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.css';
+import './styles/styles_var.css';
 import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
 import BannerConductor from '@src/components/BannerConductor/FallbackBannerConductor.vue';
-import BannerCtrl from './components/BannerCtrl.vue';
+import Banner from './components/BannerVar.vue';
 import FallbackBanner from './components/FallbackBanner.vue';
 import { UrlRuntimeEnvironment } from '@src/utils/RuntimeEnvironment';
 import { WindowResizeHandler } from '@src/utils/ResizeHandler';
@@ -20,7 +20,7 @@ import { LocalImpressionCount } from '@src/utils/LocalImpressionCount';
 import { LegacyTrackerWPORG } from '@src/tracking/LegacyTrackerWPORG';
 import eventMappings from './event_map';
 import { createFallbackDonationURL } from '@src/createFallbackDonationURL';
-import messages from './messages';
+import messages from './messages_var';
 import { LocaleFactoryDe } from '@src/utils/LocaleFactory/LocaleFactoryDe';
 import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
@@ -29,6 +29,7 @@ import { currentCampaignTimePercentage } from '@src/components/ProgressBar/curre
 import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import DailyAmounts2025 from './DailyAmounts2025';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -53,9 +54,10 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
 		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', null ),
+		dailyAmounts: new DailyAmounts2025( date, page.getCampaignParameters(), formatters ),
 	},
 	resizeHandler: new WindowResizeHandler(),
-	banner: BannerCtrl,
+	banner: Banner,
 	fallbackBanner: FallbackBanner,
 	minWidthForMainBanner: 800,
 	impressionCount,
