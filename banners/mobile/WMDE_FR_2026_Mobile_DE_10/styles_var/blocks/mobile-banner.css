@@ -16,6 +16,8 @@
 	--repel-vertical-alignment: stretch;
 	--cluster-vertical-alignment: stretch;
 	--gutter: 0;
+	--nav-button-padding: var( --space-3xs );
+	--nav-button-font-size: var( --type-step-000 );
 
 	min-height: var( --header-height );
 }

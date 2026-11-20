@@ -7,8 +7,8 @@
 		<h2>Millionen Themen. Frei zugänglich.</h2>
 		<p>
 			Ein fast unendlicher Kosmos des Wissens: Über 66 Millionen Artikel weltweit. Wikipedia ist für alle Menschen frei zugänglich. Entsteht aber nicht von selbst ...
-			<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:VST_images_the_Lagoon_Nebula.jpg">ESO, CC BY 4.0</a>
 		</p>
+		<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:VST_images_the_Lagoon_Nebula.jpg">ESO, CC BY 4.0</a>
 		<ProgressBar/>
 	</KeenSliderSlide>
 
@@ -21,8 +21,8 @@
 		</h2>
 		<p>
 			Freiwillige schreiben, prüfen und verbessern Wikipedia. Neutral und verlässlich. Ihre Spende hilft uns, die Freiwilligen bei ihrer Arbeit zu unterstützen und die Technik dahinter zu finanzieren.
-			<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Wikimania_2019_Group_Photo_2.jpg">Patricia Costillo, CC BY-SA 4.0</a>
 		</p>
+		<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Wikimania_2019_Group_Photo_2.jpg">Patricia Costillo, CC BY-SA 4.0</a>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-c-flow wmde-b-prose">
@@ -36,8 +36,8 @@
 		</h2>
 		<p>
 			Milliarden Zugriffe, riesige Datenmengen, rund um die Uhr. Eigene Server, Software und technische Infrastruktur sorgen dafür, dass Wikipedia zuverlässig, sicher und frei zugänglich bleibt.
-			<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Papaul_Tshibamba-4.jpg">VGrigas (WMF), CC BY-SA 3.0</a>
 		</p>
+		<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Papaul_Tshibamba-4.jpg">VGrigas (WMF), CC BY-SA 3.0</a>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="3" class="wmde-c-flow wmde-b-prose">
@@ -51,8 +51,8 @@
 		</h2>
 		<p>
 			Keine Paywall. Keine Werbung. Kein Konzern oder Milliardär, der hier Einfluss nimmt und Geschäfte macht. Ihre Unterstützung hilft, dass Wikipedia unabhängig und frei bleibt. Jede Spende hilft.
-			<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Wikipedia_mini_globe_handheld.jpg">Wikimedia Foundation, CC BY-SA 3.0</a>
 		</p>
+		<a class="wmde-b-photo-credit" href="https://commons.wikimedia.org/wiki/File:Wikipedia_mini_globe_handheld.jpg">Wikimedia Foundation, CC BY-SA 3.0</a>
 	</KeenSliderSlide>
 
 </template>

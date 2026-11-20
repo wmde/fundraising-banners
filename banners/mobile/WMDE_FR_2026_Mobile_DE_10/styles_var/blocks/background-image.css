@@ -7,16 +7,8 @@
 	opacity: 0;
 	transition: opacity var( --transition-time ) var( --transition-type );
 	background-image: linear-gradient( 90deg, rgb( 0, 0, 0, 1 ) 0%, rgb( 0, 0, 0, 0 ) 10% ), var( --image );
-	writing-mode: vertical-rl;
-	text-align: right;
-	padding-inline: 1ch;
 }
 
 .wmde-b-background-image--visible {
 	opacity: 1;
-}
-
-.wmde-b-background-image figcaption {
-	font-size: 0.8rem;
-	text-shadow: 1px 1px 2px var( --text-shadow );
 }

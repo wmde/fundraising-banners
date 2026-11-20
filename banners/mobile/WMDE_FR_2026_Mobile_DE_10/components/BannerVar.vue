@@ -3,11 +3,11 @@
 		<header class="wmde-b-mobile-banner__header wmde-c-repel" role="none" data-nowrap>
 			<div class="wmde-c-cluster">
 				<button class="wmde-b-nav-button" @click.prevent="onShowFundsModal" :title="$translate( 'use-of-funds-link-description' )">
-					<InfoIconStraight data-icon/> Warum spenden?
+					<InfoIconStraight class="wmde-u-content-hider"/> Warum spenden?
 				</button>
 
-				<button class="wmde-b-nav-button wmde-b-nav-button__already-donated" @click.prevent="onClose( CloseChoices.AlreadyDonated )">
-					<TickIcon data-icon/> {{ $translate( 'mini-banner-already-donated-button' ) }}
+				<button class="wmde-b-nav-button" @click.prevent="onClose( CloseChoices.AlreadyDonated )">
+					<TickIcon class="wmde-u-content-hider"/> {{ $translate( 'mini-banner-already-donated-button' ) }}
 				</button>
 			</div>
 
