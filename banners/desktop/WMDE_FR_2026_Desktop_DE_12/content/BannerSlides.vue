@@ -3,11 +3,11 @@
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
 			Kein Konzern oder Milliardär finanziert das Projekt, sondern eine gemeinnützige Organisation.
+			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, diese Unabhängigkeit zu unterstützen.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
-			Am heutigen {{ currentDayName }}, den {{ currentDate }}, bitten wir Sie daher, diese Unabhängigkeit zu unterstützen.
 			{{ campaignDaySentence }}
 			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
 		</p>
@@ -15,7 +15,7 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden und einen kostenfreien Zugang zu Wissen
-			für alle unbedingt erhalten möchten.
+			für alle unbedingt erhalten möchten. Dieses Jahr spenden jedoch weniger Menschen als sonst, dabei steigen auch unsere Kosten.
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>

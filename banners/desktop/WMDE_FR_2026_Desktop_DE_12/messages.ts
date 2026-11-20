@@ -39,6 +39,8 @@ const messages: TranslationMessages = {
 	'skip-link': 'Weiter zum Formular',
 	'form-label': 'Spenden Formular',
 	'form-error': 'Bitte Formular vervollständigen',
+	'progress-today': 'Heute:',
+	'progress-drama': 'Letzes Jahr bereits:',
 };
 
 export default messages;
