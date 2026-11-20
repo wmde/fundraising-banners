@@ -1,0 +1,64 @@
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+		transform: scale( 1.1 );
+		display: none;
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale( 1 );
+		display: block;
+	}
+}
+
+.wmde-b-upsell-modal {
+	--flow-space: var( --space-s );
+	flex-direction: column;
+	padding-inline: 0;
+	padding-block: 0;
+	overflow: hidden;
+	border: 0;
+	margin-inline: auto;
+	max-height: calc( 100vh - var( --space-xs ) * 2 );
+	max-width: 40rem;
+	min-width: 10rem;
+}
+
+.wmde-b-upsell-modal::backdrop {
+	background: var( --color-black-transparent-80 );
+}
+
+.wmde-b-upsell-modal[ open ] {
+	animation: fade-in 200ms ease-in-out;
+	display: flex;
+}
+
+@media ( prefers-reduced-motion ) {
+	.wmde-b-upsell-modal[ open ] {
+		animation-duration: 0ms;
+	}
+}
+
+.wmde-b-upsell-modal__heading {
+	height: var( --banner-header-height, 1.8lh );
+}
+
+.wmde-b-upsell-modal__scroll {
+	overflow-y: auto;
+	height: 100%;
+}
+
+.wmde-b-upsell-modal__content {
+	padding-block: var( --space-m );
+	padding-inline: var( --space-m );
+}
+
+.wmde-b-upsell-modal__buttons {
+	display: flex;
+	gap: var( --space-s );
+}
+
+.wmde-b-upsell-modal__buttons button {
+	flex: 1 1 50%;
+}
