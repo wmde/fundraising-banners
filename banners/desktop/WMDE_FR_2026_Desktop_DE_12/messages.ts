@@ -35,6 +35,7 @@ const messages: TranslationMessages = {
 	'prefix-days-left': 'Noch',
 
 	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur rund {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
+	'visitors-vs-donors-sentence-last-year': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur rund {{totalNumberOfDonors}} Menschen haben bisher gespendet – das sind sogar {{fewerDonorsThanLastYear}} weniger als letztes Jahr.',
 	'payment-bank-transfer': 'Überweisung',
 	'skip-link': 'Weiter zum Formular',
 	'form-label': 'Spenden Formular',

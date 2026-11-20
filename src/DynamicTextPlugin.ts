@@ -11,6 +11,7 @@ interface DynamicCampaignTextOptions {
 	formatters: Formatters;
 	campaignParameters: CampaignParameters;
 	impressionCount: ImpressionCount;
+	lastYearDonors?: number[];
 }
 
 export default {
@@ -20,7 +21,8 @@ export default {
 			options.translator,
 			options.formatters,
 			options.campaignParameters,
-			options.impressionCount
+			options.impressionCount,
+			options.lastYearDonors,
 		) );
 	}
 };

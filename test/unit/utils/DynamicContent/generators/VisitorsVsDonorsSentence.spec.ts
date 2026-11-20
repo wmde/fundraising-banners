@@ -36,4 +36,30 @@ describe( 'VisitorsVsDonorsSentence', function () {
 
 		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-1,000' );
 	} );
+
+	it( 'returns the correct sentence when there are fewer donors than last year', function () {
+		const messages: TranslationMessages = { 'visitors-vs-donors-sentence-last-year': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}-{{fewerDonorsThanLastYear}}' };
+		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence(
+			new Translator( messages ),
+			10,
+			12345,
+			new IntegerEn(),
+			24680,
+		);
+
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-13,000-12,335' );
+	} );
+
+	it( 'returns the correct sentence when there are more donors than last year', function () {
+		const messages: TranslationMessages = { 'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}' };
+		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence(
+			new Translator( messages ),
+			10,
+			24680,
+			new IntegerEn(),
+			12345,
+		);
+
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-25,000' );
+	} );
 } );

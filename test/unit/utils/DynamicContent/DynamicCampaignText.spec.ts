@@ -21,6 +21,7 @@ const translator = new Translator( {
 	'day-plural': 'days',
 	'remaining-donors-needed-sentence': '{{donorsNeeded}}',
 	'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}',
+	'visitors-vs-donors-sentence-last-year': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}-{{fewerDonorsThanLastYear}}',
 	'amount-total': 'Progress total',
 	'amount-missing': 'Progress missing {{amount}}'
 } );
@@ -120,6 +121,20 @@ describe( 'DynamicCampaignText', () => {
 
 	it( 'Gets the visitors vs donors sentence', () => {
 		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-8,000' );
+	} );
+
+	it( 'Gets the visitors vs donors sentence with fewer donors than last year', () => {
+		const lastYearDonors = new Array( 8 );
+		lastYearDonors[ 7 ] = 9001;
+		const localDynamicCampaignText = new DynamicCampaignText(
+			new Date( 2023, 10, 10, 12, 0, 0 ),
+			translator,
+			formatters,
+			campaignParameters,
+			impressionCount,
+			lastYearDonors
+		);
+		expect( localDynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-8,000-1,696' );
 	} );
 
 	it( 'Gets the progress bar content', () => {
