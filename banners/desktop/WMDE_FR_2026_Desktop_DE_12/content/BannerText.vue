@@ -7,6 +7,7 @@
 		<AnimatedText :is-visible="bannerState === BannerStates.Visible">{{ visitorsVsDonorsSentence }}</AnimatedText>
 		Die meisten Menschen spenden, weil sie Wikipedia nützlich finden
 		und einen kostenfreien Zugang zu Wissen für alle unbedingt erhalten möchten.
+		Dieses Jahr spenden jedoch weniger Menschen als sonst, dabei steigen auch unsere Kosten.
 		Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 		Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.

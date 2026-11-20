@@ -15,7 +15,7 @@
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden und einen kostenfreien Zugang zu Wissen
-			für alle unbedingt erhalten möchten.
+			für alle unbedingt erhalten möchten. Dieses Jahr spenden jedoch weniger Menschen als sonst, dabei steigen auch unsere Kosten.
 			Die durchschnittliche Spende beträgt {{ averageDonation }}, doch bereits 5&nbsp;€ helfen uns weiter.
 		</p>
 	</KeenSliderSlide>

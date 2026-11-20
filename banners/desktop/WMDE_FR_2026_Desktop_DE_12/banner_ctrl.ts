@@ -29,6 +29,7 @@ import { currentCampaignTimePercentage } from '@src/components/ProgressBar/curre
 import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import DailyAmounts2025 from './DailyAmounts2025';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
@@ -53,6 +54,7 @@ const app = createVueApp( BannerConductor, {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount ),
 		localCloseTracker: new LocalStorageCloseTracker( 'deDesktop', null ),
+		dailyAmounts: new DailyAmounts2025( date, page.getCampaignParameters(), formatters ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

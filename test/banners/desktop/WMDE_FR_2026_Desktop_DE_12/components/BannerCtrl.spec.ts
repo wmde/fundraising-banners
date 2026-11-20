@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, Mock, vi, vitest } from 'vitest';
 import { mount, VueWrapper } from '@vue/test-utils';
-import BannerCtrl from '@banners/desktop/WMDE_FR_2026_Desktop_DE_12/components/BannerCtrl.vue';
+import Banner from '@banners/desktop/WMDE_FR_2026_Desktop_DE_12/components/BannerCtrl.vue';
 import { createFormItems } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_12/form_items';
 import { formItems as defaultFormItems } from '@test/banners/formItems';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
@@ -24,6 +24,7 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Translator } from '@src/Translator';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { DailyAmounts } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_12/DailyAmounts2025';
 
 const formModel = useFormModel();
 let tracker: Tracker;
@@ -31,6 +32,14 @@ const translator = ( key: string ): string => key;
 
 const widthForLargeScreen = 1301;
 const widthForSmallScreen = 1300;
+
+const dailyAmounts: DailyAmounts = {
+	formattedDifference: function (): string {
+		return '42 €';
+	},
+	formattedCurrent: '4.2m €',
+	progressPercentage: 66,
+};
 
 describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 
@@ -46,7 +55,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 			trackEvent: vi.fn()
 		};
 
-		// for dialogues
+		// for use of funds dialogue
 		showCallback = vi.fn();
 		closeCallback = vi.fn();
 		HTMLDialogElement.prototype.showModal = showCallback;
@@ -68,12 +77,13 @@ describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 		timer: Timer = null,
 		formItems: DonationFormItems = null
 	): { wrapper: VueWrapper<any>, bannerElements: any } => {
-		const wrapper = mount( BannerCtrl, {
+		const wrapper = mount( Banner, {
 			attachTo: document.body,
 			props: {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
-				localCloseTracker
+				localCloseTracker,
+				dailyAmounts
 			},
 			global: {
 				mocks: {
@@ -98,6 +108,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 			skipLink: () => wrapper.find( '.wmde-b-skip-link' ),
 			showUseOfFundsButton: () => wrapper.find( '.wmde-c-desktop-banner__footer-right button' ),
 			hideUseOfFundsButton: () => wrapper.find( '.wmde-banner-funds-modal-close button' ),
+			formContainer: () => wrapper.find( '.wmde-b-donation-form' ),
 			firstForm: () => wrapper.find( '.wmde-b-donation-form' ),
 			upsellModalContent: () => wrapper.find<HTMLDialogElement>( '.wmde-b-upsell-modal > div' ),
 			submitForm: () => wrapper.find<HTMLFormElement>( '.wmde-b-donation-form + form' ),
@@ -124,6 +135,7 @@ describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 			progressBar: () => wrapper.find( '.wmde-b-progress' ),
 			progressBarTrack: () => wrapper.find( '.wmde-b-progress__track' ),
 			progressBarFill: () => wrapper.find( '.wmde-b-progress__fill' ),
+			progressBarDramaText: () => wrapper.find( '.wmde-b-progress__drama-text' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -235,14 +247,20 @@ describe( 'WMDE_FR_2026_Desktop_DE_12_ctrl', () => {
 		it( 'shows current amount and target in the progress bar', async () => {
 			const { bannerElements } = getWrapper();
 
-			expect( bannerElements.progressBarFill().text() ).toStrictEqual( 'amountDonated' );
+			expect( bannerElements.progressBarFill().text() ).toStrictEqual( 'progress-today amountDonated' );
 			expect( bannerElements.progressBarTrack().text() ).toStrictEqual( 'donationTargetAmount' );
+		} );
+
+		it( 'shows drama elements in the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBarDramaText().text() ).toStrictEqual( 'progress-drama 4.2m €' );
 		} );
 
 		it( 'passes the progress to the progress bar', async () => {
 			const { bannerElements } = getWrapper();
 
-			expect( bannerElements.progressBar().attributes( 'style' ) ).toStrictEqual( '--progress-percentage: 42%;' );
+			expect( bannerElements.progressBar().attributes( 'style' ) ).toStrictEqual( '--progress-percentage: 42%; --drama-percentage: 66%;' );
 		} );
 	} );
 

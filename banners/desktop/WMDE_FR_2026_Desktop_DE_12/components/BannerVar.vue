@@ -81,7 +81,7 @@ import CloseIconMobile from '@src/components/Icons/CloseIconMobile.vue';
 import ContentCopier from '@src/components/ContentCopier/ContentCopier.vue';
 import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
-import ProgressBar from './ProgressBarVar.vue';
+import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 import { DailyAmounts } from './../DailyAmounts2025';
