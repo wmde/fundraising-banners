@@ -12,6 +12,7 @@
 		Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 		Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 		Vielen Dank!
+		Placeholder unsocial proof change.
 	</p>
 </template>
 
