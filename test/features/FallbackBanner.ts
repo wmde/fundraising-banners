@@ -130,7 +130,7 @@ const submitsFromLargeBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	await wrapper.find( '.wmde-fbb-large .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
-	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_blank' );
+	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_self' );
 };
 
 const submitsFromSmallBanner = async ( getWrapperAtWidth: ( width: number, dynamicContent: DynamicContent, tracker: Tracker ) => VueWrapper<any> ): Promise<any> => {
@@ -142,7 +142,7 @@ const submitsFromSmallBanner = async ( getWrapperAtWidth: ( width: number, dynam
 	await wrapper.find( '.wmde-fbb-small .wmde-fbb-button' ).trigger( 'click' );
 
 	expect( trackerSpy.hasTrackedEvent( FallbackBannerSubmitEvent.EVENT_NAME ) );
-	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_blank' );
+	expect( window.open ).toHaveBeenCalledWith( 'https://spenden.wikimedia.de', '_self' );
 };
 
 export const fallbackBannerFeatures: Record<string, ( getWrapperAtWidth: ( width: number ) => VueWrapper<any> ) => Promise<any>> = {
