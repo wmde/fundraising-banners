@@ -24,7 +24,7 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Translator } from '@src/Translator';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { DailyAmounts } from '@banners/features/WMDE_FR_2026_drama_progress_00/DailyAmounts2025';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 const formModel = useFormModel();
 let tracker: Tracker;
@@ -37,6 +37,7 @@ const dailyAmounts: DailyAmounts = {
 	formattedDifference: function (): string {
 		return '42 €';
 	},
+	formattedCurrent: '4.2m €',
 	progressPercentage: 66,
 };
 

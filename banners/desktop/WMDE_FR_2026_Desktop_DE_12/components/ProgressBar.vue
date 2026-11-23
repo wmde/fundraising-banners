@@ -11,7 +11,7 @@
 import Progress from '@src/components/ProgressBar2026/DramaProgressBar.vue';
 import { inject } from 'vue';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { DailyAmounts } from './../DailyAmounts2025';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 interface Props {
 	isVisible: boolean;

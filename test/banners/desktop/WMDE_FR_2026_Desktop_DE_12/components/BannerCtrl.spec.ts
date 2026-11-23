@@ -24,7 +24,7 @@ import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems
 import { Translator } from '@src/Translator';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
-import { DailyAmounts } from '@banners/desktop/WMDE_FR_2026_Desktop_DE_12/DailyAmounts2025';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 const formModel = useFormModel();
 let tracker: Tracker;
