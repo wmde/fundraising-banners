@@ -4,9 +4,8 @@
 	--progress-min-width: 0%;
 	--progress-padding: 0;
 	--progress-bar-padding: 3px;
-
-	--banner-height: 393px;
-	--banner-max-height: 447px;
+	--banner-height: 336px;
+	--banner-max-height: 360px;
 	--gutter: var( --space-2xs );
 	--flow-space: var( --space-s );
 
