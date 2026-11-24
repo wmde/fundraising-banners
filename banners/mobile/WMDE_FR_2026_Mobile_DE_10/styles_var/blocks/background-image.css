@@ -1,0 +1,14 @@
+.wmde-b-background-image {
+	z-index: 0;
+	position: absolute;
+	inset: 0 0 0 clamp( 2.5rem, -2.5rem + 25vw, 10rem );
+	background-size: cover;
+	background-position: left center;
+	opacity: 0;
+	transition: opacity var( --transition-time ) var( --transition-type );
+	background-image: linear-gradient( 90deg, rgb( 0, 0, 0, 1 ) 0%, rgb( 0, 0, 0, 0 ) 10% ), var( --image );
+}
+
+.wmde-b-background-image--visible {
+	opacity: 1;
+}

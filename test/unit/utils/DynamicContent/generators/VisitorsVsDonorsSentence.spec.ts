@@ -27,13 +27,13 @@ describe( 'VisitorsVsDonorsSentence', function () {
 		const messages: TranslationMessages = { 'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}' };
 		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( new Translator( messages ), 10, 42, new IntegerEn() );
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-42' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-1,000' );
 	} );
 
 	it( 'formats the projected donors', function () {
 		const messages: TranslationMessages = { 'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}' };
 		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( new Translator( messages ), 10, 42.309458309, new IntegerEn() );
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-42' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-1,000' );
 	} );
 } );
