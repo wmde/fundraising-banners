@@ -28,7 +28,7 @@
 					<BannerText :banner-state="bannerState"/>
 				</div>
 
-				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
+				<ProgressBar :is-visible="bannerState === BannerStates.Visible" :daily-amounts="dailyAmounts"/>
 			</div>
 		</div>
 
@@ -92,6 +92,7 @@ import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import BannerTitle from '../content/BannerTitle.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
+import { DailyAmounts } from '@banners/english/WMDE_FR_2026_Desktop_EN_04/DailyAmounts2025';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
@@ -101,6 +102,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	localCloseTracker: LocalCloseTracker;
+	dailyAmounts: DailyAmounts;
 }
 
 const props = defineProps<Props>();

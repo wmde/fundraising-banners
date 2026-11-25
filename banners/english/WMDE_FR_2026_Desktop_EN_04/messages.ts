@@ -30,7 +30,9 @@ const messages: TranslationMessages = {
 	'form-label': 'Donation Form',
 	'form-error': 'Please fix the errors below',
 	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million' +
-		' times a day, but currently only ca. {{totalNumberOfDonors}} people have donated.'
+		' times a day, but currently only ca. {{totalNumberOfDonors}} people have donated.',
+	'progress-today': 'Today:',
+	'progress-drama': 'Last year around this time:',
 };
 
 export default messages;

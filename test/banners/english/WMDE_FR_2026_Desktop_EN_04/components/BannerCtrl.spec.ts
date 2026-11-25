@@ -281,6 +281,12 @@ describe( 'WMDE_FR_2026_Desktop_EN_04_ctrl', () => {
 			expect( bannerElements.progressBarFill().text() ).toStrictEqual( 'amountDonated' );
 			expect( bannerElements.progressBarTrack().text() ).toStrictEqual( 'donationTargetAmount' );
 		} );
+
+		it( 'passes the progress to the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBar().attributes( 'style' ) ).toStrictEqual( '--progress-percentage: 42%;' );
+		} );
 	} );
 
 	describe( 'Donation Form', () => {

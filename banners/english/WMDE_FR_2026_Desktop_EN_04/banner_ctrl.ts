@@ -29,6 +29,7 @@ import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import { RoundedIntegerEn } from '@src/utils/DynamicContent/formatters/RoundedIntegerEn';
+import DailyAmounts2025 from './DailyAmounts2025';
 
 const localeFactory = new LocaleFactoryEn();
 const translator = new Translator( messages );
@@ -38,6 +39,7 @@ const runtimeEnvironment = new UrlRuntimeEnvironment( window.location );
 const impressionCount = new LocalImpressionCount( page.getTracking().keyword, runtimeEnvironment );
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 
+const date = new Date();
 const formatters = localeFactory.getFormatters();
 formatters.integer = new RoundedIntegerEn();
 
@@ -53,6 +55,7 @@ const app = createVueApp( BannerConductor, {
 		remainingImpressions: impressionCount.getRemainingImpressions( page.getMaxBannerImpressions( 'english' ) ),
 		donationLink: createFallbackDonationURL( page.getTracking(), impressionCount, { locale: Locales.EN } ),
 		localCloseTracker: new LocalStorageCloseTracker( 'enDesktop', null ),
+		dailyAmounts: new DailyAmounts2025( date, page.getCampaignParameters(), formatters ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,

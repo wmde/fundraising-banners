@@ -28,7 +28,7 @@
 					<BannerText :banner-state="bannerState"/>
 				</div>
 
-				<ProgressBar :is-visible="bannerState === BannerStates.Visible"/>
+				<ProgressBar :is-visible="bannerState === BannerStates.Visible" :daily-amounts="dailyAmounts"/>
 			</div>
 		</div>
 
@@ -76,8 +76,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { computed, ref, watch } from 'vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import BannerText from '../content/BannerText.vue';
-import BannerSlides from '../content/BannerSlides.vue';
+import BannerText from '../content/BannerTextVar.vue';
+import BannerSlides from '../content/BannerSlidesVar.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
@@ -92,6 +92,7 @@ import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import BannerTitle from '../content/BannerTitle.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
+import { DailyAmounts } from '@banners/english/WMDE_FR_2026_Desktop_EN_04/DailyAmounts2025';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
@@ -101,6 +102,7 @@ interface Props {
 	bannerState: BannerStates;
 	useOfFundsContent: useOfFundsContentInterface;
 	localCloseTracker: LocalCloseTracker;
+	dailyAmounts: DailyAmounts;
 }
 
 const props = defineProps<Props>();
