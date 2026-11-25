@@ -10,7 +10,8 @@
 		An unprecedented rise in hardware costs is making the essential equipment
 		needed to keep Wikipedia available to everyone much more expensive.
 		<AnimatedText :is-visible="bannerState === BannerStates.Visible">Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.</AnimatedText>
-		Please donate €5 today.
+		Unfortunately, this year less readers donate.
+		This is why we need you now: Please donate 5 € today.
 		Thank you.
 	</p>
 </template>
