@@ -20,6 +20,7 @@ export function newDynamicContent(): DynamicContent {
 			donationTarget: 'donationTarget',
 			donationTargetAmount: 'donationTargetAmount',
 			amountDonated: 'amountDonated',
+			amountDonatedInCents: 4242,
 			amountNeeded: 'amountNeeded',
 			isLateProgress: true,
 			dramaText: 'alarm!'
