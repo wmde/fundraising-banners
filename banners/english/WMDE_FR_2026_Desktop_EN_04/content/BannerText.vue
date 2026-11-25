@@ -1,39 +1,25 @@
 <template>
-	<p class="wmde-b-icon-text">
-		<InfoIcon fill="#990a00"/>
-		<strong>{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still can't be sold.&#8221; - An important update for readers in Germany.</strong>
-	</p>
 	<p>
-		<small>
-			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-			message will be up for only a few days. We ask you to reflect on the number of times you visited
-			Wikipedia in the past year and if you're able to give €5 back.
-		</small>
-	</p>
-	<p>
-		<small>
-			<AnimatedText :is-visible="bannerState === BannerStates.Visible">{{ visitorsVsDonorsSentence }}</AnimatedText>
-			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online
-			information, powering everything from your personal searches to emerging AI technologies. Your gift
-			strengthens the knowledge of today and tomorrow.
-		</small>
-	</p>
-	<p>
-		<small>
-			Just 1% of our readers donate, so if you have
-			given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate today. If
-			you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank you.
-		</small>
+		Thank you for visiting Wikipedia this {{ currentDayName }}, {{ currentDate }}.
+		This year, Wikipedia has seen fewer visitors and fewer new readers, so your visit today means a lot.
+		We don't take your attention for granted, but today we're asking you to give €5 if you can.
+		Like public libraries, we exist to serve everyone, not profit from your attention.
+		That's why we don't run ads or put knowledge behind a paywall.
+		Wikipedia's here to satisfy your curiosity and give you the facts you need.
+		Wikipedia is free to use, but not free to provide.
+		An unprecedented rise in hardware costs is making the essential equipment
+		needed to keep Wikipedia available to everyone much more expensive.
+		<AnimatedText :is-visible="bannerState === BannerStates.Visible">Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.</AnimatedText>
+		Please donate €5 today.
+		Thank you.
 	</p>
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject } from 'vue';
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import { BannerStates } from '@src/components/BannerConductor/StateMachine/BannerStates';
-import InfoIcon from '@src/components/Icons/InfoIconStraight.vue';
-import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
 	bannerState: BannerStates;
@@ -41,9 +27,6 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence } = inject<DynamicContent>( 'dynamicCampaignText' );
-const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
-onMounted( startTimer );
-onUnmounted( stopTimer );
+const { currentDayName, currentDate } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>
