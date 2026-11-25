@@ -1,41 +1,35 @@
 <template>
 	<KeenSliderSlide :current-slide="currentSlide" :index="0" class="wmde-b-prose wmde-c-flow" data-align="centered">
 		<p>
-			<InfoIcon fill="#990a00"/>&nbsp;
-			<strong>
-				{{ liveDateAndTime.currentDate }}, {{ liveDateAndTime.currentTime }}: &#8220;Wikipedia still can't be
-				sold.&#8221; - An important update for readers in Germany.
-			</strong>
-		</p>
-		<p>
-			Today is the day. We're sorry to interrupt, but it's {{ currentDayName }}, {{ currentDate }}, and this
-			message will be up for only a few days.
+			Thank you for visiting Wikipedia this {{ currentDayName }}, {{ currentDate }}.
+			This year, Wikipedia has seen fewer visitors and fewer new readers, so your visit today means a lot.
+			We don't take your attention for granted, but today we're asking you to give €5 if you can.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
 		<p>
-			We ask you to reflect on the number of times you visited Wikipedia in the past year and if you're able to give €5 back.
-			<AnimatedText :is-visible="currentSlide === 1">{{ visitorsVsDonorsSentence }}</AnimatedText>
-			In the age of AI, access to verifiable facts is crucial. Wikipedia is at the heart of online information,
-			powering everything from your personal searches to emerging AI technologies.
+			Like public libraries, we exist to serve everyone, not profit from your attention.
+			That's why we don't run ads or put knowledge behind a paywall.
+			Wikipedia's here to satisfy your curiosity and give you the facts you need.
+			Wikipedia is free to use, but not free to provide.
 		</p>
 	</KeenSliderSlide>
 	<KeenSliderSlide :current-slide="currentSlide" :index="2" class="wmde-b-prose" data-align="centered">
 		<p>
-			Your gift strengthens the knowledge of today and tomorrow. Just 1% of our readers donate, so if
-			you have given in the past and Wikipedia still provides you with €5 worth of knowledge, kindly donate
-			today. If you are undecided, remember that any contribution helps, whether it's €5 or €25. Thank&nbsp;you.
+			An unprecedented rise in hardware costs is making the essential equipment
+			needed to keep Wikipedia available to everyone much more expensive.
+			<AnimatedText :is-visible="currentSlide === 2">Your donation helps our nonprofit meet those costs while keeping Wikipedia free and independent.</AnimatedText>
+			Please donate €5 today.
+			Thank you.
 		</p>
 	</KeenSliderSlide>
 </template>
 
 <script setup lang="ts">
 import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
-import { inject, onMounted, onUnmounted } from 'vue';
+import { inject } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
-import InfoIcon from '@src/components/Icons/InfoIconStraight.vue';
-import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 
 interface Props {
 	currentSlide: number;
@@ -43,9 +37,6 @@ interface Props {
 
 defineProps<Props>();
 
-const { currentDayName, currentDate, getCurrentDateAndTime, visitorsVsDonorsSentence } = inject<DynamicContent>( 'dynamicCampaignText' );
-const { liveDateAndTime, startTimer, stopTimer } = useLiveDateAndTime( getCurrentDateAndTime );
-onMounted( startTimer );
-onUnmounted( stopTimer );
+const { currentDayName, currentDate } = inject<DynamicContent>( 'dynamicCampaignText' );
 
 </script>

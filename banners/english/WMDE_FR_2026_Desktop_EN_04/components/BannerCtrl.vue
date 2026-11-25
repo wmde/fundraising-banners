@@ -14,6 +14,9 @@
 					{{ $translate( 'skip-link' ) }}
 				</button>
 
+				<div class="wmde-b-message__title wmde-c-flow">
+					<BannerTitle/>
+				</div>
 				<div v-if="!onLargeScreen" class="wmde-b-message__slideshow">
 					<KeenSlider :with-navigation="true" :play="slideshowShouldPlay" :interval="10000" :delay="2000">
 						<template #slides="{ currentSlide }: any">
@@ -87,6 +90,7 @@ import { useDisplaySwitch } from '@src/components/composables/useDisplaySwitch';
 import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import BannerTitle from '../content/BannerTitle.vue';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
 
 enum ContentStates {
