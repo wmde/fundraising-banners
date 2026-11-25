@@ -6,4 +6,8 @@
 	--form-grid-gap: var( --space-2xs );
 	--form-font-weight: var( --font-normal );
 	--prose-padding: var( --space-l );
+
+	.wmde-banner-info-icon {
+		margin-right: 5px;
+	}
 }
