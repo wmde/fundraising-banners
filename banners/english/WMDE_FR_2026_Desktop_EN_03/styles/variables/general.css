@@ -1,0 +1,9 @@
+.wmde-banner {
+	--gutter: var( --space-xs );
+	--flow-space: var( --space-xs );
+	--banner-height: 355px;
+	--banner-form-width: clamp( 18.75rem, 15rem + 5vw, 21.875rem );
+	--form-grid-gap: var( --space-2xs );
+	--form-font-weight: var( --font-normal );
+	--prose-padding: var( --space-l );
+}
