@@ -41,5 +41,5 @@
 
 .wmde-b-donation-form h2,
 .wmde-b-donation-form p {
-	font-size: var( --type-step-00 );
+	font-size: 13px;
 }
