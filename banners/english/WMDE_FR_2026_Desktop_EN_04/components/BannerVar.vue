@@ -76,8 +76,8 @@ import { BannerStates } from '@src/components/BannerConductor/StateMachine/Banne
 import { computed, ref, watch } from 'vue';
 import type { UseOfFundsContent as useOfFundsContentInterface } from '@src/domain/EditableContent/UseOfFundsContent';
 import FundsModal from '@src/components/UseOfFunds/UseOfFundsModal.vue';
-import BannerText from '../content/BannerTextVar.vue';
-import BannerSlides from '../content/BannerSlidesVar.vue';
+import BannerText from '../content/BannerText.vue';
+import BannerSlides from '../content/BannerSlides.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import { CloseChoices } from '@src/domain/CloseChoices';
 import { CloseEvent } from '@src/tracking/events/CloseEvent';
