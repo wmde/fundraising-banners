@@ -25,6 +25,7 @@ import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import { RoundedUpIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedUpIntegerDe';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -35,6 +36,9 @@ const impressionCount = new LocalImpressionCount( page.getTracking().keyword, ru
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 const date = new Date();
 const currencyFormatter = localeFactory.getCurrencyFormatter();
+
+const formatters = localeFactory.getFormatters();
+formatters.integer = new RoundedUpIntegerDe();
 
 const app = createVueApp( BannerConductor, {
 	page,
@@ -62,7 +66,7 @@ app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
 	date,
-	formatters: localeFactory.getFormatters(),
+	formatters,
 	impressionCount,
 	translator
 } );
