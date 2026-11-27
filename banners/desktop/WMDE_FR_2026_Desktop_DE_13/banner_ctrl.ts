@@ -26,7 +26,7 @@ import { createFormItems } from './form_items';
 import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
-import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
+import { RoundedUpIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedUpIntegerDe';
 import { Locales } from '@src/domain/Locales';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import DailyAmounts2025 from '@src/utils/DynamicContent/DailyAmounts2025';
@@ -42,7 +42,7 @@ const impressionCount = new LocalImpressionCount( page.getTracking().keyword, ru
 const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, eventMappings, runtimeEnvironment );
 
 const formatters = localeFactory.getFormatters();
-formatters.integer = new RoundedIntegerDe();
+formatters.integer = new RoundedUpIntegerDe();
 
 const app = createVueApp( BannerConductor, {
 	page,
