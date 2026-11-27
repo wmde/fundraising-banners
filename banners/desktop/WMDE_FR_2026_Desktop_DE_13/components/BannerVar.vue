@@ -8,8 +8,8 @@
 			</button>
 		</header>
 
-		<div class="wmde-c-desktop-banner__message">
-			<div class="wmde-b-message wmde-c-flow" data-bordered>
+		<div class="wmde-c-desktop-banner__message wmde-c-flow">
+			<div class="wmde-b-message wmde-c-flow" data-filled>
 				<button class="wmde-b-skip-link" @click="onFocusMainForm">
 					{{ $translate( 'skip-link' ) }}
 				</button>
@@ -27,9 +27,9 @@
 				<div class="wmde-b-message__text wmde-c-flow" :class="{ 'visually-hidden' : !onLargeScreen }">
 					<BannerText :banner-state="bannerState"/>
 				</div>
-
-				<ProgressBar :is-visible="bannerState === BannerStates.Visible" :daily-amounts="dailyAmounts"/>
 			</div>
+
+			<ProgressBar :is-visible="bannerState === BannerStates.Visible" :daily-amounts="dailyAmounts"/>
 		</div>
 
 		<div class="wmde-c-desktop-banner__form wmde-b-donation-form__wrapper">

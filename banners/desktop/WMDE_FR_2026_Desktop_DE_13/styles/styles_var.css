@@ -40,3 +40,8 @@
 @import '@src/styles/blocks/text-radio.css';
 @import 'blocks/donation-form_var.css';
 @import 'blocks/upsell-modal.css';
+
+.wmde-c-desktop-banner__message {
+	display: flex;
+	flex-direction: column;
+}

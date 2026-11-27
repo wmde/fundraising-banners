@@ -51,6 +51,11 @@
 
 .wmde-b-message[ data-filled ] {
 	background: var( --message-background );
+	color: var( --message-color );
+}
+
+.wmde-b-message[ data-filled ] :is( .mw-heading, h1, h2, h3, h4, h5, h6 ) {
+	color: var( --color-filled-emphasized, var( --message-color ) );
 }
 
 .wmde-b-message[ data-bordered ] {

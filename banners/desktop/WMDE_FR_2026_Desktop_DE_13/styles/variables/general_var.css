@@ -6,4 +6,5 @@
 	--prose-padding: var( --space-l );
 	--text-padding: var( --space-xs ) var( --space-3xs );
 	--message-text-font-size: clamp( 0.875rem, 0.55rem + 0.4vw, 1rem );
+	--progress-padding: 0;
 }

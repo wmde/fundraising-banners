@@ -24,8 +24,9 @@
 	--info-icon-background: var( --color-red-600 );
 	--info-icon-color: var( --color-white );
 
-	--message-border-color: var( --color-red-600 );
-	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-yellow-700 ) 50%, var( --color-yellow-700 ) 100% );
+	--message-background: #14213d;
+	--message-color: #ffffff;
+	--animated-text-background: linear-gradient( 270deg, transparent 0%, transparent 50%, var( --color-red-600 ) 50%, var( --color-red-600 ) 100% );
 
 	--slider-pagination-background: var( --color-grey-300 );
 	--slider-pagination-background-active: var( --color-red-600 );
