@@ -30,7 +30,7 @@ import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIn
 import { Locales } from '@src/domain/Locales';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
 import DailyAmounts2025 from '@src/utils/DynamicContent/DailyAmounts2025';
-import { dailyDonors2025 } from './DailyDonors2025';
+import { dailyDonors2025 } from '@src/utils/DynamicContent/DailyDonors2025';
 
 const date = new Date();
 const localeFactory = new LocaleFactoryDe();
