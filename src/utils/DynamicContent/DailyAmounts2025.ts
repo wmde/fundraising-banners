@@ -2,7 +2,7 @@ import type { CampaignParameters } from '@src/domain/CampaignParameters';
 import type { Formatters } from '@src/utils/DynamicContent/Formatters';
 import TimeRange from '@src/utils/TimeRange';
 
-const campaignTarget2025 = 8000000;
+const campaignTarget2025 = 9324539.27;
 
 /**
  * This contains the amount total we had on each day of the
@@ -60,7 +60,42 @@ const dailyAmounts2025 = [
 	7641453.58,
 	7724924.73,
 	7908286.47,
-	8033523.69
+	8033523.69,
+	8107281.64,
+	8183371.7,
+	8242592.64,
+	8265049.71,
+	8287105.91,
+	8407759.07,
+	8522158.46,
+	8536503.47,
+	8546117.47,
+	8561159.23,
+	8578270.23,
+	8599977.04,
+	8868150.46,
+	9033036.33,
+	9073140.87,
+	9076388.87,
+	9187608.06,
+	9189302.06,
+	9192093.95,
+	9207075.64,
+	9214109.23,
+	9222317.06,
+	9227072.59,
+	9230595.17,
+	9231225.17,
+	9232401.17,
+	9238565.95,
+	9244542.45,
+	9247872.7,
+	9264471.96,
+	9273505.47,
+	9275439.67,
+	9289089.17,
+	9314054,
+	9324539.27,
 ];
 
 export interface DailyAmounts {

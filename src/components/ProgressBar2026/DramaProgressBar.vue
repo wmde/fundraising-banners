@@ -13,6 +13,10 @@
 			</span>
 		</div>
 
+		<div class="wmde-b-progress__current-text" aria-hidden="true" v-if="$slots['current-text']">
+			<slot name="current-text"/>
+		</div>
+
 		<div class="wmde-b-progress__bar" aria-hidden="true">
 			<div class="wmde-b-progress__track">
 				<span>
