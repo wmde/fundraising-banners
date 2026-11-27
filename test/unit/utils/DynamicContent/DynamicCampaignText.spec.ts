@@ -120,7 +120,7 @@ describe( 'DynamicCampaignText', () => {
 	} );
 
 	it( 'Gets the visitors vs donors sentence', () => {
-		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-8,000' );
+		expect( dynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-7,305' );
 	} );
 
 	it( 'Gets the visitors vs donors sentence with fewer donors than last year', () => {
@@ -134,7 +134,7 @@ describe( 'DynamicCampaignText', () => {
 			impressionCount,
 			lastYearDonors
 		);
-		expect( localDynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-8,000-1,696' );
+		expect( localDynamicCampaignText.visitorsVsDonorsSentence ).toBe( '42-7,305-1,696' );
 	} );
 
 	it( 'Gets the progress bar content', () => {

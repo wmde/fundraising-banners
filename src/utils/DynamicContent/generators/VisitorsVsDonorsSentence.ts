@@ -36,7 +36,7 @@ export class VisitorsVsDonorsSentence implements TextGenerator {
 
 		return this._translator.translate( messageKey, {
 			millionImpressionsPerDay: this._millionImpressionsPerDay,
-			totalNumberOfDonors: this._integerFormatter.format( Math.ceil( this._projectedNumberOfDonors / 1000 ) * 1000 ),
+			totalNumberOfDonors: this._integerFormatter.format( this._projectedNumberOfDonors ),
 			fewerDonorsThanLastYear: this._integerFormatter.format( fewerDonorsThanLastYear ),
 		} );
 	}

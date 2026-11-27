@@ -27,14 +27,14 @@ describe( 'VisitorsVsDonorsSentence', function () {
 		const messages: TranslationMessages = { 'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}' };
 		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( new Translator( messages ), 10, 42, new IntegerEn() );
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-1,000' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-42' );
 	} );
 
 	it( 'formats the projected donors', function () {
 		const messages: TranslationMessages = { 'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}}-{{totalNumberOfDonors}}' };
 		const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( new Translator( messages ), 10, 42.309458309, new IntegerEn() );
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-1,000' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-42' );
 	} );
 
 	it( 'returns the correct sentence when there are fewer donors than last year', function () {
@@ -47,7 +47,7 @@ describe( 'VisitorsVsDonorsSentence', function () {
 			24680,
 		);
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-13,000-12,335' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-12,345-12,335' );
 	} );
 
 	it( 'returns the correct sentence when there are more donors than last year', function () {
@@ -60,6 +60,6 @@ describe( 'VisitorsVsDonorsSentence', function () {
 			12345,
 		);
 
-		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-25,000' );
+		expect( visitorsVsDonorsSentence.getText() ).toEqual( '10-24,680' );
 	} );
 } );
