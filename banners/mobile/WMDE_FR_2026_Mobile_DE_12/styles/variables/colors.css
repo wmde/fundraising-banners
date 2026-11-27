@@ -19,6 +19,7 @@
 	--color-green-200: #b3cec7;
 	--color-green-400: #6e9e00;
 	--color-green-500: #1d865b;
+	--color-green-600: #155e3f;
 
 	--purple-300: #ebe2fc;
 	--purple-500: #6b4ba1;
@@ -74,7 +75,11 @@
 	--color-callout-error-background: var( --color-red-100 );
 
 	--progress-track-border-color: var( --color-yellow );
+	--progress-track-background: var( --color-green-600 );
 	--progress-fill-background: var( --color-yellow );
+	--progress-drama-fill-background: var( --color-red-600 );
+	--progress-drama-fill-background-image: url( 'data:image/svg+xml,<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path stroke="none" fill="%23da9000" d="M208 0 L256 0 256 48 48 256 0 256 0 208 208 0 M256 80 L256 176 176 256 80 256 256 80 M256 208 L256 256 208 256 256 208 M0 176 L0 80 80 0 176 0 0 176 M0 48 L0 0 48 0 0 48"/></svg>' );
+	--progress-line-color: var( --color-white );
 
 	--soft-close-countdown: var( --color-blue );
 	--soft-close-background: var( --color-white );

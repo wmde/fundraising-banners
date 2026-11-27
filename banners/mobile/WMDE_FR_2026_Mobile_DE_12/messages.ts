@@ -35,6 +35,8 @@ const messages: TranslationMessages = {
 	'mini-banner-already-donated-button': 'Habe bereits gespendet',
 	'amount-total': '',
 	'form-error': 'Bitte Formular vervollständigen',
+	'progress-today': 'Heute:',
+	'progress-drama': 'Letztes Jahr bereits:',
 };
 
 export default messages;

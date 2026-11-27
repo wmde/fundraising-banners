@@ -1,0 +1,121 @@
+.wmde-b-progress {
+	--height: var( --progress-height, 1.8rem );
+	--transition-time: 3s;
+	--radius: calc( var( --height ) / 2 );
+	--border-width: var( --progress-track-border-width, 3px );
+
+	width: 100%;
+	color: var( --progress-color );
+	padding-inline: var( --progress-padding, var( --space-xs ) );
+	font-family: var( --font-base );
+	font-size: var( --progress-font-size, var( --type-step-00 ) );
+	font-weight: var( --font-bold );
+	white-space: nowrap;
+}
+
+.wmde-b-progress__text {
+	padding-inline: var( --radius );
+}
+
+.wmde-b-progress__bar {
+	height: var( --height );
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr );
+	clip-path: inset( 0 0 0 0 round var( --radius ) );
+
+	--flow-space: var( --space-3xs );
+}
+
+.wmde-b-progress__track,
+.wmde-b-progress__drama,
+.wmde-b-progress__fill {
+	grid-row-start: 1;
+	grid-column-start: 1;
+
+	height: var( --height );
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-inline: var( --progress-bar-padding, var( --space-xs ) );
+}
+
+.wmde-b-progress__track {
+	background: var( --progress-track-background, transparent );
+	border-radius: var( --radius );
+}
+
+.wmde-b-progress__fill {
+	background: var( --progress-fill-background );
+	color: var( --progress-fill-color );
+	width: 0;
+	max-width: 100%;
+	white-space: nowrap;
+	border-radius: var( --radius ) 0 0 var( --radius );
+
+	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+}
+
+.wmde-b-progress__drama {
+	background-color: var( --progress-drama-fill-background );
+	background-image: var( --progress-drama-fill-background-image, url( 'data:image/svg+xml,<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path stroke="none" fill="%23000000" fill-opacity="0.4" d="M208 0 L256 0 256 48 48 256 0 256 0 208 208 0 M256 80 L256 176 176 256 80 256 256 80 M256 208 L256 256 208 256 256 208 M0 176 L0 80 80 0 176 0 0 176 M0 48 L0 0 48 0 0 48"/></svg>' ) );
+	background-repeat: repeat;
+	background-size: 1rem;
+	width: 0;
+	max-width: 100%;
+
+	transition: width var( --transition-time ) cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+}
+
+.wmde-b-progress__current-text,
+.wmde-b-progress__drama-text {
+	display: flex;
+	justify-content: flex-end;
+	gap: var( --space-3xs );
+	height: calc( var( --height ) * 1.2 );
+}
+
+.wmde-b-progress__current-text {
+	align-items: flex-start;
+	width: calc( max( var( --progress-percentage ), var( --progress-min-width, 10ch ) ) + var( --border-width ) );
+}
+
+.wmde-b-progress__drama-text {
+	align-items: flex-end;
+	width: calc( max( var( --drama-percentage ), var( --progress-min-width, 10ch ) ) + var( --border-width ) );
+}
+
+.wmde-b-progress__current-text::after,
+.wmde-b-progress__drama-text::after {
+	content: '';
+	display: block;
+	width: var( --border-width );
+	height: calc( var( --height ) * 2.2 );
+	background: var( --progress-line-color );
+	z-index: 99;
+}
+
+.wmde-b-progress__current-text::after {
+	margin-bottom: calc( var( --height ) * -1 );
+}
+
+.wmde-b-progress__drama-text::after {
+	margin-top: calc( var( --height ) * -1 );
+}
+
+:is( .wmde-b-progress__bar span, .wmde-b-progress__text span, .wmde-b-progress__current-text, .wmde-b-progress__drama-text ) {
+	opacity: 0;
+	transition: opacity 300ms ease-in-out;
+	transition-delay: var( --transition-time );
+}
+
+.wmde-b-progress--visible .wmde-b-progress__fill {
+	width: max( var( --progress-percentage ), var( --progress-min-width, 10ch ) );
+}
+
+.wmde-b-progress--visible .wmde-b-progress__drama {
+	width: max( var( --drama-percentage ), var( --progress-min-width, 10ch ) );
+}
+
+.wmde-b-progress--visible :is( .wmde-b-progress__bar span, .wmde-b-progress__text span, .wmde-b-progress__current-text, .wmde-b-progress__drama-text ) {
+	opacity: 1;
+}

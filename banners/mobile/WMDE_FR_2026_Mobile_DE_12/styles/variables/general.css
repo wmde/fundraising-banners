@@ -1,6 +1,6 @@
 .wmde-banner {
 	--progress-height: 1rem;
-	--progress-font-size: var( --type-step-00 );
+	--progress-font-size: var( --type-step-000 );
 	--progress-min-width: 0%;
 	--progress-padding: 0;
 	--progress-bar-padding: 3px;

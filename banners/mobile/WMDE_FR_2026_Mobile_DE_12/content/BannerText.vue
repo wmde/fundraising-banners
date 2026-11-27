@@ -16,7 +16,7 @@
 			Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu sein, und geben Sie etwas zurück.
 			<strong> Vielen Dank!</strong>
 		</p>
-		<ProgressBar :is-visible="playLiveText"/>
+		<ProgressBar :is-visible="playLiveText" :daily-amounts="dailyAmounts"/>
 	</div>
 </template>
 
@@ -25,10 +25,12 @@ import type { DynamicContent } from '@src/utils/DynamicContent/DynamicContent';
 import { inject, onMounted, onUnmounted, watch } from 'vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
-import ProgressBar from '../components/ProgressBar.vue';
+import ProgressBar from '../components/DramaProgressBar.vue';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 interface Props {
 	playLiveText: boolean;
+	dailyAmounts: DailyAmounts;
 }
 
 const props = defineProps<Props>();

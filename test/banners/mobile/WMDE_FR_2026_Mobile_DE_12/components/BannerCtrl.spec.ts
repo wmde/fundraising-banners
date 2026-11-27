@@ -23,11 +23,21 @@ import { FormStepShownEvent } from '@src/tracking/events/FormStepShownEvent';
 import type { Translator } from '@src/Translator';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import { BannerSubmitOnReturnEvent } from '@src/tracking/events/BannerSubmitOnReturnEvent';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 let pageScroller: PageScroller;
 let tracker: Tracker;
 const formModel = useFormModel();
 const translator = ( key: string ): string => key;
+
+const dailyAmounts: DailyAmounts = {
+	formattedDifference: function (): string {
+		return '42 €';
+	},
+	formattedCurrent: '4.2m €',
+	progressPercentage: 66,
+};
+
 describe( 'WMDE_FR_2026_Mobile_DE_12_ctrl', () => {
 	let showCallback: Mock;
 	let closeCallback: Mock;
@@ -79,7 +89,8 @@ describe( 'WMDE_FR_2026_Mobile_DE_12_ctrl', () => {
 				bannerState: BannerStates.Pending,
 				useOfFundsContent,
 				pageScroller,
-				localCloseTracker
+				localCloseTracker,
+				dailyAmounts
 			},
 			global: {
 				mocks: {
@@ -133,6 +144,9 @@ describe( 'WMDE_FR_2026_Mobile_DE_12_ctrl', () => {
 			submitButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(1) form > button' ),
 			onceButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:first-child' ),
 			yearlyButton: () => wrapper.find( '.wmde-b-donation-form .keen-slider__slide:nth-child(2) form .wmde-b-button:last-child' ),
+			progressBar: () => wrapper.find( '.wmde-b-progress' ),
+			progressBarCurrent: () => wrapper.find( '.wmde-b-progress__current-text' ),
+			progressBarDramaText: () => wrapper.find( '.wmde-b-progress__drama-text' ),
 		};
 		wrapperCache = wrapper;
 		return { wrapper, bannerElements };
@@ -566,6 +580,26 @@ describe( 'WMDE_FR_2026_Mobile_DE_12_ctrl', () => {
 				expect( bannerElements.onceButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 				expect( bannerElements.yearlyButton().attributes( 'tabindex' ) ).toStrictEqual( '-1' );
 			} );
+		} );
+	} );
+
+	describe( 'Progress Bar', () => {
+		it( 'shows current amount and target in the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBarCurrent().text() ).toStrictEqual( 'progress-today amountDonated' );
+		} );
+
+		it( 'shows drama elements in the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBarDramaText().text() ).toStrictEqual( 'progress-drama 4.2m €' );
+		} );
+
+		it( 'passes the progress to the progress bar', async () => {
+			const { bannerElements } = getWrapper();
+
+			expect( bannerElements.progressBar().attributes( 'style' ) ).toStrictEqual( '--progress-percentage: 42%; --drama-percentage: 66%;' );
 		} );
 	} );
 

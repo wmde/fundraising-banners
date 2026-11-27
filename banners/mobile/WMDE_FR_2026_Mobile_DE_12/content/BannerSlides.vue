@@ -4,9 +4,13 @@
 		:current-slide="currentSlide"
 		:index="0"
 		class="wmde-b-prose wmde-c-flow"
-		data-align="centered">
-		<p>Unser Spendenziel: {{ goalDonationSum }} Millionen €</p>
-		<ProgressBar :is-visible="playLiveText"></ProgressBar>
+		data-align="centered"
+	>
+		<p><strong>Unser Spendenziel: {{ goalDonationSum }} Millionen €</strong></p>
+
+		<p>Dieses Jahr spenden weniger Menschen, dabei steigen auch unsere Kosten.</p>
+
+		<ProgressBar :is-visible="playLiveText" :daily-amounts="dailyAmounts"/>
 	</KeenSliderSlide>
 
 	<KeenSliderSlide :current-slide="currentSlide" :index="1" class="wmde-b-prose" data-align="centered">
@@ -49,11 +53,13 @@ import { inject, onMounted, onUnmounted, watch } from 'vue';
 import KeenSliderSlide from '@src/components/Slider2026/KeenSliderSlide.vue';
 import AnimatedText from '@src/components/AnimatedText2026/AnimatedText.vue';
 import { useLiveDateAndTime } from '@src/components/composables/useLiveDateAndTime';
-import ProgressBar from '../components/ProgressBar.vue';
+import ProgressBar from '../components/DramaProgressBar.vue';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 interface Props {
 	playLiveText: boolean;
-	currentSlide: number
+	currentSlide: number;
+	dailyAmounts: DailyAmounts;
 }
 
 const props = defineProps<Props>();

@@ -25,6 +25,8 @@ import { createFormActions } from '@src/createFormActions';
 import { WindowTimer } from '@src/utils/Timer';
 import { currentCampaignTimePercentage } from '@src/components/ProgressBar/currentCampaignTimePercentage';
 import { LocalStorageCloseTracker } from '@src/utils/LocalCloseTracker';
+import DailyAmounts2025 from '@src/utils/DynamicContent/DailyAmounts2025';
+import { RoundedIntegerDe } from '@src/utils/DynamicContent/formatters/RoundedIntegerDe';
 
 const localeFactory = new LocaleFactoryDe();
 const translator = new Translator( messages );
@@ -36,6 +38,9 @@ const tracker = new LegacyTrackerWPORG( mediaWiki, page.getTracking().keyword, e
 const date = new Date();
 const currencyFormatter = localeFactory.getCurrencyFormatter();
 
+const formatters = localeFactory.getFormatters();
+formatters.integer = new RoundedIntegerDe();
+
 const app = createVueApp( BannerConductor, {
 	page,
 	bannerConfig: {
@@ -46,11 +51,8 @@ const app = createVueApp( BannerConductor, {
 	bannerProps: {
 		useOfFundsContent: localeFactory.getUseOfFundsLoader().getContent(),
 		pageScroller: new WindowPageScroller(),
-		localCloseTracker:
-			new LocalStorageCloseTracker(
-				'deMobile',
-				null
-			),
+		localCloseTracker: new LocalStorageCloseTracker( 'deMobile', null ),
+		dailyAmounts: new DailyAmounts2025( date, page.getCampaignParameters(), formatters ),
 	},
 	resizeHandler: new WindowResizeHandler(),
 	banner: Banner,
@@ -62,7 +64,7 @@ app.use( TranslationPlugin, translator );
 app.use( DynamicTextPlugin, {
 	campaignParameters: page.getCampaignParameters(),
 	date,
-	formatters: localeFactory.getFormatters(),
+	formatters,
 	impressionCount,
 	translator
 } );

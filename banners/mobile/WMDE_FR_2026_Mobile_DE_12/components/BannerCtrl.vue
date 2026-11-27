@@ -15,13 +15,13 @@
 			<template #banner-slider>
 				<KeenSlider :with-navigation="false" :play="slideshowShouldPlay" :interval="7000" :start-delay="3000">
 					<template #slides="{ currentSlide }: any">
-						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible"/>
+						<BannerSlides :currentSlide="currentSlide" :play-live-text="bannerState === BannerStates.Visible" :daily-amounts="dailyAmounts"/>
 					</template>
 				</KeenSlider>
 			</template>
 
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.Mini" :is-visible="false"/>
+				<BannerAccessibleText :play-live-text="contentState === ContentStates.Mini"/>
 			</template>
 		</MiniBanner>
 
@@ -31,7 +31,7 @@
 			:is-visible="contentState === ContentStates.FullPage"
 		>
 			<template #banner-text>
-				<BannerText :play-live-text="contentState === ContentStates.FullPage" :is-visible="contentState === ContentStates.FullPage"/>
+				<BannerText :play-live-text="contentState === ContentStates.FullPage" :daily-amounts="dailyAmounts"/>
 			</template>
 
 			<template #donation-form>
@@ -77,6 +77,7 @@ import type { PageScroller } from '@src/utils/PageScroller/PageScroller';
 import DonationForm from './DonationForm.vue';
 import BannerText from '../content/BannerText.vue';
 import BannerSlides from '../content/BannerSlides.vue';
+import BannerAccessibleText from '../content/BannerAccessibleText.vue';
 import KeenSlider from '@src/components/Slider2026/KeenSlider.vue';
 import type { Tracker } from '@src/tracking/Tracker';
 import { MobileMiniBannerExpandedEvent } from '@src/tracking/events/MobileMiniBannerExpandedEvent';
@@ -90,6 +91,7 @@ import HeartIcon from '@src/components/Icons/HeartIcon.vue';
 import { useDynamicAmounts } from '@src/components/composables/useDynamicAmounts';
 import { DonationFormItems } from '@src/utils/FormItemsBuilder/DonationFormItems';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 enum ContentStates {
 	Mini = 'wmde-b-mobile-banner--mini',
@@ -101,6 +103,7 @@ interface Props {
 	useOfFundsContent: useOfFundsContentInterface;
 	pageScroller: PageScroller;
 	localCloseTracker: LocalCloseTracker;
+	dailyAmounts: DailyAmounts;
 }
 
 const props = defineProps<Props>();
