@@ -41,7 +41,7 @@ const messages: TranslationMessages = {
 	'form-label': 'Spenden Formular',
 	'form-error': 'Bitte Formular vervollständigen',
 	'progress-today': 'Heute:',
-	'progress-drama': 'Letzes Jahr bereits:',
+	'progress-drama': 'Letztes Jahr bereits:',
 };
 
 export default messages;
