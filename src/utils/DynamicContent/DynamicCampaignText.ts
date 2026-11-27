@@ -29,20 +29,22 @@ export default class DynamicCampaignText implements DynamicContent {
 	private _progressBarContent: ProgressBarContent;
 	private _currentDate: CurrentDate;
 	private _currentTime: CurrentTime;
-	private _dramaText: string;
+	private _lastYearDonors: number[] | undefined;
 
 	public constructor(
 		date: Date,
 		translator: Translator,
 		formatters: Formatters,
 		campaignParameters: CampaignParameters,
-		impressionCount: ImpressionCount
+		impressionCount: ImpressionCount,
+		lastYearDonors?: number[],
 	) {
 		this._date = date;
 		this._translator = translator;
 		this._formatters = formatters;
 		this._campaignParameters = campaignParameters;
 		this._impressionCount = impressionCount;
+		this._lastYearDonors = lastYearDonors;
 		this._cache = new Map<string, string>();
 		this.getCurrentDateAndTime = this.getCurrentDateAndTime.bind( this );
 	}
@@ -167,7 +169,8 @@ export default class DynamicCampaignText implements DynamicContent {
 				this._translator,
 				this._campaignParameters.millionImpressionsPerDay,
 				this.getCampaignProjection().projectedDonationCount(),
-				this._formatters.integer
+				this._formatters.integer,
+				this._lastYearDonors ? this._lastYearDonors[ this.getCampaignTimeRange().daysSinceStart() - 1 ] : undefined,
 			).getText();
 		} );
 	}

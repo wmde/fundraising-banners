@@ -84,7 +84,7 @@ import DonationForm from './DonationForm.vue';
 import ProgressBar from './ProgressBarVar.vue';
 import { LocalCloseTracker } from '@src/utils/LocalCloseTracker';
 import TickIcon from '@src/components/Icons/TickIcon.vue';
-import { DailyAmounts } from './../DailyAmounts2025';
+import { DailyAmounts } from '@src/utils/DynamicContent/DailyAmounts2025';
 
 enum ContentStates {
 	Main = 'wmde-banner__content--main',
