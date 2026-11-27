@@ -1,0 +1,10 @@
+{
+  "name": "fundraising-banner-linter",
+  "main": "index.js",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "m3api": "^1.1.0",
+    "m3api-query": "^1.1.0"
+  }
+}
