@@ -1,6 +1,6 @@
 import { createVueApp } from '@src/createVueApp';
 
-import './styles/styles.css';
+import './styles/styles_var.css';
 import './styles/fallback-banner.scss';
 import './styles/use-of-funds.scss';
 
